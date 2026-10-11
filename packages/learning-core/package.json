@@ -1,0 +1,9 @@
+{
+  "name": "@sdl/learning-core",
+  "private": true,
+  "type": "module",
+  "exports": "./src/index.ts",
+  "dependencies": {
+    "@sdl/content-schema": "workspace:*"
+  }
+}

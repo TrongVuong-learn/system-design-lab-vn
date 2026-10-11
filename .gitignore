@@ -6,6 +6,8 @@ playwright-report/
 test-results/
 .vite/
 .cache/
+.sites-runtime/
+apps/web/src/generated/
 .DS_Store
 *.log
 .env

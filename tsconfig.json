@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "types": ["node"],
+    "paths": {
+      "@sdl/content-schema": ["./packages/content-schema/src/index.ts"],
+      "@sdl/learning-core": ["./packages/learning-core/src/index.ts"],
+      "@sdl/simulation-engine": ["./packages/simulation-engine/src/index.ts"]
+    }
+  },
+  "include": ["apps", "packages", "scripts", "tests", "vitest.config.ts", "playwright.config.ts"]
+}

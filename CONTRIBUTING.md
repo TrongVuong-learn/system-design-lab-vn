@@ -1,6 +1,6 @@
 # Hướng dẫn đóng góp
 
-Đọc [README](README.md), [kiến trúc](docs/engineering/ARCHITECTURE.md) và [workflow](docs/delivery/WORKFLOW.md) trước khi thay đổi dự án. Repository hiện ở giai đoạn đặc tả; hướng dẫn chạy ứng dụng sẽ được xác nhận trong milestone bootstrap.
+Đọc [README](README.md), [kiến trúc](docs/engineering/ARCHITECTURE.md) và [workflow](docs/delivery/WORKFLOW.md) trước khi thay đổi dự án. Web thử nghiệm đã có hướng dẫn chạy và kiểm tra; xem trạng thái các milestone trong docs/delivery/IMPLEMENTATION_STATUS.md.
 
 ## Quy trình làm việc
 

@@ -1,0 +1,8 @@
+node_modules
+dist
+.cache
+.sites-runtime
+apps/web/src/generated
+pnpm-lock.yaml
+test-results
+playwright-report

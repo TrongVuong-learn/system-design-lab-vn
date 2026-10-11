@@ -2,13 +2,35 @@
 
 Nền tảng học System Design tiếng Việt, trực quan, tương tác, thiết kế từ điện thoại. Có lối bắt đầu cho học sinh cấp 3 chưa biết lập trình và lộ trình tiến tới thiết kế hệ thống chuyên sâu.
 
-**Trạng thái:** đang hoàn thiện đặc tả. Repository hiện chứa tài liệu; ứng dụng, cấu hình build và các lệnh dự án bên dưới chưa được triển khai hoặc kiểm thử.
+**Trạng thái:** bản thử nghiệm web đã được hiện thực với sáu bài nhập môn, mô phỏng cục bộ và lưu tiến độ. Toàn bộ giáo trình chuyên sâu, PWA/offline, sync và app tiếp tục theo roadmap. Bản thử nghiệm chưa được pilot với học sinh hoặc kiểm tra trên điện thoại thật.
+
+## Chạy dự án
+
+Dùng Node **24.21.0** theo `.node-version` và pnpm **11.25.0**.
+
+```sh
+pnpm install --frozen-lockfile
+pnpm dev
+```
+
+Kiểm tra và build:
+
+```sh
+pnpm content:check
+pnpm lint
+pnpm test:unit
+pnpm build
+pnpm exec playwright install chromium
+pnpm test:e2e
+```
+
+`pnpm dev` sinh catalog từ học liệu và mở server tại URL Vite hiển thị. `pnpm build` tạo bundle ở `dist/` của root. E2E dùng production preview ở cổng 4173. Catalog sinh ra, dependency, browser cache và build output được Git ignore.
 
 ## Định hướng đã xác định
 
 - Phạm vi: 6 level, 36 module cốt lõi, 7 nhánh chuyên sâu; học liệu phát hành từng đợt có kiểm duyệt.
 - Web mobile trước; PWA/offline sau khi kiểm chứng; iOS/Android là đợt phát triển tiếp theo.
-- Stack đề xuất: TypeScript + React + Vite; engine độc lập giao diện; Capacitor cho app khi đạt điều kiện.
+- Stack đã triển khai: TypeScript + React + Vite; engine độc lập giao diện; Capacitor cho app khi đạt điều kiện.
 - Nội dung đi từ tình huống dễ hiểu đến thao tác, giải thích và cơ chế kỹ thuật.
 
 ## Đọc tài liệu theo thứ tự
@@ -28,8 +50,8 @@ Nền tảng học System Design tiếng Việt, trực quan, tương tác, thi�
 
 Các tài liệu sản phẩm ở root được giữ đường dẫn để các liên kết trước đây tiếp tục hoạt động. Thay đổi quyết định kỹ thuật cần cập nhật ADR và các tài liệu liên quan.
 
-Quy tắc cho agent được lưu trong [AGENTS.md](AGENTS.md). Repository có EditorConfig, Git ignore và PR template; CI/branch protection được cấu hình trong milestone bootstrap khi có remote phù hợp.
+Quy tắc cho agent được lưu trong [AGENTS.md](AGENTS.md). Repository có EditorConfig, Git ignore, PR template và cấu hình GitHub Actions Quality. CI chưa được xác nhận chạy trên GitHub vì repository chưa có remote GitHub được cấu hình.
 
 ## Mốc bắt đầu triển khai
 
-Chốt môi trường có thể tái lập, cấu trúc workspace và các hợp đồng nội dung; sau đó hoàn thiện một bài cache trên điện thoại từ mở bài, thử nghiệm, đánh giá đến lưu và tiếp tục học. Roadmap là nguồn chính cho thứ tự triển khai và phạm vi từng đợt.
+Đã có workspace, schema, core, renderer, content pipeline và bài cache từ tình huống đến assessment/resume. Sáu bài hiện là lớp nhập môn, không thay thế các module hoặc capstone đầy đủ. Báo cáo hiện thực và phần còn lại nằm trong [IMPLEMENTATION_STATUS.md](docs/delivery/IMPLEMENTATION_STATUS.md).

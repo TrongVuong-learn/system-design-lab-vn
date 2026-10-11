@@ -1,0 +1,41 @@
+import { expect, test } from '@playwright/test';
+test('learn cache, observe stale data, complete and resume after reload', async ({ page }) => {
+  await page.goto('/#/learn/cache');
+  await page.getByRole('button', { name: 'Đưa ra dự đoán' }).click();
+  await page.getByRole('button', { name: 'Phòng 201', exact: false }).click();
+  await page.getByRole('button', { name: 'Mở thí nghiệm' }).click();
+  await page.getByRole('button', { name: 'Đổi phòng ở nguồn' }).click();
+  await page.getByRole('button', { name: 'Xem lịch', exact: true }).click();
+  await expect(page.getByText('Bạn thấy phòng 201.', { exact: false })).toBeVisible();
+  await expect(page.getByText('Đã lưu trên thiết bị', { exact: true })).toBeVisible();
+  await page.reload();
+  await expect(page.getByRole('button', { name: 'Xem lịch', exact: true })).toBeVisible();
+  await expect(page.getByText('Bạn thấy phòng 201.', { exact: false })).toBeVisible();
+  await page.getByRole('button', { name: 'Lấy lịch mới', exact: true }).click();
+  await page.getByRole('button', { name: 'Xem lịch', exact: true }).click();
+  await expect(page.getByText('Bạn thấy phòng 205.', { exact: false })).toBeVisible();
+  await page.getByRole('button', { name: 'Thử tình huống mới' }).click();
+  await page
+    .getByRole('button', { name: 'Không; dữ liệu có thể cũ quá một phút.', exact: false })
+    .click();
+  await page.getByRole('button', { name: 'Lưu bài đã hoàn thành' }).click();
+  await expect(page.getByText('Một bước hiểu mới của bạn.')).toBeVisible();
+  await page.goto('/#/progress');
+  await expect(page.getByText('Ôn lại và thử thêm')).toBeVisible();
+});
+test('curriculum has 6 modules per level and no unpublished start button', async ({ page }) => {
+  await page.goto('/#/levels/L3');
+  await expect(page.locator('.module-list>div')).toHaveCount(6);
+  await expect(page.getByText('Đang biên soạn', { exact: true })).toHaveCount(6);
+  await expect(page.getByRole('link', { name: /Bắt đầu thí nghiệm/ })).toHaveCount(0);
+});
+test('all core screens fit a narrow viewport', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 720 });
+  for (const path of ['/', '/explore', '/progress', '/learn/cache']) {
+    await page.goto(`/#${path}`);
+    const overflow = await page.evaluate(
+      () => document.documentElement.scrollWidth > window.innerWidth,
+    );
+    expect(overflow).toBe(false);
+  }
+});

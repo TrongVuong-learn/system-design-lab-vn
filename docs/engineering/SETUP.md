@@ -1,12 +1,12 @@
 # Hướng dẫn thiết lập dự án
 
-Trạng thái: hướng dẫn cho milestone bootstrap; chưa chạy các lệnh cài đặt hoặc tạo ứng dụng trong repository này. Những lệnh kiểm tra của sản phẩm chỉ dùng sau khi milestone tạo script/config tương ứng hoàn tất.
+Trạng thái: workspace web đã bootstrap. Hướng dẫn chạy hiện hành trong README; các phần API, PWA và Capacitor bên dưới vẫn là kế hoạch cho milestone sau. Không chạy lại generator trên source đã có.
 
 ## 1. Môi trường và phiên bản
 
-Baseline đề xuất: **Node.js 24 LTS**, **pnpm 11.25.0**, TypeScript strict và Git. Chọn patch Node 24 hiện được hỗ trợ khi bootstrap, ghi đúng patch vào `.node-version` và dùng cùng patch trong CI. Production nên dùng dòng LTS theo [chính sách Node.js](https://nodejs.org/en/about/previous-releases).
+Baseline đã khóa: **Node.js 24.21.0 LTS**, **pnpm 11.25.0**, TypeScript strict và Git. `.node-version` và CI dùng cùng runtime. Production nên dùng dòng LTS theo [chính sách Node.js](https://nodejs.org/en/about/previous-releases).
 
-Kết quả kiểm tra môi trường khi lập kế hoạch: máy đang có Node `v26.11.1`, npm `11.20.0`, pnpm `11.25.0`. Đây là trạng thái đã quan sát, không phải baseline đã được áp dụng. Dùng version manager hoặc phương thức cài chính thức để chọn Node 24 cho riêng dự án; hướng dẫn này chưa thay đổi runtime máy.
+Máy ban đầu có Node 26.11.1. Đợt bootstrap cài Node 24.21.0 trong cache công cụ và chọn PATH theo process cho build/test; không thay Node toàn máy. Người phát triển chọn runtime trong `.node-version` bằng version manager của mình.
 
 Khóa pnpm bằng `packageManager`; commit lockfile; CI dùng `pnpm install --frozen-lockfile`. Không phụ thuộc việc Corepack có sẵn trong mọi bản Node. Nếu chưa có pnpm, dùng phương thức trong [tài liệu cài đặt pnpm](https://pnpm.io/installation) và chọn phiên bản đã chốt; không tự nâng cả repository theo một phiên bản `latest` trong CI.
 
@@ -75,7 +75,7 @@ Sau mỗi nhóm dependency, chạy kiểm tra tương thích và khóa phiên b�
 - `.gitignore`: dependencies, build, test output, secrets, local overrides; giữ `.env.example` với placeholder.
 - CI: runtime/package manager đúng version, cài theo lockfile, kiểm tra cấu trúc nội dung và mã nguồn.
 
-Nhóm script sản phẩm phải được hiện thực ở M1; đây là hợp đồng dự kiến, chưa phải lệnh đang có:
+Nhóm script dưới đây đã có trong root package.json; `content:build` sinh catalog được ignore, `build` chạy cả content validation và typecheck:
 
 | Lệnh ở root | Trách nhiệm |
 | --- | --- |
