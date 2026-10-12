@@ -45,7 +45,7 @@ function CacheLab({ progress, onChange }: LabProps) {
   return (
     <section className="lab-panel" aria-label="Thí nghiệm cache">
       <div className="lab-head">
-        <span className="eyebrow">PHÒNG THÍ NGHIỆM</span>
+        <span className="eyebrow">Thí nghiệm cache</span>
         <span className="time-badge">Phút {state.time} mô phỏng</span>
       </div>
       <Diagram
@@ -111,7 +111,7 @@ function RequestLab({ progress, onChange }: LabProps) {
   const times = [20, delay, 20];
   return (
     <section className="lab-panel">
-      <span className="eyebrow">THEO DẤU MỘT YÊU CẦU</span>
+      <span className="eyebrow">Theo dấu một yêu cầu</span>
       <Diagram
         labels={['Thiết bị gửi yêu cầu', 'Máy xử lý hỏi nơi lưu lịch', 'Câu trả lời về thiết bị']}
         values={times.map((t) => `${t} ms`)}
@@ -177,7 +177,7 @@ function TrafficLab({ progress, onChange, design = false }: LabProps & { design?
   }
   return (
     <section className="lab-panel">
-      <span className="eyebrow">{design ? 'NGÂN SÁCH: 6 ĐIỂM GIẢ LẬP' : 'MỘT GIÂY MÔ PHỎNG'}</span>
+      <span className="eyebrow">{design ? 'Ngân sách: 6 điểm giả lập' : 'Một giây mô phỏng'}</span>
       <Diagram
         labels={['Yêu cầu mới', 'Máy xử lý', 'Nơi lưu lịch']}
         values={[`${arrivals} lượt/giây`, `${servers} máy × 6 lượt/giây`, '4 lượt đọc/giây']}
@@ -262,7 +262,7 @@ function QueueLab({ progress, onChange }: LabProps) {
   }
   return (
     <section className="lab-panel">
-      <span className="eyebrow">GIÂY MÔ PHỎNG {state.second}</span>
+      <span className="eyebrow">Giây mô phỏng {state.second}</span>
       <Diagram
         labels={['Việc mới mỗi giây', 'Hàng đợi', 'Workers']}
         values={[arrivals, `${state.queued} việc chờ`, `${workers} người × 2 việc/giây`]}
@@ -362,7 +362,7 @@ function ReplicaLab({ progress, onChange }: LabProps) {
   }
   return (
     <section className="lab-panel">
-      <span className="eyebrow">GIÂY MÔ PHỎNG {state.time}</span>
+      <span className="eyebrow">Giây mô phỏng {state.time}</span>
       <Diagram
         labels={['Nguồn chính', 'Bản sao']}
         values={[`Phòng ${state.primary}`, `Phòng ${state.replica}`]}

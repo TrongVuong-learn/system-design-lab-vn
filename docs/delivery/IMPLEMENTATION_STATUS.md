@@ -28,3 +28,9 @@ Kết quả đợt đầu: content validation 36 module/6 bài đạt; lint và 
 - CI được cấu hình trong source; cần repository GitHub để xác nhận thực thi trên dịch vụ đó.
 
 Đợt tiếp theo ưu tiên pilot/sửa bài mẫu, kiểm tra thêm nền tảng mobile và mở rộng hoạt động transaction/design review, rồi PWA theo milestone. Sáu bài beta không được đánh dấu là hoàn thành toàn bộ M3/M5.
+
+## UI-02 — hướng thiết kế và tooling
+
+Nhánh `codex/ui-02-design-direction` thay trang đầu bằng bàn học có thí nghiệm cache thật, sơ đồ khác nhau theo từng bài, font Be Vietnam Pro tự host và hệ màu mới. Skill Anthropic frontend-design được cài ở phạm vi project, giữ license và khóa commit nguồn; Impeccable và UI/UX Pro Max chỉ được nghiên cứu. `DESIGN.md` và tooling lock ghi hướng thiết kế cùng nguồn tham khảo.
+
+Đã xem screenshot mobile 390 px và desktop 1280 px. Kiểm tra đạt: format, lint, build, 9 unit tests và 8 E2E trên Chromium mobile/desktop; thí nghiệm trang đầu không đánh dấu hoàn thành bài và các màn chính không tràn ở 320 px. Chưa kiểm thử trên thiết bị thật hoặc WebKit.

@@ -47,6 +47,7 @@ pnpm test:e2e
 | [Roadmap triển khai](docs/delivery/ROADMAP.md) | Milestone, backlog, người phụ trách và điều kiện nghiệm thu |
 | [Workflow dự án](docs/delivery/WORKFLOW.md) | Task, Git/PR, review mã/học liệu, release và quy tắc thư mục |
 | [Hướng dẫn đóng góp](CONTRIBUTING.md) | Quy ước khi tham gia hoặc thay đổi dự án |
+| [Hướng thiết kế](DESIGN.md) | Typography, bố cục, ngôn ngữ thị giác và review UI |
 
 Các tài liệu sản phẩm ở root được giữ đường dẫn để các liên kết trước đây tiếp tục hoạt động. Thay đổi quyết định kỹ thuật cần cập nhật ADR và các tài liệu liên quan.
 

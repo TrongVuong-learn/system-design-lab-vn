@@ -8,6 +8,7 @@
     "preview": "vite preview --host 127.0.0.1"
   },
   "dependencies": {
+    "@fontsource/be-vietnam-pro": "5.3.0",
     "@sdl/content-schema": "workspace:*",
     "@sdl/learning-core": "workspace:*",
     "@sdl/simulation-engine": "workspace:*",

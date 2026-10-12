@@ -39,3 +39,15 @@ test('all core screens fit a narrow viewport', async ({ page }) => {
     expect(overflow).toBe(false);
   }
 });
+test('home experiment demonstrates stale cache without completing a lesson', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Đổi phòng ở nguồn' }).click();
+  await expect(page.getByText('Chưa nhận thay đổi', { exact: true })).toBeVisible();
+  await page.getByRole('button', { name: 'Xem lịch', exact: true }).click();
+  await expect(page.getByRole('status')).toContainText('Bạn thấy phòng 201.');
+  await page.getByRole('button', { name: 'Lấy lịch mới', exact: true }).click();
+  await page.getByRole('button', { name: 'Xem lịch', exact: true }).click();
+  await expect(page.getByRole('status')).toContainText('Bạn thấy phòng 205.');
+  await page.goto('/#/progress');
+  await expect(page.getByText('Ôn lại và thử thêm')).toHaveCount(0);
+});

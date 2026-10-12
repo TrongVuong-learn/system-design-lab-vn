@@ -5,6 +5,7 @@
 - Đọc README.md và CONTRIBUTING.md; áp dụng docs/delivery/WORKFLOW.md.
 - Giữ các yêu cầu đã chốt: mobile-first, dễ tiếp cận với học sinh cấp 3, 6 level/36 module/7 nhánh chuyên sâu, web trước app sau.
 - Kiến trúc, setup và roadmap nằm trong docs/; cập nhật nguồn chính khi thay quyết định, tránh tạo tài liệu mâu thuẫn.
+- Khi thiết kế hoặc đổi UI, đọc `.agents/skills/frontend-design/SKILL.md` và `DESIGN.md`. Review screenshots với nội dung thật trên mobile/desktop; minh họa phải phục vụ cơ chế bài học. Nguồn skill được khóa trong docs/design/tooling-lock.json.
 
 ## Mã nguồn và học liệu
 

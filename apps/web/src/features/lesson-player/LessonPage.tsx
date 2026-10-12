@@ -44,7 +44,7 @@ export function LessonPage() {
       </div>
       <div className="lesson-heading">
         <span className="eyebrow">
-          {lesson.level} · CHẶNG {p.stage + 1}/4
+          {lesson.level} · Chặng {p.stage + 1}/4
         </span>
         <h1 ref={heading} tabIndex={-1}>
           {lesson.title}
@@ -61,7 +61,7 @@ export function LessonPage() {
       </ol>
       {p.stage === 0 && (
         <section className="story-panel">
-          <span className="eyebrow">MỘT CHUYỆN QUEN THUỘC</span>
+          <span className="eyebrow">Tình huống</span>
           <h2>{lesson.subtitle}</h2>
           <p>{lesson.story}</p>
           <div className="story-reminder">
@@ -72,9 +72,7 @@ export function LessonPage() {
       )}
       {(p.stage === 1 || p.stage === 3) && (
         <section className="question-panel">
-          <span className="eyebrow">
-            {p.stage === 1 ? 'BẠN NGHĨ ĐIỀU GÌ SẼ XẢY RA?' : 'THỬ MỘT TÌNH HUỐNG MỚI'}
-          </span>
+          <span className="eyebrow">{p.stage === 1 ? 'Dự đoán của bạn' : 'Tình huống mới'}</span>
           <h2>{current.text}</h2>
           <div className="answer-options">
             {current.options.map((option, i) => (

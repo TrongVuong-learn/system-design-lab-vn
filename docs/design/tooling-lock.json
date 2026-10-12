@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "installed": [
+    {
+      "name": "frontend-design",
+      "repository": "https://github.com/anthropics/skills",
+      "commit": "dbd4588f9e1033efb41dad4bef2f7947c8993d44",
+      "sourcePath": "skills/frontend-design",
+      "projectPath": ".agents/skills/frontend-design",
+      "license": "Apache-2.0",
+      "scope": "project"
+    }
+  ],
+  "researched": [
+    {
+      "repository": "https://github.com/pbakaus/impeccable",
+      "commit": "c63b8dd7dd5a5f3c32eaabe1af76d0694f863ed2",
+      "usage": "Reference only: design context, critique and audit workflow"
+    },
+    {
+      "repository": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
+      "commit": "67803eac81607188194aea9842a723b89326d90d",
+      "usage": "Evaluated, not installed"
+    }
+  ]
+}

@@ -4,23 +4,17 @@ import { lessons, levels, modules, tracks } from '../../app/catalog';
 import { useProgress } from '../../app/progress';
 import { parseProgress, serializeProgress } from '@sdl/learning-core';
 import { Icon } from '../../ui/primitives';
+import { LessonSketch } from './LessonSketch';
+import { FeaturedExperiment } from './FeaturedExperiment';
 
-export function LessonCard({ id, index = 0 }: { id: string; index?: number }) {
+export function LessonCard({ id }: { id: string; index?: number }) {
   const l = lessons.find((l) => l.id === id)!;
   const { progress } = useProgress();
   const done = progress.lessons[id]?.completed;
   return (
     <Link to={`/learn/${id}`} className="lesson-card">
       <div className={`lesson-visual visual-${l.kind}`}>
-        <span className="visual-number">{String(index + 1).padStart(2, '0')}</span>
-        <div className="mini-system">
-          <i />
-          <b>→</b>
-          <i />
-          <b>→</b>
-          <i />
-        </div>
-        <span className="visual-kind">{l.terms[0]?.english}</span>
+        <LessonSketch kind={l.kind} />
         {done && (
           <span className="done-badge">
             <Icon name="check" size={14} />
@@ -57,137 +51,55 @@ export function HomePage() {
   );
   return (
     <>
-      <section className="hero">
-        <div className="hero-copy">
-          <span className="eyebrow">
-            <span className="live-dot" /> HỌC BẰNG CÁCH THỬ
-          </span>
-          <h1>
-            Hiểu hệ thống.
-            <br />
-            <em>Thử từng bước.</em>
-          </h1>
-          <p>
-            Đi từ những chuyện quen thuộc đến cách một hệ thống hoạt động. Tự thay đổi, quan sát và
-            hiểu vì sao.
-          </p>
-          <div className="hero-actions">
+      <section className="learning-desk">
+        <div className="desk-copy">
+          <p className="desk-context">Bàn học của bạn</p>
+          <h1>Vì sao lịch học vẫn hiện phòng cũ?</h1>
+          <p>Cô giáo đã đổi phòng. Website chưa đổi theo. Thử xem hai nơi đang giữ thông tin gì.</p>
+          <div className="desk-start">
             <Link
               className="button primary"
               to={continuation ? `/learn/${continuation.id}` : '/learn/request'}
             >
-              {continuation ? 'Tiếp tục bài đang học' : 'Bắt đầu từ số 0'}
-              <Icon name="arrow" />
+              {continuation ? 'Tiếp tục bài đang học' : 'Mới bắt đầu? Theo dấu một yêu cầu'}
             </Link>
-            <Link className="text-link" to="/explore">
-              Xem lộ trình
-            </Link>
-          </div>
-          <div className="hero-notes">
-            <span>
-              <Icon name="check" size={15} />
-              Không cần biết code
-            </span>
-            <span>
-              <Icon name="check" size={15} />
-              Học theo nhịp của bạn
-            </span>
+            <span>Bài nhập môn không cần viết code.</span>
           </div>
         </div>
-        <div className="hero-illustration" aria-label="Minh họa một yêu cầu đi qua các thành phần">
-          <span className="illustration-caption">MỘT LẦN BẤM. MỘT HÀNH TRÌNH.</span>
-          <div className="orbit-grid">
-            <div className="orbit-node node-you">
-              <Icon name="home" size={26} />
-              <span>Bạn</span>
-            </div>
-            <div className="orbit-node node-server">
-              <Icon name="grid" size={26} />
-              <span>Máy xử lý</span>
-            </div>
-            <div className="orbit-node node-data">
-              <Icon name="book" size={26} />
-              <span>Dữ liệu</span>
-            </div>
-            <svg viewBox="0 0 360 270" aria-hidden="true">
-              <path d="M85 88H185V155H277" />
-              <path className="orbit-return" d="M277 185H185V118H85" />
-              <circle className="moving-dot" r="5">
-                <animateMotion dur="5s" repeatCount="indefinite" path="M85 88H185V155H277" />
-              </circle>
-            </svg>
-          </div>
-          <div className="illustration-foot">
-            <span className="live-dot" />
-            Một yêu cầu đang tìm câu trả lời
-          </div>
-        </div>
+        <FeaturedExperiment />
       </section>
-      <div className="home-stats">
-        <div>
-          <strong>6</strong>
-          <span>level kiến thức</span>
-        </div>
-        <div>
-          <strong>36</strong>
-          <span>module trong lộ trình</span>
-        </div>
-        <div>
-          <strong>6</strong>
-          <span>thí nghiệm mở đầu</span>
-        </div>
-        <div>
-          <strong>7</strong>
-          <span>nhánh chuyên sâu</span>
-        </div>
-      </div>
-      <section className="section">
+      <section className="section notebook-section">
         <div className="section-head">
           <div>
-            <span className="eyebrow">THỬ MỘT ĐIỀU NHỎ</span>
-            <h2>Chạm vào ý tưởng.</h2>
-            <p>Mỗi bài là một câu hỏi, một thí nghiệm và một điều bạn tự hiểu.</p>
+            <h2>Chọn một câu hỏi để thử</h2>
+            <p>Sáu bài mở đầu. Mỗi bài có dự đoán, thao tác và tình huống mới.</p>
           </div>
           <Link to="/explore" className="text-link">
-            Tất cả bài học <Icon name="arrow" size={17} />
+            Xem tất cả bài
           </Link>
         </div>
         <div className="lesson-grid">
-          {['request', 'cache', 'balance'].map((id, i) => (
-            <LessonCard key={id} id={id} index={i} />
+          {lessons.map((l) => (
+            <LessonCard key={l.id} id={l.id} />
           ))}
         </div>
       </section>
-      <section className="how-section">
-        <span className="eyebrow">MỘT NHỊP HỌC DỄ THEO</span>
-        <h2>Dự đoán. Thử. Hiểu.</h2>
-        <div className="how-grid">
-          {[
-            ['01', 'Gặp một câu chuyện', 'Lịch học, thư viện hay hàng chờ ở ngày hội.'],
-            ['02', 'Tự thay đổi và quan sát', 'Bấm từng bước để thấy điều vừa xảy ra.'],
-            ['03', 'Giải thích và áp dụng', 'Thử một tình huống mới bằng điều đã hiểu.'],
-          ].map(([n, t, p]) => (
-            <div key={n}>
-              <span>{n}</span>
-              <h3>{t}</h3>
-              <p>{p}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-      <section className="section">
-        <div className="section-head">
-          <div>
-            <span className="eyebrow">TỪ NỀN TẢNG ĐẾN CHUYÊN SÂU</span>
-            <h2>Một lộ trình. Nhiều điểm bắt đầu.</h2>
-          </div>
+      <section className="path-section">
+        <div className="path-intro">
+          <h2>Sau bài đầu, đi tiếp ở đâu?</h2>
+          <p>
+            Học theo level hoặc mở chủ đề bạn đang cần. Lộ trình gồm 36 module và 7 nhánh chuyên
+            sâu; nội dung được phát triển từng phần.
+          </p>
+          <Link className="text-link" to="/explore">
+            Khám phá bản đồ kiến thức
+          </Link>
         </div>
         <div className="level-list">
           {levels.map((level) => (
             <Link key={level.id} to={`/levels/${level.id}`}>
-              <span className="level-number">{level.number}</span>
+              <span className="level-number">{level.id}</span>
               <div>
-                <span className="eyebrow">{level.label}</span>
                 <h3>{level.name}</h3>
                 <p>{level.subtitle}</p>
               </div>
@@ -197,10 +109,10 @@ export function HomePage() {
         </div>
       </section>
       <aside className="beta-note">
-        <strong>Đang xây từng bài, kiểm chứng từng ý.</strong>
+        <strong>Bản thử nghiệm đang có sáu bài nhập môn.</strong>
         <p>
-          Đây là bản thử nghiệm với sáu bài nhập môn. Các module chuyên sâu có trạng thái rõ và sẽ
-          được bổ sung theo lộ trình.
+          Module chuyên sâu có trạng thái rõ trong lộ trình. Tiến độ học được lưu trên thiết bị của
+          bạn.
         </p>
       </aside>
     </>
@@ -221,8 +133,7 @@ export function ExplorePage() {
   const planned = modules.filter((m) => matches(`${m.title} ${m.topics}`));
   return (
     <div className="page-content">
-      <span className="eyebrow">KHÁM PHÁ</span>
-      <h1>Bắt đầu ở nơi phù hợp.</h1>
+      <h1>Khám phá bài học</h1>
       <p className="page-lead">Chọn một câu hỏi để thử ngay, hoặc nhìn toàn bộ lộ trình.</p>
       <div className="search-box">
         <Icon name="search" />
@@ -373,8 +284,7 @@ export function ProgressPage() {
   }
   return (
     <div className="page-content">
-      <span className="eyebrow">TIẾN ĐỘ CỦA BẠN</span>
-      <h1>Mỗi điều hiểu là một bước.</h1>
+      <h1>Tiến độ học của bạn</h1>
       <p className="page-lead">Tiến độ ở trên thiết bị này. Không cần tài khoản để bắt đầu.</p>
       <div className="progress-summary">
         <strong>

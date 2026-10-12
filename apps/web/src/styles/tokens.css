@@ -1,11 +1,12 @@
 :root {
-  --paper: #f8f9f4;
-  --ink: #243b32;
-  --muted: #607268;
-  --green: #173e36;
-  --sage: #e9efe3;
-  --wash: #f1f4ec;
-  --line: #dfe5da;
-  --font-body: Inter, 'Segoe UI', Arial, sans-serif;
-  --font-display: Georgia, 'Times New Roman', serif;
+  --paper: #f5f7fb;
+  --ink: #17233d;
+  --muted: #52617a;
+  --accent: #244edb;
+  --surface-tint: #eaf0ff;
+  --wash: #f0f3f9;
+  --line: #d8dfeb;
+  --highlight: #fff0a8;
+  --font-body: 'Be Vietnam Pro', sans-serif;
+  --font-display: 'Be Vietnam Pro', sans-serif;
 }
