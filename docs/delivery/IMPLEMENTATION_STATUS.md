@@ -76,3 +76,11 @@ Chuẩn được ghi ở plan chính, MOBILE_FIRST.md, TEACHING_GUIDE.md và DES
 Kết quả cuối UX-04: build/typecheck/lint/format đạt; 79 E2E đạt trên Chromium mobile/desktop, Firefox, WebKit và ma trận responsive; 1 test hover bỏ qua trên mobile theo thiết kế, có test tap thật thay thế. Tap mobile lặp 3 lần đạt sau sửa focus-visible. Đã review screenshots popup ở 390/1280 px, kiểm tra viewport 320 px và fallback khi thiếu Popover API. Không chạy lại unit core vì không đổi core/schema/engine.
 
 Sửa duplicate glossary: browser hỗ trợ popup chỉ hiện tên thuật ngữ trong danh sách, nghĩa xuất hiện khi hover/focus/chạm; không in lại cùng nghĩa dưới mục. Browser thiếu API giữ định nghĩa chữ. Plan/mobile/teaching/design đã đồng bộ. Build/typecheck/lint đạt; 8 E2E liên quan popup/fallback đạt trên Chromium mobile/desktop, Firefox, WebKit. Đã review ảnh danh sách mobile/desktop.
+
+## EDU-03 — kiểm định học liệu theo Primer và nguồn gốc
+
+[Báo cáo](CONTENT_AUDIT_2026-10-12.md) kiểm tra sáu bài, 12 câu hỏi và công thức mô phỏng; mapping nhóm chủ đề Primer vào khung hiện có. Chưa đủ học liệu cho 36 module/7 nhánh; chưa có module được nghiệm thu đầy đủ. Cập nhật CURRICULUM_MAP, plan, TEACHING_GUIDE và ROADMAP để theo dõi nguồn, prerequisite, review và ưu tiên hoàn thiện L0→L1→L2 trở lên.
+
+Sửa phạm vi đếm cache (lượt xem qua cache/nguồn, không phải tổng I/O), đơn vị số lượt còn chờ; thêm giả định tải biến động/queue headroom và giới hạn chế độ replica lag=0. Không đổi engine, schema/checkpoint hoặc đáp án. Nhánh `codex/edu-03-content-audit`.
+
+Kiểm chứng đợt này: content build vẫn 36 module/6 bài; build/typecheck/lint đạt, 12 unit và 8 E2E chọn lọc đạt (luồng sáu bài + cache/resume trên Chromium mobile/desktop, Firefox, WebKit). Đã review sáu ảnh cache/queue/replica ở 390/1280 px; không tràn ngang ở hai bề rộng đó và replica 320 px. `git diff --check` đạt. Chưa chạy lại toàn bộ E2E/responsive matrix, chưa có thiết bị thật, reviewer chuyên gia hoặc pilot; kết quả này không chứng nhận giáo trình đầy đủ/chính xác tuyệt đối.

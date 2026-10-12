@@ -131,3 +131,11 @@ Các vòng nhỏ dùng để tìm vấn đề và cải tiến; không chứng m
 Dùng term.name/term.english/term.meaning của bài làm nguồn duy nhất cho ghi chú và danh sách từ mới. Định nghĩa phải hiểu được khi mở riêng khỏi đoạn văn. Trong văn xuôi, thuật ngữ mở bằng hover/focus hoặc chạm; không bắt người học xuống cuối bài mới biết nghĩa. Giữ danh sách đầy đủ cuối bài. Không tự thêm tương tác vào đáp án; tránh nút lồng nút. Các bài phát triển sau tuân thủ chuẩn ghi chú tại chỗ của plan và MOBILE_FIRST.md.
 
 Danh sách từ mới chỉ hiển thị tên Việt/Anh khi popup được hỗ trợ; mở nghĩa bằng hover/focus hoặc chạm, không in thêm cùng định nghĩa ngay dưới mục. Browser thiếu Popover API hiển thị định nghĩa dạng chữ như fallback. Cùng một nguồn registry được dùng cho cả hai cách hiển thị.
+
+## Kiểm định kiến thức và nguồn trước phát hành
+
+Dùng quy trình tại WORKFLOW.md và registry trong CURRICULUM_MAP.md. Mỗi khẳng định kỹ thuật cần nguồn trực tiếp tới mục hỗ trợ nó; ghi phiên bản sản phẩm/tài liệu, ngày kiểm tra và giả định. Repo tổng hợp như System Design Primer dùng để phát hiện chủ đề thiếu; kiểm tra lại bảo đảm bằng paper, tiêu chuẩn hoặc tài liệu chính thức. Không suy từ SQL/NoSQL sang một consistency model cố định.
+
+Bài có mô phỏng phải công bố ý nghĩa từng metric, đơn vị, cửa sổ đo và thao tác nào được tính. Tách số việc còn chờ khỏi tốc độ việc đến; tách cache miss trong lượt xem khỏi mọi lần đọc nguồn. Có ít nhất một trace bình thường và một trace bác bỏ ngộ nhận, với kết quả tính tay đối chiếu engine. Ví dụ đời thường luôn đi kèm chỗ phép so sánh không còn đúng.
+
+Trước khi gọi một năng lực là hoàn chỉnh, cần đủ giải thích, hoạt động, đánh giá chuyển giao và review có người/ngày/bằng chứng. Build/schema/E2E chỉ kiểm chứng cấu trúc và hành vi đã định nghĩa, không tự chứng minh toàn bộ kiến thức đúng hoặc học sinh hiểu. Các trường review/claim-level source chưa được pipeline beta hiện tại thực thi; ENG-03 có trách nhiệm hiện thực, không đánh dấu gate đã bật.

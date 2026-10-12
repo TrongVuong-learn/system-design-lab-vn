@@ -295,3 +295,7 @@ Renderer chỉ annotate văn xuôi bằng các term.name/term.english có trong 
 Acceptance: hover/focus desktop, tap mobile, Escape/đóng ngoài/đóng nút, popup không tràn ở 320 px, định nghĩa từ registry, focus được giữ và luồng học/lưu tiến độ không đổi. Kiểm chứng đa browser và thiết bị thật theo ma trận hiện hành; không suy ra đã hỗ trợ mọi browser cũ từ một lần chạy emulation.
 
 Danh sách từ mới chỉ hiển thị tên Việt/Anh khi popup được hỗ trợ; mở nghĩa bằng hover/focus hoặc chạm, không in thêm cùng định nghĩa ngay dưới mục. Browser thiếu Popover API hiển thị định nghĩa dạng chữ như fallback. Cùng một nguồn registry được dùng cho cả hai cách hiển thị.
+
+## Kiểm định học liệu — EDU-03
+
+Kết quả [kiểm định ngày 12/10/2026](docs/delivery/CONTENT_AUDIT_2026-10-12.md): sáu bài beta mới giới thiệu một phần kiến thức; chưa có module nào đủ bằng chứng nghiệm thu toàn bộ. Giữ 6 level/36 module/7 nhánh và không tính phần trăm hoàn thành bằng số tiêu đề. Dùng System Design Primer để đối chiếu nhóm chủ đề, nguồn chính thức/paper để kiểm tra bảo đảm kỹ thuật. Phân bổ chi tiết ở CURRICULUM_MAP §9, ưu tiên thực hiện và acceptance ở ROADMAP §8, quy tắc kiểm định ở TEACHING_GUIDE.

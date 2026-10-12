@@ -82,10 +82,14 @@ function CacheLab({ progress, onChange }: LabProps) {
       </div>
       <div className="metrics">
         <Metric label="Lượt xem" value={state.reads} />
-        <Metric label="Đọc cache" value={state.hits} />
-        <Metric label="Đọc nguồn" value={state.misses} />
+        <Metric label="Xem qua cache" value={state.hits} />
+        <Metric label="Xem qua nguồn" value={state.misses} />
         <Metric label="Lượt thấy dữ liệu cũ" value={state.stale} />
       </div>
+      <p className="muted">
+        Các số trên chỉ đếm lượt bấm “Xem lịch”. “Lấy lịch mới” cũng đọc nguồn nhưng không tính là
+        một lượt xem.
+      </p>
       <details className="advanced">
         <summary>Thử thêm: thay thời hạn bản ghi</summary>
         <Stepper
@@ -223,7 +227,7 @@ function TrafficLab({ progress, onChange, design = false }: LabProps & { design?
       )}
       <div className="metrics">
         <Metric label="Lượt đọc hoàn tất" value={result.completed} suffix=" / giây" />
-        <Metric label="Lượt đọc còn chờ" value={result.waiting} suffix=" / giây" />
+        <Metric label="Lượt đọc còn chờ" value={result.waiting} suffix=" lượt" />
         {design && (
           <>
             <Metric label="Công suất gửi thông báo" value={workers * 2} suffix=" / giây" />
@@ -319,6 +323,10 @@ function QueueLab({ progress, onChange }: LabProps) {
                 : 'Công suất lớn hơn việc mới. Backlog giảm dần khi tiếp tục chạy.'}
         </p>
       </div>
+      <p className="muted">
+        Trong bài, việc đến và tốc độ xử lý đều cố định. Thực tế có lúc việc dồn đến hoặc xử lý chậm
+        hơn; cần công suất dự phòng, không chỉ cân bằng hai con số trung bình.
+      </p>
     </section>
   );
 }
@@ -389,6 +397,11 @@ function ReplicaLab({ progress, onChange }: LabProps) {
       </div>
       <p className="muted">
         Đọc ngay sau ghi: nguồn trả {state.primary}, bản sao trả {state.replica}.
+      </p>
+      <p className="muted">
+        Khi giảm độ trễ, thay đổi mới vẫn chờ thay đổi trước để giữ thứ tự. Riêng mức 0 là chế độ lý
+        tưởng: lần ghi tiếp theo đưa bản sao về giá trị mới nhất và bỏ các thay đổi còn chờ. Đây
+        không phải mô phỏng giao thức sao chép đồng bộ.
       </p>
     </section>
   );

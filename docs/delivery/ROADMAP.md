@@ -1,6 +1,6 @@
 # Kế hoạch triển khai và nghiệm thu
 
-Trạng thái: backlog và ước lượng đề xuất. Chưa bắt đầu phát triển ứng dụng. Phạm vi kiến thức theo [CURRICULUM_MAP.md](../../CURRICULUM_MAP.md), tiêu chuẩn học theo [TEACHING_GUIDE.md](../../TEACHING_GUIDE.md).
+Trạng thái: roadmap và ước lượng; web beta sáu bài đã được triển khai. Trạng thái thực thi theo [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md); các gate chưa đạt vẫn còn mở. Phạm vi kiến thức theo [CURRICULUM_MAP.md](../../CURRICULUM_MAP.md), tiêu chuẩn học theo [TEACHING_GUIDE.md](../../TEACHING_GUIDE.md).
 
 Quy trình thực hiện từng task, Git/review, release và quản lý thư mục áp dụng theo [WORKFLOW.md](WORKFLOW.md) và [CONTRIBUTING.md](../../CONTRIBUTING.md).
 
@@ -104,3 +104,19 @@ Môi trường: local → preview theo thay đổi → staging beta → producti
 | Kế hoạch thời gian thiếu thực tế | Đo effort viết/hiện thực/review/pilot riêng, re-estimate sau M2 |
 
 Definition of done cho một tính năng gồm hành vi đúng, nội dung liên quan đã review, mobile/accessibility, test có ý nghĩa, xử lý lỗi, tài liệu và version. “Đã có màn hình” chưa phải “đã có một bài học hoàn chỉnh”.
+
+## 8. EDU-03 — ưu tiên sau kiểm định học liệu 12/10/2026
+
+[Báo cáo kiểm định](CONTENT_AUDIT_2026-10-12.md) đối chiếu sáu bài beta, mô hình và khung 36 module với System Design Primer cùng tài liệu gốc. Đây là kiểm định có phạm vi, chưa thay review chuyên gia hoặc pilot. Giữ nguyên 6 level/36 module/7 nhánh.
+
+| Thứ tự / ID | Đầu ra | Điều kiện nghiệm thu |
+| --- | --- | --- |
+| P0 / EDU-03a | Sửa nhãn đếm cache, đơn vị backlog, làm rõ queue/replica | Số liệu có phạm vi đếm; trace cache hit → refresh → expiry → miss khớp UI; giữ dữ liệu học cũ |
+| P1 / ENG-03 | Registry năng lực, prerequisite, nguồn và review/version | Kiểm tra level khớp module, graph hợp lệ, source theo claim; chặn phát hành nội dung thiếu review; báo cáo coverage tách từng miền |
+| P1 / EDU-04 | Hoàn thiện L0: mạng, giao thức, chỉ số và ước lượng | Có bài dạy, thao tác, phản ví dụ và bài chuyển giao cho từng năng lực; giải thích ms, %, byte, p95 ngay tại chỗ |
+| P1 / EDU-05 | L1: API, dữ liệu, index và transaction | Mô hình giữ chỗ có invariant, xen kẽ hai transaction, retry; review chuyên môn trước xuất bản |
+| P2 / EDU-06 | L2: policy cache, sharding, queue lỗi và backpressure | Có mất ACK, duplicate, cache stampede, hot shard, tải biến động và giới hạn mô hình |
+| P2 / EDU-07 | L3–L4: consistency/consensus và production | Timeline phân vùng mạng; SLO, security, backup/restore; chuyên gia duyệt các bảo đảm |
+| P3 / EDU-08 | L5 và từng track, case study hoàn chỉnh | Thiết kế với workload/API/data/failure/security/cost, rubric lập luận; không chấm thành thạo bằng một trắc nghiệm |
+
+EDU-02 pilot chạy cùng từng lô học liệu đã review, không đợi soạn hết chương trình. Nhánh chuyên sâu triển khai theo prerequisite; không coi sáu bài nhập môn là đã hoàn thành các module L2 được gắn nhãn.

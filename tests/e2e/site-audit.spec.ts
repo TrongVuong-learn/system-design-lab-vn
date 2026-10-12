@@ -55,9 +55,20 @@ test('all six lessons complete, retain correct model outcomes and resume without
       await page.getByRole('button', { name: 'Đổi phòng ở nguồn' }).click();
       await page.getByRole('button', { name: 'Xem lịch', exact: true }).click();
       await expect(metric(page, 'Lượt thấy dữ liệu cũ')).toHaveText('1');
+      await expect(metric(page, 'Xem qua cache')).toHaveText('1');
+      await expect(metric(page, 'Xem qua nguồn')).toHaveText('0');
       await page.getByRole('button', { name: 'Lấy lịch mới', exact: true }).click();
+      await expect(metric(page, 'Lượt xem')).toHaveText('1');
+      await expect(metric(page, 'Xem qua nguồn')).toHaveText('0');
+      await expect(page.getByText('Các số trên chỉ đếm lượt bấm', { exact: false })).toBeVisible();
+      for (let i = 0; i < 5; i++)
+        await page.getByRole('button', { name: 'Qua 1 phút', exact: true }).click();
       await page.getByRole('button', { name: 'Xem lịch', exact: true }).click();
-      await expect(page.getByText('Bạn thấy phòng 205.', { exact: false })).toBeVisible();
+      await expect(metric(page, 'Lượt xem')).toHaveText('2');
+      await expect(metric(page, 'Xem qua nguồn')).toHaveText('1');
+      await expect(
+        page.getByText('Trang đọc lịch chính và cập nhật thành phòng 205.', { exact: false }),
+      ).toBeVisible();
     } else if (l.id === 'queue') {
       await page.getByRole('button', { name: 'Qua 1 giây' }).click();
       await expect(metric(page, 'Đã nhận')).toHaveText('6');

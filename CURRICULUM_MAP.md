@@ -225,3 +225,16 @@ Mỗi module ghi ngày review và phiên bản nguồn. Nguyên lý ổn định
 - **Bảo mật ứng dụng:** dùng [OWASP ASVS](https://owasp.org/projects/asvs) làm nguồn kiểm tra yêu cầu kỹ thuật liên quan; mỗi yêu cầu tham chiếu trong bài cần giữ phiên bản.
 
 Mỗi bài cụ thể vẫn cần nguồn trực tiếp cho cơ chế được giảng, giả định mô phỏng và ví dụ implementation. Case study tổng hợp được ghi rõ là bài thiết kế giáo dục; chỉ mô tả kiến trúc thực tế của một công ty khi có nguồn công khai hỗ trợ.
+
+## 9. Đối chiếu System Design Primer — 12/10/2026
+
+Dùng [System Design Primer của Donne Martin](https://github.com/donnemartin/system-design-primer) làm checklist bổ sung, không làm nguồn chân lý duy nhất hoặc bằng chứng đã hoàn thành chương trình. [Báo cáo kiểm định](docs/delivery/CONTENT_AUDIT_2026-10-12.md) ghi mapping, học liệu thực có và nguồn trực tiếp. Các bổ sung dưới đây thuộc module hiện hữu, chưa phải bài đã xuất bản:
+
+- L0.6: phân biệt performance/scalability; ước lượng theo workload, đơn vị và percentile; bảng latency chỉ là ví dụ có điều kiện đo/ngày đo.
+- L0.5/L2.1: phân biệt reverse proxy và load balancer; vai trò có thể cùng nằm trong một thành phần.
+- L2.2: thêm so sánh CDN push/pull và refresh-ahead khi biên soạn policy; phân biệt vị trí cache với cách cập nhật cache.
+- L1.3/L2.4: phân biệt chia dữ liệu theo chức năng (federation trong Primer) với chia các hàng của cùng miền dữ liệu (sharding).
+- L4.1/L4.6: khi ước lượng availability kết hợp, ghi rõ giả định độc lập/phụ thuộc chung; replication không thay thế restore từ backup.
+- L5.1 và capstone: bổ sung nhóm bài news feed, crawler và analytics; mỗi bài phải có yêu cầu, số liệu, đường dữ liệu và phản biện phương án. Bài tập object-oriented design trong Primer là bổ trợ, không thay năng lực thiết kế hệ thống.
+
+Phạm vi sản phẩm còn cần các phần đã quy hoạch ngoài mức tóm tắt của Primer: transaction/consensus, security/privacy, SRE, migration và bảy nhánh ứng dụng. Không giảm chiều sâu để đạt một tỷ lệ checklist.
