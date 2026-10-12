@@ -1,3 +1,4 @@
+import { restoreQueue, restoreReplica } from './index';
 import { it, expect, describe } from 'vitest';
 import {
   initialCache,
@@ -73,4 +74,34 @@ describe('educational model invariants', () => {
     expect(s.replica).toBe(201);
     expect(s.pending).toHaveLength(0);
   });
+});
+
+it('rejects malformed queue checkpoints without inventing negative work', () => {
+  const valid = { second: 1, received: 6, processed: 2, queued: 4 };
+  expect(restoreQueue(valid)).toEqual(valid);
+  for (const bad of [
+    { ...valid, queued: -1 },
+    { ...valid, received: 5 },
+    { ...valid, second: 'NaN' },
+    { ...valid, processed: 1.5 },
+  ])
+    expect(restoreQueue(bad)).toEqual(initialQueue());
+});
+it('rejects malformed replica checkpoints and keeps ordered pending writes', () => {
+  const valid = { time: 1, primary: 205, replica: 201, pending: [{ at: 3, value: 205 }] };
+  expect(restoreReplica(valid)).toEqual(valid);
+  for (const bad of [
+    { ...valid, time: -1 },
+    { ...valid, pending: [] },
+    { ...valid, primary: '205' },
+    { ...valid, pending: [{ at: 0, value: 205 }] },
+    {
+      ...valid,
+      pending: [
+        { at: 4, value: 205 },
+        { at: 3, value: 205 },
+      ],
+    },
+  ])
+    expect(restoreReplica(bad)).toEqual(initialReplica());
 });

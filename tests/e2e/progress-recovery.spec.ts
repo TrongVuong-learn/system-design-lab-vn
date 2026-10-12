@@ -43,7 +43,7 @@ test('unreadable stored progress is preserved while a session can be exported', 
   await page.getByRole('button', { name: 'Xuất bản lưu' }).waitFor({ state: 'visible' });
   await page.evaluate(async () => {
     const db = await new Promise<IDBDatabase>((resolve, reject) => {
-      const r = indexedDB.open('system-design-lab', 1);
+      const r = indexedDB.open('system-design-lab');
       r.onsuccess = () => resolve(r.result);
       r.onerror = () => reject(r.error);
     });
@@ -62,7 +62,7 @@ test('unreadable stored progress is preserved while a session can be exported', 
   await expect(page.getByRole('button', { name: 'Thử lưu lại' })).toHaveCount(0);
   const stored = await page.evaluate(async () => {
     const db = await new Promise<IDBDatabase>((resolve) => {
-      const r = indexedDB.open('system-design-lab', 1);
+      const r = indexedDB.open('system-design-lab');
       r.onsuccess = () => resolve(r.result);
     });
     const value = await new Promise<unknown>((resolve) => {

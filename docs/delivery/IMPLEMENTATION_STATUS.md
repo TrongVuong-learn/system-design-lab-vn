@@ -60,3 +60,9 @@ Test tìm ra nút stepper bị thu nhỏ còn 42 px ở breakpoint hẹp; đã s
 Build/typecheck, lint và format đạt. 16 E2E hiện có đạt; 8 test responsive cuối đạt trong lượt chạy riêng sau sửa lifecycle của fault injection. Test ban đầu dùng init script khi chỉ đổi hash, đã sửa để reload document rồi mới tiêm lỗi và kiểm tra. Một lần xét duyệt chạy tool gặp 429, retry sau đó được chấp thuận; không bỏ qua bước xét duyệt.
 
 Giới hạn: Chromium viewport/touch emulation; chưa kiểm tra Firefox/WebKit, điện thoại/tablet thật, safe area/bàn phím ảo thực hoặc tăng chữ 200%. Reduced motion test kiểm tra transition nút và một thao tác, không chứng nhận toàn bộ trợ năng. Các gate thiết bị thật vẫn còn mở.
+
+## QA-04 — audit hành vi và đa trình duyệt
+
+Báo cáo đầy đủ tại [SITE_QA_2026-10-12.md](SITE_QA_2026-10-12.md). Kết quả cuối: 12 unit / 64 E2E đạt, build/typecheck/lint/format đạt; Chromium mobile/desktop, Firefox và WebKit. Bổ sung hoàn thành cả sáu bài với metric, sai→sửa đáp án, console/resource errors, tìm kiếm, min/max, multi-tab và migration v1→v2.
+
+Đã sửa ghi đè snapshot giữa tab, checkpoint queue/replica không hợp lệ, query có khoảng trắng và browser channel runner. IndexedDB nâng v2 bảo toàn store/key/JSON v1 và chặn writer cũ; engine patch 1.0.1. ADR 0002 ghi chính sách xung đột không tự merge. Chưa đóng gate thiết bị thật/pilot/WCAG/offline/ENG-03.

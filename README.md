@@ -20,7 +20,7 @@ pnpm content:check
 pnpm lint
 pnpm test:unit
 pnpm build
-pnpm exec playwright install chromium
+pnpm exec playwright install chromium firefox webkit
 pnpm test:e2e
 ```
 

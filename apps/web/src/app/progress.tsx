@@ -1,12 +1,17 @@
 import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from 'react';
-import { emptyProgress, updateLesson, type ProgressRepository } from '@sdl/learning-core';
+import {
+  emptyProgress,
+  updateLesson,
+  ProgressConflictError,
+  type ProgressRepository,
+} from '@sdl/learning-core';
 import type { Progress, LessonProgress } from '@sdl/content-schema';
 import { progressRepository } from '../adapters/progress-repository';
 interface Context {
   progress: Progress;
   ready: boolean;
   saving: string;
-  saveState: 'loading' | 'idle' | 'saving' | 'saved' | 'write-error' | 'read-error';
+  saveState: 'loading' | 'idle' | 'saving' | 'saved' | 'write-error' | 'read-error' | 'conflict';
   retrySave(): void;
   update(id: string, patch: Partial<LessonProgress>): void;
   replace(p: Progress): void;
@@ -69,10 +74,15 @@ export function ProgressProvider({
           setSaveState('saved');
         }
       })
-      .catch(() => {
+      .catch((error: unknown) => {
         if (revision === generation.current && mounted.current) {
-          setSaving('Chưa lưu được thay đổi mới. Tiến độ đang học vẫn ở trong tab này.');
-          setSaveState('write-error');
+          if (error instanceof ProgressConflictError) {
+            setSaving('Tiến độ đã đổi ở tab khác. Phần đang học trong tab này chưa được ghi.');
+            setSaveState('conflict');
+          } else {
+            setSaving('Chưa lưu được thay đổi mới. Tiến độ đang học vẫn ở trong tab này.');
+            setSaveState('write-error');
+          }
         }
       });
   }

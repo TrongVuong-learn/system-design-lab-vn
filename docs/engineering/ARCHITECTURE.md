@@ -149,3 +149,9 @@ Web đạt gate → hoàn thiện PWA/offline → thử Capacitor trên Android/
 Bundle native có đầu vào build riêng để không đăng ký service worker như website. Capacitor `webDir` trỏ đến bundle tĩnh cục bộ; server API vẫn là dịch vụ từ xa khi cần. Back/URL/callback phải được ánh xạ về route trong app và chỉ chấp nhận nguồn dự kiến.
 
 Nếu lab cốt lõi vẫn không đạt yêu cầu trên WebView sau tối ưu có đo đạc, đánh giá Expo native với cùng core TS và content; viết lại presentation cần thiết. Chọn theo bằng chứng, không hứa app được tạo chỉ bằng một lệnh.
+
+## Bảo vệ ghi tiến độ trong bản beta
+
+Adapter IndexedDB dùng giao dịch readwrite để so sánh bản đang lưu với bản mà tab đã đọc, rồi mới ghi checkpoint. Khác nhau thì trả `ProgressConflictError`; UI giữ phiên học và hướng dẫn xuất trước khi reload, không tự gộp hai snapshot. Hàng đợi trong provider giữ thứ tự ghi cùng một tab. Đây là optimistic conflict protection, không phải sync nhiều thiết bị.
+
+IndexedDB database version 2 giữ nguyên object store/key và progress JSON version 1. Upgrade không xóa dữ liệu; tab dùng adapter cũ mở database version 1 sẽ bị từ chối ghi. Quyết định và giới hạn tại ADR 0002. Checkpoint queue/replica/cache được kiểm tra invariant khi khôi phục; checkpoint mô phỏng không hợp lệ trở về trạng thái đầu của lab, không được dùng để chứng minh năng lực đã đạt. Contract attempt/engine version đầy đủ vẫn thuộc ENG-03.

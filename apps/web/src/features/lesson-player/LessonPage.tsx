@@ -29,7 +29,8 @@ export function LessonPage() {
   const answer = p.stage === 1 ? p.prediction : p.challenge;
   const answered = answer >= 0;
   const correct = answer === current.answer;
-  const saveFailed = saveState === 'write-error' || saveState === 'read-error';
+  const saveFailed =
+    saveState === 'write-error' || saveState === 'read-error' || saveState === 'conflict';
   const canNext = p.stage === 0 || (p.stage === 1 && answered) || (p.stage === 2 && p.actions >= 2);
   const stageHelp =
     p.stage === 0

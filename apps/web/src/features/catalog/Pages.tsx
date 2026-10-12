@@ -127,7 +127,8 @@ export function ExplorePage() {
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '')
       .replace(/đ/g, 'd');
-  const matches = (s: string) => normalize(s).includes(normalize(query));
+  const term = query.trim();
+  const matches = (s: string) => normalize(s).includes(normalize(term));
   const available = lessons.filter((l) =>
     matches(`${l.title} ${l.subtitle} ${l.terms.map((t) => t.english).join(' ')}`),
   );
@@ -160,7 +161,7 @@ export function ExplorePage() {
         </p>
       )}
       <h2 className="spaced-heading">Bản đồ kiến thức</h2>
-      {query ? (
+      {term ? (
         <div className="module-list">
           {planned.map((m) => (
             <div key={m.id}>

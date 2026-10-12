@@ -51,7 +51,10 @@ test('home experiment demonstrates stale cache without completing a lesson', asy
   await page.goto('/#/progress');
   await expect(page.getByText('Ôn lại và thử thêm')).toHaveCount(0);
 });
-test('lesson stages explain the next action and restore keyboard focus', async ({ page }) => {
+test('lesson stages explain the next action and restore keyboard focus', async ({
+  page,
+  browserName,
+}) => {
   await page.goto('/#/learn/cache');
   await expect(page.getByRole('heading', { name: 'Hiểu câu chuyện', exact: true })).toBeFocused();
   await expect(
@@ -60,7 +63,9 @@ test('lesson stages explain the next action and restore keyboard focus', async (
   await page.getByRole('button', { name: 'Đưa ra dự đoán' }).click();
   await expect(page.getByRole('heading', { name: 'Dự đoán', exact: true })).toBeFocused();
   await expect(page.getByRole('button', { name: 'Mở thí nghiệm' })).toBeDisabled();
-  await page.keyboard.press('Tab');
+  await page.keyboard.press(
+    browserName === 'webkit' && process.platform === 'darwin' ? 'Alt+Tab' : 'Tab',
+  );
   await expect(page.getByRole('button', { name: 'Phòng 201', exact: false })).toBeFocused();
   await page.keyboard.press('Enter');
   await expect(page.getByRole('button', { name: 'Mở thí nghiệm' })).toBeEnabled();

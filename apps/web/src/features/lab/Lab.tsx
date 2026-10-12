@@ -7,6 +7,8 @@ import {
   boundedNumber,
   trafficStep,
   initialQueue,
+  restoreQueue,
+  restoreReplica,
   queueStep,
   initialReplica,
   replicaTick,
@@ -251,12 +253,12 @@ function QueueLab({ progress, onChange }: LabProps) {
   const [running, setRunning] = useState(false);
   const arrivals = boundedNumber(progress.lab['arrivals'], 6, 0, 12);
   const workers = boundedNumber(progress.lab['workers'], 1, 1, 6);
-  const state = {
-    second: Number(progress.lab['second'] ?? 0),
-    received: Number(progress.lab['received'] ?? 0),
-    processed: Number(progress.lab['processed'] ?? 0),
-    queued: Number(progress.lab['queued'] ?? 0),
-  };
+  const state = restoreQueue({
+    second: progress.lab['second'] ?? 0,
+    received: progress.lab['received'] ?? 0,
+    processed: progress.lab['processed'] ?? 0,
+    queued: progress.lab['queued'] ?? 0,
+  });
   function change(p: LessonProgress['lab']) {
     onChange({ lab: { ...progress.lab, ...p }, actions: progress.actions + 1 });
   }
@@ -322,32 +324,18 @@ function QueueLab({ progress, onChange }: LabProps) {
 }
 function ReplicaLab({ progress, onChange }: LabProps) {
   const lag = boundedNumber(progress.lab['lag'], 3, 0, 5);
-  let pending: { at: number; value: number }[] = [];
+  let pending: unknown;
   try {
-    const data: unknown = JSON.parse(String(progress.lab['pending'] ?? '[]'));
-    if (
-      Array.isArray(data) &&
-      data.length <= 10 &&
-      data.every(
-        (x) =>
-          x &&
-          typeof x === 'object' &&
-          Number.isSafeInteger(x.at) &&
-          x.at >= 0 &&
-          [201, 205].includes(x.value),
-      )
-    )
-      pending = data;
+    pending = JSON.parse(String(progress.lab['pending'] ?? '[]'));
   } catch {
-    /* An invalid imported checkpoint has no pending writes. */
+    pending = null;
   }
-  const state = {
-    ...initialReplica(),
-    time: Number(progress.lab['time'] ?? 0),
-    primary: Number(progress.lab['primary'] ?? 201),
-    replica: Number(progress.lab['replica'] ?? 201),
+  const state = restoreReplica({
+    time: progress.lab['time'] ?? 0,
+    primary: progress.lab['primary'] ?? 201,
+    replica: progress.lab['replica'] ?? 201,
     pending,
-  };
+  });
   function change(s: typeof state) {
     onChange({
       lab: {

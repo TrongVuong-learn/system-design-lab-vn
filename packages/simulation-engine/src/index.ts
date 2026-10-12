@@ -1,4 +1,4 @@
-export const ENGINE_VERSION = '1.0.0';
+export const ENGINE_VERSION = '1.0.1';
 export interface CacheState {
   time: number;
   source: number;
@@ -156,4 +156,47 @@ export function replicaTick(s: ReplicaState): ReplicaState {
     replica: ready.at(-1)?.value ?? s.replica,
     pending: s.pending.filter((x) => x.at > time),
   };
+}
+
+export function restoreQueue(input: unknown): QueueState {
+  if (!input || typeof input !== 'object') return initialQueue();
+  const state = { ...initialQueue(), ...input } as QueueState;
+  if (
+    ![state.second, state.received, state.processed, state.queued].every(
+      (v) => Number.isSafeInteger(v) && v >= 0,
+    ) ||
+    state.received !== state.processed + state.queued
+  )
+    return initialQueue();
+  return state;
+}
+export function restoreReplica(input: unknown): ReplicaState {
+  if (!input || typeof input !== 'object') return initialReplica();
+  const state = { ...initialReplica(), ...input } as ReplicaState;
+  if (
+    !Number.isSafeInteger(state.time) ||
+    state.time < 0 ||
+    ![201, 205].includes(state.primary) ||
+    ![201, 205].includes(state.replica) ||
+    !Array.isArray(state.pending) ||
+    state.pending.length > 10
+  )
+    return initialReplica();
+  let previous = state.time;
+  for (const item of state.pending) {
+    if (
+      !item ||
+      typeof item !== 'object' ||
+      !Number.isSafeInteger(item.at) ||
+      item.at <= state.time ||
+      item.at < previous ||
+      ![201, 205].includes(item.value)
+    )
+      return initialReplica();
+    previous = item.at;
+  }
+  if (!state.pending.length && state.primary !== state.replica) return initialReplica();
+  if (state.pending.length && state.pending.at(-1)?.value !== state.primary)
+    return initialReplica();
+  return state;
 }

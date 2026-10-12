@@ -37,3 +37,10 @@ export function updateLesson(
     },
   });
 }
+
+export class ProgressConflictError extends Error {
+  constructor() {
+    super('Progress changed in another tab.');
+    this.name = 'ProgressConflictError';
+  }
+}
