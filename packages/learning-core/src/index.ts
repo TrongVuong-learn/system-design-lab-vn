@@ -12,8 +12,13 @@ export interface ProgressRepository {
   load(): Promise<Progress>;
   save(progress: Progress): Promise<void>;
 }
+export const MAX_PROGRESS_BYTES = 2_000_000;
 export function parseProgress(text: string): Progress {
-  if (text.length > 2_000_000) throw new Error('Bản lưu quá lớn. Giới hạn là 2 MB.');
+  if (
+    text.length > MAX_PROGRESS_BYTES ||
+    new TextEncoder().encode(text).byteLength > MAX_PROGRESS_BYTES
+  )
+    throw new Error('Bản lưu quá lớn. Giới hạn là 2 MB.');
   return progressSchema.parse(JSON.parse(text));
 }
 export function serializeProgress(progress: Progress): string {

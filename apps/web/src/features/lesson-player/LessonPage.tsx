@@ -1,3 +1,4 @@
+import { SaveStatus } from '../progress/SaveStatus';
 import { useEffect, useRef } from 'react';
 import { Link, useParams } from 'react-router';
 import { lessons } from '../../app/catalog';
@@ -10,7 +11,7 @@ const stages = ['Hiểu câu chuyện', 'Dự đoán', 'Tự thử', 'Áp dụng
 export function LessonPage() {
   const { id } = useParams();
   const lesson = lessons.find((l) => l.id === id);
-  const { progress, update, ready, saving } = useProgress();
+  const { progress, update, ready, saveState } = useProgress();
   const heading = useRef<HTMLHeadingElement>(null);
   const stageHeading = useRef<HTMLHeadingElement>(null);
   const p = progress.lessons[id ?? ''] ?? newLessonProgress();
@@ -28,6 +29,7 @@ export function LessonPage() {
   const answer = p.stage === 1 ? p.prediction : p.challenge;
   const answered = answer >= 0;
   const correct = answer === current.answer;
+  const saveFailed = saveState === 'write-error' || saveState === 'read-error';
   const canNext = p.stage === 0 || (p.stage === 1 && answered) || (p.stage === 2 && p.actions >= 2);
   const stageHelp =
     p.stage === 0
@@ -82,6 +84,7 @@ export function LessonPage() {
         </h2>
         <p id="stage-help">{stageHelp}</p>
       </section>
+      {saveFailed && <SaveStatus />}
       {p.stage === 0 && (
         <section className="story-panel">
           <span className="eyebrow">Tình huống</span>
@@ -185,9 +188,7 @@ export function LessonPage() {
         ))}
       </details>
       <div className="lesson-footer">
-        <p className="save-status" role="status">
-          {saving}
-        </p>
+        {!saveFailed && <SaveStatus />}
         <div className="lesson-footer-actions">
           {p.stage > 0 && (
             <button

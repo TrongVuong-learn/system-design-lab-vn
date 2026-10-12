@@ -1,8 +1,9 @@
+import { SaveStatus } from '../progress/SaveStatus';
 import { useRef, useState } from 'react';
 import { Link, useParams } from 'react-router';
 import { lessons, levels, modules, tracks } from '../../app/catalog';
 import { useProgress } from '../../app/progress';
-import { parseProgress, serializeProgress } from '@sdl/learning-core';
+import { MAX_PROGRESS_BYTES, parseProgress, serializeProgress } from '@sdl/learning-core';
 import { Icon } from '../../ui/primitives';
 import { LessonSketch } from './LessonSketch';
 import { FeaturedExperiment } from './FeaturedExperiment';
@@ -252,7 +253,7 @@ export function LevelPage() {
   );
 }
 export function ProgressPage() {
-  const { progress, saving, replace } = useProgress();
+  const { progress, ready, replace } = useProgress();
   const file = useRef<HTMLInputElement>(null);
   const [notice, setNotice] = useState('');
   const done = lessons.filter((l) => progress.lessons[l.id]?.completed);
@@ -260,10 +261,12 @@ export function ProgressPage() {
   async function importFile(f: File | undefined) {
     if (!f) return;
     try {
-      if (f.size > 2_000_000) throw new Error('large');
+      if (f.size > MAX_PROGRESS_BYTES) throw new Error('large');
       const imported = parseProgress(await f.text());
       replace(imported);
-      setNotice('Đã nhập bản lưu. Nội dung bản lưu được dùng thay tiến độ hiện tại.');
+      setNotice(
+        'Đã nhập tiến độ vào tab này. Xem trạng thái lưu phía trên để biết đã ghi trên thiết bị chưa.',
+      );
     } catch {
       setNotice(
         'Chưa nhập được: bản lưu cần là JSON đúng phiên bản và nhỏ hơn 2 MB. Tiến độ hiện tại vẫn được giữ.',
@@ -296,9 +299,7 @@ export function ProgressPage() {
           <p>Hoàn thành bài không đồng nghĩa đã thành thạo toàn bộ chủ đề.</p>
         </div>
       </div>
-      <p className="save-status" role="status">
-        {saving}
-      </p>
+      <SaveStatus showBackupLink={false} />
       {begun.length ? (
         <div className="progress-list">
           {begun.map((l) => (
@@ -329,11 +330,15 @@ export function ProgressPage() {
         <h2>Mang tiến độ theo bạn</h2>
         <p>Dữ liệu trình duyệt có thể bị xóa. Xuất bản lưu để giữ một bản trên thiết bị của bạn.</p>
         <div className="lab-controls">
-          <button className="button primary" onClick={exportFile}>
+          <button className="button primary" disabled={!ready} onClick={exportFile}>
             <Icon name="download" />
             Xuất bản lưu
           </button>
-          <button className="button secondary" onClick={() => file.current?.click()}>
+          <button
+            className="button secondary"
+            disabled={!ready}
+            onClick={() => file.current?.click()}
+          >
             Nhập bản lưu
           </button>
           <input

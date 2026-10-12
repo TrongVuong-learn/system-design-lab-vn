@@ -6,6 +6,8 @@ interface Context {
   progress: Progress;
   ready: boolean;
   saving: string;
+  saveState: 'loading' | 'idle' | 'saving' | 'saved' | 'write-error' | 'read-error';
+  retrySave(): void;
   update(id: string, patch: Partial<LessonProgress>): void;
   replace(p: Progress): void;
 }
@@ -20,6 +22,7 @@ export function ProgressProvider({
   const [progress, setProgress] = useState(emptyProgress);
   const [ready, setReady] = useState(false);
   const [saving, setSaving] = useState('Đang mở bản lưu…');
+  const [saveState, setSaveState] = useState<Context['saveState']>('loading');
   const latest = useRef(progress);
   const loadError = useRef(false);
   const queue = useRef(Promise.resolve());
@@ -27,43 +30,57 @@ export function ProgressProvider({
   const mounted = useRef(true);
   useEffect(() => {
     mounted.current = true;
+    let active = true;
     repository
       .load()
       .then((p) => {
-        if (mounted.current) {
+        if (active) {
           latest.current = p;
           setProgress(p);
           setSaving('Lưu trên thiết bị này');
+          setSaveState('idle');
         }
       })
       .catch(() => {
-        if (mounted.current) {
+        if (active) {
           loadError.current = true;
-          setSaving('Chưa mở được bản lưu. Bạn vẫn có thể học và xuất bản mới.');
+          setSaving('Chưa mở được bản lưu. Tiến độ đang học chỉ được giữ trong tab này.');
+          setSaveState('read-error');
         }
       })
       .finally(() => {
-        if (mounted.current) setReady(true);
+        if (active) setReady(true);
       });
     return () => {
+      active = false;
       mounted.current = false;
     };
   }, [repository]);
   function save(p: Progress) {
     const revision = ++generation.current;
     setSaving('Đang lưu…');
+    setSaveState('saving');
     queue.current = queue.current
       .catch(() => {})
       .then(() => repository.save(p))
       .then(() => {
-        if (revision === generation.current && mounted.current) setSaving('Đã lưu trên thiết bị');
+        if (revision === generation.current && mounted.current) {
+          setSaving('Đã lưu trên thiết bị');
+          setSaveState('saved');
+        }
       })
       .catch(() => {
-        if (revision === generation.current && mounted.current)
-          setSaving('Chưa lưu được. Hãy xuất bản lưu trong Tiến độ.');
+        if (revision === generation.current && mounted.current) {
+          setSaving('Chưa lưu được thay đổi mới. Tiến độ đang học vẫn ở trong tab này.');
+          setSaveState('write-error');
+        }
       });
   }
+  function retrySave() {
+    if (ready && !loadError.current && saveState === 'write-error') save(latest.current);
+  }
   function replace(p: Progress) {
+    if (!ready) return;
     loadError.current = false;
     latest.current = p;
     setProgress(p);
@@ -77,7 +94,9 @@ export function ProgressProvider({
     if (!loadError.current) save(next);
   }
   return (
-    <ProgressContext.Provider value={{ progress, ready, saving, update, replace }}>
+    <ProgressContext.Provider
+      value={{ progress, ready, saving, saveState, retrySave, update, replace }}
+    >
       {children}
     </ProgressContext.Provider>
   );

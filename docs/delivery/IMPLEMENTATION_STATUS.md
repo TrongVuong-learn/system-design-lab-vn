@@ -42,3 +42,11 @@ Task: giúp người mới biết phải làm gì ở mỗi chặng và dùng pl
 Đã thực hiện: hướng dẫn thay đổi theo chặng/đáp án/số thao tác còn thiếu; `aria-current="step"`; focus đến tiêu đề chặng sau khi dữ liệu lưu đã tải xong và khi chuyển chặng; cỡ chữ chặng, nhãn mô phỏng, số liệu và lời giải lớn hơn trên mobile. Engine, schema và đáp án không đổi.
 
 Acceptance đã kiểm chứng: production build/typecheck và lint đạt; 10 E2E tests đạt trên Chromium mobile/desktop, gồm keyboard chọn đáp án, nút tiếp tục bị khóa/mở đúng, focus lúc mở/reload/quay lại và reflow 320 px. Screenshot thí nghiệm cache được review ở 390 px/1280 px. Đây là kiểm tra hành vi trợ năng có phạm vi; chưa chứng nhận WCAG đầy đủ, screen reader hoặc thiết bị thật.
+
+## QA-02a — lỗi lưu và nhập/xuất tiến độ
+
+Phần thực thi đầu của QA-02 trên nhánh `codex/qa-02-progress-recovery`: thông báo lỗi đọc/ghi riêng, nút thử ghi lại checkpoint mới nhất, đường tới xuất bản dự phòng và bảo toàn bản lưu không đọc được. Thông báo lỗi nằm trước nội dung chặng trên màn học; dữ liệu của phiên vẫn dùng được khi ghi thất bại. Lỗi đọc không tự ghi đè bản cũ; nhập file hợp lệ là thao tác chủ động thay tiến độ. Các thao tác nhập/xuất chờ tải tiến độ xong. Import thông báo phân biệt đã nhập vào phiên với đã ghi bền vững. Giới hạn 2 MB dùng UTF-8 byte ở core và File.size ở UI.
+
+Acceptance kiểm chứng: format, lint, typecheck/build, **10 unit tests / 16 E2E tests** đạt. E2E giả lập lỗi quota khi put, thử lưu checkpoint mới nhất rồi reload, giữ nguyên bản lưu không đọc được và xuất phiên học, từ chối file sai version/quá lớn mà giữ tiến độ, download/import roundtrip và reload. Unit kiểm tra byte tiếng Việt và ranh giới 2.000.000 byte. Đã review screenshots lỗi ghi 390/1280 px và kiểm tra không tràn 320 px. Node 24.21.0 và lockfile không đổi.
+
+Không đóng toàn bộ QA-02: còn kiểm tra reduced motion chuyên biệt, screen reader, Safari iOS/Chrome Android trên thiết bị thật và lifecycle/app background. Lỗi quota là fault injection, chưa là bằng chứng tái hiện hết loại lỗi storage trên thiết bị. EDU-02 pilot, ENG-03 version/coverage và ARCH-01 tiếp tục theo roadmap; không tuyên bố hoàn thiện toàn bộ giáo trình hoặc PWA.

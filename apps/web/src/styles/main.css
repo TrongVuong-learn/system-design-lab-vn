@@ -1449,3 +1449,30 @@ input[type='checkbox'] {
     display: none;
   }
 }
+
+.save-recovery {
+  border: 1px solid #bd861c;
+  background: #fff8e6;
+  padding: 18px;
+  margin: 16px 0;
+  border-radius: 8px;
+  color: var(--ink);
+}
+.save-recovery p {
+  margin: 0 0 12px;
+  font-size: 14px;
+  line-height: 1.75;
+}
+.save-recovery [role='alert'] {
+  font-weight: 600;
+}
+.recovery-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.recovery-actions .button {
+  min-height: 44px;
+  white-space: normal;
+  text-align: left;
+}
