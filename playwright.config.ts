@@ -4,8 +4,13 @@ export default defineConfig({
   fullyParallel: false,
   use: { baseURL: 'http://127.0.0.1:4173', trace: 'retain-on-failure', channel: 'chromium' },
   projects: [
-    { name: 'mobile-chromium', use: { ...devices['Pixel 7'] } },
-    { name: 'desktop-chromium', use: { ...devices['Desktop Chrome'] } },
+    { name: 'mobile-chromium', testIgnore: /responsive-matrix/, use: { ...devices['Pixel 7'] } },
+    {
+      name: 'desktop-chromium',
+      testIgnore: /responsive-matrix/,
+      use: { ...devices['Desktop Chrome'] },
+    },
+    { name: 'responsive-chromium', testMatch: /responsive-matrix/, use: { hasTouch: true } },
   ],
   webServer: {
     command: 'pnpm preview --port 4173',

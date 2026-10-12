@@ -50,3 +50,13 @@ Phần thực thi đầu của QA-02 trên nhánh `codex/qa-02-progress-recovery
 Acceptance kiểm chứng: format, lint, typecheck/build, **10 unit tests / 16 E2E tests** đạt. E2E giả lập lỗi quota khi put, thử lưu checkpoint mới nhất rồi reload, giữ nguyên bản lưu không đọc được và xuất phiên học, từ chối file sai version/quá lớn mà giữ tiến độ, download/import roundtrip và reload. Unit kiểm tra byte tiếng Việt và ranh giới 2.000.000 byte. Đã review screenshots lỗi ghi 390/1280 px và kiểm tra không tràn 320 px. Node 24.21.0 và lockfile không đổi.
 
 Không đóng toàn bộ QA-02: còn kiểm tra reduced motion chuyên biệt, screen reader, Safari iOS/Chrome Android trên thiết bị thật và lifecycle/app background. Lỗi quota là fault injection, chưa là bằng chứng tái hiện hết loại lỗi storage trên thiết bị. EDU-02 pilot, ENG-03 version/coverage và ARCH-01 tiếp tục theo roadmap; không tuyên bố hoàn thiện toàn bộ giáo trình hoặc PWA.
+
+## QA-03 — ma trận responsive
+
+Nhánh `codex/qa-03-responsive-matrix` bổ sung project Playwright responsive riêng. Kiểm tra 320/360/390/430/768/1024/1440 CSS px: trang chủ, khám phá, L3, tiến độ và bốn chặng của sáu lab; điều khiển tap, kích thước button trong lab ít nhất 44 × 44 px, không cuộn ngang, và lỗi ghi tiến độ giả lập ở từng bề rộng. Có thêm kiểm tra reduced motion + thao tác cache ở tablet landscape 1024 × 768.
+
+Test tìm ra nút stepper bị thu nhỏ còn 42 px ở breakpoint hẹp; đã sửa thành 44 px theo lựa chọn thiết kế của project. Không gọi 44 px là ngưỡng WCAG AA. Screenshot trang chủ/lab thiết kế được review ở 390/768/1440 px.
+
+Build/typecheck, lint và format đạt. 16 E2E hiện có đạt; 8 test responsive cuối đạt trong lượt chạy riêng sau sửa lifecycle của fault injection. Test ban đầu dùng init script khi chỉ đổi hash, đã sửa để reload document rồi mới tiêm lỗi và kiểm tra. Một lần xét duyệt chạy tool gặp 429, retry sau đó được chấp thuận; không bỏ qua bước xét duyệt.
+
+Giới hạn: Chromium viewport/touch emulation; chưa kiểm tra Firefox/WebKit, điện thoại/tablet thật, safe area/bàn phím ảo thực hoặc tăng chữ 200%. Reduced motion test kiểm tra transition nút và một thao tác, không chứng nhận toàn bộ trợ năng. Các gate thiết bị thật vẫn còn mở.

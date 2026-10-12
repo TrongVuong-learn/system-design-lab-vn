@@ -278,3 +278,7 @@ M2 phải kiểm chứng nguyên nhân và kết quả nằm gần nhau, bài ca
 | Có catalog nhưng bị hiểu là đã hoàn chỉnh | Trạng thái học liệu và độ bao phủ công bố riêng theo level/nhánh |
 | Học liệu gắn chặt vào web | Block/schema và logic độc lập renderer; kiểm chứng nhu cầu native trước khi xây thêm lớp trừu tượng |
 
+
+## Kiểm chứng responsive trong bản beta
+
+Ma trận tự động hiện có ở `tests/e2e/responsive-matrix.spec.ts`: 320, 360, 390, 430, 768, 1024 và 1440 CSS px; catalog, bốn chặng của sáu bài, điều khiển tap và trạng thái lỗi ghi. Project `responsive-chromium` chạy riêng ma trận; các project mobile/desktop giữ hành trình tiến độ. Đây là viewport/touch emulation, chưa thay thế ma trận trình duyệt và thiết bị thật trong tiêu chí nghiệm thu phía trên. Kết quả từng đợt ở docs/delivery/IMPLEMENTATION_STATUS.md.
