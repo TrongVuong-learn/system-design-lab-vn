@@ -29,3 +29,7 @@ Review bằng câu hỏi cụ thể: người học biết phải làm gì đầ
 - [UI/UX Pro Max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) đã được rà như bộ tra cứu mở rộng; chưa cài vì đợt này cần một hướng thị giác tập trung cho sản phẩm hiện tại.
 
 Thay hướng thiết kế phải cập nhật file này cùng token/component; không chồng lớp CSS phủ lên một hướng cũ đã bị thay thế.
+
+## Màn học
+
+Mỗi chặng có tiêu đề và một hướng dẫn ngắn trước nội dung. Chặng hiện tại dùng chữ, đường cấu trúc và `aria-current`; trên mobile bốn chặng xếp 2 × 2 để giữ nhãn dễ đọc. Focus đến tiêu đề chặng sau khi tải tiến độ hoặc chuyển chặng. Nút chưa mở phải có hướng dẫn nêu việc còn cần làm; số thao tác được suy ra từ tiến độ hiện tại.

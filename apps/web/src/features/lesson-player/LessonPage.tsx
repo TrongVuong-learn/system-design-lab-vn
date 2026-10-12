@@ -12,10 +12,11 @@ export function LessonPage() {
   const lesson = lessons.find((l) => l.id === id);
   const { progress, update, ready, saving } = useProgress();
   const heading = useRef<HTMLHeadingElement>(null);
+  const stageHeading = useRef<HTMLHeadingElement>(null);
   const p = progress.lessons[id ?? ''] ?? newLessonProgress();
   useEffect(() => {
-    heading.current?.focus({ preventScroll: true });
-  }, [id, p.stage]);
+    if (ready) (stageHeading.current ?? heading.current)?.focus({ preventScroll: true });
+  }, [id, p.stage, ready]);
   if (!lesson) return <NotFound />;
   if (!ready)
     return (
@@ -28,6 +29,18 @@ export function LessonPage() {
   const answered = answer >= 0;
   const correct = answer === current.answer;
   const canNext = p.stage === 0 || (p.stage === 1 && answered) || (p.stage === 2 && p.actions >= 2);
+  const stageHelp =
+    p.stage === 0
+      ? 'Đọc tình huống rồi chọn điều bạn nghĩ sẽ xảy ra.'
+      : p.stage === 1
+        ? answered
+          ? 'Đọc lời giải rồi mở thí nghiệm để kiểm tra dự đoán.'
+          : 'Chọn một dự đoán. Đoán sai cũng là một cách học.'
+        : p.stage === 2
+          ? p.actions < 2
+            ? `Thử thêm ${2 - p.actions} thao tác để mở chặng áp dụng.`
+            : 'Bạn có thể thử tiếp hoặc áp dụng điều vừa thấy vào tình huống mới.'
+          : 'Dùng điều vừa học để trả lời một tình huống khác.';
   function next() {
     if (p.stage < 3) {
       update(lesson!.id, { stage: p.stage + 1 });
@@ -53,12 +66,22 @@ export function LessonPage() {
       </div>
       <ol className="stage-list" aria-label="Các chặng học">
         {stages.map((s, i) => (
-          <li key={s} className={p.stage === i ? 'current' : p.stage > i ? 'past' : ''}>
+          <li
+            key={s}
+            aria-current={p.stage === i ? 'step' : undefined}
+            className={p.stage === i ? 'current' : p.stage > i ? 'past' : ''}
+          >
             <span>{i + 1}</span>
             <b>{s}</b>
           </li>
         ))}
       </ol>
+      <section className="stage-brief" aria-labelledby="stage-heading">
+        <h2 id="stage-heading" ref={stageHeading} tabIndex={-1}>
+          {stages[p.stage]}
+        </h2>
+        <p id="stage-help">{stageHelp}</p>
+      </section>
       {p.stage === 0 && (
         <section className="story-panel">
           <span className="eyebrow">Tình huống</span>
@@ -132,8 +155,8 @@ export function LessonPage() {
             <h2>Điều vừa thấy có nghĩa gì?</h2>
             <p>{lesson.explanation}</p>
             <p className="muted">
-              Thực hiện ít nhất hai thao tác để mở chặng áp dụng. Hãy thay một yếu tố mỗi lần và
-              giải thích điều bạn thấy.
+              Hãy thay một yếu tố mỗi lần và giải thích điều bạn thấy. Các số liệu bên trên thuộc mô
+              hình của bài học.
             </p>
           </section>
         </>
@@ -169,13 +192,21 @@ export function LessonPage() {
           {p.stage > 0 && (
             <button
               className="button secondary"
-              onClick={() => update(lesson.id, { stage: p.stage - 1 })}
+              onClick={() => {
+                update(lesson.id, { stage: p.stage - 1 });
+                window.scrollTo({ top: 0, behavior: 'instant' });
+              }}
             >
               Chặng trước
             </button>
           )}
           {p.stage < 3 && (
-            <button className="button primary" disabled={!canNext} onClick={next}>
+            <button
+              className="button primary"
+              disabled={!canNext}
+              aria-describedby="stage-help"
+              onClick={next}
+            >
               {p.stage === 0
                 ? 'Đưa ra dự đoán'
                 : p.stage === 1

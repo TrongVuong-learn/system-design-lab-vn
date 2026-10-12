@@ -34,3 +34,11 @@ Kết quả đợt đầu: content validation 36 module/6 bài đạt; lint và 
 Nhánh `codex/ui-02-design-direction` thay trang đầu bằng bàn học có thí nghiệm cache thật, sơ đồ khác nhau theo từng bài, font Be Vietnam Pro tự host và hệ màu mới. Skill Anthropic frontend-design được cài ở phạm vi project, giữ license và khóa commit nguồn; Impeccable và UI/UX Pro Max chỉ được nghiên cứu. `DESIGN.md` và tooling lock ghi hướng thiết kế cùng nguồn tham khảo.
 
 Đã xem screenshot mobile 390 px và desktop 1280 px. Kiểm tra đạt: format, lint, build, 9 unit tests và 8 E2E trên Chromium mobile/desktop; thí nghiệm trang đầu không đánh dấu hoàn thành bài và các màn chính không tràn ở 320 px. Chưa kiểm thử trên thiết bị thật hoặc WebKit.
+
+## UI-03 — màn học và điều hướng chặng
+
+Task: giúp người mới biết phải làm gì ở mỗi chặng và dùng player trên mobile/bàn phím. Nhánh `codex/ui-03-lesson-desk` được tạo trong worktree riêng từ commit UI-02 đã phát hành để bảo toàn thay đổi tài liệu/skill đang có ở checkout chính.
+
+Đã thực hiện: hướng dẫn thay đổi theo chặng/đáp án/số thao tác còn thiếu; `aria-current="step"`; focus đến tiêu đề chặng sau khi dữ liệu lưu đã tải xong và khi chuyển chặng; cỡ chữ chặng, nhãn mô phỏng, số liệu và lời giải lớn hơn trên mobile. Engine, schema và đáp án không đổi.
+
+Acceptance đã kiểm chứng: production build/typecheck và lint đạt; 10 E2E tests đạt trên Chromium mobile/desktop, gồm keyboard chọn đáp án, nút tiếp tục bị khóa/mở đúng, focus lúc mở/reload/quay lại và reflow 320 px. Screenshot thí nghiệm cache được review ở 390 px/1280 px. Đây là kiểm tra hành vi trợ năng có phạm vi; chưa chứng nhận WCAG đầy đủ, screen reader hoặc thiết bị thật.
