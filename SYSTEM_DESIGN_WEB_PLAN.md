@@ -299,3 +299,18 @@ Danh sách từ mới chỉ hiển thị tên Việt/Anh khi popup được hỗ
 ## Kiểm định học liệu — EDU-03
 
 Kết quả [kiểm định ngày 12/10/2026](docs/delivery/CONTENT_AUDIT_2026-10-12.md): sáu bài beta mới giới thiệu một phần kiến thức; chưa có module nào đủ bằng chứng nghiệm thu toàn bộ. Giữ 6 level/36 module/7 nhánh và không tính phần trăm hoàn thành bằng số tiêu đề. Dùng System Design Primer để đối chiếu nhóm chủ đề, nguồn chính thức/paper để kiểm tra bảo đảm kỹ thuật. Phân bổ chi tiết ở CURRICULUM_MAP §9, ưu tiên thực hiện và acceptance ở ROADMAP §8, quy tắc kiểm định ở TEACHING_GUIDE.
+
+## Tích hợp System Design Primer vào kế hoạch học liệu
+
+Phạm vi biên soạn chi tiết nằm tại [CURRICULUM_MAP mục 9](CURRICULUM_MAP.md#9-kế-hoạch-tích-hợp-kiến-thức-từ-system-design-primer): 23 nhóm kiến thức PRIMER-K01–K23, tám bài thiết kế PRIMER-C01–C08, flashcards, lộ trình ôn và bài OOD bổ trợ. Nguồn được khóa revision và ghi attribution tại đó. Đây là mở rộng đặc tả bên trong 6 level/36 module/7 nhánh, chưa phải nội dung đã học được trên web.
+
+Đưa quy trình thiết kế của Primer thành một luồng học bốn bước, diễn giải cho học sinh:
+
+1. **Cần giúp ai, làm việc gì?** Chọn phạm vi và điều kiện, viết yêu cầu đo được, ước lượng bằng số nhỏ trước.
+2. **Thông tin đi qua đâu?** Vẽ các thành phần và đường đọc/ghi; giải thích trách nhiệm từng phần.
+3. **Một việc được làm đúng thế nào?** Làm rõ API, dữ liệu, invariant, thứ tự thao tác và kết quả khi gửi lại hoặc lỗi.
+4. **Khi đông hơn hoặc có sự cố thì sao?** Đổi workload, đo nút thắt, so sánh phương án với yêu cầu độ mới, bảo mật, chi phí và vận hành.
+
+Mỗi bước có ví dụ giải sẵn → lựa chọn có phản hồi → bài đổi ràng buộc. Mobile hiển thị một quyết định hoặc một bước trace tại một thời điểm, có bản chữ và nút tiến/lùi; không dồn toàn bộ sơ đồ vào một canvas phải zoom. Tiếp tục dùng chuẩn giải thích thuật ngữ tại chỗ. Các mô hình bổ sung chỉ được xây khi batch nội dung tương ứng sẵn sàng; engine độc lập UI và vẫn ưu tiên web trước app.
+
+Các case được chuyển thể thành chia sẻ ghi chú, bảng tin câu lạc bộ, crawler thư viện, quỹ câu lạc bộ, mạng quen biết, cache tra cứu, xếp hạng sách và cổng trường tăng tải. Các chủ đề ngoài độ sâu của Primer (consensus/transaction/SRE/security/AI...) vẫn theo chương trình hiện hữu và tài liệu chuyên môn riêng. Backlog và thứ tự phụ thuộc nằm tại ROADMAP mục 9.

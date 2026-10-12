@@ -84,3 +84,9 @@ Sửa duplicate glossary: browser hỗ trợ popup chỉ hiện tên thuật ng�
 Sửa phạm vi đếm cache (lượt xem qua cache/nguồn, không phải tổng I/O), đơn vị số lượt còn chờ; thêm giả định tải biến động/queue headroom và giới hạn chế độ replica lag=0. Không đổi engine, schema/checkpoint hoặc đáp án. Nhánh `codex/edu-03-content-audit`.
 
 Kiểm chứng đợt này: content build vẫn 36 module/6 bài; build/typecheck/lint đạt, 12 unit và 8 E2E chọn lọc đạt (luồng sáu bài + cache/resume trên Chromium mobile/desktop, Firefox, WebKit). Đã review sáu ảnh cache/queue/replica ở 390/1280 px; không tràn ngang ở hai bề rộng đó và replica 320 px. `git diff --check` đạt. Chưa chạy lại toàn bộ E2E/responsive matrix, chưa có thiết bị thật, reviewer chuyên gia hoặc pilot; kết quả này không chứng nhận giáo trình đầy đủ/chính xác tuyệt đối.
+
+## EDU-03b — bổ sung Primer vào plan
+
+Nhánh `codex/edu-03-primer-plan`: chốt phạm vi biên soạn 23 nhóm kiến thức, tám case study, ôn tập/flashcards và OOD bổ trợ trong CURRICULUM_MAP v4; đồng bộ plan sản phẩm và bảy lô backlog B0–B6 có dependency/gate. Primer được khóa commit `ae9bbd7b02d90b9866215de185217d33f39ab733`, giữ CC BY 4.0 attribution; ghi rõ các điểm phải hiệu chỉnh và nguồn gốc cần duyệt.
+
+Đây là thay đổi tài liệu kế hoạch, không thêm bài học vào web, không thay engine/schema hoặc phát hành bundle mới. Sáu bài beta và các gate học liệu còn mở giữ nguyên. Kiểm tra đạt: `pnpm content:check` vẫn nhận 36 module/6 bài; 23 ID K và 8 ID C duy nhất, bảy lô B0–B6; toàn bộ 36 dòng catalog module không đổi so với baseline; các file link nội bộ/reference link hợp lệ; `git diff --check` đạt. Không chạy build/E2E vì chỉ đổi tài liệu, không thay bundle hoặc học liệu phát hành.

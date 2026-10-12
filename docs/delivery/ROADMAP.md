@@ -120,3 +120,21 @@ Definition of done cho một tính năng gồm hành vi đúng, nội dung liên
 | P3 / EDU-08 | L5 và từng track, case study hoàn chỉnh | Thiết kế với workload/API/data/failure/security/cost, rubric lập luận; không chấm thành thạo bằng một trắc nghiệm |
 
 EDU-02 pilot chạy cùng từng lô học liệu đã review, không đợi soạn hết chương trình. Nhánh chuyên sâu triển khai theo prerequisite; không coi sáu bài nhập môn là đã hoàn thành các module L2 được gắn nhãn.
+
+## 9. EDU-03b — kế hoạch biên soạn từ Primer
+
+Task EDU-03b chỉ hoàn tất đặc tả tích hợp; các lô dưới đây là backlog biên soạn. Chi tiết PRIMER-K/C và nguồn được quản lý duy nhất trong [CURRICULUM_MAP mục 9](../../CURRICULUM_MAP.md#9-kế-hoạch-tích-hợp-kiến-thức-từ-system-design-primer). Mỗi lô tách thành task bài nhỏ khi chuyển Ready; không tạo nhánh trước cho mọi lô.
+
+| Lô / task cha | Phạm vi | Phụ thuộc | Đầu ra và gate cụ thể |
+| --- | --- | --- | --- |
+| PRIMER-B0 / ENG-03 | ID, prerequisite, source/attribution, review, coverage | Đặc tả EDU-03b | Registry nhận biết planned/draft/reviewed/published; trace từ bài tới K/C, source revision; chặn thiếu review, không nâng trạng thái chỉ vì có link |
+| PRIMER-B1 / EDU-04 | K02–K06; giới thiệu K01 | B0 cho xuất bản; biên soạn có thể bắt đầu trước | Bài L0 có đơn vị, ví dụ nhỏ, trace request, DNS/transport và ước lượng; pilot người chưa biết lập trình |
+| PRIMER-B2 / EDU-05 | K01, K07, K10, K12–K14; C01 bản một dịch vụ | B1; phần nền transaction L1.5 | API/data/index và identifier; thêm bài transaction từ nguồn chuyên môn; case có kiểm tra collision, expiry, quyền và retry |
+| PRIMER-B3 / EDU-06 | K08–K09, K11 phần discovery, K15–K19; C06; C01 bản mở rộng | B2; các engine mới qua review fixture | Thử workload lệch, cache update, hot shard, mất ACK; so sánh đánh đổi; không chỉ tăng số server để qua bài |
+| PRIMER-B4 / EDU-07 | K20–K22; đào sâu K15; nối consensus/SRE/security hiện hữu | B3; transaction, failure model và reviewer chuyên môn | Có lịch sử phân vùng, failover và tính downtime; nguồn gốc hỗ trợ claim; threat/restore review và phản chứng |
+| PRIMER-B5 / EDU-08 | K11 kiến trúc, K23; C02–C05, C07–C08 | B3/B4 và prerequisite theo từng case | Bản có hướng dẫn + bản đổi ràng buộc; API/data/trace/lỗi/cost và rubric lập luận; nghiệm thu từng case, không đợi hoàn tất cả lô |
+| PRIMER-B6 / EDU-08 + learning-core | Flashcards, hướng ôn, OOD tùy chọn | Có bài nguồn đã review; persistence/version theo ENG-03 | Thẻ tự viết liên kết bài/năng lực; nhớ thẻ không tự hoàn thành module; OOD cần nền lập trình, không bắt buộc với học sinh nhập môn |
+
+Owner theo vai trò ở mục 1: curriculum lead chịu phạm vi, technical writer viết, simulation engineer làm hoạt động, QA kiểm tra, chuyên gia duyệt cơ chế, instructional reviewer kiểm tra cách giảng. Chưa gán tên reviewer hoặc thời gian cam kết khi chưa có người thực nhận việc.
+
+Mỗi bài phải có outcome/prerequisite, storyboard mobile, glossary, nguồn, giả định, trace thường/lỗi, đánh giá chuyển giao và reviewer evidence. Khi review fail, giữ draft. Sau pilot sửa ngộ nhận rồi mới phát hành từng phần. Không gọi một lô hoàn tất chỉ vì có trang hoặc trắc nghiệm. Không nhập upstream code/dependency hay đổi stack trong task kế hoạch này.

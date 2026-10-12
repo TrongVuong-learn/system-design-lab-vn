@@ -1,6 +1,6 @@
 # Bản đồ giáo trình System Design Lab
 
-Phiên bản đề xuất: 3 — 11/10/2026. Tài liệu đặc tả phạm vi; các module dưới đây chưa phải học liệu đã xây dựng. Kế hoạch sản phẩm: [SYSTEM_DESIGN_WEB_PLAN.md](SYSTEM_DESIGN_WEB_PLAN.md). Chuẩn giảng dạy: [TEACHING_GUIDE.md](TEACHING_GUIDE.md).
+Phiên bản đề xuất: 4 — 12/10/2026. Tài liệu đặc tả phạm vi; các module dưới đây chưa phải học liệu đã xây dựng. Kế hoạch sản phẩm: [SYSTEM_DESIGN_WEB_PLAN.md](SYSTEM_DESIGN_WEB_PLAN.md). Chuẩn giảng dạy: [TEACHING_GUIDE.md](TEACHING_GUIDE.md).
 
 ## 1. Nguyên tắc bao phủ và phân level
 
@@ -226,15 +226,119 @@ Mỗi module ghi ngày review và phiên bản nguồn. Nguyên lý ổn định
 
 Mỗi bài cụ thể vẫn cần nguồn trực tiếp cho cơ chế được giảng, giả định mô phỏng và ví dụ implementation. Case study tổng hợp được ghi rõ là bài thiết kế giáo dục; chỉ mô tả kiến trúc thực tế của một công ty khi có nguồn công khai hỗ trợ.
 
-## 9. Đối chiếu System Design Primer — 12/10/2026
+## 9. Kế hoạch tích hợp kiến thức từ System Design Primer
 
-Dùng [System Design Primer của Donne Martin](https://github.com/donnemartin/system-design-primer) làm checklist bổ sung, không làm nguồn chân lý duy nhất hoặc bằng chứng đã hoàn thành chương trình. [Báo cáo kiểm định](docs/delivery/CONTENT_AUDIT_2026-10-12.md) ghi mapping, học liệu thực có và nguồn trực tiếp. Các bổ sung dưới đây thuộc module hiện hữu, chưa phải bài đã xuất bản:
+### 9.1. Nguồn và phạm vi
 
-- L0.6: phân biệt performance/scalability; ước lượng theo workload, đơn vị và percentile; bảng latency chỉ là ví dụ có điều kiện đo/ngày đo.
-- L0.5/L2.1: phân biệt reverse proxy và load balancer; vai trò có thể cùng nằm trong một thành phần.
-- L2.2: thêm so sánh CDN push/pull và refresh-ahead khi biên soạn policy; phân biệt vị trí cache với cách cập nhật cache.
-- L1.3/L2.4: phân biệt chia dữ liệu theo chức năng (federation trong Primer) với chia các hàng của cùng miền dữ liệu (sharding).
-- L4.1/L4.6: khi ước lượng availability kết hợp, ghi rõ giả định độc lập/phụ thuộc chung; replication không thay thế restore từ backup.
-- L5.1 và capstone: bổ sung nhóm bài news feed, crawler và analytics; mỗi bài phải có yêu cầu, số liệu, đường dữ liệu và phản biện phương án. Bài tập object-oriented design trong Primer là bổ trợ, không thay năng lực thiết kế hệ thống.
+Nguồn: **The System Design Primer — Donne Martin và contributors**, commit `ae9bbd7b02d90b9866215de185217d33f39ab733`, ngày commit 20/03/2026; truy xuất 12/10/2026. [README cố định][primer], [license CC BY 4.0][primer-license]. Đây là bản chuyển thành kế hoạch giảng dạy tiếng Việt: phân lại level, thêm ví dụ trường học, hoạt động mobile, bài phản chứng và tiêu chí đánh giá. Không nhập nguyên code, hình hoặc bộ Anki; không đại diện cho sự chứng thực của tác giả.
 
-Phạm vi sản phẩm còn cần các phần đã quy hoạch ngoài mức tóm tắt của Primer: transaction/consensus, security/privacy, SRE, migration và bảy nhánh ứng dụng. Không giảm chiều sâu để đạt một tỷ lệ checklist.
+Giữ 6 level/36 module/7 nhánh. **23 nhóm PRIMER-K bên dưới là nhóm công việc biên soạn trong module hiện hữu**, không phải 23 module mới hoặc 23 bài đã phát hành. Một nhóm có thể cần nhiều bài nhỏ. Các ID này truy vết kế hoạch; chưa phải competency registry chạy trong ứng dụng. Trạng thái toàn bộ bổ sung: **đã đặc tả, chưa biên soạn/duyệt/phát hành**. Phần sáu bài beta hiện có chỉ được tái sử dụng khi đáp ứng mục tiêu tương ứng.
+
+### 9.2. Kiến thức, hoạt động và đầu ra bắt buộc
+
+Các liên kết ở cột kiến thức trỏ tới mục trong revision nguồn đã khóa. Cột hoạt động và nghiệm thu là thiết kế giáo dục của dự án. Các chi tiết mở rộng theo giáo trình cũ vẫn giữ nguyên; Primer không thay chương trình database, consensus, security hoặc SRE chuyên sâu.
+
+| ID / module | Kiến thức phải chuyển thành bài | Tình huống và tương tác mobile | Bằng chứng người học cần tạo |
+| --- | --- | --- | --- |
+| PRIMER-K01 · L1.1, L5.1 | [Quy trình thiết kế][p-design]: xác định người dùng/use case, phạm vi, yêu cầu, giả định; sơ đồ tổng thể; thành phần lõi; tìm nút thắt và đánh đổi | Thiết kế cổng đăng ký câu lạc bộ; chọn thẻ yêu cầu trước khi thêm thành phần | Một yêu cầu đo được, một giả định chưa biết, API/data flow và lý do chọn phương án |
+| PRIMER-K02 · L0.6, L2.1 | [Performance/scalability][p-performance]; tăng tài nguyên dọc/ngang; giới hạn và chi phí mở rộng | Đổi số bàn trực và tốc độ mỗi bàn; dùng cùng workload để so sánh | Phân biệt mục tiêu nhanh hơn một việc với phục vụ nhiều việc; chỉ ra nút thắt sau khi mở rộng |
+| PRIMER-K03 · L0.6 | [Latency/throughput][p-latency]; đơn vị và cửa sổ đo; nối tiếp phần percentile đã có trong chương trình | Timeline chờ nhận sách và bộ đếm sách trả mỗi giây | Tính hai chỉ số từ trace; giải thích vì sao nhiều việc hoàn tất hơn chưa chắc từng bạn chờ ít hơn |
+| PRIMER-K04 · L0.6, L4.3 | [Ước lượng][p-estimation], lũy thừa hai, kích thước dữ liệu, tải đọc/ghi và độ lớn latency | Bộ tính số học sinh × lượt/ngày × byte; đổi giờ cao điểm và retention | Bảng phép tính có đơn vị, giả định, khoảng biến động; không dùng số latency lịch sử như benchmark hiện tại |
+| PRIMER-K05 · L0.4 | [DNS][p-dns]: tên miền, resolver, bản ghi, cache và TTL; độ trễ cập nhật và giới hạn định tuyến | Tìm địa chỉ thư viện qua các bàn tra cứu; đổi địa chỉ khi cache còn hạn | Theo dấu truy vấn và giải thích vì sao người dùng khác nhau có thể tới địa chỉ khác nhau |
+| PRIMER-K06 · L0.4–L0.5 | [TCP/UDP/HTTP][p-communication]: kết nối, thứ tự, retransmission, request/response; tách giao thức khỏi nhu cầu ứng dụng | Gửi bài tập hoặc âm thanh lớp học; làm rơi/trễ gói trong trace | Chọn giao thức theo yêu cầu; không kết luận TCP bảo đảm xử lý nghiệp vụ đúng một lần hoặc UDP luôn nhanh hơn |
+| PRIMER-K07 · L1.2 | [REST/RPC][p-rpc]: resource/action, hợp đồng, lỗi và coupling; liên kết bài idempotency/versioning đã quy hoạch | So sánh xem lịch và đăng ký chỗ; gửi lại sau timeout | API contract và cách biết kết quả chưa rõ; phân biệt phương thức HTTP với bảo đảm của nghiệp vụ |
+| PRIMER-K08 · L2.2; Media, Platform | [CDN][p-cdn]: edge/origin; push/pull; cache hit/miss, invalidation, chi phí lưu và truyền | Phát ảnh hội trường cho người xem ở nhiều vùng; thử nội dung ít dùng và ảnh vừa cập nhật | Chọn cơ chế phân phối, giải thích cold miss và yêu cầu độ mới; không coi CDN chỉ dùng cho ảnh |
+| PRIMER-K09 · L2.1 | [Load balancing][p-lb]: L4/L7, health check, phân tải, session state; cụm cân bằng tải cũng có thể lỗi | Phân học sinh vào quầy; cho một quầy chậm hoặc ngừng nhận | Trace phân tải; phân biệt health check thành công với còn công suất; phát hiện bottleneck downstream |
+| PRIMER-K10 · L0.5, L2.1 | [Reverse proxy][p-proxy]: chuyển tiếp, TLS termination, caching/compression; quan hệ với load balancer | Mở từng lớp cổng trường → bàn điều phối → lớp học | Gán đúng trách nhiệm; chỉ ra khi một thành phần đóng cả hai vai trò |
+| PRIMER-K11 · L2.1, L5.2 | [Application layer][p-app]: tách trách nhiệm, service discovery, microservices và chi phí lời gọi qua mạng | So sánh một hệ thống quản lý trường với các dịch vụ lịch/đăng ký/thông báo | Sơ đồ ownership/phụ thuộc, một lỗi liên dịch vụ và lý do giữ monolith hoặc tách dịch vụ |
+| PRIMER-K12 · L1.3 | [Dữ liệu quan hệ][p-db]: schema, khóa, chuẩn hóa/phi chuẩn hóa; access pattern và chi phí cập nhật dữ liệu lặp | Bảng học sinh, lớp và lượt đăng ký; ghép bảng hoặc giữ bản tổng hợp | Truy vấn cần hỗ trợ, constraint và tình huống các bản dữ liệu lặp không khớp |
+| PRIMER-K13 · L1.4 | [SQL tuning][p-sql]: schema/index, query plan, joins, partitioning và cache trong DB | Tra danh sách theo mã học sinh; thêm index và đổi tỷ lệ đọc/ghi | So sánh số mục phải xét và chi phí ghi/lưu; không mặc định thêm mọi index hoặc loại bỏ mọi join |
+| PRIMER-K14 · L1.3 | [NoSQL][p-nosql]: key-value, document, wide-column, graph; so sánh với relational theo truy vấn và bảo đảm | Chọn cấu trúc cho hồ sơ, lịch sử sự kiện, quan hệ bạn bè | Hai phương án cùng yêu cầu và đánh đổi; không gán mọi NoSQL là eventual consistency hoặc không có transaction |
+| PRIMER-K15 · L2.3, L3.5 | [Replication][p-replication]: primary/replica, multi-leader, sync/async, lag, conflict, read routing | Đổi lịch ở hai địa điểm; chậm truyền và mất một nút | Lịch sử ghi/đọc, điều kiện xác nhận ghi, rủi ro mất dữ liệu; không coi replica là backup |
+| PRIMER-K16 · L2.4 | [Federation/sharding][p-sharding]: chia theo chức năng so với chia dữ liệu cùng miền; key, skew, join xuyên shard và di chuyển | Chia hồ sơ theo lớp hoặc mã học sinh; thêm lớp đông đột biến | Chọn shard key, chỉ ra hot partition và kế hoạch chuyển dữ liệu không mất/nhân đôi |
+| PRIMER-K17 · L2.2 | [Vị trí và đối tượng cache][p-cache]: client/CDN/proxy/application/database; query result so với object; dung lượng, eviction và invalidation | Đặt bản sao lịch ở các chặng, đổi một ô dữ liệu gốc | Liệt kê bản cache bị ảnh hưởng, chi phí cập nhật và cache key có phạm vi quyền truy cập |
+| PRIMER-K18 · L2.2 | [Cache policies][p-cache-policies]: cache-aside, write-through, write-back, refresh-ahead; TTL, cold start, LRU và dữ liệu cũ | Xem/đổi lịch; dừng hệ thống sau ghi cache nhưng trước ghi nguồn; dự đoán mục cần làm mới | Trace đọc/ghi/ACK, độ mới và durability; phân biệt TTL, eviction, invalidation; nêu điều kiện của từng bảo đảm |
+| PRIMER-K19 · L2.5–L2.6 | [Asynchronism][p-async]: message/task queues, xử lý nền, backpressure; nối tới ACK/retry/dedup/DLQ đã quy hoạch | Gửi giấy mời khi việc đến dồn dập; worker lỗi giữa nhận và xác nhận | Phân biệt nhận việc/làm xong, tính backlog, chọn giới hạn nhận; chỉ ra duplicate và tác dụng phụ |
+| PRIMER-K20 · L3.1 | [CAP và consistency][p-cap]: weak/eventual/strong theo định nghĩa cụ thể; đọc sau ghi và lịch sử thao tác; partition | Hai bàn giữ số chỗ còn lại, ngắt liên lạc rồi đọc/ghi | Chỉ ra thao tác phải chờ/từ chối hoặc có thể thấy cũ trong mô hình; phân biệt linearizability với ACID consistency |
+| PRIMER-K21 · L3.6, L4.1, L4.6 | [Availability][p-availability]: active-passive/active-active, failover, downtime budget, phụ thuộc nối tiếp/song song | Cho một khu nhà mất điện; chuyển xử lý và phục hồi | Tính budget theo kỳ đo; nêu giả định độc lập trước khi nhân xác suất; chỉ ra lỗi chung và điều kiện failback |
+| PRIMER-K22 · L1.2, L4.4 | [Security cơ bản][p-security]: quyền tối thiểu, dữ liệu truyền/lưu, input, truy vấn tham số; mở rộng theo ASVS đã quy hoạch | Đọc bảng điểm bằng các vai trò và sửa tham số yêu cầu | Xác định trust boundary, kiểm tra quyền phía server và dữ liệu nhạy cảm; mã hóa không thay phân quyền |
+| PRIMER-K23 · L5.6 | [Kiến trúc thực tế][p-real]: đọc nguồn, workload, bối cảnh, bottleneck, thời điểm và giới hạn | Đọc một bài engineering công khai, điền phiếu phản biện trên mobile | Phân biệt dữ kiện/giả định; giải thích vì sao kiến trúc đó không tự phù hợp cho trường học; giữ URL/ngày của bài gốc |
+
+### 9.3. Tám bài thiết kế tích hợp
+
+Đây là bài tập giáo dục lấy đề bài làm điểm xuất phát, không mô tả kiến trúc hiện hành của các công ty. Workload và số liệu sẽ được tính lại với đơn vị/giả định công khai. Các nguồn dưới đây là solution mẫu, không phải đáp án duy nhất. Chưa mở bài nâng cao như bài hoàn chỉnh khi thiếu prerequisite.
+
+| ID / nguồn | Nơi học và prerequisite | Bản chuyển thể, tương tác và tiêu chí hoàn tất |
+| --- | --- | --- |
+| PRIMER-C01 · [Pastebin/Bit.ly][c-pastebin] | L1.6 → L2 capstone; API, schema, identifier | Chia sẻ ghi chú lớp bằng mã ngắn; chọn expiry, xử lý trùng mã, đọc/ghi và analytics. Nộp API/schema, trace collision/expiry và thiết kế mở rộng; phân biệt encoding với hashing |
+| PRIMER-C02 · [Timeline/search][c-twitter] | L2 capstone → Search, Realtime; queue, cache, index | Bảng tin câu lạc bộ: fan-out khi ghi/đọc, người có nhiều người theo dõi, chỉ mục tìm kiếm. Thay phân bố follower và đo lượng công việc; giải thích độ mới của feed/index |
+| PRIMER-C03 · [Crawler][c-web_crawler] | Search, Data; networking, queue, dedup | Kho trang giả lập của thư viện: frontier, chu kỳ link, lịch thu thập lại, lập chỉ mục. Chạy trên dữ liệu fixture, không crawl Internet thật trong bài; tránh lặp vô hạn và đặt giới hạn theo host |
+| PRIMER-C04 · [Mint][c-mint] | Nhánh nghiệp vụ/Data; API, background job, quyền, idempotency | Theo dõi quỹ câu lạc bộ bằng giao dịch giả lập: nhập định kỳ, phân loại, ghi đè thủ công, tổng hợp/cảnh báo. Replay không đếm đôi; cập nhật nguồn không ghi đè lựa chọn người dùng. Không kết nối tài khoản ngân hàng thật |
+| PRIMER-C05 · [Social graph][c-social_graph] | Search, L2.4; graph/BFS, partitioning | Tìm đường quen biết ngắn nhất giữa học sinh trên graph vô hướng không trọng số. So sánh số nút/lượt đọc xuyên shard và đường tìm được; phân biệt GraphQL API với graph database |
+| PRIMER-C06 · [Query cache][c-query_cache] | L2.2–L2.4; hash table, eviction, cache policies | Cache kết quả tra thư viện với bộ nhớ hữu hạn: hit/miss, TTL, LRU, thêm node, hot key. Chứng minh eviction đúng trace và giải thích remapping/cold cache |
+| PRIMER-C07 · [Sales rank][c-sales_rank] | Data Engineering; queue/log, aggregation | Xếp hạng sách theo lượt mượn trong cửa sổ thời gian: cập nhật định kỳ, nhiều danh mục, late/duplicate event. Tính lại một bộ dữ liệu bằng tay và replay; tách độ mới khỏi tốc độ truy vấn |
+| PRIMER-C08 · [Scaling on AWS][c-scaling_aws] | L5.1–L5.3, Platform; L1–L4 liên quan | Cổng trường tăng dần tải: một máy → tách dữ liệu → cân bằng tải/cache/replica → điều chỉnh kiến trúc. Mỗi bước phải đo bottleneck, chọn phương án, nêu chi phí/lỗi; AWS là lớp triển khai tùy chọn, không đổi stack của sản phẩm học |
+
+Mỗi case có bản có hướng dẫn và bản đổi ràng buộc để chuyển giao. Rubric chung chấm riêng: yêu cầu/ước lượng; API/data; trace bình thường; lỗi/tính đúng đắn; security/cost; lập luận trade-off. Không gom thành nhãn “thành thạo” nếu phần đúng đắn chưa đạt.
+
+### 9.4. Ôn tập và phần bổ trợ từ repo
+
+- **Flashcards:** học ý tưởng ôn cách quãng từ mục Anki của Primer; tự viết thẻ tiếng Việt liên kết PRIMER-K/C, gồm một tình huống, câu hỏi “vì sao”, phản ví dụ và link quay về bài. Chạm để mở giải thích; hỗ trợ bàn phím. Chưa nhập deck hoặc chạy thuật toán ôn tập. Thành tích nhớ thẻ tách khỏi bằng chứng thiết kế.
+- **Study guide:** cung cấp ba cách học: nền tảng tuần tự; ôn theo lỗ hổng năng lực; luyện case/phỏng vấn sau nền tảng. Người mới không bị ép theo lịch ôn phỏng vấn ngắn của người đã có kinh nghiệm.
+- **Object-oriented design:** hash map/LRU là bổ trợ L0.3/L2.2; call center, deck of cards, parking lot, chat server là bài implementation tùy chọn sau kiến thức lập trình. Circular array trong repo là đề chờ đóng góp, không ghi là có solution. Không dùng notebook Python upstream để quyết định ngôn ngữ sản phẩm TypeScript.
+- **Additional questions:** làm ngân hàng bài đổi ràng buộc sau các case đã review; tác giả phải viết rubric trước khi phát hành. Liên kết đến câu hỏi chưa có học liệu chỉ là đọc thêm.
+- **Video, blog và kiến trúc công ty:** dùng như nguồn đọc có hướng dẫn; không yêu cầu tài khoản/dịch vụ ngoài để hoàn thành bài lõi. Ghi nguồn gốc, ngày xuất bản và phạm vi áp dụng; chưa kiểm chứng mọi link trong repo.
+
+### 9.5. Các điểm phải hiệu chỉnh khi chuyển thể
+
+Giữ tên thuật ngữ hiện đại primary/replica và multi-leader; giữ thuật ngữ cũ chỉ trong chú thích tra cứu nguồn. Những phần dưới đây cần nguồn trực tiếp và review trước phát hành, không dịch nguyên câu khái quát của Primer:
+
+1. CAP phải có failure model và định nghĩa; strong consistency không tự suy từ “dùng SQL” hoặc “sao chép đồng bộ”; eventual consistency không cam kết hội tụ trong vài mili giây.
+2. TTL hết hạn không đồng nghĩa tự tải mới; write-through chỉ cho bảo đảm độ mới trong phạm vi đường ghi, cơ chế phối hợp và failure handling đã định nghĩa; cache không mặc định luôn nhanh hơn mọi lần đọc database.
+3. Công thức availability nối tiếp/song song chỉ áp dụng theo cấu trúc và giả định xác suất đã nêu; phải xét lỗi chung, failover và kỳ đo. Ví dụ downtime tính lại theo số ngày đã chọn, không sao chép bảng làm hằng số.
+4. GraphQL là ngôn ngữ truy vấn và runtime cho API, không phải graph database; sửa cách nhóm trong case social graph theo [tài liệu GraphQL][graphql].
+5. Ví dụ query cache/SQL tuning, sản phẩm cloud, thông số phần cứng và latency phải ghi phiên bản; không đem cấu hình cũ thành hướng dẫn triển khai mới. Base62 là cách biểu diễn, không phải cơ chế bảo mật cho mã truy cập.
+6. Security trong Primer chỉ là phần giới thiệu; tiếp tục giữ threat modeling, tenant isolation, auth, privacy và lifecycle dữ liệu trong L4.4. Không xem sanitization chung là thay thế kiểm soát theo ngữ cảnh.
+
+Nguồn trực tiếp cho CAP, replication, isolation, queue được ghi trong [báo cáo EDU-03](docs/delivery/CONTENT_AUDIT_2026-10-12.md). Khi soạn từng bài, bổ sung sourceRef ở cấp claim và phiên bản; chưa gọi kế hoạch này là toàn bộ nội dung đã được xác minh.
+
+### 9.6. Hồ sơ bàn giao mỗi bài
+
+Mỗi bài tách từ PRIMER-K/C có: ID riêng, module/competency/depth, prerequisite, outcome, lời giải tiếng Việt, terms, tình huống có lời giải, bài tự thử, trace lỗi/phản ví dụ, assessment/rubric, sourceRef và adaptation note. Reviewer kiểm tra riêng cơ chế kỹ thuật và khả năng hiểu. Thao tác mobile theo từng bước, không bắt kéo; bảng/timeline có bản chữ và thuật ngữ dùng popover đã chuẩn hóa. Kết quả mô phỏng phụ thuộc engine registry, không nhúng code tùy ý vào học liệu.
+
+Acceptance của việc **thêm vào plan**: mọi nhóm đề mục chính, tám solution mẫu và tài nguyên bổ trợ có nơi xử lý hoặc lý do chỉ đọc thêm; ID không thay 36 module; có nguồn revision/attribution, thứ tự triển khai và gate review. Acceptance của **bài đã phát hành** vẫn là mục 7 cùng TEACHING_GUIDE và WORKFLOW; hai trạng thái không được đánh đồng.
+
+[primer]: https://github.com/donnemartin/system-design-primer/blob/ae9bbd7b02d90b9866215de185217d33f39ab733/README.md
+[primer-license]: https://github.com/donnemartin/system-design-primer/blob/ae9bbd7b02d90b9866215de185217d33f39ab733/LICENSE.txt
+[p-design]: https://github.com/donnemartin/system-design-primer/blob/ae9bbd7b02d90b9866215de185217d33f39ab733/README.md#how-to-approach-a-system-design-interview-question
+[p-performance]: https://github.com/donnemartin/system-design-primer/blob/ae9bbd7b02d90b9866215de185217d33f39ab733/README.md#performance-vs-scalability
+[p-latency]: https://github.com/donnemartin/system-design-primer/blob/ae9bbd7b02d90b9866215de185217d33f39ab733/README.md#latency-vs-throughput
+[p-estimation]: https://github.com/donnemartin/system-design-primer/blob/ae9bbd7b02d90b9866215de185217d33f39ab733/README.md#back-of-the-envelope-calculations
+[p-dns]: https://github.com/donnemartin/system-design-primer/blob/ae9bbd7b02d90b9866215de185217d33f39ab733/README.md#domain-name-system
+[p-communication]: https://github.com/donnemartin/system-design-primer/blob/ae9bbd7b02d90b9866215de185217d33f39ab733/README.md#communication
+[p-rpc]: https://github.com/donnemartin/system-design-primer/blob/ae9bbd7b02d90b9866215de185217d33f39ab733/README.md#remote-procedure-call-rpc
+[p-cdn]: https://github.com/donnemartin/system-design-primer/blob/ae9bbd7b02d90b9866215de185217d33f39ab733/README.md#content-delivery-network
+[p-lb]: https://github.com/donnemartin/system-design-primer/blob/ae9bbd7b02d90b9866215de185217d33f39ab733/README.md#load-balancer
+[p-proxy]: https://github.com/donnemartin/system-design-primer/blob/ae9bbd7b02d90b9866215de185217d33f39ab733/README.md#reverse-proxy-web-server
+[p-app]: https://github.com/donnemartin/system-design-primer/blob/ae9bbd7b02d90b9866215de185217d33f39ab733/README.md#application-layer
+[p-db]: https://github.com/donnemartin/system-design-primer/blob/ae9bbd7b02d90b9866215de185217d33f39ab733/README.md#relational-database-management-system-rdbms
+[p-sql]: https://github.com/donnemartin/system-design-primer/blob/ae9bbd7b02d90b9866215de185217d33f39ab733/README.md#sql-tuning
+[p-nosql]: https://github.com/donnemartin/system-design-primer/blob/ae9bbd7b02d90b9866215de185217d33f39ab733/README.md#nosql
+[p-replication]: https://github.com/donnemartin/system-design-primer/blob/ae9bbd7b02d90b9866215de185217d33f39ab733/README.md#master-slave-replication
+[p-sharding]: https://github.com/donnemartin/system-design-primer/blob/ae9bbd7b02d90b9866215de185217d33f39ab733/README.md#federation
+[p-cache]: https://github.com/donnemartin/system-design-primer/blob/ae9bbd7b02d90b9866215de185217d33f39ab733/README.md#cache
+[p-cache-policies]: https://github.com/donnemartin/system-design-primer/blob/ae9bbd7b02d90b9866215de185217d33f39ab733/README.md#when-to-update-the-cache
+[p-async]: https://github.com/donnemartin/system-design-primer/blob/ae9bbd7b02d90b9866215de185217d33f39ab733/README.md#asynchronism
+[p-cap]: https://github.com/donnemartin/system-design-primer/blob/ae9bbd7b02d90b9866215de185217d33f39ab733/README.md#availability-vs-consistency
+[p-availability]: https://github.com/donnemartin/system-design-primer/blob/ae9bbd7b02d90b9866215de185217d33f39ab733/README.md#availability-patterns
+[p-security]: https://github.com/donnemartin/system-design-primer/blob/ae9bbd7b02d90b9866215de185217d33f39ab733/README.md#security
+[p-real]: https://github.com/donnemartin/system-design-primer/blob/ae9bbd7b02d90b9866215de185217d33f39ab733/README.md#real-world-architectures
+[c-pastebin]: https://github.com/donnemartin/system-design-primer/blob/ae9bbd7b02d90b9866215de185217d33f39ab733/solutions/system_design/pastebin/README.md
+[c-twitter]: https://github.com/donnemartin/system-design-primer/blob/ae9bbd7b02d90b9866215de185217d33f39ab733/solutions/system_design/twitter/README.md
+[c-web_crawler]: https://github.com/donnemartin/system-design-primer/blob/ae9bbd7b02d90b9866215de185217d33f39ab733/solutions/system_design/web_crawler/README.md
+[c-mint]: https://github.com/donnemartin/system-design-primer/blob/ae9bbd7b02d90b9866215de185217d33f39ab733/solutions/system_design/mint/README.md
+[c-social_graph]: https://github.com/donnemartin/system-design-primer/blob/ae9bbd7b02d90b9866215de185217d33f39ab733/solutions/system_design/social_graph/README.md
+[c-query_cache]: https://github.com/donnemartin/system-design-primer/blob/ae9bbd7b02d90b9866215de185217d33f39ab733/solutions/system_design/query_cache/README.md
+[c-sales_rank]: https://github.com/donnemartin/system-design-primer/blob/ae9bbd7b02d90b9866215de185217d33f39ab733/solutions/system_design/sales_rank/README.md
+[c-scaling_aws]: https://github.com/donnemartin/system-design-primer/blob/ae9bbd7b02d90b9866215de185217d33f39ab733/solutions/system_design/scaling_aws/README.md
+[graphql]: https://graphql.org/learn/
