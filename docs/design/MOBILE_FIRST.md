@@ -286,3 +286,5 @@ Ma trận tự động hiện có ở `tests/e2e/responsive-matrix.spec.ts`: 320
 ### Chuẩn ghi chú thuật ngữ
 
 Từ có gạch chân chấm mở ghi chú tại chỗ: hover/focus trên desktop, chạm toggle trên mobile. Popup không modal, không điều hướng trang hoặc bắt buộc hover; có nút Đóng ít nhất 44 px, Escape và light-dismiss. Khi popup đóng bằng nút, trả focus về từ mà không mở lại. Giới hạn popup trong viewport 320 px và bám vị trí từ khi cuộn, đóng nếu từ ra khỏi vùng nhìn. Danh sách “Giải thích từ mới” vẫn giữ đầy đủ định nghĩa. Chuẩn nguồn/renderer và acceptance chi tiết nằm ở SYSTEM_DESIGN_WEB_PLAN.md, mục Chuẩn giải thích thuật ngữ tại chỗ.
+
+Danh sách từ mới chỉ hiển thị tên Việt/Anh khi popup được hỗ trợ; mở nghĩa bằng hover/focus hoặc chạm, không in thêm cùng định nghĩa ngay dưới mục. Browser thiếu Popover API hiển thị định nghĩa dạng chữ như fallback. Cùng một nguồn registry được dùng cho cả hai cách hiển thị.

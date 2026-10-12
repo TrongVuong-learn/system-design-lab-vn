@@ -57,6 +57,9 @@ test('tap toggles on mobile and glossary still provides all definitions', async 
   else await term.click();
   await expect(note).toBeHidden();
   await page.getByText('Giải thích từ mới', { exact: true }).click();
+  await expect(
+    page.getByText('Thời gian từ khi gửi yêu cầu đến khi nhận câu trả lời.', { exact: true }),
+  ).toBeHidden();
   await page
     .locator('.glossary')
     .getByRole('button', { name: 'Giải thích: Độ trễ', exact: true })

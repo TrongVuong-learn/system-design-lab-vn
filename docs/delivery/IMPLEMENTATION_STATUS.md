@@ -74,3 +74,5 @@ Nhánh `codex/ux-04-inline-glossary`: AnnotatedText khớp nguyên thuật ngữ
 Chuẩn được ghi ở plan chính, MOBILE_FIRST.md, TEACHING_GUIDE.md và DESIGN.md. Không đổi schema/đáp án, không lồng nút thuật ngữ vào nút trả lời. Definition lấy từ term registry của bài. Kiểm chứng cập nhật theo kết quả cuối của task; thiết bị thật/screen reader vẫn chưa được thử.
 
 Kết quả cuối UX-04: build/typecheck/lint/format đạt; 79 E2E đạt trên Chromium mobile/desktop, Firefox, WebKit và ma trận responsive; 1 test hover bỏ qua trên mobile theo thiết kế, có test tap thật thay thế. Tap mobile lặp 3 lần đạt sau sửa focus-visible. Đã review screenshots popup ở 390/1280 px, kiểm tra viewport 320 px và fallback khi thiếu Popover API. Không chạy lại unit core vì không đổi core/schema/engine.
+
+Sửa duplicate glossary: browser hỗ trợ popup chỉ hiện tên thuật ngữ trong danh sách, nghĩa xuất hiện khi hover/focus/chạm; không in lại cùng nghĩa dưới mục. Browser thiếu API giữ định nghĩa chữ. Plan/mobile/teaching/design đã đồng bộ. Build/typecheck/lint đạt; 8 E2E liên quan popup/fallback đạt trên Chromium mobile/desktop, Firefox, WebKit. Đã review ảnh danh sách mobile/desktop.

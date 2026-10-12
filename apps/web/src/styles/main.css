@@ -1533,3 +1533,9 @@ input[type='checkbox'] {
   color: var(--ink);
   font: inherit;
 }
+
+.glossary .term-trigger {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}

@@ -293,3 +293,5 @@ Vị trí popup nằm trong viewport, không làm cả trang cuộn ngang ở 32
 Renderer chỉ annotate văn xuôi bằng các term.name/term.english có trong schema, khớp nguyên thuật ngữ không phân biệt hoa/thường; giữ từ dài hơn ưu tiên và không khớp bên trong từ khác. Không nhúng HTML/script vào JSON và không đặt nút thuật ngữ bên trong nút đáp án. Các bài sau phải dùng cùng component và chuẩn tương tác. Annotation tường minh theo content blocks/ID sẽ thuộc contract học liệu nâng cấp sau này.
 
 Acceptance: hover/focus desktop, tap mobile, Escape/đóng ngoài/đóng nút, popup không tràn ở 320 px, định nghĩa từ registry, focus được giữ và luồng học/lưu tiến độ không đổi. Kiểm chứng đa browser và thiết bị thật theo ma trận hiện hành; không suy ra đã hỗ trợ mọi browser cũ từ một lần chạy emulation.
+
+Danh sách từ mới chỉ hiển thị tên Việt/Anh khi popup được hỗ trợ; mở nghĩa bằng hover/focus hoặc chạm, không in thêm cùng định nghĩa ngay dưới mục. Browser thiếu Popover API hiển thị định nghĩa dạng chữ như fallback. Cùng một nguồn registry được dùng cho cả hai cách hiển thị.

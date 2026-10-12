@@ -129,3 +129,5 @@ Các vòng nhỏ dùng để tìm vấn đề và cải tiến; không chứng m
 ## Tra cứu thuật ngữ khi đang đọc
 
 Dùng term.name/term.english/term.meaning của bài làm nguồn duy nhất cho ghi chú và danh sách từ mới. Định nghĩa phải hiểu được khi mở riêng khỏi đoạn văn. Trong văn xuôi, thuật ngữ mở bằng hover/focus hoặc chạm; không bắt người học xuống cuối bài mới biết nghĩa. Giữ danh sách đầy đủ cuối bài. Không tự thêm tương tác vào đáp án; tránh nút lồng nút. Các bài phát triển sau tuân thủ chuẩn ghi chú tại chỗ của plan và MOBILE_FIRST.md.
+
+Danh sách từ mới chỉ hiển thị tên Việt/Anh khi popup được hỗ trợ; mở nghĩa bằng hover/focus hoặc chạm, không in thêm cùng định nghĩa ngay dưới mục. Browser thiếu Popover API hiển thị định nghĩa dạng chữ như fallback. Cùng một nguồn registry được dùng cho cả hai cách hiển thị.

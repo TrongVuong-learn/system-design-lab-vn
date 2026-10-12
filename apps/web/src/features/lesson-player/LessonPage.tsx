@@ -184,7 +184,7 @@ export function LessonPage() {
             <strong>
               <TermNote term={t}>{t.name}</TermNote> <span>({t.english})</span>
             </strong>
-            <p>{t.meaning}</p>
+            {!('showPopover' in HTMLElement.prototype) && <p>{t.meaning}</p>}
           </div>
         ))}
       </details>

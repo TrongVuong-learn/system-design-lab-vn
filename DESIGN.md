@@ -37,3 +37,5 @@ Mỗi chặng có tiêu đề và một hướng dẫn ngắn trước nội dun
 Lỗi ghi tiến độ dùng khối nền vàng nhạt trước nội dung chặng, thông báo điều chưa lưu và hành động thử lại/xuất dự phòng. Lỗi đọc có lời giải thích giữ nguyên bản cũ; UI không coi tiến độ trong tab là đã lưu trên thiết bị. Trạng thái lưu bình thường ở cuối chặng để không chiếm vùng đọc.
 
 Thuật ngữ trong văn xuôi dùng gạch chân chấm, giữ font/màu ngữ cảnh khi đóng; trạng thái mở dùng màu hành động. Ghi chú là popover không modal trong top layer, tối đa 320 px, có định nghĩa và nút Đóng. Hover/focus đọc nhanh, click/tap ghim-toggle; giữ bản tra cứu cuối bài. Không biến mọi từ thành badge/card hoặc thêm nút bên trong đáp án.
+
+Danh sách từ mới chỉ hiển thị tên Việt/Anh khi popup được hỗ trợ; mở nghĩa bằng hover/focus hoặc chạm, không in thêm cùng định nghĩa ngay dưới mục. Browser thiếu Popover API hiển thị định nghĩa dạng chữ như fallback. Cùng một nguồn registry được dùng cho cả hai cách hiển thị.
