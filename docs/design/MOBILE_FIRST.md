@@ -282,3 +282,7 @@ M2 phải kiểm chứng nguyên nhân và kết quả nằm gần nhau, bài ca
 ## Kiểm chứng responsive trong bản beta
 
 Ma trận tự động hiện có ở `tests/e2e/responsive-matrix.spec.ts`: 320, 360, 390, 430, 768, 1024 và 1440 CSS px; catalog, bốn chặng của sáu bài, điều khiển tap và trạng thái lỗi ghi. Project `responsive-chromium` chạy riêng ma trận; các project mobile/desktop giữ hành trình tiến độ. Đây là viewport/touch emulation, chưa thay thế ma trận trình duyệt và thiết bị thật trong tiêu chí nghiệm thu phía trên. Kết quả từng đợt ở docs/delivery/IMPLEMENTATION_STATUS.md.
+
+### Chuẩn ghi chú thuật ngữ
+
+Từ có gạch chân chấm mở ghi chú tại chỗ: hover/focus trên desktop, chạm toggle trên mobile. Popup không modal, không điều hướng trang hoặc bắt buộc hover; có nút Đóng ít nhất 44 px, Escape và light-dismiss. Khi popup đóng bằng nút, trả focus về từ mà không mở lại. Giới hạn popup trong viewport 320 px và bám vị trí từ khi cuộn, đóng nếu từ ra khỏi vùng nhìn. Danh sách “Giải thích từ mới” vẫn giữ đầy đủ định nghĩa. Chuẩn nguồn/renderer và acceptance chi tiết nằm ở SYSTEM_DESIGN_WEB_PLAN.md, mục Chuẩn giải thích thuật ngữ tại chỗ.

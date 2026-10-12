@@ -1,3 +1,4 @@
+import { AnnotatedText, TermNote } from './TermNote';
 import { SaveStatus } from '../progress/SaveStatus';
 import { useEffect, useRef } from 'react';
 import { Link, useParams } from 'react-router';
@@ -65,7 +66,9 @@ export function LessonPage() {
         <h1 ref={heading} tabIndex={-1}>
           {lesson.title}
         </h1>
-        <p>{lesson.objective}</p>
+        <p>
+          <AnnotatedText text={lesson.objective} terms={lesson.terms} />
+        </p>
       </div>
       <ol className="stage-list" aria-label="Các chặng học">
         {stages.map((s, i) => (
@@ -90,7 +93,9 @@ export function LessonPage() {
         <section className="story-panel">
           <span className="eyebrow">Tình huống</span>
           <h2>{lesson.subtitle}</h2>
-          <p>{lesson.story}</p>
+          <p>
+            <AnnotatedText text={lesson.story} terms={lesson.terms} />
+          </p>
           <div className="story-reminder">
             <Icon name="book" />
             <p>Không cần viết code. Hãy đọc câu chuyện, dự đoán rồi tự thử từng bước.</p>
@@ -124,7 +129,9 @@ export function LessonPage() {
             <div className={`feedback ${correct ? 'success' : ''}`} role="status">
               <div>
                 <strong>{correct ? 'Bạn đã nối đúng các ý.' : 'Cùng nhìn lại nguyên nhân.'}</strong>
-                <p>{current.explanation}</p>
+                <p>
+                  <AnnotatedText text={current.explanation} terms={lesson.terms} />
+                </p>
                 {!correct && <p className="muted">Bạn có thể chọn lại sau khi đọc lời giải.</p>}
               </div>
             </div>
@@ -157,7 +164,9 @@ export function LessonPage() {
           <Lab lesson={lesson} progress={p} onChange={(patch) => update(lesson.id, patch)} />
           <section className="explanation-panel">
             <h2>Điều vừa thấy có nghĩa gì?</h2>
-            <p>{lesson.explanation}</p>
+            <p>
+              <AnnotatedText text={lesson.explanation} terms={lesson.terms} />
+            </p>
             <p className="muted">
               Hãy thay một yếu tố mỗi lần và giải thích điều bạn thấy. Các số liệu bên trên thuộc mô
               hình của bài học.
@@ -173,7 +182,7 @@ export function LessonPage() {
         {lesson.terms.map((t) => (
           <div key={t.english}>
             <strong>
-              {t.name} <span>({t.english})</span>
+              <TermNote term={t}>{t.name}</TermNote> <span>({t.english})</span>
             </strong>
             <p>{t.meaning}</p>
           </div>
@@ -181,7 +190,9 @@ export function LessonPage() {
       </details>
       <details className="model-notes">
         <summary>Giả định mô hình và nguồn đọc thêm</summary>
-        <p>{lesson.limit}</p>
+        <p>
+          <AnnotatedText text={lesson.limit} terms={lesson.terms} />
+        </p>
         {lesson.sources.map((s) => (
           <a href={s.url} key={s.url} target="_blank" rel="noreferrer">
             {s.title} ↗

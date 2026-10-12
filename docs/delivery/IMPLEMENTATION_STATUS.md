@@ -66,3 +66,11 @@ Giới hạn: Chromium viewport/touch emulation; chưa kiểm tra Firefox/WebKit
 Báo cáo đầy đủ tại [SITE_QA_2026-10-12.md](SITE_QA_2026-10-12.md). Kết quả cuối: 12 unit / 64 E2E đạt, build/typecheck/lint/format đạt; Chromium mobile/desktop, Firefox và WebKit. Bổ sung hoàn thành cả sáu bài với metric, sai→sửa đáp án, console/resource errors, tìm kiếm, min/max, multi-tab và migration v1→v2.
 
 Đã sửa ghi đè snapshot giữa tab, checkpoint queue/replica không hợp lệ, query có khoảng trắng và browser channel runner. IndexedDB nâng v2 bảo toàn store/key/JSON v1 và chặn writer cũ; engine patch 1.0.1. ADR 0002 ghi chính sách xung đột không tự merge. Chưa đóng gate thiết bị thật/pilot/WCAG/offline/ENG-03.
+
+## UX-04 — ghi chú thuật ngữ tại chỗ
+
+Nhánh `codex/ux-04-inline-glossary`: AnnotatedText khớp nguyên thuật ngữ trong văn xuôi từ schema; TermNote là popover không modal dùng chung. Desktop hover/focus, click ghim-toggle; mobile tap; Escape/light-dismiss/nút Đóng, trả focus không mở lại; bám vị trí khi cuộn hoặc đóng nếu từ ra khỏi viewport. Giữ glossary đầy đủ; browser không có native Popover API vẫn có văn bản và danh sách nghĩa, không gọi API thiếu.
+
+Chuẩn được ghi ở plan chính, MOBILE_FIRST.md, TEACHING_GUIDE.md và DESIGN.md. Không đổi schema/đáp án, không lồng nút thuật ngữ vào nút trả lời. Definition lấy từ term registry của bài. Kiểm chứng cập nhật theo kết quả cuối của task; thiết bị thật/screen reader vẫn chưa được thử.
+
+Kết quả cuối UX-04: build/typecheck/lint/format đạt; 79 E2E đạt trên Chromium mobile/desktop, Firefox, WebKit và ma trận responsive; 1 test hover bỏ qua trên mobile theo thiết kế, có test tap thật thay thế. Tap mobile lặp 3 lần đạt sau sửa focus-visible. Đã review screenshots popup ở 390/1280 px, kiểm tra viewport 320 px và fallback khi thiếu Popover API. Không chạy lại unit core vì không đổi core/schema/engine.

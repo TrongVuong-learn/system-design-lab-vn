@@ -125,3 +125,7 @@ Rubric bài cache: người học phân biệt nguồn chính/bản ghi; dự đ
 Nếu cùng một ngộ nhận xuất hiện lặp lại hoặc nhiều người cần được giải thích lại mới thao tác được, bài phải sửa và thử lại trước khi dùng làm mẫu. Có thể kiểm tra lại sau vài ngày với tình huống khác để xem khả năng ghi nhớ và áp dụng.
 
 Các vòng nhỏ dùng để tìm vấn đề và cải tiến; không chứng minh mọi học sinh đều hiểu. Trước khi có kết quả, chỉ mô tả bài là được thiết kế cho đối tượng này. Số lượt xem, câu ngắn, điểm dễ đọc và thời gian học là tín hiệu phụ, không thay thế bằng chứng hiểu.
+
+## Tra cứu thuật ngữ khi đang đọc
+
+Dùng term.name/term.english/term.meaning của bài làm nguồn duy nhất cho ghi chú và danh sách từ mới. Định nghĩa phải hiểu được khi mở riêng khỏi đoạn văn. Trong văn xuôi, thuật ngữ mở bằng hover/focus hoặc chạm; không bắt người học xuống cuối bài mới biết nghĩa. Giữ danh sách đầy đủ cuối bài. Không tự thêm tương tác vào đáp án; tránh nút lồng nút. Các bài phát triển sau tuân thủ chuẩn ghi chú tại chỗ của plan và MOBILE_FIRST.md.

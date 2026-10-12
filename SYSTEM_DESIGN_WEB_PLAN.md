@@ -281,3 +281,15 @@ Bắt đầu bằng bản đồ L0–L5 và registry năng lực, bootstrap work
 Bài **“Vì sao website vẫn hiện phòng học cũ?”** trong [TEACHING_GUIDE.md](TEACHING_GUIDE.md) là mẫu giọng văn cần thử với học sinh trước khi nhân rộng. Tính công sức viết bổ trợ và thử nghiệm vào ước lượng nội dung sau bài mẫu.
 
 Rủi ro lớn nhất là mô phỏng dạy sai trực giác hoặc người học chỉ thử tham số ngẫu nhiên để vượt bài. Giảm rủi ro bằng giả định rõ ràng, review chuyên môn, bước dự đoán trước khi chạy và bài áp dụng sang tình huống mới. Chi phí và công sức lớn nhất ở MVP dự kiến nằm ở thiết kế học liệu, engine và kiểm chứng; hosting là một hạng mục riêng, chỉ ước tính khi biết lưu lượng và cách triển khai.
+
+## Chuẩn giải thích thuật ngữ tại chỗ
+
+Thuật ngữ trong phần văn xuôi của bài có gạch chân chấm và nút mang tên rõ. Desktop dùng hover hoặc focus để mở ghi chú; click có thể ghim và click lại để đóng. Mobile dùng chạm để mở/đóng popup tại chỗ. Không đổi trang hoặc ghi lại tiến độ chỉ vì tra nghĩa.
+
+Popup có tên tiếng Việt, tên tiếng Anh và định nghĩa từ cùng registry của bài; không sao chép định nghĩa riêng trong UI. Đóng bằng nút có tên, Escape, chạm ngoài hoặc khi từ ra khỏi vùng nhìn/đổi chặng. Có thể di chuyển chuột từ từ sang popup để đọc; không đóng ngay khi rời chữ. Đóng bằng nút trả focus về thuật ngữ và không tự mở lại.
+
+Vị trí popup nằm trong viewport, không làm cả trang cuộn ngang ở 320 px; dùng top layer và không che vĩnh viễn thao tác học. Không dùng thuộc tính title làm cách giải thích duy nhất. Mục “Giải thích từ mới” cuối bài giữ toàn bộ định nghĩa và làm phương án tra cứu bổ sung.
+
+Renderer chỉ annotate văn xuôi bằng các term.name/term.english có trong schema, khớp nguyên thuật ngữ không phân biệt hoa/thường; giữ từ dài hơn ưu tiên và không khớp bên trong từ khác. Không nhúng HTML/script vào JSON và không đặt nút thuật ngữ bên trong nút đáp án. Các bài sau phải dùng cùng component và chuẩn tương tác. Annotation tường minh theo content blocks/ID sẽ thuộc contract học liệu nâng cấp sau này.
+
+Acceptance: hover/focus desktop, tap mobile, Escape/đóng ngoài/đóng nút, popup không tràn ở 320 px, định nghĩa từ registry, focus được giữ và luồng học/lưu tiến độ không đổi. Kiểm chứng đa browser và thiết bị thật theo ma trận hiện hành; không suy ra đã hỗ trợ mọi browser cũ từ một lần chạy emulation.

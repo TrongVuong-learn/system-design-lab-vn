@@ -35,3 +35,5 @@ Thay hướng thiết kế phải cập nhật file này cùng token/component; 
 Mỗi chặng có tiêu đề và một hướng dẫn ngắn trước nội dung. Chặng hiện tại dùng chữ, đường cấu trúc và `aria-current`; trên mobile bốn chặng xếp 2 × 2 để giữ nhãn dễ đọc. Focus đến tiêu đề chặng sau khi tải tiến độ hoặc chuyển chặng. Nút chưa mở phải có hướng dẫn nêu việc còn cần làm; số thao tác được suy ra từ tiến độ hiện tại.
 
 Lỗi ghi tiến độ dùng khối nền vàng nhạt trước nội dung chặng, thông báo điều chưa lưu và hành động thử lại/xuất dự phòng. Lỗi đọc có lời giải thích giữ nguyên bản cũ; UI không coi tiến độ trong tab là đã lưu trên thiết bị. Trạng thái lưu bình thường ở cuối chặng để không chiếm vùng đọc.
+
+Thuật ngữ trong văn xuôi dùng gạch chân chấm, giữ font/màu ngữ cảnh khi đóng; trạng thái mở dùng màu hành động. Ghi chú là popover không modal trong top layer, tối đa 320 px, có định nghĩa và nút Đóng. Hover/focus đọc nhanh, click/tap ghim-toggle; giữ bản tra cứu cuối bài. Không biến mọi từ thành badge/card hoặc thêm nút bên trong đáp án.
