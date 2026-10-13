@@ -1,4 +1,4 @@
-export const ENGINE_VERSION = '1.0.1';
+export const ENGINE_VERSION = '1.1.0';
 export interface CacheState {
   time: number;
   source: number;
@@ -200,3 +200,12 @@ export function restoreReplica(input: unknown): ReplicaState {
     return initialReplica();
   return state;
 }
+
+export {
+  measureBatch,
+  estimateCapacity,
+  initialDns,
+  restoreDns,
+  dnsStep,
+  transferPackets,
+} from './foundations';

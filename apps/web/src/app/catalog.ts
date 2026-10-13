@@ -61,3 +61,5 @@ export const tracks = [
   'Cloud & Platform',
   'Hệ thống nghiệp vụ',
 ];
+
+export const editorial = data.editorial;

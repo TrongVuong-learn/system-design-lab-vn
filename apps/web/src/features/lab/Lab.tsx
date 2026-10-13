@@ -1,3 +1,4 @@
+import { MetricsLab, DnsLab, TransportLab, CapacityLab } from './FoundationLabs';
 import { useState } from 'react';
 import type { Lesson, LessonProgress } from '@sdl/content-schema';
 import {
@@ -34,7 +35,15 @@ export function Lab(props: LabProps) {
       return <TrafficLab {...props} />;
     case 'design':
       return <TrafficLab {...props} design />;
-    default:
+    case 'metrics':
+      return <MetricsLab {...props} />;
+    case 'dns':
+      return <DnsLab {...props} />;
+    case 'transport':
+      return <TransportLab {...props} />;
+    case 'capacity':
+      return <CapacityLab {...props} />;
+    case 'request':
       return <RequestLab {...props} />;
   }
 }

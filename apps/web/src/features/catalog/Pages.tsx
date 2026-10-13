@@ -73,7 +73,7 @@ export function HomePage() {
         <div className="section-head">
           <div>
             <h2>Chọn một câu hỏi để thử</h2>
-            <p>Sáu bài mở đầu. Mỗi bài có dự đoán, thao tác và tình huống mới.</p>
+            <p>{lessons.length} bài mở đầu. Mỗi bài có dự đoán, thao tác và tình huống mới.</p>
           </div>
           <Link to="/explore" className="text-link">
             Xem tất cả bài
@@ -110,7 +110,7 @@ export function HomePage() {
         </div>
       </section>
       <aside className="beta-note">
-        <strong>Bản thử nghiệm đang có sáu bài nhập môn.</strong>
+        <strong>Bản thử nghiệm đang có {lessons.length} bài nhập môn.</strong>
         <p>
           Module chuyên sâu có trạng thái rõ trong lộ trình. Tiến độ học được lưu trên thiết bị của
           bạn.

@@ -155,3 +155,7 @@ Nếu lab cốt lõi vẫn không đạt yêu cầu trên WebView sau tối ưu 
 Adapter IndexedDB dùng giao dịch readwrite để so sánh bản đang lưu với bản mà tab đã đọc, rồi mới ghi checkpoint. Khác nhau thì trả `ProgressConflictError`; UI giữ phiên học và hướng dẫn xuất trước khi reload, không tự gộp hai snapshot. Hàng đợi trong provider giữ thứ tự ghi cùng một tab. Đây là optimistic conflict protection, không phải sync nhiều thiết bị.
 
 IndexedDB database version 2 giữ nguyên object store/key và progress JSON version 1. Upgrade không xóa dữ liệu; tab dùng adapter cũ mở database version 1 sẽ bị từ chối ghi. Quyết định và giới hạn tại ADR 0002. Checkpoint queue/replica/cache được kiểm tra invariant khi khôi phục; checkpoint mô phỏng không hợp lệ trở về trạng thái đầu của lab, không được dùng để chứng minh năng lực đã đạt. Contract attempt/engine version đầy đủ vẫn thuộc ENG-03.
+
+## Registry beta hiện thực trong EDU-04
+
+Pipeline đọc `content/lessons/vi/*.json` và `content/editorial.json`; kiểm tra graph prerequisite, nguồn theo claim và review trước khi sinh catalog. Chỉ beta đã kiểm tra được đưa vào UI. Mười bài thử nghiệm không đồng nghĩa 36 module hoàn tất. Contract triển khai và phần chưa làm của ENG-03 ở [ADR 0003](../decisions/0003-beta-editorial-registry.md). Engine metrics/DNS/transport/capacity vẫn thuần TypeScript; renderer chỉ nối trạng thái với adapter progress hiện có.

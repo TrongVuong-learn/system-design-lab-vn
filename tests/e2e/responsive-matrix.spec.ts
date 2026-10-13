@@ -6,14 +6,25 @@ async function fits(page: Page) {
     .toBeLessThanOrEqual(1);
 }
 for (const width of [320, 360, 390, 430, 768, 1024, 1440]) {
-  test(`catalog and all six labs remain usable at ${width}px`, async ({ page }) => {
+  test(`catalog and all ten labs remain usable at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: width >= 768 ? 1024 : 844 });
     for (const route of ['/', '/explore', '/levels/L3', '/progress']) {
       await page.goto(`/#${route}`);
       await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
       await fits(page);
     }
-    for (const id of ['request', 'balance', 'cache', 'queue', 'replica', 'design']) {
+    for (const id of [
+      'request',
+      'metrics',
+      'dns',
+      'transport',
+      'capacity',
+      'balance',
+      'cache',
+      'queue',
+      'replica',
+      'design',
+    ]) {
       await page.goto(`/#/learn/${id}`);
       await expect(
         page.getByRole('heading', { name: 'Hiểu câu chuyện', exact: true }),

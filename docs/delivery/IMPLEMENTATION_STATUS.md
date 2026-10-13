@@ -90,3 +90,9 @@ Kiểm chứng đợt này: content build vẫn 36 module/6 bài; build/typechec
 Nhánh `codex/edu-03-primer-plan`: chốt phạm vi biên soạn 23 nhóm kiến thức, tám case study, ôn tập/flashcards và OOD bổ trợ trong CURRICULUM_MAP v4; đồng bộ plan sản phẩm và bảy lô backlog B0–B6 có dependency/gate. Primer được khóa commit `ae9bbd7b02d90b9866215de185217d33f39ab733`, giữ CC BY 4.0 attribution; ghi rõ các điểm phải hiệu chỉnh và nguồn gốc cần duyệt.
 
 Đây là thay đổi tài liệu kế hoạch, không thêm bài học vào web, không thay engine/schema hoặc phát hành bundle mới. Sáu bài beta và các gate học liệu còn mở giữ nguyên. Kiểm tra đạt: `pnpm content:check` vẫn nhận 36 module/6 bài; 23 ID K và 8 ID C duy nhất, bảy lô B0–B6; toàn bộ 36 dòng catalog module không đổi so với baseline; các file link nội bộ/reference link hợp lệ; `git diff --check` đạt. Không chạy build/E2E vì chỉ đổi tài liệu, không thay bundle hoặc học liệu phát hành.
+
+## EDU-04a — phần đầu L0 và registry beta (13/10/2026)
+
+Bổ sung bốn bài metrics, DNS, TCP/UDP, ước lượng; tổng cộng **10 bài beta**. Metadata năng lực/prerequisite/source/review được kiểm tra trong pipeline, draft không hiển thị; module vẫn đang biên soạn. Giữ nguyên tiến độ và đáp án sáu bài cũ. Engine 1.1.0, lesson/progress JSON schema 1.
+
+Build/typecheck/lint/format và 20 unit tests đạt. Bộ E2E được chạy toàn bộ; bốn test mới được sửa cách so sánh văn bản rồi đạt trên bốn cấu hình trình duyệt. Sau review ảnh, 12 test foundations/responsive chạy lại đều đạt; bảy bề rộng 320–1440 px. Báo cáo phạm vi/kết quả, bao gồm lỗi test ban đầu và giới hạn, ở [EDU_04_L0_FOUNDATIONS.md](EDU_04_L0_FOUNDATIONS.md). B0/ENG-03 và B1/EDU-04 chưa đóng; chưa có module đầy đủ, reviewer chuyên gia hoặc pilot.

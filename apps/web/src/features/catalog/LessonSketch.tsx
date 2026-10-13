@@ -1,4 +1,24 @@
 export function LessonSketch({ kind }: { kind: string }) {
+  const foundation = (
+    {
+      metrics: [
+        'Cùng 20 lượt, hai cách nhìn',
+        '550 ms · 1.900 ms',
+        'Median và p95 khi hai việc cuối chậm',
+      ],
+      dns: ['Tên dễ nhớ → địa chỉ IP', 'Tên → DNS → IP', 'Cache có thời hạn sử dụng'],
+      transport: ['Mảnh số 2 bị mất', '1 → ? → 3', 'TCP giữ thứ tự luồng byte'],
+      capacity: ['Một ảnh, nhiều lượt xem', 'Lượt × kB', 'Dữ liệu truyền khác dữ liệu lưu'],
+    } as Record<string, string[]>
+  )[kind];
+  if (foundation)
+    return (
+      <div className="sketch foundation-sketch">
+        <span className="sketch-caption">{foundation[0]}</span>
+        <strong>{foundation[1]}</strong>
+        <p>{foundation[2]}</p>
+      </div>
+    );
   if (kind === 'cache') {
     return (
       <div className="sketch cache-sketch">

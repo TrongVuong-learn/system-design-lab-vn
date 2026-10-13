@@ -11,8 +11,19 @@ const question = z
 export const lessonSchema = z.object({
   id: z.string().regex(/^[a-z][a-z0-9-]+$/),
   version: z.literal(1),
-  status: z.literal('beta'),
-  kind: z.enum(['request', 'balance', 'cache', 'queue', 'replica', 'design']),
+  status: z.enum(['draft', 'beta']),
+  kind: z.enum([
+    'request',
+    'balance',
+    'cache',
+    'queue',
+    'replica',
+    'design',
+    'metrics',
+    'dns',
+    'transport',
+    'capacity',
+  ]),
   level: z.string().regex(/^L[0-5]$/),
   moduleId: z.string().regex(/^L[0-5]\.[1-6]$/),
   title: z.string(),
@@ -52,3 +63,5 @@ export const progressSchema = z.object({
 });
 export type Progress = z.infer<typeof progressSchema>;
 export type LessonProgress = z.infer<typeof lessonProgressSchema>;
+
+export { validateCatalog, editorialSchema } from './catalog';

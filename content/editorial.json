@@ -1,0 +1,442 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "id": "source-1",
+      "title": "MDN: Client-server overview",
+      "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/First_steps/Client-Server_overview",
+      "revision": "Tài liệu tại URL, truy cập 2026-10-13",
+      "checkedAt": "2026-10-13",
+      "attribution": "MDN"
+    },
+    {
+      "id": "source-2",
+      "title": "Google SRE: Handling overload",
+      "url": "https://sre.google/sre-book/handling-overload/",
+      "revision": "Tài liệu tại URL, truy cập 2026-10-13",
+      "checkedAt": "2026-10-13",
+      "attribution": "Google SRE"
+    },
+    {
+      "id": "source-3",
+      "title": "Azure Architecture: Cache-aside pattern",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside",
+      "revision": "Tài liệu tại URL, truy cập 2026-10-13",
+      "checkedAt": "2026-10-13",
+      "attribution": "Azure Architecture"
+    },
+    {
+      "id": "source-4",
+      "title": "Azure Architecture: Queue-based load leveling",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling",
+      "revision": "Tài liệu tại URL, truy cập 2026-10-13",
+      "checkedAt": "2026-10-13",
+      "attribution": "Azure Architecture"
+    },
+    {
+      "id": "source-5",
+      "title": "PostgreSQL: Hot standby",
+      "url": "https://www.postgresql.org/docs/current/hot-standby.html",
+      "revision": "Tài liệu tại URL, truy cập 2026-10-13",
+      "checkedAt": "2026-10-13",
+      "attribution": "PostgreSQL"
+    },
+    {
+      "id": "source-6",
+      "title": "Google SRE: Monitoring distributed systems",
+      "url": "https://sre.google/sre-book/monitoring-distributed-systems/",
+      "revision": "Tài liệu tại URL, truy cập 2026-10-13",
+      "checkedAt": "2026-10-13",
+      "attribution": "Google SRE"
+    },
+    {
+      "id": "source-7",
+      "title": "RFC 1035: Domain names — implementation and specification",
+      "url": "https://www.rfc-editor.org/rfc/rfc1035",
+      "revision": "Tài liệu tại URL, truy cập 2026-10-13",
+      "checkedAt": "2026-10-13",
+      "attribution": "RFC 1035"
+    },
+    {
+      "id": "source-8",
+      "title": "RFC 9293: Transmission Control Protocol",
+      "url": "https://www.rfc-editor.org/rfc/rfc9293",
+      "revision": "Tài liệu tại URL, truy cập 2026-10-13",
+      "checkedAt": "2026-10-13",
+      "attribution": "RFC 9293"
+    },
+    {
+      "id": "source-9",
+      "title": "RFC 768: User Datagram Protocol",
+      "url": "https://www.rfc-editor.org/rfc/rfc768",
+      "revision": "Tài liệu tại URL, truy cập 2026-10-13",
+      "checkedAt": "2026-10-13",
+      "attribution": "RFC 768"
+    },
+    {
+      "id": "source-10",
+      "title": "System Design Primer: thiết kế và ước lượng",
+      "url": "https://github.com/donnemartin/system-design-primer/blob/ae9bbd7b02d90b9866215de185217d33f39ab733/README.md",
+      "revision": "ae9bbd7b02d90b9866215de185217d33f39ab733",
+      "checkedAt": "2026-10-13",
+      "attribution": "Donne Martin và contributors — CC BY 4.0; diễn giải và ví dụ riêng của System Design Lab."
+    }
+  ],
+  "competencies": [
+    {
+      "id": "request-intro",
+      "moduleId": "L0.1",
+      "outcome": "Chỉ được nơi nhận, xử lý và lưu dữ liệu; biết vì sao một chặng chậm làm bạn chờ lâu.",
+      "depth": "introductory",
+      "planRefs": [
+        "CURRICULUM_MAP.md#9-kế-hoạch-tích-hợp-kiến-thức-từ-system-design-primer",
+        "PRIMER-K01"
+      ]
+    },
+    {
+      "id": "balance-intro",
+      "moduleId": "L2.1",
+      "outcome": "Nhận ra nút thắt chung và kiểm tra tác dụng của việc thêm máy xử lý.",
+      "depth": "introductory",
+      "planRefs": [
+        "CURRICULUM_MAP.md#9-kế-hoạch-tích-hợp-kiến-thức-từ-system-design-primer",
+        "PRIMER-K09"
+      ]
+    },
+    {
+      "id": "cache-intro",
+      "moduleId": "L0.1",
+      "outcome": "Phân biệt dữ liệu nguồn và cache; giải thích vì sao bản ghi có thể cũ và khi nào cần lấy mới.",
+      "depth": "introductory",
+      "planRefs": [
+        "CURRICULUM_MAP.md#9-kế-hoạch-tích-hợp-kiến-thức-từ-system-design-primer",
+        "PRIMER-K17",
+        "PRIMER-K18"
+      ]
+    },
+    {
+      "id": "queue-intro",
+      "moduleId": "L2.5",
+      "outcome": "Phân biệt việc đã nhận và đã hoàn tất; hiểu hàng chờ tăng khi công việc đến nhanh hơn xử lý.",
+      "depth": "introductory",
+      "planRefs": [
+        "CURRICULUM_MAP.md#9-kế-hoạch-tích-hợp-kiến-thức-từ-system-design-primer",
+        "PRIMER-K19"
+      ]
+    },
+    {
+      "id": "replica-intro",
+      "moduleId": "L2.3",
+      "outcome": "Nhận ra độ trễ sao chép và chọn nơi đọc khi cần thông tin mới.",
+      "depth": "introductory",
+      "planRefs": [
+        "CURRICULUM_MAP.md#9-kế-hoạch-tích-hợp-kiến-thức-từ-system-design-primer",
+        "PRIMER-K15"
+      ]
+    },
+    {
+      "id": "design-intro",
+      "moduleId": "L2.6",
+      "outcome": "Chọn thành phần theo yêu cầu, kiểm tra số liệu và nêu giới hạn của thiết kế.",
+      "depth": "introductory",
+      "planRefs": [
+        "CURRICULUM_MAP.md#9-kế-hoạch-tích-hợp-kiến-thức-từ-system-design-primer",
+        "PRIMER-K01"
+      ]
+    },
+    {
+      "id": "metrics-intro",
+      "moduleId": "L0.6",
+      "outcome": "Phân biệt thời gian chờ của từng lượt và số lượt làm xong mỗi giây; đọc median và p95.",
+      "depth": "introductory",
+      "planRefs": [
+        "CURRICULUM_MAP.md#9-kế-hoạch-tích-hợp-kiến-thức-từ-system-design-primer",
+        "PRIMER-K02",
+        "PRIMER-K03"
+      ]
+    },
+    {
+      "id": "dns-intro",
+      "moduleId": "L0.4",
+      "outcome": "Theo dấu lần tra DNS và giải thích cache còn hạn có thể trả địa chỉ cũ.",
+      "depth": "introductory",
+      "planRefs": [
+        "CURRICULUM_MAP.md#9-kế-hoạch-tích-hợp-kiến-thức-từ-system-design-primer",
+        "PRIMER-K05"
+      ]
+    },
+    {
+      "id": "transport-intro",
+      "moduleId": "L0.4",
+      "outcome": "Nhận ra TCP giao luồng byte theo thứ tự; UDP không tự bảo đảm giao đủ hoặc gửi lại.",
+      "depth": "introductory",
+      "planRefs": [
+        "CURRICULUM_MAP.md#9-kế-hoạch-tích-hợp-kiến-thức-từ-system-design-primer",
+        "PRIMER-K06"
+      ]
+    },
+    {
+      "id": "capacity-intro",
+      "moduleId": "L0.6",
+      "outcome": "Tính tải trung bình, tải đỉnh giả định, dữ liệu truyền và dung lượng lưu với đơn vị rõ ràng.",
+      "depth": "introductory",
+      "planRefs": [
+        "CURRICULUM_MAP.md#9-kế-hoạch-tích-hợp-kiến-thức-từ-system-design-primer",
+        "PRIMER-K04"
+      ]
+    }
+  ],
+  "lessons": [
+    {
+      "lessonId": "request",
+      "revision": 1,
+      "competencyIds": [
+        "request-intro"
+      ],
+      "prerequisiteIds": [],
+      "claims": [
+        {
+          "text": "Mỗi chặng cần thời gian. Trong mô hình nối tiếp của bài này, thời gian chờ là tổng các chặng. Nhiều yêu cầu cùng lúc còn có thể phải xếp hàng; bài load balancing sẽ giúp bạn thấy điều đó.",
+          "sourceIds": [
+            "source-1"
+          ]
+        }
+      ],
+      "review": {
+        "reviewer": "Codex",
+        "reviewerType": "agent",
+        "date": "2026-10-13",
+        "status": "beta-checked",
+        "evidence": "Đối chiếu tài liệu nguồn, giả định và đáp án; kiểm chứng mô hình theo EDU-04. Chưa có review chuyên gia độc lập hoặc pilot học sinh."
+      }
+    },
+    {
+      "lessonId": "balance",
+      "revision": 1,
+      "competencyIds": [
+        "balance-intro"
+      ],
+      "prerequisiteIds": [
+        "metrics"
+      ],
+      "claims": [
+        {
+          "text": "Bộ chia tải phân công việc cho các máy. Nhưng nếu tất cả vẫn hỏi cùng một nơi lưu dữ liệu, nơi đó có thể giới hạn số việc làm xong. Hãy thay một yếu tố mỗi lần và so sánh số đang chờ.",
+          "sourceIds": [
+            "source-2"
+          ]
+        }
+      ],
+      "review": {
+        "reviewer": "Codex",
+        "reviewerType": "agent",
+        "date": "2026-10-13",
+        "status": "beta-checked",
+        "evidence": "Đối chiếu tài liệu nguồn, giả định và đáp án; kiểm chứng mô hình theo EDU-04. Chưa có review chuyên gia độc lập hoặc pilot học sinh."
+      }
+    },
+    {
+      "lessonId": "cache",
+      "revision": 1,
+      "competencyIds": [
+        "cache-intro"
+      ],
+      "prerequisiteIds": [
+        "request"
+      ],
+      "claims": [
+        {
+          "text": "Cache là dữ liệu được giữ để dùng lại. Khi nguồn thay đổi, bản ghi có thể vẫn cũ. Hệ thống cần quy tắc cập nhật: lấy mới chủ động hoặc hết hạn rồi đọc lại nguồn khi có yêu cầu.",
+          "sourceIds": [
+            "source-3"
+          ]
+        }
+      ],
+      "review": {
+        "reviewer": "Codex",
+        "reviewerType": "agent",
+        "date": "2026-10-13",
+        "status": "beta-checked",
+        "evidence": "Đối chiếu tài liệu nguồn, giả định và đáp án; kiểm chứng mô hình theo EDU-04. Chưa có review chuyên gia độc lập hoặc pilot học sinh."
+      }
+    },
+    {
+      "lessonId": "queue",
+      "revision": 1,
+      "competencyIds": [
+        "queue-intro"
+      ],
+      "prerequisiteIds": [
+        "metrics"
+      ],
+      "claims": [
+        {
+          "text": "Hàng đợi giữ việc chờ xử lý. Nó giúp tiếp nhận một đợt đông, nhưng không tự tăng công suất. Nếu mỗi giây nhận nhiều hơn làm xong, số việc chờ tiếp tục tăng.",
+          "sourceIds": [
+            "source-4"
+          ]
+        }
+      ],
+      "review": {
+        "reviewer": "Codex",
+        "reviewerType": "agent",
+        "date": "2026-10-13",
+        "status": "beta-checked",
+        "evidence": "Đối chiếu tài liệu nguồn, giả định và đáp án; kiểm chứng mô hình theo EDU-04. Chưa có review chuyên gia độc lập hoặc pilot học sinh."
+      }
+    },
+    {
+      "lessonId": "replica",
+      "revision": 1,
+      "competencyIds": [
+        "replica-intro"
+      ],
+      "prerequisiteIds": [
+        "cache"
+      ],
+      "claims": [
+        {
+          "text": "Replication giữ bản dữ liệu ở nhiều nơi. Trong sao chép bất đồng bộ, bản sao có thể nhận thay đổi muộn. Chọn nơi đọc phải phù hợp với yêu cầu về độ mới.",
+          "sourceIds": [
+            "source-5"
+          ]
+        }
+      ],
+      "review": {
+        "reviewer": "Codex",
+        "reviewerType": "agent",
+        "date": "2026-10-13",
+        "status": "beta-checked",
+        "evidence": "Đối chiếu tài liệu nguồn, giả định và đáp án; kiểm chứng mô hình theo EDU-04. Chưa có review chuyên gia độc lập hoặc pilot học sinh."
+      }
+    },
+    {
+      "lessonId": "design",
+      "revision": 1,
+      "competencyIds": [
+        "design-intro"
+      ],
+      "prerequisiteIds": [
+        "balance",
+        "cache",
+        "queue"
+      ],
+      "claims": [
+        {
+          "text": "Mỗi thành phần giải quyết một vấn đề cụ thể. Máy xử lý nhận yêu cầu; cache giảm số lần đọc nguồn trong giả định này; worker làm việc từ hàng đợi. Dùng số liệu để chọn, rồi nghĩ đến dữ liệu cũ và tình huống lỗi.",
+          "sourceIds": [
+            "source-2"
+          ]
+        }
+      ],
+      "review": {
+        "reviewer": "Codex",
+        "reviewerType": "agent",
+        "date": "2026-10-13",
+        "status": "beta-checked",
+        "evidence": "Đối chiếu tài liệu nguồn, giả định và đáp án; kiểm chứng mô hình theo EDU-04. Chưa có review chuyên gia độc lập hoặc pilot học sinh."
+      }
+    },
+    {
+      "lessonId": "metrics",
+      "revision": 1,
+      "competencyIds": [
+        "metrics-intro"
+      ],
+      "prerequisiteIds": [
+        "request"
+      ],
+      "claims": [
+        {
+          "text": "Latency tính từ lúc gửi đến lúc nhận kết quả, gồm cả thời gian xếp hàng. Throughput là số việc hoàn tất chia cho thời gian quan sát. Median mô tả giữa nhóm; p95 giúp thấy nhóm chờ lâu. Khi hai việc cuối chậm, median có thể giữ nguyên nhưng p95 tăng.",
+          "sourceIds": [
+            "source-6"
+          ]
+        }
+      ],
+      "review": {
+        "reviewer": "Codex",
+        "reviewerType": "agent",
+        "date": "2026-10-13",
+        "status": "beta-checked",
+        "evidence": "Đối chiếu tài liệu nguồn, giả định và đáp án; kiểm chứng mô hình theo EDU-04. Chưa có review chuyên gia độc lập hoặc pilot học sinh."
+      }
+    },
+    {
+      "lessonId": "dns",
+      "revision": 1,
+      "competencyIds": [
+        "dns-intro"
+      ],
+      "prerequisiteIds": [
+        "cache"
+      ],
+      "claims": [
+        {
+          "text": "DNS giúp tra thông tin gắn với tên miền, trong bài là địa chỉ IP. Resolver có thể dùng câu trả lời trong cache khi TTL còn hạn. Nơi quản lý tên đổi địa chỉ không tự đẩy thay đổi đến mọi cache; lần tra sau khi hết hạn mới lấy lại trong mô hình này.",
+          "sourceIds": [
+            "source-7"
+          ]
+        }
+      ],
+      "review": {
+        "reviewer": "Codex",
+        "reviewerType": "agent",
+        "date": "2026-10-13",
+        "status": "beta-checked",
+        "evidence": "Đối chiếu tài liệu nguồn, giả định và đáp án; kiểm chứng mô hình theo EDU-04. Chưa có review chuyên gia độc lập hoặc pilot học sinh."
+      }
+    },
+    {
+      "lessonId": "transport",
+      "revision": 1,
+      "competencyIds": [
+        "transport-intro"
+      ],
+      "prerequisiteIds": [
+        "request"
+      ],
+      "claims": [
+        {
+          "text": "TCP cung cấp luồng byte tin cậy và đúng thứ tự: phần đến sau có thể phải giữ lại trong khi chờ phần thiếu được gửi lại. UDP gửi datagram riêng lẻ, không tự bảo đảm giao đủ, đúng thứ tự hoặc gửi lại. Ứng dụng dùng UDP vẫn có thể bổ sung các cơ chế đó.",
+          "sourceIds": [
+            "source-8",
+            "source-9"
+          ]
+        }
+      ],
+      "review": {
+        "reviewer": "Codex",
+        "reviewerType": "agent",
+        "date": "2026-10-13",
+        "status": "beta-checked",
+        "evidence": "Đối chiếu tài liệu nguồn, giả định và đáp án; kiểm chứng mô hình theo EDU-04. Chưa có review chuyên gia độc lập hoặc pilot học sinh."
+      }
+    },
+    {
+      "lessonId": "capacity",
+      "revision": 1,
+      "competencyIds": [
+        "capacity-intro"
+      ],
+      "prerequisiteIds": [
+        "metrics"
+      ],
+      "claims": [
+        {
+          "text": "Lượt/ngày = số học sinh × lượt mỗi người. Chia cho 86.400 giây để ra lượt/giây trung bình. Tải đỉnh ở đây chỉ là trung bình nhân hệ số bạn giả định. Dữ liệu truyền tăng theo lượt xem; dung lượng ảnh lưu chỉ tính số ảnh duy nhất.",
+          "sourceIds": [
+            "source-10"
+          ]
+        }
+      ],
+      "review": {
+        "reviewer": "Codex",
+        "reviewerType": "agent",
+        "date": "2026-10-13",
+        "status": "beta-checked",
+        "evidence": "Đối chiếu tài liệu nguồn, giả định và đáp án; kiểm chứng mô hình theo EDU-04. Chưa có review chuyên gia độc lập hoặc pilot học sinh."
+      }
+    }
+  ]
+}

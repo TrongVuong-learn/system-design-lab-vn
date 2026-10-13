@@ -1,5 +1,5 @@
-import { readFile, mkdir, writeFile } from 'node:fs/promises';
-import { lessonSchema, moduleSchema } from '../packages/content-schema/src/index';
+import { readFile, readdir, mkdir, writeFile } from 'node:fs/promises';
+import { lessonSchema, moduleSchema, validateCatalog } from '../packages/content-schema/src/index';
 const source = await readFile('CURRICULUM_MAP.md', 'utf8');
 const modules = [...source.matchAll(/^\| (L[0-5]\.[1-6]) \| ([^|]+) \|/gm)].map((m) => {
   const topics = m[2]!.trim();
@@ -12,17 +12,51 @@ const modules = [...source.matchAll(/^\| (L[0-5]\.[1-6]) \| ([^|]+) \|/gm)].map(
 });
 if (modules.length !== 36 || new Set(modules.map((m) => m.id)).size !== 36)
   throw new Error('Expected 36 unique curriculum modules');
-const raw = JSON.parse(await readFile('content/lessons/vi/intro.json', 'utf8')) as unknown[];
-const lessons = raw.map((l) => lessonSchema.parse(l));
-if (new Set(lessons.map((l) => l.id)).size !== lessons.length)
-  throw new Error('Duplicate lesson IDs');
-for (const l of lessons)
-  if (!modules.some((m) => m.id === l.moduleId)) throw new Error(`Unknown module ${l.moduleId}`);
+const files = (await readdir('content/lessons/vi')).filter((f) => f.endsWith('.json')).sort();
+const raw = (
+  await Promise.all(
+    files.map(
+      async (f) => JSON.parse(await readFile(`content/lessons/vi/${f}`, 'utf8')) as unknown[],
+    ),
+  )
+).flat();
+const allLessons = raw.map((l) => lessonSchema.parse(l));
+const { lessons, editorial, coverage } = validateCatalog(
+  modules,
+  allLessons,
+  JSON.parse(await readFile('content/editorial.json', 'utf8')),
+);
+// Keep the familiar first lesson and order; the source files do not define navigation.
+const order = [
+  'request',
+  'metrics',
+  'cache',
+  'dns',
+  'transport',
+  'capacity',
+  'balance',
+  'queue',
+  'replica',
+  'design',
+];
+lessons.sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
 if (!process.argv.includes('--check')) {
   await mkdir('apps/web/src/generated', { recursive: true });
   await writeFile(
     'apps/web/src/generated/catalog.json',
-    JSON.stringify({ modules, lessons }, null, 2),
+    JSON.stringify(
+      {
+        modules,
+        lessons,
+        editorial: {
+          ...editorial,
+          lessons: editorial.lessons.filter((r) => lessons.some((l) => l.id === r.lessonId)),
+        },
+        coverage,
+      },
+      null,
+      2,
+    ),
   );
 }
 console.log(

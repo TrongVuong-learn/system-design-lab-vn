@@ -138,3 +138,7 @@ Task EDU-03b chỉ hoàn tất đặc tả tích hợp; các lô dưới đây l
 Owner theo vai trò ở mục 1: curriculum lead chịu phạm vi, technical writer viết, simulation engineer làm hoạt động, QA kiểm tra, chuyên gia duyệt cơ chế, instructional reviewer kiểm tra cách giảng. Chưa gán tên reviewer hoặc thời gian cam kết khi chưa có người thực nhận việc.
 
 Mỗi bài phải có outcome/prerequisite, storyboard mobile, glossary, nguồn, giả định, trace thường/lỗi, đánh giá chuyển giao và reviewer evidence. Khi review fail, giữ draft. Sau pilot sửa ngộ nhận rồi mới phát hành từng phần. Không gọi một lô hoàn tất chỉ vì có trang hoặc trắc nghiệm. Không nhập upstream code/dependency hay đổi stack trong task kế hoạch này.
+
+### Tiến độ triển khai EDU-04a (13/10/2026)
+
+Đã viết phần đầu B0 (registry/gate cho beta) và bốn bài B1: metrics, DNS, TCP/UDP, ước lượng. Phạm vi, nghiệm thu và kết quả tại [EDU_04_L0_FOUNDATIONS.md](EDU_04_L0_FOUNDATIONS.md). B0/ENG-03 và B1/EDU-04 vẫn đang thực hiện; chưa qua gate review chuyên gia/pilot, chưa đủ toàn bộ năng lực L0. Trạng thái beta hiện thực được phân biệt với reviewed/published dự kiến tại ADR 0003.

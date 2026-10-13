@@ -2,7 +2,7 @@
 
 Nền tảng học System Design tiếng Việt, trực quan, tương tác, thiết kế từ điện thoại. Có lối bắt đầu cho học sinh cấp 3 chưa biết lập trình và lộ trình tiến tới thiết kế hệ thống chuyên sâu.
 
-**Trạng thái:** bản thử nghiệm web đã được hiện thực với sáu bài nhập môn, mô phỏng cục bộ và lưu tiến độ. Toàn bộ giáo trình chuyên sâu, PWA/offline, sync và app tiếp tục theo roadmap. Bản thử nghiệm chưa được pilot với học sinh hoặc kiểm tra trên điện thoại thật.
+**Trạng thái:** bản thử nghiệm web đã được hiện thực với mười bài nhập môn, mô phỏng cục bộ và lưu tiến độ. Toàn bộ giáo trình chuyên sâu, PWA/offline, sync và app tiếp tục theo roadmap. Bản thử nghiệm chưa được pilot với học sinh hoặc kiểm tra trên điện thoại thật.
 
 ## Chạy dự án
 
@@ -55,4 +55,4 @@ Quy tắc cho agent được lưu trong [AGENTS.md](AGENTS.md). Repository có E
 
 ## Mốc bắt đầu triển khai
 
-Đã có workspace, schema, core, renderer, content pipeline và bài cache từ tình huống đến assessment/resume. Sáu bài hiện là lớp nhập môn, không thay thế các module hoặc capstone đầy đủ. Báo cáo hiện thực và phần còn lại nằm trong [IMPLEMENTATION_STATUS.md](docs/delivery/IMPLEMENTATION_STATUS.md).
+Đã có workspace, schema, core, renderer, content pipeline và bài cache từ tình huống đến assessment/resume. Mười bài hiện là lớp nhập môn, không thay thế các module hoặc capstone đầy đủ. Báo cáo hiện thực và phần còn lại nằm trong [IMPLEMENTATION_STATUS.md](docs/delivery/IMPLEMENTATION_STATUS.md).

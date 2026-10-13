@@ -1,0 +1,237 @@
+[
+  {
+    "id": "metrics",
+    "version": 1,
+    "status": "beta",
+    "kind": "metrics",
+    "level": "L0",
+    "moduleId": "L0.6",
+    "minutes": 10,
+    "title": "Nhanh với ai, trong bao lâu?",
+    "subtitle": "Đo một đợt 20 lượt tra sách.",
+    "objective": "Phân biệt thời gian chờ của từng lượt và số lượt làm xong mỗi giây; đọc median và p95.",
+    "story": "20 bạn cùng gửi yêu cầu tra sách lúc bắt đầu. Mỗi thủ thư làm một việc trong 100 ms. Bạn có thể thêm thủ thư hoặc làm hai việc cuối chậm hơn. Ai phải chờ lâu nhất?",
+    "explanation": "Latency tính từ lúc gửi đến lúc nhận kết quả, gồm cả thời gian xếp hàng. Throughput là số việc hoàn tất chia cho thời gian quan sát. Median mô tả giữa nhóm; p95 giúp thấy nhóm chờ lâu. Khi hai việc cuối chậm, median có thể giữ nguyên nhưng p95 tăng.",
+    "limit": "20 yêu cầu đến cùng lúc, được phân theo thứ tự cho 1–4 worker giống nhau. 18 việc đầu mất 100 ms; hai việc cuối mất 100 hoặc 1.000 ms. Không có mạng, lỗi hoặc tải mới. p95 dùng nearest rank: sắp 20 latency tăng dần, lấy giá trị thứ 19. Throughput đo từ lúc bắt đầu đến khi cả đợt xong; không phải công suất ổn định dài hạn.",
+    "terms": [
+      {
+        "name": "Thời gian chờ",
+        "english": "Latency",
+        "meaning": "Thời gian từ khi yêu cầu đến đến khi nhận kết quả, kể cả xếp hàng."
+      },
+      {
+        "name": "Số việc mỗi giây",
+        "english": "Throughput",
+        "meaning": "Số việc hoàn tất chia cho số giây quan sát."
+      },
+      {
+        "name": "Trung vị",
+        "english": "Median",
+        "meaning": "Giá trị ở giữa dãy đã sắp; với 20 giá trị là trung bình giá trị thứ 10 và 11."
+      },
+      {
+        "name": "Phân vị 95",
+        "english": "p95",
+        "meaning": "Theo cách tính trong bài: giá trị thứ 19 của 20 thời gian đã sắp tăng dần. Ít nhất 95% lượt không vượt giá trị này."
+      }
+    ],
+    "prediction": {
+      "text": "Chỉ hai việc cuối chậm đi: số ở giữa nhóm có nhất thiết tăng không?",
+      "options": [
+        "Có, mọi chỉ số đều tăng như nhau.",
+        "Không; nhóm chờ lâu có thể thay đổi mà median giữ nguyên."
+      ],
+      "answer": 1,
+      "explanation": "Median chỉ nhìn giữa dãy đã sắp. Hai việc cuối chậm hơn có thể làm p95 tăng mà không đổi hai giá trị ở giữa."
+    },
+    "challenge": {
+      "text": "Một đợt làm xong 40 yêu cầu trong 2 giây. Throughput của cửa sổ đó là bao nhiêu?",
+      "options": [
+        "20 yêu cầu/giây",
+        "40 mili giây",
+        "80 yêu cầu/giây"
+      ],
+      "answer": 0,
+      "explanation": "40 yêu cầu ÷ 2 giây = 20 yêu cầu/giây. Con số này không cho biết thời gian chờ của từng yêu cầu."
+    },
+    "sources": [
+      {
+        "title": "Google SRE: Monitoring distributed systems",
+        "url": "https://sre.google/sre-book/monitoring-distributed-systems/"
+      }
+    ]
+  },
+  {
+    "id": "dns",
+    "version": 1,
+    "status": "beta",
+    "kind": "dns",
+    "level": "L0",
+    "moduleId": "L0.4",
+    "minutes": 10,
+    "title": "Tên website tìm ra địa chỉ thế nào?",
+    "subtitle": "Đổi địa chỉ trường, vì sao vẫn tra ra chỗ cũ?",
+    "objective": "Theo dấu lần tra DNS và giải thích cache còn hạn có thể trả địa chỉ cũ.",
+    "story": "Bạn nhớ tên lich.truong.example, nhưng máy cần địa chỉ IP. Bộ tra cứu DNS hỏi các nơi chỉ dẫn để tìm nơi quản lý tên đó. Nó giữ câu trả lời trong 5 giây mô phỏng để dùng lại.",
+    "explanation": "DNS giúp tra thông tin gắn với tên miền, trong bài là địa chỉ IP. Resolver có thể dùng câu trả lời trong cache khi TTL còn hạn. Nơi quản lý tên đổi địa chỉ không tự đẩy thay đổi đến mọi cache; lần tra sau khi hết hạn mới lấy lại trong mô hình này.",
+    "limit": "Tên .example và IP 203.0.113.x chỉ để minh họa, không gửi truy vấn mạng. Một bản ghi A, TTL 5 giây, mạng luôn hoạt động. Đường root → máy chủ tên miền cấp cao → nơi quản lý tên được rút gọn; bỏ qua cache chỉ dẫn, CNAME, negative caching, DNSSEC và serve-stale. DNS không phải bước tải nội dung web.",
+    "terms": [
+      {
+        "name": "Bộ tra cứu",
+        "english": "Resolver",
+        "meaning": "Thành phần tìm câu trả lời DNS giúp thiết bị và có thể giữ lại kết quả."
+      },
+      {
+        "name": "Địa chỉ mạng",
+        "english": "IP",
+        "meaning": "Địa chỉ dùng để chuyển dữ liệu đến một giao diện mạng."
+      },
+      {
+        "name": "Thời hạn dùng",
+        "english": "TTL",
+        "meaning": "Số giây bản ghi được phép giữ trong cache theo câu trả lời DNS."
+      }
+    ],
+    "prediction": {
+      "text": "Cache còn hạn giữ địa chỉ .10. Nơi quản lý tên đã đổi sang .20. Tra ngay sẽ thấy gì trong mô hình?",
+      "options": [
+        "Địa chỉ .10 trong cache.",
+        "Luôn thấy .20 ngay."
+      ],
+      "answer": 0,
+      "explanation": "Resolver còn dùng bản ghi .10 chưa hết hạn. Nguồn thay đổi không có nghĩa cache được cập nhật ngay."
+    },
+    "challenge": {
+      "text": "Lấy bản ghi lúc giây 0, TTL 5 giây. Lần tra ở đúng giây 5 sẽ làm gì trong mô hình?",
+      "options": [
+        "Dùng cache cũ thêm 5 giây.",
+        "Lấy lại từ nơi quản lý tên."
+      ],
+      "answer": 1,
+      "explanation": "Ở giây 5 thời hạn đã hết. Lần tra này lấy lại nguồn; chỉ trôi thời gian chưa tự gửi truy vấn mới."
+    },
+    "sources": [
+      {
+        "title": "RFC 1035: Domain names — implementation and specification",
+        "url": "https://www.rfc-editor.org/rfc/rfc1035"
+      }
+    ]
+  },
+  {
+    "id": "transport",
+    "version": 1,
+    "status": "beta",
+    "kind": "transport",
+    "level": "L0",
+    "moduleId": "L0.4",
+    "minutes": 10,
+    "title": "Một mảnh dữ liệu bị mất thì sao?",
+    "subtitle": "Theo ba mảnh đi qua đường truyền.",
+    "objective": "Nhận ra TCP giao luồng byte theo thứ tự; UDP không tự bảo đảm giao đủ hoặc gửi lại.",
+    "story": "Gửi ba mảnh dữ liệu được đánh số 1, 2, 3. Mảnh số 2 bị mất, số 3 đến trước phần bị thiếu. Với TCP, ứng dụng chưa được đọc phần số 3. Với UDP, từng thông điệp đến độc lập. Hãy thử cả hai.",
+    "explanation": "TCP cung cấp luồng byte tin cậy và đúng thứ tự: phần đến sau có thể phải giữ lại trong khi chờ phần thiếu được gửi lại. UDP gửi datagram riêng lẻ, không tự bảo đảm giao đủ, đúng thứ tự hoặc gửi lại. Ứng dụng dùng UDP vẫn có thể bổ sung các cơ chế đó.",
+    "limit": "Ba mảnh TCP tượng trưng cho ba vùng byte liền nhau, không phải ranh giới thông điệp ứng dụng. Với UDP chúng là ba datagram. Bài chỉ minh họa một lần mất mảnh 2 rồi TCP gửi lại thành công; không mô phỏng handshake, ACK, timeout, congestion control hoặc tốc độ thực. TCP có thể thất bại nếu kết nối không phục hồi, không bảo đảm giao mãi mãi.",
+    "terms": [
+      {
+        "name": "Luồng byte",
+        "english": "TCP",
+        "meaning": "Giao thức vận chuyển cung cấp cho ứng dụng luồng byte tin cậy và đúng thứ tự khi kết nối hoạt động."
+      },
+      {
+        "name": "Thông điệp độc lập",
+        "english": "UDP",
+        "meaning": "Giao thức vận chuyển datagram; không tự bảo đảm dữ liệu đến đủ hoặc đúng thứ tự."
+      },
+      {
+        "name": "Gửi lại",
+        "english": "Retransmission",
+        "meaning": "Gửi lại phần dữ liệu bị thiếu để thử khôi phục."
+      }
+    ],
+    "prediction": {
+      "text": "TCP nhận mảnh 1 và 3, còn thiếu 2. Ứng dụng đọc ngay phần 3 được không?",
+      "options": [
+        "Chưa; cần chờ phần byte bị thiếu.",
+        "Được, TCP bỏ qua thứ tự."
+      ],
+      "answer": 0,
+      "explanation": "TCP giữ thứ tự luồng byte. Phần 3 có thể được lưu đệm cho đến khi phần 2 được nhận."
+    },
+    "challenge": {
+      "text": "Dùng UDP, ứng dụng cần mọi thông điệp đến đủ. Có thể chỉ dựa vào UDP không?",
+      "options": [
+        "Có, UDP tự gửi lại mọi thông điệp thiếu.",
+        "Không; cần cơ chế tin cậy ở lớp khác hoặc giao thức phù hợp."
+      ],
+      "answer": 1,
+      "explanation": "UDP không cung cấp bảo đảm giao đủ. Ứng dụng hoặc một giao thức phía trên có thể thêm xác nhận, gửi lại và các quy tắc cần thiết."
+    },
+    "sources": [
+      {
+        "title": "RFC 9293: Transmission Control Protocol",
+        "url": "https://www.rfc-editor.org/rfc/rfc9293"
+      },
+      {
+        "title": "RFC 768: User Datagram Protocol",
+        "url": "https://www.rfc-editor.org/rfc/rfc768"
+      }
+    ]
+  },
+  {
+    "id": "capacity",
+    "version": 1,
+    "status": "beta",
+    "kind": "capacity",
+    "level": "L0",
+    "moduleId": "L0.6",
+    "minutes": 10,
+    "title": "Cần bao nhiêu lượt, bao nhiêu chỗ?",
+    "subtitle": "Lập bảng nháp cho thư viện ảnh lớp.",
+    "objective": "Tính tải trung bình, tải đỉnh giả định, dữ liệu truyền và dung lượng lưu với đơn vị rõ ràng.",
+    "story": "Mỗi học sinh có một ảnh riêng trên website. Mỗi lần xem tải lại toàn bộ một ảnh. Bạn biết số học sinh, số lượt mỗi ngày và kích thước ảnh. Hãy tính trước khi chọn máy chủ.",
+    "explanation": "Lượt/ngày = số học sinh × lượt mỗi người. Chia cho 86.400 giây để ra lượt/giây trung bình. Tải đỉnh ở đây chỉ là trung bình nhân hệ số bạn giả định. Dữ liệu truyền tăng theo lượt xem; dung lượng ảnh lưu chỉ tính số ảnh duy nhất.",
+    "limit": "Dùng đơn vị thập phân: 1 kB = 1.000 byte, 1 MB = 1.000 kB. Một ảnh riêng cho mỗi học sinh, kích thước bằng nhau, mỗi lượt tải một ảnh. Bỏ qua cache, nén, header, retry, bản sao, metadata và backup. Hệ số đỉnh là giả định cần đo kiểm lại; bài không suy ra số máy hoặc chi phí nhà cung cấp.",
+    "terms": [
+      {
+        "name": "Tải đỉnh",
+        "english": "Peak load",
+        "meaning": "Mức tải cao trong một khoảng quan sát; bài đang dùng một giả định nhân với trung bình."
+      },
+      {
+        "name": "Dung lượng lưu",
+        "english": "Storage",
+        "meaning": "Lượng dữ liệu cần giữ, trong bài là các ảnh duy nhất."
+      },
+      {
+        "name": "Dữ liệu truyền",
+        "english": "Transfer",
+        "meaning": "Tổng lượng dữ liệu gửi đi qua các lượt xem trong cửa sổ đo."
+      }
+    ],
+    "prediction": {
+      "text": "Giữ nguyên số ảnh, mỗi người xem gấp đôi. Điều gì tăng trong mô hình?",
+      "options": [
+        "Dung lượng lưu ảnh tự tăng gấp đôi.",
+        "Dữ liệu truyền tăng gấp đôi; dung lượng ảnh lưu không đổi."
+      ],
+      "answer": 1,
+      "explanation": "Ảnh vẫn là những tệp cũ. Tải chúng thêm lần nữa tăng dữ liệu truyền nhưng không tạo thêm ảnh để lưu."
+    },
+    "challenge": {
+      "text": "2.000 học sinh, mỗi người 1 ảnh 100 kB và xem 5 lượt/ngày. Cần lưu bao nhiêu MB ảnh duy nhất?",
+      "options": [
+        "1.000 MB",
+        "200 MB",
+        "10.000 MB"
+      ],
+      "answer": 1,
+      "explanation": "2.000 × 100 kB ÷ 1.000 = 200 MB lưu. Dữ liệu truyền là 200 × 5 = 1.000 MB/ngày; đây là hai đại lượng khác nhau."
+    },
+    "sources": [
+      {
+        "title": "System Design Primer: thiết kế và ước lượng",
+        "url": "https://github.com/donnemartin/system-design-primer/blob/ae9bbd7b02d90b9866215de185217d33f39ab733/README.md"
+      }
+    ]
+  }
+]

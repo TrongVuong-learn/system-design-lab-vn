@@ -2,7 +2,7 @@ import { AnnotatedText, TermNote } from './TermNote';
 import { SaveStatus } from '../progress/SaveStatus';
 import { useEffect, useRef } from 'react';
 import { Link, useParams } from 'react-router';
-import { lessons } from '../../app/catalog';
+import { lessons, editorial } from '../../app/catalog';
 import { useProgress } from '../../app/progress';
 import { newLessonProgress } from '@sdl/learning-core';
 import { Lab } from '../lab/Lab';
@@ -26,6 +26,8 @@ export function LessonPage() {
         Đang mở bài học…
       </div>
     );
+  const record = editorial.lessons.find((r) => r.lessonId === lesson.id);
+  const prerequisites = lessons.filter((l) => record?.prerequisiteIds.includes(l.id));
   const current = p.stage === 1 ? lesson.prediction : lesson.challenge;
   const answer = p.stage === 1 ? p.prediction : p.challenge;
   const answered = answer >= 0;
@@ -96,6 +98,17 @@ export function LessonPage() {
           <p>
             <AnnotatedText text={lesson.story} terms={lesson.terms} />
           </p>
+          {prerequisites.length > 0 && (
+            <p className="prerequisites">
+              Nên biết trước:{' '}
+              {prerequisites.map((l, i) => (
+                <span key={l.id}>
+                  {i > 0 ? '; ' : ''}
+                  <Link to={`/learn/${l.id}`}>{l.title}</Link>
+                </span>
+              ))}
+            </p>
+          )}
           <div className="story-reminder">
             <Icon name="book" />
             <p>Không cần viết code. Hãy đọc câu chuyện, dự đoán rồi tự thử từng bước.</p>
@@ -193,11 +206,24 @@ export function LessonPage() {
         <p>
           <AnnotatedText text={lesson.limit} terms={lesson.terms} />
         </p>
+        <p className="muted">
+          Bài beta được đối chiếu nguồn bởi trợ lý AI. Chưa qua review chuyên gia độc lập hoặc pilot
+          học sinh.
+        </p>
         {lesson.sources.map((s) => (
           <a href={s.url} key={s.url} target="_blank" rel="noreferrer">
             {s.title} ↗
           </a>
         ))}
+        {lesson.sources.some((s) => s.url.includes('donnemartin')) && (
+          <p className="muted">
+            Tham khảo System Design Primer — Donne Martin và contributors, CC BY 4.0. Bài này diễn
+            giải và dùng ví dụ riêng.{' '}
+            <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">
+              Giấy phép CC BY 4.0 ↗
+            </a>
+          </p>
+        )}
       </details>
       <div className="lesson-footer">
         {!saveFailed && <SaveStatus />}
