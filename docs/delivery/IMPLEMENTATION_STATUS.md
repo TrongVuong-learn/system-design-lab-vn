@@ -96,3 +96,7 @@ Nhánh `codex/edu-03-primer-plan`: chốt phạm vi biên soạn 23 nhóm kiến
 Bổ sung bốn bài metrics, DNS, TCP/UDP, ước lượng; tổng cộng **10 bài beta**. Metadata năng lực/prerequisite/source/review được kiểm tra trong pipeline, draft không hiển thị; module vẫn đang biên soạn. Giữ nguyên tiến độ và đáp án sáu bài cũ. Engine 1.1.0, lesson/progress JSON schema 1.
 
 Build/typecheck/lint/format và 20 unit tests đạt. Bộ E2E được chạy toàn bộ; bốn test mới được sửa cách so sánh văn bản rồi đạt trên bốn cấu hình trình duyệt. Sau review ảnh, 12 test foundations/responsive chạy lại đều đạt; bảy bề rộng 320–1440 px. Báo cáo phạm vi/kết quả, bao gồm lỗi test ban đầu và giới hạn, ở [EDU_04_L0_FOUNDATIONS.md](EDU_04_L0_FOUNDATIONS.md). B0/ENG-03 và B1/EDU-04 chưa đóng; chưa có module đầy đủ, reviewer chuyên gia hoặc pilot.
+
+## EDU-02 — chuẩn bị pilot học sinh (13/10/2026)
+
+Có [bộ pilot vòng 1](../research/student-pilot/README.md): kịch bản 40–45 phút, câu hỏi trước/sau, rubric, quan sát thao tác mobile và mẫu dữ liệu trống. **0 buổi thực tế**; chưa có kết quả học sinh, chưa đổi nhãn beta hoặc trạng thái reviewer. Không thay source ứng dụng, build hay bản web đang phát hành.

@@ -1,6 +1,6 @@
 # Chuẩn giảng dạy System Design dễ hiểu
 
-Phiên bản 1 — 11/10/2026. Áp dụng cho toàn bộ [giáo trình](CURRICULUM_MAP.md) và [kế hoạch website](SYSTEM_DESIGN_WEB_PLAN.md). Đây là đặc tả biên soạn và bài mẫu; chưa có website hoặc kết quả thử nghiệm học sinh.
+Phiên bản 1 — 11/10/2026. Áp dụng cho toàn bộ [giáo trình](CURRICULUM_MAP.md) và [kế hoạch website](SYSTEM_DESIGN_WEB_PLAN.md). Đây là chuẩn biên soạn và bài mẫu. Web hiện có 10 bài beta; chưa có kết quả thử nghiệm học sinh.
 
 ## 1. Người học và mục tiêu
 
@@ -138,4 +138,8 @@ Dùng quy trình tại WORKFLOW.md và registry trong CURRICULUM_MAP.md. Mỗi k
 
 Bài có mô phỏng phải công bố ý nghĩa từng metric, đơn vị, cửa sổ đo và thao tác nào được tính. Tách số việc còn chờ khỏi tốc độ việc đến; tách cache miss trong lượt xem khỏi mọi lần đọc nguồn. Có ít nhất một trace bình thường và một trace bác bỏ ngộ nhận, với kết quả tính tay đối chiếu engine. Ví dụ đời thường luôn đi kèm chỗ phép so sánh không còn đúng.
 
-Trước khi gọi một năng lực là hoàn chỉnh, cần đủ giải thích, hoạt động, đánh giá chuyển giao và review có người/ngày/bằng chứng. Build/schema/E2E chỉ kiểm chứng cấu trúc và hành vi đã định nghĩa, không tự chứng minh toàn bộ kiến thức đúng hoặc học sinh hiểu. Các trường review/claim-level source chưa được pipeline beta hiện tại thực thi; ENG-03 có trách nhiệm hiện thực, không đánh dấu gate đã bật.
+Trước khi gọi một năng lực là hoàn chỉnh, cần đủ giải thích, hoạt động, đánh giá chuyển giao và review có người/ngày/bằng chứng. Build/schema/E2E chỉ kiểm chứng cấu trúc và hành vi đã định nghĩa, không tự chứng minh toàn bộ kiến thức đúng hoặc học sinh hiểu. Pipeline beta đã kiểm tra quan hệ review/claim-level source theo ADR 0003; review bởi agent không thay review chuyên gia hoặc pilot. ENG-03 đầy đủ vẫn còn mở.
+
+## Bộ pilot vận hành
+
+Dùng [bộ EDU-02](docs/research/student-pilot/README.md) để điều phối vòng đầu: tách phiếu học sinh khỏi đáp án, ghi mức trợ giúp và câu giải thích trong tình huống mới, sửa rồi thử lại lỗi lặp. Chưa có buổi thực tế; không ghi kết quả giả lập hoặc kiểm thử tự động thành pilot học sinh.

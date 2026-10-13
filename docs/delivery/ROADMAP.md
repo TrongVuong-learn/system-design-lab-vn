@@ -142,3 +142,7 @@ Mỗi bài phải có outcome/prerequisite, storyboard mobile, glossary, nguồn
 ### Tiến độ triển khai EDU-04a (13/10/2026)
 
 Đã viết phần đầu B0 (registry/gate cho beta) và bốn bài B1: metrics, DNS, TCP/UDP, ước lượng. Phạm vi, nghiệm thu và kết quả tại [EDU_04_L0_FOUNDATIONS.md](EDU_04_L0_FOUNDATIONS.md). B0/ENG-03 và B1/EDU-04 vẫn đang thực hiện; chưa qua gate review chuyên gia/pilot, chưa đủ toàn bộ năng lực L0. Trạng thái beta hiện thực được phân biệt với reviewed/published dự kiến tại ADR 0003.
+
+### EDU-02 — bộ pilot vòng 1 (13/10/2026)
+
+Đã chuẩn bị [bộ điều phối, phiếu học sinh, rubric và biểu mẫu ghi nhận](../research/student-pilot/README.md) cho cache + các bài L0 mới. Trạng thái EDU-02: **chuẩn bị, chưa có buổi thật hoặc người tham gia được xác nhận**. Chưa đóng gate pilot. Cần chủ dự án xác nhận học sinh/người điều phối và khả năng truy cập trên thiết bị trước khi thực hiện; dữ liệu quan sát thật lưu riêng ngoài Git.
