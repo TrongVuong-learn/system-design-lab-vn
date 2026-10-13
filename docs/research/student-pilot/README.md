@@ -41,3 +41,7 @@ Quy tắc nội bộ đặt trước khi xem kết quả, không phải ngưỡn
 ## Nguồn phương pháp
 
 Bộ pilot theo nguyên tắc quan sát tác vụ, yêu cầu nói suy nghĩ và chỉ dẫn trung lập của [GOV.UK: Using moderated usability testing](https://www.gov.uk/service-manual/user-research/using-moderated-usability-testing). Cỡ vòng nhỏ tham khảo [GOV.UK: Plan user research](https://www.gov.uk/service-manual/user-research/plan-user-research-for-your-service), đồng thời giữ phạm vi 5–8 đã chốt trong TEACHING_GUIDE. Các đề bài, rubric và ngưỡng quyết định ở đây được viết riêng cho System Design Lab, chưa phải công cụ đo giáo dục đã được kiểm định.
+
+## Kiểm tra trước pilot bằng agent
+
+Đã chạy một agent theo góc nhìn học sinh trên cache và metrics; [báo cáo QA-04](AI_STUDENT_REVIEW_2026-10-13.md) ghi thao tác thật trong browser, minh chứng và giả thuyết cần kiểm tra. Đây là lượt AI mô phỏng, không tăng số buổi pilot thực tế. Hai đề xuất về nhãn nút/đơn vị đang là backlog, chưa sửa source.

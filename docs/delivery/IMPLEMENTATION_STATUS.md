@@ -100,3 +100,7 @@ Build/typecheck/lint/format và 20 unit tests đạt. Bộ E2E được chạy t
 ## EDU-02 — chuẩn bị pilot học sinh (13/10/2026)
 
 Có [bộ pilot vòng 1](../research/student-pilot/README.md): kịch bản 40–45 phút, câu hỏi trước/sau, rubric, quan sát thao tác mobile và mẫu dữ liệu trống. **0 buổi thực tế**; chưa có kết quả học sinh, chưa đổi nhãn beta hoặc trạng thái reviewer. Không thay source ứng dụng, build hay bản web đang phát hành.
+
+## QA-04 — agent mô phỏng góc nhìn học sinh (13/10/2026)
+
+Một agent thử trang chủ, cache và metrics bằng fresh Chromium touch 390 px; có 7 ảnh local. [Báo cáo](../research/student-pilot/AI_STUDENT_REVIEW_2026-10-13.md) ghi các bước đã thử, hai đề xuất hướng dẫn và kiểm tra lại TTL sau khi UI báo đã lưu. Agent chạm giới hạn trước báo cáo cuối; root tổng hợp từ ghi nhận/ảnh đã có. Chưa sửa source hoặc phát hành bundle mới. EDU-02 vẫn 0 buổi học sinh thật; không xem kết quả AI là learning gain.
