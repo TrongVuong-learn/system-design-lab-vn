@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "reviewedAt": "2026-10-14",
+  "reviewedAt": "2026-10-15",
   "origin": "repository-authored",
   "agents": [
     {
@@ -16,16 +16,18 @@
     },
     {
       "agentName": "knowledge_reviewer",
-      "definitionVersion": "1.0.1",
-      "baselineCommit": "4425af078ea484f58aec106698ea39bd49e6218f",
+      "definitionVersion": "1.1.0",
+      "baselineCommit": "f5ab3182879a212c7f3ce4456cf00a37d9d9b029",
       "model": "gpt-6-sol",
       "reasoningEffort": "low",
       "documentation": "https://learn.chatgpt.com/docs/agent-configuration/subagents",
       "files": {
-        ".codex/agents/knowledge_reviewer.toml": "d78ab7fbe947ceb0888fe3659498022bccab403baa0eba8e838c03cf28eb0e47",
-        "docs/research/knowledge-reviewer/README.md": "180d050b4f691c87cbe5f22a2c30b46171d4c153343fd53ad9ec8ca0f8152728",
-        "docs/research/knowledge-reviewer/MEMORY.md": "ecbf7ae8afef2aa47d3dcdf28efea3dd90c811c9dcdd5882dd4c2571bd77aab3",
-        "docs/research/knowledge-reviewer/AUTHORING_2026-10-14.md": "497e91e95da5aab369ab6f9200366014c09916c9c60ec0b2bea02e1a925e90d2"
+        ".codex/agents/knowledge_reviewer.toml": "d54265d0058641eaa8488880f651d223c1cb067b521c6b47e99829920dcda18b",
+        "docs/research/knowledge-reviewer/README.md": "cd931eb352b9e5a8eab24794db7c694b4990bf62c79fb01558250d13c5814c30",
+        "docs/research/knowledge-reviewer/MEMORY.md": "a4b09bae7f52f6fc267da4bd73bb32f5b7b78d6b29f3d5ceb4d3cb6e70e62ff8",
+        "docs/research/knowledge-reviewer/AUTHORING_2026-10-14.md": "497e91e95da5aab369ab6f9200366014c09916c9c60ec0b2bea02e1a925e90d2",
+        "docs/research/knowledge-reviewer/REFERENCE_GUIDE.md": "d0afb8bcc0fcb73794460bfccfdb208a33b9055ba30df01bd3958f6f9b55cd0f",
+        "docs/research/knowledge-reviewer/RESEARCH_2026-10-15.md": "f7e68b1b25fabaf7d761fddbee7b80ed80cdd63b6b967e6f50154e505b536497"
       },
       "authoringModel": "gpt-6-astra",
       "authoringReasoningEffort": "medium"

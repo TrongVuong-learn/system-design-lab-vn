@@ -21,3 +21,7 @@ User yêu cầu “sol light”; cấu hình tương ứng là `gpt-6-sol` với
 ## 2026-10-14 — QA-06 runtime Sol low song song
 
 Definition1.0.1, gpt-6-sol / low, HEAD f8ae271; bundle baseline24625a3 do parent xác minh. Review độc lập trước khi trao đổi student finding. [Report gốc](RUN_2026-10-14_PARALLEL_LOW.md), [matrix](claims-2026-10-14-parallel-low.json): đọc13 bài, trace6 cơ chế và browser DNS390. Không xác nhận P0–P2;12 entry verified-with-conditions, capacity insufficient-evidence vì thiếu nguồn sơ cấp đơn vị, phép tính đúng. Parent bổ sung NIST; trạng thái sau bổ sung ghi riêng ở [QA-06](../../delivery/QA_06_PARALLEL_REVIEW.md). Không sửa ma trận baseline để giả vờ đã đủ evidence từ đầu, không chứng nhận toàn36 module hoặc human-reviewed.
+
+## 2026-10-15 — definition1.1.0 và reference guide trước QA-07
+
+User yêu cầu nghiên cứu thêm trước khi review. Phiên tác giả gpt-6-astra medium mở19 nguồn và ghi REFERENCE_GUIDE/RESEARCH_2026-10-15; parent đọc guide/diff, đối chiếu nguồn TLS/identity/PKIX và tài liệu cấu hình official. Candidate1.1.0 được parent áp dụng và parse lại, giữ runtime gpt-6-sol low. Thêm8 calibration pitfalls, provenance/version/errata và protocol evidence; không training model, không bảo đảm luôn đúng. Chưa kết luận app trong bước authoring.
