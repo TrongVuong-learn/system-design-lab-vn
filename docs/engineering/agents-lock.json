@@ -16,15 +16,15 @@
     },
     {
       "agentName": "knowledge_reviewer",
-      "definitionVersion": "1.0.0",
+      "definitionVersion": "1.0.1",
       "baselineCommit": "4425af078ea484f58aec106698ea39bd49e6218f",
       "model": "gpt-6-sol",
-      "reasoningEffort": "medium",
+      "reasoningEffort": "low",
       "documentation": "https://learn.chatgpt.com/docs/agent-configuration/subagents",
       "files": {
-        ".codex/agents/knowledge_reviewer.toml": "c1bc6e8993dbec4520db5e0c2c4ece59820a501fccd037d703f4f1e0fe19a8c4",
-        "docs/research/knowledge-reviewer/README.md": "7d2e28a8286b10badb3316e52ec98393acd94ed09315d3fd993e2bf561b9046a",
-        "docs/research/knowledge-reviewer/MEMORY.md": "4f2638e4e2c763fbc4e7134b495e50e8fd08c149363f4181d8958370e822cd80",
+        ".codex/agents/knowledge_reviewer.toml": "d78ab7fbe947ceb0888fe3659498022bccab403baa0eba8e838c03cf28eb0e47",
+        "docs/research/knowledge-reviewer/README.md": "180d050b4f691c87cbe5f22a2c30b46171d4c153343fd53ad9ec8ca0f8152728",
+        "docs/research/knowledge-reviewer/MEMORY.md": "004547ac1bd5d8858e382928c265743637c34ed19035a56cb6cf05e6a308ec1c",
         "docs/research/knowledge-reviewer/AUTHORING_2026-10-14.md": "497e91e95da5aab369ab6f9200366014c09916c9c60ec0b2bea02e1a925e90d2"
       },
       "authoringModel": "gpt-6-astra",
