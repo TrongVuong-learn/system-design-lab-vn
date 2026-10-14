@@ -217,8 +217,12 @@ Một bài ôn school-day/version1 với hai tình huống đã hiện thực; k
 
 ## 14. EDU-13 — HTTPS/TLS dễ hiểu
 
-Task In progress; baseline f64f743; owner root. Bổ sung một bài L0.4, prerequisites HTTP/DNS, không đóng module. Tình huống website trường qua Wi-Fi: so HTTP/HTTPS, chứng chỉ hợp lệ/sai tên/hết hạn/không được tin, nghe lén/sửa dữ liệu.
+Task Verified qua QA; baseline f64f743; owner root. Bổ sung một bài L0.4, prerequisites HTTP/DNS, không đóng module. Tình huống website trường qua Wi-Fi: so HTTP/HTTPS, chứng chỉ hợp lệ/sai tên/hết hạn/không được tin, nghe lén/sửa dữ liệu.
 
 Acceptance: engine thuần xác định, không mã hóa hay gửi mạng thật; HTTPS chỉ chuyển HTTP sau kiểm tra danh tính và thiết lập kênh; sửa dữ liệu bị phát hiện và không trả lịch giả; tách endpoint nhìn thấy nội dung với người quan sát mạng. Nêu metadata vẫn lộ, TLS không chứng nhận nội dung website hoặc đăng nhập người học. Handshake khái quát không giả làm trace gói TLS thật; không 0-RTT/resumption/QUIC/revocation. Nguồn RFC 9846, 9525, 9110; claim/assessment/case/guidance có registry/version.
 
 QA: invariant ma trận cấu hình, tương thích assessment/progress cũ, mobile320/390 + desktop, glossary/focus/reload/hints, full regression và ảnh thật. Cập nhật plan trước code; publish artifact đã kiểm. Tiếp theo OS/concurrency rồi cấu trúc dữ liệu; không auth/backend/PWA/app/pilot người thật trong đợt này.
+
+### Kết quả EDU-13
+
+Bài HTTPS/TLS và case Wi-Fi đã hiện thực, catalog14 bài beta +1 bài ôn. [Nguồn, trace, QA và giới hạn](EDU_13_HTTPS_TLS.md). L0.4/module đầy đủ và pilot vẫn mở; tiếp theo OS/concurrency.

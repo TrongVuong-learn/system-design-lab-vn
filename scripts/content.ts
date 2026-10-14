@@ -52,6 +52,7 @@ const order = [
   'transport',
   'capacity',
   'http',
+  'tls',
   'network',
   'balance',
   'queue',

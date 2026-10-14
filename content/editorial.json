@@ -144,6 +144,22 @@
       "revision": "Examples and comparisons with SI prefixes; accessed 2026-10-14",
       "checkedAt": "2026-10-14",
       "attribution": "National Institute of Standards and Technology — tham khảo quy ước đơn vị; số liệu và phép tính bài do tác giả giả định."
+    },
+    {
+      "title": "RFC 9846 §1, §2, §5: TLS 1.3",
+      "url": "https://www.rfc-editor.org/info/rfc9846/",
+      "id": "source-tls13",
+      "revision": "RFC 9846 §1, §2, §5: TLS 1.3",
+      "checkedAt": "2026-10-15",
+      "attribution": "RFC Editor / tác giả RFC; diễn giải riêng"
+    },
+    {
+      "title": "RFC 9525 §6: Service identity in TLS",
+      "url": "https://www.rfc-editor.org/rfc/rfc9525.html",
+      "id": "source-tls-identity",
+      "revision": "RFC 9525 §6: Service identity in TLS",
+      "checkedAt": "2026-10-15",
+      "attribution": "RFC Editor / tác giả RFC; diễn giải riêng"
     }
   ],
   "competencies": [
@@ -275,6 +291,13 @@
       "outcome": "Phân biệt IP/port TCP và theo route qua chặng tiếp theo trong mô hình có giới hạn.",
       "depth": "introductory",
       "planRefs": ["CASE-L0-04", "EDU-04"]
+    },
+    {
+      "id": "l0-https-intro",
+      "moduleId": "L0.4",
+      "outcome": "Phân biệt bảo vệ đường truyền với độ tin cậy nội dung; giải thích vì sao chứng chỉ sai tên phải chặn kết nối.",
+      "depth": "introductory",
+      "planRefs": ["CURRICULUM_MAP.md", "docs/delivery/ROADMAP.md#14"]
     }
   ],
   "lessons": [
@@ -652,6 +675,42 @@
         "date": "2026-10-14",
         "status": "beta-checked",
         "evidence": "docs/delivery/EDU_04C_ROUTING.md"
+      }
+    },
+    {
+      "lessonId": "tls",
+      "revision": 1,
+      "competencyIds": ["l0-https-intro"],
+      "prerequisiteIds": ["http", "dns"],
+      "claims": [
+        {
+          "text": "TLS bảo vệ tính bí mật, toàn vẹn và xác thực kênh; handshake thiết lập tham số/khóa, record bảo vệ traffic.",
+          "sourceIds": ["source-tls13"]
+        },
+        {
+          "text": "Xác minh danh tính dịch vụ dựa trên tên định mở, tách với kiểm tra chuỗi chứng chỉ.",
+          "sourceIds": ["source-tls-identity"]
+        },
+        {
+          "text": "HTTPS là HTTP qua kết nối được bảo vệ.",
+          "sourceIds": ["source-11"]
+        }
+      ],
+      "review": {
+        "reviewer": "Codex — đối chiếu nguồn sơ cấp, model và assessment",
+        "reviewerType": "agent",
+        "date": "2026-10-15",
+        "status": "beta-checked",
+        "evidence": "docs/delivery/EDU_13_HTTPS_TLS.md"
+      },
+      "caseReview": {
+        "reviewer": "Codex — đối chiếu nguồn sơ cấp, model và assessment",
+        "reviewerType": "agent",
+        "date": "2026-10-15",
+        "status": "beta-checked",
+        "evidence": "docs/delivery/EDU_13_HTTPS_TLS.md",
+        "caseId": "case-tls",
+        "revision": 1
       }
     }
   ]

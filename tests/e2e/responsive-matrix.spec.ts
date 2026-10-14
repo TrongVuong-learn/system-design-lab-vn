@@ -18,6 +18,7 @@ for (const width of [320, 360, 390, 430, 768, 1024, 1440]) {
       'metrics',
       'dns',
       'routing',
+      'tls',
       'transport',
       'capacity',
       'http',

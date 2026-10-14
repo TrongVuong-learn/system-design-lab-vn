@@ -23,6 +23,7 @@ const activityKind = z.enum([
   'http',
   'network',
   'routing',
+  'tls',
 ]);
 const caseText = z.string().trim().min(8).max(1600);
 export const caseStudySchema = z

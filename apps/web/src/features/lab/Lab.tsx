@@ -1,4 +1,5 @@
 import { ObservationPanel } from './ObservationPanel';
+import { TlsLab } from './TlsLab';
 import { RoutingLab } from './RoutingLab';
 import { HttpLab, NetworkLab } from './NetworkLabs';
 import { MetricsLab, DnsLab, TransportLab, CapacityLab } from './FoundationLabs';
@@ -31,7 +32,7 @@ type LabProps = {
 };
 export function Lab(original: LabProps) {
   const kind = original.lesson.kind;
-  const extended = !['cache', 'queue', 'network'].includes(kind);
+  const extended = !['cache', 'queue', 'network', 'tls'].includes(kind);
   const props = extended
     ? {
         ...original,
@@ -72,6 +73,8 @@ export function Lab(original: LabProps) {
       return <CapacityLab {...props} />;
     case 'http':
       return <HttpLab {...props} />;
+    case 'tls':
+      return <TlsLab {...props} />;
     case 'routing':
       return <RoutingLab {...props} />;
     case 'network':

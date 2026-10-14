@@ -1,0 +1,107 @@
+[
+  {
+    "id": "tls",
+    "kind": "tls",
+    "version": 1,
+    "status": "beta",
+    "level": "L0",
+    "moduleId": "L0.4",
+    "minutes": 12,
+    "title": "HTTPS bảo vệ điều gì?",
+    "subtitle": "Giữ kín nội dung, phát hiện sửa dữ liệu và kiểm tra đúng máy chủ.",
+    "objective": "Phân biệt bảo vệ đường truyền với độ tin cậy nội dung; giải thích vì sao chứng chỉ sai tên phải chặn kết nối.",
+    "story": "Bạn xem lịch trường qua Wi-Fi ở quán. Người kiểm soát đường truyền muốn đọc lịch hoặc sửa phòng 201 thành 999. Liệu dùng HTTPS có bảo vệ được? Hãy xem cùng một lịch từ ba góc nhìn.",
+    "explanation": "HTTPS là HTTP được bảo vệ bằng TLS. Trước khi gửi HTTP trong mô hình này, trình duyệt kiểm tra chứng chỉ và hoàn tất handshake để thiết lập kênh. TLS giúp giữ kín nội dung với người trên mạng và phát hiện dữ liệu bị sửa. Hai đầu cuối vẫn đọc được lịch. Kiểm tra tên miền phải so với địa chỉ bạn định mở, không chỉ nhìn chứng chỉ có tồn tại.",
+    "limit": "Mô hình khái niệm TLS 1.3, không mã hóa, kiểm tra chứng chỉ hoặc gửi mạng thật. Các bước được gom, không mô tả thứ tự gói handshake đầy đủ. Không resumption, 0-RTT, QUIC, wildcard, thu hồi chứng chỉ hay TLS termination ở proxy. Giả định máy và khóa không bị xâm nhập, kiểm tra chứng chỉ không bị bỏ qua. HTTPS không che IP/kích thước/thời điểm trao đổi, không đảm bảo website không lừa đảo, không thay đăng nhập hay kiểm tra nội dung.",
+    "terms": [
+      {
+        "name": "Kênh bảo vệ",
+        "english": "TLS",
+        "meaning": "Giao thức thiết lập kênh giúp xác thực đầu cuối, giữ kín nội dung và phát hiện dữ liệu bị sửa trên đường."
+      },
+      {
+        "name": "HTTP được bảo vệ",
+        "english": "HTTPS",
+        "meaning": "HTTP dùng kênh TLS để bảo vệ trao đổi với đầu cuối TLS."
+      },
+      {
+        "name": "Chứng chỉ số",
+        "english": "Certificate",
+        "meaning": "Gắn danh tính dịch vụ với khóa công khai; cần kiểm tra tên, chuỗi tin cậy và thời hạn, không chứng nhận nội dung website đúng."
+      },
+      {
+        "name": "Thiết lập kênh",
+        "english": "Handshake",
+        "meaning": "Trao đổi ban đầu để xác thực và thiết lập tham số, khóa bảo vệ; không phải đăng nhập học sinh."
+      }
+    ],
+    "prediction": {
+      "text": "HTTPS hợp lệ. Người chỉ nghe lén trên mạng có đọc được nội dung “Phòng 201” trong kênh không?",
+      "options": [
+        "Không; nội dung được bảo vệ, dù một số metadata vẫn thấy được.",
+        "Có; HTTPS chỉ đổi tên đường dẫn."
+      ],
+      "answer": 0,
+      "explanation": "TLS bảo vệ nội dung với người quan sát mạng. Máy trường và trình duyệt là đầu cuối nên vẫn đọc được; IP, kích thước và thời điểm không được che hoàn toàn."
+    },
+    "challenge": {
+      "text": "Bạn mở lich.truong.example nhưng máy gửi chứng chỉ của thu-vien.example. Cách xử lý đúng trong mô hình là gì?",
+      "options": [
+        "Dừng kết nối trước khi gửi HTTP; sửa cấu hình chứng chỉ đúng danh tính.",
+        "Bỏ kiểm tra tên rồi gửi lịch vì đã chọn HTTPS."
+      ],
+      "answer": 0,
+      "explanation": "Cần xác minh danh tính dịch vụ khớp tên định mở cùng chuỗi tin cậy và thời hạn. Bỏ kiểm tra làm mất cơ sở xác thực; không tự hạ xuống HTTP thường."
+    },
+    "sources": [
+      {
+        "title": "RFC 9846 §1, §2, §5: TLS 1.3",
+        "url": "https://www.rfc-editor.org/info/rfc9846/"
+      },
+      {
+        "title": "RFC 9525 §6: Service identity in TLS",
+        "url": "https://www.rfc-editor.org/rfc/rfc9525.html"
+      },
+      {
+        "title": "RFC 9110 §4.2.2: HTTPS URI scheme",
+        "url": "https://www.rfc-editor.org/rfc/rfc9110.html"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-tls",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L0-04",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Lịch trường qua Wi-Fi ở quán",
+      "context": "Một người kiểm soát đường truyền muốn đổi lịch phòng 201 sang 999. Nhóm trường còn cấu hình nhầm chứng chỉ cho thư viện. Đây là tình huống tự biên soạn.",
+      "requirements": [
+        "Không dùng lịch bị người trên đường sửa.",
+        "Chỉ trao đổi HTTP sau khi kiểm tra đúng danh tính máy trường."
+      ],
+      "activityRef": "tls",
+      "experimentSteps": [
+        "Chọn HTTP và thử sửa dữ liệu, sau đó đổi sang HTTPS hợp lệ và gửi lại.",
+        "Chọn chứng chỉ sai tên rồi gửi; kiểm tra HTTP có được gửi hay không."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Cần quản lý chứng chỉ và khóa đúng cách; HTTPS bảo vệ đường truyền nhưng chất lượng lịch và an toàn của hai đầu cuối vẫn cần kiểm soát riêng."
+      ],
+      "limitations": "Không có can thiệp thật, dữ liệu học sinh thật hay xác thực tài khoản. Bộ kiểm tra chứng chỉ là giả định cố định; không mô phỏng toàn bộ PKI."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "So người đứng giữa đường với trình duyệt ở đầu cuối: hai nơi có quyền đọc nội dung giống nhau không?",
+        "Quan sát ô Người trên mạng khi gửi HTTPS hợp lệ; tách nội dung lịch với thông tin IP/kích thước/thời điểm."
+      ],
+      "challenge": [
+        "Tên bạn định mở có trùng tên dịch vụ trong chứng chỉ không?",
+        "Chọn chứng chỉ sai tên và gửi lịch. Quan sát bước kiểm tra trước khi HTTP được gửi."
+      ]
+    }
+  }
+]
