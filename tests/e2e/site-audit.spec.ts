@@ -200,7 +200,7 @@ test('search handles accents, case, surrounding spaces and empty results', async
   ).toBeVisible();
   await expect(page.getByText('Chưa có bài thử cho từ khóa này.', { exact: false })).toBeVisible();
   await input.fill('   ');
-  await expect(page.locator('.lesson-grid>a')).toHaveCount(12);
+  await expect(page.locator('.lesson-grid>a')).toHaveCount(13);
   await expect(page.locator('.level-list>a')).toHaveCount(6);
 });
 

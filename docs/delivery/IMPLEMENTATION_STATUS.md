@@ -110,3 +110,7 @@ Một agent thử trang chủ, cache và metrics bằng fresh Chromium touch 390
 Đã viết hai bài beta HTTP request/response và RTT/tốc độ truyền, tổng **12 bài beta**; sửa nhãn hành động và giải thích ms của metrics theo QA-04. Engine1.2.0; schema lesson/progress1 và IndexedDB2 giữ nguyên. Registry metadata/nguồn/prerequisite đi qua pipeline.
 
 Build/typecheck/lint/format và23unit đạt; toàn bộ91E2E đạt/1skip hover touch có kiểm tra tap thay thế. Ma trận320–1440px cho12lab, Chromium mobile/desktop/Firefox/WebKit; review6ảnh mobile/desktop. Phạm vi, nguồn, trace và giới hạn tại [EDU_04B_HTTP_NETWORK.md](EDU_04B_HTTP_NETWORK.md). EDU-04/B1 vẫn còn năng lực chưa biên soạn; chưa có pilot thật hoặc gate app đạt.
+
+## EDU-04c / CASE-04 — 14/10/2026
+
+Đã hiện thực bài IP/port/routing có mini-case, catalog 13 bài beta; engine 1.3.0, tiến độ v1 giữ nguyên. Kiểm nghiệm và giới hạn tại [EDU_04C_ROUTING.md](EDU_04C_ROUTING.md). L0, CAP-L0, chuyên gia/pilot và gate web/app chưa hoàn tất.

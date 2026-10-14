@@ -112,6 +112,30 @@
       "revision": "Nội dung tại URL, đối chiếu 2026-10-14",
       "checkedAt": "2026-10-14",
       "attribution": "MDN contributors; diễn giải và ví dụ riêng của System Design Lab"
+    },
+    {
+      "id": "source-routing",
+      "title": "RFC 1122",
+      "url": "https://www.rfc-editor.org/rfc/rfc1122.html",
+      "revision": "1989 — §3.3.1",
+      "checkedAt": "2026-10-14",
+      "attribution": "IETF / RFC Editor — tham khảo tiêu chuẩn; diễn giải và mô hình riêng."
+    },
+    {
+      "id": "source-tcp-header",
+      "title": "RFC 9293",
+      "url": "https://www.rfc-editor.org/rfc/rfc9293.html",
+      "revision": "2022 — §3.1",
+      "checkedAt": "2026-10-14",
+      "attribution": "IETF / RFC Editor — tham khảo tiêu chuẩn; diễn giải và mô hình riêng."
+    },
+    {
+      "id": "source-doc-ip",
+      "title": "RFC 5737",
+      "url": "https://www.rfc-editor.org/rfc/rfc5737.html",
+      "revision": "2010",
+      "checkedAt": "2026-10-14",
+      "attribution": "IETF / RFC Editor — tham khảo tiêu chuẩn; diễn giải và mô hình riêng."
     }
   ],
   "competencies": [
@@ -236,6 +260,13 @@
         "CURRICULUM_MAP.md#9-kế-hoạch-tích-hợp-kiến-thức-từ-system-design-primer",
         "PRIMER-K06"
       ]
+    },
+    {
+      "id": "l0-network-routing",
+      "moduleId": "L0.4",
+      "outcome": "Phân biệt IP/port TCP và theo route qua chặng tiếp theo trong mô hình có giới hạn.",
+      "depth": "introductory",
+      "planRefs": ["CASE-L0-04", "EDU-04"]
     }
   ],
   "lessons": [
@@ -573,6 +604,42 @@
         "reviewer": "Codex — kiểm tra ngữ cảnh, compatibility và giới hạn mô hình",
         "date": "2026-10-14",
         "evidence": "docs/delivery/EDU_09_CASE_STUDY_IMPLEMENTATION.md"
+      }
+    },
+    {
+      "lessonId": "routing",
+      "revision": 1,
+      "competencyIds": ["l0-network-routing"],
+      "prerequisiteIds": ["request", "dns"],
+      "claims": [
+        {
+          "text": "IP routing chọn chặng tiếp theo tới đích.",
+          "sourceIds": ["source-routing"]
+        },
+        {
+          "text": "TCP header có port nguồn/đích, tách với địa chỉ trong IP header.",
+          "sourceIds": ["source-tcp-header"]
+        },
+        {
+          "text": "Các dải địa chỉ ví dụ dành cho tài liệu.",
+          "sourceIds": ["source-doc-ip"]
+        }
+      ],
+      "review": {
+        "reviewer": "Codex — đối chiếu RFC, trace và giới hạn",
+        "reviewerType": "agent",
+        "date": "2026-10-14",
+        "status": "beta-checked",
+        "evidence": "docs/delivery/EDU_04C_ROUTING.md"
+      },
+      "caseReview": {
+        "caseId": "case-routing",
+        "revision": 1,
+        "reviewer": "Codex — đối chiếu RFC, trace và giới hạn",
+        "reviewerType": "agent",
+        "date": "2026-10-14",
+        "status": "beta-checked",
+        "evidence": "docs/delivery/EDU_04C_ROUTING.md"
       }
     }
   ]

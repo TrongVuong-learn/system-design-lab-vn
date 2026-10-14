@@ -169,3 +169,5 @@ EDU-04b thêm engine thuần HTTP exchange và thời gian tải lý tưởng; N
 CASE-01 phải ghi ADR và kiểm tương thích trước khi sửa schema. Giữ progress v1 khi chỉ thêm ngữ cảnh không đổi nghĩa challenge; assessment/attempt mới có version và migration riêng theo ENG-03. Không ghi đè checkpoint bằng scenario preset hoặc chấm lại đáp án cũ theo câu hỏi mới. Danh mục field trong EDU-09 là đề xuất, không đại diện API đã triển khai.
 
 CASE-01–03 đã hiện thực giai đoạn A theo [ADR 0004](../decisions/0004-case-study-context.md): case schema 1, caseReview theo revision và renderer trong lesson-player. Lesson/progress v1, engine và persistence giữ nguyên; contract attempt mới/preset/capstone vẫn là phần tiếp theo.
+
+EDU-04c bổ sung `routing` trong whitelist và engine 1.3.0, renderer `RoutingLab` với trace có bản chữ; catalog hiện 13 bài beta. Model thuần, checkpoint dùng adapter hiện hữu, không gửi mạng thật hoặc đổi dữ liệu tiến độ v1. Chi tiết tại [EDU-04c](../delivery/EDU_04C_ROUTING.md).

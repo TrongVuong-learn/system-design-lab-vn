@@ -1,0 +1,96 @@
+[
+  {
+    "id": "routing",
+    "kind": "routing",
+    "version": 1,
+    "status": "beta",
+    "level": "L0",
+    "moduleId": "L0.4",
+    "minutes": 12,
+    "title": "Đúng địa chỉ, đúng dịch vụ?",
+    "subtitle": "IP, đường đi và port làm ba việc khác nhau.",
+    "objective": "Theo dấu yêu cầu qua router; phân biệt IP đích với port TCP của dịch vụ và nhận ra lỗi ở từng chặng.",
+    "story": "Bạn đã biết địa chỉ IP của máy trường và muốn xem lịch. Máy đó còn phục vụ thư viện. Làm sao yêu cầu tới đúng máy, rồi đúng dịch vụ? Hãy theo ba bước thay vì xem toàn bộ mạng cùng lúc.",
+    "explanation": "IP đích xác định đích ở tầng mạng. Trong mô hình, router dùng route để chọn chặng tiếp theo; tới máy đích, port TCP giúp phân biệt dịch vụ lắng nghe. Đổi port không đổi IP đích. Port chỉ có nghĩa cùng giao thức và địa chỉ; cùng số port có thể xuất hiện ở máy khác.",
+    "limit": "Mô hình cố định một router, hai đích và TCP, không có NAT, firewall, ARP, DNS, mất gói, TCP handshake hoặc route động. Khi bỏ route không có route mặc định. Port 8080/9090 là cấu hình của đề, không phải quy tắc chung cho lịch/thư viện. IP là địa chỉ dành cho tài liệu; không gửi mạng thật. Không mô phỏng đầy đủ socket/connection hoặc phản hồi HTTP.",
+    "terms": [
+      {
+        "name": "Địa chỉ IP",
+        "english": "IP",
+        "meaning": "Địa chỉ dùng ở tầng mạng để xác định nguồn và đích; không tự nói ứng dụng nào đang phục vụ."
+      },
+      {
+        "name": "Cổng dịch vụ",
+        "english": "Port",
+        "meaning": "Số ở tầng vận chuyển giúp phân biệt dịch vụ, khi xét cùng giao thức và địa chỉ IP."
+      },
+      {
+        "name": "Bộ định tuyến",
+        "english": "Router",
+        "meaning": "Thiết bị chuyển gói tới chặng tiếp theo dựa trên thông tin định tuyến."
+      },
+      {
+        "name": "Thông tin đường đi",
+        "english": "Route",
+        "meaning": "Thông tin dùng để chọn chặng tiếp theo tới một đích mạng."
+      }
+    ],
+    "prediction": {
+      "text": "Giữ IP máy trường, đổi TCP port từ 8080 sang 9090. IP đích có tự đổi sang máy khác không?",
+      "options": [
+        "Không; vẫn cùng IP, nhưng dịch vụ được chọn có thể đổi.",
+        "Có; port chọn một IP mới."
+      ],
+      "answer": 0,
+      "explanation": "Địa chỉ IP và port là hai trường khác nhau. Trong cấu hình đề, TCP 8080 là lịch học, TCP 9090 là thư viện trên cùng IP."
+    },
+    "challenge": {
+      "text": "Router không có route tới máy lưu ảnh và không có route mặc định. Chỉ đổi port TCP có sửa được đường đi IP trong mô hình không?",
+      "options": [
+        "Có; đổi port luôn tạo route mới.",
+        "Không; phải khôi phục route phù hợp tới đích."
+      ],
+      "answer": 1,
+      "explanation": "Trong mô hình, route chọn chặng IP tiếp theo; port chọn dịch vụ tại đích. Khi chưa có đường tới máy đích, chỉ đổi port không bổ sung route."
+    },
+    "sources": [
+      {
+        "title": "RFC 1122 §3.3.1: Routing Outbound Datagrams",
+        "url": "https://www.rfc-editor.org/rfc/rfc1122.html"
+      },
+      {
+        "title": "RFC 9293 §3.1: IP addresses and TCP ports",
+        "url": "https://www.rfc-editor.org/rfc/rfc9293.html"
+      },
+      {
+        "title": "RFC 5737: IPv4 documentation addresses",
+        "url": "https://www.rfc-editor.org/rfc/rfc5737.html"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-routing",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L0-04",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Sửa đường tới máy lưu ảnh",
+      "context": "Nhóm ngày hội cần gửi tới máy lưu ảnh. Trong mô hình cố định, router không còn route tới đích và không có đường mặc định.",
+      "requirements": [
+        "Cần đưa yêu cầu tới đúng IP của máy lưu ảnh.",
+        "Xét việc đổi port TCP khi thông tin đường IP đang thiếu."
+      ],
+      "activityRef": "routing",
+      "experimentSteps": [
+        "Bỏ route ở router rồi gửi yêu cầu; xem nó dừng ở đâu.",
+        "Đổi port, thử lại rồi khôi phục route để so kết quả."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Cần sửa đúng chặng gây lỗi trước khi kiểm dịch vụ tại đích; một thay đổi ở tầng khác chưa giải quyết được thông tin đường đi thiếu."
+      ],
+      "limitations": "Mạng và route của đề được giả định cố định. Mạng thật có thể có đường thay thế hoặc thiết bị lọc theo nhiều trường; bài chưa mô phỏng chúng."
+    }
+  }
+]

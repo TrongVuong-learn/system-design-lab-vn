@@ -32,6 +32,7 @@ const order = [
   'metrics',
   'cache',
   'dns',
+  'routing',
   'transport',
   'capacity',
   'http',

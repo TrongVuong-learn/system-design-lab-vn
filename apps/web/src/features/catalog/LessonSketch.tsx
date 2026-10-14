@@ -6,6 +6,11 @@ export function LessonSketch({ kind }: { kind: string }) {
         '550 ms · 1.900 ms',
         'Median và p95 khi hai việc cuối chậm',
       ],
+      routing: [
+        'Tới đúng máy, đúng dịch vụ',
+        'IP → router → TCP port',
+        'Đường IP khác dịch vụ tại đích',
+      ],
       dns: ['Tên dễ nhớ → địa chỉ IP', 'Tên → DNS → IP', 'Cache có thời hạn sử dụng'],
       transport: ['Mảnh số 2 bị mất', '1 → ? → 3', 'TCP giữ thứ tự luồng byte'],
       http: ['Yêu cầu → phản hồi', 'GET · 200 / 404 / 503', 'Mã trạng thái và nội dung'],

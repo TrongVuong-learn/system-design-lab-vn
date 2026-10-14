@@ -754,3 +754,53 @@
 .case-return-note {
   font-size: 13px;
 }
+
+.routing-inputs {
+  display: grid;
+  gap: 16px;
+  margin: 24px 0;
+}
+.routing-inputs label {
+  display: grid;
+  gap: 8px;
+  font-weight: 600;
+}
+.routing-inputs select {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  font: inherit;
+  padding: 10px;
+  color: #17233d;
+  background: white;
+  border: 1px solid #d8dfeb;
+  border-radius: 6px;
+}
+.routing-inputs select:focus-visible {
+  outline: 2px solid #244edb;
+  outline-offset: 3px;
+}
+.routing-trace {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0;
+}
+.routing-trace li {
+  border-left: 3px solid #244edb;
+  padding: 12px 16px;
+  margin: 12px 0;
+  overflow-wrap: anywhere;
+}
+.routing-trace strong,
+.routing-trace span {
+  display: block;
+}
+.routing-trace span {
+  margin-top: 8px;
+  line-height: 1.6;
+}
+@media (min-width: 640px) {
+  .routing-inputs {
+    grid-template-columns: 1fr 1fr;
+  }
+}

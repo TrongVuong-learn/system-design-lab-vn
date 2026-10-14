@@ -1,3 +1,4 @@
+import { RoutingLab } from './RoutingLab';
 import { HttpLab, NetworkLab } from './NetworkLabs';
 import { MetricsLab, DnsLab, TransportLab, CapacityLab } from './FoundationLabs';
 import { useState } from 'react';
@@ -46,6 +47,8 @@ export function Lab(props: LabProps) {
       return <CapacityLab {...props} />;
     case 'http':
       return <HttpLab {...props} />;
+    case 'routing':
+      return <RoutingLab {...props} />;
     case 'network':
       return <NetworkLab {...props} />;
     case 'request':

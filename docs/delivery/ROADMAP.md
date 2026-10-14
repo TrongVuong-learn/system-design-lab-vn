@@ -1,6 +1,6 @@
 # Kế hoạch triển khai và nghiệm thu
 
-Trạng thái: roadmap và ước lượng; web beta có 12 bài nhập môn, các gate hoàn thiện level còn mở. Trạng thái thực thi theo [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md); các gate chưa đạt vẫn còn mở. Phạm vi kiến thức theo [CURRICULUM_MAP.md](../../CURRICULUM_MAP.md), tiêu chuẩn học theo [TEACHING_GUIDE.md](../../TEACHING_GUIDE.md).
+Trạng thái: roadmap và ước lượng; web beta có 13 bài nhập môn, các gate hoàn thiện level còn mở. Trạng thái thực thi theo [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md); các gate chưa đạt vẫn còn mở. Phạm vi kiến thức theo [CURRICULUM_MAP.md](../../CURRICULUM_MAP.md), tiêu chuẩn học theo [TEACHING_GUIDE.md](../../TEACHING_GUIDE.md).
 
 Quy trình thực hiện từng task, Git/review, release và quản lý thư mục áp dụng theo [WORKFLOW.md](WORKFLOW.md) và [CONTRIBUTING.md](../../CONTRIBUTING.md).
 
@@ -162,3 +162,7 @@ Trạng thái ngày 14/10/2026: CASE-00 đã viết đặc tả; CASE-01 trở �
 ### Hiện thực CASE-01–03 (14/10/2026)
 
 Đã nâng chặng Áp dụng cho đủ 12 bài beta: schema/gate review, context/yêu cầu, gợi ý thử và đánh đổi; đáp án và tiến độ v1 được giữ. [Báo cáo nghiệm thu](EDU_09_CASE_STUDY_IMPLEMENTATION.md) ghi 26 unit test, 99 E2E đạt/một skip, responsive và giới hạn review. CASE-04–10 cùng các gate module/level/pilot vẫn mở; tiếp theo bù học liệu L0 theo EDU-04. Đây là cập nhật sau mốc đặc tả CASE-00 ở trên.
+
+### CASE-04 / EDU-04c: nền IP/port/routing (14/10/2026)
+
+Đã thêm bài routing và case chuyển giao tại L0.4, nâng catalog lên 13 bài beta. [Báo cáo EDU-04c](EDU_04C_ROUTING.md) ghi engine 1.3.0, RFC nguồn, trace/giới hạn, 29 unit test và 103 E2E đạt/một skip. CASE-04/EDU-04 vẫn mở: HTTPS/TLS/session, OS/concurrency, cấu trúc dữ liệu và các năng lực L0 còn thiếu cần bài riêng và review trước CAP-L0.

@@ -1,6 +1,6 @@
 # Kế hoạch website học System Design tương tác
 
-Ngày lập: 11/10/2026. Phiên bản 5 — 14/10/2026: bổ sung ví dụ thực tế theo từng bài/module; giữ định hướng toàn diện theo level, học sinh cấp 3, mobile-first và web trước app. Trạng thái: web beta có 12 bài nhập môn; phần giáo trình đầy đủ và case theo EDU-09 còn là kế hoạch triển khai, chưa qua pilot học sinh thật.
+Ngày lập: 11/10/2026. Phiên bản 5 — 14/10/2026: bổ sung ví dụ thực tế theo từng bài/module; giữ định hướng toàn diện theo level, học sinh cấp 3, mobile-first và web trước app. Trạng thái: web beta có 13 bài nhập môn; phần giáo trình đầy đủ và case theo EDU-09 còn là kế hoạch triển khai, chưa qua pilot học sinh thật.
 
 Tên làm việc: **System Design Lab**.
 

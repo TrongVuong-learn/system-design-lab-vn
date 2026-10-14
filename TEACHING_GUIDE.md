@@ -1,6 +1,6 @@
 # Chuẩn giảng dạy System Design dễ hiểu
 
-Phiên bản 2 — 14/10/2026; chuẩn hóa mini-case từng bài và case tổng hợp. Áp dụng cho toàn bộ [giáo trình](CURRICULUM_MAP.md) và [kế hoạch website](SYSTEM_DESIGN_WEB_PLAN.md). Đây là chuẩn biên soạn và bài mẫu. Web hiện có 12 bài beta; chưa có kết quả thử nghiệm học sinh.
+Phiên bản 2 — 14/10/2026; chuẩn hóa mini-case từng bài và case tổng hợp. Áp dụng cho toàn bộ [giáo trình](CURRICULUM_MAP.md) và [kế hoạch website](SYSTEM_DESIGN_WEB_PLAN.md). Đây là chuẩn biên soạn và bài mẫu. Web hiện có 13 bài beta; chưa có kết quả thử nghiệm học sinh.
 
 ## 1. Người học và mục tiêu
 

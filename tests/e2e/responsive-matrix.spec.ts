@@ -6,7 +6,7 @@ async function fits(page: Page) {
     .toBeLessThanOrEqual(1);
 }
 for (const width of [320, 360, 390, 430, 768, 1024, 1440]) {
-  test(`catalog and all twelve labs remain usable at ${width}px`, async ({ page }) => {
+  test(`catalog and all thirteen labs remain usable at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: width >= 768 ? 1024 : 844 });
     for (const route of ['/', '/explore', '/levels/L3', '/progress']) {
       await page.goto(`/#${route}`);
@@ -17,6 +17,7 @@ for (const width of [320, 360, 390, 430, 768, 1024, 1440]) {
       'request',
       'metrics',
       'dns',
+      'routing',
       'transport',
       'capacity',
       'http',
