@@ -200,3 +200,13 @@ QA: unit trace các nhóm, schema có đủ guidance13 bài, full E2E liên quan
 ### Kết quả EDU-11
 
 Đã hiện thực gợi ý và quan sát trước–sau cho đủ13 bài beta. [EDU-11](EDU_11_FEEDBACK_ALL_LESSONS.md) ghi phạm vi, trace, test và giới hạn. Bước tiếp theo là bài ôn kết hợp kiến thức và website trường xuyên bài; chưa coi13 bài là đủ năng lực36 module và chưa đóng pilot thật.
+
+## 13. EDU-12 — ôn tổng hợp website trường (15/10/2026)
+
+Task Ready; baseline bcbf137; owner root. Scope một hoạt động ôn riêng, không nâng số lesson/module hoàn chỉnh: school-day có hai tình huống opening/rush, nối balance/cache/queue. Mở từ Khám phá và Tiến độ; gợi ý học trước nhưng không khóa truy cập.
+
+Flow: đọc yêu cầu → chọn server/cache/TTL/worker → chủ động chạy phương án → xem từng ràng buộc và trace → viết nguyên nhân/đánh đổi → lưu lượt ôn → thử tình huống đổi tải và tồn hàng chờ. Có nhiều cấu hình khả thi; không chấm một sơ đồ duy nhất.
+
+Acceptance: schema ID/version và activityRef registry cho content/record; core thuần tái dùng trafficStep/queueStep, kết quả xác định, ngân sách điểm giả lập; TTL chỉ kiểm policy theo giả định lý tưởng, không hứa freshness thực tế. Hit75% cố định, không suy ra từTTL. Hai luồng đọc và gửi độc lập; mỗi lần chạy bắt đầu từ dữ liệu tình huống, không nối backlog lần chạy trước. Đổi config làm kết quả cũ có nhãn cần chạy lại; không dùng kết quả cũ để lưu hoàn tất. Lưu nhận định do người học viết, không tự chấm đúng bằng độ dài/AI.
+
+Progress v1 thêm reviews optional tách lessons, dữ liệu cũ/export/import/multi-tab/write failure tiếp tục đúng; không tự hoàn thành bài hoặc chứng nhận mastery. Kiểm schema, invariant/tính tay/đa phương án, các luồng mobile320/390/desktop/keyboard và ảnh thật. Chưa triển khai capstone đầy đủ, tài khoản, backend, PWA, thêm học liệu nền hoặc đóng pilot thật.

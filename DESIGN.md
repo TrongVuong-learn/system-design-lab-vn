@@ -43,3 +43,7 @@ Danh sách từ mới chỉ hiển thị tên Việt/Anh khi popup được hỗ
 ## Phản hồi EDU-10
 
 Giữ palette/type bàn thí nghiệm. Bảng trước–sau3–4 dòng ở ngay dưới điều khiển, tên đại lượng bên trái, số có đơn vị, chỉ ô đổi dùng nền vàng nhạt. Chữ nguyên nhân dưới bảng là vùng đọc chính; desktop vẫn giữ cùng khối, mobile không cuộn ngang. Gợi ý là nút mở theo thứ tự và hai đoạn ngắn; lời giải sai chỉ mở theo yêu cầu. Không thêm chuyển động tự chạy, badge thưởng hoặc màn đăng nhập.
+
+## Ôn tổng hợp EDU-12
+
+Giữ bàn thí nghiệm: hai luồng “xem lịch” và “gửi thông báo” có nhãn/đơn vị riêng. Yêu cầu trước, điều khiển sau, nút chạy rõ ràng, bốn kết quả ràng buộc tiếp theo, nhận định cuối. Mobile một cột, chỉ một tình huống đang mở; trace/so lần thử/nguồn mở khi cần. Kết quả cũ giữ nhìn lại nhưng có nhãn cần chạy lại khi config đổi. Status dùng chữ Đạt/Chưa đạt ngoài màu, focus tới kết quả sau chạy, không dùng màu xanh làm bằng chứng mastery.
