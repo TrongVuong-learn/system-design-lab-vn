@@ -1,0 +1,62 @@
+[
+  {
+    "id": "school-day",
+    "version": 1,
+    "status": "beta",
+    "activityRef": "school-review",
+    "title": "Website trường: nhanh thôi đã đủ chưa?",
+    "subtitle": "Ôn chia tải, cache và hàng đợi qua hai tình huống.",
+    "prerequisiteIds": ["balance", "cache", "queue"],
+    "introduction": "Bạn giúp trường mở cổng xem lịch và gửi thông báo. Đọc lịch nhanh, thông báo làm xong và lịch đủ mới là ba yêu cầu khác nhau. Chọn một phương án, chạy thử rồi giải thích vì sao nó đáp ứng từng yêu cầu.",
+    "scenarios": [
+      {
+        "id": "opening",
+        "title": "Giờ mở lịch học",
+        "context": "Nhiều bạn cùng xem lịch. Một luồng khác tạo việc gửi thông báo. Trường vừa đổi phòng, nên cần giới hạn thời gian dùng bản ghi gần. Hãy phục vụ đủ lượt đọc, làm hết việc gửi và giữ trong ngân sách.",
+        "hints": [
+          "Nhìn riêng đường đọc và đường gửi. Thêm server không tự tăng công suất nơi lưu lịch, còn thêm cache không tự làm xong việc gửi.",
+          "Tìm giới hạn ở đường đọc rồi kiểm công suất worker. Nếu dùng cache, so thời hạn bản ghi với yêu cầu độ mới; cuối cùng cộng điểm chi phí của tất cả thành phần."
+        ],
+        "reflectionPrompt": "Vì sao phương án của bạn đáp ứng cả đọc lịch, gửi thông báo và độ mới? Nêu một giới hạn hoặc đánh đổi mà các số trên chưa chứng minh."
+      },
+      {
+        "id": "rush",
+        "title": "Thông báo đã dồn lại",
+        "context": "Lượt đọc ít hơn, nhưng việc gửi đến nhiều hơn và đã có hàng chờ từ trước. Thử phương án với yêu cầu mới: làm hết cả phần tồn trước đó trong thời gian cho phép, giữ lịch đủ mới và không vượt ngân sách.",
+        "hints": [
+          "Phân biệt ngăn hàng chờ tăng với làm hết hàng chờ đã có. Tính số việc mới cộng số tồn trước khi quyết định worker.",
+          "Nếu công suất chỉ bằng việc đến, tồn cũ vẫn giữ nguyên. Xem trace từng giây để kiểm phần công suất dư có giảm hết tồn trong cửa sổ; tải đọc giảm có thể cho bạn chọn ít server hơn."
+        ],
+        "reflectionPrompt": "Vì sao chỉ cân công suất worker bằng tốc độ việc đến chưa đủ ở tình huống này? Phương án của bạn đánh đổi điều gì để xử lý phần tồn?"
+      }
+    ],
+    "limits": [
+      "Mỗi lần chạy độc lập: phần đọc tính một cửa sổ một giây không có hàng chờ ban đầu; phần gửi chạy bốn giây từ hàng chờ của tình huống. Hai luồng có tải riêng, không suy ra việc gửi từ lượt đọc.",
+      "Mỗi server làm tối đa sáu lượt đọc/giây; nơi lưu lịch làm bốn lượt đọc/giây. Nếu bật cache, giả định đúng 75% lượt không đọc nguồn, giữ cố định cho mọi TTL; không đo hit rate từ TTL hoặc workload thật.",
+      "Độ mới chỉ kiểm policy TTL không quá một phút: giả định không trả bản ghi hết hạn và lấy nguồn mới khi cần. Bỏ qua mạng, thời gian tra nguồn, lỗi cập nhật và bản sao. Đây không phải bảo đảm dữ liệu mới trong hệ thống thật.",
+      "Mỗi worker làm tối đa hai việc/giây, việc đến đều, không retry/mất ACK/lỗi. Điểm ngân sách chỉ để luyện đánh đổi, không phải tiền hay giá dịch vụ.",
+      "Công cụ chỉ kiểm ràng buộc của mô hình; bạn tự đánh giá lời giải thích. Lưu lượt ôn không chứng minh đã thành thạo module hoặc thiết kế production."
+    ],
+    "sources": [
+      {
+        "title": "Azure Architecture Center: Cache-Aside",
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside",
+        "checkedAt": "2026-10-15",
+        "supports": "Cơ chế đọc cache/nguồn, dữ liệu có thể cũ và cân nhắc expiration. Không chứng minh hit75%, giới hạn độ mới hoặc số công suất của ví dụ."
+      },
+      {
+        "title": "Azure Architecture Center: Queue-Based Load Leveling",
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling",
+        "checkedAt": "2026-10-15",
+        "supports": "Queue tách nhận việc với xử lý, cần công suất xử lý phù hợp để tránh tích hàng chờ. Các tốc độ và điểm chi phí ở bài là giả định tác giả."
+      }
+    ],
+    "review": {
+      "reviewer": "Codex — đối chiếu nguồn và trace EDU-12",
+      "reviewerType": "agent",
+      "date": "2026-10-15",
+      "status": "beta-checked",
+      "evidence": "docs/delivery/EDU_12_SCHOOL_REVIEW.md"
+    }
+  }
+]

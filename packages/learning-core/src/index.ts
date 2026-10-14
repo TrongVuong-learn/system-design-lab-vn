@@ -1,4 +1,9 @@
-import { progressSchema, type Progress, type LessonProgress } from '@sdl/content-schema';
+import {
+  progressSchema,
+  type Progress,
+  type SchoolReviewProgress,
+  type LessonProgress,
+} from '@sdl/content-schema';
 export const emptyProgress = (): Progress => ({ version: 1, lessons: {} });
 export const newLessonProgress = (): LessonProgress => ({
   stage: 0,
@@ -43,4 +48,26 @@ export class ProgressConflictError extends Error {
     super('Progress changed in another tab.');
     this.name = 'ProgressConflictError';
   }
+}
+
+export function newSchoolReviewProgress(): SchoolReviewProgress {
+  return {
+    version: 1,
+    scenarioId: 'opening',
+    configs: {
+      opening: { servers: 1, cache: false, ttl: 5, workers: 1 },
+      rush: { servers: 1, cache: false, ttl: 5, workers: 1 },
+    },
+    runs: {},
+    previousRuns: {},
+    reflections: { opening: '', rush: '' },
+    hints: { opening: 0, rush: 0 },
+    saved: { opening: false, rush: false },
+  };
+}
+export function updateSchoolReview(progress: Progress, review: SchoolReviewProgress): Progress {
+  return progressSchema.parse({
+    ...progress,
+    reviews: { ...progress.reviews, 'school-day': review },
+  });
 }

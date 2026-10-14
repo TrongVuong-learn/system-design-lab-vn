@@ -1,5 +1,10 @@
 import { readFile, readdir, mkdir, writeFile } from 'node:fs/promises';
-import { lessonSchema, moduleSchema, validateCatalog } from '../packages/content-schema/src/index';
+import {
+  lessonSchema,
+  moduleSchema,
+  validateCatalog,
+  validateReviews,
+} from '../packages/content-schema/src/index';
 const source = await readFile('CURRICULUM_MAP.md', 'utf8');
 const modules = [...source.matchAll(/^\| (L[0-5]\.[1-6]) \| ([^|]+) \|/gm)].map((m) => {
   const topics = m[2]!.trim();
@@ -26,6 +31,17 @@ const { lessons, editorial, coverage } = validateCatalog(
   allLessons,
   JSON.parse(await readFile('content/editorial.json', 'utf8')),
 );
+const reviewFiles = (await readdir('content/reviews/vi')).filter((f) => f.endsWith('.json')).sort();
+const reviews = validateReviews(
+  (
+    await Promise.all(
+      reviewFiles.map(
+        async (f) => JSON.parse(await readFile(`content/reviews/vi/${f}`, 'utf8')) as unknown[],
+      ),
+    )
+  ).flat(),
+  lessons.map((l) => l.id),
+);
 // Keep the familiar first lesson and order; the source files do not define navigation.
 const order = [
   'request',
@@ -51,6 +67,7 @@ if (!process.argv.includes('--check')) {
       {
         modules,
         lessons,
+        reviews,
         editorial: {
           ...editorial,
           lessons: editorial.lessons.filter((r) => lessons.some((l) => l.id === r.lessonId)),
@@ -63,5 +80,5 @@ if (!process.argv.includes('--check')) {
   );
 }
 console.log(
-  `Content validated: ${modules.length} modules, ${lessons.length} available introductory lessons. Full curriculum remains in development.`,
+  `Content validated: ${modules.length} modules, ${lessons.length} available introductory lessons, ${reviews.length} integrated review. Full curriculum remains in development.`,
 );

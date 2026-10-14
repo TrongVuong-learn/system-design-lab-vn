@@ -867,3 +867,140 @@
   clip-path: inset(50%);
   white-space: nowrap;
 }
+
+.review-entry {
+  margin-block: 2rem;
+  padding: 1.25rem;
+  border-left: 3px solid #244edb;
+  background: #fff;
+  display: grid;
+  gap: 1rem;
+  align-items: start;
+}
+.review-entry h2 {
+  margin: 0 0 0.5rem;
+}
+.review-entry p {
+  margin: 0.5rem 0;
+}
+.review-entry .button {
+  justify-self: start;
+}
+.school-review {
+  max-width: 840px;
+  margin-inline: auto;
+}
+.review-scenarios {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-block: 1.5rem;
+}
+.review-scenarios button {
+  flex: 1 1 220px;
+  min-height: 48px;
+}
+.review-scenarios [aria-pressed='true'] {
+  border-color: #244edb;
+  color: #244edb;
+  background: #eaf0ff;
+}
+.review-brief {
+  border-left: 3px solid #244edb;
+  padding-left: 1rem;
+  margin-block: 1.5rem;
+}
+.review-brief h2 {
+  font-size: 1.3rem;
+}
+.review-brief li {
+  margin-block: 0.65rem;
+  line-height: 1.65;
+}
+.review-results,
+.review-reflection {
+  margin-block: 2rem;
+}
+.review-checks {
+  list-style: none;
+  padding: 0;
+  margin-block: 1rem;
+}
+.review-checks li {
+  border-top: 1px solid #d8dfeb;
+  padding-block: 1rem;
+}
+.review-checks li > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: space-between;
+  align-items: center;
+}
+.review-checks h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+.review-checks p {
+  margin: 0.6rem 0 0;
+}
+.review-pass,
+.review-fail {
+  font-weight: 600;
+}
+.review-pass {
+  color: #286746;
+}
+.review-fail {
+  color: #765214;
+}
+.review-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  margin-block: 1rem;
+  font-size: 0.9rem;
+}
+.review-table th,
+.review-table td {
+  padding: 0.6rem 0.3rem;
+  overflow-wrap: anywhere;
+  text-align: left;
+  border-bottom: 1px solid #d8dfeb;
+}
+.review-table caption {
+  text-align: left;
+  margin-bottom: 0.5rem;
+}
+.review-reflection label {
+  display: block;
+  line-height: 1.65;
+}
+.review-reflection textarea {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 140px;
+  resize: vertical;
+  margin-top: 0.75rem;
+  border: 1px solid #8999b8;
+  border-radius: 8px;
+  background: #fff;
+  padding: 0.8rem;
+  font: inherit;
+  color: inherit;
+  line-height: 1.65;
+}
+.review-hints {
+  border-left: 3px solid #d8dfeb;
+  padding-left: 1rem;
+  margin-top: 1rem;
+}
+.review-limits li {
+  margin-block: 0.8rem;
+}
+@media (min-width: 768px) {
+  .review-entry {
+    grid-template-columns: 1fr auto;
+  }
+}

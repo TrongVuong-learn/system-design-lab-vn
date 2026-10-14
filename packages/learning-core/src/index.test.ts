@@ -49,3 +49,37 @@ it('preserves independent optional hint levels through v1 export and accepts old
     ),
   ).toThrow();
 });
+
+it('optional review checkpoints round-trip without changing lessons and old saves remain valid', async () => {
+  const { newSchoolReviewProgress, updateSchoolReview } = await import('./index');
+  const lesson = updateLesson(emptyProgress(), 'cache', {
+    stage: 2,
+    actions: 3,
+    lab: { source: 205, cached: 201 },
+  });
+  expect(parseProgress(serializeProgress(lesson)).reviews).toBeUndefined();
+  const review = newSchoolReviewProgress();
+  review.configs.opening = { servers: 2, cache: true, ttl: 1, workers: 3 };
+  review.runs.opening = { ...review.configs.opening };
+  review.reflections.opening = 'Cache giảm đọc nguồn; worker xử lý việc gửi riêng.';
+  review.hints.opening = 2;
+  review.saved.opening = true;
+  const next = updateSchoolReview(lesson, review),
+    restored = parseProgress(serializeProgress(next));
+  expect(restored).toEqual(next);
+  expect(restored.lessons).toEqual(lesson.lessons);
+  expect(updateLesson(next, 'queue', { stage: 1 }).reviews).toEqual(next.reviews);
+  expect(() =>
+    parseProgress(
+      JSON.stringify({
+        ...next,
+        reviews: {
+          'school-day': {
+            ...review,
+            configs: { ...review.configs, opening: { ...review.configs.opening, workers: -1 } },
+          },
+        },
+      }),
+    ),
+  ).toThrow();
+});

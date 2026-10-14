@@ -2,10 +2,11 @@ import { createContext, useContext, useEffect, useRef, useState, type ReactNode 
 import {
   emptyProgress,
   updateLesson,
+  updateSchoolReview,
   ProgressConflictError,
   type ProgressRepository,
 } from '@sdl/learning-core';
-import type { Progress, LessonProgress } from '@sdl/content-schema';
+import type { Progress, LessonProgress, SchoolReviewProgress } from '@sdl/content-schema';
 import { progressRepository } from '../adapters/progress-repository';
 interface Context {
   progress: Progress;
@@ -15,6 +16,7 @@ interface Context {
   retrySave(): void;
   update(id: string, patch: Partial<LessonProgress>): void;
   replace(p: Progress): void;
+  updateReview(p: SchoolReviewProgress): void;
 }
 const ProgressContext = createContext<Context | null>(null);
 export function ProgressProvider({
@@ -103,9 +105,16 @@ export function ProgressProvider({
     setProgress(next);
     if (!loadError.current) save(next);
   }
+  function updateReview(review: SchoolReviewProgress) {
+    if (!ready) return;
+    const next = updateSchoolReview(latest.current, review);
+    latest.current = next;
+    setProgress(next);
+    if (!loadError.current) save(next);
+  }
   return (
     <ProgressContext.Provider
-      value={{ progress, ready, saving, saveState, retrySave, update, replace }}
+      value={{ progress, ready, saving, saveState, retrySave, update, updateReview, replace }}
     >
       {children}
     </ProgressContext.Provider>

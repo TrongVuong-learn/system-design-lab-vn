@@ -8,6 +8,7 @@ import {
   ProgressPage,
   NotFound,
 } from '../features/catalog/Pages';
+import { ReviewPage } from '../features/review';
 import { LessonPage } from '../features/lesson-player/LessonPage';
 import { Icon } from '../ui/primitives';
 
@@ -38,7 +39,7 @@ class ErrorBoundary extends Component<{ children: ReactNode }, { error: boolean 
 }
 function Shell() {
   const { pathname } = useLocation();
-  const learning = pathname.startsWith('/learn/');
+  const learning = pathname.startsWith('/learn/') || pathname.startsWith('/review/');
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
@@ -83,6 +84,7 @@ function Shell() {
           <Route path="/explore" element={<ExplorePage />} />
           <Route path="/levels/:level" element={<LevelPage />} />
           <Route path="/learn/:id" element={<LessonPage />} />
+          <Route path="/review/:id" element={<ReviewPage />} />
           <Route path="/progress" element={<ProgressPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

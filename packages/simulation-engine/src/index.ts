@@ -221,3 +221,11 @@ export {
   type Observation,
 } from './observations';
 export { observeRemaining, type GuidedKind } from './remaining-observations';
+export {
+  schoolScenarios,
+  normalizeSchoolConfig,
+  sameSchoolConfig,
+  evaluateSchoolReview,
+  type SchoolConfig,
+  type SchoolScenarioId,
+} from './school-review';

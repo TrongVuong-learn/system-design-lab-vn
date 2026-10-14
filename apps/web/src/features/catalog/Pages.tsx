@@ -1,3 +1,4 @@
+import { ReviewCard } from '../review';
 import { SaveStatus } from '../progress/SaveStatus';
 import { useRef, useState } from 'react';
 import { Link, useParams } from 'react-router';
@@ -160,6 +161,7 @@ export function ExplorePage() {
           Chưa có bài thử cho từ khóa này. Xem các chủ đề trong lộ trình bên dưới.
         </p>
       )}
+      {!term && <ReviewCard />}
       <h2 className="spaced-heading">Bản đồ kiến thức</h2>
       {term ? (
         <div className="module-list">
@@ -327,6 +329,7 @@ export function ProgressPage() {
           </Link>
         </aside>
       )}
+      <ReviewCard />
       <section className="transfer-panel">
         <h2>Mang tiến độ theo bạn</h2>
         <p>Dữ liệu trình duyệt có thể bị xóa. Xuất bản lưu để giữ một bản trên thiết bị của bạn.</p>

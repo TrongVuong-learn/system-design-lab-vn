@@ -1,6 +1,6 @@
 # Kế hoạch website học System Design tương tác
 
-Ngày lập: 11/10/2026. Phiên bản 7 — 14/10/2026: chốt phi thương mại và cải thiện phản hồi/gợi ý theo EDU-10; giữ định hướng toàn diện theo level, học sinh cấp 3, mobile-first và web trước app. Trạng thái: web beta có 13 bài nhập môn; mini-case13 bài đã hiện thực; phần giáo trình đầy đủ/case module còn theo roadmap, chưa qua pilot học sinh thật.
+Ngày lập: 11/10/2026. Phiên bản 8 — 15/10/2026: chốt phi thương mại và cải thiện phản hồi/gợi ý theo EDU-10; giữ định hướng toàn diện theo level, học sinh cấp 3, mobile-first và web trước app. Trạng thái: web beta có 13 bài nhập môn; mini-case13 bài đã hiện thực; phần giáo trình đầy đủ/case module còn theo roadmap, chưa qua pilot học sinh thật.
 
 Tên làm việc: **System Design Lab**.
 
@@ -172,7 +172,7 @@ Ngưỡng vượt bài được xác lập sau khi kiểm chứng mô hình và 
 
 Đợt EDU-10 cải thiện cache, queue và network: sau mỗi thao tác hiện thay đổi trước–sau kèm nguyên nhân từ trạng thái mô phỏng thật; khi trả lời sai mở gợi ý nơi quan sát → cách suy luận → lời giải theo yêu cầu. Hai gợi ý được biên soạn, không gọi AI runtime. Dữ liệu cũ vẫn mở được; lịch sử gợi ý và quan sát mới lưu cục bộ, không dùng làm chứng nhận năng lực.
 
-EDU-11 đã mở rộng chuẩn phản hồi cho10 bài beta còn lại. EDU-12 triển khai bài ôn website trường với hai tình huống liên kết balance/cache/queue. Mở rộng hệ thống trường xuyên các level vẫn là backlog; kết quả AI test không đóng pilot người thật. Editor tự do, CMS, AI tutor và luyện phỏng vấn được cân nhắc sau chất lượng bài học.
+EDU-11 đã mở rộng chuẩn phản hồi cho10 bài beta còn lại. EDU-12 đã hiện thực bài ôn website trường với hai tình huống liên kết balance/cache/queue. Mở rộng hệ thống trường xuyên các level vẫn là backlog; kết quả AI test không đóng pilot người thật. Editor tự do, CMS, AI tutor và luyện phỏng vấn được cân nhắc sau chất lượng bài học.
 
 ### Đánh giá bài làm
 

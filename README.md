@@ -34,6 +34,7 @@ pnpm test:e2e
 - Nội dung đi từ tình huống dễ hiểu đến thao tác, giải thích và cơ chế kỹ thuật.
 - Phi thương mại, chia sẻ quy mô nhỏ: học không cần tài khoản; ưu tiên cách giảng, tiến độ lưu trên thiết bị.
 - Cả13 bài beta có so sánh bước trước–sau và gợi ý mở dần; xem [EDU-11](docs/delivery/EDU_11_FEEDBACK_ALL_LESSONS.md).
+- Một bài ôn website trường kết hợp chia tải/cache/queue, hai tình huống và nhận định tự viết; xem [EDU-12](docs/delivery/EDU_12_SCHOOL_REVIEW.md).
 
 ## Đọc tài liệu theo thứ tự
 

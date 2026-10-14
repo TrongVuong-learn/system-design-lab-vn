@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { schoolReviewProgressSchema } from './review';
 
 const question = z
   .object({
@@ -108,8 +109,18 @@ export const lessonProgressSchema = z.object({
 export const progressSchema = z.object({
   version: z.literal(1),
   lessons: z.record(z.string().max(100), lessonProgressSchema),
+  reviews: z.object({ 'school-day': schoolReviewProgressSchema.optional() }).strict().optional(),
 });
 export type Progress = z.infer<typeof progressSchema>;
 export type LessonProgress = z.infer<typeof lessonProgressSchema>;
 
 export { validateCatalog, editorialSchema } from './catalog';
+
+export {
+  schoolConfigSchema,
+  schoolReviewProgressSchema,
+  reviewSchema,
+  validateReviews,
+  type SchoolReviewProgress,
+  type Review,
+} from './review';

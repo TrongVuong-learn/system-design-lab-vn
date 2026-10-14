@@ -1,5 +1,5 @@
 import data from '../generated/catalog.json';
-import { lessonSchema, moduleSchema } from '@sdl/content-schema';
+import { lessonSchema, moduleSchema, reviewSchema } from '@sdl/content-schema';
 export const lessons = data.lessons.map((l) => lessonSchema.parse(l));
 export const modules = data.modules.map((m) => moduleSchema.parse(m));
 export const levels = [
@@ -63,3 +63,5 @@ export const tracks = [
 ];
 
 export const editorial = data.editorial;
+
+export const reviews = data.reviews.map((r) => reviewSchema.parse(r));
