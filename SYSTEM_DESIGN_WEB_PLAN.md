@@ -172,7 +172,7 @@ Ngưỡng vượt bài được xác lập sau khi kiểm chứng mô hình và 
 
 Đợt EDU-10 cải thiện cache, queue và network: sau mỗi thao tác hiện thay đổi trước–sau kèm nguyên nhân từ trạng thái mô phỏng thật; khi trả lời sai mở gợi ý nơi quan sát → cách suy luận → lời giải theo yêu cầu. Hai gợi ý được biên soạn, không gọi AI runtime. Dữ liệu cũ vẫn mở được; lịch sử gợi ý và quan sát mới lưu cục bộ, không dùng làm chứng nhận năng lực.
 
-Sau nghiệm thu ba bài, mở rộng chuẩn phản hồi cho bài khác, bài ôn tổng hợp và hệ thống website trường xuyên suốt theo prerequisite. Các bước này vẫn là backlog; kết quả AI test không đóng pilot người thật. Editor tự do, CMS, AI tutor và luyện phỏng vấn được cân nhắc sau chất lượng bài học.
+Sau nghiệm thu ba bài, EDU-11 mở rộng chuẩn phản hồi cho10 bài beta còn lại; sau đó bài ôn tổng hợp và hệ thống website trường xuyên suốt theo prerequisite. Các bước này vẫn là backlog; kết quả AI test không đóng pilot người thật. Editor tự do, CMS, AI tutor và luyện phỏng vấn được cân nhắc sau chất lượng bài học.
 
 ### Đánh giá bài làm
 
