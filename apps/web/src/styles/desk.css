@@ -623,3 +623,79 @@
     grid-template-columns: 1fr 1fr;
   }
 }
+
+.http-choices {
+  border: 0;
+  padding: 0;
+  margin: 20px 0;
+  min-width: 0;
+}
+.http-choices legend {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+.http-messages {
+  display: grid;
+  gap: 16px;
+  margin: 24px 0;
+}
+.http-message {
+  border-top: 2px solid #cbd2df;
+  padding-top: 12px;
+  min-width: 0;
+}
+.http-message h3 {
+  font-size: 16px;
+  margin: 0 0 12px;
+}
+.http-message dt {
+  font-size: 12px;
+  color: #53637f;
+  margin: 12px 0 4px;
+}
+.http-message dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.http-message code {
+  font-size: 13px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.download-parts {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 16px;
+  margin: 24px 0;
+}
+.download-parts li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  font-size: 13px;
+}
+.download-track {
+  grid-row: 2;
+  grid-column: 1 / -1;
+  height: 12px;
+  background: #e5e9f0;
+}
+.download-track span {
+  display: block;
+  height: 100%;
+  min-width: 2px;
+  background: #244edb;
+}
+.download-track.processing span {
+  background: #60728f;
+}
+.download-track.rtt span {
+  background: #a68429;
+}
+@media (min-width: 640px) {
+  .http-messages {
+    grid-template-columns: 1fr 1fr;
+  }
+}

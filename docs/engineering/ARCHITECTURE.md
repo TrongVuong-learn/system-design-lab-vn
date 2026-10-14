@@ -158,4 +158,6 @@ IndexedDB database version 2 giữ nguyên object store/key và progress JSON ve
 
 ## Registry beta hiện thực trong EDU-04
 
-Pipeline đọc `content/lessons/vi/*.json` và `content/editorial.json`; kiểm tra graph prerequisite, nguồn theo claim và review trước khi sinh catalog. Chỉ beta đã kiểm tra được đưa vào UI. Mười bài thử nghiệm không đồng nghĩa 36 module hoàn tất. Contract triển khai và phần chưa làm của ENG-03 ở [ADR 0003](../decisions/0003-beta-editorial-registry.md). Engine metrics/DNS/transport/capacity vẫn thuần TypeScript; renderer chỉ nối trạng thái với adapter progress hiện có.
+Pipeline đọc `content/lessons/vi/*.json` và `content/editorial.json`; kiểm tra graph prerequisite, nguồn theo claim và review trước khi sinh catalog. Chỉ beta đã kiểm tra được đưa vào UI. Mười hai bài thử nghiệm không đồng nghĩa 36 module hoàn tất. Contract triển khai và phần chưa làm của ENG-03 ở [ADR 0003](../decisions/0003-beta-editorial-registry.md). Engine metrics/DNS/transport/capacity vẫn thuần TypeScript; renderer chỉ nối trạng thái với adapter progress hiện có.
+
+EDU-04b thêm engine thuần HTTP exchange và thời gian tải lý tưởng; NetworkLabs trình bày thông điệp và phép tính. Không gửi request thật từ học liệu hoặc đưa logic engine vào adapter.

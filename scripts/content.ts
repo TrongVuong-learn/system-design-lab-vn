@@ -34,6 +34,8 @@ const order = [
   'dns',
   'transport',
   'capacity',
+  'http',
+  'network',
   'balance',
   'queue',
   'replica',

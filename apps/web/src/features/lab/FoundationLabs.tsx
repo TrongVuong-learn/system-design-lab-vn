@@ -38,8 +38,12 @@ export function MetricsLab(props: Props) {
         aria-pressed={slow}
         onClick={() => change({ slow: !slow })}
       >
-        Hai việc cuối: {slow ? '1.000 ms' : '100 ms'}
+        {slow ? 'Cho hai việc cuối nhanh lại' : 'Làm hai việc cuối chậm hơn'}
       </button>
+      <p className="muted">
+        Hai việc cuối đang mất {slow ? '1.000 ms' : '100 ms'} mỗi việc. ms là mili giây: 1.000 ms =
+        1 giây.
+      </p>
       <ol className="latency-chart" aria-label="Thời gian từ lúc gửi đến khi xong của 20 lượt">
         {result.requests.map((r) => (
           <li key={r.id}>

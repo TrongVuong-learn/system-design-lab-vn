@@ -1,6 +1,6 @@
 # Kế hoạch triển khai và nghiệm thu
 
-Trạng thái: roadmap và ước lượng; web beta sáu bài đã được triển khai. Trạng thái thực thi theo [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md); các gate chưa đạt vẫn còn mở. Phạm vi kiến thức theo [CURRICULUM_MAP.md](../../CURRICULUM_MAP.md), tiêu chuẩn học theo [TEACHING_GUIDE.md](../../TEACHING_GUIDE.md).
+Trạng thái: roadmap và ước lượng; web beta có 12 bài nhập môn, các gate hoàn thiện level còn mở. Trạng thái thực thi theo [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md); các gate chưa đạt vẫn còn mở. Phạm vi kiến thức theo [CURRICULUM_MAP.md](../../CURRICULUM_MAP.md), tiêu chuẩn học theo [TEACHING_GUIDE.md](../../TEACHING_GUIDE.md).
 
 Quy trình thực hiện từng task, Git/review, release và quản lý thư mục áp dụng theo [WORKFLOW.md](WORKFLOW.md) và [CONTRIBUTING.md](../../CONTRIBUTING.md).
 
@@ -146,3 +146,7 @@ Mỗi bài phải có outcome/prerequisite, storyboard mobile, glossary, nguồn
 ### EDU-02 — bộ pilot vòng 1 (13/10/2026)
 
 Đã chuẩn bị [bộ điều phối, phiếu học sinh, rubric và biểu mẫu ghi nhận](../research/student-pilot/README.md) cho cache + các bài L0 mới. Trạng thái EDU-02: **chuẩn bị, chưa có buổi thật hoặc người tham gia được xác nhận**. Chưa đóng gate pilot. Cần chủ dự án xác nhận học sinh/người điều phối và khả năng truy cập trên thiết bị trước khi thực hiện; dữ liệu quan sát thật lưu riêng ngoài Git.
+
+### Tiến độ EDU-04b (14/10/2026)
+
+Bổ sung HTTP request/response và RTT/bandwidth; sửa hướng dẫn metrics từ QA-04. Phạm vi và nghiệm thu tại [EDU_04B_HTTP_NETWORK.md](EDU_04B_HTTP_NETWORK.md). B1/EDU-04 vẫn đang thực hiện: chưa đủ toàn bộ L0, chưa qua pilot thật. Sau đợt này tiếp tục IP/port/routing và HTTPS/TLS, OS/concurrency rồi đánh giá năng lực còn thiếu trước khi đóng L0; chưa chuyển gate web/app sang đạt.

@@ -8,6 +8,8 @@ export function LessonSketch({ kind }: { kind: string }) {
       ],
       dns: ['Tên dễ nhớ → địa chỉ IP', 'Tên → DNS → IP', 'Cache có thời hạn sử dụng'],
       transport: ['Mảnh số 2 bị mất', '1 → ? → 3', 'TCP giữ thứ tự luồng byte'],
+      http: ['Yêu cầu → phản hồi', 'GET · 200 / 404 / 503', 'Mã trạng thái và nội dung'],
+      network: ['Ba phần của thời gian chờ', 'RTT + xử lý + truyền', 'Mbps khác mili giây'],
       capacity: ['Một ảnh, nhiều lượt xem', 'Lượt × kB', 'Dữ liệu truyền khác dữ liệu lưu'],
     } as Record<string, string[]>
   )[kind];

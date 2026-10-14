@@ -15,7 +15,13 @@ test('four foundations teach the model, resume, and complete with a new scenario
     await openLab(page, lesson.id);
     if (lesson.id === 'metrics') {
       await page.getByRole('button', { name: 'Tăng Số thủ thư' }).click();
-      await page.getByRole('button', { name: 'Hai việc cuối: 100 ms', exact: true }).click();
+      await page.getByRole('button', { name: 'Làm hai việc cuối chậm hơn', exact: true }).click();
+      await expect(
+        page.getByRole('button', { name: 'Cho hai việc cuối nhanh lại' }),
+      ).toHaveAttribute('aria-pressed', 'true');
+      await expect(
+        page.getByText('ms là mili giây: 1.000 ms = 1 giây.', { exact: false }),
+      ).toBeVisible();
       await expect(page.locator('.metrics')).toContainText('550');
       await expect(page.locator('.metrics')).toContainText('1.900');
     } else if (lesson.id === 'dns') {

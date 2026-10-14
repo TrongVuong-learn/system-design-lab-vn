@@ -33,6 +33,11 @@
         "name": "Phân vị 95",
         "english": "p95",
         "meaning": "Theo cách tính trong bài: giá trị thứ 19 của 20 thời gian đã sắp tăng dần. Ít nhất 95% lượt không vượt giá trị này."
+      },
+      {
+        "name": "Mili giây",
+        "english": "ms",
+        "meaning": "Đơn vị thời gian: 1.000 ms = 1 giây; 100 ms = một phần mười giây."
       }
     ],
     "prediction": {

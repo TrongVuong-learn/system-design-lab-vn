@@ -23,6 +23,8 @@ export const lessonSchema = z.object({
     'dns',
     'transport',
     'capacity',
+    'http',
+    'network',
   ]),
   level: z.string().regex(/^L[0-5]$/),
   moduleId: z.string().regex(/^L[0-5]\.[1-6]$/),

@@ -1,4 +1,4 @@
-export const ENGINE_VERSION = '1.1.0';
+export const ENGINE_VERSION = '1.2.0';
 export interface CacheState {
   time: number;
   source: number;
@@ -209,3 +209,5 @@ export {
   dnsStep,
   transferPackets,
 } from './foundations';
+
+export { estimateDownload, httpExchange } from './network';

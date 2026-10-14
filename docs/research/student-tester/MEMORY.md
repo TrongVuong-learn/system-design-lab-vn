@@ -15,3 +15,7 @@ Lượt trước dùng agent `student_simulation`, chưa dùng native definition
 ## Các lần sau
 
 Mỗi entry ghi run ID, date, definition version, application commit, mode, report/artifact absolute paths, scope thực sự chạy, finding status và giới hạn. Giữ entry lịch sử; khi fix hoặc tái hiện có kết quả mới, thêm entry theo commit mới. Không biến “đã học trong vai Minh” thành số liệu learning gain hoặc chứng nhận bài dễ hiểu cho mọi học sinh.
+
+## 2026-10-14 — đối chiếu kỹ thuật các đề xuất trong EDU-04b
+
+Parent/root sửa SIM-01 bằng nhãn hành động và trạng thái100/1.000ms riêng; SIM-02 thêm giải thích1.000ms=1giây ngay lab và glossary. Regression metrics cùng91E2E đạt, reviewảnh390/1280px; chi tiết tại [EDU-04b](../../delivery/EDU_04B_HTTP_NETWORK.md). Đây là xác minh code/UI bởi root, không phải lượt student_tester hoặc học sinh mới. Giả thuyết về hiệu quả giảng dạy vẫn cần pilot thật. SIM-03 giữ trạng thái chưa xác nhận mất dữ liệu đã lưu.

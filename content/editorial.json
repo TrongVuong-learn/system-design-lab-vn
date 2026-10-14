@@ -80,6 +80,38 @@
       "revision": "ae9bbd7b02d90b9866215de185217d33f39ab733",
       "checkedAt": "2026-10-13",
       "attribution": "Donne Martin và contributors — CC BY 4.0; diễn giải và ví dụ riêng của System Design Lab."
+    },
+    {
+      "id": "source-11",
+      "title": "RFC 9110: HTTP Semantics",
+      "url": "https://www.rfc-editor.org/rfc/rfc9110.html",
+      "revision": "RFC 9110 (2022)",
+      "checkedAt": "2026-10-14",
+      "attribution": "RFC Editor / tác giả RFC"
+    },
+    {
+      "id": "source-12",
+      "title": "MDN: HTTP response status codes",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status",
+      "revision": "Nội dung tại URL, đối chiếu 2026-10-14",
+      "checkedAt": "2026-10-14",
+      "attribution": "MDN contributors; diễn giải và ví dụ riêng của System Design Lab"
+    },
+    {
+      "id": "source-13",
+      "title": "RFC 6349: RTT, bandwidth và giới hạn TCP throughput",
+      "url": "https://www.rfc-editor.org/rfc/rfc6349",
+      "revision": "RFC 6349 (2011)",
+      "checkedAt": "2026-10-14",
+      "attribution": "RFC Editor / tác giả RFC"
+    },
+    {
+      "id": "source-14",
+      "title": "MDN: Bandwidth",
+      "url": "https://developer.mozilla.org/en-US/docs/Glossary/Bandwidth",
+      "revision": "Nội dung tại URL, đối chiếu 2026-10-14",
+      "checkedAt": "2026-10-14",
+      "attribution": "MDN contributors; diễn giải và ví dụ riêng của System Design Lab"
     }
   ],
   "competencies": [
@@ -183,6 +215,26 @@
       "planRefs": [
         "CURRICULUM_MAP.md#9-kế-hoạch-tích-hợp-kiến-thức-từ-system-design-primer",
         "PRIMER-K04"
+      ]
+    },
+    {
+      "id": "http-intro",
+      "moduleId": "L0.5",
+      "outcome": "Chỉ được phương thức, đường dẫn, mã trạng thái và nội dung; phân biệt lỗi HTTP với chưa nhận được phản hồi.",
+      "depth": "introductory",
+      "planRefs": [
+        "CURRICULUM_MAP.md#9-kế-hoạch-tích-hợp-kiến-thức-từ-system-design-primer",
+        "PRIMER-K06"
+      ]
+    },
+    {
+      "id": "network-intro",
+      "moduleId": "L0.4",
+      "outcome": "Phân biệt RTT, tốc độ truyền và thời gian tải; đổi bit/byte và giải thích vì sao tăng tốc độ không xóa mọi thời gian chờ.",
+      "depth": "introductory",
+      "planRefs": [
+        "CURRICULUM_MAP.md#9-kế-hoạch-tích-hợp-kiến-thức-từ-system-design-primer",
+        "PRIMER-K06"
       ]
     }
   ],
@@ -339,7 +391,7 @@
     },
     {
       "lessonId": "metrics",
-      "revision": 1,
+      "revision": 2,
       "competencyIds": [
         "metrics-intro"
       ],
@@ -357,9 +409,9 @@
       "review": {
         "reviewer": "Codex",
         "reviewerType": "agent",
-        "date": "2026-10-13",
+        "date": "2026-10-14",
         "status": "beta-checked",
-        "evidence": "Đối chiếu tài liệu nguồn, giả định và đáp án; kiểm chứng mô hình theo EDU-04. Chưa có review chuyên gia độc lập hoặc pilot học sinh."
+        "evidence": "Đối chiếu tài liệu nguồn, giả định và đáp án; kiểm chứng mô hình theo EDU-04. Chưa có review chuyên gia độc lập hoặc pilot học sinh. EDU-04b bổ sung giải thích ms và nhãn hành động theo QA-04; không đổi đáp án hoặc mô hình."
       }
     },
     {
@@ -436,6 +488,60 @@
         "date": "2026-10-13",
         "status": "beta-checked",
         "evidence": "Đối chiếu tài liệu nguồn, giả định và đáp án; kiểm chứng mô hình theo EDU-04. Chưa có review chuyên gia độc lập hoặc pilot học sinh."
+      }
+    },
+    {
+      "lessonId": "http",
+      "revision": 1,
+      "competencyIds": [
+        "http-intro"
+      ],
+      "prerequisiteIds": [
+        "request",
+        "dns"
+      ],
+      "claims": [
+        {
+          "text": "HTTP dùng thông điệp yêu cầu và phản hồi. Trong bài, GET xin đọc lịch ở một đường dẫn. Mã 200 cho biết yêu cầu thành công; 404 là không tìm thấy tài nguyên ở đường dẫn đã hỏi; 503 là dịch vụ tạm chưa sẵn sàng. Phản hồi còn có header mô tả định dạng và body chứa nội dung. Nhận 404 hoặc 503 vẫn là nhận một phản hồi HTTP.",
+          "sourceIds": [
+            "source-11",
+            "source-12"
+          ]
+        }
+      ],
+      "review": {
+        "reviewer": "Codex",
+        "reviewerType": "agent",
+        "date": "2026-10-14",
+        "status": "beta-checked",
+        "evidence": "Đối chiếu nguồn và tính tay trace theo EDU-04b; test mô hình/UI ghi trong báo cáo delivery. Chưa qua review chuyên gia độc lập/pilot học sinh."
+      }
+    },
+    {
+      "lessonId": "network",
+      "revision": 1,
+      "competencyIds": [
+        "network-intro"
+      ],
+      "prerequisiteIds": [
+        "request",
+        "metrics"
+      ],
+      "claims": [
+        {
+          "text": "RTT là thời gian đi và về của một trao đổi mạng nhỏ trong mô hình. Tốc độ truyền nói có bao nhiêu bit đi được mỗi giây. Với tốc độ cố định, phần truyền ảnh bằng số bit chia cho bit/giây. Tổng chờ ở bài này còn cộng RTT và 50 ms xử lý. Tăng tốc độ làm phần truyền ngắn hơn, nhưng không tự đổi RTT đã chọn.",
+          "sourceIds": [
+            "source-13",
+            "source-14"
+          ]
+        }
+      ],
+      "review": {
+        "reviewer": "Codex",
+        "reviewerType": "agent",
+        "date": "2026-10-14",
+        "status": "beta-checked",
+        "evidence": "Đối chiếu nguồn và tính tay trace theo EDU-04b; test mô hình/UI ghi trong báo cáo delivery. Chưa qua review chuyên gia độc lập/pilot học sinh."
       }
     }
   ]

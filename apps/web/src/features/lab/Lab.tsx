@@ -1,3 +1,4 @@
+import { HttpLab, NetworkLab } from './NetworkLabs';
 import { MetricsLab, DnsLab, TransportLab, CapacityLab } from './FoundationLabs';
 import { useState } from 'react';
 import type { Lesson, LessonProgress } from '@sdl/content-schema';
@@ -43,6 +44,10 @@ export function Lab(props: LabProps) {
       return <TransportLab {...props} />;
     case 'capacity':
       return <CapacityLab {...props} />;
+    case 'http':
+      return <HttpLab {...props} />;
+    case 'network':
+      return <NetworkLab {...props} />;
     case 'request':
       return <RequestLab {...props} />;
   }

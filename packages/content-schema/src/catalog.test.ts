@@ -2,8 +2,9 @@ import { it, expect } from 'vitest';
 import { lessonSchema, validateCatalog } from './index';
 import intro from '../../../content/lessons/vi/intro.json';
 import foundations from '../../../content/lessons/vi/foundations.json';
+import webNetwork from '../../../content/lessons/vi/web-network.json';
 import registry from '../../../content/editorial.json';
-const lessons = [...intro, ...foundations].map((l) => lessonSchema.parse(l));
+const lessons = [...intro, ...foundations, ...webNetwork].map((l) => lessonSchema.parse(l));
 const modules = Array.from({ length: 6 }, (_, level) =>
   Array.from({ length: 6 }, (_, i) => ({
     id: `L${level}.${i + 1}`,
@@ -14,7 +15,7 @@ const modules = Array.from({ length: 6 }, (_, level) =>
 ).flat();
 it('validates actual catalog without equating beta coverage with module completion', () => {
   const result = validateCatalog(modules, lessons, registry);
-  expect(result.lessons).toHaveLength(10);
+  expect(result.lessons).toHaveLength(12);
   expect(result.coverage).toHaveLength(36);
   expect(result.coverage.every((c) => !c.complete)).toBe(true);
 });
@@ -47,7 +48,7 @@ it('blocks unreviewed beta, mismatched module and unsupported activity', () => {
 });
 it('excludes draft lessons and disallows beta depending on draft', () => {
   const draft = lessons.map((l) => (l.id === 'design' ? { ...l, status: 'draft' as const } : l));
-  expect(validateCatalog(modules, draft, registry).lessons).toHaveLength(9);
+  expect(validateCatalog(modules, draft, registry).lessons).toHaveLength(11);
   const draftPrereq = lessons.map((l) =>
     l.id === 'request' ? { ...l, status: 'draft' as const } : l,
   );

@@ -1,0 +1,148 @@
+[
+  {
+    "id": "http",
+    "kind": "http",
+    "version": 1,
+    "status": "beta",
+    "level": "L0",
+    "moduleId": "L0.5",
+    "minutes": 10,
+    "title": "Máy chủ đã trả lời gì?",
+    "subtitle": "Đọc một yêu cầu và ba kiểu phản hồi.",
+    "objective": "Chỉ được phương thức, đường dẫn, mã trạng thái và nội dung; phân biệt lỗi HTTP với chưa nhận được phản hồi.",
+    "story": "Bạn muốn xem phòng học trên website trường. Trình duyệt gửi một yêu cầu GET tới đường dẫn /lich-hoc. Máy chủ trả lời bằng mã trạng thái và nội dung. Nếu gõ sai đường dẫn hoặc dịch vụ bảo trì, câu trả lời đổi thế nào?",
+    "explanation": "HTTP dùng thông điệp yêu cầu và phản hồi. Trong bài, GET xin đọc lịch ở một đường dẫn. Mã 200 cho biết yêu cầu thành công; 404 là không tìm thấy tài nguyên ở đường dẫn đã hỏi; 503 là dịch vụ tạm chưa sẵn sàng. Phản hồi còn có header mô tả định dạng và body chứa nội dung. Nhận 404 hoặc 503 vẫn là nhận một phản hồi HTTP.",
+    "limit": "Mô phỏng GET với hai đường dẫn, máy chủ luôn truy cập được và không có side effect. Bảo trì vẫn giữ bộ nhận HTTP hoạt động để trả 503; không mô phỏng mất kết nối hoặc timeout. Thông điệp được trình bày như HTTP/1.1 để dễ đọc, không gửi truy vấn thật và không mô phỏng transport. Chưa dạy POST, cookie/session, redirect, HTTPS/TLS, HTTP/2 hoặc HTTP/3. 200 không tự bảo đảm nội dung luôn mới hoặc mọi yêu cầu nghiệp vụ đều đạt.",
+    "terms": [
+      {
+        "name": "Yêu cầu",
+        "english": "Request",
+        "meaning": "Thông điệp trình duyệt gửi để xin một tài nguyên hoặc một thao tác."
+      },
+      {
+        "name": "Phản hồi",
+        "english": "Response",
+        "meaning": "Thông điệp máy chủ trả lại cho một yêu cầu HTTP."
+      },
+      {
+        "name": "Mã trạng thái",
+        "english": "Status code",
+        "meaning": "Số trong phản hồi cho biết kết quả xử lý yêu cầu; ví dụ 200, 404, 503."
+      },
+      {
+        "name": "Phương thức đọc",
+        "english": "GET",
+        "meaning": "Phương thức HTTP yêu cầu lấy thông tin của tài nguyên ở đường dẫn đã chọn."
+      },
+      {
+        "name": "Thông tin mô tả",
+        "english": "Header",
+        "meaning": "Thông tin đi cùng thông điệp, như định dạng nội dung."
+      },
+      {
+        "name": "Phần nội dung",
+        "english": "Body",
+        "meaning": "Nội dung của thông điệp; trong bài là văn bản JSON có tên trường và giá trị."
+      }
+    ],
+    "prediction": {
+      "text": "Máy chủ trả 404 cho đường dẫn /lich-khong-co. Có phải chưa nhận được phản hồi HTTP không?",
+      "options": [
+        "Không; đã nhận phản hồi báo không tìm thấy tài nguyên.",
+        "Có; 404 nghĩa là không có mạng."
+      ],
+      "answer": 0,
+      "explanation": "404 là mã nằm trong phản hồi HTTP. Nó khác tình huống không nhận được phản hồi vì mất kết nối."
+    },
+    "challenge": {
+      "text": "Ứng dụng nhận 200 nhưng phòng trong nội dung vẫn cũ. Chỉ dựa vào 200 có thể kết luận dữ liệu luôn mới nhất không?",
+      "options": [
+        "Có, 200 bảo đảm mọi nội dung mới nhất.",
+        "Không; còn cần kiểm tra yêu cầu về độ mới."
+      ],
+      "answer": 1,
+      "explanation": "200 cho biết yêu cầu đã được xử lý thành công theo HTTP. Độ mới của dữ liệu cần được kiểm tra riêng; phản hồi có thể mang dữ liệu được lưu trước đó."
+    },
+    "sources": [
+      {
+        "title": "RFC 9110: HTTP Semantics",
+        "url": "https://www.rfc-editor.org/rfc/rfc9110.html"
+      },
+      {
+        "title": "MDN: HTTP response status codes",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status"
+      }
+    ]
+  },
+  {
+    "id": "network",
+    "kind": "network",
+    "version": 1,
+    "status": "beta",
+    "level": "L0",
+    "moduleId": "L0.4",
+    "minutes": 10,
+    "title": "Mạng rộng hơn có luôn bớt chờ?",
+    "subtitle": "Tách thời gian đi về và thời gian chuyển dữ liệu.",
+    "objective": "Phân biệt RTT, tốc độ truyền và thời gian tải; đổi bit/byte và giải thích vì sao tăng tốc độ không xóa mọi thời gian chờ.",
+    "story": "Bạn tải một ảnh từ thư viện trường. Yêu cầu phải đi tới máy chủ rồi câu trả lời đi về. Máy chủ cần xử lý và dữ liệu ảnh cần thời gian truyền. Mở đường truyền rộng hơn giúp phần nào?",
+    "explanation": "RTT là thời gian đi và về của một trao đổi mạng nhỏ trong mô hình. Tốc độ truyền nói có bao nhiêu bit đi được mỗi giây. Với tốc độ cố định, phần truyền ảnh bằng số bit chia cho bit/giây. Tổng chờ ở bài này còn cộng RTT và 50 ms xử lý. Tăng tốc độ làm phần truyền ngắn hơn, nhưng không tự đổi RTT đã chọn.",
+    "limit": "Một yêu cầu nhỏ trên kết nối đã có, RTT cố định, server xử lý 50 ms, payload truyền đều ở tốc độ giả định bạn chọn. Không tính DNS, handshake/TLS, header, kích thước request, mất gói, hàng đợi, slow start hoặc giới hạn receive window. Đây là bảng tính lý tưởng, không phải phép đo hoặc mô phỏng TCP thật. Trong thực tế throughput có thể thấp hơn băng thông và RTT thay đổi theo tải. Đơn vị thập phân: 1 kB = 1.000 byte, 1 byte = 8 bit, 1 Mbps = 1.000.000 bit/giây.",
+    "terms": [
+      {
+        "name": "Thời gian đi về",
+        "english": "RTT",
+        "meaning": "Thời gian để một trao đổi mạng đi tới đích và quay lại; bài giữ giá trị này cố định theo lựa chọn của bạn."
+      },
+      {
+        "name": "Băng thông",
+        "english": "Bandwidth",
+        "meaning": "Khả năng truyền dữ liệu của đường truyền trong một khoảng thời gian; tốc độ thực tế còn phụ thuộc nhiều yếu tố."
+      },
+      {
+        "name": "Mili giây",
+        "english": "ms",
+        "meaning": "Đơn vị thời gian: 1.000 ms = 1 giây."
+      },
+      {
+        "name": "Triệu bit mỗi giây",
+        "english": "Mbps",
+        "meaning": "1 Mbps = 1.000.000 bit/giây. Chữ b nhỏ là bit, khác byte; 1 byte có 8 bit."
+      },
+      {
+        "name": "Kilobyte",
+        "english": "kB",
+        "meaning": "Trong bài dùng đơn vị thập phân: 1 kB = 1.000 byte."
+      }
+    ],
+    "prediction": {
+      "text": "Giữ RTT 100 ms và xử lý 50 ms. Tăng tốc độ truyền gấp đôi có làm toàn bộ thời gian chờ giảm đúng một nửa không?",
+      "options": [
+        "Luôn giảm toàn bộ một nửa.",
+        "Không; chỉ phần truyền dữ liệu giảm một nửa trong mô hình."
+      ],
+      "answer": 1,
+      "explanation": "RTT và thời gian xử lý vẫn giữ nguyên. Chỉ thời gian chuyển ảnh bằng số bit chia tốc độ giảm một nửa."
+    },
+    "challenge": {
+      "text": "Ảnh 1.000 kB mất 1.000 ms truyền, RTT 100 ms, xử lý 50 ms. Nếu truyền nhanh gấp đôi, tổng thời gian trong mô hình là bao nhiêu?",
+      "options": [
+        "575 ms",
+        "650 ms",
+        "500 ms"
+      ],
+      "answer": 1,
+      "explanation": "Phần truyền từ 1.000 xuống 500 ms. Tổng mới là 100 + 50 + 500 = 650 ms, không phải một nửa của 1.150 ms."
+    },
+    "sources": [
+      {
+        "title": "RFC 6349: RTT, bandwidth và giới hạn TCP throughput",
+        "url": "https://www.rfc-editor.org/rfc/rfc6349"
+      },
+      {
+        "title": "MDN: Bandwidth",
+        "url": "https://developer.mozilla.org/en-US/docs/Glossary/Bandwidth"
+      }
+    ]
+  }
+]
