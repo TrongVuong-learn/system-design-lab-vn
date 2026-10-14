@@ -214,3 +214,11 @@ Progress v1 thêm reviews optional tách lessons, dữ liệu cũ/export/import/
 ### Kết quả EDU-12
 
 Một bài ôn school-day/version1 với hai tình huống đã hiện thực; kết quả model và nhận định lưu cục bộ, có điểm vào từ Khám phá/Tiến độ. [Báo cáo EDU-12](EDU_12_SCHOOL_REVIEW.md) ghi test và giới hạn. Số bài nhập môn vẫn13, hoạt động ôn tách riêng; chưa capstone/module mastery/pilot thật. Bước tiếp theo: bổ sung HTTPS/TLS và OS/concurrency cho L0 theo EDU-04; hệ thống trường tiếp tục dùng làm ngữ cảnh khi đủ prerequisites.
+
+## 14. EDU-13 — HTTPS/TLS dễ hiểu
+
+Task In progress; baseline f64f743; owner root. Bổ sung một bài L0.4, prerequisites HTTP/DNS, không đóng module. Tình huống website trường qua Wi-Fi: so HTTP/HTTPS, chứng chỉ hợp lệ/sai tên/hết hạn/không được tin, nghe lén/sửa dữ liệu.
+
+Acceptance: engine thuần xác định, không mã hóa hay gửi mạng thật; HTTPS chỉ chuyển HTTP sau kiểm tra danh tính và thiết lập kênh; sửa dữ liệu bị phát hiện và không trả lịch giả; tách endpoint nhìn thấy nội dung với người quan sát mạng. Nêu metadata vẫn lộ, TLS không chứng nhận nội dung website hoặc đăng nhập người học. Handshake khái quát không giả làm trace gói TLS thật; không 0-RTT/resumption/QUIC/revocation. Nguồn RFC 9846, 9525, 9110; claim/assessment/case/guidance có registry/version.
+
+QA: invariant ma trận cấu hình, tương thích assessment/progress cũ, mobile320/390 + desktop, glossary/focus/reload/hints, full regression và ảnh thật. Cập nhật plan trước code; publish artifact đã kiểm. Tiếp theo OS/concurrency rồi cấu trúc dữ liệu; không auth/backend/PWA/app/pilot người thật trong đợt này.

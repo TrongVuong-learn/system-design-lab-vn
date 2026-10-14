@@ -319,3 +319,7 @@ Phạm vi biên soạn chi tiết nằm tại [CURRICULUM_MAP mục 9](CURRICULU
 Mỗi bước có ví dụ giải sẵn → lựa chọn có phản hồi → bài đổi ràng buộc. Mobile hiển thị một quyết định hoặc một bước trace tại một thời điểm, có bản chữ và nút tiến/lùi; không dồn toàn bộ sơ đồ vào một canvas phải zoom. Tiếp tục dùng chuẩn giải thích thuật ngữ tại chỗ. Các mô hình bổ sung chỉ được xây khi batch nội dung tương ứng sẵn sàng; engine độc lập UI và vẫn ưu tiên web trước app.
 
 Các case được chuyển thể thành chia sẻ ghi chú, bảng tin câu lạc bộ, crawler thư viện, quỹ câu lạc bộ, mạng quen biết, cache tra cứu, xếp hạng sách và cổng trường tăng tải. Các chủ đề ngoài độ sâu của Primer (consensus/transaction/SRE/security/AI...) vẫn theo chương trình hiện hữu và tài liệu chuyên môn riêng. Backlog và thứ tự phụ thuộc nằm tại ROADMAP mục 9.
+
+### Đợt EDU-13 (15/10/2026)
+
+Bổ sung HTTPS/TLS tại L0.4 theo task/acceptance trong ROADMAP mục14. Ưu tiên phân biệt bảo mật đường truyền với độ tin cậy nội dung qua tình huống trường học; OS/concurrency và cấu trúc dữ liệu tiếp tục sau đợt này. Giữ6 level/36 module/7 track, học cục bộ và không tài khoản.

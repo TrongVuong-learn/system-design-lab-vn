@@ -47,3 +47,7 @@ Giữ palette/type bàn thí nghiệm. Bảng trước–sau3–4 dòng ở ngay
 ## Ôn tổng hợp EDU-12
 
 Giữ bàn thí nghiệm: hai luồng “xem lịch” và “gửi thông báo” có nhãn/đơn vị riêng. Yêu cầu trước, điều khiển sau, nút chạy rõ ràng, bốn kết quả ràng buộc tiếp theo, nhận định cuối. Mobile một cột, chỉ một tình huống đang mở; trace/so lần thử/nguồn mở khi cần. Kết quả cũ giữ nhìn lại nhưng có nhãn cần chạy lại khi config đổi. Status dùng chữ Đạt/Chưa đạt ngoài màu, focus tới kết quả sau chạy, không dùng màu xanh làm bằng chứng mastery.
+
+### Bài HTTPS/TLS
+
+Đọc tình huống → chọn kênh/chứng chỉ/can thiệp → chạy → ba góc nhìn (máy trường, người trên mạng, trình duyệt) và trace chữ. Mobile một cột; kết quả nằm cạnh thao tác trong lab, trước–sau dùng ObservationPanel. Dữ liệu có trạng thái chữ thay vì chỉ màu/ổ khóa; không vẽ chuỗi mã giả như mã hóa thật.
