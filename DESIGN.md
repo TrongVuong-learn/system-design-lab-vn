@@ -39,3 +39,7 @@ Lỗi ghi tiến độ dùng khối nền vàng nhạt trước nội dung chặ
 Thuật ngữ trong văn xuôi dùng gạch chân chấm, giữ font/màu ngữ cảnh khi đóng; trạng thái mở dùng màu hành động. Ghi chú là popover không modal trong top layer, tối đa 320 px, có định nghĩa và nút Đóng. Hover/focus đọc nhanh, click/tap ghim-toggle; giữ bản tra cứu cuối bài. Không biến mọi từ thành badge/card hoặc thêm nút bên trong đáp án.
 
 Danh sách từ mới chỉ hiển thị tên Việt/Anh khi popup được hỗ trợ; mở nghĩa bằng hover/focus hoặc chạm, không in thêm cùng định nghĩa ngay dưới mục. Browser thiếu Popover API hiển thị định nghĩa dạng chữ như fallback. Cùng một nguồn registry được dùng cho cả hai cách hiển thị.
+
+## Phản hồi EDU-10
+
+Giữ palette/type bàn thí nghiệm. Bảng trước–sau3–4 dòng ở ngay dưới điều khiển, tên đại lượng bên trái, số có đơn vị, chỉ ô đổi dùng nền vàng nhạt. Chữ nguyên nhân dưới bảng là vùng đọc chính; desktop vẫn giữ cùng khối, mobile không cuộn ngang. Gợi ý là nút mở theo thứ tự và hai đoạn ngắn; lời giải sai chỉ mở theo yêu cầu. Không thêm chuyển động tự chạy, badge thưởng hoặc màn đăng nhập.

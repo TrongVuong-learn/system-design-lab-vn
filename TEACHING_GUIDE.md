@@ -160,3 +160,9 @@ Dùng [bộ EDU-02](docs/research/student-pilot/README.md) để điều phối 
 8. **Nghiệm thu đúng mức:** đủ case không có nghĩa đủ mọi năng lực. Mỗi bài liên kết năng lực, hoạt động/trace, đánh giá, review và version; module cần coverage cùng bài tổng hợp. AI mô phỏng học sinh hỗ trợ QA, không thay review kỹ thuật hoặc pilot thật.
 
 Đợt đầu giữ ID/đáp án/ý nghĩa challenge và progress của 12 bài; nếu đổi mục tiêu hoặc đáp án cần thiết kế version/migration trước khi phát hành. Rubric sâu và evidence mới không tự diễn giải lại trạng thái hoàn thành cũ. Đây là chuẩn biên soạn được chốt; renderer, case schema và mini-case mới vẫn cần hiện thực theo EDU-09.
+
+## Chuẩn phản hồi thao tác và gợi ý — EDU-10
+
+Sau thao tác, ghi hành động → trước/sau có đơn vị → nguyên nhân. Chỉ so sánh bước liền trước với bước vừa làm, không gọi đó là benchmark A/B; giữ nhãn giả định và giới hạn. Thay cấu hình queue chưa thực thi phải phân biệt công suất dự kiến với việc đã hoàn thành. Cache đến hạn chỉ được làm mới khi đọc/lấy mới theo mô hình. Tổng network tách RTT, xử lý và truyền. Reset xóa quan sát cũ; reload có thể xem lại bước cuối đã lưu.
+
+Gợi ý dùng dữ liệu tĩnh có schema: hai mức cho mỗi prediction/challenge (nơi quan sát, cách suy luận). Sai: phản hồi khuyến khích, mở từng mức rồi có nút xem lời giải; đúng: hiện lời giải có nguyên nhân. Gợi ý không chứa code; glossary áp dụng trong văn xuôi. Mức đã mở lưu riêng theo bài và câu hỏi; dữ liệu cũ mặc định chưa mở. Không thay answer/options/explanation để thêm gợi ý, không coi dùng gợi ý hoặc chọn đúng sau lời giải là bằng chứng thành thạo.

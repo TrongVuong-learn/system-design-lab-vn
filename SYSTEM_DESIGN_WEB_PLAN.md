@@ -1,6 +1,6 @@
 # Kế hoạch website học System Design tương tác
 
-Ngày lập: 11/10/2026. Phiên bản 5 — 14/10/2026: bổ sung ví dụ thực tế theo từng bài/module; giữ định hướng toàn diện theo level, học sinh cấp 3, mobile-first và web trước app. Trạng thái: web beta có 13 bài nhập môn; phần giáo trình đầy đủ và case theo EDU-09 còn là kế hoạch triển khai, chưa qua pilot học sinh thật.
+Ngày lập: 11/10/2026. Phiên bản 6 — 14/10/2026: bổ sung ví dụ thực tế theo từng bài/module; giữ định hướng toàn diện theo level, học sinh cấp 3, mobile-first và web trước app. Trạng thái: web beta có 13 bài nhập môn; phần giáo trình đầy đủ và case theo EDU-09 còn là kế hoạch triển khai, chưa qua pilot học sinh thật.
 
 Tên làm việc: **System Design Lab**.
 
@@ -166,9 +166,13 @@ Ngưỡng vượt bài được xác lập sau khi kiểm chứng mô hình và 
 - Câu hỏi dự đoán, thử thách và gợi ý theo mức.
 - Hỗ trợ bàn phím, điện thoại và giảm chuyển động.
 
-### Tính năng nâng cấp theo đợt
+### Phạm vi phi thương mại và ưu tiên hiện tại
 
-Tài khoản, đồng bộ nhiều thiết bị, chia sẻ bài làm bằng URL, editor tự do, cộng tác nhiều người, CMS, AI tutor và chế độ luyện phỏng vấn. Chọn thứ tự dựa trên phản hồi beta.
+Ứng dụng phi thương mại, chia sẻ quy mô nhỏ; trọng tâm là học liệu chính xác và dễ hiểu. Học ngay không cần đăng nhập, tiến độ lưu trên thiết bị, export/import dùng để dự phòng. Tài khoản, auth/backend, sync và cộng tác chỉ xem xét lại khi có nhu cầu thực tế; không là điều kiện của web beta hoặc của việc học.
+
+Đợt EDU-10 cải thiện cache, queue và network: sau mỗi thao tác hiện thay đổi trước–sau kèm nguyên nhân từ trạng thái mô phỏng thật; khi trả lời sai mở gợi ý nơi quan sát → cách suy luận → lời giải theo yêu cầu. Hai gợi ý được biên soạn, không gọi AI runtime. Dữ liệu cũ vẫn mở được; lịch sử gợi ý và quan sát mới lưu cục bộ, không dùng làm chứng nhận năng lực.
+
+Sau nghiệm thu ba bài, mở rộng chuẩn phản hồi cho bài khác, bài ôn tổng hợp và hệ thống website trường xuyên suốt theo prerequisite. Các bước này vẫn là backlog; kết quả AI test không đóng pilot người thật. Editor tự do, CMS, AI tutor và luyện phỏng vấn được cân nhắc sau chất lượng bài học.
 
 ### Đánh giá bài làm
 

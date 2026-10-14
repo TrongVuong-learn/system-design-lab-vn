@@ -28,7 +28,7 @@ Một người có thể giữ nhiều vai trò nhưng thời gian phải đư�
 | M3 — Sáu lab và biên soạn | Engine/models bổ sung, catalog, glossary, coverage, pipeline; sau M2 | Sáu lab có bài áp dụng, review, replay và phương án không kéo |
 | M4 — Web beta và PWA | Hiệu năng, offline packs, update/migration, device QA; sau M3 | Gate web bên dưới đạt; công bố đúng phạm vi học liệu đã có |
 | M5 — Hoàn thiện chương trình | L0–L2 rồi L3–L5; từng nhánh sâu; bắt đầu song song M3 khi mẫu đã ổn | Từng level đủ mục tiêu, học liệu, hoạt động, assessment và review |
-| M6 — Tài khoản và sync nếu cần | API, auth, PostgreSQL, export/import nâng cấp | Không mất/nhân đôi attempt; phân quyền đúng; có migration/backup |
+| M6 — Tài khoản/sync (hoãn, tùy nhu cầu) | Phi thương mại, chia sẻ ít: hiện dùng lưu cục bộ và export/import; chỉ thiết kế backend khi có nhu cầu thật | Không là gate web beta/app; mở task riêng nếu được ưu tiên lại |
 | M7 — App beta | Capacitor spike rồi lifecycle, storage, deep links; sau gate web | Lab đại diện đạt trên Android/iPhone; dữ liệu và offline ổn |
 | M8 — App release | Signing, packaging, listing, release/beta channel, review | Có build đã kiểm thử, phương án hỗ trợ và phát hành theo store |
 
@@ -170,3 +170,17 @@ Trạng thái ngày 14/10/2026: CASE-00 đã viết đặc tả; CASE-01 trở �
 ### QA-05 — agent review và sửa đơn vị cache (14/10/2026)
 
 student_tester đã chạy first-use routing/cache; knowledge_reviewer được Astra medium thiết kế, runtime Sol medium. [QA-05](../research/knowledge-reviewer/QA_05_RESOLUTION.md) lưu scope, báo cáo, matrix, lỗi KR-01 đã sửa và kiểm tra. Chưa đóng gate pilot/ chuyên gia độc lập/level. Các timeout Firefox trong lượt full và kết quả serial retest được ghi rõ; không mô tả full suite ban đầu là pass.
+
+## 11. EDU-10 — phản hồi dễ hiểu (14/10/2026)
+
+Quyết định: phi thương mại, chia sẻ nhỏ, ưu tiên học liệu; auth/sync hoãn. Owner root. Đợt này chọn cache, queue, network để hoàn thiện mẫu trước khi mở rộng13 bài.
+
+| Task | Phạm vi | Acceptance |
+| --- | --- | --- |
+| EDU-10a | Bảng trước–sau và nguyên nhân sau thao tác | Dữ liệu lấy từ bước vừa thực thi, đơn vị rõ; queue đổi tham số chưa chạy phải nói chưa qua thời gian; cache hết hạn chưa tự làm mới; network không hứa tốc độ thật |
+| EDU-10b | Gợi ý hai mức + lời giải có yêu cầu cho prediction/challenge ba bài | Trả lời sai chưa hiện ngay lời giải; mở dần nơi quan sát/cách suy luận/lời giải; đúng có giải thích; lưu/reload giữ mức đã mở riêng mỗi câu hỏi |
+| EDU-10c | QA và chuẩn biên soạn | Unit trace, schema và tương thích assessment cũ; mobile320/390, desktop, keyboard, saved→reload, reduced motion; review ảnh nội dung thật |
+
+Điều kiện hoàn tất đợt: a/b hiện thực, c có chứng cứ, source/metadata/báo cáo cập nhật và site dùng artifact đã kiểm. Ngoài phạm vi: đăng nhập/backend, đổi mục tiêu/đáp án, thay engine timing, bài ôn tổng hợp, công nhận mastery, triển khai toàn36 module. Giữ6 level/36 module/7 track. EDU-02 vẫn chưa pilot thật.
+
+Backlog sau đợt: mở rộng chuẩn cho các bài khác; bài ôn liên kết3–4 kiến thức; hệ thống website trường phát triển qua các level; nút báo đoạn khó hiểu khi đã chốt cách thu thập phù hợp.
