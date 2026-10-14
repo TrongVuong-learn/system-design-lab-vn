@@ -1,0 +1,228 @@
+{
+  "head": "f8ae271c2c1e9c3618f1742f2efcee84f4e0dffa",
+  "model": "gpt-6-sol",
+  "reasoning": "low",
+  "entries": [
+    {
+      "lessonId": "request",
+      "version": 1,
+      "moduleId": "L0.1",
+      "file": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+      "field": "explanation + limit + prediction + challenge + caseStudy",
+      "claim": "Chỉ được nơi nhận, xử lý và lưu dữ liệu; biết vì sao một chặng chậm làm bạn chờ lâu.",
+      "status": "verified-with-conditions",
+      "sourceSectionRead": "MDN client-server overview (official educational documentation); 20+80+20=120 ms for sequential stages; only conceptual review",
+      "engineOrIndependentEvidence": "Independent arithmetic; no request engine trace",
+      "conditionsAndUnchecked": "No queue or parallelism; cited source is overview, not benchmark",
+      "assessment": {
+        "question": "Tra thư viện có 3 chặng: gửi 20 ms, tìm sách 80 ms, trả lời 20 ms. Mô hình nối tiếp cần bao lâu?",
+        "answerIndex": 1,
+        "review": "read with case context; answer consistent with stated assumptions"
+      }
+    },
+    {
+      "lessonId": "balance",
+      "version": 1,
+      "moduleId": "L2.1",
+      "file": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+      "field": "explanation + limit + prediction + challenge + caseStudy",
+      "claim": "Nhận ra nút thắt chung và kiểm tra tác dụng của việc thêm máy xử lý.",
+      "status": "verified-with-conditions",
+      "sourceSectionRead": "Google SRE Handling Overload, opening and Pitfalls of QPS; shared DB cap 4/s means adding front-end servers alone cannot exceed 4 uncached read/s",
+      "engineOrIndependentEvidence": "Inspected trafficStep and TrafficLab; no executed balance trace",
+      "conditionsAndUnchecked": "Fixed capacities and one DB read per request; no retries",
+      "assessment": {
+        "question": "Nếu việc pha nước đang chậm, mở thêm quầy nhận đơn có đủ giúp khách nhận nước nhanh hơn không?",
+        "answerIndex": 0,
+        "review": "read with case context; answer consistent with stated assumptions"
+      }
+    },
+    {
+      "lessonId": "cache",
+      "version": 1,
+      "moduleId": "L0.1",
+      "file": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+      "field": "explanation + limit + prediction + challenge + caseStudy",
+      "claim": "Phân biệt dữ liệu nguồn và cache; giải thích vì sao bản ghi có thể cũ và khi nào cần lấy mới.",
+      "status": "verified-with-conditions",
+      "sourceSectionRead": "Microsoft Azure Cache-Aside, Context/Problems; old entry may persist until expiry or invalidation",
+      "engineOrIndependentEvidence": "Executed source 201→205, read at t=0 yields 201, read at t=5 yields 205",
+      "conditionsAndUnchecked": "Single entry; source reachable; TTL 5 minutes, no invalidation on source update",
+      "assessment": {
+        "question": "Yêu cầu: phòng mới phải hiện trong tối đa một phút. Giữ cache cũ năm phút mà không cập nhật có đạt không?",
+        "answerIndex": 1,
+        "review": "read with case context; answer consistent with stated assumptions"
+      }
+    },
+    {
+      "lessonId": "queue",
+      "version": 1,
+      "moduleId": "L2.5",
+      "file": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+      "field": "explanation + limit + prediction + challenge + caseStudy",
+      "claim": "Phân biệt việc đã nhận và đã hoàn tất; hiểu hàng chờ tăng khi công việc đến nhanh hơn xử lý.",
+      "status": "verified-with-conditions",
+      "sourceSectionRead": "Microsoft Azure Queue-Based Load Leveling, Problems and considerations; average producer rate exceeding consumer grows queue",
+      "engineOrIndependentEvidence": "Executed arrivals 8/s ×3s with 3 workers at 2/s: backlog 6; 4 workers keeps 6; 5 reduces to 4",
+      "conditionsAndUnchecked": "Constant integer arrivals and service per second; no failure/retry",
+      "assessment": {
+        "question": "Bài mới: đến 8 việc/giây, mỗi worker làm 2 việc/giây. Ít nhất bao nhiêu worker để hàng chờ không tiếp tục tăng trong mô hình?",
+        "answerIndex": 1,
+        "review": "read with case context; answer consistent with stated assumptions"
+      }
+    },
+    {
+      "lessonId": "replica",
+      "version": 1,
+      "moduleId": "L2.3",
+      "file": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+      "field": "explanation + limit + prediction + challenge + caseStudy",
+      "claim": "Nhận ra độ trễ sao chép và chọn nơi đọc khi cần thông tin mới.",
+      "status": "verified-with-conditions",
+      "sourceSectionRead": "PostgreSQL 18 Hot Standby §26.4, standby may lag WAL and show old primary values",
+      "engineOrIndependentEvidence": "Read replicaWrite/replicaTick code; case answer conditional on primary available",
+      "conditionsAndUnchecked": "Fixed lag; no failover; no executed replica trace",
+      "assessment": {
+        "question": "Vừa đổi phòng và cần xem ngay kết quả mới. Trong mô hình này, nên đọc đâu?",
+        "answerIndex": 1,
+        "review": "read with case context; answer consistent with stated assumptions"
+      }
+    },
+    {
+      "lessonId": "design",
+      "version": 1,
+      "moduleId": "L2.6",
+      "file": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+      "field": "explanation + limit + prediction + challenge + caseStudy",
+      "claim": "Chọn thành phần theo yêu cầu, kiểm tra số liệu và nêu giới hạn của thiết kế.",
+      "status": "verified-with-conditions",
+      "sourceSectionRead": "Google SRE Handling Overload §Pitfalls of QPS; source supports bottleneck tradeoff, not fictional budget",
+      "engineOrIndependentEvidence": "Read content and traffic/queue engines; no executed combined design trace",
+      "conditionsAndUnchecked": "Authored scenario, static demand and hit rate; not a full capstone",
+      "assessment": {
+        "question": "Thiết kế đạt tải đọc nhưng dữ liệu cache cũ quá mức cho phép. Có nên coi thiết kế đã đạt tất cả yêu cầu không?",
+        "answerIndex": 0,
+        "review": "read with case context; answer consistent with stated assumptions"
+      }
+    },
+    {
+      "lessonId": "metrics",
+      "version": 1,
+      "moduleId": "L0.6",
+      "file": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+      "field": "explanation + limit + prediction + challenge + caseStudy",
+      "claim": "Phân biệt thời gian chờ của từng lượt và số lượt làm xong mỗi giây; đọc median và p95.",
+      "status": "verified-with-conditions",
+      "sourceSectionRead": "Google SRE Monitoring Distributed Systems §Worrying About Your Tail; source supports tail latency importance",
+      "engineOrIndependentEvidence": "Independent 2-worker schedule: ends 100,100,...,1000,1000; slow last two end 1900 each; median 550 both, nearest-rank p95 1000→1900. Executed matches, throughput 20→10.5263/s",
+      "conditionsAndUnchecked": "20 simultaneous arrivals; nearest-rank p95 defined locally; full-batch window not steady state",
+      "assessment": {
+        "question": "Một đợt làm xong 40 yêu cầu trong 2 giây. Throughput của cửa sổ đó là bao nhiêu?",
+        "answerIndex": 0,
+        "review": "read with case context; answer consistent with stated assumptions"
+      }
+    },
+    {
+      "lessonId": "dns",
+      "version": 1,
+      "moduleId": "L0.4",
+      "file": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+      "field": "explanation + limit + prediction + challenge + caseStudy",
+      "claim": "Theo dấu lần tra DNS và giải thích cache còn hạn có thể trả địa chỉ cũ.",
+      "status": "verified-with-conditions",
+      "sourceSectionRead": "RFC 1035 §4.1.3 TTL and §7.4 cache; TTL interval before source consultation",
+      "engineOrIndependentEvidence": "Executed: cache .10 at t=0, source .20, lookup t=0 returns .10; t=5 returns .20. Browser reproduced on mobile preview",
+      "conditionsAndUnchecked": "Single A record, no DNS failures, no serve-stale or referral cache",
+      "assessment": {
+        "question": "Lấy bản ghi lúc giây 0, TTL 5 giây. Lần tra ở đúng giây 5 sẽ làm gì trong mô hình?",
+        "answerIndex": 1,
+        "review": "read with case context; answer consistent with stated assumptions"
+      }
+    },
+    {
+      "lessonId": "transport",
+      "version": 1,
+      "moduleId": "L0.4",
+      "file": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+      "field": "explanation + limit + prediction + challenge + caseStudy",
+      "claim": "Nhận ra TCP giao luồng byte theo thứ tự; UDP không tự bảo đảm giao đủ hoặc gửi lại.",
+      "status": "verified-with-conditions",
+      "sourceSectionRead": "RFC 9293 §3.1 TCP sequencing and RFC 768 introduction, UDP delivery not guaranteed",
+      "engineOrIndependentEvidence": "Read transferPackets phase logic and content answer; no executed trace",
+      "conditionsAndUnchecked": "TCP recovery success is authored single-loss trace, not a guarantee of eventual delivery",
+      "assessment": {
+        "question": "Dùng UDP, ứng dụng cần mọi thông điệp đến đủ. Có thể chỉ dựa vào UDP không?",
+        "answerIndex": 1,
+        "review": "read with case context; answer consistent with stated assumptions"
+      }
+    },
+    {
+      "lessonId": "capacity",
+      "version": 1,
+      "moduleId": "L0.6",
+      "file": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+      "field": "explanation + limit + prediction + challenge + caseStudy",
+      "claim": "Tính tải trung bình, tải đỉnh giả định, dữ liệu truyền và dung lượng lưu với đơn vị rõ ràng.",
+      "status": "insufficient-evidence",
+      "sourceSectionRead": "Cited System Design Primer is a community secondary overview; no directly cited primary metrology source for decimal unit convention",
+      "engineOrIndependentEvidence": "Independent arithmetic 2000×100 kB=200000 kB=200 MB; ×5 views=1000 MB/day; inspected estimateCapacity",
+      "conditionsAndUnchecked": "Decimal kB/MB convention explicitly declared; primary source attribution remains open",
+      "assessment": {
+        "question": "2.000 học sinh, mỗi người 1 ảnh 100 kB và xem 5 lượt/ngày. Cần lưu bao nhiêu MB ảnh duy nhất?",
+        "answerIndex": 1,
+        "review": "read with case context; answer consistent with stated assumptions"
+      }
+    },
+    {
+      "lessonId": "http",
+      "version": 1,
+      "moduleId": "L0.5",
+      "file": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/web-network.json",
+      "field": "explanation + limit + prediction + challenge + caseStudy",
+      "claim": "Chỉ được phương thức, đường dẫn, mã trạng thái và nội dung; phân biệt lỗi HTTP với chưa nhận được phản hồi.",
+      "status": "verified-with-conditions",
+      "sourceSectionRead": "RFC 9110 §15.3.1, §15.5.5, §15.6.4 status definitions",
+      "engineOrIndependentEvidence": "Read httpExchange and renderer; 200/404/503 all responses in model; no executed HTTP trace",
+      "conditionsAndUnchecked": "Server reachable; no network timeout; 200 does not imply fresh content",
+      "assessment": {
+        "question": "Ứng dụng nhận 200 nhưng phòng trong nội dung vẫn cũ. Chỉ dựa vào 200 có thể kết luận dữ liệu luôn mới nhất không?",
+        "answerIndex": 1,
+        "review": "read with case context; answer consistent with stated assumptions"
+      }
+    },
+    {
+      "lessonId": "network",
+      "version": 1,
+      "moduleId": "L0.4",
+      "file": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/web-network.json",
+      "field": "explanation + limit + prediction + challenge + caseStudy",
+      "claim": "Phân biệt RTT, tốc độ truyền và thời gian tải; đổi bit/byte và giải thích vì sao tăng tốc độ không xóa mọi thời gian chờ.",
+      "status": "verified-with-conditions",
+      "sourceSectionRead": "RFC 6349 §1.2/§3.2.1 RTT and bottleneck bandwidth; not a source for ideal model formula",
+      "engineOrIndependentEvidence": "Independent 1000 kB×1000×8/(8×10^6) s=1 s; 16 Mbps=.5 s; totals 1150→650 ms; executed matches",
+      "conditionsAndUnchecked": "Warm connection, fixed RTT 100 ms, process 50 ms; omits slow start and overhead",
+      "assessment": {
+        "question": "Ảnh 1.000 kB mất 1.000 ms truyền, RTT 100 ms, xử lý 50 ms. Nếu truyền nhanh gấp đôi, tổng thời gian trong mô hình là bao nhiêu?",
+        "answerIndex": 1,
+        "review": "read with case context; answer consistent with stated assumptions"
+      }
+    },
+    {
+      "lessonId": "routing",
+      "version": 1,
+      "moduleId": "L0.4",
+      "file": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/routing.json",
+      "field": "explanation + limit + prediction + challenge + caseStudy",
+      "claim": "Theo dấu yêu cầu qua router; phân biệt IP đích với port TCP của dịch vụ và nhận ra lỗi ở từng chặng.",
+      "status": "verified-with-conditions",
+      "sourceSectionRead": "RFC 1122 §3.3.1 routing; RFC 9293 §3.1 ports; RFC 5737 documentation IP blocks",
+      "engineOrIndependentEvidence": "Executed absent route at step 1 with TCP 8080 vs 9090: both no-route; read renderer trace",
+      "conditionsAndUnchecked": "Fixed router/no default route; no firewall/NAT/handshake",
+      "assessment": {
+        "question": "Router không có route tới máy lưu ảnh và không có route mặc định. Chỉ đổi port TCP có sửa được đường đi IP trong mô hình không?",
+        "answerIndex": 1,
+        "review": "read with case context; answer consistent with stated assumptions"
+      }
+    }
+  ]
+}

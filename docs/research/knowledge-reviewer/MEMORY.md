@@ -17,3 +17,7 @@ KR-01 đang được parent sửa/retest; các kết quả runtime Sol và trạ
 ## 2026-10-14 — giảm reasoning theo yêu cầu
 
 User yêu cầu “sol light”; cấu hình tương ứng là `gpt-6-sol` với `model_reasoning_effort = "low"`. Definition 1.0.1 áp dụng cho các lần chạy sau; lịch sử review medium ở trên giữ nguyên. Không chạy lại review hoặc đổi nội dung ứng dụng trong task cấu hình này.
+
+## 2026-10-14 — QA-06 runtime Sol low song song
+
+Definition1.0.1, gpt-6-sol / low, HEAD f8ae271; bundle baseline24625a3 do parent xác minh. Review độc lập trước khi trao đổi student finding. [Report gốc](RUN_2026-10-14_PARALLEL_LOW.md), [matrix](claims-2026-10-14-parallel-low.json): đọc13 bài, trace6 cơ chế và browser DNS390. Không xác nhận P0–P2;12 entry verified-with-conditions, capacity insufficient-evidence vì thiếu nguồn sơ cấp đơn vị, phép tính đúng. Parent bổ sung NIST; trạng thái sau bổ sung ghi riêng ở [QA-06](../../delivery/QA_06_PARALLEL_REVIEW.md). Không sửa ma trận baseline để giả vờ đã đủ evidence từ đầu, không chứng nhận toàn36 module hoặc human-reviewed.

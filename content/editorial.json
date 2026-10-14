@@ -136,6 +136,14 @@
       "revision": "2010",
       "checkedAt": "2026-10-14",
       "attribution": "IETF / RFC Editor — tham khảo tiêu chuẩn; diễn giải và mô hình riêng."
+    },
+    {
+      "id": "source-nist-units",
+      "title": "NIST: decimal units and binary prefixes",
+      "url": "https://physics.nist.gov/cuu/Units/binary.html",
+      "revision": "Examples and comparisons with SI prefixes; accessed 2026-10-14",
+      "checkedAt": "2026-10-14",
+      "attribution": "National Institute of Standards and Technology — tham khảo quy ước đơn vị; số liệu và phép tính bài do tác giả giả định."
     }
   ],
   "competencies": [
@@ -356,7 +364,7 @@
     },
     {
       "lessonId": "queue",
-      "revision": 2,
+      "revision": 3,
       "competencyIds": ["queue-intro"],
       "prerequisiteIds": ["metrics"],
       "claims": [
@@ -366,11 +374,11 @@
         }
       ],
       "review": {
-        "reviewer": "Codex",
+        "reviewer": "Codex — đối chiếu hai agent QA và bổ sung thuật ngữ/nguồn",
         "reviewerType": "agent",
-        "date": "2026-10-13",
+        "date": "2026-10-14",
         "status": "beta-checked",
-        "evidence": "Đối chiếu tài liệu nguồn, giả định và đáp án; kiểm chứng mô hình theo EDU-04. Chưa có review chuyên gia độc lập hoặc pilot học sinh."
+        "evidence": "docs/delivery/QA_06_PARALLEL_REVIEW.md"
       },
       "caseReview": {
         "caseId": "case-queue",
@@ -524,21 +532,25 @@
     },
     {
       "lessonId": "capacity",
-      "revision": 2,
+      "revision": 3,
       "competencyIds": ["capacity-intro"],
       "prerequisiteIds": ["metrics"],
       "claims": [
         {
           "text": "Lượt/ngày = số học sinh × lượt mỗi người. Chia cho 86.400 giây để ra lượt/giây trung bình. Tải đỉnh ở đây chỉ là trung bình nhân hệ số bạn giả định. Dữ liệu truyền tăng theo lượt xem; dung lượng ảnh lưu chỉ tính số ảnh duy nhất.",
           "sourceIds": ["source-10"]
+        },
+        {
+          "text": "Bài dùng đơn vị thập phân: 1 byte = 8 bit, 1 kB = 1.000 byte và 1 MB = 1.000.000 byte; không dùng KiB/MiB.",
+          "sourceIds": ["source-nist-units"]
         }
       ],
       "review": {
-        "reviewer": "Codex",
+        "reviewer": "Codex — đối chiếu hai agent QA và bổ sung thuật ngữ/nguồn",
         "reviewerType": "agent",
-        "date": "2026-10-13",
+        "date": "2026-10-14",
         "status": "beta-checked",
-        "evidence": "Đối chiếu tài liệu nguồn, giả định và đáp án; kiểm chứng mô hình theo EDU-04. Chưa có review chuyên gia độc lập hoặc pilot học sinh."
+        "evidence": "docs/delivery/QA_06_PARALLEL_REVIEW.md"
       },
       "caseReview": {
         "caseId": "case-capacity",
@@ -580,7 +592,7 @@
     },
     {
       "lessonId": "network",
-      "revision": 2,
+      "revision": 3,
       "competencyIds": ["network-intro"],
       "prerequisiteIds": ["request", "metrics"],
       "claims": [
@@ -590,11 +602,11 @@
         }
       ],
       "review": {
-        "reviewer": "Codex",
+        "reviewer": "Codex — đối chiếu hai agent QA và bổ sung thuật ngữ/nguồn",
         "reviewerType": "agent",
         "date": "2026-10-14",
         "status": "beta-checked",
-        "evidence": "Đối chiếu nguồn và tính tay trace theo EDU-04b; test mô hình/UI ghi trong báo cáo delivery. Chưa qua review chuyên gia độc lập/pilot học sinh."
+        "evidence": "docs/delivery/QA_06_PARALLEL_REVIEW.md"
       },
       "caseReview": {
         "caseId": "case-network",

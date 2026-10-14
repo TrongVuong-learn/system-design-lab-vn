@@ -236,6 +236,11 @@
         "name": "Người xử lý",
         "english": "Worker",
         "meaning": "Thành phần lấy việc từ hàng đợi để làm."
+      },
+      {
+        "name": "Việc tồn đọng",
+        "english": "Backlog",
+        "meaning": "Các công việc chưa hoàn thành đang tích lại. Trong bài, đây là số việc còn trong hàng đợi sau mỗi chặng giây."
       }
     ],
     "prediction": {

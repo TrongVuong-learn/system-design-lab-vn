@@ -25,3 +25,7 @@ Parent/root sửa SIM-01 bằng nhãn hành động và trạng thái100/1.000ms
 Definition 1.0.0; application 4425af0; Chromium touch 390×844, xem thêm hai case 320 px. [Report gốc](RUN_2026-10-14_ROUTING_CACHE.md), artifact `/private/tmp/student-tester-2026-10-14-current/`. Parent đã đọc report và xem routing-lab.png. Agent xác nhận saved → reload, case/lab/quay lại, completion của routing/cache. Không thấy defect chặn học/mất dữ liệu trong phạm vi; chưa test toàn bộ site/thiết bị thật.
 
 P3: diễn đạt định nghĩa port có thể trừu tượng cho người mới; chưa có pilot xác nhận, chưa sửa như defect. Skip link xuất hiện trong ảnh cache dài là quan sát chưa xác minh; không kết luận lỗi UI chỉ từ ảnh toàn trang. Ghi đầy đủ phần chưa thử trong report. Đây là AI mô phỏng, không đóng EDU-02.
+
+## 2026-10-14 — QA-06 first-use DNS/network/queue
+
+Definition1.0.0, HEAD f8ae271, bundle baseline24625a3 do parent xác minh. Chạy song song độc lập với knowledge reviewer. [Report gốc](RUN_2026-10-14_DNS_NETWORK_QUEUE.md); artifact `/private/tmp/student-parallel-2026-10-14/`. Ba luồng prediction→lab→case→completion, phản hồi sai/sửa có chủ ý, tap glossary, saved→reload, case/lab giữ câu trả lời; touch390 và case320. Không xác nhận defect. P3 payload/backlog thiếu giải thích inline, parent bổ sung glossary; regression xem [QA-06](../../delivery/QA_06_PARALLEL_REVIEW.md). Chưa pilot thật, desktop, offline hay assistive technology.

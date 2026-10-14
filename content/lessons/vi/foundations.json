@@ -294,6 +294,10 @@
       {
         "title": "System Design Primer: thiết kế và ước lượng",
         "url": "https://github.com/donnemartin/system-design-primer/blob/ae9bbd7b02d90b9866215de185217d33f39ab733/README.md"
+      },
+      {
+        "title": "NIST: decimal units and binary prefixes",
+        "url": "https://physics.nist.gov/cuu/Units/binary.html"
       }
     ],
     "caseStudy": {

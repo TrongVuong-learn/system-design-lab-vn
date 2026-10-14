@@ -138,6 +138,11 @@
         "name": "Kilobyte",
         "english": "kB",
         "meaning": "Trong bài dùng đơn vị thập phân: 1 kB = 1.000 byte."
+      },
+      {
+        "name": "Dữ liệu cần truyền",
+        "english": "Payload",
+        "meaning": "Phần nội dung cần truyền; trong bài là dữ liệu ảnh, không tính phần điều khiển của giao thức."
       }
     ],
     "prediction": {

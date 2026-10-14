@@ -11,7 +11,7 @@
       "files": {
         ".codex/agents/student_tester.toml": "fb41a2be4292afd36170e5161314637d2505204acc93c2cf3e3efb6daa50cb87",
         "docs/research/student-tester/README.md": "5319de7ec6c771655b4ebca94252af380a498989946a2280a267dc5c7f7b4dee",
-        "docs/research/student-tester/MEMORY.md": "39bc2c6d1bc175278ea3b40b14b7a6060ecfe1c794272680e327090d7131ca05"
+        "docs/research/student-tester/MEMORY.md": "23ba9ae6be4304203f06d37df7f9a2f73b861a71087e63492c94a5df0c961c63"
       }
     },
     {
@@ -24,7 +24,7 @@
       "files": {
         ".codex/agents/knowledge_reviewer.toml": "d78ab7fbe947ceb0888fe3659498022bccab403baa0eba8e838c03cf28eb0e47",
         "docs/research/knowledge-reviewer/README.md": "180d050b4f691c87cbe5f22a2c30b46171d4c153343fd53ad9ec8ca0f8152728",
-        "docs/research/knowledge-reviewer/MEMORY.md": "004547ac1bd5d8858e382928c265743637c34ed19035a56cb6cf05e6a308ec1c",
+        "docs/research/knowledge-reviewer/MEMORY.md": "ecbf7ae8afef2aa47d3dcdf28efea3dd90c811c9dcdd5882dd4c2571bd77aab3",
         "docs/research/knowledge-reviewer/AUTHORING_2026-10-14.md": "497e91e95da5aab369ab6f9200366014c09916c9c60ec0b2bea02e1a925e90d2"
       },
       "authoringModel": "gpt-6-astra",
