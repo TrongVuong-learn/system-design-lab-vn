@@ -51,11 +51,7 @@
     },
     "challenge": {
       "text": "Một đợt làm xong 40 yêu cầu trong 2 giây. Throughput của cửa sổ đó là bao nhiêu?",
-      "options": [
-        "20 yêu cầu/giây",
-        "40 mili giây",
-        "80 yêu cầu/giây"
-      ],
+      "options": ["20 yêu cầu/giây", "40 mili giây", "80 yêu cầu/giây"],
       "answer": 0,
       "explanation": "40 yêu cầu ÷ 2 giây = 20 yêu cầu/giây. Con số này không cho biết thời gian chờ của từng yêu cầu."
     },
@@ -64,7 +60,32 @@
         "title": "Google SRE: Monitoring distributed systems",
         "url": "https://sre.google/sre-book/monitoring-distributed-systems/"
       }
-    ]
+    ],
+    "caseStudy": {
+      "id": "case-metrics",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L0-06",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Đo một đợt tra sách",
+      "context": "Nhóm thư viện ghi lại số yêu cầu đã làm xong trong một khoảng thời gian. Bạn cần báo cáo tốc độ phục vụ, rồi xem ai phải chờ lâu.",
+      "requirements": [
+        "Đợt trong đề làm xong 40 yêu cầu trong hai giây.",
+        "Báo cáo tốc độ có đơn vị yêu cầu/giây; thời gian chờ là đại lượng riêng."
+      ],
+      "activityRef": "metrics",
+      "experimentSteps": [
+        "Thay số thủ thư, quan sát tốc độ và thời gian chờ.",
+        "Làm hai việc cuối chậm hơn rồi so median với p95."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Đếm số việc làm xong giúp biết tốc độ phục vụ; cần phân bố thời gian để thấy người phải chờ lâu."
+      ],
+      "limitations": "Lab có tập yêu cầu riêng. Con số 40 yêu cầu trong hai giây là dữ liệu của câu hỏi, không phải cấu hình được áp ngầm vào lab."
+    }
   },
   {
     "id": "dns",
@@ -99,19 +120,13 @@
     ],
     "prediction": {
       "text": "Cache còn hạn giữ địa chỉ .10. Nơi quản lý tên đã đổi sang .20. Tra ngay sẽ thấy gì trong mô hình?",
-      "options": [
-        "Địa chỉ .10 trong cache.",
-        "Luôn thấy .20 ngay."
-      ],
+      "options": ["Địa chỉ .10 trong cache.", "Luôn thấy .20 ngay."],
       "answer": 0,
       "explanation": "Resolver còn dùng bản ghi .10 chưa hết hạn. Nguồn thay đổi không có nghĩa cache được cập nhật ngay."
     },
     "challenge": {
       "text": "Lấy bản ghi lúc giây 0, TTL 5 giây. Lần tra ở đúng giây 5 sẽ làm gì trong mô hình?",
-      "options": [
-        "Dùng cache cũ thêm 5 giây.",
-        "Lấy lại từ nơi quản lý tên."
-      ],
+      "options": ["Dùng cache cũ thêm 5 giây.", "Lấy lại từ nơi quản lý tên."],
       "answer": 1,
       "explanation": "Ở giây 5 thời hạn đã hết. Lần tra này lấy lại nguồn; chỉ trôi thời gian chưa tự gửi truy vấn mới."
     },
@@ -120,7 +135,32 @@
         "title": "RFC 1035: Domain names — implementation and specification",
         "url": "https://www.rfc-editor.org/rfc/rfc1035"
       }
-    ]
+    ],
+    "caseStudy": {
+      "id": "case-dns",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L0-04",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Website trường chuyển địa chỉ",
+      "context": "Website trường chuyển sang địa chỉ mới, còn nơi tra tên đang giữ địa chỉ đã lấy trước đó.",
+      "requirements": [
+        "Bản ghi được lấy lúc giây 0, TTL là năm giây.",
+        "Xét một lần tra diễn ra đúng giây 5; nguồn đang truy cập được."
+      ],
+      "activityRef": "dns",
+      "experimentSteps": [
+        "Tra địa chỉ rồi đổi IP ở nguồn.",
+        "Cho thời gian qua năm giây và tra lại, đối chiếu đường lấy dữ liệu."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Giữ bản ghi giúp bớt hỏi lại nguồn. Thời hạn và lần tra tiếp theo quyết định lúc mô hình lấy địa chỉ lại."
+      ],
+      "limitations": "Chỉ cho thời gian trôi không tự phát truy vấn. Bài chưa mô phỏng đầy đủ các tầng resolver của DNS."
+    }
   },
   {
     "id": "transport",
@@ -155,10 +195,7 @@
     ],
     "prediction": {
       "text": "TCP nhận mảnh 1 và 3, còn thiếu 2. Ứng dụng đọc ngay phần 3 được không?",
-      "options": [
-        "Chưa; cần chờ phần byte bị thiếu.",
-        "Được, TCP bỏ qua thứ tự."
-      ],
+      "options": ["Chưa; cần chờ phần byte bị thiếu.", "Được, TCP bỏ qua thứ tự."],
       "answer": 0,
       "explanation": "TCP giữ thứ tự luồng byte. Phần 3 có thể được lưu đệm cho đến khi phần 2 được nhận."
     },
@@ -180,7 +217,32 @@
         "title": "RFC 768: User Datagram Protocol",
         "url": "https://www.rfc-editor.org/rfc/rfc768"
       }
-    ]
+    ],
+    "caseStudy": {
+      "id": "case-transport",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L0-04",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Gửi đầy đủ hướng dẫn tham dự",
+      "context": "Câu lạc bộ gửi nội dung hướng dẫn gồm nhiều mảnh. Một mảnh có thể bị mất; người nhận cần đầy đủ thông tin để làm đúng.",
+      "requirements": [
+        "Ứng dụng cần mọi thông điệp đến đủ.",
+        "Phương án đang xét chỉ dùng UDP, chưa thêm xác nhận hoặc gửi lại."
+      ],
+      "activityRef": "transport",
+      "experimentSteps": [
+        "Chọn UDP, gửi ba mảnh và xem kết quả tại đích.",
+        "So với trace TCP và bước khôi phục; chỉ ra lớp nào xử lý mảnh thiếu."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Chọn giao thức hoặc bổ sung cơ chế tin cậy phải theo yêu cầu của ứng dụng; việc khôi phục cũng có chi phí và điều kiện."
+      ],
+      "limitations": "Trace giản lược một lần mất mảnh. Bài không bảo đảm thời hạn giao dữ liệu hoặc mô phỏng mọi trạng thái TCP."
+    }
   },
   {
     "id": "capacity",
@@ -224,11 +286,7 @@
     },
     "challenge": {
       "text": "2.000 học sinh, mỗi người 1 ảnh 100 kB và xem 5 lượt/ngày. Cần lưu bao nhiêu MB ảnh duy nhất?",
-      "options": [
-        "1.000 MB",
-        "200 MB",
-        "10.000 MB"
-      ],
+      "options": ["1.000 MB", "200 MB", "10.000 MB"],
       "answer": 1,
       "explanation": "2.000 × 100 kB ÷ 1.000 = 200 MB lưu. Dữ liệu truyền là 200 × 5 = 1.000 MB/ngày; đây là hai đại lượng khác nhau."
     },
@@ -237,6 +295,31 @@
         "title": "System Design Primer: thiết kế và ước lượng",
         "url": "https://github.com/donnemartin/system-design-primer/blob/ae9bbd7b02d90b9866215de185217d33f39ab733/README.md"
       }
-    ]
+    ],
+    "caseStudy": {
+      "id": "case-capacity",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L0-06",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Dự trù kho ảnh ngày hội",
+      "context": "Mỗi học sinh gửi một ảnh để làm album ngày hội. Nhóm cần tách chỗ lưu ảnh khỏi lượng dữ liệu gửi cho người xem.",
+      "requirements": [
+        "Có 2.000 học sinh; mỗi người một ảnh 100 kB.",
+        "Mỗi ảnh được xem năm lượt/ngày; tính ảnh duy nhất, dùng 1.000 kB = 1 MB."
+      ],
+      "activityRef": "capacity",
+      "experimentSteps": [
+        "Tăng số lượt xem trong lab và đối chiếu lưu trữ với dữ liệu truyền.",
+        "Đổi kích thước ảnh; ghi đơn vị và đại lượng nào thay đổi."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Ảnh lớn hơn làm tăng dữ liệu gốc lẫn lượng truyền. Thêm lượt xem làm tăng lượng truyền, không tự tạo thêm file gốc."
+      ],
+      "limitations": "Bỏ qua metadata, thumbnail, replica và overhead giao thức. Các giá trị ban đầu của lab khác số liệu đề, không bị thay khi mở tình huống."
+    }
   }
 ]

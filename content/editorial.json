@@ -241,17 +241,13 @@
   "lessons": [
     {
       "lessonId": "request",
-      "revision": 1,
-      "competencyIds": [
-        "request-intro"
-      ],
+      "revision": 2,
+      "competencyIds": ["request-intro"],
       "prerequisiteIds": [],
       "claims": [
         {
           "text": "Mỗi chặng cần thời gian. Trong mô hình nối tiếp của bài này, thời gian chờ là tổng các chặng. Nhiều yêu cầu cùng lúc còn có thể phải xếp hàng; bài load balancing sẽ giúp bạn thấy điều đó.",
-          "sourceIds": [
-            "source-1"
-          ]
+          "sourceIds": ["source-1"]
         }
       ],
       "review": {
@@ -260,23 +256,26 @@
         "date": "2026-10-13",
         "status": "beta-checked",
         "evidence": "Đối chiếu tài liệu nguồn, giả định và đáp án; kiểm chứng mô hình theo EDU-04. Chưa có review chuyên gia độc lập hoặc pilot học sinh."
+      },
+      "caseReview": {
+        "caseId": "case-request",
+        "revision": 1,
+        "status": "beta-checked",
+        "reviewerType": "agent",
+        "reviewer": "Codex — kiểm tra ngữ cảnh, compatibility và giới hạn mô hình",
+        "date": "2026-10-14",
+        "evidence": "docs/delivery/EDU_09_CASE_STUDY_IMPLEMENTATION.md"
       }
     },
     {
       "lessonId": "balance",
-      "revision": 1,
-      "competencyIds": [
-        "balance-intro"
-      ],
-      "prerequisiteIds": [
-        "metrics"
-      ],
+      "revision": 2,
+      "competencyIds": ["balance-intro"],
+      "prerequisiteIds": ["metrics"],
       "claims": [
         {
           "text": "Bộ chia tải phân công việc cho các máy. Nhưng nếu tất cả vẫn hỏi cùng một nơi lưu dữ liệu, nơi đó có thể giới hạn số việc làm xong. Hãy thay một yếu tố mỗi lần và so sánh số đang chờ.",
-          "sourceIds": [
-            "source-2"
-          ]
+          "sourceIds": ["source-2"]
         }
       ],
       "review": {
@@ -285,23 +284,26 @@
         "date": "2026-10-13",
         "status": "beta-checked",
         "evidence": "Đối chiếu tài liệu nguồn, giả định và đáp án; kiểm chứng mô hình theo EDU-04. Chưa có review chuyên gia độc lập hoặc pilot học sinh."
+      },
+      "caseReview": {
+        "caseId": "case-balance",
+        "revision": 1,
+        "status": "beta-checked",
+        "reviewerType": "agent",
+        "reviewer": "Codex — kiểm tra ngữ cảnh, compatibility và giới hạn mô hình",
+        "date": "2026-10-14",
+        "evidence": "docs/delivery/EDU_09_CASE_STUDY_IMPLEMENTATION.md"
       }
     },
     {
       "lessonId": "cache",
-      "revision": 1,
-      "competencyIds": [
-        "cache-intro"
-      ],
-      "prerequisiteIds": [
-        "request"
-      ],
+      "revision": 2,
+      "competencyIds": ["cache-intro"],
+      "prerequisiteIds": ["request"],
       "claims": [
         {
           "text": "Cache là dữ liệu được giữ để dùng lại. Khi nguồn thay đổi, bản ghi có thể vẫn cũ. Hệ thống cần quy tắc cập nhật: lấy mới chủ động hoặc hết hạn rồi đọc lại nguồn khi có yêu cầu.",
-          "sourceIds": [
-            "source-3"
-          ]
+          "sourceIds": ["source-3"]
         }
       ],
       "review": {
@@ -310,23 +312,26 @@
         "date": "2026-10-13",
         "status": "beta-checked",
         "evidence": "Đối chiếu tài liệu nguồn, giả định và đáp án; kiểm chứng mô hình theo EDU-04. Chưa có review chuyên gia độc lập hoặc pilot học sinh."
+      },
+      "caseReview": {
+        "caseId": "case-cache",
+        "revision": 1,
+        "status": "beta-checked",
+        "reviewerType": "agent",
+        "reviewer": "Codex — kiểm tra ngữ cảnh, compatibility và giới hạn mô hình",
+        "date": "2026-10-14",
+        "evidence": "docs/delivery/EDU_09_CASE_STUDY_IMPLEMENTATION.md"
       }
     },
     {
       "lessonId": "queue",
-      "revision": 1,
-      "competencyIds": [
-        "queue-intro"
-      ],
-      "prerequisiteIds": [
-        "metrics"
-      ],
+      "revision": 2,
+      "competencyIds": ["queue-intro"],
+      "prerequisiteIds": ["metrics"],
       "claims": [
         {
           "text": "Hàng đợi giữ việc chờ xử lý. Nó giúp tiếp nhận một đợt đông, nhưng không tự tăng công suất. Nếu mỗi giây nhận nhiều hơn làm xong, số việc chờ tiếp tục tăng.",
-          "sourceIds": [
-            "source-4"
-          ]
+          "sourceIds": ["source-4"]
         }
       ],
       "review": {
@@ -335,23 +340,26 @@
         "date": "2026-10-13",
         "status": "beta-checked",
         "evidence": "Đối chiếu tài liệu nguồn, giả định và đáp án; kiểm chứng mô hình theo EDU-04. Chưa có review chuyên gia độc lập hoặc pilot học sinh."
+      },
+      "caseReview": {
+        "caseId": "case-queue",
+        "revision": 1,
+        "status": "beta-checked",
+        "reviewerType": "agent",
+        "reviewer": "Codex — kiểm tra ngữ cảnh, compatibility và giới hạn mô hình",
+        "date": "2026-10-14",
+        "evidence": "docs/delivery/EDU_09_CASE_STUDY_IMPLEMENTATION.md"
       }
     },
     {
       "lessonId": "replica",
-      "revision": 1,
-      "competencyIds": [
-        "replica-intro"
-      ],
-      "prerequisiteIds": [
-        "cache"
-      ],
+      "revision": 2,
+      "competencyIds": ["replica-intro"],
+      "prerequisiteIds": ["cache"],
       "claims": [
         {
           "text": "Replication giữ bản dữ liệu ở nhiều nơi. Trong sao chép bất đồng bộ, bản sao có thể nhận thay đổi muộn. Chọn nơi đọc phải phù hợp với yêu cầu về độ mới.",
-          "sourceIds": [
-            "source-5"
-          ]
+          "sourceIds": ["source-5"]
         }
       ],
       "review": {
@@ -360,25 +368,26 @@
         "date": "2026-10-13",
         "status": "beta-checked",
         "evidence": "Đối chiếu tài liệu nguồn, giả định và đáp án; kiểm chứng mô hình theo EDU-04. Chưa có review chuyên gia độc lập hoặc pilot học sinh."
+      },
+      "caseReview": {
+        "caseId": "case-replica",
+        "revision": 1,
+        "status": "beta-checked",
+        "reviewerType": "agent",
+        "reviewer": "Codex — kiểm tra ngữ cảnh, compatibility và giới hạn mô hình",
+        "date": "2026-10-14",
+        "evidence": "docs/delivery/EDU_09_CASE_STUDY_IMPLEMENTATION.md"
       }
     },
     {
       "lessonId": "design",
-      "revision": 1,
-      "competencyIds": [
-        "design-intro"
-      ],
-      "prerequisiteIds": [
-        "balance",
-        "cache",
-        "queue"
-      ],
+      "revision": 2,
+      "competencyIds": ["design-intro"],
+      "prerequisiteIds": ["balance", "cache", "queue"],
       "claims": [
         {
           "text": "Mỗi thành phần giải quyết một vấn đề cụ thể. Máy xử lý nhận yêu cầu; cache giảm số lần đọc nguồn trong giả định này; worker làm việc từ hàng đợi. Dùng số liệu để chọn, rồi nghĩ đến dữ liệu cũ và tình huống lỗi.",
-          "sourceIds": [
-            "source-2"
-          ]
+          "sourceIds": ["source-2"]
         }
       ],
       "review": {
@@ -387,23 +396,26 @@
         "date": "2026-10-13",
         "status": "beta-checked",
         "evidence": "Đối chiếu tài liệu nguồn, giả định và đáp án; kiểm chứng mô hình theo EDU-04. Chưa có review chuyên gia độc lập hoặc pilot học sinh."
+      },
+      "caseReview": {
+        "caseId": "case-design",
+        "revision": 1,
+        "status": "beta-checked",
+        "reviewerType": "agent",
+        "reviewer": "Codex — kiểm tra ngữ cảnh, compatibility và giới hạn mô hình",
+        "date": "2026-10-14",
+        "evidence": "docs/delivery/EDU_09_CASE_STUDY_IMPLEMENTATION.md"
       }
     },
     {
       "lessonId": "metrics",
-      "revision": 2,
-      "competencyIds": [
-        "metrics-intro"
-      ],
-      "prerequisiteIds": [
-        "request"
-      ],
+      "revision": 3,
+      "competencyIds": ["metrics-intro"],
+      "prerequisiteIds": ["request"],
       "claims": [
         {
           "text": "Latency tính từ lúc gửi đến lúc nhận kết quả, gồm cả thời gian xếp hàng. Throughput là số việc hoàn tất chia cho thời gian quan sát. Median mô tả giữa nhóm; p95 giúp thấy nhóm chờ lâu. Khi hai việc cuối chậm, median có thể giữ nguyên nhưng p95 tăng.",
-          "sourceIds": [
-            "source-6"
-          ]
+          "sourceIds": ["source-6"]
         }
       ],
       "review": {
@@ -412,23 +424,26 @@
         "date": "2026-10-14",
         "status": "beta-checked",
         "evidence": "Đối chiếu tài liệu nguồn, giả định và đáp án; kiểm chứng mô hình theo EDU-04. Chưa có review chuyên gia độc lập hoặc pilot học sinh. EDU-04b bổ sung giải thích ms và nhãn hành động theo QA-04; không đổi đáp án hoặc mô hình."
+      },
+      "caseReview": {
+        "caseId": "case-metrics",
+        "revision": 1,
+        "status": "beta-checked",
+        "reviewerType": "agent",
+        "reviewer": "Codex — kiểm tra ngữ cảnh, compatibility và giới hạn mô hình",
+        "date": "2026-10-14",
+        "evidence": "docs/delivery/EDU_09_CASE_STUDY_IMPLEMENTATION.md"
       }
     },
     {
       "lessonId": "dns",
-      "revision": 1,
-      "competencyIds": [
-        "dns-intro"
-      ],
-      "prerequisiteIds": [
-        "cache"
-      ],
+      "revision": 2,
+      "competencyIds": ["dns-intro"],
+      "prerequisiteIds": ["cache"],
       "claims": [
         {
           "text": "DNS giúp tra thông tin gắn với tên miền, trong bài là địa chỉ IP. Resolver có thể dùng câu trả lời trong cache khi TTL còn hạn. Nơi quản lý tên đổi địa chỉ không tự đẩy thay đổi đến mọi cache; lần tra sau khi hết hạn mới lấy lại trong mô hình này.",
-          "sourceIds": [
-            "source-7"
-          ]
+          "sourceIds": ["source-7"]
         }
       ],
       "review": {
@@ -437,24 +452,26 @@
         "date": "2026-10-13",
         "status": "beta-checked",
         "evidence": "Đối chiếu tài liệu nguồn, giả định và đáp án; kiểm chứng mô hình theo EDU-04. Chưa có review chuyên gia độc lập hoặc pilot học sinh."
+      },
+      "caseReview": {
+        "caseId": "case-dns",
+        "revision": 1,
+        "status": "beta-checked",
+        "reviewerType": "agent",
+        "reviewer": "Codex — kiểm tra ngữ cảnh, compatibility và giới hạn mô hình",
+        "date": "2026-10-14",
+        "evidence": "docs/delivery/EDU_09_CASE_STUDY_IMPLEMENTATION.md"
       }
     },
     {
       "lessonId": "transport",
-      "revision": 1,
-      "competencyIds": [
-        "transport-intro"
-      ],
-      "prerequisiteIds": [
-        "request"
-      ],
+      "revision": 2,
+      "competencyIds": ["transport-intro"],
+      "prerequisiteIds": ["request"],
       "claims": [
         {
           "text": "TCP cung cấp luồng byte tin cậy và đúng thứ tự: phần đến sau có thể phải giữ lại trong khi chờ phần thiếu được gửi lại. UDP gửi datagram riêng lẻ, không tự bảo đảm giao đủ, đúng thứ tự hoặc gửi lại. Ứng dụng dùng UDP vẫn có thể bổ sung các cơ chế đó.",
-          "sourceIds": [
-            "source-8",
-            "source-9"
-          ]
+          "sourceIds": ["source-8", "source-9"]
         }
       ],
       "review": {
@@ -463,23 +480,26 @@
         "date": "2026-10-13",
         "status": "beta-checked",
         "evidence": "Đối chiếu tài liệu nguồn, giả định và đáp án; kiểm chứng mô hình theo EDU-04. Chưa có review chuyên gia độc lập hoặc pilot học sinh."
+      },
+      "caseReview": {
+        "caseId": "case-transport",
+        "revision": 1,
+        "status": "beta-checked",
+        "reviewerType": "agent",
+        "reviewer": "Codex — kiểm tra ngữ cảnh, compatibility và giới hạn mô hình",
+        "date": "2026-10-14",
+        "evidence": "docs/delivery/EDU_09_CASE_STUDY_IMPLEMENTATION.md"
       }
     },
     {
       "lessonId": "capacity",
-      "revision": 1,
-      "competencyIds": [
-        "capacity-intro"
-      ],
-      "prerequisiteIds": [
-        "metrics"
-      ],
+      "revision": 2,
+      "competencyIds": ["capacity-intro"],
+      "prerequisiteIds": ["metrics"],
       "claims": [
         {
           "text": "Lượt/ngày = số học sinh × lượt mỗi người. Chia cho 86.400 giây để ra lượt/giây trung bình. Tải đỉnh ở đây chỉ là trung bình nhân hệ số bạn giả định. Dữ liệu truyền tăng theo lượt xem; dung lượng ảnh lưu chỉ tính số ảnh duy nhất.",
-          "sourceIds": [
-            "source-10"
-          ]
+          "sourceIds": ["source-10"]
         }
       ],
       "review": {
@@ -488,25 +508,26 @@
         "date": "2026-10-13",
         "status": "beta-checked",
         "evidence": "Đối chiếu tài liệu nguồn, giả định và đáp án; kiểm chứng mô hình theo EDU-04. Chưa có review chuyên gia độc lập hoặc pilot học sinh."
+      },
+      "caseReview": {
+        "caseId": "case-capacity",
+        "revision": 1,
+        "status": "beta-checked",
+        "reviewerType": "agent",
+        "reviewer": "Codex — kiểm tra ngữ cảnh, compatibility và giới hạn mô hình",
+        "date": "2026-10-14",
+        "evidence": "docs/delivery/EDU_09_CASE_STUDY_IMPLEMENTATION.md"
       }
     },
     {
       "lessonId": "http",
-      "revision": 1,
-      "competencyIds": [
-        "http-intro"
-      ],
-      "prerequisiteIds": [
-        "request",
-        "dns"
-      ],
+      "revision": 2,
+      "competencyIds": ["http-intro"],
+      "prerequisiteIds": ["request", "dns"],
       "claims": [
         {
           "text": "HTTP dùng thông điệp yêu cầu và phản hồi. Trong bài, GET xin đọc lịch ở một đường dẫn. Mã 200 cho biết yêu cầu thành công; 404 là không tìm thấy tài nguyên ở đường dẫn đã hỏi; 503 là dịch vụ tạm chưa sẵn sàng. Phản hồi còn có header mô tả định dạng và body chứa nội dung. Nhận 404 hoặc 503 vẫn là nhận một phản hồi HTTP.",
-          "sourceIds": [
-            "source-11",
-            "source-12"
-          ]
+          "sourceIds": ["source-11", "source-12"]
         }
       ],
       "review": {
@@ -515,25 +536,26 @@
         "date": "2026-10-14",
         "status": "beta-checked",
         "evidence": "Đối chiếu nguồn và tính tay trace theo EDU-04b; test mô hình/UI ghi trong báo cáo delivery. Chưa qua review chuyên gia độc lập/pilot học sinh."
+      },
+      "caseReview": {
+        "caseId": "case-http",
+        "revision": 1,
+        "status": "beta-checked",
+        "reviewerType": "agent",
+        "reviewer": "Codex — kiểm tra ngữ cảnh, compatibility và giới hạn mô hình",
+        "date": "2026-10-14",
+        "evidence": "docs/delivery/EDU_09_CASE_STUDY_IMPLEMENTATION.md"
       }
     },
     {
       "lessonId": "network",
-      "revision": 1,
-      "competencyIds": [
-        "network-intro"
-      ],
-      "prerequisiteIds": [
-        "request",
-        "metrics"
-      ],
+      "revision": 2,
+      "competencyIds": ["network-intro"],
+      "prerequisiteIds": ["request", "metrics"],
       "claims": [
         {
           "text": "RTT là thời gian đi và về của một trao đổi mạng nhỏ trong mô hình. Tốc độ truyền nói có bao nhiêu bit đi được mỗi giây. Với tốc độ cố định, phần truyền ảnh bằng số bit chia cho bit/giây. Tổng chờ ở bài này còn cộng RTT và 50 ms xử lý. Tăng tốc độ làm phần truyền ngắn hơn, nhưng không tự đổi RTT đã chọn.",
-          "sourceIds": [
-            "source-13",
-            "source-14"
-          ]
+          "sourceIds": ["source-13", "source-14"]
         }
       ],
       "review": {
@@ -542,6 +564,15 @@
         "date": "2026-10-14",
         "status": "beta-checked",
         "evidence": "Đối chiếu nguồn và tính tay trace theo EDU-04b; test mô hình/UI ghi trong báo cáo delivery. Chưa qua review chuyên gia độc lập/pilot học sinh."
+      },
+      "caseReview": {
+        "caseId": "case-network",
+        "revision": 1,
+        "status": "beta-checked",
+        "reviewerType": "agent",
+        "reviewer": "Codex — kiểm tra ngữ cảnh, compatibility và giới hạn mô hình",
+        "date": "2026-10-14",
+        "evidence": "docs/delivery/EDU_09_CASE_STUDY_IMPLEMENTATION.md"
       }
     }
   ]

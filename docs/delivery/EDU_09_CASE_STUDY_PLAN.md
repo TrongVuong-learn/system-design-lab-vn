@@ -2,7 +2,7 @@
 
 Ngày: 14/10/2026. Trạng thái: **đặc tả triển khai**, chưa bổ sung case vào ứng dụng. Phạm vi: 36/36 module cốt lõi, sáu bài tổng hợp level và định hướng cho bảy nhánh chuyên sâu. Baseline: 12 bài beta tại commit `b082d69`; chưa có pilot học sinh thật.
 
-Nguồn chính: [phạm vi giáo trình](../../CURRICULUM_MAP.md), [chuẩn giảng dạy](../../TEACHING_GUIDE.md), [kiến trúc](../engineering/ARCHITECTURE.md), [workflow](WORKFLOW.md). Tài liệu này sở hữu danh mục case, phân rã công việc và nghiệm thu; không thay danh sách module, không nhân đôi registry học liệu. Yêu cầu hiện tại là lập kế hoạch; đợt này không đổi code, dependency, nội dung JSON hay website đang chạy.
+Nguồn chính: [phạm vi giáo trình](../../CURRICULUM_MAP.md), [chuẩn giảng dạy](../../TEACHING_GUIDE.md), [kiến trúc](../engineering/ARCHITECTURE.md), [workflow](WORKFLOW.md). Tài liệu này sở hữu danh mục case, phân rã công việc và nghiệm thu; không thay danh sách module, không nhân đôi registry học liệu. Đợt CASE-00 chỉ lập kế hoạch. Tiến độ hiện thực sau đó được quản lý tại [báo cáo CASE-01–03](EDU_09_CASE_STUDY_IMPLEMENTATION.md); danh mục dưới đây tiếp tục là đặc tả cho phần chưa xây.
 
 ## 1. Kết quả cần đạt và cách chia phạm vi
 

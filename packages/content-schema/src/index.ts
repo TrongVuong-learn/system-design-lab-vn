@@ -8,24 +8,54 @@ const question = z
     explanation: z.string().min(20),
   })
   .refine((q) => q.answer < q.options.length, 'Answer outside options');
+const activityKind = z.enum([
+  'request',
+  'balance',
+  'cache',
+  'queue',
+  'replica',
+  'design',
+  'metrics',
+  'dns',
+  'transport',
+  'capacity',
+  'http',
+  'network',
+]);
+const caseText = z.string().trim().min(8).max(1600);
+export const caseStudySchema = z
+  .object({
+    id: z.string().regex(/^case-[a-z][a-z0-9-]+$/),
+    schemaVersion: z.literal(1),
+    revision: z.number().int().positive(),
+    familyId: z.string().regex(/^CASE-L[0-5]-0[1-6]$/),
+    provenance: z.discriminatedUnion('kind', [
+      z.object({ kind: z.literal('authored-scenario') }).strict(),
+      z
+        .object({
+          kind: z.literal('documented-case'),
+          sourceIds: z.array(z.string().min(1)).min(1),
+          adaptationNote: caseText,
+        })
+        .strict(),
+    ]),
+    title: caseText,
+    context: caseText,
+    requirements: z.array(caseText).min(1).max(3),
+    activityRef: activityKind,
+    experimentSteps: z.array(caseText).min(1).max(3),
+    assessmentRef: z.literal('challenge'),
+    tradeoffs: z.array(caseText).min(1).max(3),
+    limitations: caseText,
+  })
+  .strict();
+export type CaseStudy = z.infer<typeof caseStudySchema>;
 export const lessonSchema = z.object({
   id: z.string().regex(/^[a-z][a-z0-9-]+$/),
   version: z.literal(1),
   status: z.enum(['draft', 'beta']),
-  kind: z.enum([
-    'request',
-    'balance',
-    'cache',
-    'queue',
-    'replica',
-    'design',
-    'metrics',
-    'dns',
-    'transport',
-    'capacity',
-    'http',
-    'network',
-  ]),
+  kind: activityKind,
+  caseStudy: caseStudySchema.optional(),
   level: z.string().regex(/^L[0-5]$/),
   moduleId: z.string().regex(/^L[0-5]\.[1-6]$/),
   title: z.string(),

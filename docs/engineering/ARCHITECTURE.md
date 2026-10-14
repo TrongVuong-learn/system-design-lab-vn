@@ -167,3 +167,5 @@ EDU-04b thêm engine thuần HTTP exchange và thời gian tải lý tưởng; N
 [EDU-09 mục 8](../delivery/EDU_09_CASE_STUDY_PLAN.md) đặc tả contract, ranh giới và đường dẫn cho tình huống áp dụng. Giai đoạn đầu đặt case cùng lesson, dùng editorial registry và whitelist activity hiện có; renderer nằm trong lesson-player, cơ chế mô phỏng vẫn thuộc engine thuần. Chưa thêm package hoặc schema thực thi trong đợt kế hoạch.
 
 CASE-01 phải ghi ADR và kiểm tương thích trước khi sửa schema. Giữ progress v1 khi chỉ thêm ngữ cảnh không đổi nghĩa challenge; assessment/attempt mới có version và migration riêng theo ENG-03. Không ghi đè checkpoint bằng scenario preset hoặc chấm lại đáp án cũ theo câu hỏi mới. Danh mục field trong EDU-09 là đề xuất, không đại diện API đã triển khai.
+
+CASE-01–03 đã hiện thực giai đoạn A theo [ADR 0004](../decisions/0004-case-study-context.md): case schema 1, caseReview theo revision và renderer trong lesson-player. Lesson/progress v1, engine và persistence giữ nguyên; contract attempt mới/preset/capstone vẫn là phần tiếp theo.

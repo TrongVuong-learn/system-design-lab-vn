@@ -56,4 +56,4 @@ Quy tắc cho agent được lưu trong [AGENTS.md](AGENTS.md). Repository có E
 
 ## Mốc bắt đầu triển khai
 
-Đã có workspace, schema, core, renderer, content pipeline và bài cache từ tình huống đến assessment/resume. Mười hai bài hiện là lớp nhập môn, không thay thế các module hoặc capstone đầy đủ. Báo cáo hiện thực và phần còn lại nằm trong [IMPLEMENTATION_STATUS.md](docs/delivery/IMPLEMENTATION_STATUS.md).
+Đã có workspace, schema, core, renderer, content pipeline và bài cache từ tình huống đến assessment/resume. Mười hai bài có tình huống giả định trong chặng Áp dụng theo [EDU-09](docs/delivery/EDU_09_CASE_STUDY_IMPLEMENTATION.md); vẫn là lớp nhập môn, không thay thế các module hoặc capstone đầy đủ. Báo cáo hiện thực và phần còn lại nằm trong [IMPLEMENTATION_STATUS.md](docs/delivery/IMPLEMENTATION_STATUS.md).

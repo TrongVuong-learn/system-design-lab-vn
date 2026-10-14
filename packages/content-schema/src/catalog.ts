@@ -30,6 +30,17 @@ export const editorialSchema = z.object({
       competencyIds: z.array(id).min(1),
       prerequisiteIds: z.array(id),
       claims: z.array(z.object({ text: id, sourceIds: z.array(id).min(1) })).min(1),
+      caseReview: z
+        .object({
+          caseId: id,
+          revision: z.number().int().positive(),
+          reviewer: id,
+          reviewerType: z.enum(['agent', 'human']),
+          date: z.iso.date(),
+          status: z.enum(['pending', 'beta-checked']),
+          evidence: id,
+        })
+        .optional(),
       review: z.object({
         reviewer: id,
         reviewerType: z.enum(['agent', 'human']),
@@ -65,6 +76,10 @@ export function validateCatalog(modules: CurriculumModule[], lessons: Lesson[], 
     editorial.lessons.map((l) => l.lessonId),
     'editorial record',
   );
+  unique(
+    lessons.flatMap((l) => (l.caseStudy ? [l.caseStudy.id] : [])),
+    'case',
+  );
   const byId = new Map(lessons.map((l) => [l.id, l]));
   const moduleIds = new Set(modules.map((m) => m.id));
   const sourceIds = new Set(editorial.sources.map((s) => s.id));
@@ -81,6 +96,29 @@ export function validateCatalog(modules: CurriculumModule[], lessons: Lesson[], 
     if (!record) throw new Error(`Missing editorial record ${l.id}`);
     if (l.status === 'beta' && record.review.status !== 'beta-checked')
       throw new Error(`Unreviewed beta ${l.id}`);
+    if (l.status === 'beta' && !l.caseStudy) throw new Error(`Missing beta case ${l.id}`);
+    if (l.caseStudy) {
+      const c = l.caseStudy;
+      const expectedFamily = `CASE-${l.level}-0${l.moduleId.split('.')[1]}`;
+      if (c.familyId !== expectedFamily || c.activityRef !== l.kind)
+        throw new Error(`Case activity/module mismatch ${l.id}`);
+      const review = record.caseReview;
+      if (
+        l.status === 'beta' &&
+        (!review ||
+          review.caseId !== c.id ||
+          review.revision !== c.revision ||
+          review.status !== 'beta-checked')
+      )
+        throw new Error(`Missing or stale case review ${l.id}`);
+      if (c.provenance.kind === 'documented-case') {
+        for (const id of c.provenance.sourceIds) {
+          const source = editorial.sources.find((s) => s.id === id);
+          if (!source || !l.sources.some((s) => s.url === source.url))
+            throw new Error(`Invalid case source ${l.id}: ${id}`);
+        }
+      }
+    }
     unique(record.competencyIds, 'lesson competency');
     unique(record.prerequisiteIds, 'prerequisite');
     for (const id of record.competencyIds) {

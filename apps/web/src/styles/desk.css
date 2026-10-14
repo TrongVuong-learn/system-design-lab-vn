@@ -699,3 +699,58 @@
     grid-template-columns: 1fr 1fr;
   }
 }
+
+/* A case brief belongs to the lesson: context first, one decision at a time. */
+.case-context {
+  margin: 24px 0;
+  padding: 24px 0;
+  border-top: 2px solid #d8dfeb;
+}
+.case-context h2 {
+  margin: 8px 0 16px;
+  font-size: clamp(22px, 4vw, 28px);
+}
+.case-context p,
+.case-context li,
+.case-reflection p,
+.case-reflection li {
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.case-provenance {
+  color: #53637f;
+  font-size: 13px;
+  margin: 0;
+}
+.case-requirements {
+  border-left: 3px solid #244edb;
+  padding-left: 16px;
+  margin: 24px 0;
+}
+.case-requirements h3,
+.case-reflection h3 {
+  font-size: 17px;
+  margin: 0 0 12px;
+}
+.case-requirements ul,
+.case-experiment ol {
+  padding-left: 22px;
+}
+.case-requirements li,
+.case-experiment li {
+  margin: 8px 0;
+}
+.case-limits summary,
+.case-experiment summary {
+  min-height: 44px;
+  padding: 12px 0;
+  cursor: pointer;
+}
+.case-reflection {
+  margin: 24px 0;
+  border-top: 1px solid #d8dfeb;
+  padding-top: 24px;
+}
+.case-return-note {
+  font-size: 13px;
+}

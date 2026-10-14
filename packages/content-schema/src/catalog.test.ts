@@ -54,3 +54,60 @@ it('excludes draft lessons and disallows beta depending on draft', () => {
   );
   expect(() => validateCatalog(modules, draftPrereq, registry)).toThrow('Unavailable prerequisite');
 });
+
+it('preserves all v1 assessment semantics when adding case context', async () => {
+  const { default: legacy } = await import('./fixtures/legacy-assessments-v1.json');
+  for (const l of lessons) {
+    expect({
+      moduleId: l.moduleId,
+      version: l.version,
+      prediction: l.prediction,
+      challenge: l.challenge,
+    }).toEqual(legacy[l.id as keyof typeof legacy]);
+  }
+});
+it('blocks absent, duplicate, mismatched, or stale beta cases', () => {
+  const copy = () => structuredClone(lessons);
+  const missing = copy();
+  delete missing[0]!.caseStudy;
+  expect(() => validateCatalog(modules, missing, registry)).toThrow('Missing beta case');
+  const duplicated = copy();
+  duplicated[1]!.caseStudy!.id = duplicated[0]!.caseStudy!.id;
+  expect(() => validateCatalog(modules, duplicated, registry)).toThrow('Duplicate case');
+  const activity = copy();
+  activity[0]!.caseStudy!.activityRef = 'queue';
+  expect(() => validateCatalog(modules, activity, registry)).toThrow('Case activity/module');
+  const family = copy();
+  family[0]!.caseStudy!.familyId = 'CASE-L5-06';
+  expect(() => validateCatalog(modules, family, registry)).toThrow('Case activity/module');
+  const stale = copy();
+  stale[0]!.caseStudy!.revision++;
+  expect(() => validateCatalog(modules, stale, registry)).toThrow('stale case review');
+  const pending = structuredClone(registry);
+  pending.lessons[0]!.caseReview.status = 'pending';
+  expect(() => validateCatalog(modules, lessons, pending)).toThrow('stale case review');
+});
+it('rejects unverified documented provenance and executable case fields', () => {
+  const documented = structuredClone(lessons);
+  documented[0]!.caseStudy!.provenance = {
+    kind: 'documented-case',
+    sourceIds: ['missing'],
+    adaptationNote: 'Ví dụ chuyển thể có giới hạn.',
+  };
+  expect(() => validateCatalog(modules, documented, registry)).toThrow('Invalid case source');
+  expect(() =>
+    lessonSchema.parse({
+      ...lessons[0],
+      caseStudy: { ...lessons[0]!.caseStudy, code: 'alert(1)' },
+    }),
+  ).toThrow();
+  expect(() =>
+    lessonSchema.parse({
+      ...lessons[0],
+      caseStudy: {
+        ...lessons[0]!.caseStudy,
+        provenance: { kind: 'documented-case', sourceIds: [] },
+      },
+    }),
+  ).toThrow();
+});

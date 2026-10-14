@@ -72,7 +72,32 @@
         "title": "MDN: HTTP response status codes",
         "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status"
       }
-    ]
+    ],
+    "caseStudy": {
+      "id": "case-http",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L0-05",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Trang trả lời thành công nhưng lịch vẫn cũ",
+      "context": "Bạn mở lịch sinh hoạt. Máy chủ trả phản hồi HTTP 200, nhưng nội dung vẫn ghi phòng trước lần đổi lịch.",
+      "requirements": [
+        "Phải xem xét độ mới của nội dung phòng học.",
+        "Bạn cần quyết định status 200 có đủ để kết luận nội dung luôn mới nhất hay không."
+      ],
+      "activityRef": "http",
+      "experimentSteps": [
+        "Gửi yêu cầu và mở phản hồi, xem status cùng nội dung.",
+        "Thử đường dẫn không có và chế độ bảo trì để phân biệt các phản hồi."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Status giúp hiểu kết quả xử lý ở tầng HTTP. Muốn kết luận về phòng hiện tại cần xem thêm yêu cầu và cơ chế quản lý độ mới."
+      ],
+      "limitations": "Lab HTTP minh họa thông điệp; tình huống dữ liệu cũ là bài suy luận. Nó chưa mô phỏng cache hoặc phiên bản lịch."
+    }
   },
   {
     "id": "network",
@@ -126,11 +151,7 @@
     },
     "challenge": {
       "text": "Ảnh 1.000 kB mất 1.000 ms truyền, RTT 100 ms, xử lý 50 ms. Nếu truyền nhanh gấp đôi, tổng thời gian trong mô hình là bao nhiêu?",
-      "options": [
-        "575 ms",
-        "650 ms",
-        "500 ms"
-      ],
+      "options": ["575 ms", "650 ms", "500 ms"],
       "answer": 1,
       "explanation": "Phần truyền từ 1.000 xuống 500 ms. Tổng mới là 100 + 50 + 500 = 650 ms, không phải một nửa của 1.150 ms."
     },
@@ -143,6 +164,31 @@
         "title": "MDN: Bandwidth",
         "url": "https://developer.mozilla.org/en-US/docs/Glossary/Bandwidth"
       }
-    ]
+    ],
+    "caseStudy": {
+      "id": "case-network",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L0-04",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Tải poster ngày hội trên mạng nhanh hơn",
+      "context": "Bạn tải poster 1.000 kB. Nhóm muốn biết nâng tốc độ truyền có giảm toàn bộ thời gian chờ theo cùng tỷ lệ hay không.",
+      "requirements": [
+        "Ban đầu phần truyền mất 1.000 ms; RTT 100 ms, xử lý 50 ms.",
+        "Chỉ tốc độ truyền tăng gấp đôi; RTT và xử lý giữ nguyên."
+      ],
+      "activityRef": "network",
+      "experimentSteps": [
+        "Đặt ảnh 1.000 kB, RTT 100 ms, tốc độ 8 Mbps rồi so với 16 Mbps.",
+        "Đọc riêng ba thành phần thời gian; thử đổi RTT trong một lượt khác."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Đường truyền nhanh hơn giảm phần chuyển payload. Các phần chờ khác vẫn cần được xét trước khi dự đoán tổng thời gian."
+      ],
+      "limitations": "Mô hình bỏ qua DNS, handshake, mất gói và giới hạn cửa sổ truyền; số liệu không phải benchmark của một mạng thật."
+    }
   }
 ]

@@ -1,3 +1,4 @@
+import { CaseStudyContext, CaseStudyReflection } from './CaseStudyPanel';
 import { AnnotatedText, TermNote } from './TermNote';
 import { SaveStatus } from '../progress/SaveStatus';
 import { useEffect, useRef } from 'react';
@@ -115,6 +116,7 @@ export function LessonPage() {
           </div>
         </section>
       )}
+      {p.stage === 3 && <CaseStudyContext lesson={lesson} />}
       {(p.stage === 1 || p.stage === 3) && (
         <section className="question-panel">
           <span className="eyebrow">{p.stage === 1 ? 'Dự đoán của bạn' : 'Tình huống mới'}</span>
@@ -148,6 +150,16 @@ export function LessonPage() {
                 {!correct && <p className="muted">Bạn có thể chọn lại sau khi đọc lời giải.</p>}
               </div>
             </div>
+          )}
+          {p.stage === 3 && (
+            <CaseStudyReflection
+              lesson={lesson}
+              answered={answered}
+              onExperiment={() => {
+                update(lesson.id, { stage: 2 });
+                window.scrollTo({ top: 0, behavior: 'instant' });
+              }}
+            />
           )}
           {p.stage === 3 && answered && correct && (
             <button

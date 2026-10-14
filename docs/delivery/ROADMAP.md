@@ -158,3 +158,7 @@ Bổ sung HTTP request/response và RTT/bandwidth; sửa hướng dẫn metrics 
 Thứ tự: CASE-01 schema/version → CASE-02 ba bài đại diện → CASE-03 đủ 12 bài beta → CASE-04 L0 → CASE-05 L1 → CASE-06 L2 → CASE-07/08 L3–L4 theo prerequisite → CASE-09 L5 và CASE-10 từng nhánh. Các task này bổ sung đầu ra áp dụng cho EDU-04…08/PRIMER-B1…B5, không thay hoặc tự đóng các gate đó. CASE-QA và EDU-02 chạy theo batch; kiến thức nền, reviewer và mô hình mới là dependency cần kiểm riêng.
 
 Trạng thái ngày 14/10/2026: CASE-00 đã viết đặc tả; CASE-01 trở đi chưa hiện thực. Site vẫn có 12 bài beta theo baseline EDU-04b. Chưa tăng số module hoàn chỉnh, chưa có pilot thật, chưa thay gate web/app. Ước lượng CASE-01–03 và điều kiện nguồn lực tại EDU-09 mục 9; lịch phần còn lại được cập nhật sau storyboard, không gán thời hạn hoàn thành toàn chương trình từ số lượng case.
+
+### Hiện thực CASE-01–03 (14/10/2026)
+
+Đã nâng chặng Áp dụng cho đủ 12 bài beta: schema/gate review, context/yêu cầu, gợi ý thử và đánh đổi; đáp án và tiến độ v1 được giữ. [Báo cáo nghiệm thu](EDU_09_CASE_STUDY_IMPLEMENTATION.md) ghi 26 unit test, 99 E2E đạt/một skip, responsive và giới hạn review. CASE-04–10 cùng các gate module/level/pilot vẫn mở; tiếp theo bù học liệu L0 theo EDU-04. Đây là cập nhật sau mốc đặc tả CASE-00 ở trên.
