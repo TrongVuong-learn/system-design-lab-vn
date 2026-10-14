@@ -184,3 +184,7 @@ Quyết định: phi thương mại, chia sẻ nhỏ, ưu tiên học liệu; au
 Điều kiện hoàn tất đợt: a/b hiện thực, c có chứng cứ, source/metadata/báo cáo cập nhật và site dùng artifact đã kiểm. Ngoài phạm vi: đăng nhập/backend, đổi mục tiêu/đáp án, thay engine timing, bài ôn tổng hợp, công nhận mastery, triển khai toàn36 module. Giữ6 level/36 module/7 track. EDU-02 vẫn chưa pilot thật.
 
 Backlog sau đợt: mở rộng chuẩn cho các bài khác; bài ôn liên kết3–4 kiến thức; hệ thống website trường phát triển qua các level; nút báo đoạn khó hiểu khi đã chốt cách thu thập phù hợp.
+
+### Kết quả EDU-10a/b/c
+
+Đã hiện thực phản hồi trước–sau và gợi ý mở dần cho cache/queue/network; nghiệm thu và giới hạn tại [EDU-10](EDU_10_CLEAR_FEEDBACK.md). Phi thương mại/lưu cục bộ là ưu tiên hiện tại. Mở rộng10 bài, bài ôn tổng hợp và pilot vẫn là backlog; chưa đóng gate module/level.

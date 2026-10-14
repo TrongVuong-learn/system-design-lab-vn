@@ -336,7 +336,7 @@
     },
     {
       "lessonId": "cache",
-      "revision": 3,
+      "revision": 4,
       "competencyIds": ["cache-intro"],
       "prerequisiteIds": ["request"],
       "claims": [
@@ -346,11 +346,11 @@
         }
       ],
       "review": {
-        "reviewer": "Codex",
+        "reviewer": "Codex — EDU-10, phản hồi từ engine và gợi ý biên soạn",
         "reviewerType": "agent",
-        "date": "2026-10-13",
+        "date": "2026-10-14",
         "status": "beta-checked",
-        "evidence": "Đối chiếu tài liệu nguồn, giả định và đáp án; kiểm chứng mô hình theo EDU-04. Chưa có review chuyên gia độc lập hoặc pilot học sinh."
+        "evidence": "docs/delivery/EDU_10_CLEAR_FEEDBACK.md"
       },
       "caseReview": {
         "caseId": "case-cache",
@@ -364,7 +364,7 @@
     },
     {
       "lessonId": "queue",
-      "revision": 3,
+      "revision": 4,
       "competencyIds": ["queue-intro"],
       "prerequisiteIds": ["metrics"],
       "claims": [
@@ -374,11 +374,11 @@
         }
       ],
       "review": {
-        "reviewer": "Codex — đối chiếu hai agent QA và bổ sung thuật ngữ/nguồn",
+        "reviewer": "Codex — EDU-10, phản hồi từ engine và gợi ý biên soạn",
         "reviewerType": "agent",
         "date": "2026-10-14",
         "status": "beta-checked",
-        "evidence": "docs/delivery/QA_06_PARALLEL_REVIEW.md"
+        "evidence": "docs/delivery/EDU_10_CLEAR_FEEDBACK.md"
       },
       "caseReview": {
         "caseId": "case-queue",
@@ -592,7 +592,7 @@
     },
     {
       "lessonId": "network",
-      "revision": 3,
+      "revision": 4,
       "competencyIds": ["network-intro"],
       "prerequisiteIds": ["request", "metrics"],
       "claims": [
@@ -602,11 +602,11 @@
         }
       ],
       "review": {
-        "reviewer": "Codex — đối chiếu hai agent QA và bổ sung thuật ngữ/nguồn",
+        "reviewer": "Codex — EDU-10, phản hồi từ engine và gợi ý biên soạn",
         "reviewerType": "agent",
         "date": "2026-10-14",
         "status": "beta-checked",
-        "evidence": "docs/delivery/QA_06_PARALLEL_REVIEW.md"
+        "evidence": "docs/delivery/EDU_10_CLEAR_FEEDBACK.md"
       },
       "caseReview": {
         "caseId": "case-network",

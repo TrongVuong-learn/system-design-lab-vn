@@ -1,5 +1,11 @@
+import { ObservationPanel } from './ObservationPanel';
 import type { LessonProgress } from '@sdl/content-schema';
-import { boundedNumber, estimateDownload, httpExchange } from '@sdl/simulation-engine';
+import {
+  boundedNumber,
+  estimateDownload,
+  httpExchange,
+  observeNetwork,
+} from '@sdl/simulation-engine';
 import { Metric, Stepper } from '../../ui/primitives';
 
 type Props = { progress: LessonProgress; onChange(patch: Partial<LessonProgress>): void };
@@ -122,8 +128,22 @@ export function NetworkLab({ progress, onChange }: Props) {
   const rate = boundedNumber(progress.lab['rate'], 8, 1, 32);
   const size = boundedNumber(progress.lab['size'], 1000, 100, 10000);
   const result = estimateDownload(rtt, rate, size);
-  const change = (patch: LessonProgress['lab']) =>
-    onChange({ lab: { ...progress.lab, ...patch }, actions: progress.actions + 1 });
+  const change = (patch: LessonProgress['lab']) => {
+    const before = { rtt, rate, size };
+    const after = {
+      rtt: Number(patch['rtt'] ?? rtt),
+      rate: Number(patch['rate'] ?? rate),
+      size: Number(patch['size'] ?? size),
+    };
+    onChange({
+      lab: {
+        ...progress.lab,
+        ...patch,
+        observation: JSON.stringify(observeNetwork(before, after)),
+      },
+      actions: progress.actions + 1,
+    });
+  };
   const parts = [
     { label: 'Đi và về (RTT)', value: result.rttMs, className: 'rtt' },
     { label: 'Máy chủ xử lý', value: result.processingMs, className: 'processing' },
@@ -158,6 +178,7 @@ export function NetworkLab({ progress, onChange }: Props) {
         step={100}
         onChange={(size) => change({ size })}
       />
+      <ObservationPanel value={progress.lab['observation']} />
       <ol className="download-parts" aria-label="Ba phần thời gian cộng nối tiếp">
         {parts.map((part) => (
           <li key={part.label}>

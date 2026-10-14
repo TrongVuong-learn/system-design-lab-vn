@@ -56,6 +56,14 @@ export const lessonSchema = z.object({
   version: z.literal(1),
   status: z.enum(['draft', 'beta']),
   kind: activityKind,
+  guidance: z
+    .object({
+      schemaVersion: z.literal(1),
+      prediction: z.tuple([z.string().trim().min(8).max(500), z.string().trim().min(8).max(500)]),
+      challenge: z.tuple([z.string().trim().min(8).max(500), z.string().trim().min(8).max(500)]),
+    })
+    .strict()
+    .optional(),
   caseStudy: caseStudySchema.optional(),
   level: z.string().regex(/^L[0-5]$/),
   moduleId: z.string().regex(/^L[0-5]\.[1-6]$/),
@@ -85,6 +93,13 @@ export const lessonProgressSchema = z.object({
   challenge: z.number().int().min(-1).max(10),
   actions: z.number().int().nonnegative(),
   completed: z.boolean(),
+  hints: z
+    .object({
+      prediction: z.number().int().min(0).max(3),
+      challenge: z.number().int().min(0).max(3),
+    })
+    .strict()
+    .optional(),
   lab: z.record(
     z.string(),
     z.union([z.string().max(2000), z.number().finite(), z.boolean(), z.null()]),

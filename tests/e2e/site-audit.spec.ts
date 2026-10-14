@@ -66,9 +66,9 @@ test('all six lessons complete, retain correct model outcomes and resume without
       await page.getByRole('button', { name: 'Xem lịch', exact: true }).click();
       await expect(metric(page, 'Lượt xem')).toHaveText('2');
       await expect(metric(page, 'Xem qua nguồn')).toHaveText('1');
-      await expect(
-        page.getByText('Trang đọc lịch chính và cập nhật thành phòng 205.', { exact: false }),
-      ).toBeVisible();
+      await expect(page.getByRole('region', { name: 'So sánh bước vừa thử' })).toContainText(
+        'trả phòng 205',
+      );
     } else if (l.id === 'queue') {
       await page.getByRole('button', { name: 'Qua 1 giây' }).click();
       await expect(metric(page, 'Đã nhận')).toHaveText('6');

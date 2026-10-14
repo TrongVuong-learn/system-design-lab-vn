@@ -114,3 +114,17 @@ it('rejects unverified documented provenance and executable case fields', () => 
     }),
   ).toThrow();
 });
+
+it('validates authored two-step guidance without accepting executable fields', () => {
+  const guided = lessons.find((l) => l.id === 'cache')!;
+  expect(lessonSchema.parse(guided).guidance?.prediction).toHaveLength(2);
+  expect(() =>
+    lessonSchema.parse({
+      ...guided,
+      guidance: { ...guided.guidance, prediction: ['Only one hint'] },
+    }),
+  ).toThrow();
+  expect(() =>
+    lessonSchema.parse({ ...guided, guidance: { ...guided.guidance, script: 'alert(1)' } }),
+  ).toThrow();
+});

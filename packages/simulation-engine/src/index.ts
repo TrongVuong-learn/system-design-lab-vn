@@ -213,3 +213,10 @@ export {
 export { estimateDownload, httpExchange } from './network';
 
 export { routePacket } from './routing';
+export {
+  observeCache,
+  observeQueue,
+  observeNetwork,
+  parseObservation,
+  type Observation,
+} from './observations';

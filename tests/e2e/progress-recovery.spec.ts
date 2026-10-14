@@ -23,7 +23,9 @@ test('failed writes retain the latest lesson state and can be retried', async ({
   await page.getByRole('button', { name: 'Đổi phòng ở nguồn' }).click();
   await page.getByRole('button', { name: 'Xem lịch', exact: true }).click();
   await expect(page.getByRole('alert')).toContainText('Chưa lưu được thay đổi mới');
-  await expect(page.getByText('Bạn thấy phòng 201.', { exact: false })).toBeVisible();
+  await expect(page.getByRole('region', { name: 'So sánh bước vừa thử' })).toContainText(
+    'phòng 201 từ cache',
+  );
   await page.evaluate(() => {
     (window as Window & { failProgressWrites?: boolean }).failProgressWrites = false;
   });
@@ -31,8 +33,14 @@ test('failed writes retain the latest lesson state and can be retried', async ({
   await expect(page.getByText('Đã lưu trên thiết bị', { exact: true })).toBeVisible();
   await page.reload();
   await expect(page.getByRole('heading', { name: 'Tự thử', exact: true })).toBeVisible();
-  await expect(page.getByText('Bạn thấy phòng 201.', { exact: false })).toBeVisible();
-  await expect(page.getByText('Phòng 205', { exact: true })).toBeVisible();
+  await expect(page.getByRole('region', { name: 'So sánh bước vừa thử' })).toContainText(
+    'phòng 201 từ cache',
+  );
+  await expect(
+    page
+      .getByRole('region', { name: 'So sánh bước vừa thử' })
+      .getByRole('row', { name: /Lịch ở nguồn/ }),
+  ).toContainText('Phòng 205');
   await expect(page.getByRole('button', { name: 'Thử tình huống mới' })).toBeEnabled();
 });
 

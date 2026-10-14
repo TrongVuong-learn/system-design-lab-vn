@@ -1,10 +1,12 @@
+import { ObservationPanel } from './ObservationPanel';
 import { RoutingLab } from './RoutingLab';
 import { HttpLab, NetworkLab } from './NetworkLabs';
 import { MetricsLab, DnsLab, TransportLab, CapacityLab } from './FoundationLabs';
-import { useState } from 'react';
 import type { Lesson, LessonProgress } from '@sdl/content-schema';
 import {
   cacheStep,
+  observeCache,
+  observeQueue,
   initialCache,
   restoreCache,
   boundedNumber,
@@ -58,7 +60,11 @@ export function Lab(props: LabProps) {
 function CacheLab({ progress, onChange }: LabProps) {
   const state = restoreCache(progress.lab);
   function act(command: CacheCommand) {
-    onChange({ lab: { ...cacheStep(state, command) }, actions: progress.actions + 1 });
+    const next = cacheStep(state, command);
+    onChange({
+      lab: { ...next, observation: JSON.stringify(observeCache(state, next, command)) },
+      actions: progress.actions + 1,
+    });
   }
   const expired = state.time - state.refreshedAt >= state.ttl;
   return (
@@ -93,10 +99,12 @@ function CacheLab({ progress, onChange }: LabProps) {
           Qua 1 phút
         </button>
       </div>
-      <div className="feedback" role="status">
-        <Icon name="arrow" />
-        <p>{state.message}</p>
-      </div>
+      <ObservationPanel value={progress.lab['observation']} />
+      {!progress.lab['observation'] && (
+        <div className="feedback" role="status">
+          <p>{state.message}</p>
+        </div>
+      )}
       <div className="metrics">
         <Metric label="Lượt xem" value={state.reads} />
         <Metric label="Xem qua cache" value={state.hits} />
@@ -271,7 +279,6 @@ function TrafficLab({ progress, onChange, design = false }: LabProps & { design?
   );
 }
 function QueueLab({ progress, onChange }: LabProps) {
-  const [running, setRunning] = useState(false);
   const arrivals = boundedNumber(progress.lab['arrivals'], 6, 0, 12);
   const workers = boundedNumber(progress.lab['workers'], 1, 1, 6);
   const state = restoreQueue({
@@ -281,7 +288,21 @@ function QueueLab({ progress, onChange }: LabProps) {
     queued: progress.lab['queued'] ?? 0,
   });
   function change(p: LessonProgress['lab']) {
-    onChange({ lab: { ...progress.lab, ...p }, actions: progress.actions + 1 });
+    const next = restoreQueue({ ...state, ...p });
+    const observation =
+      p['observation'] === ''
+        ? ''
+        : JSON.stringify(
+            observeQueue(
+              state,
+              next,
+              Number(p['arrivals'] ?? arrivals),
+              Number(p['workers'] ?? workers),
+              arrivals,
+              workers,
+            ),
+          );
+    onChange({ lab: { ...progress.lab, ...p, observation }, actions: progress.actions + 1 });
   }
   return (
     <section className="lab-panel">
@@ -309,7 +330,6 @@ function QueueLab({ progress, onChange }: LabProps) {
           className="button primary"
           onClick={() => {
             change({ ...queueStep(state, arrivals, workers) });
-            setRunning(true);
           }}
         >
           Qua 1 giây
@@ -317,8 +337,7 @@ function QueueLab({ progress, onChange }: LabProps) {
         <button
           className="button secondary"
           onClick={() => {
-            change({ ...initialQueue() });
-            setRunning(false);
+            change({ ...initialQueue(), observation: '' });
           }}
         >
           Đặt lại hàng đợi
@@ -329,17 +348,12 @@ function QueueLab({ progress, onChange }: LabProps) {
         <Metric label="Đã làm xong" value={state.processed} />
         <Metric label="Đang chờ" value={state.queued} />
       </div>
-      <div className="feedback" role="status">
-        <p>
-          {!running && !state.second
-            ? 'Từng lần bấm là một giây mô phỏng. Hãy thử 3 bước với một worker, rồi tăng worker.'
-            : arrivals > workers * 2
-              ? 'Việc đến nhanh hơn xử lý. Nếu tải giữ nguyên, hàng chờ tiếp tục tăng.'
-              : arrivals === workers * 2
-                ? 'Tốc độ làm xong bằng tốc độ đến. Hàng chờ đã có chưa giảm.'
-                : 'Công suất lớn hơn việc mới. Backlog giảm dần khi tiếp tục chạy.'}
-        </p>
-      </div>
+      <ObservationPanel value={progress.lab['observation']} />
+      {!progress.lab['observation'] && (
+        <div className="feedback" role="status">
+          <p>Từng lần bấm là một giây mô phỏng. Hãy thử 3 bước với một worker, rồi tăng worker.</p>
+        </div>
+      )}
       <p className="muted">
         Trong bài, việc đến và tốc độ xử lý đều cố định. Thực tế có lúc việc dồn đến hoặc xử lý chậm
         hơn; cần công suất dự phòng, không chỉ cân bằng hai con số trung bình.

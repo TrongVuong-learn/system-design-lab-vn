@@ -210,6 +210,17 @@
         "Bản ghi gần có thể giảm lượt hỏi nguồn. Cần thêm quy tắc cập nhật phù hợp nếu thông tin thay đổi."
       ],
       "limitations": "Đồng hồ trong lab và câu hỏi đều dùng phút mô phỏng. Mô hình này giả định nguồn truy cập được, chưa kiểm chứng một cam kết độ mới của hệ thống thật."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Đề nói trang đọc từ cache. Nhìn riêng phòng trong bản ghi gần và phòng ở nguồn.",
+        "Bản ghi gần còn hạn sẽ được dùng cho lần đọc này. Nguồn đổi chưa tự cập nhật cache; hãy theo đúng nơi trang đang đọc."
+      ],
+      "challenge": [
+        "So sánh giới hạn một phút trong yêu cầu với thời gian bản ghi có thể còn cũ.",
+        "Đọc nhanh và đọc dữ liệu mới là hai điều khác nhau. Nếu giữ bản ghi cũ đủ năm phút, có khoảng thời gian nào vượt yêu cầu một phút không?"
+      ]
     }
   },
   {
@@ -285,6 +296,17 @@
         "Thêm worker tăng công suất trong mô hình này nhưng tốn tài nguyên. Cân tốc độ đến chỉ ngăn tăng hàng chờ; giảm hàng chờ cũ cần năng lực dư."
       ],
       "limitations": "Các việc giống nhau và xử lý theo chặng giây; chưa có retry, duplicate hoặc mất ACK."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Nhìn số việc mới mỗi giây và số việc một worker làm xong trong cùng giây.",
+        "Lấy số việc đến trừ số làm xong. Những việc còn lại được giữ trong hàng đợi cho giây sau; hàng đợi không tự xử lý việc."
+      ],
+      "challenge": [
+        "Tính công suất của từng lựa chọn: số worker × hai việc mỗi giây.",
+        "Muốn hàng chờ không tăng, công suất phải ít nhất bằng tám việc mới mỗi giây. Cân bằng chỉ giữ hàng chờ đã có, chưa làm nó giảm."
+      ]
     }
   },
   {

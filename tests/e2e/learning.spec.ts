@@ -6,14 +6,20 @@ test('learn cache, observe stale data, complete and resume after reload', async 
   await page.getByRole('button', { name: 'Mở thí nghiệm' }).click();
   await page.getByRole('button', { name: 'Đổi phòng ở nguồn' }).click();
   await page.getByRole('button', { name: 'Xem lịch', exact: true }).click();
-  await expect(page.getByText('Bạn thấy phòng 201.', { exact: false })).toBeVisible();
+  await expect(page.getByRole('region', { name: 'So sánh bước vừa thử' })).toContainText(
+    'phòng 201 từ cache',
+  );
   await expect(page.getByText('Đã lưu trên thiết bị', { exact: true })).toBeVisible();
   await page.reload();
   await expect(page.getByRole('button', { name: 'Xem lịch', exact: true })).toBeVisible();
-  await expect(page.getByText('Bạn thấy phòng 201.', { exact: false })).toBeVisible();
+  await expect(page.getByRole('region', { name: 'So sánh bước vừa thử' })).toContainText(
+    'phòng 201 từ cache',
+  );
   await page.getByRole('button', { name: 'Lấy lịch mới', exact: true }).click();
   await page.getByRole('button', { name: 'Xem lịch', exact: true }).click();
-  await expect(page.getByText('Bạn thấy phòng 205.', { exact: false })).toBeVisible();
+  await expect(page.getByRole('region', { name: 'So sánh bước vừa thử' })).toContainText(
+    'phòng 205 từ cache',
+  );
   await expect(page.locator('.time-badge')).toContainText('Phút');
   await page.getByRole('button', { name: 'Thử tình huống mới' }).click();
   await page.getByText('Giới hạn tình huống', { exact: true }).click();

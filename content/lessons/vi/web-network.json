@@ -194,6 +194,17 @@
         "Đường truyền nhanh hơn giảm phần chuyển payload. Các phần chờ khác vẫn cần được xét trước khi dự đoán tổng thời gian."
       ],
       "limitations": "Mô hình bỏ qua DNS, handshake, mất gói và giới hạn cửa sổ truyền; số liệu không phải benchmark của một mạng thật."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Tách tổng thời gian thành ba phần: RTT, xử lý và truyền ảnh. Phần nào phụ thuộc tốc độ truyền?",
+        "Đặt phần truyền là T. Tổng ban đầu là RTT + xử lý + T; khi tốc độ gấp đôi, chỉ T được thay bằng T/2."
+      ],
+      "challenge": [
+        "Giữ riêng RTT 100 ms và xử lý 50 ms. Chỉ chia đôi 1.000 ms của phần truyền.",
+        "Cộng RTT, xử lý và phần truyền mới lại. Đừng chia đôi cả tổng cũ vì hai phần đầu giữ nguyên."
+      ]
     }
   }
 ]

@@ -30,3 +30,22 @@ it('counts the import limit in UTF-8 bytes, including Vietnamese text', () => {
   expect(parseProgress(boundary)).toEqual(emptyProgress());
   expect(() => parseProgress(boundary + ' ')).toThrow('Bản lưu quá lớn');
 });
+
+it('preserves independent optional hint levels through v1 export and accepts older saves', () => {
+  const old = updateLesson(emptyProgress(), 'cache', { stage: 1 });
+  expect(parseProgress(serializeProgress(old)).lessons['cache']?.hints).toBeUndefined();
+  const hinted = updateLesson(old, 'cache', { hints: { prediction: 2, challenge: 0 } });
+  const experimented = updateLesson(hinted, 'cache', { lab: { cached: 201, source: 205 } });
+  expect(parseProgress(serializeProgress(experimented)).lessons['cache']?.hints).toEqual({
+    prediction: 2,
+    challenge: 0,
+  });
+  expect(() =>
+    parseProgress(
+      JSON.stringify({
+        ...hinted,
+        lessons: { cache: { ...hinted.lessons['cache'], hints: { prediction: 4, challenge: 0 } } },
+      }),
+    ),
+  ).toThrow();
+});

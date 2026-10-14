@@ -1,3 +1,4 @@
+import { QuestionFeedback } from './QuestionFeedback';
 import { CaseStudyContext, CaseStudyReflection } from './CaseStudyPanel';
 import { AnnotatedText, TermNote } from './TermNote';
 import { SaveStatus } from '../progress/SaveStatus';
@@ -33,6 +34,9 @@ export function LessonPage() {
   const answer = p.stage === 1 ? p.prediction : p.challenge;
   const answered = answer >= 0;
   const correct = answer === current.answer;
+  const questionKey = p.stage === 1 ? 'prediction' : 'challenge';
+  const hintLevel = p.hints?.[questionKey] ?? 0;
+  const revealSolution = correct || !lesson.guidance || hintLevel === 3;
   const saveFailed =
     saveState === 'write-error' || saveState === 'read-error' || saveState === 'conflict';
   const canNext = p.stage === 0 || (p.stage === 1 && answered) || (p.stage === 2 && p.actions >= 2);
@@ -41,7 +45,9 @@ export function LessonPage() {
       ? 'Đọc tình huống rồi chọn điều bạn nghĩ sẽ xảy ra.'
       : p.stage === 1
         ? answered
-          ? 'Đọc lời giải rồi mở thí nghiệm để kiểm tra dự đoán.'
+          ? revealSolution
+            ? 'Đọc lời giải rồi mở thí nghiệm để kiểm tra dự đoán.'
+            : 'Thử suy luận, mở gợi ý nếu cần hoặc vào thí nghiệm để kiểm tra dự đoán.'
           : 'Chọn một dự đoán. Đoán sai cũng là một cách học.'
         : p.stage === 2
           ? p.actions < 2
@@ -141,20 +147,26 @@ export function LessonPage() {
             ))}
           </div>
           {answered && (
-            <div className={`feedback ${correct ? 'success' : ''}`} role="status">
-              <div>
-                <strong>{correct ? 'Bạn đã nối đúng các ý.' : 'Cùng nhìn lại nguyên nhân.'}</strong>
-                <p>
-                  <AnnotatedText text={current.explanation} terms={lesson.terms} />
-                </p>
-                {!correct && <p className="muted">Bạn có thể chọn lại sau khi đọc lời giải.</p>}
-              </div>
-            </div>
+            <QuestionFeedback
+              lesson={lesson}
+              question={questionKey}
+              correct={correct}
+              level={hintLevel}
+              onReveal={(level) =>
+                update(lesson.id, {
+                  hints: {
+                    prediction: p.hints?.prediction ?? 0,
+                    challenge: p.hints?.challenge ?? 0,
+                    [questionKey]: level,
+                  },
+                })
+              }
+            />
           )}
           {p.stage === 3 && (
             <CaseStudyReflection
               lesson={lesson}
-              answered={answered}
+              answered={answered && revealSolution}
               onExperiment={() => {
                 update(lesson.id, { stage: 2 });
                 window.scrollTo({ top: 0, behavior: 'instant' });
