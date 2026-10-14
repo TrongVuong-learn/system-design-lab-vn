@@ -1,6 +1,6 @@
 # Kế hoạch website học System Design tương tác
 
-Ngày lập: 11/10/2026. Phiên bản 4: toàn diện theo level, dễ tiếp cận với học sinh cấp 3, mobile-first và chuẩn bị phát triển app. Trạng thái: đề xuất sản phẩm và triển khai; chưa xây dựng hoặc phát hành website.
+Ngày lập: 11/10/2026. Phiên bản 5 — 14/10/2026: bổ sung ví dụ thực tế theo từng bài/module; giữ định hướng toàn diện theo level, học sinh cấp 3, mobile-first và web trước app. Trạng thái: web beta có 12 bài nhập môn; phần giáo trình đầy đủ và case theo EDU-09 còn là kế hoạch triển khai, chưa qua pilot học sinh thật.
 
 Tên làm việc: **System Design Lab**.
 
@@ -38,8 +38,9 @@ Ví dụ mở đầu: “Giờ ra chơi, nhiều bạn cùng xếp hàng mua nư
 - Dùng ví dụ đời thường để giới thiệu, sau đó nối rõ từng phần với khái niệm kỹ thuật và giới hạn của ví dụ.
 - Cho người học dự đoán trước khi chạy; phản hồi giải thích nguyên nhân của kết quả.
 - Có gợi ý ba mức: gợi ý nơi quan sát, gợi ý nguyên lý, lời giải có giải thích.
-- Mỗi bài cơ bản nhắm đến 10–15 phút; một lab có thể gồm hai bài ngắn. Bài tổng hợp khoảng 30–45 phút. Thời lượng phải được kiểm chứng qua thử nghiệm người học.
-- Mỗi bài có câu hỏi chuyển giao sang tình huống khác, tránh chỉ nhớ các thao tác vừa làm.
+- Mỗi bài cơ bản nhắm đến 10–15 phút; một lab có thể gồm hai bài ngắn. Bài tổng hợp level chia phiên khoảng 30–45 phút; case sâu có thể cần nhiều phiên. Thời lượng phải được kiểm chứng qua thử nghiệm người học; quy mô mini-case và case module theo EDU-09.
+- Mỗi bài có mini-case trong chặng **Áp dụng**: vấn đề, yêu cầu cụ thể, lựa chọn/thử nghiệm, phản hồi và đánh đổi. Mỗi module có họ tình huống cùng bài tổng hợp; mỗi level có capstone. Giữ bốn chặng player hiện hành, không tạo thêm khối lặp lại câu chuyện mở đầu.
+- Chuẩn biên soạn quản lý trong [TEACHING_GUIDE](TEACHING_GUIDE.md); danh mục và thứ tự triển khai đủ 36 module, bảy nhánh, tương thích dữ liệu và QA nằm trong [EDU-09](docs/delivery/EDU_09_CASE_STUDY_PLAN.md). Ví dụ giả định được ghi rõ; case doanh nghiệp phải có nguồn trực tiếp và giới hạn chuyển thể. Câu hỏi chuyển giao thay ngữ cảnh hoặc ràng buộc để kiểm tra vận dụng.
 
 ### Chuẩn dễ hiểu cho học sinh cấp 3
 

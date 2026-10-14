@@ -150,3 +150,11 @@ Mỗi bài phải có outcome/prerequisite, storyboard mobile, glossary, nguồn
 ### Tiến độ EDU-04b (14/10/2026)
 
 Bổ sung HTTP request/response và RTT/bandwidth; sửa hướng dẫn metrics từ QA-04. Phạm vi và nghiệm thu tại [EDU_04B_HTTP_NETWORK.md](EDU_04B_HTTP_NETWORK.md). B1/EDU-04 vẫn đang thực hiện: chưa đủ toàn bộ L0, chưa qua pilot thật. Sau đợt này tiếp tục IP/port/routing và HTTPS/TLS, OS/concurrency rồi đánh giá năng lực còn thiếu trước khi đóng L0; chưa chuyển gate web/app sang đạt.
+
+## 10. EDU-09 — ví dụ thực tế trong từng bài và module
+
+[Kế hoạch chi tiết EDU-09](EDU_09_CASE_STUDY_PLAN.md) bổ sung 36 họ case theo đúng module, mini-case cho từng bài, sáu capstone level và hướng phân rã bảy nhánh. Chuẩn viết trong TEACHING_GUIDE; danh mục tình huống và task CASE-00…10/CASE-QA chỉ quản lý trong EDU-09, tránh hai backlog mâu thuẫn.
+
+Thứ tự: CASE-01 schema/version → CASE-02 ba bài đại diện → CASE-03 đủ 12 bài beta → CASE-04 L0 → CASE-05 L1 → CASE-06 L2 → CASE-07/08 L3–L4 theo prerequisite → CASE-09 L5 và CASE-10 từng nhánh. Các task này bổ sung đầu ra áp dụng cho EDU-04…08/PRIMER-B1…B5, không thay hoặc tự đóng các gate đó. CASE-QA và EDU-02 chạy theo batch; kiến thức nền, reviewer và mô hình mới là dependency cần kiểm riêng.
+
+Trạng thái ngày 14/10/2026: CASE-00 đã viết đặc tả; CASE-01 trở đi chưa hiện thực. Site vẫn có 12 bài beta theo baseline EDU-04b. Chưa tăng số module hoàn chỉnh, chưa có pilot thật, chưa thay gate web/app. Ước lượng CASE-01–03 và điều kiện nguồn lực tại EDU-09 mục 9; lịch phần còn lại được cập nhật sau storyboard, không gán thời hạn hoàn thành toàn chương trình từ số lượng case.

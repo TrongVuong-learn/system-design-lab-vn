@@ -1,6 +1,6 @@
 # Chuẩn giảng dạy System Design dễ hiểu
 
-Phiên bản 1 — 11/10/2026. Áp dụng cho toàn bộ [giáo trình](CURRICULUM_MAP.md) và [kế hoạch website](SYSTEM_DESIGN_WEB_PLAN.md). Đây là chuẩn biên soạn và bài mẫu. Web hiện có 12 bài beta; chưa có kết quả thử nghiệm học sinh.
+Phiên bản 2 — 14/10/2026; chuẩn hóa mini-case từng bài và case tổng hợp. Áp dụng cho toàn bộ [giáo trình](CURRICULUM_MAP.md) và [kế hoạch website](SYSTEM_DESIGN_WEB_PLAN.md). Đây là chuẩn biên soạn và bài mẫu. Web hiện có 12 bài beta; chưa có kết quả thử nghiệm học sinh.
 
 ## 1. Người học và mục tiêu
 
@@ -53,6 +53,8 @@ Hoàn thành lớp trực giác không tự động đánh dấu đã nắm cơ 
 Cho phép dùng máy tính hoặc công cụ trực quan. Mục tiêu chính là hiểu quan hệ, không phải tính nhẩm.
 
 ## 4. Bài mẫu: “Vì sao website vẫn hiện phòng học cũ?”
+
+Các màn hình dưới đây là nhịp storyboard sư phạm, không quy định số chặng UI. Khi hiện thực, ghép vào bốn chặng player hiện hành; tình huống chuyển giao nằm ở Áp dụng theo chuẩn cuối tài liệu.
 
 **Tên kỹ thuật cho tác giả:** cache và độ mới dữ liệu. Bài thuộc lối dẫn nhập L0; cơ chế cache ở L2 liên kết về ví dụ này.
 
@@ -143,3 +145,18 @@ Trước khi gọi một năng lực là hoàn chỉnh, cần đủ giải thíc
 ## Bộ pilot vận hành
 
 Dùng [bộ EDU-02](docs/research/student-pilot/README.md) để điều phối vòng đầu: tách phiếu học sinh khỏi đáp án, ghi mức trợ giúp và câu giải thích trong tình huống mới, sửa rồi thử lại lỗi lặp. Chưa có buổi thực tế; không ghi kết quả giả lập hoặc kiểm thử tự động thành pilot học sinh.
+
+## Chuẩn tình huống áp dụng — EDU-09
+
+Áp dụng cho mọi bài mới và đợt nâng 12 bài beta. Mỗi bài có một mini-case trong chặng Áp dụng, mỗi module có họ tình huống và bài tổng hợp, mỗi level có capstone. Danh mục, độ khó, hoạt động và kế hoạch triển khai được quản lý duy nhất tại [EDU-09](docs/delivery/EDU_09_CASE_STUDY_PLAN.md).
+
+1. **Vấn đề có người dùng cụ thể:** ai đang làm gì, gặp khó khăn nào; mở bằng lời phổ thông. Tình huống áp dụng thay ít nhất một ràng buộc hoặc ngữ cảnh so với ví dụ có hướng dẫn, không kể lại y nguyên đoạn mở bài.
+2. **Yêu cầu kiểm tra được:** điều cần đạt, số liệu có đơn vị, phạm vi thời gian, invariant nếu có; nhập môn chỉ vài ràng buộc chính. Giải thích ký hiệu và đơn vị trước khi dùng.
+3. **Quyết định và thử nghiệm:** dự đoán/chọn phương án, thao tác theo bước, quan sát kết quả. Hoạt động phải đúng khả năng engine; phép suy luận chỉ trên giấy ghi rõ là suy luận, không giả vờ có mô phỏng. Bài thiết kế có thể dùng bảng quyết định hoặc trace thay animation.
+4. **Phản hồi có nguyên nhân:** gắn kết quả với cơ chế, có gợi ý tăng dần và một phản ví dụ. Không lộ lời giải trong context/yêu cầu trước khi người học thử. Đánh giá theo độ sâu, không chỉ đếm click hoặc nhớ từ tiếng Anh.
+5. **Lợi ích, đánh đổi và giới hạn:** nói rõ cải thiện gì, mất gì, khi nào phương án không còn phù hợp; với bài mở cho phép nhiều phương án có lý do và rubric.
+6. **Nguồn trung thực:** trường học/doanh nghiệp giả định phải có nhãn “Tình huống giả định”; số người, tải, thời gian hoặc đơn giá tự đặt không được mô tả là benchmark thật. Case doanh nghiệp có tài liệu gốc, thời điểm/phiên bản, phần trích/chuyển thể và phạm vi giản lược. Nguồn của cơ chế kỹ thuật vẫn bắt buộc với tình huống tự viết; lưu trong editorial registry.
+7. **Dễ học trên mobile:** từng quyết định một, sơ đồ có bản chữ, chạm/bàn phím dùng được, từ mới giải thích tại chỗ theo chuẩn hiện hành. Có thể rời bài rồi tiếp tục từ dữ liệu đã lưu; bài tổng hợp dài chia chặng. Không nhồi mọi chủ đề của một module vào một mini-case.
+8. **Nghiệm thu đúng mức:** đủ case không có nghĩa đủ mọi năng lực. Mỗi bài liên kết năng lực, hoạt động/trace, đánh giá, review và version; module cần coverage cùng bài tổng hợp. AI mô phỏng học sinh hỗ trợ QA, không thay review kỹ thuật hoặc pilot thật.
+
+Đợt đầu giữ ID/đáp án/ý nghĩa challenge và progress của 12 bài; nếu đổi mục tiêu hoặc đáp án cần thiết kế version/migration trước khi phát hành. Rubric sâu và evidence mới không tự diễn giải lại trạng thái hoàn thành cũ. Đây là chuẩn biên soạn được chốt; renderer, case schema và mini-case mới vẫn cần hiện thực theo EDU-09.

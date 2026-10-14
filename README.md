@@ -40,6 +40,7 @@ pnpm test:e2e
 | [Kế hoạch sản phẩm](SYSTEM_DESIGN_WEB_PLAN.md) | Mục tiêu, tính năng, phương pháp học |
 | [Bản đồ giáo trình](CURRICULUM_MAP.md) | Level, module, nhánh chuyên sâu và độ bao phủ |
 | [Chuẩn giảng dạy](TEACHING_GUIDE.md) | Cách viết cho người mới và bài mẫu |
+| [Kế hoạch ví dụ thực tế](docs/delivery/EDU_09_CASE_STUDY_PLAN.md) | 36 họ case, mini-case từng bài, sáu capstone, bảy nhánh và thứ tự triển khai |
 | [Quyết định công nghệ](docs/decisions/0001-web-first-mobile-ready.md) | So sánh stack và hướng web → app |
 | [Kiến trúc dự án](docs/engineering/ARCHITECTURE.md) | Cấu trúc mã nguồn, module, dữ liệu và ranh giới phụ thuộc |
 | [Thiết lập môi trường](docs/engineering/SETUP.md) | Runtime, workspace, lệnh khởi tạo và CI dự kiến |
