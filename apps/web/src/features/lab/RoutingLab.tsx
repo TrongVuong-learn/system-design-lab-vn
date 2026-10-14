@@ -1,3 +1,4 @@
+import { ObservationPanel } from './ObservationPanel';
 import type { LessonProgress } from '@sdl/content-schema';
 import { routePacket } from '@sdl/simulation-engine';
 const messages = {
@@ -108,6 +109,7 @@ export function RoutingLab({
           </span>
         </li>
       </ol>
+      <ObservationPanel value={progress.lab['observation']} />
       <div className="feedback" role="status">
         <p>{messages[result.outcome as keyof typeof messages]}</p>
       </div>

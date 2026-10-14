@@ -220,3 +220,4 @@ export {
   parseObservation,
   type Observation,
 } from './observations';
+export { observeRemaining, type GuidedKind } from './remaining-observations';

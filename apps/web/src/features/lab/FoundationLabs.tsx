@@ -1,3 +1,4 @@
+import { ObservationPanel } from './ObservationPanel';
 import type { LessonProgress } from '@sdl/content-schema';
 import {
   boundedNumber,
@@ -44,6 +45,7 @@ export function MetricsLab(props: Props) {
         Hai việc cuối đang mất {slow ? '1.000 ms' : '100 ms'} mỗi việc. ms là mili giây: 1.000 ms =
         1 giây.
       </p>
+      <ObservationPanel value={progress.lab['observation']} />
       <ol className="latency-chart" aria-label="Thời gian từ lúc gửi đến khi xong của 20 lượt">
         {result.requests.map((r) => (
           <li key={r.id}>
@@ -113,6 +115,7 @@ export function DnsLab({ progress, onChange }: Props) {
           Qua 1 giây
         </button>
       </div>
+      <ObservationPanel value={progress.lab['observation']} />
       <div className="feedback" role="status">
         <p>
           {state.route === 'none'
@@ -134,7 +137,9 @@ export function DnsLab({ progress, onChange }: Props) {
       </p>
       <button
         className="text-button"
-        onClick={() => onChange({ lab: { ...initialDns() }, actions: progress.actions + 1 })}
+        onClick={() =>
+          onChange({ lab: { ...initialDns(), observation: null }, actions: progress.actions + 1 })
+        }
       >
         Đặt lại DNS
       </button>
@@ -200,6 +205,7 @@ export function TransportLab(props: Props) {
           Thử lại
         </button>
       </div>
+      <ObservationPanel value={progress.lab['observation']} />
       <div className="feedback" role="status">
         <p>
           {step < 2
@@ -265,6 +271,7 @@ export function CapacityLab(props: Props) {
         max={10}
         onChange={(peak) => change({ peak })}
       />
+      <ObservationPanel value={progress.lab['observation']} />
       <div className="estimate-sheet" aria-live="polite">
         <p>
           <b>

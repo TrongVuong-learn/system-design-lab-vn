@@ -5,6 +5,8 @@ import { MetricsLab, DnsLab, TransportLab, CapacityLab } from './FoundationLabs'
 import type { Lesson, LessonProgress } from '@sdl/content-schema';
 import {
   cacheStep,
+  observeRemaining,
+  type GuidedKind,
   observeCache,
   observeQueue,
   initialCache,
@@ -27,7 +29,28 @@ type LabProps = {
   progress: LessonProgress;
   onChange(patch: Partial<LessonProgress>): void;
 };
-export function Lab(props: LabProps) {
+export function Lab(original: LabProps) {
+  const kind = original.lesson.kind;
+  const extended = !['cache', 'queue', 'network'].includes(kind);
+  const props = extended
+    ? {
+        ...original,
+        onChange(patch: Partial<LessonProgress>) {
+          if (!patch.lab) {
+            original.onChange(patch);
+            return;
+          }
+          const observation =
+            patch.lab['observation'] === null
+              ? null
+              : observeRemaining(kind as GuidedKind, original.progress.lab, patch.lab);
+          original.onChange({
+            ...patch,
+            lab: { ...patch.lab, observation: observation ? JSON.stringify(observation) : '' },
+          });
+        },
+      }
+    : original;
   switch (props.lesson.kind) {
     case 'cache':
       return <CacheLab {...props} />;
@@ -186,6 +209,7 @@ function RequestLab({ progress, onChange }: LabProps) {
           Gửi lại từ đầu
         </button>
       </div>
+      <ObservationPanel value={progress.lab['observation']} />
     </section>
   );
 }
@@ -250,6 +274,7 @@ function TrafficLab({ progress, onChange, design = false }: LabProps & { design?
           onChange={(value) => change({ workers: value })}
         />
       )}
+      <ObservationPanel value={progress.lab['observation']} />
       <div className="metrics">
         <Metric label="Lượt đọc hoàn tất" value={result.completed} suffix=" / giây" />
         <Metric label="Lượt đọc còn chờ" value={result.waiting} suffix=" lượt" />
@@ -375,13 +400,14 @@ function ReplicaLab({ progress, onChange }: LabProps) {
     replica: progress.lab['replica'] ?? 201,
     pending,
   });
-  function change(s: typeof state) {
+  function change(s: typeof state, reset = false) {
     onChange({
       lab: {
         time: s.time,
         primary: s.primary,
         replica: s.replica,
         pending: JSON.stringify(s.pending),
+        observation: reset ? null : '',
         lag,
       },
       actions: progress.actions + 1,
@@ -415,10 +441,11 @@ function ReplicaLab({ progress, onChange }: LabProps) {
         <button className="button secondary" onClick={() => change(replicaTick(state))}>
           Qua 1 giây
         </button>
-        <button className="button secondary" onClick={() => change(initialReplica())}>
+        <button className="button secondary" onClick={() => change(initialReplica(), true)}>
           Đặt lại
         </button>
       </div>
+      <ObservationPanel value={progress.lab['observation']} />
       <div className="feedback" role="status">
         <p>
           {state.primary === state.replica

@@ -39,7 +39,9 @@ test('HTTP shows explicit responses for success, missing resources and maintenan
   await page.getByRole('button', { name: 'Đường dẫn không có', exact: true }).click();
   await exchange(page);
   await expect(response).toContainText('404 Not Found');
-  await expect(page.locator('.lab-panel [role=status]')).toContainText('máy chủ đã trả lời');
+  await expect(page.locator('.lab-panel > .feedback[role=status]')).toContainText(
+    'máy chủ đã trả lời',
+  );
   await page.getByRole('button', { name: 'Cho dịch vụ bảo trì' }).click();
   await exchange(page);
   await expect(response).toContainText('503 Service Unavailable');

@@ -280,7 +280,7 @@
   "lessons": [
     {
       "lessonId": "request",
-      "revision": 2,
+      "revision": 3,
       "competencyIds": ["request-intro"],
       "prerequisiteIds": [],
       "claims": [
@@ -290,11 +290,11 @@
         }
       ],
       "review": {
-        "reviewer": "Codex",
+        "reviewer": "Codex — EDU-11, đối chiếu engine/trace và gợi ý biên soạn",
         "reviewerType": "agent",
-        "date": "2026-10-13",
+        "date": "2026-10-14",
         "status": "beta-checked",
-        "evidence": "Đối chiếu tài liệu nguồn, giả định và đáp án; kiểm chứng mô hình theo EDU-04. Chưa có review chuyên gia độc lập hoặc pilot học sinh."
+        "evidence": "docs/delivery/EDU_11_FEEDBACK_ALL_LESSONS.md"
       },
       "caseReview": {
         "caseId": "case-request",
@@ -308,7 +308,7 @@
     },
     {
       "lessonId": "balance",
-      "revision": 2,
+      "revision": 3,
       "competencyIds": ["balance-intro"],
       "prerequisiteIds": ["metrics"],
       "claims": [
@@ -318,11 +318,11 @@
         }
       ],
       "review": {
-        "reviewer": "Codex",
+        "reviewer": "Codex — EDU-11, đối chiếu engine/trace và gợi ý biên soạn",
         "reviewerType": "agent",
-        "date": "2026-10-13",
+        "date": "2026-10-14",
         "status": "beta-checked",
-        "evidence": "Đối chiếu tài liệu nguồn, giả định và đáp án; kiểm chứng mô hình theo EDU-04. Chưa có review chuyên gia độc lập hoặc pilot học sinh."
+        "evidence": "docs/delivery/EDU_11_FEEDBACK_ALL_LESSONS.md"
       },
       "caseReview": {
         "caseId": "case-balance",
@@ -392,7 +392,7 @@
     },
     {
       "lessonId": "replica",
-      "revision": 2,
+      "revision": 3,
       "competencyIds": ["replica-intro"],
       "prerequisiteIds": ["cache"],
       "claims": [
@@ -402,11 +402,11 @@
         }
       ],
       "review": {
-        "reviewer": "Codex",
+        "reviewer": "Codex — EDU-11, đối chiếu engine/trace và gợi ý biên soạn",
         "reviewerType": "agent",
-        "date": "2026-10-13",
+        "date": "2026-10-14",
         "status": "beta-checked",
-        "evidence": "Đối chiếu tài liệu nguồn, giả định và đáp án; kiểm chứng mô hình theo EDU-04. Chưa có review chuyên gia độc lập hoặc pilot học sinh."
+        "evidence": "docs/delivery/EDU_11_FEEDBACK_ALL_LESSONS.md"
       },
       "caseReview": {
         "caseId": "case-replica",
@@ -420,7 +420,7 @@
     },
     {
       "lessonId": "design",
-      "revision": 2,
+      "revision": 3,
       "competencyIds": ["design-intro"],
       "prerequisiteIds": ["balance", "cache", "queue"],
       "claims": [
@@ -430,11 +430,11 @@
         }
       ],
       "review": {
-        "reviewer": "Codex",
+        "reviewer": "Codex — EDU-11, đối chiếu engine/trace và gợi ý biên soạn",
         "reviewerType": "agent",
-        "date": "2026-10-13",
+        "date": "2026-10-14",
         "status": "beta-checked",
-        "evidence": "Đối chiếu tài liệu nguồn, giả định và đáp án; kiểm chứng mô hình theo EDU-04. Chưa có review chuyên gia độc lập hoặc pilot học sinh."
+        "evidence": "docs/delivery/EDU_11_FEEDBACK_ALL_LESSONS.md"
       },
       "caseReview": {
         "caseId": "case-design",
@@ -448,7 +448,7 @@
     },
     {
       "lessonId": "metrics",
-      "revision": 3,
+      "revision": 4,
       "competencyIds": ["metrics-intro"],
       "prerequisiteIds": ["request"],
       "claims": [
@@ -458,11 +458,11 @@
         }
       ],
       "review": {
-        "reviewer": "Codex",
+        "reviewer": "Codex — EDU-11, đối chiếu engine/trace và gợi ý biên soạn",
         "reviewerType": "agent",
         "date": "2026-10-14",
         "status": "beta-checked",
-        "evidence": "Đối chiếu tài liệu nguồn, giả định và đáp án; kiểm chứng mô hình theo EDU-04. Chưa có review chuyên gia độc lập hoặc pilot học sinh. EDU-04b bổ sung giải thích ms và nhãn hành động theo QA-04; không đổi đáp án hoặc mô hình."
+        "evidence": "docs/delivery/EDU_11_FEEDBACK_ALL_LESSONS.md"
       },
       "caseReview": {
         "caseId": "case-metrics",
@@ -476,7 +476,7 @@
     },
     {
       "lessonId": "dns",
-      "revision": 2,
+      "revision": 3,
       "competencyIds": ["dns-intro"],
       "prerequisiteIds": ["cache"],
       "claims": [
@@ -486,11 +486,11 @@
         }
       ],
       "review": {
-        "reviewer": "Codex",
+        "reviewer": "Codex — EDU-11, đối chiếu engine/trace và gợi ý biên soạn",
         "reviewerType": "agent",
-        "date": "2026-10-13",
+        "date": "2026-10-14",
         "status": "beta-checked",
-        "evidence": "Đối chiếu tài liệu nguồn, giả định và đáp án; kiểm chứng mô hình theo EDU-04. Chưa có review chuyên gia độc lập hoặc pilot học sinh."
+        "evidence": "docs/delivery/EDU_11_FEEDBACK_ALL_LESSONS.md"
       },
       "caseReview": {
         "caseId": "case-dns",
@@ -504,7 +504,7 @@
     },
     {
       "lessonId": "transport",
-      "revision": 2,
+      "revision": 3,
       "competencyIds": ["transport-intro"],
       "prerequisiteIds": ["request"],
       "claims": [
@@ -514,11 +514,11 @@
         }
       ],
       "review": {
-        "reviewer": "Codex",
+        "reviewer": "Codex — EDU-11, đối chiếu engine/trace và gợi ý biên soạn",
         "reviewerType": "agent",
-        "date": "2026-10-13",
+        "date": "2026-10-14",
         "status": "beta-checked",
-        "evidence": "Đối chiếu tài liệu nguồn, giả định và đáp án; kiểm chứng mô hình theo EDU-04. Chưa có review chuyên gia độc lập hoặc pilot học sinh."
+        "evidence": "docs/delivery/EDU_11_FEEDBACK_ALL_LESSONS.md"
       },
       "caseReview": {
         "caseId": "case-transport",
@@ -532,7 +532,7 @@
     },
     {
       "lessonId": "capacity",
-      "revision": 3,
+      "revision": 4,
       "competencyIds": ["capacity-intro"],
       "prerequisiteIds": ["metrics"],
       "claims": [
@@ -546,11 +546,11 @@
         }
       ],
       "review": {
-        "reviewer": "Codex — đối chiếu hai agent QA và bổ sung thuật ngữ/nguồn",
+        "reviewer": "Codex — EDU-11, đối chiếu engine/trace và gợi ý biên soạn",
         "reviewerType": "agent",
         "date": "2026-10-14",
         "status": "beta-checked",
-        "evidence": "docs/delivery/QA_06_PARALLEL_REVIEW.md"
+        "evidence": "docs/delivery/EDU_11_FEEDBACK_ALL_LESSONS.md"
       },
       "caseReview": {
         "caseId": "case-capacity",
@@ -564,7 +564,7 @@
     },
     {
       "lessonId": "http",
-      "revision": 2,
+      "revision": 3,
       "competencyIds": ["http-intro"],
       "prerequisiteIds": ["request", "dns"],
       "claims": [
@@ -574,11 +574,11 @@
         }
       ],
       "review": {
-        "reviewer": "Codex",
+        "reviewer": "Codex — EDU-11, đối chiếu engine/trace và gợi ý biên soạn",
         "reviewerType": "agent",
         "date": "2026-10-14",
         "status": "beta-checked",
-        "evidence": "Đối chiếu nguồn và tính tay trace theo EDU-04b; test mô hình/UI ghi trong báo cáo delivery. Chưa qua review chuyên gia độc lập/pilot học sinh."
+        "evidence": "docs/delivery/EDU_11_FEEDBACK_ALL_LESSONS.md"
       },
       "caseReview": {
         "caseId": "case-http",
@@ -620,7 +620,7 @@
     },
     {
       "lessonId": "routing",
-      "revision": 1,
+      "revision": 2,
       "competencyIds": ["l0-network-routing"],
       "prerequisiteIds": ["request", "dns"],
       "claims": [
@@ -638,11 +638,11 @@
         }
       ],
       "review": {
-        "reviewer": "Codex — đối chiếu RFC, trace và giới hạn",
+        "reviewer": "Codex — EDU-11, đối chiếu engine/trace và gợi ý biên soạn",
         "reviewerType": "agent",
         "date": "2026-10-14",
         "status": "beta-checked",
-        "evidence": "docs/delivery/EDU_04C_ROUTING.md"
+        "evidence": "docs/delivery/EDU_11_FEEDBACK_ALL_LESSONS.md"
       },
       "caseReview": {
         "caseId": "case-routing",

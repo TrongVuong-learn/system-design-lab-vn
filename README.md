@@ -33,7 +33,7 @@ pnpm test:e2e
 - Stack đã triển khai: TypeScript + React + Vite; engine độc lập giao diện; Capacitor cho app khi đạt điều kiện.
 - Nội dung đi từ tình huống dễ hiểu đến thao tác, giải thích và cơ chế kỹ thuật.
 - Phi thương mại, chia sẻ quy mô nhỏ: học không cần tài khoản; ưu tiên cách giảng, tiến độ lưu trên thiết bị.
-- Cache/queue/network có so sánh bước trước–sau và gợi ý mở dần; xem [EDU-10](docs/delivery/EDU_10_CLEAR_FEEDBACK.md).
+- Cả13 bài beta có so sánh bước trước–sau và gợi ý mở dần; xem [EDU-11](docs/delivery/EDU_11_FEEDBACK_ALL_LESSONS.md).
 
 ## Đọc tài liệu theo thứ tự
 

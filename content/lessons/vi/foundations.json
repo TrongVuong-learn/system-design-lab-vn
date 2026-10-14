@@ -85,6 +85,17 @@
         "Đếm số việc làm xong giúp biết tốc độ phục vụ; cần phân bố thời gian để thấy người phải chờ lâu."
       ],
       "limitations": "Lab có tập yêu cầu riêng. Con số 40 yêu cầu trong hai giây là dữ liệu của câu hỏi, không phải cấu hình được áp ngầm vào lab."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Median nằm ở giữa dãy thời gian đã sắp, p95 nhìn gần nhóm chờ lâu nhất.",
+        "Với hai việc cuối chậm, kiểm tra hai vị trí giữa dãy có đổi không. Một chỉ số đại diện không cần thay đổi giống mọi chỉ số khác."
+      ],
+      "challenge": [
+        "Throughput đo số yêu cầu hoàn thành trên một đơn vị thời gian. Đề cho bao nhiêu yêu cầu, trong bao nhiêu giây?",
+        "Chia số yêu cầu cho độ dài cửa sổ. Kiểm tra đơn vị kết quả phải là yêu cầu/giây, không phải ms."
+      ]
     }
   },
   {
@@ -160,6 +171,17 @@
         "Giữ bản ghi giúp bớt hỏi lại nguồn. Thời hạn và lần tra tiếp theo quyết định lúc mô hình lấy địa chỉ lại."
       ],
       "limitations": "Chỉ cho thời gian trôi không tự phát truy vấn. Bài chưa mô phỏng đầy đủ các tầng resolver của DNS."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Đề nói bản ghi gần còn hạn. So sánh địa chỉ trong bản ghi với địa chỉ ở nơi quản lý tên.",
+        "Lần tra dùng bản ghi gần khi nó còn hạn; thay đổi nguồn không đẩy cập nhật tức thì đến mọi resolver trong mô hình."
+      ],
+      "challenge": [
+        "Tính tuổi bản ghi: thời điểm tra trừ thời điểm lấy. So với TTL năm giây.",
+        "Bản ghi chỉ được dùng khi tuổi nhỏ hơn TTL. Tại đúng ranh giới hết hạn, lần tra phải quyết định lại nơi lấy địa chỉ; chỉ đồng hồ trôi chưa gửi truy vấn."
+      ]
     }
   },
   {
@@ -242,6 +264,17 @@
         "Chọn giao thức hoặc bổ sung cơ chế tin cậy phải theo yêu cầu của ứng dụng; việc khôi phục cũng có chi phí và điều kiện."
       ],
       "limitations": "Trace giản lược một lần mất mảnh. Bài không bảo đảm thời hạn giao dữ liệu hoặc mô phỏng mọi trạng thái TCP."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "TCP cung cấp một luồng byte có thứ tự. Nhìn vùng bị thiếu nằm trước hay sau vùng ứng dụng muốn đọc.",
+        "Phân biệt dữ liệu đã tới bộ đệm với dữ liệu được giao cho ứng dụng. TCP không nhảy qua một khoảng byte thiếu để giao vùng sau như một thông điệp độc lập."
+      ],
+      "challenge": [
+        "UDP tự cung cấp xác nhận và gửi lại, hay chỉ gửi các thông điệp độc lập?",
+        "Yêu cầu giao đủ cần cơ chế tin cậy. Xem cơ chế đó có nằm trong UDP hay cần do ứng dụng/giao thức khác bổ sung."
+      ]
     }
   },
   {
@@ -324,6 +357,17 @@
         "Ảnh lớn hơn làm tăng dữ liệu gốc lẫn lượng truyền. Thêm lượt xem làm tăng lượng truyền, không tự tạo thêm file gốc."
       ],
       "limitations": "Bỏ qua metadata, thumbnail, replica và overhead giao thức. Các giá trị ban đầu của lab khác số liệu đề, không bị thay khi mở tình huống."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Tách ảnh duy nhất đang lưu với số lần tải lại cùng ảnh.",
+        "Một lần xem tạo dữ liệu truyền đi, không tạo thêm một tệp ảnh trong mô hình. Nhân lượt xem ảnh hưởng đến đại lượng nào?"
+      ],
+      "challenge": [
+        "Đề hỏi ảnh duy nhất cần lưu, không hỏi tổng dữ liệu truyền qua năm lượt xem.",
+        "Lấy số học sinh nhân kích thước một ảnh. Đổi kB sang MB bằng chia 1.000; chỉ nhân lượt xem khi tính truyền mỗi ngày."
+      ]
     }
   }
 ]

@@ -105,6 +105,7 @@ export function HttpLab({ progress, onChange }: Props) {
           )}
         </section>
       </div>
+      <ObservationPanel value={progress.lab['observation']} />
       <div className="feedback" role="status">
         <p>
           {response

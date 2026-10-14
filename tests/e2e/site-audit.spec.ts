@@ -82,7 +82,11 @@ test('all six lessons complete, retain correct model outcomes and resume without
         page.getByText('Nguồn chính ghi 205, bản sao vẫn trả 201.', { exact: false }),
       ).toBeVisible();
       for (let i = 0; i < 3; i++) await page.getByRole('button', { name: 'Qua 1 giây' }).click();
-      await expect(page.getByText('Phòng 205', { exact: true })).toHaveCount(2);
+      await expect(
+        page
+          .getByRole('group', { name: 'Các thành phần của mô hình' })
+          .getByText('Phòng 205', { exact: true }),
+      ).toHaveCount(2);
     } else {
       await page.getByRole('button', { name: 'Tăng Số máy xử lý' }).click();
       await page.getByRole('checkbox', { name: 'Thêm cache', exact: false }).check();
@@ -178,9 +182,17 @@ test('malformed imported model checkpoints cannot show negative jobs or invalid 
   await page.getByRole('button', { name: 'Qua 1 giây' }).click();
   await expect(metric(page, 'Đang chờ')).toHaveText('4');
   await page.goto('/#/learn/replica');
-  await expect(page.getByText('Phòng 201', { exact: true })).toHaveCount(2);
+  await expect(
+    page
+      .getByRole('group', { name: 'Các thành phần của mô hình' })
+      .getByText('Phòng 201', { exact: true }),
+  ).toHaveCount(2);
   await page.getByRole('button', { name: 'Đổi phòng ở nguồn' }).click();
-  await expect(page.getByText('Phòng 205', { exact: true })).toBeVisible();
+  await expect(
+    page
+      .getByRole('group', { name: 'Các thành phần của mô hình' })
+      .getByText('Phòng 205', { exact: true }),
+  ).toBeVisible();
 });
 
 test('search handles accents, case, surrounding spaces and empty results', async ({ page }) => {

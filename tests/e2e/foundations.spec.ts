@@ -28,25 +28,29 @@ test('four foundations teach the model, resume, and complete with a new scenario
       await page.getByRole('button', { name: 'Tra địa chỉ', exact: true }).click();
       await page.getByRole('button', { name: 'Đổi IP ở nguồn' }).click();
       await page.getByRole('button', { name: 'Tra địa chỉ', exact: true }).click();
-      await expect(page.locator('.lab-panel [role=status]')).toContainText(
+      await expect(page.locator('.lab-panel > .feedback[role=status]')).toContainText(
         'dùng cache: 203.0.113.10',
       );
       for (let i = 0; i < 5; i++) await page.getByRole('button', { name: 'Qua 1 giây' }).click();
       await page.getByRole('button', { name: 'Tra địa chỉ', exact: true }).click();
-      await expect(page.locator('.lab-panel [role=status]')).toContainText(
+      await expect(page.locator('.lab-panel > .feedback[role=status]')).toContainText(
         'lấy nguồn: 203.0.113.20',
       );
     } else if (lesson.id === 'transport') {
       await page.getByRole('button', { name: 'Gửi ba mảnh' }).click();
       await page.getByRole('button', { name: 'Nhận tại đích' }).click();
-      await expect(page.getByText('Giữ trong bộ đệm', { exact: true })).toBeVisible();
+      await expect(
+        page.locator('.packet-board').getByText('Giữ trong bộ đệm', { exact: true }),
+      ).toBeVisible();
       await page.getByRole('button', { name: 'Xem bước khôi phục' }).click();
       await expect(page.getByText('Ứng dụng nhận', { exact: true })).toHaveCount(4);
       await page.getByRole('button', { name: 'UDP', exact: true }).click();
       await page.getByRole('button', { name: 'Gửi ba mảnh' }).click();
       await page.getByRole('button', { name: 'Nhận tại đích' }).click();
       await page.getByRole('button', { name: 'Xem bước khôi phục' }).click();
-      await expect(page.locator('.lab-panel [role=status]')).toContainText('không tự gửi lại');
+      await expect(page.locator('.lab-panel > .feedback[role=status]')).toContainText(
+        'không tự gửi lại',
+      );
     } else {
       await page.getByRole('button', { name: 'Tăng Lượt mỗi người mỗi ngày' }).click();
       await page.getByRole('button', { name: 'Tăng Lượt mỗi người mỗi ngày' }).click();

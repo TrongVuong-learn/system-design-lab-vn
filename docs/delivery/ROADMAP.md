@@ -191,8 +191,12 @@ Backlog sau đợt: mở rộng chuẩn cho các bài khác; bài ôn liên kế
 
 ## 12. EDU-11 — mở rộng phản hồi cho10 bài beta còn lại
 
-Task Ready, owner root, baseline cde6c94. Phạm vi: request/balance/replica/design/metrics/dns/transport/capacity/http/routing. Mỗi câu hỏi có hai gợi ý biên soạn; mỗi hoạt động có quan sát trước–sau từ trạng thái thật và nguyên nhân, cùng renderer EDU-10. Dependencies: schema guidance/hints/observation hiện có, engine registry13 kinds.
+Task Verified qua QA, owner root, baseline cde6c94. Phạm vi: request/balance/replica/design/metrics/dns/transport/capacity/http/routing. Mỗi câu hỏi có hai gợi ý biên soạn; mỗi hoạt động có quan sát trước–sau từ trạng thái thật và nguyên nhân, cùng renderer EDU-10. Dependencies: schema guidance/hints/observation hiện có, engine registry13 kinds.
 
 Acceptance: không đổi mục tiêu, đáp án hoặc cơ chế engine; đơn vị và giới hạn đúng từng bài; DNS hết hạn chưa tự tra; replica cấu hình lag không đổi lịch ghi cũ; HTTP đổi cấu hình bắt đầu request mới, mã lỗi vẫn là phản hồi; TCP/UDP không biến một trace thành bảo đảm giao thành công; metrics và traffic so các lần tính độc lập, không coi đó là thời gian thật tiếp diễn. Reset bỏ quan sát cũ; lưu/reload, hint riêng prediction/challenge, tiến độ v1 và fixture cũ tiếp tục chạy.
 
 QA: unit trace các nhóm, schema có đủ guidance13 bài, full E2E liên quan, mobile320/390 và desktop, keyboard/reduced motion và ảnh thật. Ngoài phạm vi: bài ôn tổng hợp, tài khoản/backend, PWA/app, công nhận mastery hoặc đóng pilot người thật. Sau EDU-11 tiếp tục bài ôn có ràng buộc kết hợp kiến thức, chuẩn hóa hệ thống website trường xuyên bài.
+
+### Kết quả EDU-11
+
+Đã hiện thực gợi ý và quan sát trước–sau cho đủ13 bài beta. [EDU-11](EDU_11_FEEDBACK_ALL_LESSONS.md) ghi phạm vi, trace, test và giới hạn. Bước tiếp theo là bài ôn kết hợp kiến thức và website trường xuyên bài; chưa coi13 bài là đủ năng lực36 module và chưa đóng pilot thật.

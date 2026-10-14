@@ -97,6 +97,17 @@
         "Status giúp hiểu kết quả xử lý ở tầng HTTP. Muốn kết luận về phòng hiện tại cần xem thêm yêu cầu và cơ chế quản lý độ mới."
       ],
       "limitations": "Lab HTTP minh họa thông điệp; tình huống dữ liệu cũ là bài suy luận. Nó chưa mô phỏng cache hoặc phiên bản lịch."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "404 nằm ở đâu: bên trong thông điệp phản hồi HTTP hay là việc không có phản hồi?",
+        "Phân biệt máy chủ trả lời tài nguyên không tồn tại với mất kết nối. Đọc được mã HTTP nghĩa là đã nhận một phản hồi."
+      ],
+      "challenge": [
+        "Tách mã trạng thái với nội dung phòng học trong phản hồi. Mỗi phần cho biết điều gì?",
+        "Thành công HTTP không tự xác nhận mọi yêu cầu nghiệp vụ. Muốn biết dữ liệu mới, phải đối chiếu yêu cầu về độ mới riêng."
+      ]
     }
   },
   {

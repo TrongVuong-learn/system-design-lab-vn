@@ -91,6 +91,17 @@
         "Cần sửa đúng chặng gây lỗi trước khi kiểm dịch vụ tại đích; một thay đổi ở tầng khác chưa giải quyết được thông tin đường đi thiếu."
       ],
       "limitations": "Mạng và route của đề được giả định cố định. Mạng thật có thể có đường thay thế hoặc thiết bị lọc theo nhiều trường; bài chưa mô phỏng chúng."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "IP và port TCP là hai trường khác nhau. Đề chỉ đổi trường nào?",
+        "Giữ nguyên IP nghĩa là giữ máy đích; port có thể chọn dịch vụ khác đang lắng nghe tại máy đó trong cấu hình của bài."
+      ],
+      "challenge": [
+        "Yêu cầu đang dừng ở router hay đã tới máy đích để chọn dịch vụ?",
+        "Route cung cấp chặng IP tiếp theo; port dùng tại đích. Thay một trường chọn dịch vụ có tự thêm mục định tuyến thiếu hay không?"
+      ]
     }
   }
 ]

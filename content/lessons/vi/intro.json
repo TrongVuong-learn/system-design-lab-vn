@@ -67,6 +67,17 @@
         "Tối ưu nơi tìm sách có thể giảm thời gian xử lý; đường gửi và trả lời vẫn góp vào thời gian chờ."
       ],
       "limitations": "Các thời gian của đề là giả định riêng. Thí nghiệm chưa có hàng đợi hoặc xử lý song song."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Theo đường câu trả lời: nó phải đi qua nơi tra lịch trước khi về thiết bị.",
+        "Các chặng của ví dụ nối tiếp, không chồng thời gian. Tăng thời gian một chặng thì tổng thời gian hành trình thay đổi ra sao?"
+      ],
+      "challenge": [
+        "Đề hỏi cả hành trình, không chỉ thời gian tìm sách. Có ba chặng với cùng đơn vị ms.",
+        "Viết lần lượt thời gian gửi, tìm sách và trả lời, rồi cộng chúng. Đừng nhân hoặc bỏ hai chặng đi/về."
+      ]
     }
   },
   {
@@ -140,6 +151,17 @@
         "Thêm năng lực ở một tầng có thể giúp khi tầng đó nghẽn. Sau mỗi thay đổi cần đo lại các phụ thuộc còn lại."
       ],
       "limitations": "Căng tin là phép so sánh; lab dùng server và nơi lưu dữ liệu với công suất cố định. Chưa mô phỏng session, discovery hay retry."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Nhìn nơi lưu lịch dùng chung. Công suất ở đó có đổi khi thêm máy xử lý ở phía trước không?",
+        "Kết quả toàn đường đi bị giới hạn bởi thành phần có công suất thấp nhất. Thêm máy ở một chỗ không tự thay công suất ở chỗ khác."
+      ],
+      "challenge": [
+        "Tách hai việc: nhận đơn và pha nước. Khách nhận nước sau khi việc nào hoàn tất?",
+        "Tìm công đoạn đang hạn chế số đồ uống làm xong. Cải thiện công đoạn khác trước có làm giới hạn này biến mất không?"
+      ]
     }
   },
   {
@@ -377,6 +399,17 @@
         "Bản sao có thể chia tải đọc, nhưng đường đọc cần phù hợp yêu cầu đọc sau ghi của người dùng."
       ],
       "limitations": "Một nguồn và một replica, lag cố định, thông điệp đúng thứ tự. Bài chưa kiểm chứng failover hoặc bầu leader."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "So sánh thời điểm ghi với ba giây độ trễ sao chép được giả định.",
+        "Nguồn nhận ghi trước; bản sao chỉ áp dụng khi thay đổi tới lượt. “Đọc ngay” xảy ra trước hay sau thời điểm đó?"
+      ],
+      "challenge": [
+        "Đề cần kết quả của lần ghi vừa rồi. Nơi nào đã nhận ghi, nơi nào có thể còn chờ sao chép?",
+        "Chọn đường đọc đáp ứng độ mới trong mô hình này. Một bản sao phục vụ được không có nghĩa nó đã nhận thay đổi mới nhất."
+      ]
     }
   },
   {
@@ -447,6 +480,17 @@
         "Mỗi lựa chọn có chi phí và giới hạn. Cần đối chiếu từng yêu cầu, kể cả những yêu cầu chưa được mô hình hiện tại đo."
       ],
       "limitations": "Lab giữ dữ liệu không đổi trong cửa sổ thử và dùng hit rate giả định. Phần độ mới là suy luận; chưa đánh giá security, failover hoặc retry."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Tách luồng đọc lịch và luồng gửi thông báo. Cache phục vụ loại công việc nào?",
+        "Giảm đọc nguồn không tự thêm người gửi thông báo. Kiểm tra công suất của từng luồng riêng thay vì coi một giải pháp xử lý mọi việc."
+      ],
+      "challenge": [
+        "Liệt kê các yêu cầu: số lượt làm xong, độ mới, chi phí và hành vi khi lỗi.",
+        "Một thiết kế chỉ đạt tất cả khi các yêu cầu bắt buộc cùng đạt. Chỉ số hiệu năng cao có thay thế được yêu cầu về dữ liệu mới không?"
+      ]
     }
   }
 ]
