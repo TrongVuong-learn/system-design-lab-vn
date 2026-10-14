@@ -166,3 +166,7 @@ Trạng thái ngày 14/10/2026: CASE-00 đã viết đặc tả; CASE-01 trở �
 ### CASE-04 / EDU-04c: nền IP/port/routing (14/10/2026)
 
 Đã thêm bài routing và case chuyển giao tại L0.4, nâng catalog lên 13 bài beta. [Báo cáo EDU-04c](EDU_04C_ROUTING.md) ghi engine 1.3.0, RFC nguồn, trace/giới hạn, 29 unit test và 103 E2E đạt/một skip. CASE-04/EDU-04 vẫn mở: HTTPS/TLS/session, OS/concurrency, cấu trúc dữ liệu và các năng lực L0 còn thiếu cần bài riêng và review trước CAP-L0.
+
+### QA-05 — agent review và sửa đơn vị cache (14/10/2026)
+
+student_tester đã chạy first-use routing/cache; knowledge_reviewer được Astra medium thiết kế, runtime Sol medium. [QA-05](../research/knowledge-reviewer/QA_05_RESOLUTION.md) lưu scope, báo cáo, matrix, lỗi KR-01 đã sửa và kiểm tra. Chưa đóng gate pilot/ chuyên gia độc lập/level. Các timeout Firefox trong lượt full và kết quả serial retest được ghi rõ; không mô tả full suite ban đầu là pass.

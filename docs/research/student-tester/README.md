@@ -32,4 +32,8 @@ Cấu hình này có thể cần phiên mới để được discovery. Đã ki�
 
 ## Phạm vi hoàn tất
 
-Đã lưu native agent definition và hướng dẫn gọi lại, seed lịch sử từ QA-04, khóa checksum trong [agents-lock.json](../../engineering/agents-lock.json). Chưa chạy một lượt browser mới với definition này; không đổi trạng thái pilot thật. Đây là task lưu agent; không sửa ứng dụng hoặc bản web đang phát hành.
+Đã lưu native agent definition và hướng dẫn gọi lại, seed lịch sử từ QA-04, khóa checksum trong [agents-lock.json](../../engineering/agents-lock.json). Đã chạy first-use routing/cache bằng fallback theo definition này; report tại RUN_2026-10-14_ROUTING_CACHE.md. Chưa xác nhận native discovery tự động; không đổi trạng thái pilot thật. Đây là task lưu agent; không sửa ứng dụng hoặc bản web đang phát hành.
+
+## Lượt chạy đã xác minh
+
+Ngày 14/10/2026: [routing/cache](RUN_2026-10-14_ROUTING_CACHE.md) trên 4425af0, first-use/context mới. Browser riêng và artifacts thực; không đọc code/đáp án trước khám phá. Parent spawn fallback đọc native definition. Các câu “chưa có lượt mới” ở trạng thái tạo profile ban đầu là lịch sử; kết quả hiện hành theo MEMORY/report này.

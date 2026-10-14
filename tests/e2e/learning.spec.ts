@@ -14,7 +14,12 @@ test('learn cache, observe stale data, complete and resume after reload', async 
   await page.getByRole('button', { name: 'Lấy lịch mới', exact: true }).click();
   await page.getByRole('button', { name: 'Xem lịch', exact: true }).click();
   await expect(page.getByText('Bạn thấy phòng 205.', { exact: false })).toBeVisible();
+  await expect(page.locator('.time-badge')).toContainText('Phút');
   await page.getByRole('button', { name: 'Thử tình huống mới' }).click();
+  await page.getByText('Giới hạn tình huống', { exact: true }).click();
+  await expect(
+    page.getByText('Đồng hồ trong lab và câu hỏi đều dùng phút mô phỏng.', { exact: false }),
+  ).toBeVisible();
   await page
     .getByRole('button', { name: 'Không; dữ liệu có thể cũ quá một phút.', exact: false })
     .click();

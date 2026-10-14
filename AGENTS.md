@@ -28,3 +28,9 @@
 - Khi người dùng gọi tester học sinh/Minh, dùng role `student_tester` tại `.codex/agents/student_tester.toml`; cách gọi và lịch sử tại `docs/research/student-tester/`.
 - Lượt first-use không giao finding/đáp án cũ trước khi agent khám phá UI. Chỉ gọi khi có task kiểm tra; không tự chạy cho mọi thay đổi.
 - Agent tạo báo cáo/ảnh trong phiên browser riêng; parent review bằng chứng và cập nhật lịch sử. Kết quả AI mô phỏng không thay pilot học sinh thật.
+
+## Agent review kiến thức
+
+- Khi người dùng gọi review kiến thức, dùng `knowledge_reviewer` tại `.codex/agents/knowledge_reviewer.toml`, runtime model `gpt-6-sol`, reasoning `medium`; chỉ dùng `gpt-6-astra medium` khi user giao thiết kế/cập nhật profile. Hướng dẫn/lịch sử tại `docs/research/knowledge-reviewer/`.
+- Review claim + nguồn sơ cấp + engine/trace + assessment/giới hạn, ghi rõ chưa xác minh. Không tự đổi model, không ghi human-reviewed hoặc đóng pilot bằng AI review.
+- Reviewer chỉ đọc/kiểm/report; parent rà evidence trước sửa hoặc phát hành. Chỉ gọi khi có task, không tự tạo lịch chạy hay phát hành từ finding chưa xác minh.

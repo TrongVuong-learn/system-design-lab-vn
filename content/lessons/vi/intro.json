@@ -189,7 +189,7 @@
     "caseStudy": {
       "id": "case-cache",
       "schemaVersion": 1,
-      "revision": 1,
+      "revision": 2,
       "familyId": "CASE-L0-01",
       "provenance": {
         "kind": "authored-scenario"
@@ -209,7 +209,7 @@
       "tradeoffs": [
         "Bản ghi gần có thể giảm lượt hỏi nguồn. Cần thêm quy tắc cập nhật phù hợp nếu thông tin thay đổi."
       ],
-      "limitations": "Đồng hồ trong lab dùng giây; câu hỏi dùng phút. Mô hình này giả định nguồn truy cập được, chưa kiểm chứng một cam kết độ mới của hệ thống thật."
+      "limitations": "Đồng hồ trong lab và câu hỏi đều dùng phút mô phỏng. Mô hình này giả định nguồn truy cập được, chưa kiểm chứng một cam kết độ mới của hệ thống thật."
     }
   },
   {

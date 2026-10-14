@@ -376,7 +376,7 @@ Giữ lesson ID, module, bốn chặng và semantics đáp án hiện hành. Đ�
 | Lesson ID | Module hiện tại | Mini-case và yêu cầu | Tái sử dụng / giới hạn đợt đầu |
 | --- | --- | --- | --- |
 | `request` | L0.1 | Tra sách: ba chặng tuần tự 20/80/20 ms; xác định tổng thời gian | Trace request hiện hữu; lời giải 120 ms không đổi |
-| `cache` | L0.1 | Phòng sinh hoạt vừa đổi; cần mới trong một phút nhưng bản ghi giữ năm phút không kiểm tra | Dùng mô hình bản sao/refresh; phân biệt giây mô phỏng và phút của đề, không coi lab đã chứng minh SLA |
+| `cache` | L0.1 | Phòng sinh hoạt vừa đổi; cần mới trong một phút nhưng bản ghi giữ năm phút không kiểm tra | Dùng mô hình bản sao/refresh; lab và đề dùng phút mô phỏng, không coi lab đã chứng minh SLA |
 | `metrics` | L0.6 | Quầy xử lý 40 yêu cầu trong hai giây; phân biệt tốc độ và thời gian chờ | Lab batch/slow jobs hiện hữu; 20 yêu cầu/s thuộc phép tính đề, không đổi cấu hình lab ngầm |
 | `dns` | L0.4 | Đổi địa chỉ website; cache lấy tại t=0, TTL 5 giây, tra lại t=5 | Engine thời gian logic/expiry hiện hữu, công bố nguồn đang truy cập được |
 | `transport` | L0.4 | Gửi nội dung cần đủ mảnh khi dùng UDP | Lab mất mảnh/byte range; giải thích ứng dụng cần cơ chế bổ sung, không mô phỏng một protocol đáng tin cậy hoàn chỉnh |

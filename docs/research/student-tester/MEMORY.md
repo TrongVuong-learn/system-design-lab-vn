@@ -19,3 +19,9 @@ Mỗi entry ghi run ID, date, definition version, application commit, mode, repo
 ## 2026-10-14 — đối chiếu kỹ thuật các đề xuất trong EDU-04b
 
 Parent/root sửa SIM-01 bằng nhãn hành động và trạng thái100/1.000ms riêng; SIM-02 thêm giải thích1.000ms=1giây ngay lab và glossary. Regression metrics cùng91E2E đạt, reviewảnh390/1280px; chi tiết tại [EDU-04b](../../delivery/EDU_04B_HTTP_NETWORK.md). Đây là xác minh code/UI bởi root, không phải lượt student_tester hoặc học sinh mới. Giả thuyết về hiệu quả giảng dạy vẫn cần pilot thật. SIM-03 giữ trạng thái chưa xác nhận mất dữ liệu đã lưu.
+
+## 2026-10-14 — first-use routing/cache
+
+Definition 1.0.0; application 4425af0; Chromium touch 390×844, xem thêm hai case 320 px. [Report gốc](RUN_2026-10-14_ROUTING_CACHE.md), artifact `/private/tmp/student-tester-2026-10-14-current/`. Parent đã đọc report và xem routing-lab.png. Agent xác nhận saved → reload, case/lab/quay lại, completion của routing/cache. Không thấy defect chặn học/mất dữ liệu trong phạm vi; chưa test toàn bộ site/thiết bị thật.
+
+P3: diễn đạt định nghĩa port có thể trừu tượng cho người mới; chưa có pilot xác nhận, chưa sửa như defect. Skip link xuất hiện trong ảnh cache dài là quan sát chưa xác minh; không kết luận lỗi UI chỉ từ ảnh toàn trang. Ghi đầy đủ phần chưa thử trong report. Đây là AI mô phỏng, không đóng EDU-02.

@@ -1,0 +1,500 @@
+{
+  "reviewer": "AI knowledge_reviewer; gpt-6-sol medium theo yêu cầu parent",
+  "commit": "4425af078ea484f58aec106698ea39bd49e6218f",
+  "workingDiff": "cache caseStudy revision 2 và limitations phút mô phỏng; các diff khác ngoài source học liệu",
+  "date": "2026-10-14",
+  "coverage": {
+    "lessonsInventoried": 13,
+    "claimRows": 27,
+    "sourceSectionsOpened": 11,
+    "engineTrace": "CLI tsx direct imports, one representative case per relevant engine; not browser execution"
+  },
+  "rows": [
+    {
+      "lessonId": "request",
+      "moduleId": "L0.1",
+      "version": 1,
+      "caseRevision": 1,
+      "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+      "field": "explanation + limit + prediction + challenge + caseStudy",
+      "claim": "Chỉ được nơi nhận, xử lý và lưu dữ liệu; biết vì sao một chặng chậm làm bạn chờ lâu.",
+      "status": "verified-with-conditions",
+      "source": {
+        "url": "https://www.rfc-editor.org/rfc/rfc9110.html",
+        "sectionRead": "§3.4, §6; nguồn sơ cấp bổ sung, source trong bài là MDN",
+        "accessed": "2026-10-14"
+      },
+      "engineOrIndependentEvidence": "20 + 80 + 20 = 120 ms; lab RequestLab chưa chạy trong trace CLI này.",
+      "conditions": "Chặng nối tiếp, không xếp hàng hoặc song song.",
+      "unchecked": "Không chạy tương tác browser/mobile; trace CLI chỉ bao phủ ví dụ nêu. Mọi behavior khác từ đọc source, chưa exhaustive."
+    },
+    {
+      "lessonId": "request",
+      "moduleId": "L0.1",
+      "version": 1,
+      "caseRevision": 1,
+      "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+      "field": "challenge.answer + challenge.explanation + caseStudy.requirements + caseStudy.limitations",
+      "claim": "Tra thư viện có 3 chặng: gửi 20 ms, tìm sách 80 ms, trả lời 20 ms. Mô hình nối tiếp cần bao lâu?",
+      "status": "verified-with-conditions",
+      "source": {
+        "url": "https://www.rfc-editor.org/rfc/rfc9110.html",
+        "sectionRead": "§3.4, §6; nguồn sơ cấp bổ sung, source trong bài là MDN",
+        "accessed": "2026-10-14"
+      },
+      "engineOrIndependentEvidence": "20 + 80 + 20 = 120 ms; lab RequestLab chưa chạy trong trace CLI này.",
+      "conditions": "Chặng nối tiếp, không xếp hàng hoặc song song.",
+      "unchecked": "Chưa chạy assessment trong browser hoặc thử nhiều cách trả lời hợp lệ."
+    },
+    {
+      "lessonId": "balance",
+      "moduleId": "L2.1",
+      "version": 1,
+      "caseRevision": 1,
+      "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+      "field": "explanation + limit + prediction + challenge + caseStudy",
+      "claim": "Nhận ra nút thắt chung và kiểm tra tác dụng của việc thêm máy xử lý.",
+      "status": "verified-with-conditions",
+      "source": {
+        "url": "https://sre.google/sre-book/handling-overload/",
+        "sectionRead": "Chapter 21, Handling Overload",
+        "accessed": "2026-10-14"
+      },
+      "engineOrIndependentEvidence": "Tầng DB 4 lượt/giây, không cache: min(3×6,4)=4; trafficStep đã chạy với 2 server, cache hit 0,75: 12 hoàn tất, 3 đọc DB.",
+      "conditions": "Công suất cố định, mỗi yêu cầu đọc nguồn một lần; cache hit giả định nếu bật.",
+      "unchecked": "Không chạy tương tác browser/mobile; trace CLI chỉ bao phủ ví dụ nêu. Mọi behavior khác từ đọc source, chưa exhaustive."
+    },
+    {
+      "lessonId": "balance",
+      "moduleId": "L2.1",
+      "version": 1,
+      "caseRevision": 1,
+      "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+      "field": "challenge.answer + challenge.explanation + caseStudy.requirements + caseStudy.limitations",
+      "claim": "Nếu việc pha nước đang chậm, mở thêm quầy nhận đơn có đủ giúp khách nhận nước nhanh hơn không?",
+      "status": "verified-with-conditions",
+      "source": {
+        "url": "https://sre.google/sre-book/handling-overload/",
+        "sectionRead": "Chapter 21, Handling Overload",
+        "accessed": "2026-10-14"
+      },
+      "engineOrIndependentEvidence": "Tầng DB 4 lượt/giây, không cache: min(3×6,4)=4; trafficStep đã chạy với 2 server, cache hit 0,75: 12 hoàn tất, 3 đọc DB.",
+      "conditions": "Công suất cố định, mỗi yêu cầu đọc nguồn một lần; cache hit giả định nếu bật.",
+      "unchecked": "Chưa chạy assessment trong browser hoặc thử nhiều cách trả lời hợp lệ."
+    },
+    {
+      "lessonId": "cache",
+      "moduleId": "L0.1",
+      "version": 1,
+      "caseRevision": 2,
+      "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+      "field": "explanation + limit + prediction + challenge + caseStudy",
+      "claim": "Phân biệt dữ liệu nguồn và cache; giải thích vì sao bản ghi có thể cũ và khi nào cần lấy mới.",
+      "status": "verified-with-conditions",
+      "source": {
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside",
+        "sectionRead": "Context and problem; Solution; Problems and considerations",
+        "accessed": "2026-10-14"
+      },
+      "engineOrIndependentEvidence": "Đã chạy: update nguồn 205 → read t=0 trả 201; wait 5 → read t=5 trả 205, miss=1. UI Lab.tsx:68,93,114 đều phút.",
+      "conditions": "Một bản ghi, nguồn truy cập được, không retry; TTL không cam kết độ mới thực tế.",
+      "unchecked": "Không chạy tương tác browser/mobile; trace CLI chỉ bao phủ ví dụ nêu. Mọi behavior khác từ đọc source, chưa exhaustive."
+    },
+    {
+      "lessonId": "cache",
+      "moduleId": "L0.1",
+      "version": 1,
+      "caseRevision": 2,
+      "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+      "field": "challenge.answer + challenge.explanation + caseStudy.requirements + caseStudy.limitations",
+      "claim": "Yêu cầu: phòng mới phải hiện trong tối đa một phút. Giữ cache cũ năm phút mà không cập nhật có đạt không?",
+      "status": "verified-with-conditions",
+      "source": {
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside",
+        "sectionRead": "Context and problem; Solution; Problems and considerations",
+        "accessed": "2026-10-14"
+      },
+      "engineOrIndependentEvidence": "Đã chạy: update nguồn 205 → read t=0 trả 201; wait 5 → read t=5 trả 205, miss=1. UI Lab.tsx:68,93,114 đều phút.",
+      "conditions": "Một bản ghi, nguồn truy cập được, không retry; TTL không cam kết độ mới thực tế.",
+      "unchecked": "Chưa chạy assessment trong browser hoặc thử nhiều cách trả lời hợp lệ."
+    },
+    {
+      "lessonId": "queue",
+      "moduleId": "L2.5",
+      "version": 1,
+      "caseRevision": 1,
+      "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+      "field": "explanation + limit + prediction + challenge + caseStudy",
+      "claim": "Phân biệt việc đã nhận và đã hoàn tất; hiểu hàng chờ tăng khi công việc đến nhanh hơn xử lý.",
+      "status": "verified-with-conditions",
+      "source": {
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling",
+        "sectionRead": "Solution; Problems and considerations",
+        "accessed": "2026-10-14"
+      },
+      "engineOrIndependentEvidence": "8 đến, 1 worker×2 → backlog sau 3 giây = 18; engine thực thi cho đúng 18. 4 worker×2=8 chỉ ngăn tăng.",
+      "conditions": "Việc đồng nhất, nhịp giây, không mất/duplicate/retry.",
+      "unchecked": "Không chạy tương tác browser/mobile; trace CLI chỉ bao phủ ví dụ nêu. Mọi behavior khác từ đọc source, chưa exhaustive."
+    },
+    {
+      "lessonId": "queue",
+      "moduleId": "L2.5",
+      "version": 1,
+      "caseRevision": 1,
+      "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+      "field": "challenge.answer + challenge.explanation + caseStudy.requirements + caseStudy.limitations",
+      "claim": "Bài mới: đến 8 việc/giây, mỗi worker làm 2 việc/giây. Ít nhất bao nhiêu worker để hàng chờ không tiếp tục tăng trong mô hình?",
+      "status": "verified-with-conditions",
+      "source": {
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling",
+        "sectionRead": "Solution; Problems and considerations",
+        "accessed": "2026-10-14"
+      },
+      "engineOrIndependentEvidence": "8 đến, 1 worker×2 → backlog sau 3 giây = 18; engine thực thi cho đúng 18. 4 worker×2=8 chỉ ngăn tăng.",
+      "conditions": "Việc đồng nhất, nhịp giây, không mất/duplicate/retry.",
+      "unchecked": "Chưa chạy assessment trong browser hoặc thử nhiều cách trả lời hợp lệ."
+    },
+    {
+      "lessonId": "replica",
+      "moduleId": "L2.3",
+      "version": 1,
+      "caseRevision": 1,
+      "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+      "field": "explanation + limit + prediction + challenge + caseStudy",
+      "claim": "Nhận ra độ trễ sao chép và chọn nơi đọc khi cần thông tin mới.",
+      "status": "verified-with-conditions",
+      "source": {
+        "url": "https://www.postgresql.org/docs/current/hot-standby.html",
+        "sectionRead": "§26.4.2, Handling Query Conflicts; PostgreSQL 18 current tại ngày review",
+        "accessed": "2026-10-14"
+      },
+      "engineOrIndependentEvidence": "Đã chạy: write 205 lag 3, tick 3 → replica 205. Trước t=3 suy từ mã, chưa chạy trace đọc riêng.",
+      "conditions": "Một primary và một replica, lag cố định, thứ tự giao đúng; primary truy cập được.",
+      "unchecked": "Không chạy tương tác browser/mobile; trace CLI chỉ bao phủ ví dụ nêu. Mọi behavior khác từ đọc source, chưa exhaustive."
+    },
+    {
+      "lessonId": "replica",
+      "moduleId": "L2.3",
+      "version": 1,
+      "caseRevision": 1,
+      "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+      "field": "challenge.answer + challenge.explanation + caseStudy.requirements + caseStudy.limitations",
+      "claim": "Vừa đổi phòng và cần xem ngay kết quả mới. Trong mô hình này, nên đọc đâu?",
+      "status": "verified-with-conditions",
+      "source": {
+        "url": "https://www.postgresql.org/docs/current/hot-standby.html",
+        "sectionRead": "§26.4.2, Handling Query Conflicts; PostgreSQL 18 current tại ngày review",
+        "accessed": "2026-10-14"
+      },
+      "engineOrIndependentEvidence": "Đã chạy: write 205 lag 3, tick 3 → replica 205. Trước t=3 suy từ mã, chưa chạy trace đọc riêng.",
+      "conditions": "Một primary và một replica, lag cố định, thứ tự giao đúng; primary truy cập được.",
+      "unchecked": "Chưa chạy assessment trong browser hoặc thử nhiều cách trả lời hợp lệ."
+    },
+    {
+      "lessonId": "design",
+      "moduleId": "L2.6",
+      "version": 1,
+      "caseRevision": 1,
+      "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+      "field": "explanation + limit + prediction + challenge + caseStudy",
+      "claim": "Chọn thành phần theo yêu cầu, kiểm tra số liệu và nêu giới hạn của thiết kế.",
+      "status": "verified-with-conditions",
+      "source": {
+        "url": "https://sre.google/sre-book/handling-overload/",
+        "sectionRead": "Chapter 21, Handling Overload",
+        "accessed": "2026-10-14"
+      },
+      "engineOrIndependentEvidence": "Với 12 đọc/giây, hit 75% giả định → 3 đọc DB/giây; 2 server×6=12; 3 worker×2=6; cost=2+3+1=6. UI Lab.tsx:189-197 xác nhận; trafficStep đã chạy cho 12 completed, 0 waiting.",
+      "conditions": "Dữ liệu không đổi trong cửa sổ tải, hit 75% giả định; độ mới không được lab đo.",
+      "unchecked": "Không chạy tương tác browser/mobile; trace CLI chỉ bao phủ ví dụ nêu. Mọi behavior khác từ đọc source, chưa exhaustive."
+    },
+    {
+      "lessonId": "design",
+      "moduleId": "L2.6",
+      "version": 1,
+      "caseRevision": 1,
+      "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+      "field": "challenge.answer + challenge.explanation + caseStudy.requirements + caseStudy.limitations",
+      "claim": "Thiết kế đạt tải đọc nhưng dữ liệu cache cũ quá mức cho phép. Có nên coi thiết kế đã đạt tất cả yêu cầu không?",
+      "status": "verified-with-conditions",
+      "source": {
+        "url": "https://sre.google/sre-book/handling-overload/",
+        "sectionRead": "Chapter 21, Handling Overload",
+        "accessed": "2026-10-14"
+      },
+      "engineOrIndependentEvidence": "Với 12 đọc/giây, hit 75% giả định → 3 đọc DB/giây; 2 server×6=12; 3 worker×2=6; cost=2+3+1=6. UI Lab.tsx:189-197 xác nhận; trafficStep đã chạy cho 12 completed, 0 waiting.",
+      "conditions": "Dữ liệu không đổi trong cửa sổ tải, hit 75% giả định; độ mới không được lab đo.",
+      "unchecked": "Chưa chạy assessment trong browser hoặc thử nhiều cách trả lời hợp lệ."
+    },
+    {
+      "lessonId": "metrics",
+      "moduleId": "L0.6",
+      "version": 1,
+      "caseRevision": 1,
+      "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+      "field": "explanation + limit + prediction + challenge + caseStudy",
+      "claim": "Phân biệt thời gian chờ của từng lượt và số lượt làm xong mỗi giây; đọc median và p95.",
+      "status": "verified-with-conditions",
+      "source": {
+        "url": "https://sre.google/sre-book/monitoring-distributed-systems/",
+        "sectionRead": "The Four Golden Signals: Latency, Traffic",
+        "accessed": "2026-10-14"
+      },
+      "engineOrIndependentEvidence": "20 việc 1 worker, 18×100ms và 2×1000ms: vị trí 10/11 =1000/1100, median=1050ms; vị trí 19=2800ms; đã chạy engine cho cùng giá trị.",
+      "conditions": "20 yêu cầu đến t=0, nearest-rank p95, throughput cửa sổ batch.",
+      "unchecked": "Không chạy tương tác browser/mobile; trace CLI chỉ bao phủ ví dụ nêu. Mọi behavior khác từ đọc source, chưa exhaustive."
+    },
+    {
+      "lessonId": "metrics",
+      "moduleId": "L0.6",
+      "version": 1,
+      "caseRevision": 1,
+      "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+      "field": "challenge.answer + challenge.explanation + caseStudy.requirements + caseStudy.limitations",
+      "claim": "Một đợt làm xong 40 yêu cầu trong 2 giây. Throughput của cửa sổ đó là bao nhiêu?",
+      "status": "verified-with-conditions",
+      "source": {
+        "url": "https://sre.google/sre-book/monitoring-distributed-systems/",
+        "sectionRead": "The Four Golden Signals: Latency, Traffic",
+        "accessed": "2026-10-14"
+      },
+      "engineOrIndependentEvidence": "20 việc 1 worker, 18×100ms và 2×1000ms: vị trí 10/11 =1000/1100, median=1050ms; vị trí 19=2800ms; đã chạy engine cho cùng giá trị.",
+      "conditions": "20 yêu cầu đến t=0, nearest-rank p95, throughput cửa sổ batch.",
+      "unchecked": "Chưa chạy assessment trong browser hoặc thử nhiều cách trả lời hợp lệ."
+    },
+    {
+      "lessonId": "dns",
+      "moduleId": "L0.4",
+      "version": 1,
+      "caseRevision": 1,
+      "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+      "field": "explanation + limit + prediction + challenge + caseStudy",
+      "claim": "Theo dấu lần tra DNS và giải thích cache còn hạn có thể trả địa chỉ cũ.",
+      "status": "verified-with-conditions",
+      "source": {
+        "url": "https://www.rfc-editor.org/rfc/rfc1035",
+        "sectionRead": "§3.2.1, TTL",
+        "accessed": "2026-10-14"
+      },
+      "engineOrIndependentEvidence": "Đã chạy lookup t=0, move .20, wait×5, lookup t=5 → .20 authoritative; RFC 1035 TTL tính bằng giây.",
+      "conditions": "Một bản ghi A, nguồn truy cập được; bỏ qua serve-stale và negative cache.",
+      "unchecked": "Không chạy tương tác browser/mobile; trace CLI chỉ bao phủ ví dụ nêu. Mọi behavior khác từ đọc source, chưa exhaustive."
+    },
+    {
+      "lessonId": "dns",
+      "moduleId": "L0.4",
+      "version": 1,
+      "caseRevision": 1,
+      "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+      "field": "challenge.answer + challenge.explanation + caseStudy.requirements + caseStudy.limitations",
+      "claim": "Lấy bản ghi lúc giây 0, TTL 5 giây. Lần tra ở đúng giây 5 sẽ làm gì trong mô hình?",
+      "status": "verified-with-conditions",
+      "source": {
+        "url": "https://www.rfc-editor.org/rfc/rfc1035",
+        "sectionRead": "§3.2.1, TTL",
+        "accessed": "2026-10-14"
+      },
+      "engineOrIndependentEvidence": "Đã chạy lookup t=0, move .20, wait×5, lookup t=5 → .20 authoritative; RFC 1035 TTL tính bằng giây.",
+      "conditions": "Một bản ghi A, nguồn truy cập được; bỏ qua serve-stale và negative cache.",
+      "unchecked": "Chưa chạy assessment trong browser hoặc thử nhiều cách trả lời hợp lệ."
+    },
+    {
+      "lessonId": "transport",
+      "moduleId": "L0.4",
+      "version": 1,
+      "caseRevision": 1,
+      "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+      "field": "explanation + limit + prediction + challenge + caseStudy",
+      "claim": "Nhận ra TCP giao luồng byte theo thứ tự; UDP không tự bảo đảm giao đủ hoặc gửi lại.",
+      "status": "verified-with-conditions",
+      "source": {
+        "url": "https://www.rfc-editor.org/rfc/rfc9293",
+        "sectionRead": "§2.2, TCP byte stream and retransmission; https://www.rfc-editor.org/rfc/rfc768 Introduction",
+        "accessed": "2026-10-14"
+      },
+      "engineOrIndependentEvidence": "Đã chạy TCP loss phase 2: nhận [1,3], ứng dụng nhận [1], giữ 1 vùng sau khoảng thiếu.",
+      "conditions": "Một lần mất vùng thứ 2, TCP retransmit thành công; không bảo đảm liveness vô hạn.",
+      "unchecked": "Không chạy tương tác browser/mobile; trace CLI chỉ bao phủ ví dụ nêu. Mọi behavior khác từ đọc source, chưa exhaustive."
+    },
+    {
+      "lessonId": "transport",
+      "moduleId": "L0.4",
+      "version": 1,
+      "caseRevision": 1,
+      "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+      "field": "challenge.answer + challenge.explanation + caseStudy.requirements + caseStudy.limitations",
+      "claim": "Dùng UDP, ứng dụng cần mọi thông điệp đến đủ. Có thể chỉ dựa vào UDP không?",
+      "status": "verified-with-conditions",
+      "source": {
+        "url": "https://www.rfc-editor.org/rfc/rfc9293",
+        "sectionRead": "§2.2, TCP byte stream and retransmission; https://www.rfc-editor.org/rfc/rfc768 Introduction",
+        "accessed": "2026-10-14"
+      },
+      "engineOrIndependentEvidence": "Đã chạy TCP loss phase 2: nhận [1,3], ứng dụng nhận [1], giữ 1 vùng sau khoảng thiếu.",
+      "conditions": "Một lần mất vùng thứ 2, TCP retransmit thành công; không bảo đảm liveness vô hạn.",
+      "unchecked": "Chưa chạy assessment trong browser hoặc thử nhiều cách trả lời hợp lệ."
+    },
+    {
+      "lessonId": "capacity",
+      "moduleId": "L0.6",
+      "version": 1,
+      "caseRevision": 1,
+      "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+      "field": "explanation + limit + prediction + challenge + caseStudy",
+      "claim": "Tính tải trung bình, tải đỉnh giả định, dữ liệu truyền và dung lượng lưu với đơn vị rõ ràng.",
+      "status": "verified-with-conditions",
+      "source": {
+        "url": "",
+        "sectionRead": "Ví dụ số là giả định tác giả; phép tính thập phân tự kiểm. Source được ghi là System Design Primer, không phải nguồn sơ cấp.",
+        "accessed": "2026-10-14"
+      },
+      "engineOrIndependentEvidence": "2.000×100 kB=200.000 kB=200 MB; ×5 lượt=1.000 MB/ngày; đã chạy engine cho kết quả này.",
+      "conditions": "1 ảnh/học sinh, đơn vị thập phân, không cache/thumbnail/replica/overhead.",
+      "unchecked": "Không chạy tương tác browser/mobile; trace CLI chỉ bao phủ ví dụ nêu. Mọi behavior khác từ đọc source, chưa exhaustive."
+    },
+    {
+      "lessonId": "capacity",
+      "moduleId": "L0.6",
+      "version": 1,
+      "caseRevision": 1,
+      "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+      "field": "challenge.answer + challenge.explanation + caseStudy.requirements + caseStudy.limitations",
+      "claim": "2.000 học sinh, mỗi người 1 ảnh 100 kB và xem 5 lượt/ngày. Cần lưu bao nhiêu MB ảnh duy nhất?",
+      "status": "verified-with-conditions",
+      "source": {
+        "url": "",
+        "sectionRead": "Ví dụ số là giả định tác giả; phép tính thập phân tự kiểm. Source được ghi là System Design Primer, không phải nguồn sơ cấp.",
+        "accessed": "2026-10-14"
+      },
+      "engineOrIndependentEvidence": "2.000×100 kB=200.000 kB=200 MB; ×5 lượt=1.000 MB/ngày; đã chạy engine cho kết quả này.",
+      "conditions": "1 ảnh/học sinh, đơn vị thập phân, không cache/thumbnail/replica/overhead.",
+      "unchecked": "Số liệu là giả định tác giả; chưa kiểm workload thực hoặc nguồn sơ cấp cho hệ số peak."
+    },
+    {
+      "lessonId": "http",
+      "moduleId": "L0.5",
+      "version": 1,
+      "caseRevision": 1,
+      "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/web-network.json",
+      "field": "explanation + limit + prediction + challenge + caseStudy",
+      "claim": "Chỉ được phương thức, đường dẫn, mã trạng thái và nội dung; phân biệt lỗi HTTP với chưa nhận được phản hồi.",
+      "status": "verified-with-conditions",
+      "source": {
+        "url": "https://www.rfc-editor.org/rfc/rfc9110.html",
+        "sectionRead": "§15.3.1, §15.5.5, §15.6.4",
+        "accessed": "2026-10-14"
+      },
+      "engineOrIndependentEvidence": "Đã chạy GET missing phase 2 → status 404 và body JSON, có phản hồi HTTP.",
+      "conditions": "Máy chủ vẫn trả phản hồi khi bảo trì; status 200 không chứng minh độ mới.",
+      "unchecked": "Không chạy tương tác browser/mobile; trace CLI chỉ bao phủ ví dụ nêu. Mọi behavior khác từ đọc source, chưa exhaustive."
+    },
+    {
+      "lessonId": "http",
+      "moduleId": "L0.5",
+      "version": 1,
+      "caseRevision": 1,
+      "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/web-network.json",
+      "field": "challenge.answer + challenge.explanation + caseStudy.requirements + caseStudy.limitations",
+      "claim": "Ứng dụng nhận 200 nhưng phòng trong nội dung vẫn cũ. Chỉ dựa vào 200 có thể kết luận dữ liệu luôn mới nhất không?",
+      "status": "verified-with-conditions",
+      "source": {
+        "url": "https://www.rfc-editor.org/rfc/rfc9110.html",
+        "sectionRead": "§15.3.1, §15.5.5, §15.6.4",
+        "accessed": "2026-10-14"
+      },
+      "engineOrIndependentEvidence": "Đã chạy GET missing phase 2 → status 404 và body JSON, có phản hồi HTTP.",
+      "conditions": "Máy chủ vẫn trả phản hồi khi bảo trì; status 200 không chứng minh độ mới.",
+      "unchecked": "Chưa chạy assessment trong browser hoặc thử nhiều cách trả lời hợp lệ."
+    },
+    {
+      "lessonId": "network",
+      "moduleId": "L0.4",
+      "version": 1,
+      "caseRevision": 1,
+      "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/web-network.json",
+      "field": "explanation + limit + prediction + challenge + caseStudy",
+      "claim": "Phân biệt RTT, tốc độ truyền và thời gian tải; đổi bit/byte và giải thích vì sao tăng tốc độ không xóa mọi thời gian chờ.",
+      "status": "verified-with-conditions",
+      "source": {
+        "url": "https://www.rfc-editor.org/rfc/rfc6349",
+        "sectionRead": "§1.2, §3.2.1; giới hạn TCP throughput",
+        "accessed": "2026-10-14"
+      },
+      "engineOrIndependentEvidence": "1.000 kB×8.000 bit/kB÷16.000.000 bit/s=0,5s=500ms; +100+50=650ms; đã chạy engine đúng 650.",
+      "conditions": "Kết nối sẵn có, rate cố định, bỏ qua slow start, loss và window.",
+      "unchecked": "Không chạy tương tác browser/mobile; trace CLI chỉ bao phủ ví dụ nêu. Mọi behavior khác từ đọc source, chưa exhaustive."
+    },
+    {
+      "lessonId": "network",
+      "moduleId": "L0.4",
+      "version": 1,
+      "caseRevision": 1,
+      "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/web-network.json",
+      "field": "challenge.answer + challenge.explanation + caseStudy.requirements + caseStudy.limitations",
+      "claim": "Ảnh 1.000 kB mất 1.000 ms truyền, RTT 100 ms, xử lý 50 ms. Nếu truyền nhanh gấp đôi, tổng thời gian trong mô hình là bao nhiêu?",
+      "status": "verified-with-conditions",
+      "source": {
+        "url": "https://www.rfc-editor.org/rfc/rfc6349",
+        "sectionRead": "§1.2, §3.2.1; giới hạn TCP throughput",
+        "accessed": "2026-10-14"
+      },
+      "engineOrIndependentEvidence": "1.000 kB×8.000 bit/kB÷16.000.000 bit/s=0,5s=500ms; +100+50=650ms; đã chạy engine đúng 650.",
+      "conditions": "Kết nối sẵn có, rate cố định, bỏ qua slow start, loss và window.",
+      "unchecked": "Chưa chạy assessment trong browser hoặc thử nhiều cách trả lời hợp lệ."
+    },
+    {
+      "lessonId": "routing",
+      "moduleId": "L0.4",
+      "version": 1,
+      "caseRevision": 1,
+      "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/routing.json",
+      "field": "explanation + limit + prediction + challenge + caseStudy",
+      "claim": "Theo dấu yêu cầu qua router; phân biệt IP đích với port TCP của dịch vụ và nhận ra lỗi ở từng chặng.",
+      "status": "verified-with-conditions",
+      "source": {
+        "url": "https://www.rfc-editor.org/rfc/rfc1122.html",
+        "sectionRead": "§3.3.1; https://www.rfc-editor.org/rfc/rfc9293 §3.1",
+        "accessed": "2026-10-14"
+      },
+      "engineOrIndependentEvidence": "Đã chạy routePacket(other,8080,false,3) và port 9090 cùng trả no-route, IP 198.51.100.20 không đổi.",
+      "conditions": "Một router, không default route, không NAT/firewall, port TCP ở cùng IP.",
+      "unchecked": "Không chạy tương tác browser/mobile; trace CLI chỉ bao phủ ví dụ nêu. Mọi behavior khác từ đọc source, chưa exhaustive."
+    },
+    {
+      "lessonId": "routing",
+      "moduleId": "L0.4",
+      "version": 1,
+      "caseRevision": 1,
+      "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/routing.json",
+      "field": "challenge.answer + challenge.explanation + caseStudy.requirements + caseStudy.limitations",
+      "claim": "Router không có route tới máy lưu ảnh và không có route mặc định. Chỉ đổi port TCP có sửa được đường đi IP trong mô hình không?",
+      "status": "verified-with-conditions",
+      "source": {
+        "url": "https://www.rfc-editor.org/rfc/rfc1122.html",
+        "sectionRead": "§3.3.1; https://www.rfc-editor.org/rfc/rfc9293 §3.1",
+        "accessed": "2026-10-14"
+      },
+      "engineOrIndependentEvidence": "Đã chạy routePacket(other,8080,false,3) và port 9090 cùng trả no-route, IP 198.51.100.20 không đổi.",
+      "conditions": "Một router, không default route, không NAT/firewall, port TCP ở cùng IP.",
+      "unchecked": "Chưa chạy assessment trong browser hoặc thử nhiều cách trả lời hợp lệ."
+    },
+    {
+      "lessonId": "capacity",
+      "moduleId": "L0.6",
+      "version": 1,
+      "caseRevision": 1,
+      "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+      "field": "sources + limit (peak factor)",
+      "claim": "Hệ số đỉnh là giả định cần đo kiểm lại; source hiện là System Design Primer.",
+      "status": "insufficient-evidence",
+      "source": {
+        "url": "https://github.com/donnemartin/system-design-primer/blob/ae9bbd7b02d90b9866215de185217d33f39ab733/README.md",
+        "sectionRead": "Chưa dùng làm nguồn chứng minh sơ cấp; là primer tổng hợp.",
+        "accessed": "2026-10-14"
+      },
+      "engineOrIndependentEvidence": "Không có benchmark hay workload đo thật; phép tính số riêng đã xác minh.",
+      "conditions": "Không suy ra số máy/cost từ peak factor tự chọn.",
+      "unchecked": "Cần nguồn đo tải gốc khi bài sau sử dụng hệ số đỉnh cho quyết định hạ tầng."
+    }
+  ]
+}

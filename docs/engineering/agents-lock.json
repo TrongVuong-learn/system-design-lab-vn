@@ -1,14 +1,34 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "reviewedAt": "2026-10-14",
   "origin": "repository-authored",
-  "agentName": "student_tester",
-  "definitionVersion": "1.0.0",
-  "baselineCommit": "7d165a42ddd5ba9b852fccea35cb1564dc0c4111",
-  "documentation": "https://learn.chatgpt.com/docs/agent-configuration/subagents#custom-agents",
-  "files": {
-    ".codex/agents/student_tester.toml": "fb41a2be4292afd36170e5161314637d2505204acc93c2cf3e3efb6daa50cb87",
-    "docs/research/student-tester/README.md": "14f93885727b33d811c99fc6581b67ab2331abe638291669528ad114db52df92",
-    "docs/research/student-tester/MEMORY.md": "c7eac71a5e961546efd5fc1697ff0bd05558eef169744512ee1d98d7c8bd4e7b"
-  }
+  "agents": [
+    {
+      "agentName": "student_tester",
+      "definitionVersion": "1.0.0",
+      "baselineCommit": "7d165a42ddd5ba9b852fccea35cb1564dc0c4111",
+      "documentation": "https://learn.chatgpt.com/docs/agent-configuration/subagents#custom-agents",
+      "files": {
+        ".codex/agents/student_tester.toml": "fb41a2be4292afd36170e5161314637d2505204acc93c2cf3e3efb6daa50cb87",
+        "docs/research/student-tester/README.md": "5319de7ec6c771655b4ebca94252af380a498989946a2280a267dc5c7f7b4dee",
+        "docs/research/student-tester/MEMORY.md": "39bc2c6d1bc175278ea3b40b14b7a6060ecfe1c794272680e327090d7131ca05"
+      }
+    },
+    {
+      "agentName": "knowledge_reviewer",
+      "definitionVersion": "1.0.0",
+      "baselineCommit": "4425af078ea484f58aec106698ea39bd49e6218f",
+      "model": "gpt-6-sol",
+      "reasoningEffort": "medium",
+      "documentation": "https://learn.chatgpt.com/docs/agent-configuration/subagents",
+      "files": {
+        ".codex/agents/knowledge_reviewer.toml": "c1bc6e8993dbec4520db5e0c2c4ece59820a501fccd037d703f4f1e0fe19a8c4",
+        "docs/research/knowledge-reviewer/README.md": "7d2e28a8286b10badb3316e52ec98393acd94ed09315d3fd993e2bf561b9046a",
+        "docs/research/knowledge-reviewer/MEMORY.md": "4f2638e4e2c763fbc4e7134b495e50e8fd08c149363f4181d8958370e822cd80",
+        "docs/research/knowledge-reviewer/AUTHORING_2026-10-14.md": "497e91e95da5aab369ab6f9200366014c09916c9c60ec0b2bea02e1a925e90d2"
+      },
+      "authoringModel": "gpt-6-astra",
+      "authoringReasoningEffort": "medium"
+    }
+  ]
 }

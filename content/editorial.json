@@ -328,7 +328,7 @@
     },
     {
       "lessonId": "cache",
-      "revision": 2,
+      "revision": 3,
       "competencyIds": ["cache-intro"],
       "prerequisiteIds": ["request"],
       "claims": [
@@ -346,12 +346,12 @@
       },
       "caseReview": {
         "caseId": "case-cache",
-        "revision": 1,
+        "revision": 2,
         "status": "beta-checked",
         "reviewerType": "agent",
-        "reviewer": "Codex — kiểm tra ngữ cảnh, compatibility và giới hạn mô hình",
+        "reviewer": "Codex — đối chiếu KR-01 từ reviewer Astra và nguồn UI/engine",
         "date": "2026-10-14",
-        "evidence": "docs/delivery/EDU_09_CASE_STUDY_IMPLEMENTATION.md"
+        "evidence": "docs/research/knowledge-reviewer/QA_05_RESOLUTION.md"
       }
     },
     {
