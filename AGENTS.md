@@ -22,3 +22,9 @@
 - Chỉ báo build/test/deploy thành công khi có bằng chứng. Phân biệt đặc tả, source đã viết và tính năng đã chạy.
 - Runtime/dependency được khóa theo setup đã kiểm tra; không tự nâng framework để xử lý task không liên quan.
 - Phát hành áp dụng workflow và quyền đã được người dùng giao; không coi file template là workflow đang chạy.
+
+## Agent kiểm thử theo góc nhìn học sinh
+
+- Khi người dùng gọi tester học sinh/Minh, dùng role `student_tester` tại `.codex/agents/student_tester.toml`; cách gọi và lịch sử tại `docs/research/student-tester/`.
+- Lượt first-use không giao finding/đáp án cũ trước khi agent khám phá UI. Chỉ gọi khi có task kiểm tra; không tự chạy cho mọi thay đổi.
+- Agent tạo báo cáo/ảnh trong phiên browser riêng; parent review bằng chứng và cập nhật lịch sử. Kết quả AI mô phỏng không thay pilot học sinh thật.
