@@ -1,6 +1,6 @@
 # Kế hoạch triển khai và nghiệm thu
 
-Trạng thái: roadmap và ước lượng; web beta có 13 bài nhập môn, các gate hoàn thiện level còn mở. Trạng thái thực thi theo [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md); các gate chưa đạt vẫn còn mở. Phạm vi kiến thức theo [CURRICULUM_MAP.md](../../CURRICULUM_MAP.md), tiêu chuẩn học theo [TEACHING_GUIDE.md](../../TEACHING_GUIDE.md).
+Trạng thái: roadmap và ước lượng; web beta có 16 bài nhập môn, các gate hoàn thiện level còn mở. Trạng thái thực thi theo [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md); các gate chưa đạt vẫn còn mở. Phạm vi kiến thức theo [CURRICULUM_MAP.md](../../CURRICULUM_MAP.md), tiêu chuẩn học theo [TEACHING_GUIDE.md](../../TEACHING_GUIDE.md).
 
 Quy trình thực hiện từng task, Git/review, release và quản lý thư mục áp dụng theo [WORKFLOW.md](WORKFLOW.md) và [CONTRIBUTING.md](../../CONTRIBUTING.md).
 
@@ -254,3 +254,24 @@ QA: tính tay4 preset, từngtick/bảo toànCPU/worker/I/O độc lập, bounda
 ### Kết quả EDU-15
 
 Bài cpu-io và case ảnh trường đã hiện thực; catalog16 bài beta+1 bài ôn. [Nguồn, trace và QA](EDU_15_CPU_IO.md) ghi61 unit,175 E2E đạt/1 skip trước chỉnh nhãn,20 retest liên quan đạt sau chỉnh. Không đóngOS/pilot; tiếp theo cấu trúc dữ liệuL0.3, còn memory/filesystem/eventloop ở đợt riêng.
+
+
+## 19. Thực thi toàn bộ roadmap — cập nhật 15/10/2026
+
+Yêu cầu: hoàn thành toàn bộ plan. Không thay đổi phạm vi 6 level/36 module/7 nhánh; tài khoản/sync vẫn hoãn theo quyết định phi thương mại. Theo dõi tại đây để tránh tạo một backlog cạnh tranh. Các báo cáo lịch sử giữ nguyên phạm vi ở thời điểm chạy.
+
+| Thứ tự | Task / đầu ra | Trạng thái và điều kiện đóng |
+| --- | --- | --- |
+| 1 | M4-OFFLINE-01: gói offline của bản beta đang có | In progress. Manifest tạo từ artifact; tải đủ rồi mới ready, retry khi lỗi, reload offline, không tự thay bản đang học, xóa gói không xóa IndexedDB; kiểm tra browser và nguồn lifecycle |
+| 2 | ENG-03: contract nội dung/attempt/depth đầy đủ | Còn mở. ADR + migration dữ liệu cũ + schema/version/coverage và assessment đúng độ sâu; không đổi v1 ngầm |
+| 3 | EDU-04: hoàn thiện L0 | Còn mở. L0.3 cấu trúc dữ liệu; OS/non-blocking/event loop; session/proxy/HTTP2–3; availability/durability và các competency thiếu phải có bài/hoạt động/đánh giá |
+| 4 | EDU-05: L1.1–L1.6 | Còn mở. Requirements/API/data/index/transaction/service delivery; case CASE-L1-01…06 và trace giữ invariant |
+| 5 | EDU-06: L2.1–L2.6 | Còn mở. Các bài nhập môn chưa thay module; thêm failure, invalidation/stampede, sharding, ACK/duplicate và backpressure |
+| 6 | EDU-07: L3.1–L4.6 | Còn mở. Nguồn sơ cấp, lịch lỗi độc lập, assessment có giới hạn; review chuyên môn cho consensus/transaction/security/DR |
+| 7 | EDU-08/09: L5, sáu capstone, bảy track | Còn mở. Danh mục CASE đầy đủ đã đặc tả; cần hoạt động, rubric quyết định và tình huống đổi yêu cầu; không tính đọc mục lục là hoàn thành |
+| 8 | M4 release QA | Còn mở. Performance đo được, accessibility, offline/update/quota và ma trận thiết bị; giữ artifact/rollback |
+| 9 | EDU-02: pilot | Chờ học sinh thật; bộ pilot và AI tester không thay dữ liệu người học thật |
+| 10 | M7 app beta | Sau gate web; spike Capacitor, lifecycle/deep link/storage/offline và thiết bị Android/iPhone thật |
+| 11 | M8 app release | Sau beta; signing/tài khoản store/listing/review và quyền phát hành thực tế |
+
+Owner thực thi hiện tại: Codex với review bằng chứng bởi parent. Không tự gọi AI review là human review. Cần cập nhật từng task sau kiểm chứng; bảng này không tuyên bố toàn bộ roadmap đã hoàn tất.
