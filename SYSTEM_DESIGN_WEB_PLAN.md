@@ -327,3 +327,7 @@ Bổ sung HTTPS/TLS tại L0.4 theo task/acceptance trong ROADMAP mục14. Ưu t
 ### Đợt EDU-14 — OS/concurrency
 
 Bổ sung bài mất cập nhật và vùng cần bảo vệ tại L0.2, dùng bộ đếm trường học làm ngữ cảnh. Scope/acceptance tại ROADMAP mục15; chưa thay thế toàn module OS, chưa sang transaction phân tán. Giữ local progress, mobile-first và học sinh cấp3.
+
+### Đợt EDU-15 — CPU/I/O
+
+Bài cpu-io/L0.2 nối từ concurrency, cho so worker khi có chờ dữ liệu với workload chỉ CPU. Acceptance/giả định tại ROADMAP mục16. Đợt kế tiếp cấu trúc dữ liệuL0.3; phần OS đầy đủ, capstone và pilot vẫn mở.

@@ -55,3 +55,7 @@ Giữ bàn thí nghiệm: hai luồng “xem lịch” và “gửi thông báo�
 ### Bài concurrency
 
 Bộ đếm chung là điểm nhìn chính, ngay sau đó là hai luồng A/B và số từng luồng đã đọc. Nút ghi rõ “A đọc số chung”/“A ghi số đã đọc +1”; nhãn chờ giải thích ai giữ khóa. Mobile một cột, desktop hai luồng cùng hàng; trace chữ đánh dấu từng thao tác thành công, không dùng animation tự chạy hoặc thời gian giả. Bảng observation giữ cùng chuẩn hiện có.
+
+### Bài CPU/I/O
+
+Giữ bàn thí nghiệm; hiển thị một CPU, hai việc và trạng thái tại mốc hiện tại, không dùng số worker như số CPU. Chọn loại việc/worker →Qua1ms hoặc chạy xong →before/after →timeline chữ từng khoảng. Mỗi dòng timeline chỉ khoảng, CPU và mô tả hai việc để vừa320px; ghi sốms giả định, có chữ nghỉ/I/O/chờworker/chờCPU ngoài màu. Không thêm animation tự chạy.

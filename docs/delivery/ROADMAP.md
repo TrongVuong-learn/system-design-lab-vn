@@ -240,3 +240,13 @@ QA: liệt kê6 lịch hợp lệ không khóa, invariant mọi nhánh locked, r
 ### Kết quả EDU-14
 
 Bài concurrency/L0.2 và case ghi danh đã hiện thực; catalog15 bài beta+1 bài ôn. [Báo cáo source/trace/QA](EDU_14_CONCURRENCY.md) ghi57 unit,163 E2E đạt/1 skip sau sửa matrix inline terms; không đóng module/pilot. Bước tiếp: CPU/I/O và cấu trúc dữ liệu.
+
+## 16. EDU-15 — CPU/I/O và worker (15/10/2026)
+
+Task In progress; baseline9fd7f44; owner root. Bài L0.2 tiếp concurrency, ID cpu-io. Hai việc A/B cùng đến t0; một CPU xử lý tối đa một việc mỗi khoảng1ms. Worker giữ việc suốt lúc blocking I/O; chọn1/2 worker. Preset I/O: CPU1→I/O3→CPU1; preset CPU: tổng4ms CPU/việc, không I/O. Khi nhiều việc sẵn chọn A trước, không preempt, không tính context switch; I/O của hai việc độc lập, có thể chồng lên nhau.
+
+Acceptance: timeline deterministic, queued/ready/blocked/done tách rõ; CPU không bận vì thread blocked, thread giữ worker không đồng nghĩa giữCPU. I/O1worker xong10ms,2worker6ms (busy4/idle6 hoặc2); CPU cả hai cấu hình8ms busy8. Tất cả request latency tính từ arrival0 gồm chờworker/CPU, không chỉ thời gian giữworker. Số giả định không benchmark; thêmworker không thêmCPU và không luôn nhanh hơn. Không nhận đây là event loop/nonblocking API/OS scheduler thật hoặc bài đầy đủ OS.
+
+Core TS độc lập UI; checkpoint version1 chỉ mode/workers/step, derive bounded state tối đa10ticks; invalidstep không được giả hoàn thành. Catalog/schema/editorial/case/guidance có version, giữ assessment15 bài và progress1/IndexedDB2. Đổiconfig/reset bắt đầu từ0 rõ ràng; bảng before/after, timeline chữ cột ít/không cuộn ngang và nhãn trạng thái ngoài màu. Mobile320/390 trước desktop, keyboard/reduced motion/glossary/hints/resume/export/import.
+
+QA: tính tay4 preset, từngtick/bảo toànCPU/worker/I/O độc lập, boundaries/restore/immutability; full regression, ảnh thật mobile/desktop; phát hành đúngartifact đã test. Nguồn OSTEP1.10 chương4§4.4,26§26.1,36§36.3–4; parent đối chiếu trực tiếp, không gán agent review cũ cho bài mới. Tiếp theo cấu trúc dữ liệu L0.3; memory/filesystem/event loop và OS sâu cònbacklog, không tự đóngL0.2.
