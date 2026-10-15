@@ -2,7 +2,7 @@
 
 Nền tảng học System Design tiếng Việt, trực quan, tương tác, thiết kế từ điện thoại. Có lối bắt đầu cho học sinh cấp 3 chưa biết lập trình và lộ trình tiến tới thiết kế hệ thống chuyên sâu.
 
-**Trạng thái:** bản thử nghiệm web đã được hiện thực với mười sáu bài nhập môn, mô phỏng cục bộ và lưu tiến độ. Toàn bộ giáo trình chuyên sâu, PWA/offline, sync và app tiếp tục theo roadmap. Bản thử nghiệm chưa được pilot với học sinh hoặc kiểm tra trên điện thoại thật.
+**Trạng thái:** bản thử nghiệm web đã được hiện thực với mười sáu bài nhập môn, mô phỏng cục bộ và lưu tiến độ. Gói tải offline của16 bài và bài ôn đã có tại Tiến độ; giáo trình chuyên sâu, PWA cài đặt, sync và app tiếp tục theo roadmap. Bản thử nghiệm chưa được pilot với học sinh hoặc kiểm tra trên điện thoại thật.
 
 ## Chạy dự án
 
@@ -29,7 +29,7 @@ pnpm test:e2e
 ## Định hướng đã xác định
 
 - Phạm vi: 6 level, 36 module cốt lõi, 7 nhánh chuyên sâu; học liệu phát hành từng đợt có kiểm duyệt.
-- Web mobile trước; PWA/offline sau khi kiểm chứng; iOS/Android là đợt phát triển tiếp theo.
+- Web mobile trước; gói offline beta được kiểm tra trên browser, còn gate thiết bị thật; iOS/Android là đợt phát triển tiếp theo.
 - Stack đã triển khai: TypeScript + React + Vite; engine độc lập giao diện; Capacitor cho app khi đạt điều kiện.
 - Nội dung đi từ tình huống dễ hiểu đến thao tác, giải thích và cơ chế kỹ thuật.
 - Phi thương mại, chia sẻ quy mô nhỏ: học không cần tài khoản; ưu tiên cách giảng, tiến độ lưu trên thiết bị.
@@ -66,3 +66,5 @@ Bài HTTPS/TLS mới tại L0.4: [phạm vi, nguồn và QA EDU-13](docs/deliver
 Bài OS/concurrency mở đầu tại L0.2: [mất cập nhật và vùng đọc–tăng–ghi](docs/delivery/EDU_14_CONCURRENCY.md). CPU/I/O có bài nhập môn tiếp theo; OS sâu tiếp tục theo roadmap.
 
 Bài CPU/I/O tại L0.2: [so1/2worker, chờ dữ liệu và giới hạnCPU](docs/delivery/EDU_15_CPU_IO.md). Tiếp theo cấu trúc dữ liệuL0.3; moduleOS đầy đủ còn theo roadmap.
+
+Gói tải offline: [phạm vi, cơ chế cập nhật và kiểm chứng M4-OFFLINE-01](docs/delivery/M4_OFFLINE_01.md). Không thay pilot hoặc cam kết lưu vĩnh viễn của trình duyệt.

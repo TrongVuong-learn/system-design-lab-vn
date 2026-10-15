@@ -1,3 +1,4 @@
+import { OfflinePanel } from '../offline';
 import { ReviewCard } from '../review';
 import { SaveStatus } from '../progress/SaveStatus';
 import { useRef, useState } from 'react';
@@ -330,6 +331,7 @@ export function ProgressPage() {
         </aside>
       )}
       <ReviewCard />
+      <OfflinePanel />
       <section className="transfer-panel">
         <h2>Mang tiến độ theo bạn</h2>
         <p>Dữ liệu trình duyệt có thể bị xóa. Xuất bản lưu để giữ một bản trên thiết bị của bạn.</p>

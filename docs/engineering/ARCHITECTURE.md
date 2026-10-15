@@ -177,3 +177,10 @@ EDU-13 thêm activity TLS thuần TypeScript/model1, engine1.4.0; registry có14
 EDU-14 thêm activity concurrency và engine1.5.0/model1: replay tối đa4 bước thành công từ command log, không tin shared/local/owner trong import. Renderer nối adapter hiện hữu; progress1/IndexedDB2 và14 bài cũ giữ nghĩa, catalog15 bài beta. Mô hình một process/CPU, không mutex hoặc memory model runtime thật.
 
 EDU-15 thêm cpu-io, engine1.6.0/model1 thuầnTS; derive timeline từ config/step≤10, không nhận jobstate tùy ý từ checkpoint. Registry16 bài beta, progress1/IndexedDB2 giữ nguyên. Renderer dùng cùng adapter/AnnotatedText/ObservationPanel; không worker thread hay I/O thật, sốworker là slotblocking của mô hình.
+
+
+## Gói offline beta — M4-OFFLINE-01
+
+Đã có adapter `apps/web/src/adapters/offline.ts`, UI `features/offline/` và build tool `scripts/offline.ts` với worker template riêng. Core học/mô phỏng không phụ thuộc service worker. Vite closeBundle sinh `offline.json`/`sw.js`; hash version gồm tài nguyên và logic worker, mỗi request có SHA256 integrity. Hiện artifact nhỏ và cùng bundle nên tải cả bản beta, chưa hỗ trợ gói riêng từng module hoặc content blocks native.
+
+Opt-in download tại Tiến độ. Cache Storage giữ static artifact; IndexedDB tiếp tục giữ progress riêng. Cache chỉ ready sau khi đầy đủ và được kiểm tra lại qua message worker. Repair chủ động dùng addAll, không xóa progress. Worker mới chờ toàn bộ client cũ đóng, không ép reload/skipWaiting. Gói có thể bị browser thu hồi; user cần backup tiến độ. Xem báo cáo `docs/delivery/M4_OFFLINE_01.md`; chưa đóng gate thiết bị/PWA install/native.

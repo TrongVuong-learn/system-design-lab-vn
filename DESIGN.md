@@ -59,3 +59,8 @@ Bộ đếm chung là điểm nhìn chính, ngay sau đó là hai luồng A/B v�
 ### Bài CPU/I/O
 
 Giữ bàn thí nghiệm; hiển thị một CPU, hai việc và trạng thái tại mốc hiện tại, không dùng số worker như số CPU. Chọn loại việc/worker →Qua1ms hoặc chạy xong →before/after →timeline chữ từng khoảng. Mỗi dòng timeline chỉ khoảng, CPU và mô tả hai việc để vừa320px; ghi sốms giả định, có chữ nghỉ/I/O/chờworker/chờCPU ngoài màu. Không thêm animation tự chạy.
+
+
+### Quản lý offline
+
+Một mục tại Tiến độ, cùng kiểu transfer-panel: phạm vi → dung lượng/phiên bản → trạng thái chữ → tải/kiểm tra/xóa. Mobile wrap nút, chiều cao ít nhất44px; không dùng navigator.onLine làm bằng chứng tải đủ. Bản cập nhật chờ có lời hướng dẫn đóng tất cả tab; không thay bài giữa chừng. Xóa gói nói rõ giữ tiến độ, lỗi download có thể thử lại.

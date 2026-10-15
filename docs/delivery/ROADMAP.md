@@ -262,7 +262,7 @@ Yêu cầu: hoàn thành toàn bộ plan. Không thay đổi phạm vi 6 level/3
 
 | Thứ tự | Task / đầu ra | Trạng thái và điều kiện đóng |
 | --- | --- | --- |
-| 1 | M4-OFFLINE-01: gói offline của bản beta đang có | In progress. Manifest tạo từ artifact; tải đủ rồi mới ready, retry khi lỗi, reload offline, không tự thay bản đang học, xóa gói không xóa IndexedDB; kiểm tra browser và nguồn lifecycle |
+| 1 | M4-OFFLINE-01: gói offline của bản beta đang có | Verified trên browser. [Báo cáo](M4_OFFLINE_01.md):187 E2E đạt/1skip,63 unit; manifest/integrity, retry, reload offline, update chờ, xóa giữ tiến độ. Gate OS/thiết bị thật vẫn mở |
 | 2 | ENG-03: contract nội dung/attempt/depth đầy đủ | Còn mở. ADR + migration dữ liệu cũ + schema/version/coverage và assessment đúng độ sâu; không đổi v1 ngầm |
 | 3 | EDU-04: hoàn thiện L0 | Còn mở. L0.3 cấu trúc dữ liệu; OS/non-blocking/event loop; session/proxy/HTTP2–3; availability/durability và các competency thiếu phải có bài/hoạt động/đánh giá |
 | 4 | EDU-05: L1.1–L1.6 | Còn mở. Requirements/API/data/index/transaction/service delivery; case CASE-L1-01…06 và trace giữ invariant |

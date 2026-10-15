@@ -4,6 +4,10 @@
 
 Catalog hiện16 bài beta và1 bài ôn tổng hợp; mới nhất là [EDU-15 CPU/I/O](EDU_15_CPU_IO.md). Phần ghi số6 bài/kiểm chứng bên dưới là lịch sử đợt đầu, không phải trạng thái catalog hiện tại. [ROADMAP](ROADMAP.md) quản lý công việc tiếp; [QA-07](QA_07_KNOWLEDGE_REVIEW.md) chỉ review baseline14 bài trước EDU-14, không chứng nhận bài mới. CPU/I/O đã có bài nhập môn; cấu trúc dữ liệu, OS sâu và phần lớn36 module vẫn chưa hoàn tất; chưa pilot thật.
 
+## M4-OFFLINE-01 — gói tải beta
+
+Gói offline toàn artifact16 bài + bài ôn đã hiện thực; tải đủ có integrity, kiểm tra/repair cache thiếu, mở lại bài chưa ghé khi mất mạng, xóa giữ tiến độ và cập nhật chờ đóng tất cả tab. Xem [acceptance và bằng chứng](M4_OFFLINE_01.md). Đây chưa phải toàn bộ M4: còn thiết bị thật, installed PWA/OS lifecycle, performance field data và các gate của roadmap. Các ghi nhận chưa có offline phía dưới là lịch sử trước đợt này.
+
 ## Lịch sử — bản thử nghiệm đầu tiên
 
 ## Phạm vi đã có
