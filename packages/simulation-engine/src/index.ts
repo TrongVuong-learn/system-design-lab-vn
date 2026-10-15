@@ -1,4 +1,4 @@
-export const ENGINE_VERSION = '1.6.0';
+export const ENGINE_VERSION = '1.7.0';
 export interface CacheState {
   time: number;
   source: number;
@@ -251,3 +251,5 @@ export {
   cpuIoPhase,
   type CpuIoConfig,
 } from './cpu-io';
+
+export { librarySearch, SEARCH_MODEL_VERSION } from './library-search';

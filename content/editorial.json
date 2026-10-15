@@ -192,6 +192,14 @@
       "revision": "OSTEP1.10; PDF section at URL",
       "checkedAt": "2026-10-15",
       "attribution": "Remzi H. và Andrea C. Arpaci-Dusseau; diễn giải và scenario riêng, không sao chép hình/mã."
+    },
+    {
+      "id": "source-cmu-search",
+      "title": "CMU15-122 Search lectures4/6",
+      "url": "https://www.cs.cmu.edu/~15122-archive/s26/handouts/lectures/06-binsearch.pdf",
+      "revision": "Spring2026 Frank Pfenning lectures4/6",
+      "checkedAt": "2026-10-15",
+      "attribution": "Frank Pfenning / Carnegie Mellon University; diễn giải riêng, không sao chép slide"
     }
   ],
   "competencies": [
@@ -344,6 +352,13 @@
       "outcome": "Đọc timeline CPU/I/O, phân biệt chờ worker với chờ CPU và giải thích khi nào thêm worker giúp trong mô hình một lõi.",
       "depth": "introductory",
       "planRefs": ["CURRICULUM_MAP.md", "docs/delivery/ROADMAP.md#16"]
+    },
+    {
+      "id": "l0-library-search-intro",
+      "moduleId": "L0.3",
+      "outcome": "Theo dấu tìm tuần tự và tìm nhị phân trên mảng đã sắp; giải thích vì sao thứ tự dữ liệu giúp loại bỏ một phần danh mục.",
+      "depth": "introductory",
+      "planRefs": ["EDU-04", "CASE-L0-03"]
     }
   ],
   "lessons": [
@@ -820,6 +835,34 @@
         "status": "beta-checked",
         "evidence": "docs/delivery/EDU_15_CPU_IO.md",
         "caseId": "case-cpu-io",
+        "revision": 1
+      }
+    },
+    {
+      "lessonId": "library-search",
+      "revision": 1,
+      "competencyIds": ["l0-library-search-intro"],
+      "prerequisiteIds": ["request"],
+      "claims": [
+        {
+          "text": "Tuần tự duyệt từng mục; chia đôi dựa trên mảng đã sắp và thu hẹp khoảng sau mỗi phép so.",
+          "sourceIds": ["source-cmu-search"]
+        }
+      ],
+      "review": {
+        "reviewer": "Codex parent — nguồn CMU và trace độc lập",
+        "reviewerType": "agent",
+        "date": "2026-10-15",
+        "status": "beta-checked",
+        "evidence": "docs/delivery/EDU_16_LIBRARY_SEARCH.md"
+      },
+      "caseReview": {
+        "reviewer": "Codex parent — nguồn CMU và trace độc lập",
+        "reviewerType": "agent",
+        "date": "2026-10-15",
+        "status": "beta-checked",
+        "evidence": "docs/delivery/EDU_16_LIBRARY_SEARCH.md",
+        "caseId": "case-library-search",
         "revision": 1
       }
     }

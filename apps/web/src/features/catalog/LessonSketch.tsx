@@ -1,6 +1,11 @@
 export function LessonSketch({ kind }: { kind: string }) {
   const foundation = (
     {
+      'library-search': [
+        'Tìm mã sách cuối danh mục',
+        '8 mục hoặc 4 mục?',
+        'So từng mục với chia đôi trên mảng đã sắp',
+      ],
       metrics: [
         'Cùng 20 lượt, hai cách nhìn',
         '550 ms · 1.900 ms',

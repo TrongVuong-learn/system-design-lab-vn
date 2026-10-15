@@ -1,6 +1,6 @@
 # Kế hoạch triển khai và nghiệm thu
 
-Trạng thái: roadmap và ước lượng; web beta có 16 bài nhập môn, các gate hoàn thiện level còn mở. Trạng thái thực thi theo [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md); các gate chưa đạt vẫn còn mở. Phạm vi kiến thức theo [CURRICULUM_MAP.md](../../CURRICULUM_MAP.md), tiêu chuẩn học theo [TEACHING_GUIDE.md](../../TEACHING_GUIDE.md).
+Trạng thái: roadmap và ước lượng; web beta có 17 bài nhập môn, các gate hoàn thiện level còn mở. Trạng thái thực thi theo [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md); các gate chưa đạt vẫn còn mở. Phạm vi kiến thức theo [CURRICULUM_MAP.md](../../CURRICULUM_MAP.md), tiêu chuẩn học theo [TEACHING_GUIDE.md](../../TEACHING_GUIDE.md).
 
 Quy trình thực hiện từng task, Git/review, release và quản lý thư mục áp dụng theo [WORKFLOW.md](WORKFLOW.md) và [CONTRIBUTING.md](../../CONTRIBUTING.md).
 
@@ -279,4 +279,6 @@ Owner thực thi hiện tại: Codex với review bằng chứng bởi parent. K
 
 ##20. EDU-16 — tìm kiếm trong danh mục thư viện L0.3
 
-In progress: một bài nhập môn so duyệt từng mục với tìm nhị phân trên mảng mã sách đã sắp tăng. N=8/32/128, mục tiêu đầu/cuối/không có. Mỗi bước chỉ là một lần xem mã và so quan hệ, không ms; linear luôn duyệt đến thấy hoặc hết, chưa tối ưu dừng sớm trên mảng sorted. Binary dùng khoảng inclusive, chọn giữa làm tròn xuống. Checkpoint config/step/version, derive trace; không tin counter nhập. Case CASE-L0-03, hints/before-after, mobile320, keyboard/resume/export và offline mới phải hoạt động. Nguồn tác giả Princeton BinarySearch + CMU linear search. Không đóng toàn module hash/tree/heap/locality/serialization/compression.
+Đã hiện thực và kiểm chứng beta: một bài nhập môn so duyệt từng mục với tìm nhị phân trên mảng mã sách đã sắp tăng. N=8/32/128, mục tiêu đầu/cuối/không có. Mỗi bước chỉ là một lần xem mã và so quan hệ, không ms; linear luôn duyệt đến thấy hoặc hết, chưa tối ưu dừng sớm trên mảng sorted. Binary dùng khoảng inclusive, chọn giữa làm tròn xuống. Checkpoint config/step/version, derive trace; không tin counter nhập. Case CASE-L0-03, hints/before-after, mobile320, keyboard/resume/export và offline mới phải hoạt động. Nguồn tác giả Princeton BinarySearch + CMU linear search. Không đóng toàn module hash/tree/heap/locality/serialization/compression.
+
+Kết quả EDU-16: catalog17 bài và1bài ôn;65unit đạt,24retest dữ liệu đạt sau sửa fixture/readiness. Full run và giới hạn được ghi riêng trong [EDU-16](EDU_16_LIBRARY_SEARCH.md); không đóng L0.3 hoặc pilot.

@@ -2,7 +2,7 @@
 
 Nền tảng học System Design tiếng Việt, trực quan, tương tác, thiết kế từ điện thoại. Có lối bắt đầu cho học sinh cấp 3 chưa biết lập trình và lộ trình tiến tới thiết kế hệ thống chuyên sâu.
 
-**Trạng thái:** bản thử nghiệm web đã được hiện thực với mười sáu bài nhập môn, mô phỏng cục bộ và lưu tiến độ. Gói tải offline của16 bài và bài ôn đã có tại Tiến độ; giáo trình chuyên sâu, PWA cài đặt, sync và app tiếp tục theo roadmap. Bản thử nghiệm chưa được pilot với học sinh hoặc kiểm tra trên điện thoại thật.
+**Trạng thái:** bản thử nghiệm web đã được hiện thực với mười bảy bài nhập môn, mô phỏng cục bộ và lưu tiến độ. Gói tải offline của17 bài và bài ôn đã có tại Tiến độ; giáo trình chuyên sâu, PWA cài đặt, sync và app tiếp tục theo roadmap. Bản thử nghiệm chưa được pilot với học sinh hoặc kiểm tra trên điện thoại thật.
 
 ## Chạy dự án
 
@@ -33,7 +33,7 @@ pnpm test:e2e
 - Stack đã triển khai: TypeScript + React + Vite; engine độc lập giao diện; Capacitor cho app khi đạt điều kiện.
 - Nội dung đi từ tình huống dễ hiểu đến thao tác, giải thích và cơ chế kỹ thuật.
 - Phi thương mại, chia sẻ quy mô nhỏ: học không cần tài khoản; ưu tiên cách giảng, tiến độ lưu trên thiết bị.
-- Cả16 bài beta có so sánh bước trước–sau và gợi ý mở dần; xem [EDU-11](docs/delivery/EDU_11_FEEDBACK_ALL_LESSONS.md).
+- Cả17 bài beta có so sánh bước trước–sau và gợi ý mở dần; xem [EDU-11](docs/delivery/EDU_11_FEEDBACK_ALL_LESSONS.md).
 - Một bài ôn website trường kết hợp chia tải/cache/queue, hai tình huống và nhận định tự viết; xem [EDU-12](docs/delivery/EDU_12_SCHOOL_REVIEW.md).
 
 ## Đọc tài liệu theo thứ tự
@@ -68,3 +68,5 @@ Bài OS/concurrency mở đầu tại L0.2: [mất cập nhật và vùng đọc
 Bài CPU/I/O tại L0.2: [so1/2worker, chờ dữ liệu và giới hạnCPU](docs/delivery/EDU_15_CPU_IO.md). Tiếp theo cấu trúc dữ liệuL0.3; moduleOS đầy đủ còn theo roadmap.
 
 Gói tải offline: [phạm vi, cơ chế cập nhật và kiểm chứng M4-OFFLINE-01](docs/delivery/M4_OFFLINE_01.md). Không thay pilot hoặc cam kết lưu vĩnh viễn của trình duyệt.
+
+Bài tìm mã sách L0.3: [phạm vi và kiểm chứng EDU-16](docs/delivery/EDU_16_LIBRARY_SEARCH.md); chưa thay module cấu trúc dữ liệu đầy đủ.

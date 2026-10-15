@@ -1,3 +1,4 @@
+import catalog from '../../apps/web/src/generated/catalog.json' with { type: 'json' };
 import { test, expect, type Page } from '@playwright/test';
 import { readFile } from 'node:fs/promises';
 async function clicks(page: Page, name: string, count: number) {
@@ -23,6 +24,7 @@ test('two scenarios require actual runs, explain backlog, preserve reflection an
   await expect(page.getByRole('button', { name: 'Lưu lượt ôn', exact: true })).toBeDisabled();
   await page.getByRole('button', { name: 'Chạy phương án', exact: true }).click();
   await expect(result).toContainText('Phương án đạt');
+  await expect(page.getByRole('heading', { name: 'Kiểm từng yêu cầu' })).toBeFocused();
   const reflection = page.locator('#review-reflection');
   await reflection.fill(
     'Cache giảm tải đọc nguồn; worker riêng làm xong việc gửi. Hit75% chỉ là giả định.',
@@ -50,7 +52,8 @@ test('two scenarios require actual runs, explain backlog, preserve reflection an
   await expect(page.getByRole('row', { name: 'Việc còn chờ 8 0' })).toBeVisible();
   await expect(page.getByText('Đã lưu trên thiết bị', { exact: true })).toBeVisible();
   await page.goto('/#/progress');
-  await expect(page.locator('.progress-summary')).toContainText('0 / 16');
+  await expect(page.getByRole('button', { name: 'Nhập bản lưu', exact: true })).toBeEnabled();
+  await expect(page.locator('.progress-summary')).toContainText(`0 / ${catalog.lessons.length}`);
   await expect(page.getByRole('region', { name: 'Ôn tổng hợp' })).toContainText('Đã lưu 2/2');
 });
 test('old lesson saves survive review export/import and narrow reduced-motion UI', async ({
@@ -59,6 +62,7 @@ test('old lesson saves survive review export/import and narrow reduced-motion UI
   await page.setViewportSize({ width: 320, height: 844 });
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/#/progress');
+  await expect(page.getByRole('button', { name: 'Nhập bản lưu', exact: true })).toBeEnabled();
   const old = {
     version: 1,
     lessons: {
@@ -91,6 +95,7 @@ test('old lesson saves survive review export/import and narrow reduced-motion UI
     .toBeLessThanOrEqual(1);
   await expect(page.getByText('Đã lưu trên thiết bị', { exact: true })).toBeVisible();
   await page.goto('/#/progress');
+  await expect(page.getByRole('button', { name: 'Nhập bản lưu', exact: true })).toBeEnabled();
   const downloading = page.waitForEvent('download');
   await page.getByRole('button', { name: 'Xuất bản lưu' }).click();
   const download = await downloading;

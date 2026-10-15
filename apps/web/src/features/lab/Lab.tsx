@@ -1,3 +1,4 @@
+import { LibrarySearchLab } from './LibrarySearchLab';
 import { ObservationPanel } from './ObservationPanel';
 import { CpuIoLab } from './CpuIoLab';
 import { ConcurrencyLab } from './ConcurrencyLab';
@@ -34,7 +35,15 @@ type LabProps = {
 };
 export function Lab(original: LabProps) {
   const kind = original.lesson.kind;
-  const extended = !['cache', 'queue', 'network', 'tls', 'concurrency', 'cpu-io'].includes(kind);
+  const extended = ![
+    'cache',
+    'queue',
+    'network',
+    'tls',
+    'concurrency',
+    'cpu-io',
+    'library-search',
+  ].includes(kind);
   const props = extended
     ? {
         ...original,
@@ -75,6 +84,8 @@ export function Lab(original: LabProps) {
       return <CapacityLab {...props} />;
     case 'http':
       return <HttpLab {...props} />;
+    case 'library-search':
+      return <LibrarySearchLab {...props} />;
     case 'cpu-io':
       return <CpuIoLab {...props} />;
     case 'concurrency':

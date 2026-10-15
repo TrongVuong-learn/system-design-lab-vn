@@ -26,6 +26,7 @@ const activityKind = z.enum([
   'tls',
   'concurrency',
   'cpu-io',
+  'library-search',
 ]);
 const caseText = z.string().trim().min(8).max(1600);
 export const caseStudySchema = z

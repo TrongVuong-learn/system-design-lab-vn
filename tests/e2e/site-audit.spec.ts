@@ -1,3 +1,4 @@
+import catalog from '../../apps/web/src/generated/catalog.json' with { type: 'json' };
 import { expect, test, type Page } from '@playwright/test';
 import { readFileSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
@@ -110,6 +111,7 @@ test('all six lessons complete, retain correct model outcomes and resume without
     await expect(page.getByText('Một bước hiểu mới của bạn.', { exact: true })).toBeVisible();
   }
   await page.goto('/#/progress');
+  await expect(page.getByRole('button', { name: 'Nhập bản lưu', exact: true })).toBeEnabled();
   await expect(page.getByText('Ôn lại và thử thêm', { exact: true })).toHaveCount(6);
   expect(errors).toEqual([]);
 });
@@ -139,6 +141,7 @@ test('stepper boundaries, missing routes and keyboard skip remain usable', async
   browserName,
 }) => {
   await page.goto('/');
+  await expect(page.getByRole('link', { name: 'Đến nội dung chính' })).toBeAttached();
   await page.keyboard.press(
     browserName === 'webkit' && process.platform === 'darwin' ? 'Alt+Tab' : 'Tab',
   );
@@ -170,6 +173,7 @@ test('malformed imported model checkpoints cannot show negative jobs or invalid 
     },
   };
   await page.goto('/#/progress');
+  await expect(page.getByRole('button', { name: 'Nhập bản lưu', exact: true })).toBeEnabled();
   await expect(page.getByRole('button', { name: 'Nhập bản lưu' })).toBeEnabled();
   await page.locator('input[type="file"]').setInputFiles({
     name: 'checkpoint.json',
@@ -212,7 +216,7 @@ test('search handles accents, case, surrounding spaces and empty results', async
   ).toBeVisible();
   await expect(page.getByText('Chưa có bài thử cho từ khóa này.', { exact: false })).toBeVisible();
   await input.fill('   ');
-  await expect(page.locator('.lesson-grid>a')).toHaveCount(16);
+  await expect(page.locator('.lesson-grid>a')).toHaveCount(catalog.lessons.length);
   await expect(page.locator('.level-list>a')).toHaveCount(6);
 });
 

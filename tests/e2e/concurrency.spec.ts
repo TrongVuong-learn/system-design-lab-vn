@@ -70,6 +70,7 @@ test('320px hints, term toggles and exported partial work survive reimport', asy
   await expect(page.getByText('Đã lưu trên thiết bị', { exact: true })).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await page.goto('/#/progress');
+  await expect(page.getByRole('button', { name: 'Nhập bản lưu', exact: true })).toBeEnabled();
   const download = page.waitForEvent('download');
   await page.getByRole('button', { name: 'Xuất bản lưu' }).click();
   const buffer = await readFile((await (await download).path())!);
@@ -92,33 +93,32 @@ test('320px hints, term toggles and exported partial work survive reimport', asy
 
 test('impossible imported locked schedule cannot forge counter or ownership', async ({ page }) => {
   await page.goto('/#/progress');
-  await page
-    .locator('input[type=file]')
-    .setInputFiles({
-      name: 'malformed-lab.json',
-      mimeType: 'application/json',
-      buffer: Buffer.from(
-        JSON.stringify({
-          version: 1,
-          lessons: {
-            concurrency: {
-              stage: 2,
-              prediction: 0,
-              challenge: -1,
-              actions: 2,
-              completed: false,
-              lab: {
-                locked: true,
-                modelVersion: 1,
-                schedule: '["a","b"]',
-                shared: 999,
-                owner: 'b',
-              },
+  await expect(page.getByRole('button', { name: 'Nhập bản lưu', exact: true })).toBeEnabled();
+  await page.locator('input[type=file]').setInputFiles({
+    name: 'malformed-lab.json',
+    mimeType: 'application/json',
+    buffer: Buffer.from(
+      JSON.stringify({
+        version: 1,
+        lessons: {
+          concurrency: {
+            stage: 2,
+            prediction: 0,
+            challenge: -1,
+            actions: 2,
+            completed: false,
+            lab: {
+              locked: true,
+              modelVersion: 1,
+              schedule: '["a","b"]',
+              shared: 999,
+              owner: 'b',
             },
           },
-        }),
-      ),
-    });
+        },
+      }),
+    ),
+  });
   await expect(page.getByText('Đã lưu trên thiết bị', { exact: true })).toBeVisible();
   await page.goto('/#/learn/concurrency');
   const lab = page.getByRole('region', { name: 'Thí nghiệm concurrency' });

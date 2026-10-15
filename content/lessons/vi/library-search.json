@@ -1,0 +1,98 @@
+[
+  {
+    "id": "library-search",
+    "kind": "library-search",
+    "version": 1,
+    "status": "beta",
+    "level": "L0",
+    "moduleId": "L0.3",
+    "minutes": 12,
+    "title": "Tìm sách mà không xem mọi mục?",
+    "subtitle": "Đổi cách tìm, quan sát số mục cần xem.",
+    "objective": "Theo dấu tìm tuần tự và tìm nhị phân trên mảng đã sắp; giải thích vì sao thứ tự dữ liệu giúp loại bỏ một phần danh mục.",
+    "story": "Thư viện có danh mục mã sách đã sắp từ nhỏ đến lớn. Bạn cần tìm mã cuối. Một bạn xem từ đầu từng mục; bạn khác xem mã giữa rồi bỏ phần chắc chắn không chứa mục tiêu. Khi danh mục tăng từ 8 lên 128 sách, hai bạn phải xem bao nhiêu mục?",
+    "explanation": "Mảng là dãy mục có vị trí; trong mô hình, có thể lấy trực tiếp mục ở một vị trí. Tìm tuần tự xem lần lượt cho đến khi thấy mã hoặc hết dãy. Tìm nhị phân dùng thứ tự đã sắp: nếu mã giữa nhỏ hơn mục tiêu thì các mã bên trái cũng không thể là mục tiêu; nếu lớn hơn thì bỏ phía phải. Mỗi bước thu hẹp phạm vi. Với danh mục lớn, số mục cần xem trong trường hợp xấu nhất của tuần tự tăng theo số sách; nhị phân tăng theo số lần chia đôi. Nhưng mục tiêu ở đầu có thể được tuần tự tìm thấy ngay. Chi phí sắp xếp và cập nhật dữ liệu vẫn cần được cân nhắc trong hệ thống thật.",
+    "limit": "Mảng mã chẵn từ 2 đến 2N, đã sắp tăng, không trùng; N là 8, 32 hoặc 128. Mã đầu là 2, cuối là 2N, mã không có là 2N+1. Từng mục không tối ưu dừng sớm theo thứ tự; chia đôi dùng vị trí giữa làm tròn xuống trong khoảng còn lại. Một bước đếm một mục được xem, không số lệnh CPU hoặc ms. Không tính sort, thêm/xóa, disk, cache hay truyền mạng. Chưa dạy hash table, tree, heap, locality hoặc serialization đầy đủ.",
+    "terms": [
+      {
+        "name": "Mảng",
+        "english": "Array",
+        "meaning": "Dãy mục có vị trí; mô hình cho phép lấy trực tiếp mục tại vị trí đã biết."
+      },
+      {
+        "name": "Tìm tuần tự",
+        "english": "Linear search",
+        "meaning": "Xem từng mục cho đến khi tìm thấy hoặc hết dãy."
+      },
+      {
+        "name": "Tìm nhị phân",
+        "english": "Binary search",
+        "meaning": "Tìm trên dãy đã sắp, so mục giữa rồi bỏ phía chắc chắn không chứa mục tiêu."
+      }
+    ],
+    "prediction": {
+      "text": "Mã giữa nhỏ hơn mã bạn cần tìm. Danh mục đã sắp tăng. Có thể bỏ phần nào?",
+      "options": [
+        "Bỏ mục giữa và tất cả mục bên trái.",
+        "Bỏ phía phải vì mã lớn thường nằm bên trái."
+      ],
+      "answer": 0,
+      "explanation": "Các mã bên trái không lớn hơn mã giữa. Khi mã giữa còn nhỏ hơn mục tiêu, cả phần đó đều không thể trùng mục tiêu; tiếp tục ở phía phải."
+    },
+    "challenge": {
+      "text": "Danh mục chưa sắp, chỉ tìm một lần và chưa tính chi phí sắp xếp. Có thể dùng quy tắc chia đôi của bài ngay và vẫn bảo đảm tìm đúng không?",
+      "options": [
+        "Không; chưa có thứ tự thì không thể loại nửa danh mục theo mã giữa.",
+        "Có; chia đôi luôn đúng cho mọi thứ tự."
+      ],
+      "answer": 0,
+      "explanation": "Bỏ một nửa chỉ đúng nhờ thứ tự đã sắp. Danh mục chưa sắp có thể chứa mục tiêu ở bất cứ phía nào. Có thể duyệt từng mục; nếu chọn sắp trước thì phải tính thêm chi phí đó."
+    },
+    "sources": [
+      {
+        "title": "CMU15-122 Spring2026 Lecture4 — linear search và sorted arrays",
+        "url": "https://www.cs.cmu.edu/~15122-archive/s26/handouts/lectures/04-linsearch.pdf"
+      },
+      {
+        "title": "CMU15-122 Spring2026 Lecture6 — binary search",
+        "url": "https://www.cs.cmu.edu/~15122-archive/s26/handouts/lectures/06-binsearch.pdf"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-library-search",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L0-03",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Tra mã sách cho câu lạc bộ đọc",
+      "context": "Danh mục thư viện đã sắp mã tăng. Nhóm bạn cần chọn cách tra mã cho danh mục nhỏ và lớn. Đây là tình huống tự biên soạn.",
+      "requirements": [
+        "So số mục xem khi tìm mã cuối với 8 và 128 sách.",
+        "Thử mã đầu và giải thích vì sao không thể nói chia đôi luôn ít bước hơn."
+      ],
+      "activityRef": "library-search",
+      "experimentSteps": [
+        "Tìm mã cuối bằng từng mục và chia đôi với 8 rồi 128 sách.",
+        "Đổi sang mã đầu, sau đó mã không có; xem trace và kết luận."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Thứ tự giúp tìm nhưng sắp xếp/cập nhật cũng tốn công. Bài không đo các chi phí đó, không bảo đảm tốc độ ms ngoài hệ thống thật."
+      ],
+      "limitations": "Mảng số cố định đã sắp, không benchmark phần cứng hay tìm theo nội dung văn bản."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Mã bên trái có lớn hơn mã giữa trong dãy tăng không?",
+        "Nếu mã giữa còn nhỏ hơn mục tiêu, các mã nhỏ hơn nó có thể là mục tiêu không?"
+      ],
+      "challenge": [
+        "Vì sao trong bài có thể bỏ một nửa chỉ sau một lần xem?",
+        "Bảo đảm đó dựa vào thứ tự. Khi chưa sắp, mục tiêu có thể ở cả hai phía."
+      ]
+    }
+  }
+]

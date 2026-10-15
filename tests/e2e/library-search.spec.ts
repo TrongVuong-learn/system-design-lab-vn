@@ -1,0 +1,42 @@
+import { test, expect } from '@playwright/test';
+test('library search compares methods, restores work and finishes the new case', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 320, height: 850 });
+  await page.goto('/#/learn/library-search');
+  await page.getByRole('button', { name: 'Đưa ra dự đoán' }).click();
+  await page.locator('.answer-options button').nth(1).click();
+  await page.getByRole('button', { name: 'Mở gợi ý 1' }).click();
+  await page.getByRole('button', { name: 'Mở gợi ý 2' }).click();
+  await page.getByRole('button', { name: 'Mở thí nghiệm' }).click();
+  const lab = page.getByRole('region', { name: 'Tìm mã sách trong mảng' });
+  await lab.getByRole('button', { name: 'Tìm đến khi xong' }).click();
+  await expect(lab.getByRole('status').first()).toContainText('Đã xem 8 mục. Tìm thấy mã 16');
+  await lab.getByLabel('Cách tìm').selectOption('binary');
+  await lab.getByRole('button', { name: 'Xem một mục', exact: true }).press('Enter');
+  await expect(lab.getByRole('status').first()).toContainText('vị trí 5–8');
+  await expect(page.getByText('Đã lưu trên thiết bị', { exact: true })).toBeVisible();
+  await page.reload();
+  await expect(lab.getByLabel('Cách tìm')).toHaveValue('binary');
+  await expect(lab.getByRole('status').first()).toContainText('Đã xem 1 mục');
+  await lab.getByRole('button', { name: 'Tìm đến khi xong' }).click();
+  await expect(lab.getByRole('status').first()).toContainText('Đã xem 4 mục');
+  await lab.getByLabel('Số sách').selectOption('128');
+  await lab.getByLabel('Mã cần tìm').selectOption('missing');
+  await lab.getByRole('button', { name: 'Tìm đến khi xong' }).click();
+  await expect(lab.getByRole('status').first()).toContainText('Đã xem 8 mục. Không có mã 257');
+  await lab.getByText('Xem các bước tìm kiếm', { exact: true }).click();
+  await expect(lab.locator('ol li')).toHaveCount(8);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await lab.getByLabel('Mã cần tìm').selectOption('first');
+  await lab.getByLabel('Cách tìm').selectOption('linear');
+  await lab.getByRole('button', { name: 'Xem một mục', exact: true }).click();
+  await expect(lab.getByRole('status').first()).toContainText('Đã xem 1 mục. Tìm thấy mã 2');
+  await page.getByRole('button', { name: 'Thử tình huống mới' }).click();
+  await expect(page.getByRole('heading', { name: 'Tra mã sách cho câu lạc bộ đọc' })).toBeVisible();
+  await page.locator('.answer-options button').first().click();
+  await page.getByRole('button', { name: 'Lưu bài đã hoàn thành' }).click();
+  await expect(page.getByText('Đã lưu trên thiết bị', { exact: true })).toBeVisible();
+  await page.reload();
+  await expect(page.getByRole('button', { name: 'Đã hoàn thành bài nhập môn' })).toBeVisible();
+});

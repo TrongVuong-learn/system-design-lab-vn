@@ -64,3 +64,7 @@ Giữ bàn thí nghiệm; hiển thị một CPU, hai việc và trạng thái t
 ### Quản lý offline
 
 Một mục tại Tiến độ, cùng kiểu transfer-panel: phạm vi → dung lượng/phiên bản → trạng thái chữ → tải/kiểm tra/xóa. Mobile wrap nút, chiều cao ít nhất44px; không dùng navigator.onLine làm bằng chứng tải đủ. Bản cập nhật chờ có lời hướng dẫn đóng tất cả tab; không thay bài giữa chừng. Xóa gói nói rõ giữ tiến độ, lỗi download có thể thử lại.
+
+### Tìm mã sách
+
+Ba lựa chọn ngắn → xem một mục/chạy xong → số mục và phạm vi còn lại → before/after → trace chữ mở khi cần. Không vẽ128 ô quá nhỏ hoặc dùng ms giả. Danh mục đã sắp, vị trí bắt đầu từ1 trong UI; đổi config bắt đầu lại rõ ràng. Giữ palette và font, kiểm320/390/1280px.

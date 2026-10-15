@@ -48,6 +48,7 @@ test('unreadable stored progress is preserved while a session can be exported', 
   page,
 }) => {
   await page.goto('/#/progress');
+  await expect(page.getByRole('button', { name: 'Nhập bản lưu', exact: true })).toBeEnabled();
   await page.getByRole('button', { name: 'Xuất bản lưu' }).waitFor({ state: 'visible' });
   await page.evaluate(async () => {
     const db = await new Promise<IDBDatabase>((resolve, reject) => {
@@ -95,6 +96,7 @@ test('invalid and oversized imports preserve progress; exported progress can be 
   await page.getByRole('button', { name: 'Đưa ra dự đoán' }).click();
   await expect(page.getByText('Đã lưu trên thiết bị', { exact: true })).toBeVisible();
   await page.goto('/#/progress');
+  await expect(page.getByRole('button', { name: 'Nhập bản lưu', exact: true })).toBeEnabled();
   const downloaded = page.waitForEvent('download');
   await page.getByRole('button', { name: 'Xuất bản lưu' }).click();
   const exportPath = await (await downloaded).path();

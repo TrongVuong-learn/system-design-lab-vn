@@ -75,6 +75,7 @@ test('narrow hint and glossary flow, expanded timeline and exported work restore
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await expect(page.getByText('Đã lưu trên thiết bị', { exact: true })).toBeVisible();
   await page.goto('/#/progress');
+  await expect(page.getByRole('button', { name: 'Nhập bản lưu', exact: true })).toBeEnabled();
   const download = page.waitForEvent('download');
   await page.getByRole('button', { name: 'Xuất bản lưu' }).click();
   const buffer = await readFile((await (await download).path())!);
@@ -99,35 +100,34 @@ test('invalid imported steps do not forge completion or overwrite derived CPU co
   page,
 }) => {
   await page.goto('/#/progress');
-  await page
-    .locator('input[type=file]')
-    .setInputFiles({
-      name: 'invalid-model.json',
-      mimeType: 'application/json',
-      buffer: Buffer.from(
-        JSON.stringify({
-          version: 1,
-          lessons: {
-            'cpu-io': {
-              stage: 2,
-              prediction: 0,
-              challenge: -1,
-              actions: 2,
-              completed: false,
-              lab: {
-                mode: 'io',
-                workers: 2,
-                modelVersion: 1,
-                step: 99,
-                time: 999,
-                finished: true,
-                busy: 999,
-              },
+  await expect(page.getByRole('button', { name: 'Nhập bản lưu', exact: true })).toBeEnabled();
+  await page.locator('input[type=file]').setInputFiles({
+    name: 'invalid-model.json',
+    mimeType: 'application/json',
+    buffer: Buffer.from(
+      JSON.stringify({
+        version: 1,
+        lessons: {
+          'cpu-io': {
+            stage: 2,
+            prediction: 0,
+            challenge: -1,
+            actions: 2,
+            completed: false,
+            lab: {
+              mode: 'io',
+              workers: 2,
+              modelVersion: 1,
+              step: 99,
+              time: 999,
+              finished: true,
+              busy: 999,
             },
           },
-        }),
-      ),
-    });
+        },
+      }),
+    ),
+  });
   await expect(page.getByText('Đã lưu trên thiết bị', { exact: true })).toBeVisible();
   await page.goto('/#/learn/cpu-io');
   const lab = page.getByRole('region', { name: 'Thí nghiệm CPU và I/O' });
