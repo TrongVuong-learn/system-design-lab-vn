@@ -51,3 +51,7 @@ Giữ bàn thí nghiệm: hai luồng “xem lịch” và “gửi thông báo�
 ### Bài HTTPS/TLS
 
 Đọc tình huống → chọn kênh/chứng chỉ/can thiệp → chạy → ba góc nhìn (máy trường, người trên mạng, trình duyệt) và trace chữ. Mobile một cột; kết quả nằm cạnh thao tác trong lab, trước–sau dùng ObservationPanel. Dữ liệu có trạng thái chữ thay vì chỉ màu/ổ khóa; không vẽ chuỗi mã giả như mã hóa thật.
+
+### Bài concurrency
+
+Bộ đếm chung là điểm nhìn chính, ngay sau đó là hai luồng A/B và số từng luồng đã đọc. Nút ghi rõ “A đọc số chung”/“A ghi số đã đọc +1”; nhãn chờ giải thích ai giữ khóa. Mobile một cột, desktop hai luồng cùng hàng; trace chữ đánh dấu từng thao tác thành công, không dùng animation tự chạy hoặc thời gian giả. Bảng observation giữ cùng chuẩn hiện có.

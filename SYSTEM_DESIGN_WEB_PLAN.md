@@ -323,3 +323,7 @@ Các case được chuyển thể thành chia sẻ ghi chú, bảng tin câu l�
 ### Đợt EDU-13 (15/10/2026)
 
 Bổ sung HTTPS/TLS tại L0.4 theo task/acceptance trong ROADMAP mục14. Ưu tiên phân biệt bảo mật đường truyền với độ tin cậy nội dung qua tình huống trường học; OS/concurrency và cấu trúc dữ liệu tiếp tục sau đợt này. Giữ6 level/36 module/7 track, học cục bộ và không tài khoản.
+
+### Đợt EDU-14 — OS/concurrency
+
+Bổ sung bài mất cập nhật và vùng cần bảo vệ tại L0.2, dùng bộ đếm trường học làm ngữ cảnh. Scope/acceptance tại ROADMAP mục15; chưa thay thế toàn module OS, chưa sang transaction phân tán. Giữ local progress, mobile-first và học sinh cấp3.
