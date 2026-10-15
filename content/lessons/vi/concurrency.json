@@ -1,0 +1,123 @@
+[
+  {
+    "id": "concurrency",
+    "version": 1,
+    "kind": "concurrency",
+    "status": "beta",
+    "level": "L0",
+    "moduleId": "L0.2",
+    "minutes": 12,
+    "title": "Hai lượt cộng, sao chỉ tăng một?",
+    "subtitle": "Theo từng bước đọc và ghi để tìm cập nhật bị mất.",
+    "objective": "Giải thích lost update qua lịch xen kẽ, phân biệt concurrency với parallelism và chỉ ra vùng cần khóa trong mô hình.",
+    "story": "Website trường đang ghi 30 lượt đăng ký. Hai yêu cầu mới đến; luồng A và B đều muốn cộng 1 vào bộ đếm trong RAM của cùng máy chủ. Lẽ ra phải thành 32. Nếu cả hai cùng đọc 30 trước khi ghi thì sao? Bạn sẽ tự chọn bước chạy để tìm câu trả lời.",
+    "explanation": "Process là một chương trình đang chạy; các thread trong cùng process có thể dùng chung dữ liệu. Concurrency nghĩa nhiều công việc cùng tiến triển, có thể xen kẽ trên một CPU. Parallelism là thực thi đồng thời thật trên nhiều đơn vị xử lý. Ở đây, đọc rồi ghi số đã đọc+1 là hai bước: A và B đều có thể đọc 30, sau đó cùng ghi 31. Một cập nhật bị ghi đè, dù từng luồng đã ghi. Khi cả hai dùng cùng một khóa cho toàn đoạn đọc–tăng–ghi, luồng sau phải đợi luồng trước ghi và trả khóa rồi mới đọc. Trong mô hình, nếu cả hai hoàn tất thì số chung là 32.",
+    "limit": "Mô hình abstract một CPU, hai thread, biến chung ban đầu 30; mỗi thao tác đọc hoặc ghi riêng lẻ được coi là không bị chen ngang bên trong, thứ tự bộ nhớ giữ như trace. Phép tăng được gộp vào bước ghi; không phải mã đa luồng JavaScript/C thực đang có data race. Không mô phỏng CPU timing, các quy tắc bộ nhớ/lớp đệm CPU, scheduler thật, I/O, crash, retry, database hay nhiều máy. Khóa là mutual exclusion lý tưởng, không phải cờ boolean tự xây. Chỉ khi mọi đường sửa cùng dùng khóa đúng phạm vi mới được bảo vệ; bài không chứng minh fairness, hiệu năng hay tránh deadlock trong hệ thống thật. L 0.2 còn thiếu CPU/RAM/disk/I/O/event loop ở độ sâu riêng.",
+    "terms": [
+      {
+        "name": "Tiến trình",
+        "english": "Process",
+        "meaning": "Một chương trình đang chạy, có trạng thái và tài nguyên thực thi; bài xét một process trên máy chủ."
+      },
+      {
+        "name": "Luồng thực thi",
+        "english": "Thread",
+        "meaning": "Một đường thực thi trong process; các luồng ở cùng process có thể truy cập dữ liệu chung."
+      },
+      {
+        "name": "Tiến triển đồng thời",
+        "english": "Concurrency",
+        "meaning": "Nhiều công việc cùng tiến triển; có thể luân phiên từng bước trên một CPU, không cần chạy cùng một lúc."
+      },
+      {
+        "name": "Thực thi song song",
+        "english": "Parallelism",
+        "meaning": "Nhiều phần việc thực thi cùng lúc trên các đơn vị xử lý khác nhau."
+      },
+      {
+        "name": "Mất cập nhật",
+        "english": "Lost update",
+        "meaning": "Một lần ghi dựa trên dữ liệu cũ ghi đè tác động của lần cập nhật khác."
+      },
+      {
+        "name": "Khóa loại trừ",
+        "english": "Mutex",
+        "meaning": "Cho tối đa một luồng vào vùng được bảo vệ tại một thời điểm; các bên cần dùng cùng khóa đúng phạm vi."
+      },
+      {
+        "name": "Bộ xử lý",
+        "english": "CPU",
+        "meaning": "Bộ phận thực thi lệnh; ở bài này chỉ một CPU mô phỏng chạy từng thao tác."
+      },
+      {
+        "name": "Bộ nhớ làm việc",
+        "english": "RAM",
+        "meaning": "Nơi chương trình giữ dữ liệu khi chạy; ví dụ đặt số đăng ký chung ở đây, không phải database bền vững."
+      }
+    ],
+    "prediction": {
+      "text": "Không khóa: A đọc 30, B đọc 30, A ghi số đã đọc+1, rồi B cũng ghi số đã đọc+1. Số chung cuối cùng là bao nhiêu?",
+      "options": [
+        "31; cả hai đều tính từ 30 đã đọc.",
+        "32; có hai luồng nên mỗi lần ghi luôn cộng vào số chung mới nhất."
+      ],
+      "answer": 0,
+      "explanation": "A ghi 31. B vẫn giữ số 30 trong ô riêng nên cũng ghi 31, thay vì đọc lại 31 rồi ghi 32. Kết quả phụ thuộc lịch đọc/ghi; chạy A xong rồi B có thể cho 32 ngay cả khi không khóa."
+    },
+    "challenge": {
+      "text": "Muốn cả hai lượt tăng được giữ lại trong mô hình, với điều kiện hai luồng đều hoàn tất, nên đặt cùng một khóa ở đâu?",
+      "options": [
+        "Giữ từ trước khi đọc đến sau khi ghi số mới.",
+        "Chỉ khóa lúc ghi; để cả hai đọc số cũ trước đó."
+      ],
+      "answer": 0,
+      "explanation": "Cần bảo vệ toàn đoạn đọc–tăng–ghi. Nếu chỉ khóa từng lần ghi, cả hai vẫn có thể đọc 30 trước; dù ghi lần lượt, mỗi bên vẫn ghi 31 từ số cũ. Khóa không tự làm công việc chạy nhanh hơn."
+    },
+    "sources": [
+      {
+        "title": "OSTEP1.10 — Ch26 §§26.3–26.4: shared data and interleaving",
+        "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/threads-intro.pdf"
+      },
+      {
+        "title": "OSTEP1.10 — Ch28 §§28.1–28.3: locks and mutual exclusion",
+        "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/threads-locks.pdf"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-concurrency",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L0-02",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Giữ đủ hai lượt ghi danh",
+      "context": "Trong ngày hội trường, hai yêu cầu đăng ký được hai thread xử lý cùng process. Bộ đếm chung trong RAM đang là 30; mỗi yêu cầu muốn tăng 1. Đây là tình huống giả định, không có dữ liệu người học thật.",
+      "requirements": [
+        "Khi cả hai yêu cầu hoàn tất, bộ đếm phải thành 32.",
+        "Tìm toàn vùng cần bảo vệ thay vì chỉ cho các lần ghi chạy lần lượt."
+      ],
+      "activityRef": "concurrency",
+      "experimentSteps": [
+        "Không khóa: cho A đọc, B đọc, A ghi rồi B ghi; xem ô đọc riêng và số chung.",
+        "Bật khóa để bắt đầu lại. Cho A đọc rồi thử B đọc; hoàn tất A trước khi tiếp tục B."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Khóa làm các luồng chờ ở vùng chung; nên bảo vệ đủ dữ liệu cần nhất quán nhưng không coi đó là tăng thêm công suất CPU."
+      ],
+      "limitations": "Chỉ có hai yêu cầu, một bộ đếm trong một process, không có lỗi/retry hoặc giao dịch dữ liệu bền vững. Mutex trong RAM không tự điều phối nhiều máy chủ."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Sau hai lần đọc, mỗi ô riêng của A/B giữ số nào?",
+        "Khi ghi, luồng dùng số đã đọc, không tự đọc lại số chung. Tính riêng 30+1 cho từng luồng."
+      ],
+      "challenge": [
+        "Nếu B đã đọc 30 trước lúc A ghi 31 thì chỉ khóa lần ghi của B có làm ô đọc riêng tự đổi không?",
+        "Muốn B đọc sau cập nhật của A, khóa phải được giữ từ trước lần đọc của A đến sau lần ghi của A."
+      ]
+    }
+  }
+]

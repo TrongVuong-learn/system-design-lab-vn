@@ -173,3 +173,5 @@ CASE-01–03 đã hiện thực giai đoạn A theo [ADR 0004](../decisions/0004
 EDU-04c bổ sung `routing` trong whitelist và engine 1.3.0, renderer `RoutingLab` với trace có bản chữ; catalog hiện 13 bài beta. Model thuần, checkpoint dùng adapter hiện hữu, không gửi mạng thật hoặc đổi dữ liệu tiến độ v1. Chi tiết tại [EDU-04c](../delivery/EDU_04C_ROUTING.md).
 
 EDU-13 thêm activity TLS thuần TypeScript/model1, engine1.4.0; registry có14 bài beta. Model khái niệm không thực thi crypto/PKI; renderer dùng adapter progress hiện có, giữ progress/content v1 và assessment13 bài cũ.
+
+EDU-14 thêm activity concurrency và engine1.5.0/model1: replay tối đa4 bước thành công từ command log, không tin shared/local/owner trong import. Renderer nối adapter hiện hữu; progress1/IndexedDB2 và14 bài cũ giữ nghĩa, catalog15 bài beta. Mô hình một process/CPU, không mutex hoặc memory model runtime thật.

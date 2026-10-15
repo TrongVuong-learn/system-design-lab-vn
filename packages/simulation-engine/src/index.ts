@@ -1,4 +1,4 @@
-export const ENGINE_VERSION = '1.4.0';
+export const ENGINE_VERSION = '1.5.0';
 export interface CacheState {
   time: number;
   source: number;
@@ -231,3 +231,13 @@ export {
 } from './school-review';
 
 export { normalizeTls, simulateTls, observeTls, TLS_MODEL_VERSION, type TlsConfig } from './tls';
+
+export {
+  CONCURRENCY_MODEL_VERSION,
+  initialConcurrency,
+  concurrencyStep,
+  restoreConcurrency,
+  observeConcurrency,
+  type Actor,
+  type ConcurrencyState,
+} from './concurrency';

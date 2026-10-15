@@ -45,6 +45,7 @@ const reviews = validateReviews(
 // Keep the familiar first lesson and order; the source files do not define navigation.
 const order = [
   'request',
+  'concurrency',
   'metrics',
   'cache',
   'dns',

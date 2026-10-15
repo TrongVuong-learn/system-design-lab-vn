@@ -3,11 +3,12 @@ import { lessonSchema, validateCatalog } from './index';
 import intro from '../../../content/lessons/vi/intro.json';
 import foundations from '../../../content/lessons/vi/foundations.json';
 import webNetwork from '../../../content/lessons/vi/web-network.json';
+import concurrency from '../../../content/lessons/vi/concurrency.json';
 import tls from '../../../content/lessons/vi/tls.json';
 import routing from '../../../content/lessons/vi/routing.json';
 import registry from '../../../content/editorial.json';
-const lessons = [...intro, ...foundations, ...webNetwork, ...routing, ...tls].map((l) =>
-  lessonSchema.parse(l),
+const lessons = [...intro, ...foundations, ...webNetwork, ...routing, ...tls, ...concurrency].map(
+  (l) => lessonSchema.parse(l),
 );
 const modules = Array.from({ length: 6 }, (_, level) =>
   Array.from({ length: 6 }, (_, i) => ({
@@ -19,7 +20,7 @@ const modules = Array.from({ length: 6 }, (_, level) =>
 ).flat();
 it('validates actual catalog without equating beta coverage with module completion', () => {
   const result = validateCatalog(modules, lessons, registry);
-  expect(result.lessons).toHaveLength(14);
+  expect(result.lessons).toHaveLength(15);
   expect(result.coverage).toHaveLength(36);
   expect(result.coverage.every((c) => !c.complete)).toBe(true);
 });
@@ -52,7 +53,7 @@ it('blocks unreviewed beta, mismatched module and unsupported activity', () => {
 });
 it('excludes draft lessons and disallows beta depending on draft', () => {
   const draft = lessons.map((l) => (l.id === 'design' ? { ...l, status: 'draft' as const } : l));
-  expect(validateCatalog(modules, draft, registry).lessons).toHaveLength(13);
+  expect(validateCatalog(modules, draft, registry).lessons).toHaveLength(14);
   const draftPrereq = lessons.map((l) =>
     l.id === 'request' ? { ...l, status: 'draft' as const } : l,
   );
@@ -130,8 +131,8 @@ it('validates authored two-step guidance without accepting executable fields', (
   ).toThrow();
 });
 
-it('all fourteen beta lessons have authored two-stage hints while v1 answers stay unchanged', () => {
-  expect(lessons.filter((l) => l.status === 'beta')).toHaveLength(14);
+it('all fifteen beta lessons have authored two-stage hints while v1 answers stay unchanged', () => {
+  expect(lessons.filter((l) => l.status === 'beta')).toHaveLength(15);
   for (const lesson of lessons.filter((l) => l.status === 'beta')) {
     expect(lesson.guidance?.schemaVersion).toBe(1);
     expect(lesson.guidance?.prediction).toHaveLength(2);

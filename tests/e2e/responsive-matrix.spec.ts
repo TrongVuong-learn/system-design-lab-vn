@@ -6,7 +6,7 @@ async function fits(page: Page) {
     .toBeLessThanOrEqual(1);
 }
 for (const width of [320, 360, 390, 430, 768, 1024, 1440]) {
-  test(`catalog and all thirteen labs remain usable at ${width}px`, async ({ page }) => {
+  test(`catalog and all available labs remain usable at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: width >= 768 ? 1024 : 844 });
     for (const route of ['/', '/explore', '/levels/L3', '/progress']) {
       await page.goto(`/#${route}`);
@@ -15,6 +15,7 @@ for (const width of [320, 360, 390, 430, 768, 1024, 1440]) {
     }
     for (const id of [
       'request',
+      'concurrency',
       'metrics',
       'dns',
       'routing',
@@ -40,13 +41,21 @@ for (const width of [320, 360, 390, 430, 768, 1024, 1440]) {
       await page.getByRole('button', { name: 'Mở thí nghiệm' }).tap();
       await expect(page.getByRole('heading', { name: 'Tự thử', exact: true })).toBeFocused();
       await fits(page);
-      const controls = page.locator('.lab-panel').getByRole('button');
+      // Inline glossary words follow text sizing; lab action controls retain 44px targets.
+      const controls = page
+        .locator('.lab-panel')
+        .getByRole('button')
+        .and(page.locator('button:not(.term-trigger)'));
       for (const control of await controls.all()) {
         const box = await control.boundingBox();
         expect(box?.height).toBeGreaterThanOrEqual(44);
         expect(box?.width).toBeGreaterThanOrEqual(44);
       }
-      const action = page.locator('.lab-panel').getByRole('button', { disabled: false }).first();
+      const action = page
+        .locator('.lab-panel')
+        .getByRole('button', { disabled: false })
+        .and(page.locator('button:not(.term-trigger)'))
+        .first();
       await action.tap();
       await action.tap();
       await page.getByRole('button', { name: 'Thử tình huống mới' }).tap();

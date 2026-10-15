@@ -229,10 +229,14 @@ Bài HTTPS/TLS và case Wi-Fi đã hiện thực, catalog14 bài beta +1 bài ô
 
 ## 15. EDU-14 — concurrency và mất cập nhật (15/10/2026)
 
-Task In progress; baseline2c1eef9; owner root. Một bài L0.2 về hai thread cùng sửa bộ đếm đăng ký trong RAM một process. Mỗi thread đọc rồi ghi số đã đọc+1; người học điều khiển một CPU xen kẽ, so không khóa/vùng đọc–tăng–ghi có khóa. Prerequisite request, không cần lập trình. Đây là nền OS/concurrency, không đóng toàn module CPU/RAM/disk/I/O/event loop.
+Task Verified qua QA; baseline2c1eef9; owner root. Một bài L0.2 về hai thread cùng sửa bộ đếm đăng ký trong RAM một process. Mỗi thread đọc rồi ghi số đã đọc+1; người học điều khiển một CPU xen kẽ, so không khóa/vùng đọc–tăng–ghi có khóa. Prerequisite request, không cần lập trình. Đây là nền OS/concurrency, không đóng toàn module CPU/RAM/disk/I/O/event loop.
 
 Acceptance: pure engine/checkpoint replay có version; không khóa có thể31 hoặc32 từ30 tùy lịch, có khóa thì32 khi cả hai hoàn tất; khóa bảo vệ cả read và write, chỉ một owner, giữ đến write; thao tác chờ không đọc/ghi hoặc làm bước tiến giả; không hứa fairness/performance/deadlock freedom. Reset/đổi chế độ bắt đầu lượt mới rõ ràng; replay malformed từ chối toàn schedule, không tin shared/local được import. Case/guidance/thuật ngữ/assessment có source/editorial registry. Nội dung phân biệt concurrency và parallelism, thread/process ở mức nhập môn, không mô phỏng JS runtime, memory model/UB hay transaction/lock nhiều máy.
 
 Hierarchy UI: số chung và mục tiêu32 → hai luồng có giá trị đọc riêng/nút bước kế → observation trước–sau → trace chữ → giải thích. Mobile320/390 một cột, desktop hai luồng cạnh nhau; keyboard/reduced motion, glossary, hints, resume/export/import và lỗi lưu dùng adapter hiện hữu. Nguồn OSTEP1.10 chương26/28 theo section đã đọc; không gán số đăng ký tự đặt cho benchmark nguồn.
 
 QA: liệt kê6 lịch hợp lệ không khóa, invariant mọi nhánh locked, restore/replay/đổi chế độ, assessment cũ, schema/registry, E2E luồng lost update/khóa/chờ/tiếp tục học/từ mới, mobile320–1440 và screenshot nội dung thật. Phát hành artifact đã test, không đổi runtime/dependency/auth. Tiếp theo bổ sung CPU/I/O rồi cấu trúc dữ liệu; pilot thật còn mở.
+
+### Kết quả EDU-14
+
+Bài concurrency/L0.2 và case ghi danh đã hiện thực; catalog15 bài beta+1 bài ôn. [Báo cáo source/trace/QA](EDU_14_CONCURRENCY.md) ghi57 unit,163 E2E đạt/1 skip sau sửa matrix inline terms; không đóng module/pilot. Bước tiếp: CPU/I/O và cấu trúc dữ liệu.

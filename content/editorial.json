@@ -160,6 +160,22 @@
       "revision": "RFC 9525 §6: Service identity in TLS",
       "checkedAt": "2026-10-15",
       "attribution": "RFC Editor / tác giả RFC; diễn giải riêng"
+    },
+    {
+      "title": "OSTEP1.10 — Ch26 §§26.3–26.4: shared data and interleaving",
+      "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/threads-intro.pdf",
+      "id": "source-os-threads",
+      "revision": "OSTEP version1.10; chapter PDF at URL",
+      "checkedAt": "2026-10-15",
+      "attribution": "Remzi H. Arpaci-Dusseau và Andrea C. Arpaci-Dusseau; diễn giải và tình huống riêng, không sao chép hình/mã."
+    },
+    {
+      "title": "OSTEP1.10 — Ch28 §§28.1–28.3: locks and mutual exclusion",
+      "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/threads-locks.pdf",
+      "id": "source-os-locks",
+      "revision": "OSTEP version1.10; chapter PDF at URL",
+      "checkedAt": "2026-10-15",
+      "attribution": "Remzi H. Arpaci-Dusseau và Andrea C. Arpaci-Dusseau; diễn giải và tình huống riêng, không sao chép hình/mã."
     }
   ],
   "competencies": [
@@ -298,6 +314,13 @@
       "outcome": "Phân biệt bảo vệ đường truyền với độ tin cậy nội dung; giải thích vì sao chứng chỉ sai tên phải chặn kết nối.",
       "depth": "introductory",
       "planRefs": ["CURRICULUM_MAP.md", "docs/delivery/ROADMAP.md#14"]
+    },
+    {
+      "id": "l0-concurrency-intro",
+      "moduleId": "L0.2",
+      "outcome": "Giải thích lost update qua lịch xen kẽ, phân biệt concurrency với parallelism và chỉ ra vùng cần khóa trong mô hình.",
+      "depth": "introductory",
+      "planRefs": ["CURRICULUM_MAP.md", "docs/delivery/ROADMAP.md#15"]
     }
   ],
   "lessons": [
@@ -710,6 +733,38 @@
         "status": "beta-checked",
         "evidence": "docs/delivery/EDU_13_HTTPS_TLS.md",
         "caseId": "case-tls",
+        "revision": 1
+      }
+    },
+    {
+      "lessonId": "concurrency",
+      "revision": 1,
+      "competencyIds": ["l0-concurrency-intro"],
+      "prerequisiteIds": ["request"],
+      "claims": [
+        {
+          "text": "Các thread của một process có thể chia sẻ dữ liệu; xen kẽ đọc–tăng–ghi có thể làm mất cập nhật ngay trên một CPU.",
+          "sourceIds": ["source-os-threads"]
+        },
+        {
+          "text": "Cùng một khóa loại trừ bảo vệ toàn vùng đọc–tăng–ghi; chỉ khóa lúc ghi chưa sửa được giá trị đã đọc cũ.",
+          "sourceIds": ["source-os-locks"]
+        }
+      ],
+      "review": {
+        "reviewer": "Codex — parent đối chiếu OSTEP, lịch xen kẽ và giới hạn",
+        "reviewerType": "agent",
+        "date": "2026-10-15",
+        "status": "beta-checked",
+        "evidence": "docs/delivery/EDU_14_CONCURRENCY.md"
+      },
+      "caseReview": {
+        "reviewer": "Codex — parent đối chiếu OSTEP, lịch xen kẽ và giới hạn",
+        "reviewerType": "agent",
+        "date": "2026-10-15",
+        "status": "beta-checked",
+        "evidence": "docs/delivery/EDU_14_CONCURRENCY.md",
+        "caseId": "case-concurrency",
         "revision": 1
       }
     }

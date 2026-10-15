@@ -24,6 +24,7 @@ const activityKind = z.enum([
   'network',
   'routing',
   'tls',
+  'concurrency',
 ]);
 const caseText = z.string().trim().min(8).max(1600);
 export const caseStudySchema = z

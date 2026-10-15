@@ -50,7 +50,7 @@ test('two scenarios require actual runs, explain backlog, preserve reflection an
   await expect(page.getByRole('row', { name: 'Việc còn chờ 8 0' })).toBeVisible();
   await expect(page.getByText('Đã lưu trên thiết bị', { exact: true })).toBeVisible();
   await page.goto('/#/progress');
-  await expect(page.locator('.progress-summary')).toContainText('0 / 14');
+  await expect(page.locator('.progress-summary')).toContainText('0 / 15');
   await expect(page.getByRole('region', { name: 'Ôn tổng hợp' })).toContainText('Đã lưu 2/2');
 });
 test('old lesson saves survive review export/import and narrow reduced-motion UI', async ({
