@@ -25,3 +25,11 @@ Definition1.0.1, gpt-6-sol / low, HEAD f8ae271; bundle baseline24625a3 do parent
 ## 2026-10-15 — definition1.1.0 và reference guide trước QA-07
 
 User yêu cầu nghiên cứu thêm trước khi review. Phiên tác giả gpt-6-astra medium mở19 nguồn và ghi REFERENCE_GUIDE/RESEARCH_2026-10-15; parent đọc guide/diff, đối chiếu nguồn TLS/identity/PKIX và tài liệu cấu hình official. Candidate1.1.0 được parent áp dụng và parse lại, giữ runtime gpt-6-sol low. Thêm8 calibration pitfalls, provenance/version/errata và protocol evidence; không training model, không bảo đảm luôn đúng. Chưa kết luận app trong bước authoring.
+
+## 2026-10-15 — QA-07 Sol low, audit mở rộng
+
+Profile1.1.0 tại HEADcffdd41; application baselinef5ab318. Lượt đầu ngắt vì usage limit; giữ script/trace rồi resume cùng gpt-6-sol low khi có thể chạy. Bản firstpass7/23 verified-with-conditions,16 insufficient được giữ nguyên trong evidence; parent yêu cầu mở rộng bằng nguồn/engine cho13 bài còn lại, sửa nhầm section DNS và metadata boilerplate trong bản expanded.
+
+[Report QA-07](RUN_2026-10-15_QA07.md), [matrix23 claim](claims-2026-10-15-qa07.json), [parent acceptance](../../delivery/QA_07_KNOWLEDGE_REVIEW.md). Bản cuối đọc14 bài và1 bài ôn,19 registry claim+4 school,23 verified-with-conditions trong mô hình nhập môn.75 checked engine cases khớp (24 TLS,8 school,43 older);2 malformed TLS chỉ quan sát. Parent đọc report/matrix, chạy lại độc lập75 phép kiểm, kiểm math/nguồn mẫu và xác nhận không có app diff. Không confirmed P0/P1/P2;75% cache là góp ý diễn đạt, chưa sửa app/phát hành. UI source-only; không browser/pilot/expert/full errata.
+
+Evidence bền vững nằm tại `evidence/qa07-2026-10-15/`; giữ raw firstpass/report/trace, không sửa lịch sử để làm kết quả ban đầu giống đã hoàn tất. Parent sửa lỗi đếm10 RFC và phân biệt section negative caching trong guide sau đọc nguồn; runtime không đổi.

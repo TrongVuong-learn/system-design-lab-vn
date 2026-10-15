@@ -1,0 +1,729 @@
+{
+  "count": 43,
+  "failed": [],
+  "checks": [
+    {
+      "kind": "request",
+      "input": {
+        "step": 1,
+        "delay": 80
+      },
+      "expected": {
+        "after": "20 ms"
+      },
+      "actual": {
+        "after": "20 ms"
+      },
+      "pass": true
+    },
+    {
+      "kind": "request",
+      "input": {
+        "step": 2,
+        "delay": 80
+      },
+      "expected": {
+        "after": "100 ms"
+      },
+      "actual": {
+        "after": "100 ms"
+      },
+      "pass": true
+    },
+    {
+      "kind": "request",
+      "input": {
+        "step": 3,
+        "delay": 80
+      },
+      "expected": {
+        "after": "120 ms"
+      },
+      "actual": {
+        "after": "120 ms"
+      },
+      "pass": true
+    },
+    {
+      "kind": "request",
+      "input": {
+        "step": 3,
+        "delay": 20
+      },
+      "expected": {
+        "after": "60 ms"
+      },
+      "actual": {
+        "after": "60 ms"
+      },
+      "pass": true
+    },
+    {
+      "kind": "balance",
+      "input": {
+        "servers": 1,
+        "cache": false,
+        "arrivals": 8
+      },
+      "expected": {
+        "completed": 4,
+        "waiting": 4
+      },
+      "actual": {
+        "completed": 4,
+        "waiting": 4
+      },
+      "pass": true
+    },
+    {
+      "kind": "balance",
+      "input": {
+        "servers": 3,
+        "cache": false,
+        "arrivals": 12
+      },
+      "expected": {
+        "completed": 4,
+        "waiting": 8
+      },
+      "actual": {
+        "completed": 4,
+        "waiting": 8
+      },
+      "pass": true
+    },
+    {
+      "kind": "balance",
+      "input": {
+        "servers": 2,
+        "cache": true,
+        "arrivals": 12
+      },
+      "expected": {
+        "completed": 12,
+        "waiting": 0
+      },
+      "actual": {
+        "completed": 12,
+        "waiting": 0
+      },
+      "pass": true
+    },
+    {
+      "kind": "balance",
+      "input": {
+        "servers": 1,
+        "cache": true,
+        "arrivals": 20
+      },
+      "expected": {
+        "completed": 6,
+        "waiting": 14
+      },
+      "actual": {
+        "completed": 6,
+        "waiting": 14
+      },
+      "pass": true
+    },
+    {
+      "kind": "cache-stale",
+      "input": {
+        "action": "update205;read@0"
+      },
+      "expected": {
+        "last": 201,
+        "stale": 1,
+        "hits": 1
+      },
+      "actual": {
+        "last": 201,
+        "stale": 1,
+        "hits": 1
+      },
+      "pass": true
+    },
+    {
+      "kind": "cache-expiry",
+      "input": {
+        "action": "read@ttl5"
+      },
+      "expected": {
+        "last": 205,
+        "misses": 1
+      },
+      "actual": {
+        "last": 205,
+        "misses": 1
+      },
+      "pass": true
+    },
+    {
+      "kind": "cache-restore",
+      "input": {
+        "bad": "counters"
+      },
+      "expected": {
+        "reads": 0,
+        "source": 201
+      },
+      "actual": {
+        "reads": 0,
+        "source": 201
+      },
+      "pass": true
+    },
+    {
+      "kind": "queue-overload",
+      "input": {
+        "arrivals": 6,
+        "workers": 1,
+        "seconds": 3
+      },
+      "expected": {
+        "queued": 12,
+        "processed": 6,
+        "received": 18
+      },
+      "actual": {
+        "queued": 12,
+        "processed": 6,
+        "received": 18
+      },
+      "pass": true
+    },
+    {
+      "kind": "queue-drain",
+      "input": {
+        "backlog": 12,
+        "arrivals": 0,
+        "workers": 6
+      },
+      "expected": {
+        "queued": 0,
+        "processed": 18
+      },
+      "actual": {
+        "queued": 0,
+        "processed": 18
+      },
+      "pass": true
+    },
+    {
+      "kind": "queue-restore",
+      "input": {
+        "invalidConservation": true
+      },
+      "expected": {
+        "queued": 0
+      },
+      "actual": {
+        "queued": 0
+      },
+      "pass": true
+    },
+    {
+      "kind": "replica-before",
+      "input": {
+        "write205": 0,
+        "lag": 3
+      },
+      "expected": {
+        "primary": 205,
+        "replica": 201,
+        "pendingAt": 3
+      },
+      "actual": {
+        "primary": 205,
+        "replica": 201,
+        "pendingAt": 3
+      },
+      "pass": true
+    },
+    {
+      "kind": "replica-t2",
+      "input": {},
+      "expected": {
+        "replica": 201,
+        "time": 2
+      },
+      "actual": {
+        "replica": 201,
+        "time": 2
+      },
+      "pass": true
+    },
+    {
+      "kind": "replica-t3",
+      "input": {},
+      "expected": {
+        "replica": 205,
+        "time": 3
+      },
+      "actual": {
+        "replica": 205,
+        "time": 3
+      },
+      "pass": true
+    },
+    {
+      "kind": "replica-zero-lag",
+      "input": {},
+      "expected": {
+        "primary": 201,
+        "replica": 201,
+        "pending": []
+      },
+      "actual": {
+        "primary": 201,
+        "replica": 201,
+        "pending": []
+      },
+      "pass": true
+    },
+    {
+      "kind": "replica-restore",
+      "input": {
+        "badPastEvent": true
+      },
+      "expected": {
+        "time": 0,
+        "replica": 201
+      },
+      "actual": {
+        "time": 0,
+        "replica": 201
+      },
+      "pass": true
+    },
+    {
+      "kind": "design",
+      "input": {
+        "servers": 2,
+        "workers": 3,
+        "cache": true
+      },
+      "expected": {
+        "read": "12 lượt/giây",
+        "send": "6 việc/giây",
+        "cost": "6/6 điểm"
+      },
+      "actual": {
+        "read": "12 lượt/giây",
+        "send": "6 việc/giây",
+        "cost": "6/6 điểm"
+      },
+      "pass": true
+    },
+    {
+      "kind": "metrics",
+      "input": {
+        "workers": 1,
+        "slow": false
+      },
+      "expected": {
+        "median": 1050,
+        "p95": 1900,
+        "windowMs": 2000
+      },
+      "actual": {
+        "median": 1050,
+        "p95": 1900,
+        "windowMs": 2000
+      },
+      "pass": true
+    },
+    {
+      "kind": "metrics",
+      "input": {
+        "workers": 1,
+        "slow": true
+      },
+      "expected": {
+        "median": 1050,
+        "p95": 2800,
+        "windowMs": 3800
+      },
+      "actual": {
+        "median": 1050,
+        "p95": 2800,
+        "windowMs": 3800
+      },
+      "pass": true
+    },
+    {
+      "kind": "metrics",
+      "input": {
+        "workers": 4,
+        "slow": false
+      },
+      "expected": {
+        "median": 300,
+        "p95": 500,
+        "windowMs": 500
+      },
+      "actual": {
+        "median": 300,
+        "p95": 500,
+        "windowMs": 500
+      },
+      "pass": true
+    },
+    {
+      "kind": "dns-before-expiry",
+      "input": {},
+      "expected": {
+        "last": 10,
+        "route": "cache"
+      },
+      "actual": {
+        "last": 10,
+        "route": "cache"
+      },
+      "pass": true
+    },
+    {
+      "kind": "dns-at-expiry",
+      "input": {},
+      "expected": {
+        "last": 20,
+        "route": "authoritative",
+        "expiresAt": 10
+      },
+      "actual": {
+        "last": 20,
+        "route": "authoritative",
+        "expiresAt": 10
+      },
+      "pass": true
+    },
+    {
+      "kind": "dns-restore",
+      "input": {
+        "badExpiry": true
+      },
+      "expected": {
+        "time": 0,
+        "source": 10
+      },
+      "actual": {
+        "time": 0,
+        "source": 10
+      },
+      "pass": true
+    },
+    {
+      "kind": "transport",
+      "input": {
+        "protocol": "tcp",
+        "loss": true,
+        "step": 2
+      },
+      "expected": {
+        "delivered": [
+          1
+        ],
+        "buffered": 1,
+        "retransmissions": 0
+      },
+      "actual": {
+        "delivered": [
+          1
+        ],
+        "buffered": 1,
+        "retransmissions": 0
+      },
+      "pass": true
+    },
+    {
+      "kind": "transport",
+      "input": {
+        "protocol": "tcp",
+        "loss": true,
+        "step": 3
+      },
+      "expected": {
+        "delivered": [
+          1,
+          2,
+          3
+        ],
+        "buffered": 0,
+        "retransmissions": 1
+      },
+      "actual": {
+        "delivered": [
+          1,
+          2,
+          3
+        ],
+        "buffered": 0,
+        "retransmissions": 1
+      },
+      "pass": true
+    },
+    {
+      "kind": "transport",
+      "input": {
+        "protocol": "udp",
+        "loss": true,
+        "step": 3
+      },
+      "expected": {
+        "delivered": [
+          1,
+          3
+        ],
+        "buffered": 0,
+        "retransmissions": 0
+      },
+      "actual": {
+        "delivered": [
+          1,
+          3
+        ],
+        "buffered": 0,
+        "retransmissions": 0
+      },
+      "pass": true
+    },
+    {
+      "kind": "transport",
+      "input": {
+        "protocol": "udp",
+        "loss": false,
+        "step": 3
+      },
+      "expected": {
+        "delivered": [
+          1,
+          2,
+          3
+        ],
+        "buffered": 0,
+        "retransmissions": 0
+      },
+      "actual": {
+        "delivered": [
+          1,
+          2,
+          3
+        ],
+        "buffered": 0,
+        "retransmissions": 0
+      },
+      "pass": true
+    },
+    {
+      "kind": "capacity",
+      "input": {
+        "students": 2000,
+        "views": 5,
+        "kB": 100,
+        "peak": 4
+      },
+      "expected": {
+        "daily": 10000,
+        "storageMB": 200,
+        "transferMB": 1000,
+        "averageRps": 0.11574074074074074
+      },
+      "actual": {
+        "daily": 10000,
+        "storageMB": 200,
+        "transferMB": 1000,
+        "averageRps": 0.11574074074074074
+      },
+      "pass": true
+    },
+    {
+      "kind": "capacity-invalid",
+      "input": {
+        "students": 0
+      },
+      "expected": {
+        "daily": 5000
+      },
+      "actual": {
+        "daily": 5000
+      },
+      "pass": true
+    },
+    {
+      "kind": "http",
+      "input": {
+        "resource": "timetable",
+        "maintenance": false,
+        "step": 2
+      },
+      "expected": {
+        "status": 200,
+        "target": "/lich-hoc"
+      },
+      "actual": {
+        "status": 200,
+        "target": "/lich-hoc"
+      },
+      "pass": true
+    },
+    {
+      "kind": "http",
+      "input": {
+        "resource": "missing",
+        "maintenance": false,
+        "step": 2
+      },
+      "expected": {
+        "status": 404,
+        "target": "/lich-khong-co"
+      },
+      "actual": {
+        "status": 404,
+        "target": "/lich-khong-co"
+      },
+      "pass": true
+    },
+    {
+      "kind": "http",
+      "input": {
+        "resource": "timetable",
+        "maintenance": true,
+        "step": 2
+      },
+      "expected": {
+        "status": 503,
+        "target": "/lich-hoc"
+      },
+      "actual": {
+        "status": 503,
+        "target": "/lich-hoc"
+      },
+      "pass": true
+    },
+    {
+      "kind": "network",
+      "input": {
+        "rtt": 100,
+        "rate": 8,
+        "size": 1000
+      },
+      "expected": {
+        "totalMs": 1150
+      },
+      "actual": {
+        "totalMs": 1150
+      },
+      "pass": true
+    },
+    {
+      "kind": "network",
+      "input": {
+        "rtt": 100,
+        "rate": 16,
+        "size": 1000
+      },
+      "expected": {
+        "totalMs": 650
+      },
+      "actual": {
+        "totalMs": 650
+      },
+      "pass": true
+    },
+    {
+      "kind": "network",
+      "input": {
+        "rtt": 20,
+        "rate": 32,
+        "size": 100
+      },
+      "expected": {
+        "totalMs": 95
+      },
+      "actual": {
+        "totalMs": 95
+      },
+      "pass": true
+    },
+    {
+      "kind": "routing",
+      "input": {
+        "destination": "school",
+        "port": 8080,
+        "route": true,
+        "step": 3
+      },
+      "expected": {
+        "outcome": "timetable"
+      },
+      "actual": {
+        "outcome": "timetable"
+      },
+      "pass": true
+    },
+    {
+      "kind": "routing",
+      "input": {
+        "destination": "school",
+        "port": 9090,
+        "route": true,
+        "step": 3
+      },
+      "expected": {
+        "outcome": "library"
+      },
+      "actual": {
+        "outcome": "library"
+      },
+      "pass": true
+    },
+    {
+      "kind": "routing",
+      "input": {
+        "destination": "school",
+        "port": 8181,
+        "route": true,
+        "step": 3
+      },
+      "expected": {
+        "outcome": "not-listening"
+      },
+      "actual": {
+        "outcome": "not-listening"
+      },
+      "pass": true
+    },
+    {
+      "kind": "routing",
+      "input": {
+        "destination": "school",
+        "port": 8080,
+        "route": false,
+        "step": 3
+      },
+      "expected": {
+        "outcome": "no-route"
+      },
+      "actual": {
+        "outcome": "no-route"
+      },
+      "pass": true
+    },
+    {
+      "kind": "routing",
+      "input": {
+        "destination": "other",
+        "port": 8080,
+        "route": true,
+        "step": 3
+      },
+      "expected": {
+        "outcome": "other-host"
+      },
+      "actual": {
+        "outcome": "other-host"
+      },
+      "pass": true
+    }
+  ]
+}

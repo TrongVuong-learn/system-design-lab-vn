@@ -1,0 +1,26 @@
+# QA07 — rà soát kiến thức beta
+
+**Kết luận: pass-with-scope.** Không xác nhận lỗi P0/P1/P2 trong phần đã kiểm. Đây là AI review, không phải xác nhận của chuyên gia độc lập hay pilot học sinh. Không nên diễn giải là toàn bộ 14 bài hoặc 36 module đã được chứng nhận.
+
+## Phạm vi và provenance
+
+- Checkout: `/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning`; HEAD `cffdd410c64cd246c6ea4ef7251f4c3ed2835f5d`, clean lúc kiểm. So với baseline ứng dụng `f5ab3182879a212c7f3ce4456cf00a37d9d9b029`, diff HEAD chỉ gồm profile/tài liệu QA; source ứng dụng cùng baseline.
+- Runtime reviewer theo yêu cầu: `gpt-6-sol`, reasoning `low`; chỉ đọc/kiểm/báo cáo. Đã đọc README, CONTRIBUTING, WORKFLOW, profile 1.1.0, REFERENCE_GUIDE, 14 JSON bài beta, registry 19 claims, JSON bài ôn website trường, engine TLS và school, UI source tương ứng.
+- Đọc mỗi bài gồm story, explanation, limit, terms, prediction, challenge, caseStudy và guidance để rà claim dễ gây ngộ nhận. Đây là **content risk scan**, không phải primary-source/engine execution đầy đủ cho 13 bài ngoài TLS; 16/19 registry rows đó được đánh `insufficient-evidence` trong ma trận. Bài ôn là 4 claim thêm, không phải registry lesson.
+- Primary pages mở trực tiếp ngày **2026-10-15**: [RFC 9846](https://www.rfc-editor.org/info/rfc9846/) Abstract, §§1, 1.2, 2, 5 (Proposed Standard, obsoletes RFC 8446, vẫn TLS 1.3); [RFC 9525](https://www.rfc-editor.org/rfc/rfc9525.html) §§6.1.1, 6.6 (reference identity độc lập presented identity); [RFC 5280](https://www.rfc-editor.org/rfc/rfc5280.html) §§6.1.1, 6.1.3(a)(2) (trust anchor, thời hạn); [RFC 9110](https://www.rfc-editor.org/rfc/rfc9110.html) §4.2.2 (HTTPS URI). Trang RFC 5280 info/status lỗi tải; full errata của RFC chưa được audit. Azure Architecture Center [Cache-Aside](https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside) Solution, Problems and considerations: Lifetime/Consistency và [Queue-Based Load Leveling](https://learn.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling) When to use, Workload design là trang sống, revision `unknown`, truy cập ngày trên. Không gán số lab cho Azure.
+
+## Bằng chứng engine và assessment
+
+Script `/private/tmp/knowledge-qa07/review/run.mjs`, output `/private/tmp/knowledge-qa07/review/traces.json`. Chạy từ checkout: `/Users/vuongn/.npm/_npx/538786c08bcb9442/node_modules/node/bin/node --import tsx /private/tmp/knowledge-qa07/review/run.mjs`. Expected lập độc lập trong script trước so với actual: TLS `sent = !secure || cert=valid`, `blocked = secure && cert≠valid`, `rejected = secure && cert=valid && tamper`, phòng nhận theo nhánh này. 24/24 tổ hợp 2 chế độ × 4 chứng chỉ × 3 hành vi attacker khớp; 2 input restore/malformed ghi output quan sát, không coi là full validator/PKI. Giới hạn công bố loại 0-RTT, QUIC, termination và endpoint compromise nên thứ tự trước HTTP phù hợp với **mô hình**. Dự đoán/challenge/gợi ý TLS giữ đúng tách người trên mạng với endpoint và chặn tên sai.
+
+Bài ôn: tự tính `capacityRead=min(server×6, cache?4/0.25:4)`, giới hạn lượt hoàn tất theo arrival; backlog sau bốn giây theo số đếm `max(0, initial+4×arrivals−4×workers×2)` ở các cấu hình test; cost `server+worker+cache`. Opening config (2 server, cache, TTL1, 3 worker): 12/12 đọc, queue 0, cost 6/7. Rush config (2 server, cache, TTL1, 5 worker): 6/6 đọc, queue 0 từ 8 tồn + 32 mới − 40 làm, cost 8/8. Thử thêm no-cache dưới công suất, TTL2, và over-budget ở cả hai scenario: 8/8 cấu hình khớp expected/checks, gồm trace bốn giây. UI source hiển thị rõ giới hạn một giây cho đọc, bốn giây cho gửi, TTL là **kiểm policy giả định** và số tiền là điểm giả lập. Hints phân biệt giữ backlog ổn định với xóa backlog; reflection đòi nêu đánh đổi. Không có bằng chứng browser-observed, viewport, focus hoặc lưu tiến độ thực tế.
+
+## Lỗi và rủi ro
+
+- **P0/P1/P2 xác nhận:** không có trong phạm vi kiểm sâu.
+- **Góp ý biên tập, chưa phải lỗi chặn:** `content/reviews/vi/school-day.json` limits viết “giả định đúng 75% lượt không đọc nguồn”, UI source lặp lại. Với 6 lượt trong rush, 75% tương ứng 4,5 lượt hit; engine dùng phần trăm lý tưởng để tính capacity rồi làm tròn `databaseReads` thành 2 (4/6 hit thực đếm). Chỉ số DB reads không hiển thị trong ReviewPage và đáp án không dựa vào nó, nên tác động người học thấp. Nên viết “tỷ lệ hit giả định 75% dùng để ước lượng công suất” hoặc nói đây là tỷ lệ dài hạn/kỳ vọng, không phải số nguyên đúng từng giây. Kiểm lại nhãn và đơn vị nếu chỉnh.
+- **Chưa xác minh:** 13 bài còn lại có nội dung/feedback được rà theo rủi ro, chưa mở trực tiếp primary sections của từng claim và chưa chạy engine; ma trận không gán verified cho các claim này. Chưa chạy browser thực trên mobile/desktop; UI evidence là đọc source. Chưa kiểm full RFC errata/revocation/browser policy. Không có dữ liệu pilot người học hoặc chuyên gia độc lập.
+
+## Điều kiện trước khi dùng kết luận rộng hơn
+
+Nếu QA07 cần chứng nhận cả 19 claim, cần mở nguồn sơ cấp từng nhóm và thực thi normal/boundary/failure/restore cho 13 bài còn lại, kiểm UI thật và lưu trace theo dòng ma trận. Với bài ôn/TLS đã kiểm, có thể tiếp tục review phát hành trong phạm vi giới hạn công bố; parent cần tự rà bằng chứng và xử lý version/migration nếu thay assessment hoặc output học.

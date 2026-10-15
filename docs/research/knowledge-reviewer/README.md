@@ -29,3 +29,7 @@ Kết luận: pass-with-scope, changes-required hoặc incomplete. Một bảng 
 Theo [official OpenAI documentation — Subagents](https://learn.chatgpt.com/docs/agent-configuration/subagents), file native dùng name/description/developer_instructions, model và model_reasoning_effort. Đã parse TOML, kiểm model/effort và checksum. Native discovery của app có thể cần phiên mới; khi phiên hiện tại chưa nạp custom role, fallback spawn đọc nguyên definition với context mới và truyền explicit gpt-6-sol/low. Không đổi model nếu requested model không khả dụng; báo lỗi rõ.
 
 Định nghĩa/code kiểm của repository được khóa trong `docs/engineering/agents-lock.json`. Lượt chạy thật được ghi tại MEMORY/report; cú pháp đúng không tự chứng minh runtime tự nạp custom role.
+
+## Audit mới nhất
+
+[QA-07 15/10/2026](RUN_2026-10-15_QA07.md) và [matrix](claims-2026-10-15-qa07.json):14 bài beta+1 bài ôn,23 claim trong phạm vi mô hình nhập môn;75 checked traces khớp. Không confirmed P0/P1/P2, có góp ý wording75%. Parent acceptance/giới hạn tại [QA-07](../../delivery/QA_07_KNOWLEDGE_REVIEW.md). Raw evidence, firstpass và script ở `evidence/qa07-2026-10-15/`. Script giữ absolute checkout/import của run gốc để bảo toàn provenance; khi chạy ở checkout khác cần tạo run mới có đường dẫn/commit đúng và giữ actual cũ. Không dùng kết quả này để chứng nhận production, mọi UI/browser hay toàn36 module.
