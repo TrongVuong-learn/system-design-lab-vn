@@ -275,3 +275,8 @@ Yêu cầu: hoàn thành toàn bộ plan. Không thay đổi phạm vi 6 level/3
 | 11 | M8 app release | Sau beta; signing/tài khoản store/listing/review và quyền phát hành thực tế |
 
 Owner thực thi hiện tại: Codex với review bằng chứng bởi parent. Không tự gọi AI review là human review. Cần cập nhật từng task sau kiểm chứng; bảng này không tuyên bố toàn bộ roadmap đã hoàn tất.
+
+
+##20. EDU-16 — tìm kiếm trong danh mục thư viện L0.3
+
+In progress: một bài nhập môn so duyệt từng mục với tìm nhị phân trên mảng mã sách đã sắp tăng. N=8/32/128, mục tiêu đầu/cuối/không có. Mỗi bước chỉ là một lần xem mã và so quan hệ, không ms; linear luôn duyệt đến thấy hoặc hết, chưa tối ưu dừng sớm trên mảng sorted. Binary dùng khoảng inclusive, chọn giữa làm tròn xuống. Checkpoint config/step/version, derive trace; không tin counter nhập. Case CASE-L0-03, hints/before-after, mobile320, keyboard/resume/export và offline mới phải hoạt động. Nguồn tác giả Princeton BinarySearch + CMU linear search. Không đóng toàn module hash/tree/heap/locality/serialization/compression.
