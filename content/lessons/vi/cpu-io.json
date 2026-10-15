@@ -1,0 +1,117 @@
+[
+  {
+    "id": "cpu-io",
+    "kind": "cpu-io",
+    "version": 1,
+    "status": "beta",
+    "level": "L0",
+    "moduleId": "L0.2",
+    "minutes": 12,
+    "title": "Thêm worker có luôn nhanh hơn?",
+    "subtitle": "Tách lúc CPU xử lý, chờ dữ liệu và chờ đến lượt.",
+    "objective": "Đọc timeline CPU/I/O, phân biệt chờ worker với chờ CPU và giải thích khi nào thêm worker giúp trong mô hình một lõi.",
+    "story": "Hai yêu cầu A/B cùng đến để lấy ảnh ngày hội trường. Một worker giữ một yêu cầu cho đến khi xong. Nhưng lúc chờ dữ liệu, nó không nhất thiết dùng CPU. Nếu có worker thứ hai thì máy có thể làm gì? Sau đó thử loại việc chỉ tính toán để xem thêm worker còn giúp không.",
+    "explanation": "CPU thực hiện phần tính toán; I/O là trao đổi dữ liệu với thiết bị hoặc bên ngoài, như đọc dữ liệu hay nhận phản hồi mạng. Thread dùng I/O blocking có thể ngủ chờ sự kiện, để CPU chạy thread khác sẵn sàng. Worker ở bài này vẫn giữ yêu cầu của mình trong lúc chờ. Hai worker cho phép hai yêu cầu cùng tiến triển và chồng phần chờ I/O với công việc khác. Nhưng nếu cả hai việc chỉ cần CPU và chỉ có một lõi xử lý, thêm worker không tạo thêm lõi. Phải quan sát công suất CPU và thời gian chờ thay vì đếm worker rồi kết luận nhanh hơn.",
+    "limit": "Hai việc đến cùng lúc ở 0 ms; một đơn vị CPU xử lý tối đa một việc mỗi khoảng 1 ms. Chọn A trước khi nhiều việc sẵn sàng, không preempt trong chặng CPU. Worker giữ yêu cầu qua I/O blocking. Loại I/O: mỗi việc CPU 1 ms, chờ độc lập 3 ms, CPU 1 ms; loại CPU: mỗi việc dùng 4 ms CPU, không I/O. Không có tranh chấp thiết bị/mạng, phí đổi luồng, RAM thiếu, lỗi/retry, tải mới, nhiều lõi hoặc scheduler thật. Các số do tác giả đặt, không phải benchmark. Đây chưa dạy event loop, I/O non-blocking, disk/filesystem đầy đủ; thêm worker ngoài mô hình có thể tốn tài nguyên và chậm hơn.",
+    "terms": [
+      {
+        "name": "Bộ xử lý",
+        "english": "CPU",
+        "meaning": "Thực hiện lệnh tính toán. Bài cố định một đơn vị xử lý, mỗi khoảng chỉ làm một việc."
+      },
+      {
+        "name": "Vào ra dữ liệu",
+        "english": "I/O",
+        "meaning": "Trao đổi dữ liệu với thiết bị hoặc bên ngoài, chẳng hạn đợi đọc dữ liệu hoặc phản hồi mạng."
+      },
+      {
+        "name": "Luồng thực thi",
+        "english": "Thread",
+        "meaning": "Một đường thực thi có thể được hệ điều hành cho chạy hoặc đặt vào trạng thái chờ."
+      },
+      {
+        "name": "Bên nhận xử lý việc",
+        "english": "Worker",
+        "meaning": "Một chỗ xử lý một yêu cầu; trong mô hình này nó giữ yêu cầu đến khi xong, kể cả lúc chờ I/O. Worker không phải một CPU."
+      },
+      {
+        "name": "Chờ hoàn tất thao tác",
+        "english": "Blocking",
+        "meaning": "Luồng gọi phải chờ thao tác hoàn tất mới tiếp tục; khi ngủ chờ I/O, nó không cần liên tục chiếm CPU."
+      },
+      {
+        "name": "Chờ đến lượt CPU",
+        "english": "Ready",
+        "meaning": "Việc đã có thể chạy, nhưng cần CPU chọn; khác với còn chờ dữ liệu hoặc chưa có worker."
+      }
+    ],
+    "prediction": {
+      "text": "A đang ngủ chờ I/O, B đã có worker và sẵn sàng tính toán. CPU có bắt buộc phải nghỉ cho đến khi A nhận dữ liệu không?",
+      "options": [
+        "Không; CPU có thể xử lý B đã sẵn sàng.",
+        "Có; worker A giữ yêu cầu nghĩa là A cũng giữ CPU."
+      ],
+      "answer": 0,
+      "explanation": "Chờ I/O và chiếm CPU là hai việc khác nhau. Trong mô hình hai worker, B có thể dùng CPU lúc A ngủ chờ dữ liệu. Nếu chỉ có một worker thì B chưa được nhận xử lý nên CPU có thể nghỉ."
+    },
+    "challenge": {
+      "text": "Đổi sang loại việc chỉ CPU: mỗi việc cần 4 ms CPU, hai việc cùng đến, vẫn một lõi và không phí đổi luồng. Đổi từ 1 lên 2 worker có tự giảm tổng thời gian dưới 8 ms không?",
+      "options": [
+        "Không; hai việc vẫn cần tổng 8 ms trên một lõi.",
+        "Có; 2 worker luôn đồng nghĩa 2 CPU nên chỉ còn 4 ms."
+      ],
+      "answer": 0,
+      "explanation": "Tổng lượng xử lý là 4 + 4 = 8 ms CPU. Hai worker chia sẻ cùng một lõi, không làm nó xử lý gấp đôi. Thêm worker có thể chồng chờ I/O trong tình huống trước, nhưng không tạo công suất CPU trong tình huống này."
+    },
+    "sources": [
+      {
+        "title": "OSTEP1.10 — Ch4 §4.4: Ready, Running, Blocked",
+        "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/cpu-intro.pdf"
+      },
+      {
+        "title": "OSTEP1.10 — Ch26 §26.1: overlapping I/O with other work",
+        "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/threads-intro.pdf"
+      },
+      {
+        "title": "OSTEP1.10 — Ch36 §36.4: CPU work and I/O overlap",
+        "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/file-devices.pdf"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-cpu-io",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L0-02",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Cổng ảnh trường đang chờ gì?",
+      "context": "Nhóm trường so hai yêu cầu lấy ảnh có thời gian đợi dữ liệu với hai yêu cầu xử lý ảnh chỉ tính toán. Cùng một lõi CPU, thử 1 và 2 worker để tránh kết luận theo số worker. Đây là ví dụ tự biên soạn.",
+      "requirements": [
+        "So thời gian hai yêu cầu hoàn tất, tính từ lúc cả hai đến ở 0 ms.",
+        "Giải thích khác biệt giữa loại có chờ I/O và loại chỉ CPU."
+      ],
+      "activityRef": "cpu-io",
+      "experimentSteps": [
+        "Loại có I/O: chạy xong với 1 worker rồi đổi sang 2 worker; mở timeline xem khoảng CPU nghỉ.",
+        "Loại chỉ CPU: thử lại cả hai số worker, so tổng thời gian và lượng CPU đã xử lý."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Worker giúp khi còn công việc sẵn sàng để dùng CPU lúc bên khác chờ. Trong hệ thống thật, thiết bị, RAM và phí đổi luồng cũng có thể thành giới hạn; không áp dụng tỷ lệ tăng tốc của đề như bảo đảm."
+      ],
+      "limitations": "Hai yêu cầu cố định, I/O độc lập và hoàn tất đúng hạn, không hàng chờ thiết bị hoặc benchmark mạng/disk. Không mô phỏng nhiều lõi hoặc API non-blocking."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Worker giữ yêu cầu của A có đồng nghĩa lõi CPU phải thực hiện lệnh cho A trong suốt lúc chờ không?",
+        "Quan sát khoảng 1–2 ms với loại I/O và 2 worker: A chờ I/O, còn B đã có thể dùng CPU."
+      ],
+      "challenge": [
+        "Tính tổng ms CPU mà A và B cần; số lõi xử lý có đổi khi chọn thêm worker không?",
+        "Mỗi việc cần 4 ms trên cùng một lõi: 4 + 4 = 8. Ở loại này không có thời gian I/O để chồng lên phần xử lý khác."
+      ]
+    }
+  }
+]

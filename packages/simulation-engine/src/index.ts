@@ -1,4 +1,4 @@
-export const ENGINE_VERSION = '1.5.0';
+export const ENGINE_VERSION = '1.6.0';
 export interface CacheState {
   time: number;
   source: number;
@@ -241,3 +241,13 @@ export {
   type Actor,
   type ConcurrencyState,
 } from './concurrency';
+
+export {
+  CPU_IO_MODEL_VERSION,
+  normalizeCpuIo,
+  simulateCpuIo,
+  restoreCpuIo,
+  observeCpuIo,
+  cpuIoPhase,
+  type CpuIoConfig,
+} from './cpu-io';

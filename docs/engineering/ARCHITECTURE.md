@@ -175,3 +175,5 @@ EDU-04c bổ sung `routing` trong whitelist và engine 1.3.0, renderer `RoutingL
 EDU-13 thêm activity TLS thuần TypeScript/model1, engine1.4.0; registry có14 bài beta. Model khái niệm không thực thi crypto/PKI; renderer dùng adapter progress hiện có, giữ progress/content v1 và assessment13 bài cũ.
 
 EDU-14 thêm activity concurrency và engine1.5.0/model1: replay tối đa4 bước thành công từ command log, không tin shared/local/owner trong import. Renderer nối adapter hiện hữu; progress1/IndexedDB2 và14 bài cũ giữ nghĩa, catalog15 bài beta. Mô hình một process/CPU, không mutex hoặc memory model runtime thật.
+
+EDU-15 thêm cpu-io, engine1.6.0/model1 thuầnTS; derive timeline từ config/step≤10, không nhận jobstate tùy ý từ checkpoint. Registry16 bài beta, progress1/IndexedDB2 giữ nguyên. Renderer dùng cùng adapter/AnnotatedText/ObservationPanel; không worker thread hay I/O thật, sốworker là slotblocking của mô hình.

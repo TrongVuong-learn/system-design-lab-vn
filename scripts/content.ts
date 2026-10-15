@@ -46,6 +46,7 @@ const reviews = validateReviews(
 const order = [
   'request',
   'concurrency',
+  'cpu-io',
   'metrics',
   'cache',
   'dns',

@@ -16,6 +16,7 @@ for (const width of [320, 360, 390, 430, 768, 1024, 1440]) {
     for (const id of [
       'request',
       'concurrency',
+      'cpu-io',
       'metrics',
       'dns',
       'routing',

@@ -25,6 +25,7 @@ const activityKind = z.enum([
   'routing',
   'tls',
   'concurrency',
+  'cpu-io',
 ]);
 const caseText = z.string().trim().min(8).max(1600);
 export const caseStudySchema = z

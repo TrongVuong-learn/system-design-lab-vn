@@ -1052,3 +1052,56 @@
     grid-template-columns: 1fr 1fr;
   }
 }
+
+.cpu-io-clock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1.1rem 0;
+  border-block: 1px solid var(--line);
+  margin: 1rem 0;
+}
+.cpu-io-clock strong {
+  font-size: 1.5rem;
+}
+.cpu-io-jobs {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+.cpu-io-jobs li {
+  border-left: 3px solid var(--accent);
+  padding-left: 1rem;
+}
+.cpu-io-jobs strong,
+.cpu-io-jobs span {
+  display: block;
+}
+.cpu-io-timeline {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 0.85rem;
+}
+.cpu-io-timeline caption {
+  text-align: left;
+  padding: 0.75rem 0;
+}
+.cpu-io-timeline th,
+.cpu-io-timeline td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.6rem 0.25rem;
+  border-bottom: 1px solid var(--line);
+  overflow-wrap: anywhere;
+}
+.cpu-io-timeline th:first-child {
+  width: 24%;
+}
+.cpu-io-timeline th:nth-child(2) {
+  width: 20%;
+}
+.cpu-io-timeline td span {
+  display: block;
+}

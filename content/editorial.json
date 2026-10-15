@@ -176,6 +176,22 @@
       "revision": "OSTEP version1.10; chapter PDF at URL",
       "checkedAt": "2026-10-15",
       "attribution": "Remzi H. Arpaci-Dusseau và Andrea C. Arpaci-Dusseau; diễn giải và tình huống riêng, không sao chép hình/mã."
+    },
+    {
+      "title": "OSTEP1.10 — Ch4 §4.4: Ready, Running, Blocked",
+      "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/cpu-intro.pdf",
+      "id": "source-os-process",
+      "revision": "OSTEP1.10; PDF section at URL",
+      "checkedAt": "2026-10-15",
+      "attribution": "Remzi H. và Andrea C. Arpaci-Dusseau; diễn giải và scenario riêng, không sao chép hình/mã."
+    },
+    {
+      "title": "OSTEP1.10 — Ch36 §36.4: CPU work and I/O overlap",
+      "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/file-devices.pdf",
+      "id": "source-os-io",
+      "revision": "OSTEP1.10; PDF section at URL",
+      "checkedAt": "2026-10-15",
+      "attribution": "Remzi H. và Andrea C. Arpaci-Dusseau; diễn giải và scenario riêng, không sao chép hình/mã."
     }
   ],
   "competencies": [
@@ -321,6 +337,13 @@
       "outcome": "Giải thích lost update qua lịch xen kẽ, phân biệt concurrency với parallelism và chỉ ra vùng cần khóa trong mô hình.",
       "depth": "introductory",
       "planRefs": ["CURRICULUM_MAP.md", "docs/delivery/ROADMAP.md#15"]
+    },
+    {
+      "id": "l0-cpu-io-intro",
+      "moduleId": "L0.2",
+      "outcome": "Đọc timeline CPU/I/O, phân biệt chờ worker với chờ CPU và giải thích khi nào thêm worker giúp trong mô hình một lõi.",
+      "depth": "introductory",
+      "planRefs": ["CURRICULUM_MAP.md", "docs/delivery/ROADMAP.md#16"]
     }
   ],
   "lessons": [
@@ -765,6 +788,38 @@
         "status": "beta-checked",
         "evidence": "docs/delivery/EDU_14_CONCURRENCY.md",
         "caseId": "case-concurrency",
+        "revision": 1
+      }
+    },
+    {
+      "lessonId": "cpu-io",
+      "revision": 1,
+      "competencyIds": ["l0-cpu-io-intro"],
+      "prerequisiteIds": ["concurrency"],
+      "claims": [
+        {
+          "text": "Phân biệt ready/running/blocked; một thread ngủ chờ I/O cho phép CPU chạy thread khác sẵn sàng.",
+          "sourceIds": ["source-os-process", "source-os-threads", "source-os-io"]
+        },
+        {
+          "text": "Worker không đồng nghĩa thêm lõi CPU; các số thời gian của hai preset là giả định tính toán trong mô hình.",
+          "sourceIds": ["source-os-threads"]
+        }
+      ],
+      "review": {
+        "reviewer": "Codex — parent đối chiếu OSTEP, timeline và giới hạn",
+        "reviewerType": "agent",
+        "date": "2026-10-15",
+        "status": "beta-checked",
+        "evidence": "docs/delivery/EDU_15_CPU_IO.md"
+      },
+      "caseReview": {
+        "reviewer": "Codex — parent đối chiếu OSTEP, timeline và giới hạn",
+        "reviewerType": "agent",
+        "date": "2026-10-15",
+        "status": "beta-checked",
+        "evidence": "docs/delivery/EDU_15_CPU_IO.md",
+        "caseId": "case-cpu-io",
         "revision": 1
       }
     }
