@@ -48,6 +48,8 @@ pnpm test:e2e
 | [Workflow dự án](docs/delivery/WORKFLOW.md) | Task, Git/PR, review mã/học liệu, release và quy tắc thư mục |
 | [Hướng dẫn đóng góp](CONTRIBUTING.md) | Quy ước khi tham gia hoặc thay đổi dự án |
 | [Hướng thiết kế](DESIGN.md) | Typography, bố cục, ngôn ngữ thị giác và review UI |
+| [Skill cho agent](docs/engineering/AGENT_SKILLS.md) | Skill đã cài theo project, cách dùng, giới hạn và kiểm tra nguồn |
+| [Review plan và tooling](docs/delivery/PLAN_REVIEW_2026-10-12.md) | Khoảng trống kế hoạch/hiện thực, nghiên cứu repo và lựa chọn skill |
 
 Các tài liệu sản phẩm ở root được giữ đường dẫn để các liên kết trước đây tiếp tục hoạt động. Thay đổi quyết định kỹ thuật cần cập nhật ADR và các tài liệu liên quan.
 

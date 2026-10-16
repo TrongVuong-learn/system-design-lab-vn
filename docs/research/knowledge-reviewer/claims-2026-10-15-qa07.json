@@ -1,0 +1,1329 @@
+[
+  {
+    "claimId": "request-1",
+    "lessonId": "request",
+    "version": 1,
+    "path": "content/editorial.json",
+    "field": "lessons[request].claims[0].text",
+    "claim": "Mỗi chặng cần thời gian. Trong mô hình nối tiếp của bài này, thời gian chờ là tổng các chặng. Nhiều yêu cầu cùng lúc còn có thể phải xếp hàng; bài load balancing sẽ giúp bạn thấy điều đó.",
+    "scope": "primary section + authored arithmetic/assumptions + executed model trace + assessment source scan",
+    "assumptions": "Authored finite idealized model; see lesson.limit. Source does not establish numeric scenario rates.",
+    "sources": [
+      {
+        "url": "https://www.rfc-editor.org/rfc/rfc9110.html",
+        "edition": "RFC 9110, STD 97, 2022",
+        "section": "§§3, 6, 9.3.1, 15.3.1, 15.5.5, 15.6.4",
+        "checkedAt": "2026-10-15",
+        "revision": "RFC 9110, STD 97, 2022",
+        "statusCheck": "RFC 9110 STD 97 published 2022; current updates not fully audited",
+        "errataCheck": "not fully audited",
+        "support": "HTTP request/response, GET and 200/404/503 semantics"
+      }
+    ],
+    "independentExpected": "Sequential 20+80+20=120 ms; min delay20 =>60 ms. No parallel path in model.",
+    "trace": {
+      "mode": "executed",
+      "input": [
+        {
+          "step": 1,
+          "delay": 80
+        },
+        {
+          "step": 2,
+          "delay": 80
+        },
+        {
+          "step": 3,
+          "delay": 80
+        },
+        {
+          "step": 3,
+          "delay": 20
+        }
+      ],
+      "actions": "Call public engine functions; compare independently calculated expected fields",
+      "actual": "4/4 checked examples match; see per-case actual",
+      "artifact": "/private/tmp/knowledge-qa07/review/traces-older.json",
+      "command": "/Users/vuongn/.npm/_npx/538786c08bcb9442/node_modules/node/bin/node --import tsx /private/tmp/knowledge-qa07/review/run-older.mjs"
+    },
+    "assessmentEvidence": "Story, explanation, limit, terms, prediction, challenge, case and both guidance hints read; answer/feedback consistent with scoped model.",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": "apps/web/src/features/lesson-player/LessonPage.tsx"
+    },
+    "verdict": "verified-with-conditions",
+    "uncertainty": "Browser not observed; toy model boundaries and source product scope limit generalization. Not a production guarantee.",
+    "impact": "No mismatch found in checked examples; lesson limitations constrain inference.",
+    "retest": "Rerun representative boundary and assessment if engine/lesson output changes."
+  },
+  {
+    "claimId": "balance-1",
+    "lessonId": "balance",
+    "version": 1,
+    "path": "content/editorial.json",
+    "field": "lessons[balance].claims[0].text",
+    "claim": "Bộ chia tải phân công việc cho các máy. Nhưng nếu tất cả vẫn hỏi cùng một nơi lưu dữ liệu, nơi đó có thể giới hạn số việc làm xong. Hãy thay một yếu tố mỗi lần và so sánh số đang chờ.",
+    "scope": "primary section + authored arithmetic/assumptions + executed model trace + assessment source scan",
+    "assumptions": "Authored finite idealized model; see lesson.limit. Source does not establish numeric scenario rates.",
+    "sources": [
+      {
+        "url": "https://sre.google/sre-book/handling-overload/",
+        "edition": "Google SRE Book, Chapter 21",
+        "section": "The Pitfalls of Queries per Second; Handling Overload",
+        "checkedAt": "2026-10-15",
+        "revision": "Google SRE Book, Chapter 21",
+        "statusCheck": "publisher edition/page read",
+        "errataCheck": "not applicable",
+        "support": "Shared resources and differing request costs limit simple QPS scaling"
+      }
+    ],
+    "independentExpected": "With no cache source4 reads/s caps 3 servers at4; with 75% assumed hits, two servers×6=12.",
+    "trace": {
+      "mode": "executed",
+      "input": [
+        {
+          "servers": 1,
+          "cache": false,
+          "arrivals": 8
+        },
+        {
+          "servers": 3,
+          "cache": false,
+          "arrivals": 12
+        },
+        {
+          "servers": 2,
+          "cache": true,
+          "arrivals": 12
+        },
+        {
+          "servers": 1,
+          "cache": true,
+          "arrivals": 20
+        }
+      ],
+      "actions": "Call public engine functions; compare independently calculated expected fields",
+      "actual": "4/4 checked examples match; see per-case actual",
+      "artifact": "/private/tmp/knowledge-qa07/review/traces-older.json",
+      "command": "/Users/vuongn/.npm/_npx/538786c08bcb9442/node_modules/node/bin/node --import tsx /private/tmp/knowledge-qa07/review/run-older.mjs"
+    },
+    "assessmentEvidence": "Story, explanation, limit, terms, prediction, challenge, case and both guidance hints read; answer/feedback consistent with scoped model.",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": "apps/web/src/features/lesson-player/LessonPage.tsx"
+    },
+    "verdict": "verified-with-conditions",
+    "uncertainty": "Browser not observed; toy model boundaries and source product scope limit generalization. Not a production guarantee.",
+    "impact": "No mismatch found in checked examples; lesson limitations constrain inference.",
+    "retest": "Rerun representative boundary and assessment if engine/lesson output changes."
+  },
+  {
+    "claimId": "cache-1",
+    "lessonId": "cache",
+    "version": 1,
+    "path": "content/editorial.json",
+    "field": "lessons[cache].claims[0].text",
+    "claim": "Cache là dữ liệu được giữ để dùng lại. Khi nguồn thay đổi, bản ghi có thể vẫn cũ. Hệ thống cần quy tắc cập nhật: lấy mới chủ động hoặc hết hạn rồi đọc lại nguồn khi có yêu cầu.",
+    "scope": "primary section + authored arithmetic/assumptions + executed model trace + assessment source scan",
+    "assumptions": "Authored finite idealized model; see lesson.limit. Source does not establish numeric scenario rates.",
+    "sources": [
+      {
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside",
+        "edition": "Azure Architecture Center, living page",
+        "section": "Solution; Problems and considerations: Lifetime/Consistency",
+        "checkedAt": "2026-10-15",
+        "revision": "unknown",
+        "statusCheck": "official publisher page read; living revision unknown",
+        "errataCheck": "not applicable",
+        "support": "Cache read/miss/expiration and possible stale values"
+      }
+    ],
+    "independentExpected": "After source 205 at t0, cached201 remains until t5; at t5 age=TTL and miss reloads205.",
+    "trace": {
+      "mode": "executed",
+      "input": [
+        {
+          "action": "update205;read@0"
+        },
+        {
+          "action": "read@ttl5"
+        },
+        {
+          "bad": "counters"
+        }
+      ],
+      "actions": "Call public engine functions; compare independently calculated expected fields",
+      "actual": "3/3 checked examples match; see per-case actual",
+      "artifact": "/private/tmp/knowledge-qa07/review/traces-older.json",
+      "command": "/Users/vuongn/.npm/_npx/538786c08bcb9442/node_modules/node/bin/node --import tsx /private/tmp/knowledge-qa07/review/run-older.mjs"
+    },
+    "assessmentEvidence": "Story, explanation, limit, terms, prediction, challenge, case and both guidance hints read; answer/feedback consistent with scoped model.",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": "apps/web/src/features/lesson-player/LessonPage.tsx"
+    },
+    "verdict": "verified-with-conditions",
+    "uncertainty": "Browser not observed; toy model boundaries and source product scope limit generalization. Not a production guarantee.",
+    "impact": "No mismatch found in checked examples; lesson limitations constrain inference.",
+    "retest": "Rerun representative boundary and assessment if engine/lesson output changes."
+  },
+  {
+    "claimId": "queue-1",
+    "lessonId": "queue",
+    "version": 1,
+    "path": "content/editorial.json",
+    "field": "lessons[queue].claims[0].text",
+    "claim": "Hàng đợi giữ việc chờ xử lý. Nó giúp tiếp nhận một đợt đông, nhưng không tự tăng công suất. Nếu mỗi giây nhận nhiều hơn làm xong, số việc chờ tiếp tục tăng.",
+    "scope": "primary section + authored arithmetic/assumptions + executed model trace + assessment source scan",
+    "assumptions": "Authored finite idealized model; see lesson.limit. Source does not establish numeric scenario rates.",
+    "sources": [
+      {
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling",
+        "edition": "Azure Architecture Center, living page",
+        "section": "When to use; Workload design",
+        "checkedAt": "2026-10-15",
+        "revision": "unknown",
+        "statusCheck": "official publisher page read; living revision unknown",
+        "errataCheck": "not applicable",
+        "support": "Decoupled receipt and processing; worker capacity/backlog tradeoff"
+      }
+    ],
+    "independentExpected": "6 arrivals/s minus 2 done/s yields +4 backlog/s; after3s=12; zero arrival and6 workers×2 drains12.",
+    "trace": {
+      "mode": "executed",
+      "input": [
+        {
+          "arrivals": 6,
+          "workers": 1,
+          "seconds": 3
+        },
+        {
+          "backlog": 12,
+          "arrivals": 0,
+          "workers": 6
+        },
+        {
+          "invalidConservation": true
+        }
+      ],
+      "actions": "Call public engine functions; compare independently calculated expected fields",
+      "actual": "3/3 checked examples match; see per-case actual",
+      "artifact": "/private/tmp/knowledge-qa07/review/traces-older.json",
+      "command": "/Users/vuongn/.npm/_npx/538786c08bcb9442/node_modules/node/bin/node --import tsx /private/tmp/knowledge-qa07/review/run-older.mjs"
+    },
+    "assessmentEvidence": "Story, explanation, limit, terms, prediction, challenge, case and both guidance hints read; answer/feedback consistent with scoped model.",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": "apps/web/src/features/lesson-player/LessonPage.tsx"
+    },
+    "verdict": "verified-with-conditions",
+    "uncertainty": "Browser not observed; toy model boundaries and source product scope limit generalization. Not a production guarantee.",
+    "impact": "No mismatch found in checked examples; lesson limitations constrain inference.",
+    "retest": "Rerun representative boundary and assessment if engine/lesson output changes."
+  },
+  {
+    "claimId": "replica-1",
+    "lessonId": "replica",
+    "version": 1,
+    "path": "content/editorial.json",
+    "field": "lessons[replica].claims[0].text",
+    "claim": "Replication giữ bản dữ liệu ở nhiều nơi. Trong sao chép bất đồng bộ, bản sao có thể nhận thay đổi muộn. Chọn nơi đọc phải phù hợp với yêu cầu về độ mới.",
+    "scope": "primary section + authored arithmetic/assumptions + executed model trace + assessment source scan",
+    "assumptions": "Authored finite idealized model; see lesson.limit. Source does not establish numeric scenario rates.",
+    "sources": [
+      {
+        "url": "https://www.postgresql.org/docs/18/hot-standby.html",
+        "edition": "PostgreSQL 18 documentation",
+        "section": "§26.4.1",
+        "checkedAt": "2026-10-15",
+        "revision": "PostgreSQL 18 documentation",
+        "statusCheck": "publisher edition/page read",
+        "errataCheck": "not applicable",
+        "support": "Standby replay delay can make query results differ from primary"
+      }
+    ],
+    "independentExpected": "Write at t0 with lag3: primary205/replica201 through t2; t3 replica205; ideal lag0 updates both.",
+    "trace": {
+      "mode": "executed",
+      "input": [
+        {
+          "write205": 0,
+          "lag": 3
+        },
+        {},
+        {},
+        {},
+        {
+          "badPastEvent": true
+        }
+      ],
+      "actions": "Call public engine functions; compare independently calculated expected fields",
+      "actual": "5/5 checked examples match; see per-case actual",
+      "artifact": "/private/tmp/knowledge-qa07/review/traces-older.json",
+      "command": "/Users/vuongn/.npm/_npx/538786c08bcb9442/node_modules/node/bin/node --import tsx /private/tmp/knowledge-qa07/review/run-older.mjs"
+    },
+    "assessmentEvidence": "Story, explanation, limit, terms, prediction, challenge, case and both guidance hints read; answer/feedback consistent with scoped model.",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": "apps/web/src/features/lesson-player/LessonPage.tsx"
+    },
+    "verdict": "verified-with-conditions",
+    "uncertainty": "Browser not observed; toy model boundaries and source product scope limit generalization. Not a production guarantee.",
+    "impact": "No mismatch found in checked examples; lesson limitations constrain inference.",
+    "retest": "Rerun representative boundary and assessment if engine/lesson output changes."
+  },
+  {
+    "claimId": "design-1",
+    "lessonId": "design",
+    "version": 1,
+    "path": "content/editorial.json",
+    "field": "lessons[design].claims[0].text",
+    "claim": "Mỗi thành phần giải quyết một vấn đề cụ thể. Máy xử lý nhận yêu cầu; cache giảm số lần đọc nguồn trong giả định này; worker làm việc từ hàng đợi. Dùng số liệu để chọn, rồi nghĩ đến dữ liệu cũ và tình huống lỗi.",
+    "scope": "primary section + authored arithmetic/assumptions + executed model trace + assessment source scan",
+    "assumptions": "Authored finite idealized model; see lesson.limit. Source does not establish numeric scenario rates.",
+    "sources": [
+      {
+        "url": "https://sre.google/sre-book/handling-overload/",
+        "edition": "Google SRE Book, Chapter 21",
+        "section": "The Pitfalls of Queries per Second; Handling Overload",
+        "checkedAt": "2026-10-15",
+        "revision": "Google SRE Book, Chapter 21",
+        "statusCheck": "publisher edition/page read",
+        "errataCheck": "not applicable",
+        "support": "Shared resources and differing request costs limit simple QPS scaling"
+      },
+      {
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside",
+        "edition": "Azure Architecture Center, living page",
+        "section": "Solution; Problems and considerations: Lifetime/Consistency",
+        "checkedAt": "2026-10-15",
+        "revision": "unknown",
+        "statusCheck": "official publisher page read; living revision unknown",
+        "errataCheck": "not applicable",
+        "support": "Cache read/miss/expiration and possible stale values"
+      },
+      {
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling",
+        "edition": "Azure Architecture Center, living page",
+        "section": "When to use; Workload design",
+        "checkedAt": "2026-10-15",
+        "revision": "unknown",
+        "statusCheck": "official publisher page read; living revision unknown",
+        "errataCheck": "not applicable",
+        "support": "Decoupled receipt and processing; worker capacity/backlog tradeoff"
+      }
+    ],
+    "independentExpected": "12 reads/s, two servers×6 and 75% hit leave 3 source reads <=4; 3 workers×2=6 jobs/s; cost2+3+1=6.",
+    "trace": {
+      "mode": "executed",
+      "input": [
+        {
+          "servers": 2,
+          "workers": 3,
+          "cache": true
+        }
+      ],
+      "actions": "Call public engine functions; compare independently calculated expected fields",
+      "actual": "1/1 checked examples match; see per-case actual",
+      "artifact": "/private/tmp/knowledge-qa07/review/traces-older.json",
+      "command": "/Users/vuongn/.npm/_npx/538786c08bcb9442/node_modules/node/bin/node --import tsx /private/tmp/knowledge-qa07/review/run-older.mjs"
+    },
+    "assessmentEvidence": "Story, explanation, limit, terms, prediction, challenge, case and both guidance hints read; answer/feedback consistent with scoped model.",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": "apps/web/src/features/lesson-player/LessonPage.tsx"
+    },
+    "verdict": "verified-with-conditions",
+    "uncertainty": "Browser not observed; toy model boundaries and source product scope limit generalization. Not a production guarantee.",
+    "impact": "No mismatch found in checked examples; lesson limitations constrain inference.",
+    "retest": "Rerun representative boundary and assessment if engine/lesson output changes."
+  },
+  {
+    "claimId": "metrics-1",
+    "lessonId": "metrics",
+    "version": 1,
+    "path": "content/editorial.json",
+    "field": "lessons[metrics].claims[0].text",
+    "claim": "Latency tính từ lúc gửi đến lúc nhận kết quả, gồm cả thời gian xếp hàng. Throughput là số việc hoàn tất chia cho thời gian quan sát. Median mô tả giữa nhóm; p95 giúp thấy nhóm chờ lâu. Khi hai việc cuối chậm, median có thể giữ nguyên nhưng p95 tăng.",
+    "scope": "primary section + authored arithmetic/assumptions + executed model trace + assessment source scan",
+    "assumptions": "Authored finite idealized model; see lesson.limit. Source does not establish numeric scenario rates.",
+    "sources": [
+      {
+        "url": "https://sre.google/sre-book/monitoring-distributed-systems/",
+        "edition": "Google SRE Book, Chapter 6",
+        "section": "The Four Golden Signals; Worrying About Your Tail",
+        "checkedAt": "2026-10-15",
+        "revision": "Google SRE Book, Chapter 6",
+        "statusCheck": "publisher edition/page read",
+        "errataCheck": "not applicable",
+        "support": "Latency includes queueing; tail percentile reveals slow group"
+      }
+    ],
+    "independentExpected": "One worker completions 100..2000 ms => median (1000+1100)/2=1050, nearest-rank p95 item19=1900; slow last two finish2800,3800 => p95=2800. Four workers, five waves of four => median300,p95=500.",
+    "trace": {
+      "mode": "executed",
+      "input": [
+        {
+          "workers": 1,
+          "slow": false
+        },
+        {
+          "workers": 1,
+          "slow": true
+        },
+        {
+          "workers": 4,
+          "slow": false
+        }
+      ],
+      "actions": "Call public engine functions; compare independently calculated expected fields",
+      "actual": "3/3 checked examples match; see per-case actual",
+      "artifact": "/private/tmp/knowledge-qa07/review/traces-older.json",
+      "command": "/Users/vuongn/.npm/_npx/538786c08bcb9442/node_modules/node/bin/node --import tsx /private/tmp/knowledge-qa07/review/run-older.mjs"
+    },
+    "assessmentEvidence": "Story, explanation, limit, terms, prediction, challenge, case and both guidance hints read; answer/feedback consistent with scoped model.",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": "apps/web/src/features/lesson-player/LessonPage.tsx"
+    },
+    "verdict": "verified-with-conditions",
+    "uncertainty": "Browser not observed; toy model boundaries and source product scope limit generalization. Not a production guarantee.",
+    "impact": "No mismatch found in checked examples; lesson limitations constrain inference.",
+    "retest": "Rerun representative boundary and assessment if engine/lesson output changes."
+  },
+  {
+    "claimId": "dns-1",
+    "lessonId": "dns",
+    "version": 1,
+    "path": "content/editorial.json",
+    "field": "lessons[dns].claims[0].text",
+    "claim": "DNS giúp tra thông tin gắn với tên miền, trong bài là địa chỉ IP. Resolver có thể dùng câu trả lời trong cache khi TTL còn hạn. Nơi quản lý tên đổi địa chỉ không tự đẩy thay đổi đến mọi cache; lần tra sau khi hết hạn mới lấy lại trong mô hình này.",
+    "scope": "primary section + authored arithmetic/assumptions + executed model trace + assessment source scan",
+    "assumptions": "Authored finite idealized model; see lesson.limit. Source does not establish numeric scenario rates.",
+    "sources": [
+      {
+        "url": "https://www.rfc-editor.org/rfc/rfc1035",
+        "edition": "RFC 1035, STD 13, 1987",
+        "section": "§3.2.1 (RR TTL)",
+        "checkedAt": "2026-10-15",
+        "revision": "RFC 1035, STD 13, 1987",
+        "statusCheck": "published RFC edition read; current update chain not fully checked",
+        "errataCheck": "not fully audited",
+        "support": "DNS RR TTL permits caching for interval; source consulted after expiry"
+      }
+    ],
+    "independentExpected": "RR fetched t0 TTL5; source flips to .20; lookup before t5 returns .10; at t5 requery returns .20 and expiry10.",
+    "trace": {
+      "mode": "executed",
+      "input": [
+        {},
+        {},
+        {
+          "badExpiry": true
+        }
+      ],
+      "actions": "Call public engine functions; compare independently calculated expected fields",
+      "actual": "3/3 checked examples match; see per-case actual",
+      "artifact": "/private/tmp/knowledge-qa07/review/traces-older.json",
+      "command": "/Users/vuongn/.npm/_npx/538786c08bcb9442/node_modules/node/bin/node --import tsx /private/tmp/knowledge-qa07/review/run-older.mjs"
+    },
+    "assessmentEvidence": "Story, explanation, limit, terms, prediction, challenge, case and both guidance hints read; answer/feedback consistent with scoped model.",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": "apps/web/src/features/lesson-player/LessonPage.tsx"
+    },
+    "verdict": "verified-with-conditions",
+    "uncertainty": "Browser not observed; toy model boundaries and source product scope limit generalization. Not a production guarantee.",
+    "impact": "No mismatch found in checked examples; lesson limitations constrain inference.",
+    "retest": "Rerun representative boundary and assessment if engine/lesson output changes."
+  },
+  {
+    "claimId": "transport-1",
+    "lessonId": "transport",
+    "version": 1,
+    "path": "content/editorial.json",
+    "field": "lessons[transport].claims[0].text",
+    "claim": "TCP cung cấp luồng byte tin cậy và đúng thứ tự: phần đến sau có thể phải giữ lại trong khi chờ phần thiếu được gửi lại. UDP gửi datagram riêng lẻ, không tự bảo đảm giao đủ, đúng thứ tự hoặc gửi lại. Ứng dụng dùng UDP vẫn có thể bổ sung các cơ chế đó.",
+    "scope": "primary section + authored arithmetic/assumptions + executed model trace + assessment source scan",
+    "assumptions": "Authored finite idealized model; see lesson.limit. Source does not establish numeric scenario rates.",
+    "sources": [
+      {
+        "url": "https://www.rfc-editor.org/rfc/rfc9293",
+        "edition": "RFC 9293, STD 7, 2022",
+        "section": "§§2.2,3.1",
+        "checkedAt": "2026-10-15",
+        "revision": "RFC 9293, STD 7, 2022",
+        "statusCheck": "published RFC edition read; current update chain not fully checked",
+        "errataCheck": "not fully audited",
+        "support": "Reliable ordered byte stream; TCP ports"
+      },
+      {
+        "url": "https://www.rfc-editor.org/info/rfc768/",
+        "edition": "RFC 768, STD 6, 1980",
+        "section": "Introduction",
+        "checkedAt": "2026-10-15",
+        "revision": "RFC 768, STD 6, 1980",
+        "statusCheck": "published RFC edition read; current update chain not fully checked",
+        "errataCheck": "not fully audited",
+        "support": "UDP datagrams do not guarantee delivery/duplicate protection"
+      }
+    ],
+    "independentExpected": "Loss of segment2: TCP delivers contiguous prefix [1], buffers3, then success assumed retransmission gives [1,2,3]. UDP exposes received datagrams [1,3] without recovery.",
+    "trace": {
+      "mode": "executed",
+      "input": [
+        {
+          "protocol": "tcp",
+          "loss": true,
+          "step": 2
+        },
+        {
+          "protocol": "tcp",
+          "loss": true,
+          "step": 3
+        },
+        {
+          "protocol": "udp",
+          "loss": true,
+          "step": 3
+        },
+        {
+          "protocol": "udp",
+          "loss": false,
+          "step": 3
+        }
+      ],
+      "actions": "Call public engine functions; compare independently calculated expected fields",
+      "actual": "4/4 checked examples match; see per-case actual",
+      "artifact": "/private/tmp/knowledge-qa07/review/traces-older.json",
+      "command": "/Users/vuongn/.npm/_npx/538786c08bcb9442/node_modules/node/bin/node --import tsx /private/tmp/knowledge-qa07/review/run-older.mjs"
+    },
+    "assessmentEvidence": "Story, explanation, limit, terms, prediction, challenge, case and both guidance hints read; answer/feedback consistent with scoped model.",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": "apps/web/src/features/lesson-player/LessonPage.tsx"
+    },
+    "verdict": "verified-with-conditions",
+    "uncertainty": "Browser not observed; toy model boundaries and source product scope limit generalization. Not a production guarantee.",
+    "impact": "No mismatch found in checked examples; lesson limitations constrain inference.",
+    "retest": "Rerun representative boundary and assessment if engine/lesson output changes."
+  },
+  {
+    "claimId": "capacity-1",
+    "lessonId": "capacity",
+    "version": 1,
+    "path": "content/editorial.json",
+    "field": "lessons[capacity].claims[0].text",
+    "claim": "Lượt/ngày = số học sinh × lượt mỗi người. Chia cho 86.400 giây để ra lượt/giây trung bình. Tải đỉnh ở đây chỉ là trung bình nhân hệ số bạn giả định. Dữ liệu truyền tăng theo lượt xem; dung lượng ảnh lưu chỉ tính số ảnh duy nhất.",
+    "scope": "primary section + authored arithmetic/assumptions + executed model trace + assessment source scan",
+    "assumptions": "Authored finite idealized model; see lesson.limit. Source does not establish numeric scenario rates.",
+    "sources": [
+      {
+        "url": "https://physics.nist.gov/cuu/Units/binary.html",
+        "edition": "NIST Units page, living",
+        "section": "Examples and comparisons with SI prefixes",
+        "checkedAt": "2026-10-15",
+        "revision": "unknown",
+        "statusCheck": "official publisher page read; living revision unknown",
+        "errataCheck": "not applicable",
+        "support": "Decimal MB versus binary MiB and byte/bit"
+      },
+      {
+        "url": null,
+        "edition": null,
+        "section": null,
+        "checkedAt": null,
+        "revision": null,
+        "statusCheck": "not applicable",
+        "errataCheck": "not applicable",
+        "support": "Daily view, transfer and storage figures are authored assumptions and independently checked arithmetic, not an external benchmark."
+      }
+    ],
+    "independentExpected": "2000×5=10000 views/day; 2000×100kB=200MB storage; views×100kB=1000MB transfer; average=10000/86400 rps.",
+    "trace": {
+      "mode": "executed",
+      "input": [
+        {
+          "students": 2000,
+          "views": 5,
+          "kB": 100,
+          "peak": 4
+        },
+        {
+          "students": 0
+        }
+      ],
+      "actions": "Call public engine functions; compare independently calculated expected fields",
+      "actual": "2/2 checked examples match; see per-case actual",
+      "artifact": "/private/tmp/knowledge-qa07/review/traces-older.json",
+      "command": "/Users/vuongn/.npm/_npx/538786c08bcb9442/node_modules/node/bin/node --import tsx /private/tmp/knowledge-qa07/review/run-older.mjs"
+    },
+    "assessmentEvidence": "Story, explanation, limit, terms, prediction, challenge, case and both guidance hints read; answer/feedback consistent with scoped model.",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": "apps/web/src/features/lesson-player/LessonPage.tsx"
+    },
+    "verdict": "verified-with-conditions",
+    "uncertainty": "Browser not observed; toy model boundaries and source product scope limit generalization. Not a production guarantee.",
+    "impact": "No mismatch found in checked examples; lesson limitations constrain inference.",
+    "retest": "Rerun representative boundary and assessment if engine/lesson output changes."
+  },
+  {
+    "claimId": "capacity-2",
+    "lessonId": "capacity",
+    "version": 1,
+    "path": "content/editorial.json",
+    "field": "lessons[capacity].claims[1].text",
+    "claim": "Bài dùng đơn vị thập phân: 1 byte = 8 bit, 1 kB = 1.000 byte và 1 MB = 1.000.000 byte; không dùng KiB/MiB.",
+    "scope": "primary section + authored arithmetic/assumptions + executed model trace + assessment source scan",
+    "assumptions": "Authored finite idealized model; see lesson.limit. Source does not establish numeric scenario rates.",
+    "sources": [
+      {
+        "url": "https://physics.nist.gov/cuu/Units/binary.html",
+        "edition": "NIST Units page, living",
+        "section": "Examples and comparisons with SI prefixes",
+        "checkedAt": "2026-10-15",
+        "revision": "unknown",
+        "statusCheck": "official publisher page read; living revision unknown",
+        "errataCheck": "not applicable",
+        "support": "Decimal MB versus binary MiB and byte/bit"
+      }
+    ],
+    "independentExpected": "2000×5=10000 views/day; 2000×100kB=200MB storage; views×100kB=1000MB transfer; average=10000/86400 rps.",
+    "trace": {
+      "mode": "executed",
+      "input": [
+        {
+          "students": 2000,
+          "views": 5,
+          "kB": 100,
+          "peak": 4
+        },
+        {
+          "students": 0
+        }
+      ],
+      "actions": "Call public engine functions; compare independently calculated expected fields",
+      "actual": "2/2 checked examples match; see per-case actual",
+      "artifact": "/private/tmp/knowledge-qa07/review/traces-older.json",
+      "command": "/Users/vuongn/.npm/_npx/538786c08bcb9442/node_modules/node/bin/node --import tsx /private/tmp/knowledge-qa07/review/run-older.mjs"
+    },
+    "assessmentEvidence": "Story, explanation, limit, terms, prediction, challenge, case and both guidance hints read; answer/feedback consistent with scoped model.",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": "apps/web/src/features/lesson-player/LessonPage.tsx"
+    },
+    "verdict": "verified-with-conditions",
+    "uncertainty": "Browser not observed; toy model boundaries and source product scope limit generalization. Not a production guarantee.",
+    "impact": "No mismatch found in checked examples; lesson limitations constrain inference.",
+    "retest": "Rerun representative boundary and assessment if engine/lesson output changes."
+  },
+  {
+    "claimId": "http-1",
+    "lessonId": "http",
+    "version": 1,
+    "path": "content/editorial.json",
+    "field": "lessons[http].claims[0].text",
+    "claim": "HTTP dùng thông điệp yêu cầu và phản hồi. Trong bài, GET xin đọc lịch ở một đường dẫn. Mã 200 cho biết yêu cầu thành công; 404 là không tìm thấy tài nguyên ở đường dẫn đã hỏi; 503 là dịch vụ tạm chưa sẵn sàng. Phản hồi còn có header mô tả định dạng và body chứa nội dung. Nhận 404 hoặc 503 vẫn là nhận một phản hồi HTTP.",
+    "scope": "primary section + authored arithmetic/assumptions + executed model trace + assessment source scan",
+    "assumptions": "Authored finite idealized model; see lesson.limit. Source does not establish numeric scenario rates.",
+    "sources": [
+      {
+        "url": "https://www.rfc-editor.org/rfc/rfc9110.html",
+        "edition": "RFC 9110, STD 97, 2022",
+        "section": "§§3, 6, 9.3.1, 15.3.1, 15.5.5, 15.6.4",
+        "checkedAt": "2026-10-15",
+        "revision": "RFC 9110, STD 97, 2022",
+        "statusCheck": "RFC 9110 STD 97 published 2022; current updates not fully audited",
+        "errataCheck": "not fully audited",
+        "support": "HTTP request/response, GET and 200/404/503 semantics"
+      }
+    ],
+    "independentExpected": "At response step2, GET /lich-hoc=200, missing path=404, maintenance=503; all are received HTTP responses.",
+    "trace": {
+      "mode": "executed",
+      "input": [
+        {
+          "resource": "timetable",
+          "maintenance": false,
+          "step": 2
+        },
+        {
+          "resource": "missing",
+          "maintenance": false,
+          "step": 2
+        },
+        {
+          "resource": "timetable",
+          "maintenance": true,
+          "step": 2
+        }
+      ],
+      "actions": "Call public engine functions; compare independently calculated expected fields",
+      "actual": "3/3 checked examples match; see per-case actual",
+      "artifact": "/private/tmp/knowledge-qa07/review/traces-older.json",
+      "command": "/Users/vuongn/.npm/_npx/538786c08bcb9442/node_modules/node/bin/node --import tsx /private/tmp/knowledge-qa07/review/run-older.mjs"
+    },
+    "assessmentEvidence": "Story, explanation, limit, terms, prediction, challenge, case and both guidance hints read; answer/feedback consistent with scoped model.",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": "apps/web/src/features/lesson-player/LessonPage.tsx"
+    },
+    "verdict": "verified-with-conditions",
+    "uncertainty": "Browser not observed; toy model boundaries and source product scope limit generalization. Not a production guarantee.",
+    "impact": "No mismatch found in checked examples; lesson limitations constrain inference.",
+    "retest": "Rerun representative boundary and assessment if engine/lesson output changes."
+  },
+  {
+    "claimId": "network-1",
+    "lessonId": "network",
+    "version": 1,
+    "path": "content/editorial.json",
+    "field": "lessons[network].claims[0].text",
+    "claim": "RTT là thời gian đi và về của một trao đổi mạng nhỏ trong mô hình. Tốc độ truyền nói có bao nhiêu bit đi được mỗi giây. Với tốc độ cố định, phần truyền ảnh bằng số bit chia cho bit/giây. Tổng chờ ở bài này còn cộng RTT và 50 ms xử lý. Tăng tốc độ làm phần truyền ngắn hơn, nhưng không tự đổi RTT đã chọn.",
+    "scope": "primary section + authored arithmetic/assumptions + executed model trace + assessment source scan",
+    "assumptions": "Authored finite idealized model; see lesson.limit. Source does not establish numeric scenario rates.",
+    "sources": [
+      {
+        "url": "https://physics.nist.gov/cuu/Units/binary.html",
+        "edition": "NIST Units page, living",
+        "section": "Examples and comparisons with SI prefixes",
+        "checkedAt": "2026-10-15",
+        "revision": "unknown",
+        "statusCheck": "official publisher page read; living revision unknown",
+        "errataCheck": "not applicable",
+        "support": "Decimal MB versus binary MiB and byte/bit"
+      },
+      {
+        "url": "https://datatracker.ietf.org/doc/html/rfc6349",
+        "edition": "RFC 6349, Informational, 2011",
+        "section": "§§2.2,3.2",
+        "checkedAt": "2026-10-15",
+        "revision": "RFC 6349 (2011)",
+        "statusCheck": "IETF Datatracker full published RFC opened; Informational status displayed",
+        "errataCheck": "not fully audited",
+        "support": "RTT and bottleneck bandwidth are distinct measured quantities; real TCP throughput constrained by window and path."
+      }
+    ],
+    "independentExpected": "1000kB×1000×8/(8×10^6)×1000=1000ms transfer; plus100 RTT+50 processing=1150ms. At16Mbps total650ms.",
+    "trace": {
+      "mode": "executed",
+      "input": [
+        {
+          "rtt": 100,
+          "rate": 8,
+          "size": 1000
+        },
+        {
+          "rtt": 100,
+          "rate": 16,
+          "size": 1000
+        },
+        {
+          "rtt": 20,
+          "rate": 32,
+          "size": 100
+        }
+      ],
+      "actions": "Call public engine functions; compare independently calculated expected fields",
+      "actual": "3/3 checked examples match; see per-case actual",
+      "artifact": "/private/tmp/knowledge-qa07/review/traces-older.json",
+      "command": "/Users/vuongn/.npm/_npx/538786c08bcb9442/node_modules/node/bin/node --import tsx /private/tmp/knowledge-qa07/review/run-older.mjs"
+    },
+    "assessmentEvidence": "Story, explanation, limit, terms, prediction, challenge, case and both guidance hints read; answer/feedback consistent with scoped model.",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": "apps/web/src/features/lesson-player/LessonPage.tsx"
+    },
+    "verdict": "verified-with-conditions",
+    "uncertainty": "Browser not observed; toy model boundaries and source product scope limit generalization. Not a production guarantee.",
+    "impact": "No mismatch found in checked examples; lesson limitations constrain inference.",
+    "retest": "Rerun representative boundary and assessment if engine/lesson output changes."
+  },
+  {
+    "claimId": "routing-1",
+    "lessonId": "routing",
+    "version": 1,
+    "path": "content/editorial.json",
+    "field": "lessons[routing].claims[0].text",
+    "claim": "IP routing chọn chặng tiếp theo tới đích.",
+    "scope": "primary section + authored arithmetic/assumptions + executed model trace + assessment source scan",
+    "assumptions": "Authored finite idealized model; see lesson.limit. Source does not establish numeric scenario rates.",
+    "sources": [
+      {
+        "url": "https://www.rfc-editor.org/rfc/rfc1122.html",
+        "edition": "RFC 1122, STD 3, 1989",
+        "section": "§3.3.1",
+        "checkedAt": "2026-10-15",
+        "revision": "RFC 1122, STD 3, 1989",
+        "statusCheck": "published RFC edition read; current update chain not fully checked",
+        "errataCheck": "not fully audited",
+        "support": "IP next-hop decision to destination"
+      },
+      {
+        "url": "https://www.rfc-editor.org/rfc/rfc9293",
+        "edition": "RFC 9293, STD 7, 2022",
+        "section": "§§2.2,3.1",
+        "checkedAt": "2026-10-15",
+        "revision": "RFC 9293, STD 7, 2022",
+        "statusCheck": "published RFC edition read; current update chain not fully checked",
+        "errataCheck": "not fully audited",
+        "support": "Reliable ordered byte stream; TCP ports"
+      },
+      {
+        "url": "https://www.rfc-editor.org/info/rfc5737/",
+        "edition": "RFC 5737, Informational, 2010",
+        "section": "§3",
+        "checkedAt": "2026-10-15",
+        "revision": "RFC 5737, Informational, 2010",
+        "statusCheck": "published RFC edition read; current update chain not fully checked",
+        "errataCheck": "not fully audited",
+        "support": "TEST-NET-1/2/3 reserved for documentation"
+      }
+    ],
+    "independentExpected": "Route absent stops at router regardless of TCP port; same IP port8080 timetable,9090 library,8181 no listener; alternate IP other host.",
+    "trace": {
+      "mode": "executed",
+      "input": [
+        {
+          "destination": "school",
+          "port": 8080,
+          "route": true,
+          "step": 3
+        },
+        {
+          "destination": "school",
+          "port": 9090,
+          "route": true,
+          "step": 3
+        },
+        {
+          "destination": "school",
+          "port": 8181,
+          "route": true,
+          "step": 3
+        },
+        {
+          "destination": "school",
+          "port": 8080,
+          "route": false,
+          "step": 3
+        },
+        {
+          "destination": "other",
+          "port": 8080,
+          "route": true,
+          "step": 3
+        }
+      ],
+      "actions": "Call public engine functions; compare independently calculated expected fields",
+      "actual": "5/5 checked examples match; see per-case actual",
+      "artifact": "/private/tmp/knowledge-qa07/review/traces-older.json",
+      "command": "/Users/vuongn/.npm/_npx/538786c08bcb9442/node_modules/node/bin/node --import tsx /private/tmp/knowledge-qa07/review/run-older.mjs"
+    },
+    "assessmentEvidence": "Story, explanation, limit, terms, prediction, challenge, case and both guidance hints read; answer/feedback consistent with scoped model.",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": "apps/web/src/features/lesson-player/LessonPage.tsx"
+    },
+    "verdict": "verified-with-conditions",
+    "uncertainty": "Browser not observed; toy model boundaries and source product scope limit generalization. Not a production guarantee.",
+    "impact": "No mismatch found in checked examples; lesson limitations constrain inference.",
+    "retest": "Rerun representative boundary and assessment if engine/lesson output changes."
+  },
+  {
+    "claimId": "routing-2",
+    "lessonId": "routing",
+    "version": 1,
+    "path": "content/editorial.json",
+    "field": "lessons[routing].claims[1].text",
+    "claim": "TCP header có port nguồn/đích, tách với địa chỉ trong IP header.",
+    "scope": "primary section + authored arithmetic/assumptions + executed model trace + assessment source scan",
+    "assumptions": "Authored finite idealized model; see lesson.limit. Source does not establish numeric scenario rates.",
+    "sources": [
+      {
+        "url": "https://www.rfc-editor.org/rfc/rfc1122.html",
+        "edition": "RFC 1122, STD 3, 1989",
+        "section": "§3.3.1",
+        "checkedAt": "2026-10-15",
+        "revision": "RFC 1122, STD 3, 1989",
+        "statusCheck": "published RFC edition read; current update chain not fully checked",
+        "errataCheck": "not fully audited",
+        "support": "IP next-hop decision to destination"
+      },
+      {
+        "url": "https://www.rfc-editor.org/rfc/rfc9293",
+        "edition": "RFC 9293, STD 7, 2022",
+        "section": "§§2.2,3.1",
+        "checkedAt": "2026-10-15",
+        "revision": "RFC 9293, STD 7, 2022",
+        "statusCheck": "published RFC edition read; current update chain not fully checked",
+        "errataCheck": "not fully audited",
+        "support": "Reliable ordered byte stream; TCP ports"
+      },
+      {
+        "url": "https://www.rfc-editor.org/info/rfc5737/",
+        "edition": "RFC 5737, Informational, 2010",
+        "section": "§3",
+        "checkedAt": "2026-10-15",
+        "revision": "RFC 5737, Informational, 2010",
+        "statusCheck": "published RFC edition read; current update chain not fully checked",
+        "errataCheck": "not fully audited",
+        "support": "TEST-NET-1/2/3 reserved for documentation"
+      }
+    ],
+    "independentExpected": "Route absent stops at router regardless of TCP port; same IP port8080 timetable,9090 library,8181 no listener; alternate IP other host.",
+    "trace": {
+      "mode": "executed",
+      "input": [
+        {
+          "destination": "school",
+          "port": 8080,
+          "route": true,
+          "step": 3
+        },
+        {
+          "destination": "school",
+          "port": 9090,
+          "route": true,
+          "step": 3
+        },
+        {
+          "destination": "school",
+          "port": 8181,
+          "route": true,
+          "step": 3
+        },
+        {
+          "destination": "school",
+          "port": 8080,
+          "route": false,
+          "step": 3
+        },
+        {
+          "destination": "other",
+          "port": 8080,
+          "route": true,
+          "step": 3
+        }
+      ],
+      "actions": "Call public engine functions; compare independently calculated expected fields",
+      "actual": "5/5 checked examples match; see per-case actual",
+      "artifact": "/private/tmp/knowledge-qa07/review/traces-older.json",
+      "command": "/Users/vuongn/.npm/_npx/538786c08bcb9442/node_modules/node/bin/node --import tsx /private/tmp/knowledge-qa07/review/run-older.mjs"
+    },
+    "assessmentEvidence": "Story, explanation, limit, terms, prediction, challenge, case and both guidance hints read; answer/feedback consistent with scoped model.",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": "apps/web/src/features/lesson-player/LessonPage.tsx"
+    },
+    "verdict": "verified-with-conditions",
+    "uncertainty": "Browser not observed; toy model boundaries and source product scope limit generalization. Not a production guarantee.",
+    "impact": "No mismatch found in checked examples; lesson limitations constrain inference.",
+    "retest": "Rerun representative boundary and assessment if engine/lesson output changes."
+  },
+  {
+    "claimId": "routing-3",
+    "lessonId": "routing",
+    "version": 1,
+    "path": "content/editorial.json",
+    "field": "lessons[routing].claims[2].text",
+    "claim": "Các dải địa chỉ ví dụ dành cho tài liệu.",
+    "scope": "primary section + authored arithmetic/assumptions + executed model trace + assessment source scan",
+    "assumptions": "Authored finite idealized model; see lesson.limit. Source does not establish numeric scenario rates.",
+    "sources": [
+      {
+        "url": "https://www.rfc-editor.org/rfc/rfc1122.html",
+        "edition": "RFC 1122, STD 3, 1989",
+        "section": "§3.3.1",
+        "checkedAt": "2026-10-15",
+        "revision": "RFC 1122, STD 3, 1989",
+        "statusCheck": "published RFC edition read; current update chain not fully checked",
+        "errataCheck": "not fully audited",
+        "support": "IP next-hop decision to destination"
+      },
+      {
+        "url": "https://www.rfc-editor.org/rfc/rfc9293",
+        "edition": "RFC 9293, STD 7, 2022",
+        "section": "§§2.2,3.1",
+        "checkedAt": "2026-10-15",
+        "revision": "RFC 9293, STD 7, 2022",
+        "statusCheck": "published RFC edition read; current update chain not fully checked",
+        "errataCheck": "not fully audited",
+        "support": "Reliable ordered byte stream; TCP ports"
+      },
+      {
+        "url": "https://www.rfc-editor.org/info/rfc5737/",
+        "edition": "RFC 5737, Informational, 2010",
+        "section": "§3",
+        "checkedAt": "2026-10-15",
+        "revision": "RFC 5737, Informational, 2010",
+        "statusCheck": "published RFC edition read; current update chain not fully checked",
+        "errataCheck": "not fully audited",
+        "support": "TEST-NET-1/2/3 reserved for documentation"
+      }
+    ],
+    "independentExpected": "Route absent stops at router regardless of TCP port; same IP port8080 timetable,9090 library,8181 no listener; alternate IP other host.",
+    "trace": {
+      "mode": "executed",
+      "input": [
+        {
+          "destination": "school",
+          "port": 8080,
+          "route": true,
+          "step": 3
+        },
+        {
+          "destination": "school",
+          "port": 9090,
+          "route": true,
+          "step": 3
+        },
+        {
+          "destination": "school",
+          "port": 8181,
+          "route": true,
+          "step": 3
+        },
+        {
+          "destination": "school",
+          "port": 8080,
+          "route": false,
+          "step": 3
+        },
+        {
+          "destination": "other",
+          "port": 8080,
+          "route": true,
+          "step": 3
+        }
+      ],
+      "actions": "Call public engine functions; compare independently calculated expected fields",
+      "actual": "5/5 checked examples match; see per-case actual",
+      "artifact": "/private/tmp/knowledge-qa07/review/traces-older.json",
+      "command": "/Users/vuongn/.npm/_npx/538786c08bcb9442/node_modules/node/bin/node --import tsx /private/tmp/knowledge-qa07/review/run-older.mjs"
+    },
+    "assessmentEvidence": "Story, explanation, limit, terms, prediction, challenge, case and both guidance hints read; answer/feedback consistent with scoped model.",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": "apps/web/src/features/lesson-player/LessonPage.tsx"
+    },
+    "verdict": "verified-with-conditions",
+    "uncertainty": "Browser not observed; toy model boundaries and source product scope limit generalization. Not a production guarantee.",
+    "impact": "No mismatch found in checked examples; lesson limitations constrain inference.",
+    "retest": "Rerun representative boundary and assessment if engine/lesson output changes."
+  },
+  {
+    "claimId": "tls-1",
+    "lessonId": "tls",
+    "version": 1,
+    "path": "content/editorial.json",
+    "field": "lessons[tls].claims[0].text",
+    "claim": "TLS bảo vệ tính bí mật, toàn vẹn và xác thực kênh; handshake thiết lập tham số/khóa, record bảo vệ traffic.",
+    "scope": "source and engine trace",
+    "assumptions": "valid certificate means name, trust path and time assumed valid; no endpoint compromise; no resumption/0-RTT",
+    "sources": [
+      {
+        "url": "https://www.rfc-editor.org/info/rfc9846/",
+        "edition": "RFC 9846",
+        "section": "Abstract; §§1,1.2,2,5",
+        "checkedAt": "2026-10-15",
+        "revision": "RFC 9846",
+        "statusCheck": "RFC 9846 Proposed Standard; info/full text opened; obsoletes RFC 8446; errata not fully audited",
+        "errataCheck": "not fully audited",
+        "support": "TLS 1.3 protects channel confidentiality/integrity and handshake/record roles"
+      }
+    ],
+    "independentExpected": "For 2×4×3 cases: HTTP sent iff insecure or cert valid; HTTPS invalid cert blocks before HTTP; valid HTTPS tamper rejects altered record; insecure tamper yields room 999.",
+    "trace": {
+      "mode": "executed",
+      "artifact": "/private/tmp/knowledge-qa07/review/traces.json",
+      "command": "node --import tsx /private/tmp/knowledge-qa07/review/run.mjs",
+      "input": "secure ∈ {false,true}; certificate ∈ {valid,wrong-name,expired,untrusted}; attack ∈ {none,listen,tamper}; plus malformed inputs",
+      "actions": "simulateTls(input) for each; compare expected predicates computed without simulateTls",
+      "actual": "24/24 matched; 2 malformed/restored outputs recorded"
+    },
+    "assessmentEvidence": "TLS prediction/challenge/options/answer/feedback and both guidance ladders read; distinction endpoint/network, wrong-name stop consistent; source-only",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": null
+    },
+    "verdict": "verified-with-conditions",
+    "uncertainty": "No real cryptographic or browser certificate verification; no browser observation; full RFC errata not audited.",
+    "impact": "No learner-impacting mismatch found in checked scope.",
+    "retest": null
+  },
+  {
+    "claimId": "tls-2",
+    "lessonId": "tls",
+    "version": 1,
+    "path": "content/editorial.json",
+    "field": "lessons[tls].claims[1].text",
+    "claim": "Xác minh danh tính dịch vụ dựa trên tên định mở, tách với kiểm tra chuỗi chứng chỉ.",
+    "scope": "source and engine trace",
+    "assumptions": "valid certificate means name, trust path and time assumed valid; no endpoint compromise; no resumption/0-RTT",
+    "sources": [
+      {
+        "url": "https://www.rfc-editor.org/rfc/rfc9525.html",
+        "edition": "RFC 9525",
+        "section": "§§6.1.1,6.6",
+        "checkedAt": "2026-10-15",
+        "revision": "RFC 9525",
+        "statusCheck": "RFC 9525 published Proposed Standard; info page opened; updates/errata not fully audited",
+        "errataCheck": "not fully audited",
+        "support": "reference identifier independently derived from intended service; mismatch fails"
+      },
+      {
+        "url": "https://www.rfc-editor.org/rfc/rfc5280.html",
+        "edition": "RFC 5280",
+        "section": "§§6.1.1,6.1.3",
+        "checkedAt": "2026-10-15",
+        "revision": "RFC 5280",
+        "statusCheck": "RFC 5280 Standards Track full text opened; info page fetch failed; current status/update chain unverified",
+        "errataCheck": "not fully audited",
+        "support": "trust anchor and current validity time are separate path validation inputs"
+      }
+    ],
+    "independentExpected": "For 2×4×3 cases: HTTP sent iff insecure or cert valid; HTTPS invalid cert blocks before HTTP; valid HTTPS tamper rejects altered record; insecure tamper yields room 999.",
+    "trace": {
+      "mode": "executed",
+      "artifact": "/private/tmp/knowledge-qa07/review/traces.json",
+      "command": "node --import tsx /private/tmp/knowledge-qa07/review/run.mjs",
+      "input": "secure ∈ {false,true}; certificate ∈ {valid,wrong-name,expired,untrusted}; attack ∈ {none,listen,tamper}; plus malformed inputs",
+      "actions": "simulateTls(input) for each; compare expected predicates computed without simulateTls",
+      "actual": "24/24 matched; 2 malformed/restored outputs recorded"
+    },
+    "assessmentEvidence": "TLS prediction/challenge/options/answer/feedback and both guidance ladders read; distinction endpoint/network, wrong-name stop consistent; source-only",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": null
+    },
+    "verdict": "verified-with-conditions",
+    "uncertainty": "No real cryptographic or browser certificate verification; no browser observation; full RFC errata not audited.",
+    "impact": "No learner-impacting mismatch found in checked scope.",
+    "retest": null
+  },
+  {
+    "claimId": "tls-3",
+    "lessonId": "tls",
+    "version": 1,
+    "path": "content/editorial.json",
+    "field": "lessons[tls].claims[2].text",
+    "claim": "HTTPS là HTTP qua kết nối được bảo vệ.",
+    "scope": "source and engine trace",
+    "assumptions": "valid certificate means name, trust path and time assumed valid; no endpoint compromise; no resumption/0-RTT",
+    "sources": [
+      {
+        "url": "https://www.rfc-editor.org/rfc/rfc9110.html",
+        "edition": "RFC 9110",
+        "section": "§4.2.2",
+        "checkedAt": "2026-10-15",
+        "revision": "RFC 9110",
+        "statusCheck": "RFC 9110 STD 97 published 2022; current updates not fully audited",
+        "errataCheck": "not fully audited",
+        "support": "HTTPS URI semantics"
+      }
+    ],
+    "independentExpected": "For 2×4×3 cases: HTTP sent iff insecure or cert valid; HTTPS invalid cert blocks before HTTP; valid HTTPS tamper rejects altered record; insecure tamper yields room 999.",
+    "trace": {
+      "mode": "executed",
+      "artifact": "/private/tmp/knowledge-qa07/review/traces.json",
+      "command": "node --import tsx /private/tmp/knowledge-qa07/review/run.mjs",
+      "input": "secure ∈ {false,true}; certificate ∈ {valid,wrong-name,expired,untrusted}; attack ∈ {none,listen,tamper}; plus malformed inputs",
+      "actions": "simulateTls(input) for each; compare expected predicates computed without simulateTls",
+      "actual": "24/24 matched; 2 malformed/restored outputs recorded"
+    },
+    "assessmentEvidence": "TLS prediction/challenge/options/answer/feedback and both guidance ladders read; distinction endpoint/network, wrong-name stop consistent; source-only",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": null
+    },
+    "verdict": "verified-with-conditions",
+    "uncertainty": "No real cryptographic or browser certificate verification; no browser observation; full RFC errata not audited.",
+    "impact": "No learner-impacting mismatch found in checked scope.",
+    "retest": null
+  },
+  {
+    "claimId": "school-read",
+    "lessonId": "school-day",
+    "version": 1,
+    "path": "content/reviews/vi/school-day.json",
+    "field": "limits[0..1] + scenarios[*].context",
+    "claim": "Mỗi server tối đa 6 lượt/giây; nguồn tối đa 4; cache dùng giả định 75% hit cố định.",
+    "scope": "source and engine trace",
+    "assumptions": "Read window 1 second, no initial read queue; notification window 4 seconds from scenario initial backlog; streams independent.",
+    "sources": [
+      {
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside",
+        "edition": "Azure Architecture Center, live page",
+        "section": "Solution; Problems and considerations",
+        "checkedAt": "2026-10-15",
+        "revision": "unknown",
+        "statusCheck": "living page opened",
+        "errataCheck": "not fully audited",
+        "support": "cache can reduce data store reads; fixed 75% is authored assumption"
+      }
+    ],
+    "independentExpected": "opening: min(12,2×6,4/.25)=12 with cache; rush 6 with cache; without cache source caps at 4",
+    "trace": {
+      "mode": "executed",
+      "artifact": "/private/tmp/knowledge-qa07/review/traces.json",
+      "command": "node --import tsx /private/tmp/knowledge-qa07/review/run.mjs",
+      "input": "opening/rush; 4 configs each including pass, over-budget, TTL2, no-cache undercapacity",
+      "actions": "evaluateSchoolReview; compare independent read capacity, backlog conservation, TTL/budget predicates",
+      "actual": "8/8 matched expected counts/checks"
+    },
+    "assessmentEvidence": "Two scenario contexts/hints/reflection prompts and limits read; UI component source read; browser not observed",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": "apps/web/src/features/review/ReviewPage.tsx"
+    },
+    "verdict": "verified-with-conditions",
+    "uncertainty": "No browser observation, live persistence or real freshness measurement; fixed hit share and costs are authored assumptions.",
+    "impact": "No learner-impacting mismatch found in checked configurations.",
+    "retest": null
+  },
+  {
+    "claimId": "school-queue",
+    "lessonId": "school-day",
+    "version": 1,
+    "path": "content/reviews/vi/school-day.json",
+    "field": "limits[0,3] + scenarios[*].hints",
+    "claim": "Mỗi worker tối đa 2 việc/giây; làm hết backlog trong cửa sổ 4 giây.",
+    "scope": "source and engine trace",
+    "assumptions": "Read window 1 second, no initial read queue; notification window 4 seconds from scenario initial backlog; streams independent.",
+    "sources": [
+      {
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling",
+        "edition": "Azure Architecture Center, live page",
+        "section": "When to use; Workload design",
+        "checkedAt": "2026-10-15",
+        "revision": "unknown",
+        "statusCheck": "living page opened",
+        "errataCheck": "not fully audited",
+        "support": "decoupled intake/processing, backlog needs capacity"
+      }
+    ],
+    "independentExpected": "opening 6 arrivals/s×4=24, 3 workers×2×4=24 => 0; rush initial8+8×4=40, 5×2×4=40 =>0; 4 workers leave8",
+    "trace": {
+      "mode": "executed",
+      "artifact": "/private/tmp/knowledge-qa07/review/traces.json",
+      "command": "node --import tsx /private/tmp/knowledge-qa07/review/run.mjs",
+      "input": "opening/rush; 4 configs each including pass, over-budget, TTL2, no-cache undercapacity",
+      "actions": "evaluateSchoolReview; compare independent read capacity, backlog conservation, TTL/budget predicates",
+      "actual": "8/8 matched expected counts/checks"
+    },
+    "assessmentEvidence": "Two scenario contexts/hints/reflection prompts and limits read; UI component source read; browser not observed",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": "apps/web/src/features/review/ReviewPage.tsx"
+    },
+    "verdict": "verified-with-conditions",
+    "uncertainty": "No browser observation, live persistence or real freshness measurement; fixed hit share and costs are authored assumptions.",
+    "impact": "No learner-impacting mismatch found in checked configurations.",
+    "retest": null
+  },
+  {
+    "claimId": "school-freshness",
+    "lessonId": "school-day",
+    "version": 1,
+    "path": "content/reviews/vi/school-day.json",
+    "field": "limits[2] + scenarios[*].context",
+    "claim": "Kiểm policy TTL không quá một phút trong mô hình lý tưởng, không chứng minh độ mới mạng thật.",
+    "scope": "source and engine trace",
+    "assumptions": "Authored policy/cost rule; not real-world guarantee or price.",
+    "sources": [
+      {
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside",
+        "edition": "Azure Architecture Center, live page",
+        "section": "Problems and considerations: Lifetime, Consistency",
+        "checkedAt": "2026-10-15",
+        "revision": "unknown",
+        "statusCheck": "living page opened",
+        "errataCheck": "not fully audited",
+        "support": "expiration policy alone is not store consistency guarantee"
+      }
+    ],
+    "independentExpected": "cache true TTL1 passes policy, TTL2 fails, cache false passes; does not guarantee origin-current data",
+    "trace": {
+      "mode": "executed",
+      "artifact": "/private/tmp/knowledge-qa07/review/traces.json",
+      "command": "node --import tsx /private/tmp/knowledge-qa07/review/run.mjs",
+      "input": "opening/rush; 4 configs each including pass, over-budget, TTL2, no-cache undercapacity",
+      "actions": "evaluateSchoolReview; compare independent read capacity, backlog conservation, TTL/budget predicates",
+      "actual": "8/8 matched expected counts/checks"
+    },
+    "assessmentEvidence": "Two scenario contexts/hints/reflection prompts and limits read; UI component source read; browser not observed",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": "apps/web/src/features/review/ReviewPage.tsx"
+    },
+    "verdict": "verified-with-conditions",
+    "uncertainty": "No browser observation, live persistence or real freshness measurement; fixed hit share and costs are authored assumptions.",
+    "impact": "No learner-impacting mismatch found in checked configurations.",
+    "retest": null
+  },
+  {
+    "claimId": "school-budget",
+    "lessonId": "school-day",
+    "version": 1,
+    "path": "content/reviews/vi/school-day.json",
+    "field": "scenarios[*].context + limits[3]",
+    "claim": "Tổng điểm server + worker + cache không vượt ngân sách tình huống.",
+    "scope": "source and engine trace",
+    "assumptions": "Authored policy/cost rule; not real-world guarantee or price.",
+    "sources": [
+      {
+        "url": null,
+        "edition": null,
+        "section": null,
+        "checkedAt": null,
+        "revision": null,
+        "statusCheck": "not applicable",
+        "errataCheck": "not applicable",
+        "support": "Authored points, no external source can validate price; verified as internal arithmetic."
+      }
+    ],
+    "independentExpected": "opening 2+3+1=6<=7; rush2+5+1=8<=8; 4+6+1=11 fails",
+    "trace": {
+      "mode": "executed",
+      "artifact": "/private/tmp/knowledge-qa07/review/traces.json",
+      "command": "node --import tsx /private/tmp/knowledge-qa07/review/run.mjs",
+      "input": "opening/rush; 4 configs each including pass, over-budget, TTL2, no-cache undercapacity",
+      "actions": "evaluateSchoolReview; compare independent read capacity, backlog conservation, TTL/budget predicates",
+      "actual": "8/8 matched expected counts/checks"
+    },
+    "assessmentEvidence": "Two scenario contexts/hints/reflection prompts and limits read; UI component source read; browser not observed",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": "apps/web/src/features/review/ReviewPage.tsx"
+    },
+    "verdict": "verified-with-conditions",
+    "uncertainty": "No browser observation, live persistence or real freshness measurement; fixed hit share and costs are authored assumptions.",
+    "impact": "No learner-impacting mismatch found in checked configurations.",
+    "retest": null
+  }
+]

@@ -1,6 +1,6 @@
 # Kế hoạch website học System Design tương tác
 
-Ngày lập: 11/10/2026. Phiên bản 4: toàn diện theo level, dễ tiếp cận với học sinh cấp 3, mobile-first và chuẩn bị phát triển app. Trạng thái: đề xuất sản phẩm và triển khai; chưa xây dựng hoặc phát hành website.
+Ngày lập: 11/10/2026. Phiên bản 4: toàn diện theo level, dễ tiếp cận với học sinh cấp 3, mobile-first và chuẩn bị phát triển app. Cập nhật trạng thái 12/10/2026: đã có source bản thử nghiệm web với sáu bài nhập môn; phạm vi đầy đủ bên dưới vẫn là kế hoạch. Xem [trạng thái hiện thực](docs/delivery/IMPLEMENTATION_STATUS.md) để phân biệt phần đã có và gate chưa đạt; chưa xác nhận phát hành production.
 
 Tên làm việc: **System Design Lab**.
 
@@ -276,7 +276,7 @@ Chỉ số theo dõi sau beta: tỷ lệ bắt đầu/hoàn thành lab, bước 
 
 ## 9. Ưu tiên triển khai đầu tiên
 
-Bắt đầu bằng bản đồ L0–L5 và registry năng lực, bootstrap workspace theo [SETUP.md](docs/engineering/SETUP.md), rồi hoàn thiện bài cache nhập môn từ mở bài đến đánh giá và resume trên điện thoại. Tiếp theo phát triển bài **“Vì sao thêm server mà hệ thống vẫn chậm?”**. Song song prototype transaction và design review để kiểm tra khung phục vụ nhiều độ sâu. Mọi đợt đối chiếu độ bao phủ, ưu tiên lấp khoảng trống cốt lõi.
+Workspace, catalog L0–L5 và sáu bài nhập môn đã có; không bootstrap lại. Ưu tiên đóng gate bài cache: kiểm thử dữ liệu/trợ năng/mobile, review chuyên môn và pilot học sinh; hoàn thiện registry năng lực, review metadata và validation trước khi nhân rộng học liệu. Prototype transaction và design review kiểm tra khung phục vụ nhiều độ sâu. Task tiếp theo và điều kiện nghiệm thu nằm trong [roadmap](docs/delivery/ROADMAP.md); kết quả đối chiếu source nằm trong [review ngày 12/10](docs/delivery/PLAN_REVIEW_2026-10-12.md).
 
 Bài **“Vì sao website vẫn hiện phòng học cũ?”** trong [TEACHING_GUIDE.md](TEACHING_GUIDE.md) là mẫu giọng văn cần thử với học sinh trước khi nhân rộng. Tính công sức viết bổ trợ và thử nghiệm vào ước lượng nội dung sau bài mẫu.
 

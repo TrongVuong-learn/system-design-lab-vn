@@ -1,0 +1,656 @@
+[
+  {
+    "claimId": "request-1",
+    "lessonId": "request",
+    "version": 1,
+    "path": "content/editorial.json",
+    "field": "lessons[request].claims[0].text",
+    "claim": "Mỗi chặng cần thời gian. Trong mô hình nối tiếp của bài này, thời gian chờ là tổng các chặng. Nhiều yêu cầu cùng lúc còn có thể phải xếp hàng; bài load balancing sẽ giúp bạn thấy điều đó.",
+    "scope": "content and guidance risk scan",
+    "assumptions": null,
+    "sources": [],
+    "independentExpected": null,
+    "trace": null,
+    "assessmentEvidence": "prediction/challenge and guidance read from lesson JSON",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": null
+    },
+    "verdict": "insufficient-evidence",
+    "uncertainty": "full source/engine/UI review pending",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "balance-1",
+    "lessonId": "balance",
+    "version": 1,
+    "path": "content/editorial.json",
+    "field": "lessons[balance].claims[0].text",
+    "claim": "Bộ chia tải phân công việc cho các máy. Nhưng nếu tất cả vẫn hỏi cùng một nơi lưu dữ liệu, nơi đó có thể giới hạn số việc làm xong. Hãy thay một yếu tố mỗi lần và so sánh số đang chờ.",
+    "scope": "content and guidance risk scan",
+    "assumptions": null,
+    "sources": [],
+    "independentExpected": null,
+    "trace": null,
+    "assessmentEvidence": "prediction/challenge and guidance read from lesson JSON",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": null
+    },
+    "verdict": "insufficient-evidence",
+    "uncertainty": "full source/engine/UI review pending",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "cache-1",
+    "lessonId": "cache",
+    "version": 1,
+    "path": "content/editorial.json",
+    "field": "lessons[cache].claims[0].text",
+    "claim": "Cache là dữ liệu được giữ để dùng lại. Khi nguồn thay đổi, bản ghi có thể vẫn cũ. Hệ thống cần quy tắc cập nhật: lấy mới chủ động hoặc hết hạn rồi đọc lại nguồn khi có yêu cầu.",
+    "scope": "content and guidance risk scan",
+    "assumptions": null,
+    "sources": [],
+    "independentExpected": null,
+    "trace": null,
+    "assessmentEvidence": "prediction/challenge and guidance read from lesson JSON",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": null
+    },
+    "verdict": "insufficient-evidence",
+    "uncertainty": "full source/engine/UI review pending",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "queue-1",
+    "lessonId": "queue",
+    "version": 1,
+    "path": "content/editorial.json",
+    "field": "lessons[queue].claims[0].text",
+    "claim": "Hàng đợi giữ việc chờ xử lý. Nó giúp tiếp nhận một đợt đông, nhưng không tự tăng công suất. Nếu mỗi giây nhận nhiều hơn làm xong, số việc chờ tiếp tục tăng.",
+    "scope": "content and guidance risk scan",
+    "assumptions": null,
+    "sources": [],
+    "independentExpected": null,
+    "trace": null,
+    "assessmentEvidence": "prediction/challenge and guidance read from lesson JSON",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": null
+    },
+    "verdict": "insufficient-evidence",
+    "uncertainty": "full source/engine/UI review pending",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "replica-1",
+    "lessonId": "replica",
+    "version": 1,
+    "path": "content/editorial.json",
+    "field": "lessons[replica].claims[0].text",
+    "claim": "Replication giữ bản dữ liệu ở nhiều nơi. Trong sao chép bất đồng bộ, bản sao có thể nhận thay đổi muộn. Chọn nơi đọc phải phù hợp với yêu cầu về độ mới.",
+    "scope": "content and guidance risk scan",
+    "assumptions": null,
+    "sources": [],
+    "independentExpected": null,
+    "trace": null,
+    "assessmentEvidence": "prediction/challenge and guidance read from lesson JSON",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": null
+    },
+    "verdict": "insufficient-evidence",
+    "uncertainty": "full source/engine/UI review pending",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "design-1",
+    "lessonId": "design",
+    "version": 1,
+    "path": "content/editorial.json",
+    "field": "lessons[design].claims[0].text",
+    "claim": "Mỗi thành phần giải quyết một vấn đề cụ thể. Máy xử lý nhận yêu cầu; cache giảm số lần đọc nguồn trong giả định này; worker làm việc từ hàng đợi. Dùng số liệu để chọn, rồi nghĩ đến dữ liệu cũ và tình huống lỗi.",
+    "scope": "content and guidance risk scan",
+    "assumptions": null,
+    "sources": [],
+    "independentExpected": null,
+    "trace": null,
+    "assessmentEvidence": "prediction/challenge and guidance read from lesson JSON",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": null
+    },
+    "verdict": "insufficient-evidence",
+    "uncertainty": "full source/engine/UI review pending",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "metrics-1",
+    "lessonId": "metrics",
+    "version": 1,
+    "path": "content/editorial.json",
+    "field": "lessons[metrics].claims[0].text",
+    "claim": "Latency tính từ lúc gửi đến lúc nhận kết quả, gồm cả thời gian xếp hàng. Throughput là số việc hoàn tất chia cho thời gian quan sát. Median mô tả giữa nhóm; p95 giúp thấy nhóm chờ lâu. Khi hai việc cuối chậm, median có thể giữ nguyên nhưng p95 tăng.",
+    "scope": "content and guidance risk scan",
+    "assumptions": null,
+    "sources": [],
+    "independentExpected": null,
+    "trace": null,
+    "assessmentEvidence": "prediction/challenge and guidance read from lesson JSON",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": null
+    },
+    "verdict": "insufficient-evidence",
+    "uncertainty": "full source/engine/UI review pending",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "dns-1",
+    "lessonId": "dns",
+    "version": 1,
+    "path": "content/editorial.json",
+    "field": "lessons[dns].claims[0].text",
+    "claim": "DNS giúp tra thông tin gắn với tên miền, trong bài là địa chỉ IP. Resolver có thể dùng câu trả lời trong cache khi TTL còn hạn. Nơi quản lý tên đổi địa chỉ không tự đẩy thay đổi đến mọi cache; lần tra sau khi hết hạn mới lấy lại trong mô hình này.",
+    "scope": "content and guidance risk scan",
+    "assumptions": null,
+    "sources": [],
+    "independentExpected": null,
+    "trace": null,
+    "assessmentEvidence": "prediction/challenge and guidance read from lesson JSON",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": null
+    },
+    "verdict": "insufficient-evidence",
+    "uncertainty": "full source/engine/UI review pending",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "transport-1",
+    "lessonId": "transport",
+    "version": 1,
+    "path": "content/editorial.json",
+    "field": "lessons[transport].claims[0].text",
+    "claim": "TCP cung cấp luồng byte tin cậy và đúng thứ tự: phần đến sau có thể phải giữ lại trong khi chờ phần thiếu được gửi lại. UDP gửi datagram riêng lẻ, không tự bảo đảm giao đủ, đúng thứ tự hoặc gửi lại. Ứng dụng dùng UDP vẫn có thể bổ sung các cơ chế đó.",
+    "scope": "content and guidance risk scan",
+    "assumptions": null,
+    "sources": [],
+    "independentExpected": null,
+    "trace": null,
+    "assessmentEvidence": "prediction/challenge and guidance read from lesson JSON",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": null
+    },
+    "verdict": "insufficient-evidence",
+    "uncertainty": "full source/engine/UI review pending",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "capacity-1",
+    "lessonId": "capacity",
+    "version": 1,
+    "path": "content/editorial.json",
+    "field": "lessons[capacity].claims[0].text",
+    "claim": "Lượt/ngày = số học sinh × lượt mỗi người. Chia cho 86.400 giây để ra lượt/giây trung bình. Tải đỉnh ở đây chỉ là trung bình nhân hệ số bạn giả định. Dữ liệu truyền tăng theo lượt xem; dung lượng ảnh lưu chỉ tính số ảnh duy nhất.",
+    "scope": "content and guidance risk scan",
+    "assumptions": null,
+    "sources": [],
+    "independentExpected": null,
+    "trace": null,
+    "assessmentEvidence": "prediction/challenge and guidance read from lesson JSON",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": null
+    },
+    "verdict": "insufficient-evidence",
+    "uncertainty": "full source/engine/UI review pending",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "capacity-2",
+    "lessonId": "capacity",
+    "version": 1,
+    "path": "content/editorial.json",
+    "field": "lessons[capacity].claims[1].text",
+    "claim": "Bài dùng đơn vị thập phân: 1 byte = 8 bit, 1 kB = 1.000 byte và 1 MB = 1.000.000 byte; không dùng KiB/MiB.",
+    "scope": "content and guidance risk scan",
+    "assumptions": null,
+    "sources": [],
+    "independentExpected": null,
+    "trace": null,
+    "assessmentEvidence": "prediction/challenge and guidance read from lesson JSON",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": null
+    },
+    "verdict": "insufficient-evidence",
+    "uncertainty": "full source/engine/UI review pending",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "http-1",
+    "lessonId": "http",
+    "version": 1,
+    "path": "content/editorial.json",
+    "field": "lessons[http].claims[0].text",
+    "claim": "HTTP dùng thông điệp yêu cầu và phản hồi. Trong bài, GET xin đọc lịch ở một đường dẫn. Mã 200 cho biết yêu cầu thành công; 404 là không tìm thấy tài nguyên ở đường dẫn đã hỏi; 503 là dịch vụ tạm chưa sẵn sàng. Phản hồi còn có header mô tả định dạng và body chứa nội dung. Nhận 404 hoặc 503 vẫn là nhận một phản hồi HTTP.",
+    "scope": "content and guidance risk scan",
+    "assumptions": null,
+    "sources": [],
+    "independentExpected": null,
+    "trace": null,
+    "assessmentEvidence": "prediction/challenge and guidance read from lesson JSON",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": null
+    },
+    "verdict": "insufficient-evidence",
+    "uncertainty": "full source/engine/UI review pending",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "network-1",
+    "lessonId": "network",
+    "version": 1,
+    "path": "content/editorial.json",
+    "field": "lessons[network].claims[0].text",
+    "claim": "RTT là thời gian đi và về của một trao đổi mạng nhỏ trong mô hình. Tốc độ truyền nói có bao nhiêu bit đi được mỗi giây. Với tốc độ cố định, phần truyền ảnh bằng số bit chia cho bit/giây. Tổng chờ ở bài này còn cộng RTT và 50 ms xử lý. Tăng tốc độ làm phần truyền ngắn hơn, nhưng không tự đổi RTT đã chọn.",
+    "scope": "content and guidance risk scan",
+    "assumptions": null,
+    "sources": [],
+    "independentExpected": null,
+    "trace": null,
+    "assessmentEvidence": "prediction/challenge and guidance read from lesson JSON",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": null
+    },
+    "verdict": "insufficient-evidence",
+    "uncertainty": "full source/engine/UI review pending",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "routing-1",
+    "lessonId": "routing",
+    "version": 1,
+    "path": "content/editorial.json",
+    "field": "lessons[routing].claims[0].text",
+    "claim": "IP routing chọn chặng tiếp theo tới đích.",
+    "scope": "content and guidance risk scan",
+    "assumptions": null,
+    "sources": [],
+    "independentExpected": null,
+    "trace": null,
+    "assessmentEvidence": "prediction/challenge and guidance read from lesson JSON",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": null
+    },
+    "verdict": "insufficient-evidence",
+    "uncertainty": "full source/engine/UI review pending",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "routing-2",
+    "lessonId": "routing",
+    "version": 1,
+    "path": "content/editorial.json",
+    "field": "lessons[routing].claims[1].text",
+    "claim": "TCP header có port nguồn/đích, tách với địa chỉ trong IP header.",
+    "scope": "content and guidance risk scan",
+    "assumptions": null,
+    "sources": [],
+    "independentExpected": null,
+    "trace": null,
+    "assessmentEvidence": "prediction/challenge and guidance read from lesson JSON",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": null
+    },
+    "verdict": "insufficient-evidence",
+    "uncertainty": "full source/engine/UI review pending",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "routing-3",
+    "lessonId": "routing",
+    "version": 1,
+    "path": "content/editorial.json",
+    "field": "lessons[routing].claims[2].text",
+    "claim": "Các dải địa chỉ ví dụ dành cho tài liệu.",
+    "scope": "content and guidance risk scan",
+    "assumptions": null,
+    "sources": [],
+    "independentExpected": null,
+    "trace": null,
+    "assessmentEvidence": "prediction/challenge and guidance read from lesson JSON",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": null
+    },
+    "verdict": "insufficient-evidence",
+    "uncertainty": "full source/engine/UI review pending",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "tls-1",
+    "lessonId": "tls",
+    "version": 1,
+    "path": "content/editorial.json",
+    "field": "lessons[tls].claims[0].text",
+    "claim": "TLS bảo vệ tính bí mật, toàn vẹn và xác thực kênh; handshake thiết lập tham số/khóa, record bảo vệ traffic.",
+    "scope": "source and engine trace",
+    "assumptions": "valid certificate means name, trust path and time assumed valid; no endpoint compromise; no resumption/0-RTT",
+    "sources": [
+      {
+        "url": "https://www.rfc-editor.org/info/rfc9846/",
+        "edition": "RFC 9846",
+        "section": "Abstract; §§1,1.2,2,5",
+        "checkedAt": "2026-10-15",
+        "revision": "RFC 9846",
+        "statusCheck": "source page opened; TLS 9846 Proposed Standard and obsoletes 8446; full errata audit not done",
+        "errataCheck": "not fully audited",
+        "support": "TLS 1.3 protects channel confidentiality/integrity and handshake/record roles"
+      }
+    ],
+    "independentExpected": "For 2×4×3 cases: HTTP sent iff insecure or cert valid; HTTPS invalid cert blocks before HTTP; valid HTTPS tamper rejects altered record; insecure tamper yields room 999.",
+    "trace": {
+      "mode": "executed",
+      "artifact": "/private/tmp/knowledge-qa07/review/traces.json",
+      "command": "node --import tsx /private/tmp/knowledge-qa07/review/run.mjs",
+      "input": "secure ∈ {false,true}; certificate ∈ {valid,wrong-name,expired,untrusted}; attack ∈ {none,listen,tamper}; plus malformed inputs",
+      "actions": "simulateTls(input) for each; compare expected predicates computed without simulateTls",
+      "actual": "24/24 matched; 2 malformed/restored outputs recorded"
+    },
+    "assessmentEvidence": "TLS prediction/challenge/options/answer/feedback and both guidance ladders read; distinction endpoint/network, wrong-name stop consistent; source-only",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": null
+    },
+    "verdict": "verified-with-conditions",
+    "uncertainty": "No real cryptographic or browser certificate verification; no browser observation; full RFC errata not audited.",
+    "impact": "No learner-impacting mismatch found in checked scope.",
+    "retest": null
+  },
+  {
+    "claimId": "tls-2",
+    "lessonId": "tls",
+    "version": 1,
+    "path": "content/editorial.json",
+    "field": "lessons[tls].claims[1].text",
+    "claim": "Xác minh danh tính dịch vụ dựa trên tên định mở, tách với kiểm tra chuỗi chứng chỉ.",
+    "scope": "source and engine trace",
+    "assumptions": "valid certificate means name, trust path and time assumed valid; no endpoint compromise; no resumption/0-RTT",
+    "sources": [
+      {
+        "url": "https://www.rfc-editor.org/rfc/rfc9525.html",
+        "edition": "RFC 9525",
+        "section": "§§6.1.1,6.6",
+        "checkedAt": "2026-10-15",
+        "revision": "RFC 9525",
+        "statusCheck": "source page opened; TLS 9846 Proposed Standard and obsoletes 8446; full errata audit not done",
+        "errataCheck": "not fully audited",
+        "support": "reference identifier independently derived from intended service; mismatch fails"
+      },
+      {
+        "url": "https://www.rfc-editor.org/rfc/rfc5280.html",
+        "edition": "RFC 5280",
+        "section": "§§6.1.1,6.1.3",
+        "checkedAt": "2026-10-15",
+        "revision": "RFC 5280",
+        "statusCheck": "source page opened; TLS 9846 Proposed Standard and obsoletes 8446; full errata audit not done",
+        "errataCheck": "not fully audited",
+        "support": "trust anchor and current validity time are separate path validation inputs"
+      }
+    ],
+    "independentExpected": "For 2×4×3 cases: HTTP sent iff insecure or cert valid; HTTPS invalid cert blocks before HTTP; valid HTTPS tamper rejects altered record; insecure tamper yields room 999.",
+    "trace": {
+      "mode": "executed",
+      "artifact": "/private/tmp/knowledge-qa07/review/traces.json",
+      "command": "node --import tsx /private/tmp/knowledge-qa07/review/run.mjs",
+      "input": "secure ∈ {false,true}; certificate ∈ {valid,wrong-name,expired,untrusted}; attack ∈ {none,listen,tamper}; plus malformed inputs",
+      "actions": "simulateTls(input) for each; compare expected predicates computed without simulateTls",
+      "actual": "24/24 matched; 2 malformed/restored outputs recorded"
+    },
+    "assessmentEvidence": "TLS prediction/challenge/options/answer/feedback and both guidance ladders read; distinction endpoint/network, wrong-name stop consistent; source-only",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": null
+    },
+    "verdict": "verified-with-conditions",
+    "uncertainty": "No real cryptographic or browser certificate verification; no browser observation; full RFC errata not audited.",
+    "impact": "No learner-impacting mismatch found in checked scope.",
+    "retest": null
+  },
+  {
+    "claimId": "tls-3",
+    "lessonId": "tls",
+    "version": 1,
+    "path": "content/editorial.json",
+    "field": "lessons[tls].claims[2].text",
+    "claim": "HTTPS là HTTP qua kết nối được bảo vệ.",
+    "scope": "source and engine trace",
+    "assumptions": "valid certificate means name, trust path and time assumed valid; no endpoint compromise; no resumption/0-RTT",
+    "sources": [
+      {
+        "url": "https://www.rfc-editor.org/rfc/rfc9110.html",
+        "edition": "RFC 9110",
+        "section": "§4.2.2",
+        "checkedAt": "2026-10-15",
+        "revision": "RFC 9110",
+        "statusCheck": "source page opened; TLS 9846 Proposed Standard and obsoletes 8446; full errata audit not done",
+        "errataCheck": "not fully audited",
+        "support": "HTTPS URI semantics"
+      }
+    ],
+    "independentExpected": "For 2×4×3 cases: HTTP sent iff insecure or cert valid; HTTPS invalid cert blocks before HTTP; valid HTTPS tamper rejects altered record; insecure tamper yields room 999.",
+    "trace": {
+      "mode": "executed",
+      "artifact": "/private/tmp/knowledge-qa07/review/traces.json",
+      "command": "node --import tsx /private/tmp/knowledge-qa07/review/run.mjs",
+      "input": "secure ∈ {false,true}; certificate ∈ {valid,wrong-name,expired,untrusted}; attack ∈ {none,listen,tamper}; plus malformed inputs",
+      "actions": "simulateTls(input) for each; compare expected predicates computed without simulateTls",
+      "actual": "24/24 matched; 2 malformed/restored outputs recorded"
+    },
+    "assessmentEvidence": "TLS prediction/challenge/options/answer/feedback and both guidance ladders read; distinction endpoint/network, wrong-name stop consistent; source-only",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": null
+    },
+    "verdict": "verified-with-conditions",
+    "uncertainty": "No real cryptographic or browser certificate verification; no browser observation; full RFC errata not audited.",
+    "impact": "No learner-impacting mismatch found in checked scope.",
+    "retest": null
+  },
+  {
+    "claimId": "school-read",
+    "lessonId": "school-day",
+    "version": 1,
+    "path": "content/reviews/vi/school-day.json",
+    "field": "limits/scenarios",
+    "claim": "school-read",
+    "scope": "source and engine trace",
+    "assumptions": "authored fixed rates; four seconds",
+    "sources": [
+      {
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside",
+        "edition": "Azure Architecture Center, live page",
+        "section": "Solution; Problems and considerations",
+        "checkedAt": "2026-10-15",
+        "revision": "unknown",
+        "statusCheck": "living page opened",
+        "errataCheck": "not fully audited",
+        "support": "cache can reduce data store reads; fixed 75% is authored assumption"
+      }
+    ],
+    "independentExpected": "opening: min(12,2×6,4/.25)=12 with cache; rush 6 with cache; without cache source caps at 4",
+    "trace": {
+      "mode": "executed",
+      "artifact": "/private/tmp/knowledge-qa07/review/traces.json",
+      "command": "node --import tsx /private/tmp/knowledge-qa07/review/run.mjs",
+      "input": "opening/rush; 4 configs each including pass, over-budget, TTL2, no-cache undercapacity",
+      "actions": "evaluateSchoolReview; compare independent read capacity, backlog conservation, TTL/budget predicates",
+      "actual": "8/8 matched expected counts/checks"
+    },
+    "assessmentEvidence": "Two scenario contexts/hints/reflection prompts and limits read; UI component source read; browser not observed",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": "apps/web/src/features/review/ReviewPage.tsx"
+    },
+    "verdict": "verified-with-conditions",
+    "uncertainty": "No browser observation, live persistence or real freshness measurement; fixed hit share and costs are authored assumptions.",
+    "impact": "No learner-impacting mismatch found in checked configurations.",
+    "retest": null
+  },
+  {
+    "claimId": "school-queue",
+    "lessonId": "school-day",
+    "version": 1,
+    "path": "content/reviews/vi/school-day.json",
+    "field": "limits/scenarios",
+    "claim": "school-queue",
+    "scope": "source and engine trace",
+    "assumptions": "authored fixed rates; four seconds",
+    "sources": [
+      {
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling",
+        "edition": "Azure Architecture Center, live page",
+        "section": "When to use; Workload design",
+        "checkedAt": "2026-10-15",
+        "revision": "unknown",
+        "statusCheck": "living page opened",
+        "errataCheck": "not fully audited",
+        "support": "decoupled intake/processing, backlog needs capacity"
+      }
+    ],
+    "independentExpected": "opening 6 arrivals/s×4=24, 3 workers×2×4=24 => 0; rush initial8+8×4=40, 5×2×4=40 =>0; 4 workers leave8",
+    "trace": {
+      "mode": "executed",
+      "artifact": "/private/tmp/knowledge-qa07/review/traces.json",
+      "command": "node --import tsx /private/tmp/knowledge-qa07/review/run.mjs",
+      "input": "opening/rush; 4 configs each including pass, over-budget, TTL2, no-cache undercapacity",
+      "actions": "evaluateSchoolReview; compare independent read capacity, backlog conservation, TTL/budget predicates",
+      "actual": "8/8 matched expected counts/checks"
+    },
+    "assessmentEvidence": "Two scenario contexts/hints/reflection prompts and limits read; UI component source read; browser not observed",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": "apps/web/src/features/review/ReviewPage.tsx"
+    },
+    "verdict": "verified-with-conditions",
+    "uncertainty": "No browser observation, live persistence or real freshness measurement; fixed hit share and costs are authored assumptions.",
+    "impact": "No learner-impacting mismatch found in checked configurations.",
+    "retest": null
+  },
+  {
+    "claimId": "school-freshness",
+    "lessonId": "school-day",
+    "version": 1,
+    "path": "content/reviews/vi/school-day.json",
+    "field": "limits/scenarios",
+    "claim": "school-freshness",
+    "scope": "source and engine trace",
+    "assumptions": "authored fixed rates; four seconds",
+    "sources": [
+      {
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside",
+        "edition": "Azure Architecture Center, live page",
+        "section": "Problems and considerations: Lifetime, Consistency",
+        "checkedAt": "2026-10-15",
+        "revision": "unknown",
+        "statusCheck": "living page opened",
+        "errataCheck": "not fully audited",
+        "support": "expiration policy alone is not store consistency guarantee"
+      }
+    ],
+    "independentExpected": "cache true TTL1 passes policy, TTL2 fails, cache false passes; does not guarantee origin-current data",
+    "trace": {
+      "mode": "executed",
+      "artifact": "/private/tmp/knowledge-qa07/review/traces.json",
+      "command": "node --import tsx /private/tmp/knowledge-qa07/review/run.mjs",
+      "input": "opening/rush; 4 configs each including pass, over-budget, TTL2, no-cache undercapacity",
+      "actions": "evaluateSchoolReview; compare independent read capacity, backlog conservation, TTL/budget predicates",
+      "actual": "8/8 matched expected counts/checks"
+    },
+    "assessmentEvidence": "Two scenario contexts/hints/reflection prompts and limits read; UI component source read; browser not observed",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": "apps/web/src/features/review/ReviewPage.tsx"
+    },
+    "verdict": "verified-with-conditions",
+    "uncertainty": "No browser observation, live persistence or real freshness measurement; fixed hit share and costs are authored assumptions.",
+    "impact": "No learner-impacting mismatch found in checked configurations.",
+    "retest": null
+  },
+  {
+    "claimId": "school-budget",
+    "lessonId": "school-day",
+    "version": 1,
+    "path": "content/reviews/vi/school-day.json",
+    "field": "limits/scenarios",
+    "claim": "school-budget",
+    "scope": "source and engine trace",
+    "assumptions": "authored fixed rates; four seconds",
+    "sources": [],
+    "independentExpected": "opening 2+3+1=6<=7; rush2+5+1=8<=8; 4+6+1=11 fails",
+    "trace": {
+      "mode": "executed",
+      "artifact": "/private/tmp/knowledge-qa07/review/traces.json",
+      "command": "node --import tsx /private/tmp/knowledge-qa07/review/run.mjs",
+      "input": "opening/rush; 4 configs each including pass, over-budget, TTL2, no-cache undercapacity",
+      "actions": "evaluateSchoolReview; compare independent read capacity, backlog conservation, TTL/budget predicates",
+      "actual": "8/8 matched expected counts/checks"
+    },
+    "assessmentEvidence": "Two scenario contexts/hints/reflection prompts and limits read; UI component source read; browser not observed",
+    "uiEvidence": {
+      "mode": "source-only",
+      "viewport": null,
+      "artifact": "apps/web/src/features/review/ReviewPage.tsx"
+    },
+    "verdict": "verified-with-conditions",
+    "uncertainty": "No browser observation, live persistence or real freshness measurement; fixed hit share and costs are authored assumptions.",
+    "impact": "No learner-impacting mismatch found in checked configurations.",
+    "retest": null
+  }
+]

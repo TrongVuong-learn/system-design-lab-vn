@@ -1,0 +1,21 @@
+{
+  "applicationCommit": "f5ab3182879a212c7f3ce4456cf00a37d9d9b029",
+  "reviewHead": "cffdd410c64cd246c6ea4ef7251f4c3ed2835f5d",
+  "profile": "1.1.0",
+  "runtimeModel": "gpt-6-sol",
+  "reasoning": "low",
+  "checkedCases": 75,
+  "observationalTlsCases": 2,
+  "parentRerunCheckedCases": 75,
+  "files": {
+    "claim-matrix-firstpass.json": "a8a70a9a9f9a8f9a460fbb0e443a067c477f3493fce92b52cbea4476f27c5e1b",
+    "parent-traces-older.json": "327b4b4dc9bb7e466ef70e6009e87561742452c7ad5371252a1adc1a40d48e2e",
+    "parent-traces.json": "4cde0b037fc7b0894453b23e92d0a359bbafd1fc0f9d3e6c709fb7c369be5eae",
+    "profile-validation.json": "6c09a58d1bc93b63dbd5295e8f6cb8cca1b3b67ffde4497851b6e8edd331a47c",
+    "report-firstpass.md": "f9665bbb350927c42e685bc943a66b2c241e71c312e7e13ff8d27cc1cae5e756",
+    "run-older.mjs": "1e6d571bac98eb50aa976a783259795b0035fc3104bb2c5a34f88ed78af77c49",
+    "run.mjs": "029047949770b82b7b2c70fae302f9162da6c957d8febb3084b8c8467108c9cb",
+    "traces-older.json": "327b4b4dc9bb7e466ef70e6009e87561742452c7ad5371252a1adc1a40d48e2e",
+    "traces.json": "4cde0b037fc7b0894453b23e92d0a359bbafd1fc0f9d3e6c709fb7c369be5eae"
+  }
+}

@@ -1,0 +1,1672 @@
+{
+  "runtime": "v26.11.1",
+  "checks": 121,
+  "rows": [
+    {
+      "id": "network",
+      "input": {
+        "rtt": 20,
+        "rate": 1,
+        "size": 100
+      },
+      "expected": 870,
+      "actual": 870,
+      "mode": "executed"
+    },
+    {
+      "id": "network",
+      "input": {
+        "rtt": 20,
+        "rate": 1,
+        "size": 1000
+      },
+      "expected": 8070,
+      "actual": 8070,
+      "mode": "executed"
+    },
+    {
+      "id": "network",
+      "input": {
+        "rtt": 20,
+        "rate": 1,
+        "size": 10000
+      },
+      "expected": 80070,
+      "actual": 80070,
+      "mode": "executed"
+    },
+    {
+      "id": "network",
+      "input": {
+        "rtt": 20,
+        "rate": 8,
+        "size": 100
+      },
+      "expected": 170,
+      "actual": 170,
+      "mode": "executed"
+    },
+    {
+      "id": "network",
+      "input": {
+        "rtt": 20,
+        "rate": 8,
+        "size": 1000
+      },
+      "expected": 1070,
+      "actual": 1070,
+      "mode": "executed"
+    },
+    {
+      "id": "network",
+      "input": {
+        "rtt": 20,
+        "rate": 8,
+        "size": 10000
+      },
+      "expected": 10070,
+      "actual": 10070,
+      "mode": "executed"
+    },
+    {
+      "id": "network",
+      "input": {
+        "rtt": 20,
+        "rate": 16,
+        "size": 100
+      },
+      "expected": 120,
+      "actual": 120,
+      "mode": "executed"
+    },
+    {
+      "id": "network",
+      "input": {
+        "rtt": 20,
+        "rate": 16,
+        "size": 1000
+      },
+      "expected": 570,
+      "actual": 570,
+      "mode": "executed"
+    },
+    {
+      "id": "network",
+      "input": {
+        "rtt": 20,
+        "rate": 16,
+        "size": 10000
+      },
+      "expected": 5070,
+      "actual": 5070,
+      "mode": "executed"
+    },
+    {
+      "id": "network",
+      "input": {
+        "rtt": 20,
+        "rate": 32,
+        "size": 100
+      },
+      "expected": 95,
+      "actual": 95,
+      "mode": "executed"
+    },
+    {
+      "id": "network",
+      "input": {
+        "rtt": 20,
+        "rate": 32,
+        "size": 1000
+      },
+      "expected": 320,
+      "actual": 320,
+      "mode": "executed"
+    },
+    {
+      "id": "network",
+      "input": {
+        "rtt": 20,
+        "rate": 32,
+        "size": 10000
+      },
+      "expected": 2570,
+      "actual": 2570,
+      "mode": "executed"
+    },
+    {
+      "id": "network",
+      "input": {
+        "rtt": 100,
+        "rate": 1,
+        "size": 100
+      },
+      "expected": 950,
+      "actual": 950,
+      "mode": "executed"
+    },
+    {
+      "id": "network",
+      "input": {
+        "rtt": 100,
+        "rate": 1,
+        "size": 1000
+      },
+      "expected": 8150,
+      "actual": 8150,
+      "mode": "executed"
+    },
+    {
+      "id": "network",
+      "input": {
+        "rtt": 100,
+        "rate": 1,
+        "size": 10000
+      },
+      "expected": 80150,
+      "actual": 80150,
+      "mode": "executed"
+    },
+    {
+      "id": "network",
+      "input": {
+        "rtt": 100,
+        "rate": 8,
+        "size": 100
+      },
+      "expected": 250,
+      "actual": 250,
+      "mode": "executed"
+    },
+    {
+      "id": "network",
+      "input": {
+        "rtt": 100,
+        "rate": 8,
+        "size": 1000
+      },
+      "expected": 1150,
+      "actual": 1150,
+      "mode": "executed"
+    },
+    {
+      "id": "network",
+      "input": {
+        "rtt": 100,
+        "rate": 8,
+        "size": 10000
+      },
+      "expected": 10150,
+      "actual": 10150,
+      "mode": "executed"
+    },
+    {
+      "id": "network",
+      "input": {
+        "rtt": 100,
+        "rate": 16,
+        "size": 100
+      },
+      "expected": 200,
+      "actual": 200,
+      "mode": "executed"
+    },
+    {
+      "id": "network",
+      "input": {
+        "rtt": 100,
+        "rate": 16,
+        "size": 1000
+      },
+      "expected": 650,
+      "actual": 650,
+      "mode": "executed"
+    },
+    {
+      "id": "network",
+      "input": {
+        "rtt": 100,
+        "rate": 16,
+        "size": 10000
+      },
+      "expected": 5150,
+      "actual": 5150,
+      "mode": "executed"
+    },
+    {
+      "id": "network",
+      "input": {
+        "rtt": 100,
+        "rate": 32,
+        "size": 100
+      },
+      "expected": 175,
+      "actual": 175,
+      "mode": "executed"
+    },
+    {
+      "id": "network",
+      "input": {
+        "rtt": 100,
+        "rate": 32,
+        "size": 1000
+      },
+      "expected": 400,
+      "actual": 400,
+      "mode": "executed"
+    },
+    {
+      "id": "network",
+      "input": {
+        "rtt": 100,
+        "rate": 32,
+        "size": 10000
+      },
+      "expected": 2650,
+      "actual": 2650,
+      "mode": "executed"
+    },
+    {
+      "id": "network",
+      "input": {
+        "rtt": 200,
+        "rate": 1,
+        "size": 100
+      },
+      "expected": 1050,
+      "actual": 1050,
+      "mode": "executed"
+    },
+    {
+      "id": "network",
+      "input": {
+        "rtt": 200,
+        "rate": 1,
+        "size": 1000
+      },
+      "expected": 8250,
+      "actual": 8250,
+      "mode": "executed"
+    },
+    {
+      "id": "network",
+      "input": {
+        "rtt": 200,
+        "rate": 1,
+        "size": 10000
+      },
+      "expected": 80250,
+      "actual": 80250,
+      "mode": "executed"
+    },
+    {
+      "id": "network",
+      "input": {
+        "rtt": 200,
+        "rate": 8,
+        "size": 100
+      },
+      "expected": 350,
+      "actual": 350,
+      "mode": "executed"
+    },
+    {
+      "id": "network",
+      "input": {
+        "rtt": 200,
+        "rate": 8,
+        "size": 1000
+      },
+      "expected": 1250,
+      "actual": 1250,
+      "mode": "executed"
+    },
+    {
+      "id": "network",
+      "input": {
+        "rtt": 200,
+        "rate": 8,
+        "size": 10000
+      },
+      "expected": 10250,
+      "actual": 10250,
+      "mode": "executed"
+    },
+    {
+      "id": "network",
+      "input": {
+        "rtt": 200,
+        "rate": 16,
+        "size": 100
+      },
+      "expected": 300,
+      "actual": 300,
+      "mode": "executed"
+    },
+    {
+      "id": "network",
+      "input": {
+        "rtt": 200,
+        "rate": 16,
+        "size": 1000
+      },
+      "expected": 750,
+      "actual": 750,
+      "mode": "executed"
+    },
+    {
+      "id": "network",
+      "input": {
+        "rtt": 200,
+        "rate": 16,
+        "size": 10000
+      },
+      "expected": 5250,
+      "actual": 5250,
+      "mode": "executed"
+    },
+    {
+      "id": "network",
+      "input": {
+        "rtt": 200,
+        "rate": 32,
+        "size": 100
+      },
+      "expected": 275,
+      "actual": 275,
+      "mode": "executed"
+    },
+    {
+      "id": "network",
+      "input": {
+        "rtt": 200,
+        "rate": 32,
+        "size": 1000
+      },
+      "expected": 500,
+      "actual": 500,
+      "mode": "executed"
+    },
+    {
+      "id": "network",
+      "input": {
+        "rtt": 200,
+        "rate": 32,
+        "size": 10000
+      },
+      "expected": 2750,
+      "actual": 2750,
+      "mode": "executed"
+    },
+    {
+      "id": "tls",
+      "input": {
+        "secure": true,
+        "certificate": "valid",
+        "attack": "none"
+      },
+      "expected": {
+        "sent": true,
+        "blocked": false,
+        "rejected": false,
+        "browser": "Phòng 201"
+      },
+      "actual": {
+        "sent": true,
+        "blocked": false,
+        "rejected": false,
+        "browser": "Phòng 201"
+      },
+      "mode": "executed"
+    },
+    {
+      "id": "tls",
+      "input": {
+        "secure": true,
+        "certificate": "valid",
+        "attack": "listen"
+      },
+      "expected": {
+        "sent": true,
+        "blocked": false,
+        "rejected": false,
+        "browser": "Phòng 201"
+      },
+      "actual": {
+        "sent": true,
+        "blocked": false,
+        "rejected": false,
+        "browser": "Phòng 201"
+      },
+      "mode": "executed"
+    },
+    {
+      "id": "tls",
+      "input": {
+        "secure": true,
+        "certificate": "valid",
+        "attack": "tamper"
+      },
+      "expected": {
+        "sent": true,
+        "blocked": false,
+        "rejected": true,
+        "browser": "Không nhận lịch đã bị sửa"
+      },
+      "actual": {
+        "sent": true,
+        "blocked": false,
+        "rejected": true,
+        "browser": "Không nhận lịch đã bị sửa"
+      },
+      "mode": "executed"
+    },
+    {
+      "id": "tls",
+      "input": {
+        "secure": true,
+        "certificate": "wrong-name",
+        "attack": "none"
+      },
+      "expected": {
+        "sent": false,
+        "blocked": true,
+        "rejected": false,
+        "browser": "Chưa có lịch"
+      },
+      "actual": {
+        "sent": false,
+        "blocked": true,
+        "rejected": false,
+        "browser": "Chưa có lịch"
+      },
+      "mode": "executed"
+    },
+    {
+      "id": "tls",
+      "input": {
+        "secure": true,
+        "certificate": "wrong-name",
+        "attack": "listen"
+      },
+      "expected": {
+        "sent": false,
+        "blocked": true,
+        "rejected": false,
+        "browser": "Chưa có lịch"
+      },
+      "actual": {
+        "sent": false,
+        "blocked": true,
+        "rejected": false,
+        "browser": "Chưa có lịch"
+      },
+      "mode": "executed"
+    },
+    {
+      "id": "tls",
+      "input": {
+        "secure": true,
+        "certificate": "wrong-name",
+        "attack": "tamper"
+      },
+      "expected": {
+        "sent": false,
+        "blocked": true,
+        "rejected": false,
+        "browser": "Chưa có lịch"
+      },
+      "actual": {
+        "sent": false,
+        "blocked": true,
+        "rejected": false,
+        "browser": "Chưa có lịch"
+      },
+      "mode": "executed"
+    },
+    {
+      "id": "tls",
+      "input": {
+        "secure": true,
+        "certificate": "expired",
+        "attack": "none"
+      },
+      "expected": {
+        "sent": false,
+        "blocked": true,
+        "rejected": false,
+        "browser": "Chưa có lịch"
+      },
+      "actual": {
+        "sent": false,
+        "blocked": true,
+        "rejected": false,
+        "browser": "Chưa có lịch"
+      },
+      "mode": "executed"
+    },
+    {
+      "id": "tls",
+      "input": {
+        "secure": true,
+        "certificate": "expired",
+        "attack": "listen"
+      },
+      "expected": {
+        "sent": false,
+        "blocked": true,
+        "rejected": false,
+        "browser": "Chưa có lịch"
+      },
+      "actual": {
+        "sent": false,
+        "blocked": true,
+        "rejected": false,
+        "browser": "Chưa có lịch"
+      },
+      "mode": "executed"
+    },
+    {
+      "id": "tls",
+      "input": {
+        "secure": true,
+        "certificate": "expired",
+        "attack": "tamper"
+      },
+      "expected": {
+        "sent": false,
+        "blocked": true,
+        "rejected": false,
+        "browser": "Chưa có lịch"
+      },
+      "actual": {
+        "sent": false,
+        "blocked": true,
+        "rejected": false,
+        "browser": "Chưa có lịch"
+      },
+      "mode": "executed"
+    },
+    {
+      "id": "tls",
+      "input": {
+        "secure": true,
+        "certificate": "untrusted",
+        "attack": "none"
+      },
+      "expected": {
+        "sent": false,
+        "blocked": true,
+        "rejected": false,
+        "browser": "Chưa có lịch"
+      },
+      "actual": {
+        "sent": false,
+        "blocked": true,
+        "rejected": false,
+        "browser": "Chưa có lịch"
+      },
+      "mode": "executed"
+    },
+    {
+      "id": "tls",
+      "input": {
+        "secure": true,
+        "certificate": "untrusted",
+        "attack": "listen"
+      },
+      "expected": {
+        "sent": false,
+        "blocked": true,
+        "rejected": false,
+        "browser": "Chưa có lịch"
+      },
+      "actual": {
+        "sent": false,
+        "blocked": true,
+        "rejected": false,
+        "browser": "Chưa có lịch"
+      },
+      "mode": "executed"
+    },
+    {
+      "id": "tls",
+      "input": {
+        "secure": true,
+        "certificate": "untrusted",
+        "attack": "tamper"
+      },
+      "expected": {
+        "sent": false,
+        "blocked": true,
+        "rejected": false,
+        "browser": "Chưa có lịch"
+      },
+      "actual": {
+        "sent": false,
+        "blocked": true,
+        "rejected": false,
+        "browser": "Chưa có lịch"
+      },
+      "mode": "executed"
+    },
+    {
+      "id": "tls",
+      "input": {
+        "secure": false,
+        "certificate": "valid",
+        "attack": "none"
+      },
+      "expected": {
+        "sent": true,
+        "blocked": false,
+        "rejected": false,
+        "browser": "Phòng 201"
+      },
+      "actual": {
+        "sent": true,
+        "blocked": false,
+        "rejected": false,
+        "browser": "Phòng 201"
+      },
+      "mode": "executed"
+    },
+    {
+      "id": "tls",
+      "input": {
+        "secure": false,
+        "certificate": "valid",
+        "attack": "listen"
+      },
+      "expected": {
+        "sent": true,
+        "blocked": false,
+        "rejected": false,
+        "browser": "Phòng 201"
+      },
+      "actual": {
+        "sent": true,
+        "blocked": false,
+        "rejected": false,
+        "browser": "Phòng 201"
+      },
+      "mode": "executed"
+    },
+    {
+      "id": "tls",
+      "input": {
+        "secure": false,
+        "certificate": "valid",
+        "attack": "tamper"
+      },
+      "expected": {
+        "sent": true,
+        "blocked": false,
+        "rejected": false,
+        "browser": "Phòng 999 (đã bị sửa trên đường)"
+      },
+      "actual": {
+        "sent": true,
+        "blocked": false,
+        "rejected": false,
+        "browser": "Phòng 999 (đã bị sửa trên đường)"
+      },
+      "mode": "executed"
+    },
+    {
+      "id": "tls",
+      "input": {
+        "secure": false,
+        "certificate": "wrong-name",
+        "attack": "none"
+      },
+      "expected": {
+        "sent": true,
+        "blocked": false,
+        "rejected": false,
+        "browser": "Phòng 201"
+      },
+      "actual": {
+        "sent": true,
+        "blocked": false,
+        "rejected": false,
+        "browser": "Phòng 201"
+      },
+      "mode": "executed"
+    },
+    {
+      "id": "tls",
+      "input": {
+        "secure": false,
+        "certificate": "wrong-name",
+        "attack": "listen"
+      },
+      "expected": {
+        "sent": true,
+        "blocked": false,
+        "rejected": false,
+        "browser": "Phòng 201"
+      },
+      "actual": {
+        "sent": true,
+        "blocked": false,
+        "rejected": false,
+        "browser": "Phòng 201"
+      },
+      "mode": "executed"
+    },
+    {
+      "id": "tls",
+      "input": {
+        "secure": false,
+        "certificate": "wrong-name",
+        "attack": "tamper"
+      },
+      "expected": {
+        "sent": true,
+        "blocked": false,
+        "rejected": false,
+        "browser": "Phòng 999 (đã bị sửa trên đường)"
+      },
+      "actual": {
+        "sent": true,
+        "blocked": false,
+        "rejected": false,
+        "browser": "Phòng 999 (đã bị sửa trên đường)"
+      },
+      "mode": "executed"
+    },
+    {
+      "id": "tls",
+      "input": {
+        "secure": false,
+        "certificate": "expired",
+        "attack": "none"
+      },
+      "expected": {
+        "sent": true,
+        "blocked": false,
+        "rejected": false,
+        "browser": "Phòng 201"
+      },
+      "actual": {
+        "sent": true,
+        "blocked": false,
+        "rejected": false,
+        "browser": "Phòng 201"
+      },
+      "mode": "executed"
+    },
+    {
+      "id": "tls",
+      "input": {
+        "secure": false,
+        "certificate": "expired",
+        "attack": "listen"
+      },
+      "expected": {
+        "sent": true,
+        "blocked": false,
+        "rejected": false,
+        "browser": "Phòng 201"
+      },
+      "actual": {
+        "sent": true,
+        "blocked": false,
+        "rejected": false,
+        "browser": "Phòng 201"
+      },
+      "mode": "executed"
+    },
+    {
+      "id": "tls",
+      "input": {
+        "secure": false,
+        "certificate": "expired",
+        "attack": "tamper"
+      },
+      "expected": {
+        "sent": true,
+        "blocked": false,
+        "rejected": false,
+        "browser": "Phòng 999 (đã bị sửa trên đường)"
+      },
+      "actual": {
+        "sent": true,
+        "blocked": false,
+        "rejected": false,
+        "browser": "Phòng 999 (đã bị sửa trên đường)"
+      },
+      "mode": "executed"
+    },
+    {
+      "id": "tls",
+      "input": {
+        "secure": false,
+        "certificate": "untrusted",
+        "attack": "none"
+      },
+      "expected": {
+        "sent": true,
+        "blocked": false,
+        "rejected": false,
+        "browser": "Phòng 201"
+      },
+      "actual": {
+        "sent": true,
+        "blocked": false,
+        "rejected": false,
+        "browser": "Phòng 201"
+      },
+      "mode": "executed"
+    },
+    {
+      "id": "tls",
+      "input": {
+        "secure": false,
+        "certificate": "untrusted",
+        "attack": "listen"
+      },
+      "expected": {
+        "sent": true,
+        "blocked": false,
+        "rejected": false,
+        "browser": "Phòng 201"
+      },
+      "actual": {
+        "sent": true,
+        "blocked": false,
+        "rejected": false,
+        "browser": "Phòng 201"
+      },
+      "mode": "executed"
+    },
+    {
+      "id": "tls",
+      "input": {
+        "secure": false,
+        "certificate": "untrusted",
+        "attack": "tamper"
+      },
+      "expected": {
+        "sent": true,
+        "blocked": false,
+        "rejected": false,
+        "browser": "Phòng 999 (đã bị sửa trên đường)"
+      },
+      "actual": {
+        "sent": true,
+        "blocked": false,
+        "rejected": false,
+        "browser": "Phòng 999 (đã bị sửa trên đường)"
+      },
+      "mode": "executed"
+    },
+    {
+      "id": "http",
+      "input": {
+        "resource": "timetable",
+        "maintenance": false,
+        "step": 0
+      },
+      "expected": null,
+      "actual": null,
+      "mode": "executed"
+    },
+    {
+      "id": "http",
+      "input": {
+        "resource": "timetable",
+        "maintenance": false,
+        "step": 1
+      },
+      "expected": null,
+      "actual": null,
+      "mode": "executed"
+    },
+    {
+      "id": "http",
+      "input": {
+        "resource": "timetable",
+        "maintenance": false,
+        "step": 2
+      },
+      "expected": 200,
+      "actual": 200,
+      "mode": "executed"
+    },
+    {
+      "id": "http",
+      "input": {
+        "resource": "timetable",
+        "maintenance": true,
+        "step": 0
+      },
+      "expected": null,
+      "actual": null,
+      "mode": "executed"
+    },
+    {
+      "id": "http",
+      "input": {
+        "resource": "timetable",
+        "maintenance": true,
+        "step": 1
+      },
+      "expected": null,
+      "actual": null,
+      "mode": "executed"
+    },
+    {
+      "id": "http",
+      "input": {
+        "resource": "timetable",
+        "maintenance": true,
+        "step": 2
+      },
+      "expected": 503,
+      "actual": 503,
+      "mode": "executed"
+    },
+    {
+      "id": "http",
+      "input": {
+        "resource": "missing",
+        "maintenance": false,
+        "step": 0
+      },
+      "expected": null,
+      "actual": null,
+      "mode": "executed"
+    },
+    {
+      "id": "http",
+      "input": {
+        "resource": "missing",
+        "maintenance": false,
+        "step": 1
+      },
+      "expected": null,
+      "actual": null,
+      "mode": "executed"
+    },
+    {
+      "id": "http",
+      "input": {
+        "resource": "missing",
+        "maintenance": false,
+        "step": 2
+      },
+      "expected": 404,
+      "actual": 404,
+      "mode": "executed"
+    },
+    {
+      "id": "http",
+      "input": {
+        "resource": "missing",
+        "maintenance": true,
+        "step": 0
+      },
+      "expected": null,
+      "actual": null,
+      "mode": "executed"
+    },
+    {
+      "id": "http",
+      "input": {
+        "resource": "missing",
+        "maintenance": true,
+        "step": 1
+      },
+      "expected": null,
+      "actual": null,
+      "mode": "executed"
+    },
+    {
+      "id": "http",
+      "input": {
+        "resource": "missing",
+        "maintenance": true,
+        "step": 2
+      },
+      "expected": 503,
+      "actual": 503,
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "school",
+        "port": 8080,
+        "route": false,
+        "step": 0
+      },
+      "expected": "ready",
+      "actual": "ready",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "school",
+        "port": 8080,
+        "route": false,
+        "step": 1
+      },
+      "expected": "no-route",
+      "actual": "no-route",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "school",
+        "port": 8080,
+        "route": false,
+        "step": 2
+      },
+      "expected": "no-route",
+      "actual": "no-route",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "school",
+        "port": 8080,
+        "route": false,
+        "step": 3
+      },
+      "expected": "no-route",
+      "actual": "no-route",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "school",
+        "port": 8080,
+        "route": true,
+        "step": 0
+      },
+      "expected": "ready",
+      "actual": "ready",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "school",
+        "port": 8080,
+        "route": true,
+        "step": 1
+      },
+      "expected": "forwarding",
+      "actual": "forwarding",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "school",
+        "port": 8080,
+        "route": true,
+        "step": 2
+      },
+      "expected": "at-host",
+      "actual": "at-host",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "school",
+        "port": 8080,
+        "route": true,
+        "step": 3
+      },
+      "expected": "timetable",
+      "actual": "timetable",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "school",
+        "port": 9090,
+        "route": false,
+        "step": 0
+      },
+      "expected": "ready",
+      "actual": "ready",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "school",
+        "port": 9090,
+        "route": false,
+        "step": 1
+      },
+      "expected": "no-route",
+      "actual": "no-route",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "school",
+        "port": 9090,
+        "route": false,
+        "step": 2
+      },
+      "expected": "no-route",
+      "actual": "no-route",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "school",
+        "port": 9090,
+        "route": false,
+        "step": 3
+      },
+      "expected": "no-route",
+      "actual": "no-route",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "school",
+        "port": 9090,
+        "route": true,
+        "step": 0
+      },
+      "expected": "ready",
+      "actual": "ready",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "school",
+        "port": 9090,
+        "route": true,
+        "step": 1
+      },
+      "expected": "forwarding",
+      "actual": "forwarding",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "school",
+        "port": 9090,
+        "route": true,
+        "step": 2
+      },
+      "expected": "at-host",
+      "actual": "at-host",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "school",
+        "port": 9090,
+        "route": true,
+        "step": 3
+      },
+      "expected": "library",
+      "actual": "library",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "school",
+        "port": 8181,
+        "route": false,
+        "step": 0
+      },
+      "expected": "ready",
+      "actual": "ready",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "school",
+        "port": 8181,
+        "route": false,
+        "step": 1
+      },
+      "expected": "no-route",
+      "actual": "no-route",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "school",
+        "port": 8181,
+        "route": false,
+        "step": 2
+      },
+      "expected": "no-route",
+      "actual": "no-route",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "school",
+        "port": 8181,
+        "route": false,
+        "step": 3
+      },
+      "expected": "no-route",
+      "actual": "no-route",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "school",
+        "port": 8181,
+        "route": true,
+        "step": 0
+      },
+      "expected": "ready",
+      "actual": "ready",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "school",
+        "port": 8181,
+        "route": true,
+        "step": 1
+      },
+      "expected": "forwarding",
+      "actual": "forwarding",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "school",
+        "port": 8181,
+        "route": true,
+        "step": 2
+      },
+      "expected": "at-host",
+      "actual": "at-host",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "school",
+        "port": 8181,
+        "route": true,
+        "step": 3
+      },
+      "expected": "not-listening",
+      "actual": "not-listening",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "other",
+        "port": 8080,
+        "route": false,
+        "step": 0
+      },
+      "expected": "ready",
+      "actual": "ready",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "other",
+        "port": 8080,
+        "route": false,
+        "step": 1
+      },
+      "expected": "no-route",
+      "actual": "no-route",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "other",
+        "port": 8080,
+        "route": false,
+        "step": 2
+      },
+      "expected": "no-route",
+      "actual": "no-route",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "other",
+        "port": 8080,
+        "route": false,
+        "step": 3
+      },
+      "expected": "no-route",
+      "actual": "no-route",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "other",
+        "port": 8080,
+        "route": true,
+        "step": 0
+      },
+      "expected": "ready",
+      "actual": "ready",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "other",
+        "port": 8080,
+        "route": true,
+        "step": 1
+      },
+      "expected": "forwarding",
+      "actual": "forwarding",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "other",
+        "port": 8080,
+        "route": true,
+        "step": 2
+      },
+      "expected": "other-host",
+      "actual": "other-host",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "other",
+        "port": 8080,
+        "route": true,
+        "step": 3
+      },
+      "expected": "other-host",
+      "actual": "other-host",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "other",
+        "port": 9090,
+        "route": false,
+        "step": 0
+      },
+      "expected": "ready",
+      "actual": "ready",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "other",
+        "port": 9090,
+        "route": false,
+        "step": 1
+      },
+      "expected": "no-route",
+      "actual": "no-route",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "other",
+        "port": 9090,
+        "route": false,
+        "step": 2
+      },
+      "expected": "no-route",
+      "actual": "no-route",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "other",
+        "port": 9090,
+        "route": false,
+        "step": 3
+      },
+      "expected": "no-route",
+      "actual": "no-route",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "other",
+        "port": 9090,
+        "route": true,
+        "step": 0
+      },
+      "expected": "ready",
+      "actual": "ready",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "other",
+        "port": 9090,
+        "route": true,
+        "step": 1
+      },
+      "expected": "forwarding",
+      "actual": "forwarding",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "other",
+        "port": 9090,
+        "route": true,
+        "step": 2
+      },
+      "expected": "other-host",
+      "actual": "other-host",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "other",
+        "port": 9090,
+        "route": true,
+        "step": 3
+      },
+      "expected": "other-host",
+      "actual": "other-host",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "other",
+        "port": 8181,
+        "route": false,
+        "step": 0
+      },
+      "expected": "ready",
+      "actual": "ready",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "other",
+        "port": 8181,
+        "route": false,
+        "step": 1
+      },
+      "expected": "no-route",
+      "actual": "no-route",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "other",
+        "port": 8181,
+        "route": false,
+        "step": 2
+      },
+      "expected": "no-route",
+      "actual": "no-route",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "other",
+        "port": 8181,
+        "route": false,
+        "step": 3
+      },
+      "expected": "no-route",
+      "actual": "no-route",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "other",
+        "port": 8181,
+        "route": true,
+        "step": 0
+      },
+      "expected": "ready",
+      "actual": "ready",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "other",
+        "port": 8181,
+        "route": true,
+        "step": 1
+      },
+      "expected": "forwarding",
+      "actual": "forwarding",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "other",
+        "port": 8181,
+        "route": true,
+        "step": 2
+      },
+      "expected": "other-host",
+      "actual": "other-host",
+      "mode": "executed"
+    },
+    {
+      "id": "routing",
+      "input": {
+        "destination": "other",
+        "port": 8181,
+        "route": true,
+        "step": 3
+      },
+      "expected": "other-host",
+      "actual": "other-host",
+      "mode": "executed"
+    },
+    {
+      "id": "metrics-thumbnail",
+      "input": {
+        "workers": 2,
+        "slow": true
+      },
+      "expected": {
+        "median": 550,
+        "p95": 1900
+      },
+      "actual": {
+        "median": 550,
+        "p95": 1900
+      },
+      "mode": "executed"
+    }
+  ],
+  "rounding": [
+    {
+      "arrivals": 1,
+      "completed": 1,
+      "waiting": 0,
+      "databaseReads": 0,
+      "capacity": 12,
+      "bottleneck": "máy xử lý"
+    },
+    {
+      "arrivals": 2,
+      "completed": 2,
+      "waiting": 0,
+      "databaseReads": 1,
+      "capacity": 12,
+      "bottleneck": "máy xử lý"
+    },
+    {
+      "arrivals": 3,
+      "completed": 3,
+      "waiting": 0,
+      "databaseReads": 1,
+      "capacity": 12,
+      "bottleneck": "máy xử lý"
+    },
+    {
+      "arrivals": 6,
+      "completed": 6,
+      "waiting": 0,
+      "databaseReads": 2,
+      "capacity": 12,
+      "bottleneck": "máy xử lý"
+    },
+    {
+      "arrivals": 12,
+      "completed": 12,
+      "waiting": 0,
+      "databaseReads": 3,
+      "capacity": 12,
+      "bottleneck": "máy xử lý"
+    }
+  ]
+}

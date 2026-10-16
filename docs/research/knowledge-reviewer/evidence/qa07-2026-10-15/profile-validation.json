@@ -1,0 +1,9 @@
+{
+  "profileVersion": "1.1.0",
+  "model": "gpt-6-sol",
+  "reasoning": "low",
+  "toml": "pass",
+  "lockedFilesValidated": 9,
+  "localLinks": "pass",
+  "applicationSourceUnchanged": true
+}

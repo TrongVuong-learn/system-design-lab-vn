@@ -1,0 +1,1096 @@
+[
+  {
+    "kind": "tls",
+    "input": {
+      "secure": false,
+      "certificate": "valid",
+      "attack": "none"
+    },
+    "expected": {
+      "sent": true,
+      "blocked": false,
+      "rejected": false,
+      "browser": "Phòng 201"
+    },
+    "actual": {
+      "sent": true,
+      "blocked": false,
+      "rejected": false,
+      "browser": "Phòng 201",
+      "observer": "Đọc được: Phòng 201",
+      "outcome": "Đã nhận lịch"
+    },
+    "pass": true
+  },
+  {
+    "kind": "tls",
+    "input": {
+      "secure": false,
+      "certificate": "valid",
+      "attack": "listen"
+    },
+    "expected": {
+      "sent": true,
+      "blocked": false,
+      "rejected": false,
+      "browser": "Phòng 201"
+    },
+    "actual": {
+      "sent": true,
+      "blocked": false,
+      "rejected": false,
+      "browser": "Phòng 201",
+      "observer": "Đọc được: Phòng 201",
+      "outcome": "Đã nhận lịch"
+    },
+    "pass": true
+  },
+  {
+    "kind": "tls",
+    "input": {
+      "secure": false,
+      "certificate": "valid",
+      "attack": "tamper"
+    },
+    "expected": {
+      "sent": true,
+      "blocked": false,
+      "rejected": false,
+      "browser": "Phòng 999 (đã bị sửa trên đường)"
+    },
+    "actual": {
+      "sent": true,
+      "blocked": false,
+      "rejected": false,
+      "browser": "Phòng 999 (đã bị sửa trên đường)",
+      "observer": "Đọc được: Phòng 201",
+      "outcome": "Đã nhận lịch"
+    },
+    "pass": true
+  },
+  {
+    "kind": "tls",
+    "input": {
+      "secure": false,
+      "certificate": "wrong-name",
+      "attack": "none"
+    },
+    "expected": {
+      "sent": true,
+      "blocked": false,
+      "rejected": false,
+      "browser": "Phòng 201"
+    },
+    "actual": {
+      "sent": true,
+      "blocked": false,
+      "rejected": false,
+      "browser": "Phòng 201",
+      "observer": "Đọc được: Phòng 201",
+      "outcome": "Đã nhận lịch"
+    },
+    "pass": true
+  },
+  {
+    "kind": "tls",
+    "input": {
+      "secure": false,
+      "certificate": "wrong-name",
+      "attack": "listen"
+    },
+    "expected": {
+      "sent": true,
+      "blocked": false,
+      "rejected": false,
+      "browser": "Phòng 201"
+    },
+    "actual": {
+      "sent": true,
+      "blocked": false,
+      "rejected": false,
+      "browser": "Phòng 201",
+      "observer": "Đọc được: Phòng 201",
+      "outcome": "Đã nhận lịch"
+    },
+    "pass": true
+  },
+  {
+    "kind": "tls",
+    "input": {
+      "secure": false,
+      "certificate": "wrong-name",
+      "attack": "tamper"
+    },
+    "expected": {
+      "sent": true,
+      "blocked": false,
+      "rejected": false,
+      "browser": "Phòng 999 (đã bị sửa trên đường)"
+    },
+    "actual": {
+      "sent": true,
+      "blocked": false,
+      "rejected": false,
+      "browser": "Phòng 999 (đã bị sửa trên đường)",
+      "observer": "Đọc được: Phòng 201",
+      "outcome": "Đã nhận lịch"
+    },
+    "pass": true
+  },
+  {
+    "kind": "tls",
+    "input": {
+      "secure": false,
+      "certificate": "expired",
+      "attack": "none"
+    },
+    "expected": {
+      "sent": true,
+      "blocked": false,
+      "rejected": false,
+      "browser": "Phòng 201"
+    },
+    "actual": {
+      "sent": true,
+      "blocked": false,
+      "rejected": false,
+      "browser": "Phòng 201",
+      "observer": "Đọc được: Phòng 201",
+      "outcome": "Đã nhận lịch"
+    },
+    "pass": true
+  },
+  {
+    "kind": "tls",
+    "input": {
+      "secure": false,
+      "certificate": "expired",
+      "attack": "listen"
+    },
+    "expected": {
+      "sent": true,
+      "blocked": false,
+      "rejected": false,
+      "browser": "Phòng 201"
+    },
+    "actual": {
+      "sent": true,
+      "blocked": false,
+      "rejected": false,
+      "browser": "Phòng 201",
+      "observer": "Đọc được: Phòng 201",
+      "outcome": "Đã nhận lịch"
+    },
+    "pass": true
+  },
+  {
+    "kind": "tls",
+    "input": {
+      "secure": false,
+      "certificate": "expired",
+      "attack": "tamper"
+    },
+    "expected": {
+      "sent": true,
+      "blocked": false,
+      "rejected": false,
+      "browser": "Phòng 999 (đã bị sửa trên đường)"
+    },
+    "actual": {
+      "sent": true,
+      "blocked": false,
+      "rejected": false,
+      "browser": "Phòng 999 (đã bị sửa trên đường)",
+      "observer": "Đọc được: Phòng 201",
+      "outcome": "Đã nhận lịch"
+    },
+    "pass": true
+  },
+  {
+    "kind": "tls",
+    "input": {
+      "secure": false,
+      "certificate": "untrusted",
+      "attack": "none"
+    },
+    "expected": {
+      "sent": true,
+      "blocked": false,
+      "rejected": false,
+      "browser": "Phòng 201"
+    },
+    "actual": {
+      "sent": true,
+      "blocked": false,
+      "rejected": false,
+      "browser": "Phòng 201",
+      "observer": "Đọc được: Phòng 201",
+      "outcome": "Đã nhận lịch"
+    },
+    "pass": true
+  },
+  {
+    "kind": "tls",
+    "input": {
+      "secure": false,
+      "certificate": "untrusted",
+      "attack": "listen"
+    },
+    "expected": {
+      "sent": true,
+      "blocked": false,
+      "rejected": false,
+      "browser": "Phòng 201"
+    },
+    "actual": {
+      "sent": true,
+      "blocked": false,
+      "rejected": false,
+      "browser": "Phòng 201",
+      "observer": "Đọc được: Phòng 201",
+      "outcome": "Đã nhận lịch"
+    },
+    "pass": true
+  },
+  {
+    "kind": "tls",
+    "input": {
+      "secure": false,
+      "certificate": "untrusted",
+      "attack": "tamper"
+    },
+    "expected": {
+      "sent": true,
+      "blocked": false,
+      "rejected": false,
+      "browser": "Phòng 999 (đã bị sửa trên đường)"
+    },
+    "actual": {
+      "sent": true,
+      "blocked": false,
+      "rejected": false,
+      "browser": "Phòng 999 (đã bị sửa trên đường)",
+      "observer": "Đọc được: Phòng 201",
+      "outcome": "Đã nhận lịch"
+    },
+    "pass": true
+  },
+  {
+    "kind": "tls",
+    "input": {
+      "secure": true,
+      "certificate": "valid",
+      "attack": "none"
+    },
+    "expected": {
+      "sent": true,
+      "blocked": false,
+      "rejected": false,
+      "browser": "Phòng 201"
+    },
+    "actual": {
+      "sent": true,
+      "blocked": false,
+      "rejected": false,
+      "browser": "Phòng 201",
+      "observer": "Không đọc được nội dung lịch; vẫn thấy IP, kích thước và thời điểm trao đổi",
+      "outcome": "Đã nhận lịch"
+    },
+    "pass": true
+  },
+  {
+    "kind": "tls",
+    "input": {
+      "secure": true,
+      "certificate": "valid",
+      "attack": "listen"
+    },
+    "expected": {
+      "sent": true,
+      "blocked": false,
+      "rejected": false,
+      "browser": "Phòng 201"
+    },
+    "actual": {
+      "sent": true,
+      "blocked": false,
+      "rejected": false,
+      "browser": "Phòng 201",
+      "observer": "Không đọc được nội dung lịch; vẫn thấy IP, kích thước và thời điểm trao đổi",
+      "outcome": "Đã nhận lịch"
+    },
+    "pass": true
+  },
+  {
+    "kind": "tls",
+    "input": {
+      "secure": true,
+      "certificate": "valid",
+      "attack": "tamper"
+    },
+    "expected": {
+      "sent": true,
+      "blocked": false,
+      "rejected": true,
+      "browser": "Không nhận lịch đã bị sửa"
+    },
+    "actual": {
+      "sent": true,
+      "blocked": false,
+      "rejected": true,
+      "browser": "Không nhận lịch đã bị sửa",
+      "observer": "Không đọc được nội dung lịch; vẫn thấy IP, kích thước và thời điểm trao đổi",
+      "outcome": "Phát hiện sửa dữ liệu; từ chối bản ghi"
+    },
+    "pass": true
+  },
+  {
+    "kind": "tls",
+    "input": {
+      "secure": true,
+      "certificate": "wrong-name",
+      "attack": "none"
+    },
+    "expected": {
+      "sent": false,
+      "blocked": true,
+      "rejected": false,
+      "browser": "Chưa có lịch"
+    },
+    "actual": {
+      "sent": false,
+      "blocked": true,
+      "rejected": false,
+      "browser": "Chưa có lịch",
+      "observer": "Chưa có nội dung HTTP được gửi",
+      "outcome": "Dừng ở kiểm tra chứng chỉ"
+    },
+    "pass": true
+  },
+  {
+    "kind": "tls",
+    "input": {
+      "secure": true,
+      "certificate": "wrong-name",
+      "attack": "listen"
+    },
+    "expected": {
+      "sent": false,
+      "blocked": true,
+      "rejected": false,
+      "browser": "Chưa có lịch"
+    },
+    "actual": {
+      "sent": false,
+      "blocked": true,
+      "rejected": false,
+      "browser": "Chưa có lịch",
+      "observer": "Chưa có nội dung HTTP được gửi",
+      "outcome": "Dừng ở kiểm tra chứng chỉ"
+    },
+    "pass": true
+  },
+  {
+    "kind": "tls",
+    "input": {
+      "secure": true,
+      "certificate": "wrong-name",
+      "attack": "tamper"
+    },
+    "expected": {
+      "sent": false,
+      "blocked": true,
+      "rejected": false,
+      "browser": "Chưa có lịch"
+    },
+    "actual": {
+      "sent": false,
+      "blocked": true,
+      "rejected": false,
+      "browser": "Chưa có lịch",
+      "observer": "Chưa có nội dung HTTP được gửi",
+      "outcome": "Dừng ở kiểm tra chứng chỉ"
+    },
+    "pass": true
+  },
+  {
+    "kind": "tls",
+    "input": {
+      "secure": true,
+      "certificate": "expired",
+      "attack": "none"
+    },
+    "expected": {
+      "sent": false,
+      "blocked": true,
+      "rejected": false,
+      "browser": "Chưa có lịch"
+    },
+    "actual": {
+      "sent": false,
+      "blocked": true,
+      "rejected": false,
+      "browser": "Chưa có lịch",
+      "observer": "Chưa có nội dung HTTP được gửi",
+      "outcome": "Dừng ở kiểm tra chứng chỉ"
+    },
+    "pass": true
+  },
+  {
+    "kind": "tls",
+    "input": {
+      "secure": true,
+      "certificate": "expired",
+      "attack": "listen"
+    },
+    "expected": {
+      "sent": false,
+      "blocked": true,
+      "rejected": false,
+      "browser": "Chưa có lịch"
+    },
+    "actual": {
+      "sent": false,
+      "blocked": true,
+      "rejected": false,
+      "browser": "Chưa có lịch",
+      "observer": "Chưa có nội dung HTTP được gửi",
+      "outcome": "Dừng ở kiểm tra chứng chỉ"
+    },
+    "pass": true
+  },
+  {
+    "kind": "tls",
+    "input": {
+      "secure": true,
+      "certificate": "expired",
+      "attack": "tamper"
+    },
+    "expected": {
+      "sent": false,
+      "blocked": true,
+      "rejected": false,
+      "browser": "Chưa có lịch"
+    },
+    "actual": {
+      "sent": false,
+      "blocked": true,
+      "rejected": false,
+      "browser": "Chưa có lịch",
+      "observer": "Chưa có nội dung HTTP được gửi",
+      "outcome": "Dừng ở kiểm tra chứng chỉ"
+    },
+    "pass": true
+  },
+  {
+    "kind": "tls",
+    "input": {
+      "secure": true,
+      "certificate": "untrusted",
+      "attack": "none"
+    },
+    "expected": {
+      "sent": false,
+      "blocked": true,
+      "rejected": false,
+      "browser": "Chưa có lịch"
+    },
+    "actual": {
+      "sent": false,
+      "blocked": true,
+      "rejected": false,
+      "browser": "Chưa có lịch",
+      "observer": "Chưa có nội dung HTTP được gửi",
+      "outcome": "Dừng ở kiểm tra chứng chỉ"
+    },
+    "pass": true
+  },
+  {
+    "kind": "tls",
+    "input": {
+      "secure": true,
+      "certificate": "untrusted",
+      "attack": "listen"
+    },
+    "expected": {
+      "sent": false,
+      "blocked": true,
+      "rejected": false,
+      "browser": "Chưa có lịch"
+    },
+    "actual": {
+      "sent": false,
+      "blocked": true,
+      "rejected": false,
+      "browser": "Chưa có lịch",
+      "observer": "Chưa có nội dung HTTP được gửi",
+      "outcome": "Dừng ở kiểm tra chứng chỉ"
+    },
+    "pass": true
+  },
+  {
+    "kind": "tls",
+    "input": {
+      "secure": true,
+      "certificate": "untrusted",
+      "attack": "tamper"
+    },
+    "expected": {
+      "sent": false,
+      "blocked": true,
+      "rejected": false,
+      "browser": "Chưa có lịch"
+    },
+    "actual": {
+      "sent": false,
+      "blocked": true,
+      "rejected": false,
+      "browser": "Chưa có lịch",
+      "observer": "Chưa có nội dung HTTP được gửi",
+      "outcome": "Dừng ở kiểm tra chứng chỉ"
+    },
+    "pass": true
+  },
+  {
+    "kind": "school",
+    "id": "opening",
+    "config": {
+      "servers": 2,
+      "cache": true,
+      "ttl": 1,
+      "workers": 3
+    },
+    "expected": {
+      "completed": 12,
+      "waiting": 0,
+      "queued": 0,
+      "cost": 6,
+      "passed": true
+    },
+    "actual": {
+      "completed": 12,
+      "waiting": 0,
+      "queued": 0,
+      "cost": 6,
+      "passed": true,
+      "checks": {
+        "reads": true,
+        "notifications": true,
+        "freshnessPolicy": true,
+        "budget": true
+      },
+      "trace": [
+        {
+          "second": 1,
+          "queued": 0,
+          "processed": 6,
+          "received": 6,
+          "doneThisSecond": 6
+        },
+        {
+          "second": 2,
+          "queued": 0,
+          "processed": 12,
+          "received": 12,
+          "doneThisSecond": 6
+        },
+        {
+          "second": 3,
+          "queued": 0,
+          "processed": 18,
+          "received": 18,
+          "doneThisSecond": 6
+        },
+        {
+          "second": 4,
+          "queued": 0,
+          "processed": 24,
+          "received": 24,
+          "doneThisSecond": 6
+        }
+      ]
+    },
+    "pass": true
+  },
+  {
+    "kind": "school",
+    "id": "opening",
+    "config": {
+      "servers": 1,
+      "cache": false,
+      "ttl": 5,
+      "workers": 1
+    },
+    "expected": {
+      "completed": 4,
+      "waiting": 8,
+      "queued": 16,
+      "cost": 2,
+      "passed": false
+    },
+    "actual": {
+      "completed": 4,
+      "waiting": 8,
+      "queued": 16,
+      "cost": 2,
+      "passed": false,
+      "checks": {
+        "reads": false,
+        "notifications": false,
+        "freshnessPolicy": true,
+        "budget": true
+      },
+      "trace": [
+        {
+          "second": 1,
+          "queued": 4,
+          "processed": 2,
+          "received": 6,
+          "doneThisSecond": 2
+        },
+        {
+          "second": 2,
+          "queued": 8,
+          "processed": 4,
+          "received": 12,
+          "doneThisSecond": 2
+        },
+        {
+          "second": 3,
+          "queued": 12,
+          "processed": 6,
+          "received": 18,
+          "doneThisSecond": 2
+        },
+        {
+          "second": 4,
+          "queued": 16,
+          "processed": 8,
+          "received": 24,
+          "doneThisSecond": 2
+        }
+      ]
+    },
+    "pass": true
+  },
+  {
+    "kind": "school",
+    "id": "opening",
+    "config": {
+      "servers": 2,
+      "cache": true,
+      "ttl": 2,
+      "workers": 6
+    },
+    "expected": {
+      "completed": 12,
+      "waiting": 0,
+      "queued": 0,
+      "cost": 9,
+      "passed": false
+    },
+    "actual": {
+      "completed": 12,
+      "waiting": 0,
+      "queued": 0,
+      "cost": 9,
+      "passed": false,
+      "checks": {
+        "reads": true,
+        "notifications": true,
+        "freshnessPolicy": false,
+        "budget": false
+      },
+      "trace": [
+        {
+          "second": 1,
+          "queued": 0,
+          "processed": 6,
+          "received": 6,
+          "doneThisSecond": 6
+        },
+        {
+          "second": 2,
+          "queued": 0,
+          "processed": 12,
+          "received": 12,
+          "doneThisSecond": 6
+        },
+        {
+          "second": 3,
+          "queued": 0,
+          "processed": 18,
+          "received": 18,
+          "doneThisSecond": 6
+        },
+        {
+          "second": 4,
+          "queued": 0,
+          "processed": 24,
+          "received": 24,
+          "doneThisSecond": 6
+        }
+      ]
+    },
+    "pass": true
+  },
+  {
+    "kind": "school",
+    "id": "opening",
+    "config": {
+      "servers": 4,
+      "cache": true,
+      "ttl": 1,
+      "workers": 6
+    },
+    "expected": {
+      "completed": 12,
+      "waiting": 0,
+      "queued": 0,
+      "cost": 11,
+      "passed": false
+    },
+    "actual": {
+      "completed": 12,
+      "waiting": 0,
+      "queued": 0,
+      "cost": 11,
+      "passed": false,
+      "checks": {
+        "reads": true,
+        "notifications": true,
+        "freshnessPolicy": true,
+        "budget": false
+      },
+      "trace": [
+        {
+          "second": 1,
+          "queued": 0,
+          "processed": 6,
+          "received": 6,
+          "doneThisSecond": 6
+        },
+        {
+          "second": 2,
+          "queued": 0,
+          "processed": 12,
+          "received": 12,
+          "doneThisSecond": 6
+        },
+        {
+          "second": 3,
+          "queued": 0,
+          "processed": 18,
+          "received": 18,
+          "doneThisSecond": 6
+        },
+        {
+          "second": 4,
+          "queued": 0,
+          "processed": 24,
+          "received": 24,
+          "doneThisSecond": 6
+        }
+      ]
+    },
+    "pass": true
+  },
+  {
+    "kind": "school",
+    "id": "rush",
+    "config": {
+      "servers": 2,
+      "cache": true,
+      "ttl": 1,
+      "workers": 5
+    },
+    "expected": {
+      "completed": 6,
+      "waiting": 0,
+      "queued": 0,
+      "cost": 8,
+      "passed": true
+    },
+    "actual": {
+      "completed": 6,
+      "waiting": 0,
+      "queued": 0,
+      "cost": 8,
+      "passed": true,
+      "checks": {
+        "reads": true,
+        "notifications": true,
+        "freshnessPolicy": true,
+        "budget": true
+      },
+      "trace": [
+        {
+          "second": 1,
+          "queued": 6,
+          "processed": 10,
+          "received": 16,
+          "doneThisSecond": 10
+        },
+        {
+          "second": 2,
+          "queued": 4,
+          "processed": 20,
+          "received": 24,
+          "doneThisSecond": 10
+        },
+        {
+          "second": 3,
+          "queued": 2,
+          "processed": 30,
+          "received": 32,
+          "doneThisSecond": 10
+        },
+        {
+          "second": 4,
+          "queued": 0,
+          "processed": 40,
+          "received": 40,
+          "doneThisSecond": 10
+        }
+      ]
+    },
+    "pass": true
+  },
+  {
+    "kind": "school",
+    "id": "rush",
+    "config": {
+      "servers": 1,
+      "cache": false,
+      "ttl": 5,
+      "workers": 1
+    },
+    "expected": {
+      "completed": 4,
+      "waiting": 2,
+      "queued": 32,
+      "cost": 2,
+      "passed": false
+    },
+    "actual": {
+      "completed": 4,
+      "waiting": 2,
+      "queued": 32,
+      "cost": 2,
+      "passed": false,
+      "checks": {
+        "reads": false,
+        "notifications": false,
+        "freshnessPolicy": true,
+        "budget": true
+      },
+      "trace": [
+        {
+          "second": 1,
+          "queued": 14,
+          "processed": 2,
+          "received": 16,
+          "doneThisSecond": 2
+        },
+        {
+          "second": 2,
+          "queued": 20,
+          "processed": 4,
+          "received": 24,
+          "doneThisSecond": 2
+        },
+        {
+          "second": 3,
+          "queued": 26,
+          "processed": 6,
+          "received": 32,
+          "doneThisSecond": 2
+        },
+        {
+          "second": 4,
+          "queued": 32,
+          "processed": 8,
+          "received": 40,
+          "doneThisSecond": 2
+        }
+      ]
+    },
+    "pass": true
+  },
+  {
+    "kind": "school",
+    "id": "rush",
+    "config": {
+      "servers": 2,
+      "cache": true,
+      "ttl": 2,
+      "workers": 6
+    },
+    "expected": {
+      "completed": 6,
+      "waiting": 0,
+      "queued": 0,
+      "cost": 9,
+      "passed": false
+    },
+    "actual": {
+      "completed": 6,
+      "waiting": 0,
+      "queued": 0,
+      "cost": 9,
+      "passed": false,
+      "checks": {
+        "reads": true,
+        "notifications": true,
+        "freshnessPolicy": false,
+        "budget": false
+      },
+      "trace": [
+        {
+          "second": 1,
+          "queued": 4,
+          "processed": 12,
+          "received": 16,
+          "doneThisSecond": 12
+        },
+        {
+          "second": 2,
+          "queued": 0,
+          "processed": 24,
+          "received": 24,
+          "doneThisSecond": 12
+        },
+        {
+          "second": 3,
+          "queued": 0,
+          "processed": 32,
+          "received": 32,
+          "doneThisSecond": 8
+        },
+        {
+          "second": 4,
+          "queued": 0,
+          "processed": 40,
+          "received": 40,
+          "doneThisSecond": 8
+        }
+      ]
+    },
+    "pass": true
+  },
+  {
+    "kind": "school",
+    "id": "rush",
+    "config": {
+      "servers": 4,
+      "cache": true,
+      "ttl": 1,
+      "workers": 6
+    },
+    "expected": {
+      "completed": 6,
+      "waiting": 0,
+      "queued": 0,
+      "cost": 11,
+      "passed": false
+    },
+    "actual": {
+      "completed": 6,
+      "waiting": 0,
+      "queued": 0,
+      "cost": 11,
+      "passed": false,
+      "checks": {
+        "reads": true,
+        "notifications": true,
+        "freshnessPolicy": true,
+        "budget": false
+      },
+      "trace": [
+        {
+          "second": 1,
+          "queued": 4,
+          "processed": 12,
+          "received": 16,
+          "doneThisSecond": 12
+        },
+        {
+          "second": 2,
+          "queued": 0,
+          "processed": 24,
+          "received": 24,
+          "doneThisSecond": 12
+        },
+        {
+          "second": 3,
+          "queued": 0,
+          "processed": 32,
+          "received": 32,
+          "doneThisSecond": 8
+        },
+        {
+          "second": 4,
+          "queued": 0,
+          "processed": 40,
+          "received": 40,
+          "doneThisSecond": 8
+        }
+      ]
+    },
+    "pass": true
+  },
+  {
+    "kind": "tls-restored",
+    "input": {
+      "secure": "false",
+      "certificate": "weird",
+      "attack": "weird"
+    },
+    "actual": {
+      "config": {
+        "secure": true,
+        "certificate": "valid",
+        "attack": "none"
+      },
+      "outcome": "Đã nhận lịch",
+      "observer": "Không đọc được nội dung lịch; vẫn thấy IP, kích thước và thời điểm trao đổi",
+      "browser": "Phòng 201",
+      "sent": true,
+      "blocked": false,
+      "rejected": false,
+      "trace": [
+        "Bắt đầu thiết lập TLS; chưa gửi yêu cầu HTTP.",
+        "Tên lich.truong.example khớp; chuỗi tin cậy và thời hạn được giả định hợp lệ.",
+        "Xác thực và thiết lập khóa kênh hoàn tất theo giả định.",
+        "Gửi yêu cầu HTTP và nhận lịch qua kênh TLS.",
+        "Trình duyệt kiểm tra và đọc nội dung tại đầu cuối."
+      ]
+    }
+  },
+  {
+    "kind": "tls-restored",
+    "input": {
+      "secure": false,
+      "certificate": "wrong-name",
+      "attack": "tamper"
+    },
+    "actual": {
+      "config": {
+        "secure": false,
+        "certificate": "wrong-name",
+        "attack": "tamper"
+      },
+      "outcome": "Đã nhận lịch",
+      "observer": "Đọc được: Phòng 201",
+      "browser": "Phòng 999 (đã bị sửa trên đường)",
+      "sent": true,
+      "blocked": false,
+      "rejected": false,
+      "trace": [
+        "Gửi HTTP không có TLS; chứng chỉ không tham gia.",
+        "Người trên đường truyền đọc được phòng 201.",
+        "Người trên đường đổi phòng 201 thành 999; mô hình HTTP này không phát hiện."
+      ]
+    }
+  }
+]

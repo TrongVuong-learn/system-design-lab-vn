@@ -9,6 +9,8 @@
 
 ## Mã nguồn và học liệu
 
+- Skill theo task và giới hạn áp dụng nằm trong `docs/engineering/AGENT_SKILLS.md`; bản cài mới khóa commit/checksum trong `docs/engineering/skills-lock.json`. Chỉ đọc skill liên quan. Ví dụ upstream không thay stack, ranh giới package hoặc workflow của repository.
+
 - Tổ chức theo cấu trúc trong docs/engineering/ARCHITECTURE.md. Chỉ tạo app/package khi milestone hoặc task cần.
 - Core mô phỏng và học tập không phụ thuộc React, DOM, storage hoặc native SDK; tích hợp qua adapter.
 - Nội dung có schema/ID/version và hoạt động tham chiếu registry; không nhúng mã thực thi tùy ý vào học liệu.
@@ -22,3 +24,9 @@
 - Chỉ báo build/test/deploy thành công khi có bằng chứng. Phân biệt đặc tả, source đã viết và tính năng đã chạy.
 - Runtime/dependency được khóa theo setup đã kiểm tra; không tự nâng framework để xử lý task không liên quan.
 - Phát hành áp dụng workflow và quyền đã được người dùng giao; không coi file template là workflow đang chạy.
+
+## Agent review kiến thức
+
+- Khi người dùng gọi review kiến thức, dùng `knowledge_reviewer` tại `.codex/agents/knowledge_reviewer.toml`, runtime model `gpt-6-sol`, reasoning `low`; chỉ dùng `gpt-6-astra medium` khi user giao thiết kế/cập nhật profile. Hướng dẫn/lịch sử tại `docs/research/knowledge-reviewer/`.
+- Review claim + nguồn sơ cấp + engine/trace + assessment/giới hạn, ghi rõ chưa xác minh. Không tự đổi model, không ghi human-reviewed hoặc đóng pilot bằng AI review.
+- Reviewer chỉ đọc/kiểm/report; parent rà evidence trước sửa hoặc phát hành. Chỉ gọi khi có task, không tự tạo lịch chạy hay phát hành từ finding chưa xác minh.

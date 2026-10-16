@@ -1,0 +1,13 @@
+import { initialCache,cacheStep,initialQueue,queueStep,initialReplica,replicaWrite,replicaTick,trafficStep } from '/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/packages/simulation-engine/src/index.ts';
+import {measureBatch,estimateCapacity,initialDns,dnsStep,transferPackets} from '/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/packages/simulation-engine/src/foundations.ts';
+import {evaluateSchoolReview} from '/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/packages/simulation-engine/src/school-review.ts';
+const out:any={};
+out.metrics={baseline:measureBatch(4,false),slow:measureBatch(4,true)};
+out.capacity=estimateCapacity(2000,5,100,4);
+let d=initialDns();d=dnsStep(d,'lookup');d=dnsStep(d,'move');out.dnsBefore=dnsStep(d,'lookup');for(let i=0;i<5;i++)d=dnsStep(d,'wait');out.dnsAtExpiry=dnsStep(d,'lookup');
+out.transport={tcpLoss2:transferPackets('tcp',true,2),tcpLoss3:transferPackets('tcp',true,3),udpLoss3:transferPackets('udp',true,3)};
+out.schoolOpening=evaluateSchoolReview('opening',{servers:2,cache:true,ttl:1,workers:3});
+out.schoolRush=evaluateSchoolReview('rush',{servers:1,cache:true,ttl:1,workers:5});
+let r=replicaWrite(initialReplica(),205,5);r=replicaWrite(r,201,1);out.replicaDynamic=r;
+let c=cacheStep(initialCache(),{type:'refresh'});out.cacheRefresh=c;
+console.log(JSON.stringify(out,null,2));

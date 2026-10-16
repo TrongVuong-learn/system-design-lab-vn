@@ -1,6 +1,6 @@
 # Kế hoạch triển khai và nghiệm thu
 
-Trạng thái: backlog và ước lượng đề xuất. Chưa bắt đầu phát triển ứng dụng. Phạm vi kiến thức theo [CURRICULUM_MAP.md](../../CURRICULUM_MAP.md), tiêu chuẩn học theo [TEACHING_GUIDE.md](../../TEACHING_GUIDE.md).
+Trạng thái cập nhật 12/10/2026: đã có source bản thử nghiệm web với sáu bài nhập môn; M1–M3 có phần hiện thực nhưng chưa đủ bằng chứng để đóng toàn bộ gate. [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md) ghi kết quả đã chạy và giới hạn. Backlog và ước lượng bên dưới vẫn là kế hoạch. Phạm vi kiến thức theo [CURRICULUM_MAP.md](../../CURRICULUM_MAP.md), tiêu chuẩn học theo [TEACHING_GUIDE.md](../../TEACHING_GUIDE.md).
 
 Quy trình thực hiện từng task, Git/review, release và quản lý thư mục áp dụng theo [WORKFLOW.md](WORKFLOW.md) và [CONTRIBUTING.md](../../CONTRIBUTING.md).
 
@@ -51,6 +51,20 @@ M5 là luồng nội dung dài hạn. App có thể phát hành với các level
 | REL-01 | Preview/staging và artifact version | QA-01 | Deployment tái lập; direct URL và rollback hoạt động |
 
 Không dùng task kiểu “Làm frontend” hoặc “Viết nội dung” cho cả tháng. Mỗi ticket phải có outcome, dependencies, owner, cách kiểm chứng và phần ngoài phạm vi.
+
+### Ưu tiên sau review 12/10/2026
+
+Giữ các mốc và yêu cầu sản phẩm; hoàn tất gate trước khi mở rộng. Đây là backlog đề xuất, chưa phải các task đã hoàn thành. Owner là vai trò, cần gán người cụ thể khi chuyển Ready.
+
+| Task | Outcome và phạm vi | Phụ thuộc / owner | Acceptance và bằng chứng |
+| --- | --- | --- | --- |
+| QA-02 | Bảo vệ tiến độ và luồng học của bản beta; ngoài phạm vi sync/PWA | DATA-01, WEB-01 / kỹ sư + QA | Test export/import sai và quá lớn, lỗi lưu, reload, focus/keyboard, reduced motion; kiểm tra Safari iOS/Chrome Android thật, lưu kết quả và giới hạn |
+| EDU-02 | Review bài cache, pilot học sinh, sửa và thử lại; chưa nhân rộng 36 module | QA-01, QA-02 / curriculum lead + reviewer | Chốt rubric chuyển giao, nhóm pilot và ngưỡng đạt trước thử; ghi ngộ nhận và kết quả thử lại; không suy hiệu quả học từ pass E2E |
+| ENG-03 | Contract nội dung/attempt và coverage tối thiểu trước nhân rộng | ENG-02 / kỹ sư + curriculum lead | Fixture chặn prerequisite chu trình/reference thiếu, review/publication sai; định danh version của lesson/engine trong bằng chứng học; chiến lược migrate hoặc từ chối bản lưu cũ; không thêm backend |
+| ARCH-01 | Prototype transaction/design review để kiểm tra độ sâu khác cache | WEB-01, ENG-03 / kỹ sư engine + reviewer | Một bài áp dụng với invariant/rubric và giới hạn mô hình, core độc lập UI; chưa tuyên bố hoàn chỉnh module |
+| REL-01 | Xác nhận CI/preview khi có remote và phạm vi phát hành | QA-02 / technical lead | CI thực sự chạy, artifact/version và mở trực tiếp URL được kiểm chứng; rollout/rollback có bằng chứng |
+
+Chi tiết phát hiện và nghiên cứu tooling: [PLAN_REVIEW_2026-10-12.md](PLAN_REVIEW_2026-10-12.md). Skill hỗ trợ thực hiện các task, không thay reviewer, pilot hoặc thiết bị thật.
 
 ## 4. Ước lượng và cách điều hành
 
