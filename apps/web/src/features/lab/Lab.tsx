@@ -1,3 +1,4 @@
+import { HashTableLab } from './HashTableLab';
 import { LibrarySearchLab } from './LibrarySearchLab';
 import { ObservationPanel } from './ObservationPanel';
 import { CpuIoLab } from './CpuIoLab';
@@ -43,6 +44,7 @@ export function Lab(original: LabProps) {
     'concurrency',
     'cpu-io',
     'library-search',
+    'hash-table',
   ].includes(kind);
   const props = extended
     ? {
@@ -84,6 +86,8 @@ export function Lab(original: LabProps) {
       return <CapacityLab {...props} />;
     case 'http':
       return <HttpLab {...props} />;
+    case 'hash-table':
+      return <HashTableLab {...props} />;
     case 'library-search':
       return <LibrarySearchLab {...props} />;
     case 'cpu-io':

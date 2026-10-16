@@ -48,6 +48,7 @@ const order = [
   'concurrency',
   'cpu-io',
   'library-search',
+  'hash-table',
   'metrics',
   'cache',
   'dns',

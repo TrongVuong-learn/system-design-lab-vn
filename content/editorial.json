@@ -200,6 +200,22 @@
       "revision": "Spring2026 Frank Pfenning lectures4/6",
       "checkedAt": "2026-10-15",
       "attribution": "Frank Pfenning / Carnegie Mellon University; diễn giải riêng, không sao chép slide"
+    },
+    {
+      "id": "source-cmu-hash",
+      "title": "CMU15-122 Lecture13 Hash Tables §4–8",
+      "url": "https://www.cs.cmu.edu/afs/cs.cmu.edu/academic/class/15122-s14/www/13-hashtables.pdf",
+      "revision": "2014-02-27 Pfenning/Simmons",
+      "checkedAt": "2026-10-16",
+      "attribution": "Frank Pfenning, Rob Simmons / CMU; diễn giải và ví dụ riêng"
+    },
+    {
+      "id": "source-mit-chaining",
+      "title": "MIT6.006 Fall2011 Lecture8 Hashing I",
+      "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/d3e4d64266d481c74c9e7c15e09999fe_MIT6_006F11_lec08.pdf",
+      "revision": "Fall2011 Lecture8",
+      "checkedAt": "2026-10-16",
+      "attribution": "MIT OpenCourseWare; liên kết tham khảo, không sao chép hình hoặc code"
     }
   ],
   "competencies": [
@@ -357,6 +373,13 @@
       "id": "l0-library-search-intro",
       "moduleId": "L0.3",
       "outcome": "Theo dấu tìm tuần tự và tìm nhị phân trên mảng đã sắp; giải thích vì sao thứ tự dữ liệu giúp loại bỏ một phần danh mục.",
+      "depth": "introductory",
+      "planRefs": ["EDU-04", "CASE-L0-03"]
+    },
+    {
+      "id": "l0-hash-collision-intro",
+      "moduleId": "L0.3",
+      "outcome": "Theo dấu chọn ngăn hash và so khóa đầy đủ; giải thích va chạm không có nghĩa hai khóa giống nhau.",
       "depth": "introductory",
       "planRefs": ["EDU-04", "CASE-L0-03"]
     }
@@ -863,6 +886,34 @@
         "status": "beta-checked",
         "evidence": "docs/delivery/EDU_16_LIBRARY_SEARCH.md",
         "caseId": "case-library-search",
+        "revision": 1
+      }
+    },
+    {
+      "lessonId": "hash-table",
+      "revision": 1,
+      "competencyIds": ["l0-hash-collision-intro"],
+      "prerequisiteIds": ["library-search"],
+      "claims": [
+        {
+          "text": "Hash chọn bucket; collision là khóa khác cùng bucket, chaining phải so khóa đầy đủ; trường hợp xấu có thể dồn vào một chain.",
+          "sourceIds": ["source-cmu-hash", "source-mit-chaining"]
+        }
+      ],
+      "review": {
+        "reviewer": "Codex parent — nguồn CMU/MIT và tính tay preset",
+        "reviewerType": "agent",
+        "date": "2026-10-16",
+        "status": "beta-checked",
+        "evidence": "docs/delivery/EDU_17_HASH_COLLISIONS.md"
+      },
+      "caseReview": {
+        "reviewer": "Codex parent — nguồn CMU/MIT và tính tay preset",
+        "reviewerType": "agent",
+        "date": "2026-10-16",
+        "status": "beta-checked",
+        "evidence": "docs/delivery/EDU_17_HASH_COLLISIONS.md",
+        "caseId": "case-hash-table",
         "revision": 1
       }
     }

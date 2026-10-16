@@ -27,6 +27,7 @@ const activityKind = z.enum([
   'concurrency',
   'cpu-io',
   'library-search',
+  'hash-table',
 ]);
 const caseText = z.string().trim().min(8).max(1600);
 export const caseStudySchema = z

@@ -2,15 +2,15 @@
 
 Nền tảng học System Design tiếng Việt, trực quan, tương tác, thiết kế từ điện thoại. Có lối bắt đầu cho học sinh cấp 3 chưa biết lập trình và lộ trình tiến tới thiết kế hệ thống chuyên sâu.
 
-**Trạng thái:** bản thử nghiệm web đã được hiện thực với mười bảy bài nhập môn, mô phỏng cục bộ và lưu tiến độ. Gói tải offline của17 bài và bài ôn đã có tại Tiến độ; giáo trình chuyên sâu, PWA cài đặt, sync và app tiếp tục theo roadmap. Bản thử nghiệm chưa được pilot với học sinh hoặc kiểm tra trên điện thoại thật.
+**Trạng thái:** bản thử nghiệm web đã được hiện thực với mười tám bài nhập môn, mô phỏng cục bộ và lưu tiến độ. Gói tải offline của 18 bài và bài ôn đã có tại Tiến độ; giáo trình chuyên sâu, PWA cài đặt, sync và app tiếp tục theo roadmap. Bản thử nghiệm chưa được pilot với học sinh hoặc kiểm tra trên điện thoại thật.
 
 ## Website đang hoạt động
 
-**[Mở System Design Lab trên Vercel](https://system-design-lab-vn.vercel.app)** —17 bài nhập môn +1 bài ôn, học không cần tài khoản. Có thể gửi production URL này cho AI khác test; [prompt review](docs/research/AI_REVIEW_HANDOFF.md) chỉ cách kiểm nguồn/trace/assessment.
+**[Mở System Design Lab trên Vercel](https://system-design-lab-vn.vercel.app)** —18 bài nhập môn +1 bài ôn, học không cần tài khoản. Có thể gửi production URL này cho AI khác test; [prompt review](docs/research/AI_REVIEW_HANDOFF.md) chỉ cách kiểm nguồn/trace/assessment.
 
 Vercel là nơi triển khai chính theo yêu cầu16/10/2026; hiện phát hành bằng CLI prebuilt, chưa có GitHub auto-deploy. Site ChatGPT cũ giữ nguyên để chuyển tiến độ: xuất ở địa chỉ cũ, nhập tại Vercel vì hai origin có storage riêng. Xem [báo cáo phát hành](docs/delivery/REL_02_VERCEL.md).
 
-Mã nguồn: **[TrongVuong-learn/system-design-lab-vn](https://github.com/TrongVuong-learn/system-design-lab-vn)** (repo riêng tư, nhánh mặc định `master`).
+Mã nguồn: **[TrongVuong-learn/system-design-lab-vn](https://github.com/TrongVuong-learn/system-design-lab-vn)** (repo công khai, nhánh mặc định `master`).
 
 ## Chạy dự án
 
@@ -41,7 +41,7 @@ pnpm test:e2e
 - Stack đã triển khai: TypeScript + React + Vite; engine độc lập giao diện; Capacitor cho app khi đạt điều kiện.
 - Nội dung đi từ tình huống dễ hiểu đến thao tác, giải thích và cơ chế kỹ thuật.
 - Phi thương mại, chia sẻ quy mô nhỏ: học không cần tài khoản; ưu tiên cách giảng, tiến độ lưu trên thiết bị.
-- Cả17 bài beta có so sánh bước trước–sau và gợi ý mở dần; xem [EDU-11](docs/delivery/EDU_11_FEEDBACK_ALL_LESSONS.md).
+- Cả 18 bài beta có so sánh bước trước–sau và gợi ý mở dần; xem [EDU-11](docs/delivery/EDU_11_FEEDBACK_ALL_LESSONS.md).
 - Một bài ôn website trường kết hợp chia tải/cache/queue, hai tình huống và nhận định tự viết; xem [EDU-12](docs/delivery/EDU_12_SCHOOL_REVIEW.md).
 
 ## Đọc tài liệu theo thứ tự
