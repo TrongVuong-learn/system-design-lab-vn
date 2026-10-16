@@ -70,3 +70,5 @@ Bài CPU/I/O tại L0.2: [so1/2worker, chờ dữ liệu và giới hạnCPU](do
 Gói tải offline: [phạm vi, cơ chế cập nhật và kiểm chứng M4-OFFLINE-01](docs/delivery/M4_OFFLINE_01.md). Không thay pilot hoặc cam kết lưu vĩnh viễn của trình duyệt.
 
 Bài tìm mã sách L0.3: [phạm vi và kiểm chứng EDU-16](docs/delivery/EDU_16_LIBRARY_SEARCH.md); chưa thay module cấu trúc dữ liệu đầy đủ.
+
+Triển khai Vercel: [REL-02](docs/delivery/REL_02_VERCEL.md). Giao AI khác kiểm kiến thức: [prompt và tình huống kiểm](docs/research/AI_REVIEW_HANDOFF.md). Không cần reviewer con người mới dùng bản tự học; các giới hạn/review vẫn được công bố đúng phạm vi.

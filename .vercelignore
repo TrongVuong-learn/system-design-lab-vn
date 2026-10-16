@@ -1,0 +1,12 @@
+node_modules
+.cache
+.git
+.openai
+.sites-runtime
+.env
+.env.*
+test-results
+playwright-report
+docs
+.codex
+.agents
