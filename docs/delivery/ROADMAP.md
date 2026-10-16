@@ -292,3 +292,10 @@ Phạm vi: static hosting/cấu hình cache đúng cho shell/SW và assets; gi�
 
 
 Kết quả REL-02: đã deploy Vercel READY tại https://system-design-lab-vn.vercel.app;66unit,18/18file HTTP/hash/cache đúng, smoke390/1280 gồm resume/offline đạt. [Báo cáo](REL_02_VERCEL.md) ghi deploymentID và giới hạn; không đóng36module/pilot chỉ từ hosting. Vercel là nơi phát hành chính, Site cũ giữ nguyên.
+
+
+##22. EDU-17 — hash table và va chạm khóa L0.3
+
+Người dùng báo đã review và xác nhận kiến thức hiện có (17bài/1ôn),16/10/2026. Ghi nhận đây là xác nhận của người dùng; phương pháp/phạm vi claim chưa cung cấp, không tự đổi từng record thành human-reviewed hoặc đóng pilot. CI baseline GitHub fa82055 đã success.
+
+Task tiếp: bài nhập môn hash/separate chaining cho mã sách2,6,10,14; hash k mod B với B4/8; so với duyệt cả danh mục, mục tiêu2/14/18. Đếm số khóa đã so, không ms; tính hash và dựng bảng không nằm trong số đếm. Chọn bucket xong vẫn so khóa đầy đủ; nhiều bucket không bảo đảm mọi truy vấn ít bước hơn. Không gán hash toy thành hash bảo mật hoặc bảo đảm O(1). Core pure, checkpoint config/step/model1, derive state; case CASE-L0-03, hints/terms/before-after, keyboard/mobile/resume/offline. Nguồn sơ cấp xác minh trước viết, registry beta AI/parent theo nguồn mới. Acceptance: toàn preset/prefix/invalid checkpoint; E2E bốn browser, responsive/offline; commit/push GitHub và phát hành prebuilt Vercel đã kiểm. Không đổi câu hỏi/tiến độ17bài cũ hoặc tự đóng L0.3.
