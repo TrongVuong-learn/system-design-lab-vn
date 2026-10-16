@@ -289,3 +289,6 @@ Kết quả EDU-16: catalog17 bài và1bài ôn;65unit đạt,24retest dữ li�
 Theo yêu cầu người dùng: triển khai17 bài +1bài ôn trên Vercel để tự học và giao AI khác test. Không chờ tìm reviewer con người để phát hành bản học thử; vẫn ghi đúng review là AI/parent và nguồn, không chứng nhận kiến thức tuyệt đối hoặc pilot thật. Không tự thay nội dung, mở auth/sync hoặc đóng36module.
 
 Phạm vi: static hosting/cấu hình cache đúng cho shell/SW và assets; giữ build/runtime khóa, giữ Site cũ nguyên trạng; deploy artifact đã kiểm; xác minh URL/headers/luồng chính. Thêm hướng dẫn AI review dựa trên claim → nguồn sơ cấp → trace → assessment, kèm cách báo lỗi tái hiện. Tiến độ lưu theo origin, cần export/import khi đổi domain. Dependency: tài khoản Vercel của người dùng; không đưa credential vào repo. Chưa deploy nếu chưa có xác nhận của nền tảng.
+
+
+Kết quả REL-02: đã deploy Vercel READY tại https://system-design-lab-vn.vercel.app;66unit,18/18file HTTP/hash/cache đúng, smoke390/1280 gồm resume/offline đạt. [Báo cáo](REL_02_VERCEL.md) ghi deploymentID và giới hạn; không đóng36module/pilot chỉ từ hosting. Vercel là nơi phát hành chính, Site cũ giữ nguyên.

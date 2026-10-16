@@ -75,3 +75,8 @@ Trong feature dùng các thư mục như `components`, `hooks`, `model` khi cầ
 Root giữ README, CONTRIBUTING, AGENTS và cấu hình workspace/tooling. Ba tài liệu sản phẩm hiện có được giữ đường dẫn vì đã được tham chiếu; README là điểm vào và xác định nguồn chính. Mọi di chuyển tài liệu sau này phải cập nhật liên kết, tránh duy trì hai bản đầy đủ cùng nội dung.
 
 Build output, generated content và test reports không chỉnh tay hoặc trộn với source. Cache và file local không commit; manifest/lockfile/config cần để tái lập được commit. Mỗi thư mục mới cần có trách nhiệm rõ và consumer thật.
+
+
+## Hosting đang dùng —16/10/2026
+
+Vercel production tại https://system-design-lab-vn.vercel.app là nơi phát hành chính theo yêu cầu người dùng. Dùng CLI prebuilt từ artifact đã kiểm; không rebuild lúc upload. Ghi commit/config, fingerprint, deploymentID/READY và HTTP/browser smoke theo REL_02_VERCEL.md. Không coi GitHub Actions hay auto-deploy đang chạy khi chưa có remote/workflow thực tế. Site cũ giữ để người học export dữ liệu, không tự phát hành/đổi sharing trên đó trong các đợt Vercel.
