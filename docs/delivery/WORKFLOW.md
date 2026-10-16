@@ -80,3 +80,7 @@ Build output, generated content và test reports không chỉnh tay hoặc trộ
 ## Hosting đang dùng —16/10/2026
 
 Vercel production tại https://system-design-lab-vn.vercel.app là nơi phát hành chính theo yêu cầu người dùng. Dùng CLI prebuilt từ artifact đã kiểm; không rebuild lúc upload. Ghi commit/config, fingerprint, deploymentID/READY và HTTP/browser smoke theo REL_02_VERCEL.md. Không coi GitHub Actions hay auto-deploy đang chạy khi chưa có remote/workflow thực tế. Site cũ giữ để người học export dữ liệu, không tự phát hành/đổi sharing trên đó trong các đợt Vercel.
+
+## Repository GitHub —16/10/2026
+
+Repo riêng tư `TrongVuong-learn/system-design-lab-vn`, remote origin HTTPS, default branch `master`, giữ tên nhánh chính hiện có. Source đã import cùng lịch sử từ checkout đang chạy Vercel; các thay đổi chưa commit ở checkout gốc không bị đưa lên hoặc ghi đè. GitHub Actions Quality đã khởi chạy; trạng thái thực xem trên Actions, chưa tự bật branch protection hoặc Vercel Git integration.

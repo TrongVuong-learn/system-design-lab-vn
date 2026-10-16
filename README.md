@@ -10,6 +10,8 @@ Nền tảng học System Design tiếng Việt, trực quan, tương tác, thi�
 
 Vercel là nơi triển khai chính theo yêu cầu16/10/2026; hiện phát hành bằng CLI prebuilt, chưa có GitHub auto-deploy. Site ChatGPT cũ giữ nguyên để chuyển tiến độ: xuất ở địa chỉ cũ, nhập tại Vercel vì hai origin có storage riêng. Xem [báo cáo phát hành](docs/delivery/REL_02_VERCEL.md).
 
+Mã nguồn: **[TrongVuong-learn/system-design-lab-vn](https://github.com/TrongVuong-learn/system-design-lab-vn)** (repo riêng tư, nhánh mặc định `master`).
+
 ## Chạy dự án
 
 Dùng Node **24.21.0** theo `.node-version` và pnpm **11.25.0**.
@@ -61,7 +63,7 @@ pnpm test:e2e
 
 Các tài liệu sản phẩm ở root được giữ đường dẫn để các liên kết trước đây tiếp tục hoạt động. Thay đổi quyết định kỹ thuật cần cập nhật ADR và các tài liệu liên quan.
 
-Quy tắc cho agent được lưu trong [AGENTS.md](AGENTS.md). Repository có EditorConfig, Git ignore, PR template và cấu hình GitHub Actions Quality. CI chưa được xác nhận chạy trên GitHub vì repository chưa có remote GitHub được cấu hình.
+Quy tắc cho agent được lưu trong [AGENTS.md](AGENTS.md). Repository có EditorConfig, Git ignore, PR template và cấu hình GitHub Actions Quality. Remote GitHub đã kết nối ngày16/10/2026; workflow Quality đã khởi chạy trên GitHub. Xem [kết quả CI](https://github.com/TrongVuong-learn/system-design-lab-vn/actions); chỉ coi đạt khi run hoàn tất thành công. Vercel hiện vẫn phát hành bằng CLI, chưa có auto-deploy từ GitHub.
 
 ## Mốc bắt đầu triển khai
 
