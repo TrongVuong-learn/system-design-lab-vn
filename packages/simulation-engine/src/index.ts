@@ -1,4 +1,4 @@
-export const ENGINE_VERSION = '1.7.0';
+export const ENGINE_VERSION = '1.8.0';
 export interface CacheState {
   time: number;
   source: number;
@@ -253,3 +253,5 @@ export {
 } from './cpu-io';
 
 export { librarySearch, SEARCH_MODEL_VERSION } from './library-search';
+
+export { hashTable, HASH_MODEL_VERSION } from './hash-table';

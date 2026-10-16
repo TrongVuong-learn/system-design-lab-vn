@@ -1,6 +1,6 @@
 # Kế hoạch triển khai và nghiệm thu
 
-Trạng thái: roadmap và ước lượng; web beta có 17 bài nhập môn, các gate hoàn thiện level còn mở. Trạng thái thực thi theo [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md); các gate chưa đạt vẫn còn mở. Phạm vi kiến thức theo [CURRICULUM_MAP.md](../../CURRICULUM_MAP.md), tiêu chuẩn học theo [TEACHING_GUIDE.md](../../TEACHING_GUIDE.md).
+Trạng thái: roadmap và ước lượng; web beta có 18 bài nhập môn, các gate hoàn thiện level còn mở. Trạng thái thực thi theo [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md); các gate chưa đạt vẫn còn mở. Phạm vi kiến thức theo [CURRICULUM_MAP.md](../../CURRICULUM_MAP.md), tiêu chuẩn học theo [TEACHING_GUIDE.md](../../TEACHING_GUIDE.md).
 
 Quy trình thực hiện từng task, Git/review, release và quản lý thư mục áp dụng theo [WORKFLOW.md](WORKFLOW.md) và [CONTRIBUTING.md](../../CONTRIBUTING.md).
 
@@ -299,3 +299,5 @@ Kết quả REL-02: đã deploy Vercel READY tại https://system-design-lab-vn.
 Người dùng báo đã review và xác nhận kiến thức hiện có (17bài/1ôn),16/10/2026. Ghi nhận đây là xác nhận của người dùng; phương pháp/phạm vi claim chưa cung cấp, không tự đổi từng record thành human-reviewed hoặc đóng pilot. CI baseline GitHub fa82055 đã success.
 
 Task tiếp: bài nhập môn hash/separate chaining cho mã sách2,6,10,14; hash k mod B với B4/8; so với duyệt cả danh mục, mục tiêu2/14/18. Đếm số khóa đã so, không ms; tính hash và dựng bảng không nằm trong số đếm. Chọn bucket xong vẫn so khóa đầy đủ; nhiều bucket không bảo đảm mọi truy vấn ít bước hơn. Không gán hash toy thành hash bảo mật hoặc bảo đảm O(1). Core pure, checkpoint config/step/model1, derive state; case CASE-L0-03, hints/terms/before-after, keyboard/mobile/resume/offline. Nguồn sơ cấp xác minh trước viết, registry beta AI/parent theo nguồn mới. Acceptance: toàn preset/prefix/invalid checkpoint; E2E bốn browser, responsive/offline; commit/push GitHub và phát hành prebuilt Vercel đã kiểm. Không đổi câu hỏi/tiến độ17bài cũ hoặc tự đóng L0.3.
+
+Kết quả EDU-17: bài nhập môn hash table/separate chaining và mini-case đã hiện thực, nâng catalog lên 18 bài + 1 bài ôn. 68 unit và 24 E2E liên quan đạt; ảnh 320/390/1280 px, export/import và offline kiểm riêng. Nguồn, giới hạn và trạng thái phát hành tại [EDU-17](EDU_17_HASH_COLLISIONS.md). L0.3 và pilot vẫn mở; tiếp theo là cây/heap/locality theo prerequisite.

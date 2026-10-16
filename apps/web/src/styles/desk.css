@@ -1105,3 +1105,20 @@
 .cpu-io-timeline td span {
   display: block;
 }
+
+.hash-buckets {
+  width: 100%;
+  border-collapse: collapse;
+  margin-block: 1rem;
+}
+.hash-buckets th,
+.hash-buckets td {
+  text-align: left;
+  padding: 0.6rem;
+  border-bottom: 1px solid var(--border, #d8dfeb);
+  overflow-wrap: anywhere;
+}
+.hash-buckets caption {
+  text-align: left;
+  margin-bottom: 0.5rem;
+}

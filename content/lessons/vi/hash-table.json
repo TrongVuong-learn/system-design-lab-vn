@@ -1,0 +1,108 @@
+[
+  {
+    "id": "hash-table",
+    "kind": "hash-table",
+    "version": 1,
+    "status": "beta",
+    "level": "L0",
+    "moduleId": "L0.3",
+    "minutes": 12,
+    "title": "Hai mã sách, sao cùng một ngăn?",
+    "subtitle": "Thử hash table và xử lý va chạm bằng chuỗi khóa.",
+    "objective": "Theo dấu chọn ngăn hash và so khóa đầy đủ; giải thích va chạm không có nghĩa hai khóa giống nhau.",
+    "story": "Thư viện chia danh mục thành các ngăn. Mã sách được đưa vào ngăn theo phần dư khi chia cho số ngăn. Với bốn ngăn, mã 2 và 6 đều vào ngăn 2. Khi tìm sách, chỉ biết số ngăn đã đủ chưa? Hãy thử cả mã 18 chưa có trong danh mục.",
+    "explanation": "Hash table dùng một quy tắc hash để chọn ngăn lưu hoặc tra khóa. Nhiều khóa có thể chọn cùng ngăn, gọi là va chạm. Với cách separate chaining trong bài, ngăn giữ một chuỗi khóa; tìm kiếm vẫn đi qua chuỗi và so khóa đầy đủ. Vì thế cùng ngăn chưa đồng nghĩa cùng sách. Nếu các khóa dồn vào một ngăn thì tìm có thể phải xem tất cả. Hiệu quả phụ thuộc cách phân bố khóa và cấu hình bảng. Thử đổi số ngăn rồi so với duyệt cả danh mục; không coi hash luôn là một bước.",
+    "limit": "Bốn khóa số cố định 2, 6, 10, 14, ngăn đánh số 0…B−1; B = 4 hoặc 8; h(k)=k mod B. Các chain được giữ theo thứ tự chèn. Mục tiêu 2, 14 hoặc 18, không thêm/xóa; bảng dựng trước, không benchmark. Chỉ đếm so khóa, không tính công hash/dựng bảng/đọc bộ nhớ. Không mô phỏng resize, mã hóa, hash bảo mật, open addressing hoặc ghi đồng thời. Không suy bảo đảm O(1) từ bốn khóa hoặc việc tăng số ngăn.",
+    "terms": [
+      {
+        "name": "Bảng băm",
+        "english": "Hash table",
+        "meaning": "Cấu trúc dùng quy tắc hash chọn ngăn, rồi tra khóa trong ngăn đó."
+      },
+      {
+        "name": "Khóa",
+        "english": "Key",
+        "meaning": "Mã dùng để phân biệt và tìm bản ghi; bài dùng mã sách làm khóa."
+      },
+      {
+        "name": "Ngăn",
+        "english": "Bucket",
+        "meaning": "Một vị trí trong bảng; nhiều khóa có thể cùng rơi vào đây."
+      },
+      {
+        "name": "Va chạm",
+        "english": "Collision",
+        "meaning": "Hai khóa khác nhau được đưa vào cùng ngăn của bảng."
+      },
+      {
+        "name": "Lưu chuỗi riêng",
+        "english": "Separate chaining",
+        "meaning": "Mỗi ngăn giữ một chuỗi các bản ghi; khi tra vẫn so khóa đầy đủ."
+      }
+    ],
+    "prediction": {
+      "text": "Bốn ngăn dùng phần dư khi chia mã cho 4. Mã 2 và 6 đều dư 2. Điều đó có nghĩa 2 và 6 là cùng một khóa không?",
+      "options": [
+        "Không; cùng ngăn nhưng vẫn là hai khóa khác nhau.",
+        "Có; số ngăn giống nhau nghĩa là cùng một khóa."
+      ],
+      "answer": 0,
+      "explanation": "Ngăn chỉ thu hẹp nơi tìm. Khi va chạm, chuỗi trong ngăn giữ cả hai khóa; vẫn phải so khóa đầy đủ để chọn đúng bản ghi."
+    },
+    "challenge": {
+      "text": "Tìm mã 18 chưa được lưu. Nó vào ngăn 2 cùng các mã khác. Có thể kết luận tìm thấy chỉ vì ngăn 2 không trống không?",
+      "options": [
+        "Không; cần so khóa đầy đủ, hết chuỗi không có 18 thì kết luận không tìm thấy.",
+        "Có; ngăn được chọn không trống là đã tìm thấy 18."
+      ],
+      "answer": 0,
+      "explanation": "Số ngăn trùng không phải khóa trùng. Tại bốn ngăn, 2/6/10/14 đều ở ngăn 2 nhưng không có 18. Tra hết chuỗi mà không thấy khóa bằng 18 thì trả kết quả không có."
+    },
+    "sources": [
+      {
+        "title": "CMU15-122 Lecture13 (2014), §4–8 — chains, hashing và giới hạn trung bình",
+        "url": "https://www.cs.cmu.edu/afs/cs.cmu.edu/academic/class/15122-s14/www/13-hashtables.pdf"
+      },
+      {
+        "title": "MIT6.006 Fall2011 Lecture8 — hashing with chaining",
+        "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/d3e4d64266d481c74c9e7c15e09999fe_MIT6_006F11_lec08.pdf"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-hash-table",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L0-03",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Tra đúng thẻ sách trong cùng ngăn",
+      "context": "Nhóm thư viện dùng mã sách chọn ngăn để giảm phần danh mục cần xem. Họ nhận ra các mã khác nhau có thể cùng ngăn. Đây là tình huống tự biên soạn.",
+      "requirements": [
+        "Tra đúng mã dù các khóa va chạm.",
+        "So số khóa phải xét khi dùng 4 và 8 ngăn; không kết luận tốc độ ms."
+      ],
+      "activityRef": "hash-table",
+      "experimentSteps": [
+        "Tra mã 14 với 4 ngăn rồi 8 ngăn; so với cách Từng khóa.",
+        "Tra mã 18 và xem vì sao ngăn không trống vẫn có thể trả không tìm thấy."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Nhiều ngăn có thể giảm độ dài chuỗi với bộ khóa này nhưng tốn chỗ; mã2 vẫn chỉ cần một lần so. Bài bỏ qua chi phí dựng bảng và hash."
+      ],
+      "limitations": "Bốn khóa cố định; chưa có insert/delete/resize hoặc số liệu tốc độ thật."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Phần dư có thể giống nhau dù hai số khác nhau không?",
+        "2 chia 4 dư 2; 6 chia 4 cũng dư 2. Khóa đầy đủ vẫn là 2 và 6."
+      ],
+      "challenge": [
+        "Ngăn2 đang chứa những khóa nào? Có khóa 18 thật sự trong đó không?",
+        "Cùng ngăn chỉ cho biết nơi cần tìm. Phải so từng khóa; không khóa nào bằng 18 thì không tìm thấy."
+      ]
+    }
+  }
+]

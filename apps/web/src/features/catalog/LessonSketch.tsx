@@ -1,6 +1,11 @@
 export function LessonSketch({ kind }: { kind: string }) {
   const foundation = (
     {
+      'hash-table': [
+        'Hai mã khác, cùng một ngăn',
+        '2 → ngăn 2 ← 6',
+        'Chọn ngăn rồi vẫn cần so khóa đầy đủ',
+      ],
       'library-search': [
         'Tìm mã sách cuối danh mục',
         '8 mục hoặc 4 mục?',
