@@ -282,3 +282,10 @@ Owner thực thi hiện tại: Codex với review bằng chứng bởi parent. K
 Đã hiện thực và kiểm chứng beta: một bài nhập môn so duyệt từng mục với tìm nhị phân trên mảng mã sách đã sắp tăng. N=8/32/128, mục tiêu đầu/cuối/không có. Mỗi bước chỉ là một lần xem mã và so quan hệ, không ms; linear luôn duyệt đến thấy hoặc hết, chưa tối ưu dừng sớm trên mảng sorted. Binary dùng khoảng inclusive, chọn giữa làm tròn xuống. Checkpoint config/step/version, derive trace; không tin counter nhập. Case CASE-L0-03, hints/before-after, mobile320, keyboard/resume/export và offline mới phải hoạt động. Nguồn tác giả Princeton BinarySearch + CMU linear search. Không đóng toàn module hash/tree/heap/locality/serialization/compression.
 
 Kết quả EDU-16: catalog17 bài và1bài ôn;65unit đạt,24retest dữ liệu đạt sau sửa fixture/readiness. Full run và giới hạn được ghi riêng trong [EDU-16](EDU_16_LIBRARY_SEARCH.md); không đóng L0.3 hoặc pilot.
+
+
+##21. REL-02 — đưa bản học thử lên Vercel (16/10/2026)
+
+Theo yêu cầu người dùng: triển khai17 bài +1bài ôn trên Vercel để tự học và giao AI khác test. Không chờ tìm reviewer con người để phát hành bản học thử; vẫn ghi đúng review là AI/parent và nguồn, không chứng nhận kiến thức tuyệt đối hoặc pilot thật. Không tự thay nội dung, mở auth/sync hoặc đóng36module.
+
+Phạm vi: static hosting/cấu hình cache đúng cho shell/SW và assets; giữ build/runtime khóa, giữ Site cũ nguyên trạng; deploy artifact đã kiểm; xác minh URL/headers/luồng chính. Thêm hướng dẫn AI review dựa trên claim → nguồn sơ cấp → trace → assessment, kèm cách báo lỗi tái hiện. Tiến độ lưu theo origin, cần export/import khi đổi domain. Dependency: tài khoản Vercel của người dùng; không đưa credential vào repo. Chưa deploy nếu chưa có xác nhận của nền tảng.
