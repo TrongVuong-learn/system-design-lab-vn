@@ -334,3 +334,10 @@ Acceptance: pipeline từ chối đổi answer index/assessment/kind/module/vers
 Kiểm chứng: content/coverage/lint đạt; lượt unit đầu79 test đạt nhưng typecheck phát hiện fixture test version2 ngoài literal lesson schema1. Đã sửa test thay đổi baseline thay vì dựng lesson bất hợp lệ. Kết quả cuối ghi sau kiểm tra lại.
 
 Kết quả ENG-03A local: 80 unit/22 files, content/coverage, lint, format và build/typecheck đạt. Không đổi UI/luồng học nên không thêm E2E mới; workflow Quality vẫn chạy regression đầy đủ trước tích hợp. Phần ENG-03 còn lại và toàn giáo trình chưa hoàn thành.
+
+
+## 26. EDU-20 — locality bộ nhớ
+
+In progress: bài L0.3 theo [scope/acceptance](EDU_20_MEMORY_LOCALITY.md). Thử cùng tám ô với một khối cache; không đổi assessment cũ, không đo tốc độ thật. Sau QA bổ sung serialization/compression rồi OS/L1 theo §19. ENG-03A là nền bảo vệ compatibility, chưa thay migration attempt đầy đủ.
+
+Kết quả EDU-20 local: 21bài+1ôn,83unit/23files và24E2E liên quan đạt; ảnh/resume/export-import/offline320/390/1280 đạt. Phần source và review nằm trong EDU-20; chỉ đóng scope sau CI/merge/phát hành, không đóng L0.3.

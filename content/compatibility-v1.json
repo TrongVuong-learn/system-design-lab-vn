@@ -66,11 +66,7 @@
       },
       "challenge": {
         "text": "Một đợt làm xong 40 yêu cầu trong 2 giây. Throughput của cửa sổ đó là bao nhiêu?",
-        "options": [
-          "20 yêu cầu/giây",
-          "40 mili giây",
-          "80 yêu cầu/giây"
-        ],
+        "options": ["20 yêu cầu/giây", "40 mili giây", "80 yêu cầu/giây"],
         "answer": 0,
         "explanation": "40 yêu cầu ÷ 2 giây = 20 yêu cầu/giây. Con số này không cho biết thời gian chờ của từng yêu cầu."
       }
@@ -82,19 +78,13 @@
       "kind": "dns",
       "prediction": {
         "text": "Cache còn hạn giữ địa chỉ .10. Nơi quản lý tên đã đổi sang .20. Tra ngay sẽ thấy gì trong mô hình?",
-        "options": [
-          "Địa chỉ .10 trong cache.",
-          "Luôn thấy .20 ngay."
-        ],
+        "options": ["Địa chỉ .10 trong cache.", "Luôn thấy .20 ngay."],
         "answer": 0,
         "explanation": "Resolver còn dùng bản ghi .10 chưa hết hạn. Nguồn thay đổi không có nghĩa cache được cập nhật ngay."
       },
       "challenge": {
         "text": "Lấy bản ghi lúc giây 0, TTL 5 giây. Lần tra ở đúng giây 5 sẽ làm gì trong mô hình?",
-        "options": [
-          "Dùng cache cũ thêm 5 giây.",
-          "Lấy lại từ nơi quản lý tên."
-        ],
+        "options": ["Dùng cache cũ thêm 5 giây.", "Lấy lại từ nơi quản lý tên."],
         "answer": 1,
         "explanation": "Ở giây 5 thời hạn đã hết. Lần tra này lấy lại nguồn; chỉ trôi thời gian chưa tự gửi truy vấn mới."
       }
@@ -106,10 +96,7 @@
       "kind": "transport",
       "prediction": {
         "text": "TCP nhận mảnh 1 và 3, còn thiếu 2. Ứng dụng đọc ngay phần 3 được không?",
-        "options": [
-          "Chưa; cần chờ phần byte bị thiếu.",
-          "Được, TCP bỏ qua thứ tự."
-        ],
+        "options": ["Chưa; cần chờ phần byte bị thiếu.", "Được, TCP bỏ qua thứ tự."],
         "answer": 0,
         "explanation": "TCP giữ thứ tự luồng byte. Phần 3 có thể được lưu đệm cho đến khi phần 2 được nhận."
       },
@@ -139,11 +126,7 @@
       },
       "challenge": {
         "text": "2.000 học sinh, mỗi người 1 ảnh 100 kB và xem 5 lượt/ngày. Cần lưu bao nhiêu MB ảnh duy nhất?",
-        "options": [
-          "1.000 MB",
-          "200 MB",
-          "10.000 MB"
-        ],
+        "options": ["1.000 MB", "200 MB", "10.000 MB"],
         "answer": 1,
         "explanation": "2.000 × 100 kB ÷ 1.000 = 200 MB lưu. Dữ liệu truyền là 200 × 5 = 1.000 MB/ngày; đây là hai đại lượng khác nhau."
       }
@@ -179,20 +162,13 @@
       "kind": "request",
       "prediction": {
         "text": "Nếu nơi lưu lịch cần thêm thời gian tra cứu, bạn có phải chờ lâu hơn không?",
-        "options": [
-          "Có, vì câu trả lời phải đi qua chặng đó.",
-          "Không, thiết bị tự biết lịch."
-        ],
+        "options": ["Có, vì câu trả lời phải đi qua chặng đó.", "Không, thiết bị tự biết lịch."],
         "answer": 0,
         "explanation": "Máy xử lý đang chờ lịch từ nơi lưu dữ liệu. Khi chặng đó chậm, câu trả lời về muộn hơn."
       },
       "challenge": {
         "text": "Tra thư viện có 3 chặng: gửi 20 ms, tìm sách 80 ms, trả lời 20 ms. Mô hình nối tiếp cần bao lâu?",
-        "options": [
-          "80 ms",
-          "120 ms",
-          "20 ms"
-        ],
+        "options": ["80 ms", "120 ms", "20 ms"],
         "answer": 1,
         "explanation": "Cộng các chặng nối tiếp: 20 + 80 + 20 = 120 ms. Khi tính, luôn giữ đơn vị thời gian."
       }
@@ -204,10 +180,7 @@
       "kind": "balance",
       "prediction": {
         "text": "Nơi lưu lịch chỉ làm được 4 lượt/giây. Thêm 3 máy xử lý nhưng vẫn hỏi nơi đó có vượt 4 lượt/giây không?",
-        "options": [
-          "Có, vì máy nhiều hơn.",
-          "Chưa, vì nơi lưu lịch vẫn giới hạn công suất."
-        ],
+        "options": ["Có, vì máy nhiều hơn.", "Chưa, vì nơi lưu lịch vẫn giới hạn công suất."],
         "answer": 1,
         "explanation": "Thêm máy ở trước không thay đổi công suất của nơi lưu dữ liệu dùng chung."
       },
@@ -228,19 +201,13 @@
       "kind": "cache",
       "prediction": {
         "text": "Lịch chính đã là 205, cache còn 201 và chưa hết hạn. Đọc từ cache thấy phòng nào?",
-        "options": [
-          "Phòng 201",
-          "Phòng 205"
-        ],
+        "options": ["Phòng 201", "Phòng 205"],
         "answer": 0,
         "explanation": "Trang đọc bản ghi hiện có là 201. Nguồn đã đổi không có nghĩa mọi bản sao đổi ngay."
       },
       "challenge": {
         "text": "Yêu cầu: phòng mới phải hiện trong tối đa một phút. Giữ cache cũ năm phút mà không cập nhật có đạt không?",
-        "options": [
-          "Có, vì cache đọc nhanh.",
-          "Không; dữ liệu có thể cũ quá một phút."
-        ],
+        "options": ["Có, vì cache đọc nhanh.", "Không; dữ liệu có thể cũ quá một phút."],
         "answer": 1,
         "explanation": "Tốc độ và độ mới là hai yêu cầu khác nhau. Một bản ghi nhanh nhưng cũ năm phút không đáp ứng giới hạn một phút."
       }
@@ -252,20 +219,13 @@
       "kind": "queue",
       "prediction": {
         "text": "Mỗi giây đến 6 việc, một worker làm xong 2 việc. Hàng chờ có tăng không?",
-        "options": [
-          "Có, nếu tải này kéo dài.",
-          "Không, vì đã có hàng đợi."
-        ],
+        "options": ["Có, nếu tải này kéo dài.", "Không, vì đã có hàng đợi."],
         "answer": 0,
         "explanation": "Mỗi giây có thêm 4 việc chưa được xử lý. Queue giữ chúng nhưng không làm thay worker."
       },
       "challenge": {
         "text": "Bài mới: đến 8 việc/giây, mỗi worker làm 2 việc/giây. Ít nhất bao nhiêu worker để hàng chờ không tiếp tục tăng trong mô hình?",
-        "options": [
-          "2 worker",
-          "4 worker",
-          "1 worker"
-        ],
+        "options": ["2 worker", "4 worker", "1 worker"],
         "answer": 1,
         "explanation": "4 × 2 = 8 việc/giây, bằng tốc độ đến. Cần công suất lớn hơn tốc độ đến để giảm một backlog đã có."
       }
@@ -277,19 +237,13 @@
       "kind": "replica",
       "prediction": {
         "text": "Lag là 3 giây. Đổi nguồn sang 205 rồi đọc bản sao ngay: có thể thấy 201 không?",
-        "options": [
-          "Có, thay đổi chưa đến bản sao.",
-          "Không, mọi bản sao đổi tức thì."
-        ],
+        "options": ["Có, thay đổi chưa đến bản sao.", "Không, mọi bản sao đổi tức thì."],
         "answer": 0,
         "explanation": "Sao chép cần 3 giây mô phỏng. Ngay sau ghi, bản sao vẫn giữ giá trị trước đó."
       },
       "challenge": {
         "text": "Vừa đổi phòng và cần xem ngay kết quả mới. Trong mô hình này, nên đọc đâu?",
-        "options": [
-          "Bản sao đang trễ.",
-          "Nguồn chính vừa được cập nhật."
-        ],
+        "options": ["Bản sao đang trễ.", "Nguồn chính vừa được cập nhật."],
         "answer": 1,
         "explanation": "Nguồn chính đã nhận thay đổi; bản sao có thể chưa nhận. Hệ thống thực tế cần định nghĩa bảo đảm đọc sau ghi rõ ràng."
       }
@@ -301,19 +255,13 @@
       "kind": "design",
       "prediction": {
         "text": "Nếu cache giảm lượt đọc nguồn, nó có tự làm xong việc gửi thông báo không?",
-        "options": [
-          "Có, cache giải quyết mọi chỗ chậm.",
-          "Không, việc gửi thông báo cần worker."
-        ],
+        "options": ["Có, cache giải quyết mọi chỗ chậm.", "Không, việc gửi thông báo cần worker."],
         "answer": 1,
         "explanation": "Hai loại công việc có đường xử lý khác nhau. Giải pháp cho đọc lịch không tự tăng tốc gửi thông báo."
       },
       "challenge": {
         "text": "Thiết kế đạt tải đọc nhưng dữ liệu cache cũ quá mức cho phép. Có nên coi thiết kế đã đạt tất cả yêu cầu không?",
-        "options": [
-          "Chưa; cần kiểm tra và đáp ứng độ mới.",
-          "Có, miễn số việc làm xong cao."
-        ],
+        "options": ["Chưa; cần kiểm tra và đáp ứng độ mới.", "Có, miễn số việc làm xong cao."],
         "answer": 0,
         "explanation": "Hiệu năng là một yêu cầu. Một thiết kế còn cần đúng dữ liệu, độ mới, chi phí và hành vi khi lỗi theo đề bài."
       }
@@ -478,13 +426,33 @@
       },
       "challenge": {
         "text": "Ảnh 1.000 kB mất 1.000 ms truyền, RTT 100 ms, xử lý 50 ms. Nếu truyền nhanh gấp đôi, tổng thời gian trong mô hình là bao nhiêu?",
-        "options": [
-          "575 ms",
-          "650 ms",
-          "500 ms"
-        ],
+        "options": ["575 ms", "650 ms", "500 ms"],
         "answer": 1,
         "explanation": "Phần truyền từ 1.000 xuống 500 ms. Tổng mới là 100 + 50 + 500 = 650 ms, không phải một nửa của 1.150 ms."
+      }
+    },
+    {
+      "lessonId": "locality",
+      "version": 1,
+      "moduleId": "L0.3",
+      "kind": "locality",
+      "prediction": {
+        "text": "Cache trống, chỉ giữ một khối 4 ô. Sau đọc ô 0, đọc ô 1 có phải nạp lại khối không?",
+        "options": [
+          "Không; ô 0 và 1 nằm trong khối 0–3 vừa nạp.",
+          "Có; mỗi ô luôn cần một lần nạp riêng."
+        ],
+        "answer": 0,
+        "explanation": "Đọc ô 0 nạp cả khối 0–3. Ô 1 đã có trong khối đó, nên lần đọc tiếp trúng cache."
+      },
+      "challenge": {
+        "text": "Cùng cache một khối 4 ô, đọc 0,4,1,5,2,6,3,7 từ cache trống cần bao nhiêu lượt nạp khối?",
+        "options": [
+          "8 lượt; mỗi lần chuyển sang khối còn lại, thay khối đang giữ.",
+          "2 lượt; đã nạp hai khối thì cả hai luôn ở lại cache."
+        ],
+        "answer": 0,
+        "explanation": "Cache chỉ giữ một khối. Khối 0–3 và 4–7 liên tục thay nhau, nên cả 8 lượt đều miss. Nếu đọc 0–7 liền nhau thì chỉ nạp 2 lượt trong cùng cấu hình."
       }
     }
   ]

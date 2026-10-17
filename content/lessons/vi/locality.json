@@ -1,0 +1,104 @@
+[
+  {
+    "id": "locality",
+    "kind": "locality",
+    "version": 1,
+    "status": "beta",
+    "level": "L0",
+    "moduleId": "L0.3",
+    "minutes": 12,
+    "title": "Vì sao đọc các ô gần nhau lại có ích?",
+    "subtitle": "Thử cùng tám ô, đổi thứ tự đọc và xem khối nào phải nạp lại.",
+    "objective": "Theo dấu một cache chỉ giữ một khối, phân biệt dùng lại cùng ô và đọc ô gần nhau; giải thích vì sao thứ tự đọc ảnh hưởng số lần nạp.",
+    "story": "Em đang đọc tám mục trong một danh sách. Máy có một chỗ giữ dữ liệu gần nơi xử lý, gọi là cache. Mỗi lần cần một ô chưa có, máy mang cả khối chứa ô đó vào. Nếu đọc 0 rồi 1, khối vừa mang vào có giúp ích không? Nếu đọc 0 rồi 4 rồi 1 thì sao?",
+    "explanation": "Locality mô tả xu hướng dùng lại dữ liệu vừa đọc hoặc dùng các ô gần nhau. Trong thí nghiệm chỉ có một chỗ giữ khối: với khối 4 ô, ô 0–3 thuộc cùng khối và ô 4–7 thuộc khối khác. Nếu ô cần đọc ở trong khối đang giữ thì có cache hit; nếu không thì có cache miss, phải nạp khối mới và thay khối cũ. Đọc lại ô 0 tận dụng việc dùng lại cùng dữ liệu; đọc lần lượt 0,1,2,3 tận dụng dữ liệu gần nhau. Đây là cache bộ nhớ giả định, không phải cache lịch học từ máy chủ trong bài trước.",
+    "limit": "Có tám ô 0–7, một khối trong cache, ban đầu trống. Khối chứa 1 hoặc 4 ô và căn theo bội kích thước khối. Mỗi bước đọc một ô; miss nạp cả khối, thay khối cũ. Đếm lượt, không đo thời gian hoặc byte; không viết/prefetch/nhiều tầng cache. Khi đổi khối từ 1 lên 4 ô, sức chứa cũng tăng; không suy ra kết quả cho cùng dung lượng cache. Hai thứ tự liền nhau/xen kẽ đều đọc đủ cùng tám ô một lần, còn lặp ô 0 là bộ truy cập khác.",
+    "terms": [
+      {
+        "name": "Tính cục bộ",
+        "english": "Locality",
+        "meaning": "Xu hướng truy cập lại dữ liệu gần đây hoặc dữ liệu ở vị trí gần nhau."
+      },
+      {
+        "name": "Cục bộ thời gian",
+        "english": "Temporal locality",
+        "meaning": "Dùng lại cùng dữ liệu trong khoảng thời gian gần nhau; bài thử đọc ô 0 nhiều lần."
+      },
+      {
+        "name": "Cục bộ không gian",
+        "english": "Spatial locality",
+        "meaning": "Dùng các vị trí gần nhau; dữ liệu đi kèm trong cùng khối có thể được dùng tiếp."
+      },
+      {
+        "name": "Khối cache",
+        "english": "Cache block",
+        "meaning": "Nhóm ô được nạp cùng nhau; mô hình chỉ giữ một nhóm tại một thời điểm."
+      },
+      {
+        "name": "Đọc trúng cache",
+        "english": "Cache hit",
+        "meaning": "Ô cần đọc nằm trong khối hiện có nên không cần nạp khối mới."
+      }
+    ],
+    "prediction": {
+      "text": "Cache trống, chỉ giữ một khối 4 ô. Sau đọc ô 0, đọc ô 1 có phải nạp lại khối không?",
+      "options": [
+        "Không; ô 0 và 1 nằm trong khối 0–3 vừa nạp.",
+        "Có; mỗi ô luôn cần một lần nạp riêng."
+      ],
+      "answer": 0,
+      "explanation": "Đọc ô 0 nạp cả khối 0–3. Ô 1 đã có trong khối đó, nên lần đọc tiếp trúng cache."
+    },
+    "challenge": {
+      "text": "Cùng cache một khối 4 ô, đọc 0,4,1,5,2,6,3,7 từ cache trống cần bao nhiêu lượt nạp khối?",
+      "options": [
+        "8 lượt; mỗi lần chuyển sang khối còn lại, thay khối đang giữ.",
+        "2 lượt; đã nạp hai khối thì cả hai luôn ở lại cache."
+      ],
+      "answer": 0,
+      "explanation": "Cache chỉ giữ một khối. Khối 0–3 và 4–7 liên tục thay nhau, nên cả 8 lượt đều miss. Nếu đọc 0–7 liền nhau thì chỉ nạp 2 lượt trong cùng cấu hình."
+    },
+    "sources": [
+      {
+        "title": "CMU 15-213 Spring2014 Recitation7, slides8–14 — locality, cache blocks and misses",
+        "url": "https://www.cs.cmu.edu/afs/cs/academic/class/15213-s14/www/recitations/rec7.pdf"
+      }
+    ],
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Xem một khối chứa những ô nào.",
+        "Khối đầu gồm 0,1,2,3. Đọc 0 đã mang cả nhóm vào."
+      ],
+      "challenge": [
+        "Cache đang giữ được một hay hai khối?",
+        "0 và 4 ở hai khối khác nhau; mỗi lần đổi khối thì khối cũ bị thay."
+      ]
+    },
+    "caseStudy": {
+      "id": "case-locality",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L0-03",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Đọc danh sách tám mục",
+      "context": "Một nhóm làm ứng dụng danh sách cho lớp, dùng mô hình tám ô để thử thứ tự truy cập. Đây là tình huống tự biên soạn, không benchmark máy thật.",
+      "requirements": [
+        "So hai thứ tự đọc cùng đủ tám ô, giữ nguyên khối 4 ô.",
+        "Tách số lần nạp khỏi thời gian chạy thực tế."
+      ],
+      "activityRef": "locality",
+      "experimentSteps": [
+        "Đọc hết theo thứ tự liền nhau, ghi số lần nạp.",
+        "Đổi sang xen kẽ, đọc hết và so với lượt trước. Sau đó thử lặp ô 0 để thấy dùng lại cùng dữ liệu."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Thứ tự liền nhau giảm nạp trong cấu hình này; thay thứ tự truy cập trong chương trình thật còn phải giữ đúng kết quả. Tăng kích thước khối cũng đổi sức chứa của cache một khối nên không phải so cùng dung lượng."
+      ],
+      "limitations": "Chỉ đọc, một khối, tám lượt; không suy ra tốc độ CPU hoặc hành vi mọi loại cache."
+    }
+  }
+]

@@ -1,3 +1,4 @@
+import { LocalityLab } from './LocalityLab';
 import { PriorityHeapLab } from './PriorityHeapLab';
 import { SearchTreeLab } from './SearchTreeLab';
 import { HashTableLab } from './HashTableLab';
@@ -49,6 +50,7 @@ export function Lab(original: LabProps) {
     'hash-table',
     'search-tree',
     'priority-heap',
+    'locality',
   ].includes(kind);
   const props = extended
     ? {
@@ -90,6 +92,8 @@ export function Lab(original: LabProps) {
       return <CapacityLab {...props} />;
     case 'http':
       return <HttpLab {...props} />;
+    case 'locality':
+      return <LocalityLab {...props} />;
     case 'priority-heap':
       return <PriorityHeapLab {...props} />;
     case 'search-tree':
