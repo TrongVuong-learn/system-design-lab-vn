@@ -49,6 +49,7 @@ const order = [
   'cpu-io',
   'library-search',
   'hash-table',
+  'search-tree',
   'metrics',
   'cache',
   'dns',

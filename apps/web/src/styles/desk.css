@@ -1122,3 +1122,36 @@
   text-align: left;
   margin-bottom: 0.5rem;
 }
+
+.search-tree-figure {
+  margin: 1.25rem 0;
+}
+.search-tree-figure svg {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  margin-inline: auto;
+}
+.search-tree-figure line {
+  stroke: #65718a;
+  stroke-width: 2;
+}
+.search-tree-figure circle {
+  fill: #fff;
+  stroke: #65718a;
+  stroke-width: 2;
+}
+.search-tree-figure circle.examined {
+  fill: #fff0a8;
+  stroke: #17233d;
+  stroke-width: 3;
+}
+.search-tree-figure text {
+  fill: #17233d;
+  font-size: 16px;
+  font-weight: 600;
+}
+.search-tree-figure figcaption {
+  margin-top: 0.75rem;
+}

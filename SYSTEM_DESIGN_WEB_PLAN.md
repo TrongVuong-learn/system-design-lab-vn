@@ -1,6 +1,6 @@
 # Kế hoạch website học System Design tương tác
 
-Ngày lập: 11/10/2026. Phiên bản 14 — 17/10/2026: chốt phi thương mại và cải thiện phản hồi/gợi ý theo EDU-10; giữ định hướng toàn diện theo level, học sinh cấp 3, mobile-first và web trước app. Trạng thái: web beta có 18 bài nhập môn; mini-case 18 bài và gói offline beta đã hiện thực; phần giáo trình đầy đủ/case module còn theo roadmap, chưa qua pilot học sinh thật.
+Ngày lập: 11/10/2026. Phiên bản 15 — 17/10/2026: chốt phi thương mại và cải thiện phản hồi/gợi ý theo EDU-10; giữ định hướng toàn diện theo level, học sinh cấp 3, mobile-first và web trước app. Trạng thái: web beta có 19 bài nhập môn; mini-case 19 bài và gói offline beta đã hiện thực; phần giáo trình đầy đủ/case module còn theo roadmap, chưa qua pilot học sinh thật.
 
 Tên làm việc: **System Design Lab**.
 
@@ -335,3 +335,5 @@ Bài cpu-io/L0.2 nối từ concurrency, cho so worker khi có chờ dữ liệu
 EDU-16 thêm tìm mã sách L0.3, nối từ request. Mảng đã sắp, số mục xem tách khỏi ms; acceptance/bằng chứng tại [EDU-16](docs/delivery/EDU_16_LIBRARY_SEARCH.md). Không đóng toàn bộ module cấu trúc dữ liệu.
 
 EDU-17 nối bài tìm mã sách bằng hash table và va chạm; so khóa đầy đủ, không suy O(1) từ mô hình bốn khóa. [Phạm vi và kiểm chứng](docs/delivery/EDU_17_HASH_COLLISIONS.md). Các phần còn lại của L0.3 vẫn theo roadmap.
+
+EDU-18 thêm cây tìm kiếm nhị phân và hình dạng; nguồn, model và kiểm chứng tại [EDU-18](docs/delivery/EDU_18_SEARCH_TREE.md). Heap, locality và phần còn lại của L0.3 vẫn mở.

@@ -1,6 +1,6 @@
 # Kế hoạch triển khai và nghiệm thu
 
-Trạng thái: roadmap và ước lượng; web beta có 18 bài nhập môn, các gate hoàn thiện level còn mở. Trạng thái thực thi theo [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md); các gate chưa đạt vẫn còn mở. Phạm vi kiến thức theo [CURRICULUM_MAP.md](../../CURRICULUM_MAP.md), tiêu chuẩn học theo [TEACHING_GUIDE.md](../../TEACHING_GUIDE.md).
+Trạng thái: roadmap và ước lượng; web beta có 19 bài nhập môn, các gate hoàn thiện level còn mở. Trạng thái thực thi theo [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md); các gate chưa đạt vẫn còn mở. Phạm vi kiến thức theo [CURRICULUM_MAP.md](../../CURRICULUM_MAP.md), tiêu chuẩn học theo [TEACHING_GUIDE.md](../../TEACHING_GUIDE.md).
 
 Quy trình thực hiện từng task, Git/review, release và quản lý thư mục áp dụng theo [WORKFLOW.md](WORKFLOW.md) và [CONTRIBUTING.md](../../CONTRIBUTING.md).
 
@@ -309,3 +309,5 @@ EDU-17 đã tích hợp qua PR #1, CI đầy đủ 195 E2E đạt/1 skip và ph�
 Task Ready ngày 17/10/2026, sau hash table; owner Codex. Bài nối library-search: bảy khóa 2/4/6/8/10/12/14, BST cân đối dựng sẵn so với cây lệch phải dựng sẵn. Tra 2/14/9 theo nhánh trái nhỏ hơn, phải lớn hơn; khóa không có dừng tại nhánh trống. Đếm một nút đã xét, không primitive comparison/ms. Không thao tác chèn/xóa/cân bằng, không đồng nhất BST với B-tree/index database hoặc heap. Case thư viện CASE-L0-03, nguồn CMU Lecture15 §3.1/4/5. Core thuần; checkpoint shape/target/step/modelVersion, derive path, bỏ counter nhập; không đổi 18 assessment cũ. UI sơ đồ nhỏ cân đối hoặc chuỗi dọc có nhãn nhánh phải, trace chữ, before/after và hints; mobile320/390, keyboard, resume/export/import/offline.
 
 Acceptance: fixtures độc lập cả 6 preset/mọi prefix; invariant BST toàn subtree, tất cả 7 khóa xuất hiện đúng một lần; invalid/version/immutability; E2E bốn browser + responsive/offline, xem ảnh nội dung thật. Cập nhật nguồn chính, commit/PR/CI/merge master rồi Vercel auto-deploy; xác minh READY/source SHA và smoke. Không đóng toàn L0.3 hoặc pilot. Heap/locality và các cấu trúc dữ liệu sâu vẫn còn mở.
+
+Kết quả local EDU-18: source 19 bài + 1 bài ôn; content/build/lint và 73 unit/20files đạt; 24 E2E liên quan đạt. Ảnh và export/import/offline 320/390/1280 đã kiểm. CI/merge/deploy cập nhật theo bằng chứng thực tế trong [báo cáo](EDU_18_SEARCH_TREE.md); không đóng L0.3 hoặc pilot.
