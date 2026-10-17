@@ -232,6 +232,14 @@
       "revision": "Fall2026 Lecture15 Binary Search Trees",
       "checkedAt": "2026-10-17",
       "attribution": "Frank Pfenning, André Platzer, Rob Simmons, Iliano Cervesato / CMU; diễn giải, ví dụ và hình riêng, không sao chép mã/hình"
+    },
+    {
+      "id": "source-cmu-heap",
+      "title": "CMU 15-122 Fall2025 Lecture25 §1/3–7",
+      "url": "https://www.cs.cmu.edu/~15122-archive/n25/handouts/lectures/25-pq.pdf",
+      "revision": "Fall2025 Lecture25 Priority Queues",
+      "checkedAt": "2026-10-17",
+      "attribution": "Frank Pfenning, Rob Simmons / CMU; ví dụ, diễn giải, code và hình riêng, không sao chép nguồn"
     }
   ],
   "competencies": [
@@ -403,6 +411,13 @@
       "id": "l0-search-tree-intro",
       "moduleId": "L0.3",
       "outcome": "Theo dấu tra khóa trong cây tìm kiếm nhị phân; giải thích hình dạng có thể làm đường tìm dài hơn.",
+      "depth": "introductory",
+      "planRefs": ["EDU-04", "CASE-L0-03"]
+    },
+    {
+      "id": "l0-priority-heap-intro",
+      "moduleId": "L0.3",
+      "outcome": "Theo dấu lấy việc ưu tiên từ min-heap, phân biệt heap-order với mảng đã sắp và quy tắc FIFO.",
       "depth": "introductory",
       "planRefs": ["EDU-04", "CASE-L0-03"]
     }
@@ -969,6 +984,34 @@
         "status": "beta-checked",
         "evidence": "docs/delivery/EDU_18_SEARCH_TREE.md",
         "caseId": "case-search-tree",
+        "revision": 1
+      }
+    },
+    {
+      "lessonId": "priority-heap",
+      "revision": 1,
+      "competencyIds": ["l0-priority-heap-intro"],
+      "prerequisiteIds": ["search-tree"],
+      "claims": [
+        {
+          "text": "Priority queue chọn theo mức; min-heap có shape đầy tầng trái trước, cha không lớn hơn con, gốc nhỏ nhất nhưng mảng theo tầng chưa sắp toàn cục; removal thay bằng cuối và sift-down với con nhỏ hơn.",
+          "sourceIds": ["source-cmu-heap"]
+        }
+      ],
+      "review": {
+        "reviewer": "Codex parent — nguồn CMU và fixtures/invariant heap độc lập",
+        "reviewerType": "agent",
+        "date": "2026-10-17",
+        "status": "beta-checked",
+        "evidence": "docs/delivery/EDU_19_PRIORITY_HEAP.md"
+      },
+      "caseReview": {
+        "reviewer": "Codex parent — nguồn CMU và fixtures/invariant heap độc lập",
+        "reviewerType": "agent",
+        "date": "2026-10-17",
+        "status": "beta-checked",
+        "evidence": "docs/delivery/EDU_19_PRIORITY_HEAP.md",
+        "caseId": "case-priority-heap",
         "revision": 1
       }
     }

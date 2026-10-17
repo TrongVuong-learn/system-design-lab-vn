@@ -1,4 +1,4 @@
-export const ENGINE_VERSION = '1.9.0';
+export const ENGINE_VERSION = '1.10.0';
 export interface CacheState {
   time: number;
   source: number;
@@ -258,3 +258,5 @@ export { librarySearch, SEARCH_MODEL_VERSION } from './library-search';
 export { hashTable, HASH_MODEL_VERSION } from './hash-table';
 
 export { searchTree, TREE_MODEL_VERSION, type SearchNode } from './search-tree';
+
+export { priorityHeap, HEAP_MODEL_VERSION, type HeapJob, type HeapRemoval } from './priority-heap';

@@ -1,0 +1,104 @@
+[
+  {
+    "id": "priority-heap",
+    "kind": "priority-heap",
+    "version": 1,
+    "status": "beta",
+    "level": "L0",
+    "moduleId": "L0.3",
+    "minutes": 14,
+    "title": "Việc đến trước có luôn được lấy trước?",
+    "subtitle": "So FIFO với min-heap trong hàng việc in của ngày hội.",
+    "objective": "Theo dấu lấy việc ưu tiên từ min-heap, phân biệt heap-order với mảng đã sắp và quy tắc FIFO.",
+    "story": "Nhóm ngày hội có bảy việc in A đến G. Việc A vào trước, mức 4; thông báo đổi phòng F vào sau nhưng được nhóm gán mức 1. Quy tắc trong bài là số nhỏ được ưu tiên hơn. Nếu mọi việc đã chờ sẵn, nên lấy A hay F trước? Hãy thử cả hai cách chọn.",
+    "explanation": "FIFO chọn việc đến trước. Hàng đợi ưu tiên chọn theo mức đã quy định; bài dùng min-heap để giữ việc có số nhỏ nhất ở gốc. Heap có dạng cây nhị phân được điền từng tầng từ trái sang phải, và số ở cha không lớn hơn số ở con. Khi lấy gốc, đưa việc ở nút cuối lên thay rồi đổi với con nhỏ hơn khi cần để khôi phục quy tắc. Mảng lưu theo tầng của heap chưa nhất thiết tăng dần: 5 có thể đứng trước 2 ở hai nhánh khác nhau. Heap không dùng quy tắc trái nhỏ/phải lớn của BST.",
+    "limit": "Bảy việc A4/B7/C2/D6/E5/F1/G3 vào đủ trước khi lấy; số nhỏ ưu tiên trước, không trùng mức. Heap ban đầu được dựng từ thứ tự đến bằng chèn và đẩy lên; UI chỉ cho lấy việc, không chèn thêm. Một bước là một lần lấy và sửa heap hoàn tất, không phải một phép so hoặc ms. Trace chữ kể bước thay gốc/đổi chỗ; sơ đồ chỉ hiện trạng thái heap đã sửa xong. Chưa có việc mới, đổi ưu tiên, các việc cùng mức, bảo đảm công bằng, nhiều máy in, lỗi hoặc thời gian in. Không kết luận hiệu năng thật từ bảy việc.",
+    "terms": [
+      {
+        "name": "Hàng đợi ưu tiên",
+        "english": "Priority queue",
+        "meaning": "Quy tắc chọn phần tử tiếp theo theo mức ưu tiên, thay vì luôn theo thứ tự đến."
+      },
+      {
+        "name": "Heap nhỏ nhất",
+        "english": "Min-heap",
+        "meaning": "Cây nhị phân điền từng tầng từ trái sang phải, cha không lớn hơn con; số nhỏ nhất ở gốc."
+      },
+      {
+        "name": "Đến trước ra trước",
+        "english": "FIFO",
+        "meaning": "First in, first out: việc vào hàng trước được lấy trước."
+      },
+      {
+        "name": "Đẩy xuống",
+        "english": "Sift-down",
+        "meaning": "Sau thay gốc, đổi với con nhỏ hơn khi cha còn lớn hơn con, rồi xét tiếp xuống dưới."
+      },
+      {
+        "name": "Mảng theo tầng",
+        "english": "Level-order array",
+        "meaning": "Lưu nút từ gốc, từng tầng từ trái sang phải; không đồng nghĩa đã sắp theo mức ưu tiên."
+      }
+    ],
+    "prediction": {
+      "text": "Bảy việc đã chờ sẵn. A vào trước, mức 4; F vào sau, mức 1. Với min-heap và quy tắc số nhỏ ưu tiên trước, việc nào ra trước?",
+      "options": [
+        "F mức 1; min-heap chọn theo mức chứ không theo thứ tự đến.",
+        "A mức 4; mọi hàng đợi đều luôn lấy việc đến trước."
+      ],
+      "answer": 0,
+      "explanation": "Min-heap đặt số nhỏ nhất ở gốc nên lấy F mức 1 trước. Nếu đổi sang FIFO trong cùng tình huống thì A mức 4 ra trước."
+    },
+    "challenge": {
+      "text": "Mảng theo tầng ban đầu là F1, E5, C2, B7, D6, A4, G3. Sau F1, có thể lấy ngay E5 vì nó đứng thứ hai trong mảng ban đầu không?",
+      "options": [
+        "Không; phải sửa heap sau khi lấy gốc. Việc kế tiếp là C2, không suy từ vị trí thứ hai cũ.",
+        "Có; heap là mảng đã sắp tăng nên cứ đọc lần lượt từ trái sang phải."
+      ],
+      "answer": 0,
+      "explanation": "Mảng heap chỉ giữ quy tắc cha không lớn hơn con. Sau lấy F1, G3 từ cuối lên gốc rồi đổi với C2; gốc mới là C2. E5 không bắt buộc nhỏ hơn nút ở nhánh bên cạnh."
+    },
+    "sources": [
+      {
+        "title": "CMU 15-122 Fall2025 Lecture25 §1/3–7 — priority queues và binary heap",
+        "url": "https://www.cs.cmu.edu/~15122-archive/n25/handouts/lectures/25-pq.pdf"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-priority-heap",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L0-03",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Chọn việc in cho ngày hội",
+      "context": "Nhóm gán mức 1 cho thông báo đổi phòng F và mức 4 cho tờ giới thiệu A. Bảy việc đã tới trước lượt chọn đầu. Đây là tình huống tự biên soạn, không đo hệ thống máy in thật.",
+      "requirements": [
+        "So sánh ai ra trước khi chọn FIFO hoặc số ưu tiên nhỏ nhất.",
+        "Xem vì sao vị trí trong mảng heap không phải toàn bộ thứ tự lấy việc."
+      ],
+      "activityRef": "priority-heap",
+      "experimentSteps": [
+        "Lấy một việc bằng min-heap, mở lịch sử để xem thay gốc và đổi chỗ.",
+        "Lấy hết rồi bắt đầu lại bằng FIFO; so thứ tự ID và mức, không so thời gian in."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "FIFO tôn trọng thứ tự đến; hàng đợi ưu tiên chọn theo mức đã gán. Lựa chọn phụ thuộc yêu cầu, không có quy tắc luôn tốt hơn. Bộ việc cố định không cho thấy việc ưu tiên thấp chờ mãi khi việc ưu tiên cao đến liên tục."
+      ],
+      "limitations": "Bảy việc và mức khác nhau; không đổi mức, thêm việc, ngắt việc đang in, thời gian chờ hoặc bảo đảm công bằng."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Điều quyết định của min-heap là thứ tự đến hay số ưu tiên?",
+        "Bài quy định số nhỏ ưu tiên hơn: so mức 1 của F với mức 4 của A."
+      ],
+      "challenge": [
+        "Hai nút ở hai nhánh khác nhau có buộc tăng dần khi đọc theo tầng không?",
+        "Mảng ban đầu có 5 đứng trước 2. Khi lấy gốc phải đưa cuối lên thay rồi sửa heap; gốc kế tiếp là C2."
+      ]
+    }
+  }
+]

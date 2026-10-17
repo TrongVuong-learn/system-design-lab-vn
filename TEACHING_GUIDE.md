@@ -1,6 +1,6 @@
 # Chuẩn giảng dạy System Design dễ hiểu
 
-Phiên bản 3 — 17/10/2026; chuẩn hóa mini-case từng bài và case tổng hợp. Áp dụng cho toàn bộ [giáo trình](CURRICULUM_MAP.md) và [kế hoạch website](SYSTEM_DESIGN_WEB_PLAN.md). Đây là chuẩn biên soạn và bài mẫu. Web hiện có 19 bài beta, mỗi bài có mini-case, cùng một bài ôn tổng hợp; chưa có kết quả thử nghiệm học sinh.
+Phiên bản 3 — 17/10/2026; chuẩn hóa mini-case từng bài và case tổng hợp. Áp dụng cho toàn bộ [giáo trình](CURRICULUM_MAP.md) và [kế hoạch website](SYSTEM_DESIGN_WEB_PLAN.md). Đây là chuẩn biên soạn và bài mẫu. Web hiện có 20 bài beta, mỗi bài có mini-case, cùng một bài ôn tổng hợp; chưa có kết quả thử nghiệm học sinh.
 
 ## 1. Người học và mục tiêu
 
@@ -148,7 +148,7 @@ Dùng [bộ EDU-02](docs/research/student-pilot/README.md) để điều phối 
 
 ## Chuẩn tình huống áp dụng — EDU-09
 
-Áp dụng cho 19 bài beta hiện có và mọi bài mới. Mỗi bài có một mini-case trong chặng Áp dụng, mỗi module có họ tình huống và bài tổng hợp, mỗi level có capstone. Danh mục, độ khó, hoạt động và kế hoạch triển khai được quản lý duy nhất tại [EDU-09](docs/delivery/EDU_09_CASE_STUDY_PLAN.md).
+Áp dụng cho 20 bài beta hiện có và mọi bài mới. Mỗi bài có một mini-case trong chặng Áp dụng, mỗi module có họ tình huống và bài tổng hợp, mỗi level có capstone. Danh mục, độ khó, hoạt động và kế hoạch triển khai được quản lý duy nhất tại [EDU-09](docs/delivery/EDU_09_CASE_STUDY_PLAN.md).
 
 1. **Vấn đề có người dùng cụ thể:** ai đang làm gì, gặp khó khăn nào; mở bằng lời phổ thông. Tình huống áp dụng thay ít nhất một ràng buộc hoặc ngữ cảnh so với ví dụ có hướng dẫn, không kể lại y nguyên đoạn mở bài.
 2. **Yêu cầu kiểm tra được:** điều cần đạt, số liệu có đơn vị, phạm vi thời gian, invariant nếu có; nhập môn chỉ vài ràng buộc chính. Giải thích ký hiệu và đơn vị trước khi dùng.
@@ -159,7 +159,7 @@ Dùng [bộ EDU-02](docs/research/student-pilot/README.md) để điều phối 
 7. **Dễ học trên mobile:** từng quyết định một, sơ đồ có bản chữ, chạm/bàn phím dùng được, từ mới giải thích tại chỗ theo chuẩn hiện hành. Có thể rời bài rồi tiếp tục từ dữ liệu đã lưu; bài tổng hợp dài chia chặng. Không nhồi mọi chủ đề của một module vào một mini-case.
 8. **Nghiệm thu đúng mức:** đủ case không có nghĩa đủ mọi năng lực. Mỗi bài liên kết năng lực, hoạt động/trace, đánh giá, review và version; module cần coverage cùng bài tổng hợp. AI mô phỏng học sinh hỗ trợ QA, không thay review kỹ thuật hoặc pilot thật.
 
-Đợt EDU-09 ban đầu giữ ID/đáp án/ý nghĩa challenge và progress của 12 bài tại thời điểm triển khai; nếu đổi mục tiêu hoặc đáp án cần thiết kế version/migration trước khi phát hành. Rubric sâu và evidence mới không tự diễn giải lại trạng thái hoàn thành cũ. Renderer, case schema và mini-case của 19 bài đã hiện thực; họ case module và capstone còn theo EDU-09. Xem trạng thái hiện hành tại README và IMPLEMENTATION_STATUS.
+Đợt EDU-09 ban đầu giữ ID/đáp án/ý nghĩa challenge và progress của 12 bài tại thời điểm triển khai; nếu đổi mục tiêu hoặc đáp án cần thiết kế version/migration trước khi phát hành. Rubric sâu và evidence mới không tự diễn giải lại trạng thái hoàn thành cũ. Renderer, case schema và mini-case của 20 bài đã hiện thực; họ case module và capstone còn theo EDU-09. Xem trạng thái hiện hành tại README và IMPLEMENTATION_STATUS.
 
 ## Chuẩn phản hồi thao tác và gợi ý — EDU-10
 
