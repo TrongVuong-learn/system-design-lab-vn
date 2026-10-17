@@ -80,3 +80,7 @@ Gói tải offline: [phạm vi, cơ chế cập nhật và kiểm chứng M4-OFF
 Bài tìm mã sách L0.3: [phạm vi và kiểm chứng EDU-16](docs/delivery/EDU_16_LIBRARY_SEARCH.md); chưa thay module cấu trúc dữ liệu đầy đủ.
 
 Triển khai Vercel: [REL-02](docs/delivery/REL_02_VERCEL.md). Giao AI khác kiểm kiến thức: [prompt và tình huống kiểm](docs/research/AI_REVIEW_HANDOFF.md). Không cần reviewer con người mới dùng bản tự học; các giới hạn/review vẫn được công bố đúng phạm vi.
+
+## Tooling cho agent
+
+[Skill đã cài và giới hạn áp dụng](docs/engineering/AGENT_SKILLS.md); kiểm inventory/checksum bằng `node scripts/check-skills.mjs`. [Review plan ngày 12/10](docs/delivery/PLAN_REVIEW_2026-10-12.md) là bản lịch sử, không thay trạng thái 18 bài hiện hành.

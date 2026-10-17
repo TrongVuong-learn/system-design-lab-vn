@@ -1,0 +1,241 @@
+{
+  "checkout": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning",
+  "head": "8f2afa8bb6a6dc832ca246e1f41f01de9fcdd197",
+  "model": "gpt-6-sol",
+  "reasoning": "low",
+  "checkedAt": "2026-10-17",
+  "claims": [
+    {
+      "claimId": "http-1",
+      "lessonId": "http/v1",
+      "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/web-network.json",
+      "field": "http.explanation/prediction/challenge",
+      "claim": "404/503 are HTTP responses; 200 alone does not guarantee latest business data",
+      "scope": "worktree 8f2afa8",
+      "assumptions": "See lesson limit and caseStudy limitations",
+      "sources": [
+        {
+          "url": "https://www.rfc-editor.org/info/rfc9110/",
+          "edition": "RFC 9110, STD 97, 2022",
+          "section": "§15.3.1, §15.5.5, §15.6.4",
+          "checkedAt": "2026-10-17",
+          "statusCheck": "not checked this run",
+          "errataCheck": "direct URL did not open; use RFC 9110 registry evidence only as prior, not fresh",
+          "support": "HTTP 200, 404, 503 semantics; 404/503 are responses."
+        }
+      ],
+      "independentExpected": "404 and 503 are response status codes; 200 does not encode freshness or source currency.",
+      "trace": {
+        "mode": "source-read/code-inferred, not executed",
+        "input": null,
+        "actions": null,
+        "actual": "httpExchange phase 2 returns 404/503 response; assessment selects 404 is response; case asks 200 freshness.",
+        "artifact": null,
+        "command": null
+      },
+      "assessmentEvidence": "Reviewed answer/options and caseStudy/guidance; no browser observation",
+      "uiEvidence": {
+        "viewport": null,
+        "artifact": null,
+        "mode": "not observed"
+      },
+      "verdict": "verified-with-conditions",
+      "uncertainty": "RFC 9110 page failed to open directly in this run; prior registry supports claim; no fresh direct section verification.",
+      "impact": null,
+      "retest": "Run engine trace/tests on writable checkout and observe UI if publication gate."
+    },
+    {
+      "claimId": "network-1",
+      "lessonId": "network/v1",
+      "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/web-network.json",
+      "field": "network.explanation/challenge",
+      "claim": "Doubling transmission rate halves only transfer component, giving 650 ms total",
+      "scope": "worktree 8f2afa8",
+      "assumptions": "See lesson limit and caseStudy limitations",
+      "sources": [
+        {
+          "url": "https://www.rfc-editor.org/info/rfc6349/",
+          "edition": "RFC 6349, Informational, 2011",
+          "section": "Intro; §4",
+          "checkedAt": "2026-10-17",
+          "statusCheck": "Informational, not Internet Standard",
+          "errataCheck": "not checked",
+          "support": "Real TCP throughput depends on path and TCP parameters; toy constant-rate model is an assumption."
+        }
+      ],
+      "independentExpected": "1000 kB × 1000 B/kB × 8 bit/B / 8,000,000 bit/s = 1 s; at 16 Mbps = 0.5 s; 100+50+500=650 ms.",
+      "trace": {
+        "mode": "source-read/code-inferred, not executed",
+        "input": null,
+        "actions": null,
+        "actual": "estimateDownload source computes kb*8/mbps=1000 ms at 8 Mbps and 500 ms at 16; total 1150/650 ms.",
+        "artifact": null,
+        "command": null
+      },
+      "assessmentEvidence": "Reviewed answer/options and caseStudy/guidance; no browser observation",
+      "uiEvidence": {
+        "viewport": null,
+        "artifact": null,
+        "mode": "not observed"
+      },
+      "verdict": "verified-with-conditions",
+      "uncertainty": "RFC does not provide toy latency formula or the example numbers; independent unit calculation does.",
+      "impact": null,
+      "retest": "Run engine trace/tests on writable checkout and observe UI if publication gate."
+    },
+    {
+      "claimId": "routing-1",
+      "lessonId": "routing/v1",
+      "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/routing.json",
+      "field": "explanation/prediction/challenge",
+      "claim": "Changing TCP destination port does not change IP destination or create missing route",
+      "scope": "worktree 8f2afa8",
+      "assumptions": "See lesson limit and caseStudy limitations",
+      "sources": [
+        {
+          "url": "https://www.rfc-editor.org/rfc/rfc1122.html",
+          "edition": "RFC 1122, STD 3, 1989",
+          "section": "§3.3.1",
+          "checkedAt": "2026-10-17",
+          "statusCheck": "STD 3; updates not audited",
+          "errataCheck": "not checked",
+          "support": "IP routing chooses next hop for destination datagram."
+        },
+        {
+          "url": "https://www.rfc-editor.org/rfc/rfc9293.html",
+          "edition": "RFC 9293, STD 7, 2022",
+          "section": "§3.1",
+          "checkedAt": "2026-10-17",
+          "statusCheck": "STD 7; updates not audited",
+          "errataCheck": "not checked",
+          "support": "TCP connection endpoints include IP address and TCP port."
+        }
+      ],
+      "independentExpected": "Keep IP 192.0.2.10; changing TCP port 8080→9090 changes service selection only; with no route and no default, packet stops at router.",
+      "trace": {
+        "mode": "source-read/code-inferred, not executed",
+        "input": null,
+        "actions": null,
+        "actual": "routePacket source preserves IP under port change; route=false -> no-route at phase≥1.",
+        "artifact": null,
+        "command": null
+      },
+      "assessmentEvidence": "Reviewed answer/options and caseStudy/guidance; no browser observation",
+      "uiEvidence": {
+        "viewport": null,
+        "artifact": null,
+        "mode": "not observed"
+      },
+      "verdict": "verified-with-conditions",
+      "uncertainty": "No runtime execution.",
+      "impact": null,
+      "retest": "Run engine trace/tests on writable checkout and observe UI if publication gate."
+    },
+    {
+      "claimId": "tls-1",
+      "lessonId": "tls/v1",
+      "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/tls.json",
+      "field": "explanation/limit/prediction/challenge",
+      "claim": "Valid HTTPS protects content from network observer; wrong-name certificate stops before HTTP",
+      "scope": "worktree 8f2afa8",
+      "assumptions": "See lesson limit and caseStudy limitations",
+      "sources": [
+        {
+          "url": "https://www.rfc-editor.org/info/rfc9846/",
+          "edition": "RFC 9846, Proposed Standard, 2026",
+          "section": "§1, §1.2",
+          "checkedAt": "2026-10-17",
+          "statusCheck": "Proposed Standard; obsoletes RFC 8446",
+          "errataCheck": "errata link seen; entries not inspected",
+          "support": "TLS 1.3 protects confidentiality/integrity and authenticates channel endpoints; obsoletes 8446"
+        },
+        {
+          "url": "https://www.rfc-editor.org/rfc/rfc9525.html",
+          "edition": "RFC 9525, Proposed Standard, 2023",
+          "section": "§6",
+          "checkedAt": "2026-10-17",
+          "statusCheck": "Proposed Standard",
+          "errataCheck": "not checked",
+          "support": "Service identity must match independently expected identity; name mismatch fails."
+        }
+      ],
+      "independentExpected": "With valid channel, observer cannot read/alter protected content undetected; with wrong-name identity, application request must not be sent in model.",
+      "trace": {
+        "mode": "source-read/code-inferred, not executed",
+        "input": null,
+        "actions": null,
+        "actual": "simulateTls source: secure+wrong-name => blocked true/sent false; secure+listen => observer lacks content; tamper => rejected.",
+        "artifact": null,
+        "command": null
+      },
+      "assessmentEvidence": "Reviewed answer/options and caseStudy/guidance; no browser observation",
+      "uiEvidence": {
+        "viewport": null,
+        "artifact": null,
+        "mode": "not observed"
+      },
+      "verdict": "verified-with-conditions",
+      "uncertainty": "TLS toy explicitly omits real PKI, termination, 0-RTT and QUIC; engine inference only.",
+      "impact": null,
+      "retest": "Run engine trace/tests on writable checkout and observe UI if publication gate."
+    },
+    {
+      "claimId": "curriculum-primer",
+      "lessonId": "specification",
+      "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/CURRICULUM_MAP.md",
+      "field": "§9 PRIMER-K01–K23",
+      "claim": "23 groups are drafting tasks within existing 36 modules, not released lessons",
+      "scope": "worktree 8f2afa8",
+      "assumptions": "See lesson limit and caseStudy limitations",
+      "sources": [],
+      "independentExpected": "Count PRIMER-K01–K23 = 23; document says not authored/approved/released.",
+      "trace": {
+        "mode": "source-read/code-inferred, not executed",
+        "input": null,
+        "actions": null,
+        "actual": "Source text only.",
+        "artifact": null,
+        "command": null
+      },
+      "assessmentEvidence": "Reviewed answer/options and caseStudy/guidance; no browser observation",
+      "uiEvidence": {
+        "viewport": null,
+        "artifact": null,
+        "mode": "not observed"
+      },
+      "verdict": "verified-with-conditions",
+      "uncertainty": "Primer commit and linked sections not independently re-opened in this pass; no specific technical guarantee promoted from Primer.",
+      "impact": null,
+      "retest": "Run engine trace/tests on writable checkout and observe UI if publication gate."
+    },
+    {
+      "claimId": "teaching-status",
+      "lessonId": "specification",
+      "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/TEACHING_GUIDE.md",
+      "field": "intro/§6",
+      "claim": "Guide states beta and mini-case policy, not completed pilot",
+      "scope": "worktree 8f2afa8",
+      "assumptions": "See lesson limit and caseStudy limitations",
+      "sources": [],
+      "independentExpected": "Beta lesson count must be read from current content, and pilot status must remain unverified until actual observation.",
+      "trace": {
+        "mode": "source-read/code-inferred, not executed",
+        "input": null,
+        "actions": null,
+        "actual": "Source says 13 beta; repository has more lesson JSON entries; count discrepancy is editorial status only.",
+        "artifact": null,
+        "command": null
+      },
+      "assessmentEvidence": "Reviewed answer/options and caseStudy/guidance; no browser observation",
+      "uiEvidence": {
+        "viewport": null,
+        "artifact": null,
+        "mode": "not observed"
+      },
+      "verdict": "insufficient-evidence",
+      "uncertainty": "Live content count needs canonical catalog, not prose.",
+      "impact": null,
+      "retest": "Run engine trace/tests on writable checkout and observe UI if publication gate."
+    }
+  ]
+}

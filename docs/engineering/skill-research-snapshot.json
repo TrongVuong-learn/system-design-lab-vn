@@ -1,0 +1,438 @@
+{
+  "checkedAt": "2026-10-12",
+  "source": "GitHub REST API /repos/{owner}/{repo} and /commits/{default_branch}",
+  "note": "Stars/forks are adoption signals, not independent quality ratings. Commit date can differ from pushed_at.",
+  "repositories": [
+    {
+      "full_name": "antfu/skills",
+      "html_url": "https://github.com/antfu/skills",
+      "stargazers_count": 5960,
+      "forks_count": 337,
+      "open_issues_count": 10,
+      "archived": false,
+      "pushed_at": "2026-10-09T06:36:34Z",
+      "default_branch": "main",
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit",
+        "node_id": "MDc6TGljZW5zZTEz"
+      },
+      "commit": "feb0f3aba6566426f12230e7fc7a10d97c1293bb",
+      "commit_date": "2026-10-09T06:36:34Z"
+    },
+    {
+      "full_name": "anthropics/skills",
+      "html_url": "https://github.com/anthropics/skills",
+      "stargazers_count": 180511,
+      "forks_count": 21397,
+      "open_issues_count": 1399,
+      "archived": false,
+      "pushed_at": "2026-10-09T18:45:52Z",
+      "default_branch": "main",
+      "license": null,
+      "commit": "dbd4588f9e1033efb41dad4bef2f7947c8993d44",
+      "commit_date": "2026-10-09T18:45:49Z"
+    },
+    {
+      "full_name": "currents-dev/playwright-best-practices-skill",
+      "html_url": "https://github.com/currents-dev/playwright-best-practices-skill",
+      "stargazers_count": 395,
+      "forks_count": 63,
+      "archived": false,
+      "pushed_at": "2026-07-21T06:01:56Z",
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit",
+        "node_id": "MDc6TGljZW5zZTEz"
+      },
+      "commit": "283d5cbc5d11aac1abda058b16ad22c317d54dc0",
+      "commit_date": "2026-07-21T06:01:56Z"
+    },
+    {
+      "full_name": "donnemartin/system-design-primer",
+      "html_url": "https://github.com/donnemartin/system-design-primer",
+      "stargazers_count": 373797,
+      "forks_count": 58842,
+      "open_issues_count": 624,
+      "archived": false,
+      "pushed_at": "2026-09-15T01:10:09Z",
+      "default_branch": "master",
+      "license": {
+        "key": "other",
+        "name": "Other",
+        "spdx_id": "NOASSERTION",
+        "url": null,
+        "node_id": "MDc6TGljZW5zZTA="
+      },
+      "commit": "ae9bbd7b02d90b9866215de185217d33f39ab733",
+      "commit_date": "2026-03-20T01:52:18Z"
+    },
+    {
+      "full_name": "microsoft/playwright",
+      "html_url": "https://github.com/microsoft/playwright",
+      "stargazers_count": 97497,
+      "forks_count": 6588,
+      "open_issues_count": 196,
+      "archived": false,
+      "pushed_at": "2026-10-11T22:43:51Z",
+      "default_branch": "main",
+      "license": {
+        "key": "apache-2.0",
+        "name": "Apache License 2.0",
+        "spdx_id": "Apache-2.0",
+        "url": "https://api.github.com/licenses/apache-2.0",
+        "node_id": "MDc6TGljZW5zZTI="
+      },
+      "commit": "d9f2fd3e2232ace8e317a84eda6cb86e25bcf49c",
+      "commit_date": "2026-10-09T18:01:12Z"
+    },
+    {
+      "full_name": "obra/superpowers",
+      "html_url": "https://github.com/obra/superpowers",
+      "stargazers_count": 297710,
+      "forks_count": 26593,
+      "open_issues_count": 330,
+      "archived": false,
+      "pushed_at": "2026-10-10T03:03:30Z",
+      "default_branch": "main",
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit",
+        "node_id": "MDc6TGljZW5zZTEz"
+      },
+      "commit": "bb92a77741419a4ab5f06e711a283343f1ada0c3",
+      "commit_date": "2026-10-10T00:28:04Z"
+    },
+    {
+      "full_name": "openai/skills",
+      "html_url": "https://github.com/openai/skills",
+      "stargazers_count": 28006,
+      "forks_count": 1921,
+      "archived": false,
+      "pushed_at": "2026-09-08T20:35:26Z",
+      "license": null,
+      "commit": "49f948faa9258a0c61caceaf225e179651397431",
+      "commit_date": "2026-06-24T02:36:12Z"
+    },
+    {
+      "full_name": "pbakaus/impeccable",
+      "html_url": "https://github.com/pbakaus/impeccable",
+      "stargazers_count": 79872,
+      "forks_count": 4751,
+      "open_issues_count": 69,
+      "archived": false,
+      "pushed_at": "2026-10-11T23:47:19Z",
+      "default_branch": "main",
+      "license": {
+        "key": "apache-2.0",
+        "name": "Apache License 2.0",
+        "spdx_id": "Apache-2.0",
+        "url": "https://api.github.com/licenses/apache-2.0",
+        "node_id": "MDc6TGljZW5zZTI="
+      },
+      "commit": "c63b8dd7dd5a5f3c32eaabe1af76d0694f863ed2",
+      "commit_date": "2026-10-11T08:54:34Z"
+    },
+    {
+      "full_name": "vercel-labs/agent-skills",
+      "html_url": "https://github.com/vercel-labs/agent-skills",
+      "stargazers_count": 32242,
+      "forks_count": 2823,
+      "open_issues_count": 179,
+      "archived": false,
+      "pushed_at": "2026-08-28T13:36:31Z",
+      "default_branch": "main",
+      "license": null,
+      "commit": "063bee94c3f4df8453406c830b0a7df0f2860278",
+      "commit_date": "2026-08-28T13:36:07Z"
+    },
+    {
+      "full_name": "vitest-dev/vitest",
+      "html_url": "https://github.com/vitest-dev/vitest",
+      "stargazers_count": 17200,
+      "forks_count": 2076,
+      "open_issues_count": 346,
+      "archived": false,
+      "pushed_at": "2026-10-10T09:49:24Z",
+      "default_branch": "main",
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit",
+        "node_id": "MDc6TGljZW5zZTEz"
+      },
+      "commit": "5c95521730bbc58ab20052f7ff807c29a8fbeb65",
+      "commit_date": "2026-10-10T08:16:16Z"
+    }
+  ],
+  "round2": {
+    "checkedAt": "2026-10-12",
+    "scope": "12 additional repositories screened; selected skill manifests examined in depth. Not a complete global ranking.",
+    "discovery_query": "topic:agent-skills stars:>1000; sort=stars; order=desc; per_page=20",
+    "limitations": [
+      "Topic search excludes repositories without this tag.",
+      "REST API rate limit interrupted later metadata lookups; GitHub pages used instead.",
+      "Count of SKILL.md paths can include duplicated harness/plugin copies; not a unique-skill count.",
+      "No additional skills installed in this research round."
+    ],
+    "topic_results": [
+      {
+        "repository": "anthropics/skills",
+        "stars": 180511
+      },
+      {
+        "repository": "DietrichGebert/ponytail",
+        "stars": 161105
+      },
+      {
+        "repository": "addyosmani/agent-skills",
+        "stars": 105022
+      },
+      {
+        "repository": "morluto/rea",
+        "stars": 103521
+      },
+      {
+        "repository": "nexu-io/open-design",
+        "stars": 100566
+      },
+      {
+        "repository": "tt-a1i/archify",
+        "stars": 82046
+      },
+      {
+        "repository": "ComposioHQ/awesome-claude-skills",
+        "stars": 76880
+      },
+      {
+        "repository": "career-ops-hq/career-ops",
+        "stars": 74066
+      },
+      {
+        "repository": "blader/humanizer",
+        "stars": 55796
+      },
+      {
+        "repository": "hesreallyhim/awesome-claude-code",
+        "stars": 55455
+      },
+      {
+        "repository": "coreyhaines31/marketingskills",
+        "stars": 54205
+      },
+      {
+        "repository": "VoltAgent/awesome-openclaw-skills",
+        "stars": 53075
+      },
+      {
+        "repository": "CherryHQ/cherry-studio",
+        "stars": 52542
+      },
+      {
+        "repository": "cathrynlavery/diagram-design",
+        "stars": 50308
+      },
+      {
+        "repository": "K-Dense-AI/scientific-agent-skills",
+        "stars": 48402
+      },
+      {
+        "repository": "sickn33/agentic-awesome-skills",
+        "stars": 47470
+      },
+      {
+        "repository": "alibaba/open-code-review",
+        "stars": 46176
+      },
+      {
+        "repository": "reactive-resume/reactive-resume",
+        "stars": 44145
+      },
+      {
+        "repository": "wshobson/agents",
+        "stars": 40414
+      },
+      {
+        "repository": "github/awesome-copilot",
+        "stars": 39925
+      }
+    ],
+    "repositories": [
+      {
+        "full_name": "ComposioHQ/awesome-claude-skills",
+        "html_url": "https://github.com/ComposioHQ/awesome-claude-skills",
+        "stargazers_count": 76880,
+        "forks_count": 9041,
+        "archived": false,
+        "pushed_at": "2026-09-18T07:16:11Z",
+        "license": null,
+        "default_branch": "master",
+        "commit": "be2a406907dbc61b73e6827ded415c96139d13a2",
+        "commit_date": "2026-07-24T07:48:01Z",
+        "tree_truncated": false,
+        "observed_skill_paths": 864,
+        "evidence_type": "GitHub REST API"
+      },
+      {
+        "full_name": "OthmanAdi/planning-with-files",
+        "html_url": "https://github.com/OthmanAdi/planning-with-files",
+        "stargazers_count": 27397,
+        "forks_count": 2270,
+        "archived": false,
+        "pushed_at": "2026-10-10T10:03:49Z",
+        "license": {
+          "key": "mit",
+          "name": "MIT License",
+          "spdx_id": "MIT",
+          "url": "https://api.github.com/licenses/mit",
+          "node_id": "MDc6TGljZW5zZTEz"
+        },
+        "default_branch": "master",
+        "commit": "7056ed2f2b86a8a9e18840f625ac66a48fa07693",
+        "commit_date": "2026-10-10T09:46:58Z",
+        "tree_truncated": false,
+        "observed_skill_paths": 18,
+        "evidence_type": "GitHub REST API"
+      },
+      {
+        "full_name": "addyosmani/agent-skills",
+        "html_url": "https://github.com/addyosmani/agent-skills",
+        "stargazers_count": 105022,
+        "forks_count": 10965,
+        "archived": false,
+        "pushed_at": "2026-10-10T08:28:49Z",
+        "license": {
+          "key": "mit",
+          "name": "MIT License",
+          "spdx_id": "MIT",
+          "url": "https://api.github.com/licenses/mit",
+          "node_id": "MDc6TGljZW5zZTEz"
+        },
+        "default_branch": "main",
+        "commit": "1be8e34187e34647bb83adc3a1323b26ae6f6abe",
+        "commit_date": "2026-10-10T08:28:48Z",
+        "tree_truncated": false,
+        "observed_skill_paths": 25,
+        "evidence_type": "GitHub REST API"
+      },
+      {
+        "full_name": "alirezarezvani/claude-skills",
+        "html_url": "https://github.com/alirezarezvani/claude-skills",
+        "stargazers_count": 28024,
+        "forks_count": 3925,
+        "archived": false,
+        "pushed_at": "2026-08-30T09:46:16Z",
+        "license": {
+          "key": "mit",
+          "name": "MIT License",
+          "spdx_id": "MIT",
+          "url": "https://api.github.com/licenses/mit",
+          "node_id": "MDc6TGljZW5zZTEz"
+        },
+        "default_branch": "main",
+        "commit": "19392f7a08264ed00486a251f5b2098321771f94",
+        "commit_date": "2026-08-26T13:53:02Z",
+        "tree_truncated": false,
+        "observed_skill_paths": 846,
+        "evidence_type": "GitHub REST API"
+      },
+      {
+        "full_name": "github/awesome-copilot",
+        "html_url": "https://github.com/github/awesome-copilot",
+        "stargazers_count": 39925,
+        "forks_count": 5098,
+        "archived": false,
+        "pushed_at": "2026-10-11T23:57:42Z",
+        "license": {
+          "key": "mit",
+          "name": "MIT License",
+          "spdx_id": "MIT",
+          "url": "https://api.github.com/licenses/mit",
+          "node_id": "MDc6TGljZW5zZTEz"
+        },
+        "default_branch": "main",
+        "commit": "6ca22e77f2ee04662d8571624540c6be950c54ca",
+        "commit_date": "2026-10-11T23:47:56Z",
+        "tree_truncated": false,
+        "observed_skill_paths": 445,
+        "evidence_type": "GitHub REST API"
+      },
+      {
+        "full_name": "sickn33/agentic-awesome-skills",
+        "html_url": "https://github.com/sickn33/agentic-awesome-skills",
+        "stargazers_count": 47470,
+        "forks_count": 6918,
+        "archived": false,
+        "pushed_at": "2026-10-11T20:04:06Z",
+        "license": {
+          "key": "mit",
+          "name": "MIT License",
+          "spdx_id": "MIT",
+          "url": "https://api.github.com/licenses/mit",
+          "node_id": "MDc6TGljZW5zZTEz"
+        },
+        "default_branch": "main",
+        "commit": "09e94102a5008d4d8066e14bdb8d0b95d365748c",
+        "commit_date": "2026-10-11T20:00:18Z",
+        "tree_truncated": false,
+        "observed_skill_paths": 8329,
+        "evidence_type": "GitHub REST API"
+      },
+      {
+        "full_name": "cathrynlavery/diagram-design",
+        "html_url": "https://github.com/cathrynlavery/diagram-design",
+        "stars_displayed": "50.3k",
+        "evidence_type": "GitHub page via web tool",
+        "commit": null,
+        "note": "Rounded page count; not an exact API count. Main-branch skill reads are research references, not install pins."
+      },
+      {
+        "full_name": "blader/humanizer",
+        "html_url": "https://github.com/blader/humanizer",
+        "stars_displayed": "55.8k",
+        "evidence_type": "GitHub page via web tool",
+        "commit": null,
+        "note": "Rounded page count; not an exact API count. Main-branch skill reads are research references, not install pins."
+      },
+      {
+        "full_name": "Leonxlnx/taste-skill",
+        "html_url": "https://github.com/Leonxlnx/taste-skill",
+        "stars_displayed": "94.8k",
+        "evidence_type": "GitHub page via web tool",
+        "commit": null,
+        "note": "Rounded page count; not an exact API count. Main-branch skill reads are research references, not install pins."
+      },
+      {
+        "full_name": "cloudflare/security-audit-skill",
+        "html_url": "https://github.com/cloudflare/security-audit-skill",
+        "stars_displayed": "28.3k",
+        "evidence_type": "GitHub page via web tool",
+        "commit": null,
+        "note": "Rounded page count; not an exact API count. Main-branch skill reads are research references, not install pins."
+      },
+      {
+        "full_name": "phuryn/pm-skills",
+        "html_url": "https://github.com/phuryn/pm-skills",
+        "stars_displayed": "26.9k",
+        "evidence_type": "GitHub page via web tool",
+        "commit": null,
+        "note": "Rounded page count; not an exact API count. Main-branch skill reads are research references, not install pins."
+      },
+      {
+        "full_name": "trailofbits/skills",
+        "html_url": "https://github.com/trailofbits/skills",
+        "stars_displayed": "7.5k",
+        "evidence_type": "GitHub page via web tool",
+        "commit": null,
+        "note": "Rounded page count; not an exact API count. Main-branch skill reads are research references, not install pins."
+      }
+    ]
+  }
+}

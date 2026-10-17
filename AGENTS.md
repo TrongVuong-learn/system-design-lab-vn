@@ -9,6 +9,8 @@
 
 ## Mã nguồn và học liệu
 
+- Skill theo task và giới hạn áp dụng nằm trong `docs/engineering/AGENT_SKILLS.md`; bản cài mới khóa commit/checksum trong `docs/engineering/skills-lock.json`. Chỉ đọc skill liên quan. Ví dụ upstream không thay stack, ranh giới package hoặc workflow của repository.
+
 - Tổ chức theo cấu trúc trong docs/engineering/ARCHITECTURE.md. Chỉ tạo app/package khi milestone hoặc task cần.
 - Core mô phỏng và học tập không phụ thuộc React, DOM, storage hoặc native SDK; tích hợp qua adapter.
 - Nội dung có schema/ID/version và hoạt động tham chiếu registry; không nhúng mã thực thi tùy ý vào học liệu.

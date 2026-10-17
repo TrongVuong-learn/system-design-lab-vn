@@ -1,0 +1,421 @@
+[
+  {
+    "claimId": "C-1",
+    "lessonId": "concurrency",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/concurrency.json",
+    "field": "explanation/prediction",
+    "claim": "Hai lượt đọc 30 rồi ghi +1 cho kết quả 31",
+    "scope": "assigned lesson and matching engine/UI source",
+    "assumptions": "toy model, fixed dataset/workload; see lesson.limit",
+    "sources": [
+      {
+        "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/threads-intro.pdf",
+        "edition": "OSTEP 1.10",
+        "section": "ch26 §§26.1,26.3-26.4",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "direct source-read for general mechanism; authored numeric example calculated independently"
+      }
+    ],
+    "independentExpected": "ABAB → 31; AABB → 32",
+    "trace": {
+      "mode": "executed",
+      "input": "concurrency:false:abab",
+      "actions": "run trace.mjs with Node strip-types",
+      "actual": {
+        "shared": 31,
+        "schedule": [
+          "a",
+          "b",
+          "a",
+          "b"
+        ],
+        "restored": 31
+      },
+      "artifact": "/private/tmp/sdl-audit-2026-10-17-os/traces.json",
+      "command": "node --experimental-strip-types /private/tmp/sdl-audit-2026-10-17-os/trace.mjs"
+    },
+    "assessmentEvidence": "prediction 0; explanation và caseStudy khớp",
+    "uiEvidence": {
+      "viewport": null,
+      "artifact": null,
+      "mode": "source-read only"
+    },
+    "verdict": "verified-with-conditions",
+    "conditions": "Only the stated abstract model; source does not establish numeric benchmark or real OS guarantee",
+    "uncertainty": "Browser/mobile observation absent; Vitest blocked by read-only worktree",
+    "impact": null,
+    "retest": "Run browser lab and unit suite in writable checkout before release if scope expands"
+  },
+  {
+    "claimId": "C-2",
+    "lessonId": "concurrency",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/concurrency.json",
+    "field": "explanation/challenge",
+    "claim": "Cùng khóa bao đọc–tăng–ghi, cả hai hoàn tất cho 32",
+    "scope": "assigned lesson and matching engine/UI source",
+    "assumptions": "toy model, fixed dataset/workload; see lesson.limit",
+    "sources": [
+      {
+        "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/threads-locks.pdf",
+        "edition": "OSTEP 1.10",
+        "section": "ch28 §§28.1-28.2",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "direct source-read for general mechanism; authored numeric example calculated independently"
+      }
+    ],
+    "independentExpected": "khóa: A đọc30/ghi31; B đọc31/ghi32",
+    "trace": {
+      "mode": "executed",
+      "input": "concurrency:true:abab",
+      "actions": "run trace.mjs with Node strip-types",
+      "actual": {
+        "shared": 31,
+        "schedule": [
+          "a",
+          "a",
+          "b"
+        ],
+        "restored": 31
+      },
+      "artifact": "/private/tmp/sdl-audit-2026-10-17-os/traces.json",
+      "command": "node --experimental-strip-types /private/tmp/sdl-audit-2026-10-17-os/trace.mjs"
+    },
+    "assessmentEvidence": "challenge 0; limit ghi rõ cùng khóa, mọi đường sửa",
+    "uiEvidence": {
+      "viewport": null,
+      "artifact": null,
+      "mode": "source-read only"
+    },
+    "verdict": "verified-with-conditions",
+    "conditions": "Only the stated abstract model; source does not establish numeric benchmark or real OS guarantee",
+    "uncertainty": "Browser/mobile observation absent; Vitest blocked by read-only worktree",
+    "impact": null,
+    "retest": "Run browser lab and unit suite in writable checkout before release if scope expands"
+  },
+  {
+    "claimId": "IO-1",
+    "lessonId": "cpu-io",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/cpu-io.json",
+    "field": "explanation/prediction",
+    "claim": "Thread chờ I/O không giữ CPU; worker khác có thể chạy",
+    "scope": "assigned lesson and matching engine/UI source",
+    "assumptions": "toy model, fixed dataset/workload; see lesson.limit",
+    "sources": [
+      {
+        "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/threads-intro.pdf",
+        "edition": "OSTEP 1.10",
+        "section": "ch26 §§26.1,26.3-26.4",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "direct source-read for general mechanism; authored numeric example calculated independently"
+      },
+      {
+        "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/cpu-intro.pdf",
+        "edition": "OSTEP 1.10",
+        "section": "ch4 §4.4",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "direct source-read for general mechanism; authored numeric example calculated independently"
+      }
+    ],
+    "independentExpected": "1 worker 10ms; 2 worker 6ms theo timeline 1+3+1 mỗi việc",
+    "trace": {
+      "mode": "executed",
+      "input": "cpu:io:2",
+      "actions": "run trace.mjs with Node strip-types",
+      "actual": {
+        "time": 6,
+        "busy": 4,
+        "idle": 2,
+        "doneAt": [
+          5,
+          6
+        ],
+        "cpu": [
+          "A",
+          "B",
+          null,
+          null,
+          "A",
+          "B"
+        ],
+        "restored": 6
+      },
+      "artifact": "/private/tmp/sdl-audit-2026-10-17-os/traces.json",
+      "command": "node --experimental-strip-types /private/tmp/sdl-audit-2026-10-17-os/trace.mjs"
+    },
+    "assessmentEvidence": "prediction 0; UI source phân biệt CPU/worker/I/O",
+    "uiEvidence": {
+      "viewport": null,
+      "artifact": null,
+      "mode": "source-read only"
+    },
+    "verdict": "verified-with-conditions",
+    "conditions": "Only the stated abstract model; source does not establish numeric benchmark or real OS guarantee",
+    "uncertainty": "Browser/mobile observation absent; Vitest blocked by read-only worktree",
+    "impact": null,
+    "retest": "Run browser lab and unit suite in writable checkout before release if scope expands"
+  },
+  {
+    "claimId": "IO-2",
+    "lessonId": "cpu-io",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/cpu-io.json",
+    "field": "challenge",
+    "claim": "Hai việc 4ms CPU trên một lõi cần ít nhất 8ms dù thêm worker",
+    "scope": "assigned lesson and matching engine/UI source",
+    "assumptions": "toy model, fixed dataset/workload; see lesson.limit",
+    "sources": [
+      {
+        "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/cpu-intro.pdf",
+        "edition": "OSTEP 1.10",
+        "section": "ch4 §4.4",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "direct source-read for general mechanism; authored numeric example calculated independently"
+      }
+    ],
+    "independentExpected": "4+4=8ms CPU, không overhead",
+    "trace": {
+      "mode": "executed",
+      "input": "cpu:cpu:2",
+      "actions": "run trace.mjs with Node strip-types",
+      "actual": {
+        "time": 8,
+        "busy": 8,
+        "idle": 0,
+        "doneAt": [
+          4,
+          8
+        ],
+        "cpu": [
+          "A",
+          "A",
+          "A",
+          "A",
+          "B",
+          "B",
+          "B",
+          "B"
+        ],
+        "restored": 8
+      },
+      "artifact": "/private/tmp/sdl-audit-2026-10-17-os/traces.json",
+      "command": "node --experimental-strip-types /private/tmp/sdl-audit-2026-10-17-os/trace.mjs"
+    },
+    "assessmentEvidence": "challenge 0; limit giả định không preempt/overhead",
+    "uiEvidence": {
+      "viewport": null,
+      "artifact": null,
+      "mode": "source-read only"
+    },
+    "verdict": "verified-with-conditions",
+    "conditions": "Only the stated abstract model; source does not establish numeric benchmark or real OS guarantee",
+    "uncertainty": "Browser/mobile observation absent; Vitest blocked by read-only worktree",
+    "impact": null,
+    "retest": "Run browser lab and unit suite in writable checkout before release if scope expands"
+  },
+  {
+    "claimId": "S-1",
+    "lessonId": "library-search",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/library-search.json",
+    "field": "explanation/prediction",
+    "claim": "Tìm nhị phân loại nửa khi mảng đã sắp tăng",
+    "scope": "assigned lesson and matching engine/UI source",
+    "assumptions": "toy model, fixed dataset/workload; see lesson.limit",
+    "sources": [
+      {
+        "url": "https://www.cs.cmu.edu/~15122-archive/s26/handouts/lectures/06-binsearch.pdf",
+        "edition": "CMU 15-122 Spring 2026",
+        "section": "lecture 6, pp1-2",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "direct source-read for general mechanism; authored numeric example calculated independently"
+      }
+    ],
+    "independentExpected": "N=8/32/128, cuối: 4/6/8 lần; đầu tuần tự 1",
+    "trace": {
+      "mode": "executed",
+      "input": "search:128:binary:last",
+      "actions": "run trace.mjs with Node strip-types",
+      "actual": {
+        "total": 8,
+        "found": true,
+        "positions": [
+          64,
+          96,
+          112,
+          120,
+          124,
+          126,
+          127,
+          128
+        ]
+      },
+      "artifact": "/private/tmp/sdl-audit-2026-10-17-os/traces.json",
+      "command": "node --experimental-strip-types /private/tmp/sdl-audit-2026-10-17-os/trace.mjs"
+    },
+    "assessmentEvidence": "prediction 0; challenge nêu chưa sắp thì không áp dụng",
+    "uiEvidence": {
+      "viewport": null,
+      "artifact": null,
+      "mode": "source-read only"
+    },
+    "verdict": "verified-with-conditions",
+    "conditions": "Only the stated abstract model; source does not establish numeric benchmark or real OS guarantee",
+    "uncertainty": "Browser/mobile observation absent; Vitest blocked by read-only worktree",
+    "impact": null,
+    "retest": "Run browser lab and unit suite in writable checkout before release if scope expands"
+  },
+  {
+    "claimId": "S-2",
+    "lessonId": "library-search",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/library-search.json",
+    "field": "limit/caseStudy",
+    "claim": "Đếm mục xem, không suy trực tiếp ra ms",
+    "scope": "assigned lesson and matching engine/UI source",
+    "assumptions": "toy model, fixed dataset/workload; see lesson.limit",
+    "sources": [
+      {
+        "url": "https://www.cs.cmu.edu/~15122-archive/s26/handouts/lectures/06-binsearch.pdf",
+        "edition": "CMU 15-122 Spring 2026",
+        "section": "lecture 6, pp1-2",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "direct source-read for general mechanism; authored numeric example calculated independently"
+      }
+    ],
+    "independentExpected": "metric là phép so mục, không benchmark",
+    "trace": {
+      "mode": "source-read + independent calculation",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": "UI source ghi rõ đơn vị; browser chưa quan sát",
+    "uiEvidence": {
+      "viewport": null,
+      "artifact": null,
+      "mode": "source-read only"
+    },
+    "verdict": "verified-with-conditions",
+    "conditions": "Only the stated abstract model; source does not establish numeric benchmark or real OS guarantee",
+    "uncertainty": "Browser/mobile observation absent; Vitest blocked by read-only worktree",
+    "impact": null,
+    "retest": "Run browser lab and unit suite in writable checkout before release if scope expands"
+  },
+  {
+    "claimId": "H-1",
+    "lessonId": "hash-table",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/hash-table.json",
+    "field": "explanation/prediction",
+    "claim": "Cùng bucket không đồng nghĩa cùng khóa; phải so khóa đầy đủ",
+    "scope": "assigned lesson and matching engine/UI source",
+    "assumptions": "toy model, fixed dataset/workload; see lesson.limit",
+    "sources": [
+      {
+        "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/d3e4d64266d481c74c9e7c15e09999fe_MIT6_006F11_lec08.pdf",
+        "edition": "MIT 6.006 Fall 2011",
+        "section": "lecture 8, pp3-4",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "direct source-read for general mechanism; authored numeric example calculated independently"
+      }
+    ],
+    "independentExpected": "B=4: [2,6,10,14] cùng bucket2; 18 không có",
+    "trace": {
+      "mode": "executed",
+      "input": "hash:4:hash:missing",
+      "actions": "run trace.mjs with Node strip-types",
+      "actual": {
+        "total": 4,
+        "found": false,
+        "keys": [
+          2,
+          6,
+          10,
+          14
+        ]
+      },
+      "artifact": "/private/tmp/sdl-audit-2026-10-17-os/traces.json",
+      "command": "node --experimental-strip-types /private/tmp/sdl-audit-2026-10-17-os/trace.mjs"
+    },
+    "assessmentEvidence": "prediction/challenge 0; UI source hiển thị chain",
+    "uiEvidence": {
+      "viewport": null,
+      "artifact": null,
+      "mode": "source-read only"
+    },
+    "verdict": "verified-with-conditions",
+    "conditions": "Only the stated abstract model; source does not establish numeric benchmark or real OS guarantee",
+    "uncertainty": "Browser/mobile observation absent; Vitest blocked by read-only worktree",
+    "impact": null,
+    "retest": "Run browser lab and unit suite in writable checkout before release if scope expands"
+  },
+  {
+    "claimId": "H-2",
+    "lessonId": "hash-table",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/hash-table.json",
+    "field": "limit/caseStudy",
+    "claim": "Nhiều ngăn không bảo đảm tra một bước",
+    "scope": "assigned lesson and matching engine/UI source",
+    "assumptions": "toy model, fixed dataset/workload; see lesson.limit",
+    "sources": [
+      {
+        "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/d3e4d64266d481c74c9e7c15e09999fe_MIT6_006F11_lec08.pdf",
+        "edition": "MIT 6.006 Fall 2011",
+        "section": "lecture 8, pp3-4",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "direct source-read for general mechanism; authored numeric example calculated independently"
+      }
+    ],
+    "independentExpected": "B=8: bucket2 [2,10], bucket6 [6,14]; mã14 cần 2 so",
+    "trace": {
+      "mode": "executed",
+      "input": "hash:8:hash:last",
+      "actions": "run trace.mjs with Node strip-types",
+      "actual": {
+        "total": 2,
+        "found": true,
+        "keys": [
+          6,
+          14
+        ]
+      },
+      "artifact": "/private/tmp/sdl-audit-2026-10-17-os/traces.json",
+      "command": "node --experimental-strip-types /private/tmp/sdl-audit-2026-10-17-os/trace.mjs"
+    },
+    "assessmentEvidence": "limit nêu rõ không suy O(1); UI source phân biệt số so với ms",
+    "uiEvidence": {
+      "viewport": null,
+      "artifact": null,
+      "mode": "source-read only"
+    },
+    "verdict": "verified-with-conditions",
+    "conditions": "Only the stated abstract model; source does not establish numeric benchmark or real OS guarantee",
+    "uncertainty": "Browser/mobile observation absent; Vitest blocked by read-only worktree",
+    "impact": null,
+    "retest": "Run browser lab and unit suite in writable checkout before release if scope expands"
+  }
+]
