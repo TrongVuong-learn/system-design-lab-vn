@@ -12,6 +12,11 @@ export function LessonSketch({ kind }: { kind: string }) {
         '1 → 2 worker, cùng một CPU',
       ],
       tls: ['Lịch đi qua kênh TLS', 'Giữ kín · Phát hiện sửa', 'Kiểm tra đúng danh tính máy chủ'],
+      'priority-heap': [
+        'Cùng bảy việc, hai cách chọn',
+        'A · 4 hay F · 1?',
+        'FIFO lấy A; min-heap lấy F trước',
+      ],
       'search-tree': [
         'Cùng bảy mã, hai hình dạng',
         '8 → 12 → 14',

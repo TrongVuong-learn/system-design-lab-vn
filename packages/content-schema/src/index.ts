@@ -29,6 +29,7 @@ const activityKind = z.enum([
   'library-search',
   'hash-table',
   'search-tree',
+  'priority-heap',
 ]);
 const caseText = z.string().trim().min(8).max(1600);
 export const caseStudySchema = z

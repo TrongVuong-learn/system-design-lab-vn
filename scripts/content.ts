@@ -50,6 +50,7 @@ const order = [
   'library-search',
   'hash-table',
   'search-tree',
+  'priority-heap',
   'metrics',
   'cache',
   'dns',

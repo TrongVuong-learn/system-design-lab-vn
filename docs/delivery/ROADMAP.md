@@ -1,6 +1,6 @@
 # Kế hoạch triển khai và nghiệm thu
 
-Trạng thái: roadmap và ước lượng; web beta có 19 bài nhập môn, các gate hoàn thiện level còn mở. Trạng thái thực thi theo [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md); các gate chưa đạt vẫn còn mở. Phạm vi kiến thức theo [CURRICULUM_MAP.md](../../CURRICULUM_MAP.md), tiêu chuẩn học theo [TEACHING_GUIDE.md](../../TEACHING_GUIDE.md).
+Trạng thái: roadmap và ước lượng; web beta có 20 bài nhập môn, các gate hoàn thiện level còn mở. Trạng thái thực thi theo [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md); các gate chưa đạt vẫn còn mở. Phạm vi kiến thức theo [CURRICULUM_MAP.md](../../CURRICULUM_MAP.md), tiêu chuẩn học theo [TEACHING_GUIDE.md](../../TEACHING_GUIDE.md).
 
 Quy trình thực hiện từng task, Git/review, release và quản lý thư mục áp dụng theo [WORKFLOW.md](WORKFLOW.md) và [CONTRIBUTING.md](../../CONTRIBUTING.md).
 
@@ -313,3 +313,11 @@ Acceptance: fixtures độc lập cả 6 preset/mọi prefix; invariant BST toà
 Kết quả local EDU-18: source 19 bài + 1 bài ôn; content/build/lint và 73 unit/20files đạt; 24 E2E liên quan đạt. Ảnh và export/import/offline 320/390/1280 đã kiểm. CI/merge/deploy cập nhật theo bằng chứng thực tế trong [báo cáo](EDU_18_SEARCH_TREE.md); không đóng L0.3 hoặc pilot.
 
 EDU-18 hoàn tất scope: [PR #6](https://github.com/TrongVuong-learn/system-design-lab-vn/pull/6) đã merge master; CI 73 unit/215 E2E đạt, 1 skip; Vercel READY đúng SHA và HTTP/browser/offline production đạt. Báo cáo EDU-18 ghi evidence và giới hạn. Catalog hiện 19 bài + 1 bài ôn; việc tiếp theo là heap/hàng đợi ưu tiên, chưa tự đóng L0.3.
+
+## 24. EDU-19 — heap/hàng đợi ưu tiên L0.3
+
+Task Ready 17/10/2026, owner Codex, nối search-tree. Bảy việc in A4/B7/C2/D6/E5/F1/G3 đến đủ trước khi lấy, số nhỏ được ưu tiên hơn, không trùng mức. So FIFO với min-heap dựng bằng insert/swim theo cùng thứ tự; lấy gốc rồi thay bằng cuối và sift-down qua con nhỏ hơn. Một bước UI là lấy một việc và sửa heap xong, không so khóa/ms. Mảng theo tầng không sắp toàn cục; heap không phải BST. Không thêm việc động, đổi ưu tiên, starvation/fairness, tie policy, lỗi/worker hoặc thời gian in. Không đóng L0.3.
+
+Acceptance: core thuần replay checkpoint method/step/model1, không tin heap/result nhập; fixtures mọi prefix/method, heap-order và bảo toàn đủ ID/khóa; trace replace/swap đúng lần đầu; malformed/version/mutation. UI sơ đồ tối đa7 nút và mảng theo tầng đọc được ở320px, FIFO danh sách, trace chữ/history, before/after, terms/hints và case CASE-L0-03. E2E keyboard/reset/resume/challenge bốn browser + responsive/offline, export/import và ảnh320/390/1280. Nguồn sơ cấp CMU Lecture25 §1/3/4/5/6, đọc trước soạn; parent đối chiếu engine/trace/assessment. Sau QA: commit/PR/CI/merge master, Vercel Git deployment READY/source SHA và smoke; không gọi AI là pilot/human review. Locality/serialization/compression còn mở.
+
+Kết quả local EDU-19: 20 bài + 1 bài ôn; content/build/lint và 76 unit/21files đạt. Responsive/offline20test đạt; 4 test bài mới đạt sau sửa locator test chọn nhầm nhãn (không đổi assertion hoặc app). Ảnh320/390/1280 và export/import/offline đạt. PR/CI và production ghi theo bằng chứng thực tế trong báo cáo EDU-19; không đóng L0.3 hoặc pilot.

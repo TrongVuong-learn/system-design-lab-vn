@@ -1155,3 +1155,21 @@
 .search-tree-figure figcaption {
   margin-top: 0.75rem;
 }
+
+.priority-heap-figure text {
+  font-size: 14px;
+}
+.heap-array {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0;
+  list-style: none;
+}
+.heap-array li {
+  border: 1px solid #65718a;
+  border-radius: 0.3rem;
+  padding: 0.5rem;
+  min-width: 3.4rem;
+  text-align: center;
+}
