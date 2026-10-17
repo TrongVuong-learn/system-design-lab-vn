@@ -1,8 +1,8 @@
 # Trạng thái hiện thực
 
-## Cập nhật 16/10/2026
+## Cập nhật 17/10/2026
 
-Catalog hiện 18 bài beta và1 bài ôn tổng hợp; mới nhất là [EDU-17 hash table và va chạm](EDU_17_HASH_COLLISIONS.md). Phần ghi số6 bài/kiểm chứng bên dưới là lịch sử đợt đầu, không phải trạng thái catalog hiện tại. [ROADMAP](ROADMAP.md) quản lý công việc tiếp; [QA-07](QA_07_KNOWLEDGE_REVIEW.md) chỉ review baseline14 bài trước EDU-14, không chứng nhận bài mới. CPU/I/O đã có bài nhập môn; cấu trúc dữ liệu đã có một bài mở đầu; OS sâu và phần lớn36 module vẫn chưa hoàn tất; chưa pilot thật.
+Catalog hiện 19 bài beta và1 bài ôn tổng hợp; mới nhất là [EDU-18 cây tìm kiếm](EDU_18_SEARCH_TREE.md). Phần ghi số6 bài/kiểm chứng bên dưới là lịch sử đợt đầu, không phải trạng thái catalog hiện tại. [ROADMAP](ROADMAP.md) quản lý công việc tiếp; [QA-07](QA_07_KNOWLEDGE_REVIEW.md) chỉ review baseline14 bài trước EDU-14, không chứng nhận bài mới. CPU/I/O đã có bài nhập môn; cấu trúc dữ liệu đã có một bài mở đầu; OS sâu và phần lớn36 module vẫn chưa hoàn tất; chưa pilot thật.
 
 ## M4-OFFLINE-01 — gói tải beta
 

@@ -1,3 +1,4 @@
+import { SearchTreeLab } from './SearchTreeLab';
 import { HashTableLab } from './HashTableLab';
 import { LibrarySearchLab } from './LibrarySearchLab';
 import { ObservationPanel } from './ObservationPanel';
@@ -45,6 +46,7 @@ export function Lab(original: LabProps) {
     'cpu-io',
     'library-search',
     'hash-table',
+    'search-tree',
   ].includes(kind);
   const props = extended
     ? {
@@ -86,6 +88,8 @@ export function Lab(original: LabProps) {
       return <CapacityLab {...props} />;
     case 'http':
       return <HttpLab {...props} />;
+    case 'search-tree':
+      return <SearchTreeLab {...props} />;
     case 'hash-table':
       return <HashTableLab {...props} />;
     case 'library-search':

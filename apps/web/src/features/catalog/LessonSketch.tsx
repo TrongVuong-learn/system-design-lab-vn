@@ -12,6 +12,11 @@ export function LessonSketch({ kind }: { kind: string }) {
         '1 → 2 worker, cùng một CPU',
       ],
       tls: ['Lịch đi qua kênh TLS', 'Giữ kín · Phát hiện sửa', 'Kiểm tra đúng danh tính máy chủ'],
+      'search-tree': [
+        'Cùng bảy mã, hai hình dạng',
+        '8 → 12 → 14',
+        'Tra mã 14: 3 nút hoặc 7 nút tùy cây',
+      ],
       'hash-table': [
         'Hai mã khác, cùng một ngăn',
         '2 → ngăn 2 ← 6',

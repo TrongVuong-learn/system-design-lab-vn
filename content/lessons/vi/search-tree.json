@@ -1,0 +1,104 @@
+[
+  {
+    "id": "search-tree",
+    "kind": "search-tree",
+    "version": 1,
+    "status": "beta",
+    "level": "L0",
+    "moduleId": "L0.3",
+    "minutes": 13,
+    "title": "Cùng mã sách, vì sao đường tìm dài hơn?",
+    "subtitle": "Tìm trên cây cân đối và cây lệch, từng nút một.",
+    "objective": "Theo dấu tra khóa trong cây tìm kiếm nhị phân; giải thích hình dạng có thể làm đường tìm dài hơn.",
+    "story": "Thư viện giữ bảy mã sách giống nhau nhưng sắp thành hai cây khác nhau. Một cây bắt đầu ở mã 8 và tỏa hai bên; cây còn lại bắt đầu ở 2 rồi nối lần lượt 4, 6, 8, 10, 12, 14. Tìm mã 14 có phải đi qua số nút giống nhau không?",
+    "explanation": "Cây tìm kiếm nhị phân (BST) tổ chức mỗi nút với tối đa hai nhánh con. Ở mọi nút, tất cả khóa trong cây con trái đều nhỏ hơn khóa của nút đó, còn cây con phải đều lớn hơn. Khi tra, bắt đầu từ gốc: bằng thì dừng, nhỏ hơn đi trái, lớn hơn đi phải. Gặp nhánh trống nghĩa là không có khóa cần tìm trong cây. Thử cùng một mã trên hai hình dạng, rồi đổi sang mã 2: cây cân đối không nhất thiết ít bước hơn cho từng mã cụ thể.",
+    "limit": "Hai cây bảy khóa khác nhau 2, 4, 6, 8, 10, 12, 14 đã dựng sẵn; mục tiêu 2, 14 hoặc 9. Một bước là xét một nút và so quan hệ, không phải số phép so máy hay ms. Không có chèn/xóa, xoay/tự cân bằng, key trùng, heap, B-tree, I/O đĩa hoặc benchmark. Đổi hình dạng chọn cây khác dựng sẵn, không minh họa thuật toán cân bằng. Không suy BST luôn chia đôi số nút.",
+    "terms": [
+      {
+        "name": "Cây tìm kiếm nhị phân",
+        "english": "Binary search tree (BST)",
+        "meaning": "Cây tối đa hai nhánh con mỗi nút, với quy tắc khóa nhỏ hơn ở toàn cây con trái, lớn hơn ở toàn cây con phải."
+      },
+      {
+        "name": "Nút",
+        "english": "Node",
+        "meaning": "Một vị trí trong cây, giữ một khóa; bài dùng mã sách làm khóa."
+      },
+      {
+        "name": "Gốc",
+        "english": "Root",
+        "meaning": "Nút bắt đầu của cây và của mỗi lần tra trong bài."
+      },
+      {
+        "name": "Cây con",
+        "english": "Subtree",
+        "meaning": "Một nút cùng các nút đi xuống từ nó. Quy tắc trái/phải áp dụng cho toàn cây con."
+      },
+      {
+        "name": "Cây lệch",
+        "english": "Skewed tree",
+        "meaning": "Cây có đường đi dài về một phía; cây lệch trong bài vẫn là BST hợp lệ."
+      }
+    ],
+    "prediction": {
+      "text": "Cùng bảy khóa và cùng tìm mã 14: cây cân đối bắt đầu ở 8, cây lệch bắt đầu ở 2. Có chắc số nút cần xét bằng nhau không?",
+      "options": [
+        "Không; hình dạng cây có thể làm đường tìm khác nhau.",
+        "Có; cùng số khóa thì mọi đường tìm dài bằng nhau."
+      ],
+      "answer": 0,
+      "explanation": "Trong hai cây dựng sẵn, mã 14 đi qua 8 → 12 → 14 ở cây cân đối, nhưng qua cả bảy nút ở cây lệch. Chỉ đếm nút đã xét, chưa nói về thời gian chạy thật."
+    },
+    "challenge": {
+      "text": "Tìm mã 9: sau 8 → 12 → 10 trên cây cân đối, cần sang trái của 10 nhưng nhánh đó trống. Có cần tìm tiếp ở nhánh phải của 12 không?",
+      "options": [
+        "Không; nhánh phải của 12 chỉ có khóa lớn hơn 12, không thể chứa 9.",
+        "Có; luôn phải kiểm hết các nút trước khi kết luận không tìm thấy."
+      ],
+      "answer": 0,
+      "explanation": "BST cho phép bỏ qua nơi chắc chắn không chứa khóa. Mã 9 nhỏ hơn 10 và 12. Nhánh trái của 10 trống nên không có 9 trong cây này; không cần sang vùng khóa lớn hơn 12."
+    },
+    "sources": [
+      {
+        "title": "CMU 15-122 Fall2026 Lecture15 §3.1/4/5 — BST, lookup và hình dạng",
+        "url": "https://www.cs.cmu.edu/~15122/handouts/lectures/15-bst.pdf"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-search-tree",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L0-03",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Chọn cách tổ chức danh mục thư viện",
+      "context": "Nhóm thư viện thử hai cây chứa cùng bảy mã để học cách đường tìm thay đổi. Đây là tình huống tự biên soạn, không phải đo hệ thống thư viện thật.",
+      "requirements": [
+        "Tra đúng mã có hoặc không có trong danh mục.",
+        "So đường tìm của mã 14 và mã 2 trên hai hình dạng; không suy thời gian ms."
+      ],
+      "activityRef": "search-tree",
+      "experimentSteps": [
+        "Tìm mã 14 ở cây cân đối rồi cây lệch phải; ghi số nút đã xét.",
+        "Đổi sang mã 2, rồi tra mã 9 không có; xem từng quyết định trái/phải và điểm dừng."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Cây cân đối dựng sẵn rút ngắn đường tệ nhất của ví dụ, nhưng mã ngay gốc cây lệch chỉ tốn một bước. Giữ cân bằng khi thêm/xóa cần cơ chế khác chưa học trong bài."
+      ],
+      "limitations": "Bảy khóa cố định, chỉ tra cứu; không mô phỏng duy trì cân bằng hoặc chi phí bộ nhớ/đĩa."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Cùng số địa điểm có buộc hai đường đi qua cùng số địa điểm không?",
+        "Hãy lần theo mã 14: từ 8 sang phải tới 12 rồi 14; từ 2 phải đi qua dãy dài hơn."
+      ],
+      "challenge": [
+        "Mã nào được phép nằm trong nhánh phải của 12? Mã 9 có thỏa điều đó không?",
+        "Toàn cây con phải của 12 có khóa lớn hơn 12. Mã 9 cần sang trái của 10; chỗ đó trống nên dừng."
+      ]
+    }
+  }
+]
