@@ -93,7 +93,7 @@
     "objective": "Nhận ra nút thắt chung và kiểm tra tác dụng của việc thêm máy xử lý.",
     "story": "Trong ngày hội trường, nhiều bạn cùng xem lịch. Mỗi máy xử lý làm được 6 yêu cầu mỗi giây, nhưng nơi lưu lịch chỉ đọc được 4 lần. Thêm máy xử lý có giải quyết chỗ chậm không?",
     "explanation": "Bộ chia tải phân công việc cho các máy. Nhưng nếu tất cả vẫn hỏi cùng một nơi lưu dữ liệu, nơi đó có thể giới hạn số việc làm xong. Hãy thay một yếu tố mỗi lần và so sánh số đang chờ.",
-    "limit": "Mô hình dùng công suất cố định, mỗi yêu cầu đọc dữ liệu một lần và không có retry. Khi bật cache, giả định 75% lượt được trả lời từ cache; đây không phải hit rate được đo từ workload thật.",
+    "limit": "Mô hình dùng công suất cố định, mỗi yêu cầu đọc dữ liệu một lần và không có retry. Khi bật cache, giả định tỷ lệ hit trung bình 75%; đây không phải hit rate được đo từ workload thật. Số đọc nguồn là tốc độ kỳ vọng theo tỷ lệ trung bình; không mô phỏng hit/miss của từng yêu cầu.",
     "terms": [
       {
         "name": "Chia tải",
@@ -425,7 +425,7 @@
     "objective": "Chọn thành phần theo yêu cầu, kiểm tra số liệu và nêu giới hạn của thiết kế.",
     "story": "Website ngày hội nhận 12 lượt đọc lịch và 6 việc gửi thông báo mỗi giây. Ngân sách là 6 điểm tài nguyên. Bạn cần trả lời hết lượt đọc và không để hàng gửi thông báo tăng mãi.",
     "explanation": "Mỗi thành phần giải quyết một vấn đề cụ thể. Máy xử lý nhận yêu cầu; cache giảm số lần đọc nguồn trong giả định này; worker làm việc từ hàng đợi. Dùng số liệu để chọn, rồi nghĩ đến dữ liệu cũ và tình huống lỗi.",
-    "limit": "Đây là bài kết hợp nhập môn, chưa phải capstone URL shortener đầy đủ. Công suất và điểm chi phí là giả lập; cache hit được giả định 75%, dữ liệu không đổi trong cửa sổ thử. Bài chưa đánh giá security, failover hoặc tính đúng đắn khi retry.",
+    "limit": "Đây là bài kết hợp nhập môn, chưa phải capstone URL shortener đầy đủ. Công suất và điểm chi phí là giả lập; tỷ lệ cache hit trung bình giả định 75%, dữ liệu không đổi trong cửa sổ thử. Bài chưa đánh giá security, failover hoặc tính đúng đắn khi retry. Số đọc nguồn là tốc độ kỳ vọng theo tỷ lệ trung bình; không mô phỏng hit/miss của từng yêu cầu.",
     "terms": [
       {
         "name": "Đánh đổi",

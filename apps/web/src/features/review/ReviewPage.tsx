@@ -157,7 +157,7 @@ export function ReviewPage() {
             onChange={(e) => configure({ cache: e.target.checked })}
           />
           <span>
-            Dùng cache đọc lịch <small>Giả định 75% lượt không đọc nguồn</small>
+            Dùng cache đọc lịch <small>Hit rate trung bình giả định 75%</small>
           </span>
         </label>
         {config.cache && (
@@ -166,7 +166,7 @@ export function ReviewPage() {
             value={config.ttl}
             min={1}
             max={10}
-            unit="phút; giả định 75% lượt qua cache không đổi"
+            unit="phút; hit rate trung bình giả định vẫn 75%"
             onChange={(ttl) => configure({ ttl })}
           />
         )}

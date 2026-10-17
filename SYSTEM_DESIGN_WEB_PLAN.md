@@ -1,6 +1,6 @@
 # Kế hoạch website học System Design tương tác
 
-Ngày lập: 11/10/2026. Phiên bản 13 — 16/10/2026: chốt phi thương mại và cải thiện phản hồi/gợi ý theo EDU-10; giữ định hướng toàn diện theo level, học sinh cấp 3, mobile-first và web trước app. Trạng thái: web beta có 18 bài nhập môn; mini-case 18 bài và gói offline beta đã hiện thực; phần giáo trình đầy đủ/case module còn theo roadmap, chưa qua pilot học sinh thật.
+Ngày lập: 11/10/2026. Phiên bản 14 — 17/10/2026: chốt phi thương mại và cải thiện phản hồi/gợi ý theo EDU-10; giữ định hướng toàn diện theo level, học sinh cấp 3, mobile-first và web trước app. Trạng thái: web beta có 18 bài nhập môn; mini-case 18 bài và gói offline beta đã hiện thực; phần giáo trình đầy đủ/case module còn theo roadmap, chưa qua pilot học sinh thật.
 
 Tên làm việc: **System Design Lab**.
 
@@ -281,7 +281,7 @@ Chỉ số theo dõi sau beta: tỷ lệ bắt đầu/hoàn thành lab, bước 
 
 ## 9. Ưu tiên triển khai đầu tiên
 
-Bắt đầu bằng bản đồ L0–L5 và registry năng lực, bootstrap workspace theo [SETUP.md](docs/engineering/SETUP.md), rồi hoàn thiện bài cache nhập môn từ mở bài đến đánh giá và resume trên điện thoại. Tiếp theo phát triển bài **“Vì sao thêm server mà hệ thống vẫn chậm?”**. Song song prototype transaction và design review để kiểm tra khung phục vụ nhiều độ sâu. Mọi đợt đối chiếu độ bao phủ, ưu tiên lấp khoảng trống cốt lõi.
+Bản đồ L0–L5, registry năng lực và workspace đã có; 18 bài beta có lab, đánh giá, mini-case và resume, kèm một bài ôn tổng hợp. Không chạy lại bootstrap trên checkout hiện hành. Bước tiếp theo là tiếp tục các phần còn thiếu của L0.3 và các năng lực nền theo thứ tự phụ thuộc trong [ROADMAP.md](docs/delivery/ROADMAP.md), rồi mở rộng transaction và design review khi bài liên quan sẵn sàng. Đối chiếu [IMPLEMENTATION_STATUS.md](docs/delivery/IMPLEMENTATION_STATUS.md) trước mỗi đợt; bài beta chưa thay thế module/capstone đầy đủ.
 
 Bài **“Vì sao website vẫn hiện phòng học cũ?”** trong [TEACHING_GUIDE.md](TEACHING_GUIDE.md) là mẫu giọng văn cần thử với học sinh trước khi nhân rộng. Tính công sức viết bổ trợ và thử nghiệm vào ước lượng nội dung sau bài mẫu.
 

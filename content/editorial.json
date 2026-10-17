@@ -216,6 +216,14 @@
       "revision": "Fall2011 Lecture8",
       "checkedAt": "2026-10-16",
       "attribution": "MIT OpenCourseWare; liên kết tham khảo, không sao chép hình hoặc code"
+    },
+    {
+      "id": "source-dns-resolver",
+      "title": "RFC 1034 §5.3.3: Resolver algorithm",
+      "url": "https://www.rfc-editor.org/rfc/rfc1034.html#section-5.3.3",
+      "revision": "RFC 1034 (1987), §5.3.3",
+      "checkedAt": "2026-10-17",
+      "attribution": "IETF / RFC Editor; diễn giải riêng quy trình resolver nhận chỉ dẫn và hỏi server tiếp theo."
     }
   ],
   "competencies": [
@@ -415,7 +423,7 @@
     },
     {
       "lessonId": "balance",
-      "revision": 3,
+      "revision": 4,
       "competencyIds": ["balance-intro"],
       "prerequisiteIds": ["metrics"],
       "claims": [
@@ -425,11 +433,11 @@
         }
       ],
       "review": {
-        "reviewer": "Codex — EDU-11, đối chiếu engine/trace và gợi ý biên soạn",
+        "reviewer": "Codex — QA-08, đối chiếu diễn đạt và kiểm regression",
         "reviewerType": "agent",
-        "date": "2026-10-14",
+        "date": "2026-10-17",
         "status": "beta-checked",
-        "evidence": "docs/delivery/EDU_11_FEEDBACK_ALL_LESSONS.md"
+        "evidence": "docs/delivery/QA_08_KNOWLEDGE_FIXES.md"
       },
       "caseReview": {
         "caseId": "case-balance",
@@ -527,7 +535,7 @@
     },
     {
       "lessonId": "design",
-      "revision": 3,
+      "revision": 4,
       "competencyIds": ["design-intro"],
       "prerequisiteIds": ["balance", "cache", "queue"],
       "claims": [
@@ -537,11 +545,11 @@
         }
       ],
       "review": {
-        "reviewer": "Codex — EDU-11, đối chiếu engine/trace và gợi ý biên soạn",
+        "reviewer": "Codex — QA-08, đối chiếu diễn đạt và kiểm regression",
         "reviewerType": "agent",
-        "date": "2026-10-14",
+        "date": "2026-10-17",
         "status": "beta-checked",
-        "evidence": "docs/delivery/EDU_11_FEEDBACK_ALL_LESSONS.md"
+        "evidence": "docs/delivery/QA_08_KNOWLEDGE_FIXES.md"
       },
       "caseReview": {
         "caseId": "case-design",
@@ -583,21 +591,25 @@
     },
     {
       "lessonId": "dns",
-      "revision": 3,
+      "revision": 4,
       "competencyIds": ["dns-intro"],
       "prerequisiteIds": ["cache"],
       "claims": [
         {
           "text": "DNS giúp tra thông tin gắn với tên miền, trong bài là địa chỉ IP. Resolver có thể dùng câu trả lời trong cache khi TTL còn hạn. Nơi quản lý tên đổi địa chỉ không tự đẩy thay đổi đến mọi cache; lần tra sau khi hết hạn mới lấy lại trong mô hình này.",
           "sourceIds": ["source-7"]
+        },
+        {
+          "text": "Resolver nhận chỉ dẫn rồi tự hỏi server tiếp theo; root và TLD không tự chuyển tiếp truy vấn trong quy trình tra lặp của bài.",
+          "sourceIds": ["source-dns-resolver"]
         }
       ],
       "review": {
-        "reviewer": "Codex — EDU-11, đối chiếu engine/trace và gợi ý biên soạn",
+        "reviewer": "Codex — QA-08, đối chiếu diễn đạt và kiểm regression",
         "reviewerType": "agent",
-        "date": "2026-10-14",
+        "date": "2026-10-17",
         "status": "beta-checked",
-        "evidence": "docs/delivery/EDU_11_FEEDBACK_ALL_LESSONS.md"
+        "evidence": "docs/delivery/QA_08_KNOWLEDGE_FIXES.md"
       },
       "caseReview": {
         "caseId": "case-dns",

@@ -32,7 +32,7 @@
     ],
     "limits": [
       "Mỗi lần chạy độc lập: phần đọc tính một cửa sổ một giây không có hàng chờ ban đầu; phần gửi chạy bốn giây từ hàng chờ của tình huống. Hai luồng có tải riêng, không suy ra việc gửi từ lượt đọc.",
-      "Mỗi server làm tối đa sáu lượt đọc/giây; nơi lưu lịch làm bốn lượt đọc/giây. Nếu bật cache, giả định đúng 75% lượt không đọc nguồn, giữ cố định cho mọi TTL; không đo hit rate từ TTL hoặc workload thật.",
+      "Mỗi server làm tối đa sáu lượt đọc/giây; nơi lưu lịch làm bốn lượt đọc/giây. Nếu bật cache, giả định tỷ lệ hit trung bình 75%, giữ cố định cho mọi TTL; không đo hit rate từ TTL hoặc workload thật. Số đọc nguồn là tốc độ kỳ vọng, có thể là số lẻ; bài không phân hit/miss cho từng lượt.",
       "Độ mới chỉ kiểm policy TTL không quá một phút: giả định không trả bản ghi hết hạn và lấy nguồn mới khi cần. Bỏ qua mạng, thời gian tra nguồn, lỗi cập nhật và bản sao. Đây không phải bảo đảm dữ liệu mới trong hệ thống thật.",
       "Mỗi worker làm tối đa hai việc/giây, việc đến đều, không retry/mất ACK/lỗi. Điểm ngân sách chỉ để luyện đánh đổi, không phải tiền hay giá dịch vụ.",
       "Công cụ chỉ kiểm ràng buộc của mô hình; bạn tự đánh giá lời giải thích. Lưu lượt ôn không chứng minh đã thành thạo module hoặc thiết kế production."
@@ -52,11 +52,11 @@
       }
     ],
     "review": {
-      "reviewer": "Codex — đối chiếu nguồn và trace EDU-12",
+      "reviewer": "Codex — QA-08, làm rõ tỷ lệ trung bình và kiểm regression",
       "reviewerType": "agent",
-      "date": "2026-10-15",
+      "date": "2026-10-17",
       "status": "beta-checked",
-      "evidence": "docs/delivery/EDU_12_SCHOOL_REVIEW.md"
+      "evidence": "docs/delivery/QA_08_KNOWLEDGE_FIXES.md"
     }
   }
 ]
