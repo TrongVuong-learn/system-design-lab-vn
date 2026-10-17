@@ -8,7 +8,7 @@ Nền tảng học System Design tiếng Việt, trực quan, tương tác, thi�
 
 **[Mở System Design Lab trên Vercel](https://system-design-lab-vn.vercel.app)** —18 bài nhập môn +1 bài ôn, học không cần tài khoản. Có thể gửi production URL này cho AI khác test; [prompt review](docs/research/AI_REVIEW_HANDOFF.md) chỉ cách kiểm nguồn/trace/assessment.
 
-Vercel là nơi triển khai chính theo yêu cầu16/10/2026; hiện phát hành bằng CLI prebuilt, chưa có GitHub auto-deploy. Site ChatGPT cũ giữ nguyên để chuyển tiến độ: xuất ở địa chỉ cũ, nhập tại Vercel vì hai origin có storage riêng. Xem [báo cáo phát hành](docs/delivery/REL_02_VERCEL.md).
+Vercel là nơi triển khai chính theo yêu cầu16/10/2026; đã nối GitHub với production branch `master`; code được merge vào master sẽ tự triển khai. Site ChatGPT cũ giữ nguyên để chuyển tiến độ: xuất ở địa chỉ cũ, nhập tại Vercel vì hai origin có storage riêng. Xem [báo cáo phát hành](docs/delivery/REL_02_VERCEL.md).
 
 Mã nguồn: **[TrongVuong-learn/system-design-lab-vn](https://github.com/TrongVuong-learn/system-design-lab-vn)** (repo công khai, nhánh mặc định `master`).
 

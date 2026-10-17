@@ -26,3 +26,11 @@ Evidence ignored tại `.cache/qa08/`: logs, ảnh và tested-artifact.json có 
 | AUD-03 | Resolved trong source: số kỳ vọng không làm tròn, nhãn tỷ lệ trung bình | Fixed unit cases, rate/resume E2E; bảng cũ ghi rõ làm tròn |
 | AUD-04 | Resolved trong tài liệu hiện hành:18 bài và bước tiếp theo | README, CURRICULUM_MAP, TEACHING_GUIDE, SYSTEM_DESIGN_WEB_PLAN; giữ lịch sử EDU-09 |
 
+
+## Tích hợp và phát hành — 17/10/2026
+
+Theo yêu cầu push/deploy và production luôn theo master: [PR #3](https://github.com/TrongVuong-learn/system-design-lab-vn/pull/3) đã merge thành `22c299c13aefd566015c7b867b0dc48c86f3b5f5`. [Quality 38985680874](https://github.com/TrongVuong-learn/system-design-lab-vn/actions/runs/38985680874) success: 70 unit và 211 E2E đạt/1 skip hover mobile có touch test riêng. Phần ghi “chưa commit/push” ở trên là trạng thái khi hoàn tất kiểm tra source, trước lượt phát hành này.
+
+Deploy prebuilt đã thực hiện từ checkout đúng origin/master 22c299c, app/content không khác source QA-08 đã kiểm. Deployment `dpl_AAeAGReEqJvyVnucjsC1K951c7dx` READY production, URL bất biến https://system-design-lab-a33gm03s8-trongvuonglearns-projects.vercel.app ; alias công khai https://system-design-lab-vn.vercel.app . Artifact offline version `40db53f9dd0fcc4b`, 18 file static SHA256 khớp khi GET không đăng nhập, missing JS trả 404. Chromium 320/390/1280 px: catalog 18, ba sketch, DNS referral, rate 0,5, lưu/reload và offline đều đạt; không overflow/pageerror. Evidence `.cache/qa08/{tested-artifact,cloud-http,live-browser}.json` và log deploy/CI ignored.
+
+[PR #4](https://github.com/TrongVuong-learn/system-design-lab-vn/pull/4) đã tích hợp skill/agent research được người dùng đồng ý công khai; CI riêng 39015011942 success. Không chép source hoặc trạng thái plan cũ lên master. Vercel Git connection xác nhận repo TrongVuong-learn/system-design-lab-vn, productionBranch master, Node24.x, build pnpm build, output dist. Các commit tooling/tài liệu không đổi app source; Git deployments sau đó theo cùng ứng dụng QA-08. Kiểm READY/source SHA của deployment cuối khi bàn giao; không coi connection đơn thuần là bằng chứng build thành công.
