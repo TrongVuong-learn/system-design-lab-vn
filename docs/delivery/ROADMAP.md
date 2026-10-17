@@ -341,3 +341,7 @@ Kết quả ENG-03A local: 80 unit/22 files, content/coverage, lint, format và 
 In progress: bài L0.3 theo [scope/acceptance](EDU_20_MEMORY_LOCALITY.md). Thử cùng tám ô với một khối cache; không đổi assessment cũ, không đo tốc độ thật. Sau QA bổ sung serialization/compression rồi OS/L1 theo §19. ENG-03A là nền bảo vệ compatibility, chưa thay migration attempt đầy đủ.
 
 Kết quả EDU-20 local: 21bài+1ôn,83unit/23files và24E2E liên quan đạt; ảnh/resume/export-import/offline320/390/1280 đạt. Phần source và review nằm trong EDU-20; chỉ đóng scope sau CI/merge/phát hành, không đóng L0.3.
+
+ENG-03A đã merge PR#10, CI80unit/219E2E đạt/1skip; chưa đóng ENG-03 đầy đủ. EDU-20 đã merge PR#11 master8f7f0ea, CI83unit/223E2E đạt/1skip. Catalog21bài+1ôn; phạm vi phát hành/evidence theo [EDU-20](EDU_20_MEMORY_LOCALITY.md). Toàn bộ roadmap vẫn mở ở các phần §19; không đánh dấu hoàn thành chỉ từ hai đợt này.
+
+EDU-20 đã phát hành production READY/master8f7f0ea,18file HTTP/hash/cache đúng; browser320/390/1280 export/import/resume/offline đạt, không overflow/pageerror. Báo cáo ghi deploymentID và giới hạn. Tiếp theo serialization/compression và OS, cùng contract attempt còn mở; không tự đóng module hoặc toàn roadmap.

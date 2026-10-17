@@ -18,3 +18,17 @@ Acceptance: fixtures sáu cấu hình/mọi prefix, cold miss, conservation, mal
 Ảnh lab320/390/1280 đã xem: controls/trace chữ/khối cache không tràn ngang, màu vàng có nhãn “Trong cache”. Export/import, lưu2bước/reload/offline rồi đổi xen kẽ và đọc hết đều đạt, không pageerror. Evidence ignored `.cache/edu20/`, log `/private/tmp/edu20-e2e.log`. Sau bổ sung role=list cho danh sách CSS bỏ bullet cần retest bài mới; CI chạy full trước merge. Compatibility20ID cũ được so deep-equal với baseline, chỉ thêm locality.
 
 Retest sau role=list:4/4 bài locality đạt trên Chromium mobile/desktop, Firefox, WebKit. Không đổi cơ chế hoặc đáp án để làm kiểm thử đạt.
+
+## CI và tích hợp
+
+[PR#10](https://github.com/TrongVuong-learn/system-design-lab-vn/pull/10) thêm ENG-03A, merge d45076f; Quality39023657000 đạt80unit/219E2E,1skip. [PR#11](https://github.com/TrongVuong-learn/system-design-lab-vn/pull/11) thêm locality, squash merge thành `8f7f0ea04ce2388002c13c2d254997687a8b94ca`. Xung đột do squash baseline đã xử lý; cây source trước/sau đồng bộ và sau merge master giống hệt nhau, kiểm bằng git diff.
+
+[Quality39024158773](https://github.com/TrongVuong-learn/system-design-lab-vn/actions/runs/39024158773) đạt83unit/223E2E,1skip, cùng content/coverage/lint/format/build. Skip hover mobile đã có test tap riêng; emulation không thay thiết bị thật. Bản run39023963418 trên cùng tree cũng đạt, nhưng dùng run sau đồng bộ làm gate tích hợp. Không thay runtime/dependency.
+
+## Phát hành ứng dụng
+
+Vercel Git deployment `dpl_EU3gveFZEjnFHvUcjw2UdgC5tiAT` READY, production alias https://system-design-lab-vn.vercel.app, branch master/SHA8f7f0ea. [Mở bài locality](https://system-design-lab-vn.vercel.app/#/learn/locality). 18file static khớp SHA256 với artifact local đã kiểm; MIME JavaScript, cache assets immutable và shell/SW/manifest no-cache đạt; missing JS404. Số file không phải số bài: catalog21bài+1ôn. Evidence `.cache/edu20/{tested-artifact,release,cloud-http}.json` ignored.
+
+Chromium production320/390/1280: lưu2lượt đọc/reload, export/import, tải gói, mở/reload locality offline rồi đổi xen kẽ và đọc hết8miss đều đạt. Không overflow/pageerror, ảnh lab đã review. `.cache/edu20/live-browser.json` ghi kết quả từng width. Gói cũ cần tải mới và đóng các tab cũ để kích hoạt; không xóa tiến độ hoặc ép update.
+
+Scope ENG-03A và EDU-20 đã phát hành. Serialization/compression, OS sâu, L1–L5/capstone/track, attempt migration, performance/device/pilot/app còn theo roadmap. Không tuyên bố hoàn thành toàn bộ plan; không có human review hoặc thiết bị thật mới trong đợt này. Commit tài liệu sau release không đổi artifact ứng dụng; deployment cuối theo master được kiểm lại khi bàn giao.
