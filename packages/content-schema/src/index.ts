@@ -131,3 +131,5 @@ export {
   type SchoolReviewProgress,
   type Review,
 } from './review';
+
+export { validateCompatibility, lessonContract, compatibilitySchema } from './compatibility';

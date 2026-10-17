@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "pnpm content:build && pnpm --filter @sdl/web dev",
-    "content:check": "node --import tsx scripts/content.ts --check",
+    "content:check": "node --import tsx scripts/content.ts --check && pnpm coverage:check",
     "content:build": "node --import tsx scripts/content.ts",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "lint": "eslint apps packages scripts tests",
@@ -17,7 +17,9 @@
     "build": "pnpm content:build && pnpm typecheck && pnpm --filter @sdl/web build",
     "preview": "pnpm --filter @sdl/web preview",
     "format": "prettier --write apps packages scripts tests *.ts *.js *.json",
-    "format:check": "prettier --check apps packages scripts tests *.ts *.js *.json"
+    "format:check": "prettier --check apps packages scripts tests *.ts *.js *.json",
+    "coverage:write": "node --import tsx scripts/coverage.ts --write",
+    "coverage:check": "node --import tsx scripts/coverage.ts"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
