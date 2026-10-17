@@ -1,4 +1,4 @@
-export const ENGINE_VERSION = '1.8.0';
+export const ENGINE_VERSION = '1.8.1';
 export interface CacheState {
   time: number;
   source: number;
@@ -109,7 +109,8 @@ export function trafficStep(c: TrafficConfig, backlog = 0) {
     arrivals: c.arrivals,
     completed,
     waiting: offered - completed,
-    databaseReads: Math.round(completed * (1 - c.cacheHit)),
+    // Expected origin read rate under the fixed average hit ratio, not a per-request trace.
+    databaseReads: completed * (1 - c.cacheHit),
     capacity,
     bottleneck: apiCapacity <= dbBound ? 'máy xử lý' : 'nơi lưu dữ liệu',
   };

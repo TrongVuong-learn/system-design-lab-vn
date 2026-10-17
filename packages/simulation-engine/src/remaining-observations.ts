@@ -90,10 +90,16 @@ export function observeRemaining(kind: GuidedKind, before: Data, after: Data): O
         row('Chi phí giả lập', `${a.cost}/6 điểm`, `${c.cost}/6 điểm`),
       );
     else
-      rows.push(row('Đọc nguồn', `${a.databaseReads} lượt/giây`, `${c.databaseReads} lượt/giây`));
+      rows.push(
+        row(
+          'Đọc nguồn kỳ vọng',
+          `${n(a.databaseReads)} lượt/giây`,
+          `${n(c.databaseReads)} lượt/giây`,
+        ),
+      );
     const change =
       c.cache !== a.cache
-        ? `Cache ${c.cache ? 'bật với giả định 75% lượt không đọc nguồn' : 'tắt, mọi lượt cần đọc nguồn'}.`
+        ? `Cache ${c.cache ? 'bật với tỷ lệ hit trung bình giả định 75%' : 'tắt, mọi lượt cần đọc nguồn'}.`
         : c.workers !== a.workers
           ? 'Đổi worker chỉ đổi công suất gửi thông báo, không tăng công suất đọc lịch.'
           : c.servers !== a.servers

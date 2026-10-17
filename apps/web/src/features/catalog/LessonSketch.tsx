@@ -1,6 +1,17 @@
 export function LessonSketch({ kind }: { kind: string }) {
   const foundation = (
     {
+      concurrency: [
+        'Hai luồng cùng đọc 30',
+        'A ghi 31 · B ghi 31',
+        'Mất một lượt cộng khi đọc–ghi xen kẽ',
+      ],
+      'cpu-io': [
+        'Một CPU, hai việc chờ dữ liệu',
+        '10\u00a0ms → 6\u00a0ms',
+        '1 → 2 worker, cùng một CPU',
+      ],
+      tls: ['Lịch đi qua kênh TLS', 'Giữ kín · Phát hiện sửa', 'Kiểm tra đúng danh tính máy chủ'],
       'hash-table': [
         'Hai mã khác, cùng một ngăn',
         '2 → ngăn 2 ← 6',

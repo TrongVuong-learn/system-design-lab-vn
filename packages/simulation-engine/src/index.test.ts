@@ -105,3 +105,20 @@ it('rejects malformed replica checkpoints and keeps ordered pending writes', () 
   ])
     expect(restoreReplica(bad)).toEqual(initialReplica());
 });
+
+it('keeps fractional expected origin reads for an average hit rate', () => {
+  const config = { servers: 2, serverCapacity: 6, databaseCapacity: 4, cacheHit: 0.75 };
+  for (const [arrivals, expected] of [
+    [1, 0.25],
+    [2, 0.5],
+    [3, 0.75],
+    [6, 1.5],
+    [12, 3],
+  ]) {
+    const result = trafficStep({ ...config, arrivals: arrivals! });
+    expect(result.databaseReads).toBe(expected);
+    expect(result.completed + result.waiting).toBe(arrivals);
+  }
+  expect(trafficStep({ ...config, arrivals: 20, servers: 1 }).databaseReads).toBe(1.5);
+  expect(trafficStep({ ...config, arrivals: 2, cacheHit: 0 }).databaseReads).toBe(2);
+});

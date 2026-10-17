@@ -143,3 +143,17 @@ it('all ten kinds produce bounded versioned observations or explicit reset, incl
   expect(observeRemaining('request', { step: 3 }, { step: 0 })).toBeNull();
   expect(observeRemaining('http', { step: 2 }, { step: 0 })).toBeNull();
 });
+
+it('explains fractional origin read rates without rounding away the cache assumption', () => {
+  const observation = observeRemaining(
+    'balance',
+    { arrivals: 2, cache: false },
+    { arrivals: 2, cache: true },
+  )!;
+  expect(observation.rows).toContainEqual({
+    label: 'Đọc nguồn kỳ vọng',
+    before: '2 lượt/giây',
+    after: '0,5 lượt/giây',
+  });
+  expect(observation.reason).toContain('tỷ lệ hit trung bình giả định 75%');
+});

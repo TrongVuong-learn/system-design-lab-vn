@@ -111,7 +111,7 @@
     "objective": "Theo dấu lần tra DNS và giải thích cache còn hạn có thể trả địa chỉ cũ.",
     "story": "Bạn nhớ tên lich.truong.example, nhưng máy cần địa chỉ IP. Bộ tra cứu DNS hỏi các nơi chỉ dẫn để tìm nơi quản lý tên đó. Nó giữ câu trả lời trong 5 giây mô phỏng để dùng lại.",
     "explanation": "DNS giúp tra thông tin gắn với tên miền, trong bài là địa chỉ IP. Resolver có thể dùng câu trả lời trong cache khi TTL còn hạn. Nơi quản lý tên đổi địa chỉ không tự đẩy thay đổi đến mọi cache; lần tra sau khi hết hạn mới lấy lại trong mô hình này.",
-    "limit": "Tên .example và IP 203.0.113.x chỉ để minh họa, không gửi truy vấn mạng. Một bản ghi A, TTL 5 giây, mạng luôn hoạt động. Đường root → máy chủ tên miền cấp cao → nơi quản lý tên được rút gọn; bỏ qua cache chỉ dẫn, CNAME, negative caching, DNSSEC và serve-stale. DNS không phải bước tải nội dung web.",
+    "limit": "Tên .example và IP 203.0.113.x chỉ để minh họa, không gửi truy vấn mạng. Một bản ghi A, TTL 5 giây, mạng luôn hoạt động. Resolver lần lượt hỏi root, máy chủ tên miền cấp cao và nơi quản lý tên; các máy chủ trả chỉ dẫn để resolver hỏi nơi tiếp theo. Đường tra được rút gọn; bỏ qua cache chỉ dẫn, CNAME, negative caching, DNSSEC và serve-stale. DNS không phải bước tải nội dung web.",
     "terms": [
       {
         "name": "Bộ tra cứu",
@@ -145,6 +145,10 @@
       {
         "title": "RFC 1035: Domain names — implementation and specification",
         "url": "https://www.rfc-editor.org/rfc/rfc1035"
+      },
+      {
+        "title": "RFC 1034 §5.3.3: Resolver algorithm và xử lý chỉ dẫn",
+        "url": "https://www.rfc-editor.org/rfc/rfc1034.html#section-5.3.3"
       }
     ],
     "caseStudy": {

@@ -285,7 +285,7 @@ function TrafficLab({ progress, onChange, design = false }: LabProps & { design?
           onChange={(e) => change({ cache: e.target.checked })}
         />
         <span>
-          Thêm cache <small>Giả định 75% lượt không cần đọc nguồn</small>
+          Thêm cache <small>Hit rate trung bình giả định 75%</small>
         </span>
       </label>
       {design && (
@@ -322,7 +322,9 @@ function TrafficLab({ progress, onChange, design = false }: LabProps & { design?
       </div>
       <p className="muted">
         Đây là cửa sổ 1 giây bắt đầu không có backlog. “Còn chờ” không phải tổng hàng đợi của một
-        lần chạy kéo dài.
+        lần chạy kéo dài. Khi bật cache, tỷ lệ hit trung bình giả định là 75%. Ví dụ, 2 lượt hoàn
+        tất tương ứng 0,5 lượt đọc nguồn kỳ vọng mỗi giây. Số lẻ biểu diễn tốc độ trung bình, không
+        phải một phần yêu cầu được gửi; bài chưa mô phỏng hit/miss của từng lượt.
       </p>
     </section>
   );

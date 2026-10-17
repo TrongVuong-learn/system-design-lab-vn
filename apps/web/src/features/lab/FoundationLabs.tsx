@@ -127,8 +127,9 @@ export function DnsLab({ progress, onChange }: Props) {
       </div>
       {state.route === 'authoritative' && (
         <p className="dns-trace">
-          Đường tra rút gọn: resolver → root → máy chủ tên miền cấp cao → nơi quản lý tên →
-          resolver.
+          Resolver lần lượt hỏi root, máy chủ tên miền cấp cao, rồi nơi quản lý tên. Root và máy chủ
+          tên miền cấp cao trả chỉ dẫn để resolver tự hỏi nơi tiếp theo; nơi quản lý tên trả địa chỉ
+          cần tìm. Đây là đường tra rút gọn khi chưa có thông tin chỉ dẫn trong cache.
         </p>
       )}
       <p className="muted">

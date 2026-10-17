@@ -67,7 +67,7 @@ Quy tắc cho agent được lưu trong [AGENTS.md](AGENTS.md). Repository có E
 
 ## Mốc bắt đầu triển khai
 
-Đã có workspace, schema, core, renderer, content pipeline và bài cache từ tình huống đến assessment/resume. Mười sáu bài có tình huống giả định trong chặng Áp dụng theo [EDU-09](docs/delivery/EDU_09_CASE_STUDY_IMPLEMENTATION.md); vẫn là lớp nhập môn, không thay thế các module hoặc capstone đầy đủ. Báo cáo hiện thực và phần còn lại nằm trong [IMPLEMENTATION_STATUS.md](docs/delivery/IMPLEMENTATION_STATUS.md).
+Đã có workspace, schema, core, renderer, content pipeline và bài cache từ tình huống đến assessment/resume. Mười tám bài có tình huống giả định trong chặng Áp dụng theo [EDU-09](docs/delivery/EDU_09_CASE_STUDY_IMPLEMENTATION.md); vẫn là lớp nhập môn, không thay thế các module hoặc capstone đầy đủ. Báo cáo hiện thực và phần còn lại nằm trong [IMPLEMENTATION_STATUS.md](docs/delivery/IMPLEMENTATION_STATUS.md).
 
 Bài HTTPS/TLS mới tại L0.4: [phạm vi, nguồn và QA EDU-13](docs/delivery/EDU_13_HTTPS_TLS.md). Đây vẫn là học liệu nhập môn, chưa hoàn tất36 module.
 
