@@ -303,3 +303,9 @@ Task tiếp: bài nhập môn hash/separate chaining cho mã sách2,6,10,14; has
 Kết quả EDU-17: bài nhập môn hash table/separate chaining và mini-case đã hiện thực, nâng catalog lên 18 bài + 1 bài ôn. 68 unit và 24 E2E liên quan đạt; ảnh 320/390/1280 px, export/import và offline kiểm riêng. Nguồn, giới hạn và trạng thái phát hành tại [EDU-17](EDU_17_HASH_COLLISIONS.md). L0.3 và pilot vẫn mở; tiếp theo là cây/heap/locality theo prerequisite.
 
 EDU-17 đã tích hợp qua PR #1, CI đầy đủ 195 E2E đạt/1 skip và phát hành Vercel READY; HTTP SHA256 và browser/offline production đạt. Xem báo cáo EDU-17 để phân biệt artifact/source, giới hạn và bước cập nhật gói cũ.
+
+## 23. EDU-18 — cây tìm kiếm và hình dạng L0.3
+
+Task Ready ngày 17/10/2026, sau hash table; owner Codex. Bài nối library-search: bảy khóa 2/4/6/8/10/12/14, BST cân đối dựng sẵn so với cây lệch phải dựng sẵn. Tra 2/14/9 theo nhánh trái nhỏ hơn, phải lớn hơn; khóa không có dừng tại nhánh trống. Đếm một nút đã xét, không primitive comparison/ms. Không thao tác chèn/xóa/cân bằng, không đồng nhất BST với B-tree/index database hoặc heap. Case thư viện CASE-L0-03, nguồn CMU Lecture15 §3.1/4/5. Core thuần; checkpoint shape/target/step/modelVersion, derive path, bỏ counter nhập; không đổi 18 assessment cũ. UI sơ đồ nhỏ cân đối hoặc chuỗi dọc có nhãn nhánh phải, trace chữ, before/after và hints; mobile320/390, keyboard, resume/export/import/offline.
+
+Acceptance: fixtures độc lập cả 6 preset/mọi prefix; invariant BST toàn subtree, tất cả 7 khóa xuất hiện đúng một lần; invalid/version/immutability; E2E bốn browser + responsive/offline, xem ảnh nội dung thật. Cập nhật nguồn chính, commit/PR/CI/merge master rồi Vercel auto-deploy; xác minh READY/source SHA và smoke. Không đóng toàn L0.3 hoặc pilot. Heap/locality và các cấu trúc dữ liệu sâu vẫn còn mở.
