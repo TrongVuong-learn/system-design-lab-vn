@@ -323,3 +323,14 @@ Acceptance: core thuần replay checkpoint method/step/model1, không tin heap/r
 Kết quả local EDU-19: 20 bài + 1 bài ôn; content/build/lint và 76 unit/21files đạt. Responsive/offline20test đạt; 4 test bài mới đạt sau sửa locator test chọn nhầm nhãn (không đổi assertion hoặc app). Ảnh320/390/1280 và export/import/offline đạt. PR/CI và production ghi theo bằng chứng thực tế trong báo cáo EDU-19; không đóng L0.3 hoặc pilot.
 
 EDU-19 đã hoàn tất scope: PR #8 merge master; CI76unit/219E2E đạt,1skip; Vercel READY đúng SHA và HTTP/browser/offline production đạt. Báo cáo EDU-19 ghi evidence/giới hạn. Catalog20bài +1ôn; bước tiếp theo là locality, rồi serialization/compression, không tự đóng L0.3.
+
+
+## 25. ENG-03A — khóa compatibility và đo độ bao phủ (17/10/2026)
+
+Scope: bảo vệ cách hiểu tiến độ v1 của 20 bài đã phát hành, sinh báo cáo 36 module từ source và chặn báo cáo lỗi thời trong CI. Không đổi UI, engine, học liệu hoặc storage; không biến 20 bài nhập môn thành giáo trình hoàn chỉnh. ADR0005 giải thích baseline và giới hạn. ENG-03 đầy đủ vẫn mở: planned competency registry, attempt có phiên bản, migration và rubric nhiều mức chưa hiện thực.
+
+Acceptance: pipeline từ chối đổi answer index/assessment/kind/module/version, mất ID cũ và thiếu baseline mới; báo cáo không suy ra complete từ số bài; giữ build và test cũ. Sau scope này tiếp tục L0.3 locality/serialization/compression, OS và L1–L5 theo bảng §19; pilot/device/store giữ gate ngoài môi trường, không đóng bằng AI.
+
+Kiểm chứng: content/coverage/lint đạt; lượt unit đầu79 test đạt nhưng typecheck phát hiện fixture test version2 ngoài literal lesson schema1. Đã sửa test thay đổi baseline thay vì dựng lesson bất hợp lệ. Kết quả cuối ghi sau kiểm tra lại.
+
+Kết quả ENG-03A local: 80 unit/22 files, content/coverage, lint, format và build/typecheck đạt. Không đổi UI/luồng học nên không thêm E2E mới; workflow Quality vẫn chạy regression đầy đủ trước tích hợp. Phần ENG-03 còn lại và toàn giáo trình chưa hoàn thành.

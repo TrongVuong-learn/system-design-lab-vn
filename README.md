@@ -63,11 +63,11 @@ pnpm test:e2e
 
 Các tài liệu sản phẩm ở root được giữ đường dẫn để các liên kết trước đây tiếp tục hoạt động. Thay đổi quyết định kỹ thuật cần cập nhật ADR và các tài liệu liên quan.
 
-Quy tắc cho agent được lưu trong [AGENTS.md](AGENTS.md). Repository có EditorConfig, Git ignore, PR template và cấu hình GitHub Actions Quality. Remote GitHub đã kết nối ngày16/10/2026; workflow Quality đã khởi chạy trên GitHub. Xem [kết quả CI](https://github.com/TrongVuong-learn/system-design-lab-vn/actions); chỉ coi đạt khi run hoàn tất thành công. Vercel hiện vẫn phát hành bằng CLI, chưa có auto-deploy từ GitHub.
+Quy tắc cho agent được lưu trong [AGENTS.md](AGENTS.md). Repository có EditorConfig, Git ignore, PR template và cấu hình GitHub Actions Quality. Remote GitHub đã kết nối ngày16/10/2026; workflow Quality đã khởi chạy trên GitHub. Xem [kết quả CI](https://github.com/TrongVuong-learn/system-design-lab-vn/actions); chỉ coi đạt khi run hoàn tất thành công. Vercel tự triển khai từ GitHub khi merge vào `master`; CLI dành cho phát hành/rollback có chủ đích từ master đã kiểm.
 
 ## Mốc bắt đầu triển khai
 
-Đã có workspace, schema, core, renderer, content pipeline và bài cache từ tình huống đến assessment/resume. Mười tám bài có tình huống giả định trong chặng Áp dụng theo [EDU-09](docs/delivery/EDU_09_CASE_STUDY_IMPLEMENTATION.md); vẫn là lớp nhập môn, không thay thế các module hoặc capstone đầy đủ. Báo cáo hiện thực và phần còn lại nằm trong [IMPLEMENTATION_STATUS.md](docs/delivery/IMPLEMENTATION_STATUS.md).
+Đã có workspace, schema, core, renderer, content pipeline và bài cache từ tình huống đến assessment/resume. Hai mươi bài có tình huống giả định trong chặng Áp dụng theo [EDU-09](docs/delivery/EDU_09_CASE_STUDY_IMPLEMENTATION.md); vẫn là lớp nhập môn, không thay thế các module hoặc capstone đầy đủ. Báo cáo hiện thực và phần còn lại nằm trong [IMPLEMENTATION_STATUS.md](docs/delivery/IMPLEMENTATION_STATUS.md).
 
 Bài HTTPS/TLS mới tại L0.4: [phạm vi, nguồn và QA EDU-13](docs/delivery/EDU_13_HTTPS_TLS.md). Đây vẫn là học liệu nhập môn, chưa hoàn tất36 module.
 
@@ -84,3 +84,5 @@ Triển khai Vercel: [REL-02](docs/delivery/REL_02_VERCEL.md). Giao AI khác ki�
 ## Tooling cho agent
 
 [Skill đã cài và giới hạn áp dụng](docs/engineering/AGENT_SKILLS.md); kiểm inventory/checksum bằng `node scripts/check-skills.mjs`. [Review plan ngày 12/10](docs/delivery/PLAN_REVIEW_2026-10-12.md) là bản lịch sử, không thay trạng thái 20 bài hiện hành.
+
+Độ bao phủ theo module được kiểm tự động tại [CONTENT_COVERAGE](docs/delivery/CONTENT_COVERAGE.md); kiểm tra hợp đồng đáp án đã phát hành nằm trong `pnpm content:check`.

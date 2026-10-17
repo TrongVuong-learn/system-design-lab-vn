@@ -4,6 +4,7 @@ import {
   moduleSchema,
   validateCatalog,
   validateReviews,
+  validateCompatibility,
 } from '../packages/content-schema/src/index';
 const source = await readFile('CURRICULUM_MAP.md', 'utf8');
 const modules = [...source.matchAll(/^\| (L[0-5]\.[1-6]) \| ([^|]+) \|/gm)].map((m) => {
@@ -30,6 +31,10 @@ const { lessons, editorial, coverage } = validateCatalog(
   modules,
   allLessons,
   JSON.parse(await readFile('content/editorial.json', 'utf8')),
+);
+validateCompatibility(
+  allLessons,
+  JSON.parse(await readFile('content/compatibility-v1.json', 'utf8')),
 );
 const reviewFiles = (await readdir('content/reviews/vi')).filter((f) => f.endsWith('.json')).sort();
 const reviews = validateReviews(
