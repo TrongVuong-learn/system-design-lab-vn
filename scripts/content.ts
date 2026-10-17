@@ -56,6 +56,7 @@ const order = [
   'hash-table',
   'search-tree',
   'priority-heap',
+  'locality',
   'metrics',
   'cache',
   'dns',

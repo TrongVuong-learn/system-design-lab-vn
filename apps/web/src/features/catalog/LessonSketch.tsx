@@ -12,6 +12,11 @@ export function LessonSketch({ kind }: { kind: string }) {
         '1 → 2 worker, cùng một CPU',
       ],
       tls: ['Lịch đi qua kênh TLS', 'Giữ kín · Phát hiện sửa', 'Kiểm tra đúng danh tính máy chủ'],
+      locality: [
+        'Cùng tám ô, đổi thứ tự đọc',
+        '2 hoặc 8 lượt nạp khối',
+        'Một khối 4 ô: liền nhau so với xen kẽ',
+      ],
       'priority-heap': [
         'Cùng bảy việc, hai cách chọn',
         'A · 4 hay F · 1?',

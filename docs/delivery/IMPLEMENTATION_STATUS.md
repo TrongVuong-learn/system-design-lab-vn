@@ -2,7 +2,7 @@
 
 ## Cập nhật 17/10/2026
 
-Catalog hiện 20 bài beta và1 bài ôn tổng hợp; mới nhất là [EDU-19 heap và hàng đợi ưu tiên](EDU_19_PRIORITY_HEAP.md). Phần ghi số6 bài/kiểm chứng bên dưới là lịch sử đợt đầu, không phải trạng thái catalog hiện tại. [ROADMAP](ROADMAP.md) quản lý công việc tiếp; [QA-07](QA_07_KNOWLEDGE_REVIEW.md) chỉ review baseline14 bài trước EDU-14, không chứng nhận bài mới. CPU/I/O đã có bài nhập môn; cấu trúc dữ liệu đã có một bài mở đầu; OS sâu và phần lớn36 module vẫn chưa hoàn tất; chưa pilot thật.
+Catalog hiện 21 bài beta và1 bài ôn tổng hợp; mới nhất là [EDU-20 locality bộ nhớ](EDU_20_MEMORY_LOCALITY.md). Phần ghi số6 bài/kiểm chứng bên dưới là lịch sử đợt đầu, không phải trạng thái catalog hiện tại. [ROADMAP](ROADMAP.md) quản lý công việc tiếp; [QA-07](QA_07_KNOWLEDGE_REVIEW.md) chỉ review baseline14 bài trước EDU-14, không chứng nhận bài mới. CPU/I/O đã có bài nhập môn; cấu trúc dữ liệu đã có một bài mở đầu; OS sâu và phần lớn36 module vẫn chưa hoàn tất; chưa pilot thật.
 
 ## M4-OFFLINE-01 — gói tải beta
 

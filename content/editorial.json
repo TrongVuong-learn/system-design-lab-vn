@@ -240,6 +240,14 @@
       "revision": "Fall2025 Lecture25 Priority Queues",
       "checkedAt": "2026-10-17",
       "attribution": "Frank Pfenning, Rob Simmons / CMU; ví dụ, diễn giải, code và hình riêng, không sao chép nguồn"
+    },
+    {
+      "id": "cmu-locality-2014",
+      "title": "CMU 15-213 Spring2014 Recitation7, slides8–14 — locality, cache blocks and misses",
+      "url": "https://www.cs.cmu.edu/afs/cs/academic/class/15213-s14/www/recitations/rec7.pdf",
+      "revision": "Spring2014 Recitation7 slides8–14",
+      "checkedAt": "2026-10-17",
+      "attribution": "Carnegie Mellon University, Lou Clark"
     }
   ],
   "competencies": [
@@ -420,6 +428,13 @@
       "outcome": "Theo dấu lấy việc ưu tiên từ min-heap, phân biệt heap-order với mảng đã sắp và quy tắc FIFO.",
       "depth": "introductory",
       "planRefs": ["EDU-04", "CASE-L0-03"]
+    },
+    {
+      "id": "locality-intro",
+      "moduleId": "L0.3",
+      "outcome": "Theo dấu một cache chỉ giữ một khối, phân biệt dùng lại cùng ô và đọc ô gần nhau; giải thích vì sao thứ tự đọc ảnh hưởng số lần nạp.",
+      "depth": "introductory",
+      "planRefs": ["CURRICULUM_MAP.md#l0", "EDU-20"]
     }
   ],
   "lessons": [
@@ -1013,6 +1028,34 @@
         "evidence": "docs/delivery/EDU_19_PRIORITY_HEAP.md",
         "caseId": "case-priority-heap",
         "revision": 1
+      }
+    },
+    {
+      "lessonId": "locality",
+      "revision": 1,
+      "competencyIds": ["locality-intro"],
+      "prerequisiteIds": ["library-search"],
+      "claims": [
+        {
+          "text": "Locality gồm dùng lại dữ liệu và truy cập gần nhau; cache nạp theo khối, miss cần nạp dữ liệu chưa có. Số liệu tám ô thuộc mô hình riêng, không benchmark nguồn.",
+          "sourceIds": ["cmu-locality-2014"]
+        }
+      ],
+      "review": {
+        "reviewer": "Codex parent",
+        "reviewerType": "agent",
+        "date": "2026-10-17",
+        "status": "beta-checked",
+        "evidence": "docs/delivery/EDU_20_MEMORY_LOCALITY.md"
+      },
+      "caseReview": {
+        "caseId": "case-locality",
+        "revision": 1,
+        "reviewer": "Codex parent",
+        "reviewerType": "agent",
+        "date": "2026-10-17",
+        "status": "beta-checked",
+        "evidence": "docs/delivery/EDU_20_MEMORY_LOCALITY.md"
       }
     }
   ]
