@@ -84,3 +84,7 @@ Vercel production tại https://system-design-lab-vn.vercel.app là nơi phát h
 ## Repository GitHub —16/10/2026
 
 Repo công khai theo yêu cầu người dùng `TrongVuong-learn/system-design-lab-vn`, remote origin HTTPS, default branch `master`, giữ tên nhánh chính hiện có. Source đã import cùng lịch sử từ checkout đang chạy Vercel; các thay đổi chưa commit ở checkout gốc không bị đưa lên hoặc ghi đè. GitHub Actions Quality đã đạt ở baseline fa82055; mỗi PR kiểm lại trên Actions, chưa tự bật branch protection hoặc Vercel Git integration.
+
+## Production theo master — 17/10/2026
+
+Theo yêu cầu người dùng: chỉ phát hành Vercel từ source đã merge vào remote `master`; không deploy nhánh tính năng chưa tích hợp. Trước upload prebuilt, xác nhận commit master và đối chiếu fingerprint/artifact với source ứng dụng tương ứng. Sau deploy, kiểm READY, production alias và smoke. Nếu app source chưa thay đổi, không coi commit chỉ tài liệu/tooling là một bản ứng dụng mới cần rebuild. Vercel Git auto-deploy vẫn chưa được bật; mỗi lần phát hành tiếp tục qua CI, merge và CLI prebuilt.

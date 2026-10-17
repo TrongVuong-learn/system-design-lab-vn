@@ -16,3 +16,6 @@ apps/web/src/generated/
 !.env.*.example
 
 .vercel/
+
+# Local pnpm package cache
+.pnpm-store/

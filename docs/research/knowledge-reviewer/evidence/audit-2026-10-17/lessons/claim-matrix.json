@@ -1,0 +1,3100 @@
+[
+  {
+    "claimId": "request-story",
+    "lessonId": "request",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "story",
+    "claim": "Bạn bấm xem thời khóa biểu. Thiết bị gửi một yêu cầu, máy xử lý hỏi nơi lưu lịch, rồi trả câu trả lời về cho bạn. Cùng theo dấu hành trình nhỏ này.",
+    "scope": "assigned lesson content",
+    "assumptions": "Các số mili giây là giả định của mô hình, không phải đo tốc độ một website thật. Bài này chưa mô phỏng hàng đợi hoặc xử lý song song.",
+    "sources": [
+      {
+        "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/First_steps/Client-Server_overview",
+        "edition": "MDN: Client-server overview",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": null,
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Các số mili giây là giả định của mô hình, không phải đo tốc độ một website thật. Bài này chưa mô phỏng hàng đợi hoặc xử lý song song.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "request-explanation",
+    "lessonId": "request",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "explanation",
+    "claim": "Mỗi chặng cần thời gian. Trong mô hình nối tiếp của bài này, thời gian chờ là tổng các chặng. Nhiều yêu cầu cùng lúc còn có thể phải xếp hàng; bài load balancing sẽ giúp bạn thấy điều đó.",
+    "scope": "assigned lesson content",
+    "assumptions": "Các số mili giây là giả định của mô hình, không phải đo tốc độ một website thật. Bài này chưa mô phỏng hàng đợi hoặc xử lý song song.",
+    "sources": [
+      {
+        "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/First_steps/Client-Server_overview",
+        "edition": "MDN: Client-server overview",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": null,
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Các số mili giây là giả định của mô hình, không phải đo tốc độ một website thật. Bài này chưa mô phỏng hàng đợi hoặc xử lý song song.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "request-limit",
+    "lessonId": "request",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "limit",
+    "claim": "Các số mili giây là giả định của mô hình, không phải đo tốc độ một website thật. Bài này chưa mô phỏng hàng đợi hoặc xử lý song song.",
+    "scope": "assigned lesson content",
+    "assumptions": "Các số mili giây là giả định của mô hình, không phải đo tốc độ một website thật. Bài này chưa mô phỏng hàng đợi hoặc xử lý song song.",
+    "sources": [
+      {
+        "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/First_steps/Client-Server_overview",
+        "edition": "MDN: Client-server overview",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": null,
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Các số mili giây là giả định của mô hình, không phải đo tốc độ một website thật. Bài này chưa mô phỏng hàng đợi hoặc xử lý song song.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "request-terms",
+    "lessonId": "request",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "terms",
+    "claim": "[{\"name\": \"Yêu cầu\", \"english\": \"Request\", \"meaning\": \"Thông điệp xin máy xử lý làm một việc, như tìm lịch học.\"}, {\"name\": \"Độ trễ\", \"english\": \"Latency\", \"meaning\": \"Thời gian từ khi gửi yêu cầu đến khi nhận câu trả lời.\"}]",
+    "scope": "assigned lesson content",
+    "assumptions": "Các số mili giây là giả định của mô hình, không phải đo tốc độ một website thật. Bài này chưa mô phỏng hàng đợi hoặc xử lý song song.",
+    "sources": [
+      {
+        "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/First_steps/Client-Server_overview",
+        "edition": "MDN: Client-server overview",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": null,
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Các số mili giây là giả định của mô hình, không phải đo tốc độ một website thật. Bài này chưa mô phỏng hàng đợi hoặc xử lý song song.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "request-prediction",
+    "lessonId": "request",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "prediction",
+    "claim": "{\"text\": \"Nếu nơi lưu lịch cần thêm thời gian tra cứu, bạn có phải chờ lâu hơn không?\", \"options\": [\"Có, vì câu trả lời phải đi qua chặng đó.\", \"Không, thiết bị tự biết lịch.\"], \"answer\": 0, \"explanation\": \"Máy xử lý đang chờ lịch từ nơi lưu dữ liệu. Khi chặng đó chậm, câu trả lời về muộn hơn.\"}",
+    "scope": "assigned lesson content",
+    "assumptions": "Các số mili giây là giả định của mô hình, không phải đo tốc độ một website thật. Bài này chưa mô phỏng hàng đợi hoặc xử lý song song.",
+    "sources": [
+      {
+        "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/First_steps/Client-Server_overview",
+        "edition": "MDN: Client-server overview",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": "options, answer, feedback and guidance compared",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Các số mili giây là giả định của mô hình, không phải đo tốc độ một website thật. Bài này chưa mô phỏng hàng đợi hoặc xử lý song song.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "request-challenge",
+    "lessonId": "request",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "challenge",
+    "claim": "{\"text\": \"Tra thư viện có 3 chặng: gửi 20 ms, tìm sách 80 ms, trả lời 20 ms. Mô hình nối tiếp cần bao lâu?\", \"options\": [\"80 ms\", \"120 ms\", \"20 ms\"], \"answer\": 1, \"explanation\": \"Cộng các chặng nối tiếp: 20 + 80 + 20 = 120 ms. Khi tính, luôn giữ đơn vị thời gian.\"}",
+    "scope": "assigned lesson content",
+    "assumptions": "Các số mili giây là giả định của mô hình, không phải đo tốc độ một website thật. Bài này chưa mô phỏng hàng đợi hoặc xử lý song song.",
+    "sources": [
+      {
+        "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/First_steps/Client-Server_overview",
+        "edition": "MDN: Client-server overview",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": "options, answer, feedback and guidance compared",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Các số mili giây là giả định của mô hình, không phải đo tốc độ một website thật. Bài này chưa mô phỏng hàng đợi hoặc xử lý song song.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "request-caseStudy",
+    "lessonId": "request",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "caseStudy",
+    "claim": "{\"id\": \"case-request\", \"schemaVersion\": 1, \"revision\": 1, \"familyId\": \"CASE-L0-01\", \"provenance\": {\"kind\": \"authored-scenario\"}, \"title\": \"Tra sách trước giờ học\", \"context\": \"Bạn mở cổng thư viện để tìm một cuốn sách. Yêu cầu đi qua đường gửi, nơi tìm sách rồi đường trả kết quả.\", \"requirements\": [\"Ba chặng diễn ra nối tiếp, không chồng thời gian.\", \"Thời gian từng chặng là 20 ms, 80 ms và 20 ms.\"], \"activityRef\": \"request\", \"experimentSteps\": [\"Chạy một yêu cầu và theo dõi từng chặng.\", \"Đọc thời gian ở từng nơi; phân biệt một chặng với cả hành trình.\"], \"assessmentRef\": \"challenge\", \"tradeoffs\": [\"Tối ưu nơi tìm sách có thể giảm thời gian xử lý; đường gửi và trả lời vẫn góp vào thời gian chờ.\"], \"limitations\": \"Các thời gian của đề là giả định riêng. Thí nghiệm chưa có hàng đợi hoặc xử lý song song.\"}",
+    "scope": "assigned lesson content",
+    "assumptions": "Các số mili giây là giả định của mô hình, không phải đo tốc độ một website thật. Bài này chưa mô phỏng hàng đợi hoặc xử lý song song.",
+    "sources": [
+      {
+        "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/First_steps/Client-Server_overview",
+        "edition": "MDN: Client-server overview",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": "options, answer, feedback and guidance compared",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Các số mili giây là giả định của mô hình, không phải đo tốc độ một website thật. Bài này chưa mô phỏng hàng đợi hoặc xử lý song song.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "request-guidance",
+    "lessonId": "request",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "guidance",
+    "claim": "{\"schemaVersion\": 1, \"prediction\": [\"Theo đường câu trả lời: nó phải đi qua nơi tra lịch trước khi về thiết bị.\", \"Các chặng của ví dụ nối tiếp, không chồng thời gian. Tăng thời gian một chặng thì tổng thời gian hành trình thay đổi ra sao?\"], \"challenge\": [\"Đề hỏi cả hành trình, không chỉ thời gian tìm sách. Có ba chặng với cùng đơn vị ms.\", \"Viết lần lượt thời gian gửi, tìm sách và trả lời, rồi cộng chúng. Đừng nhân hoặc bỏ hai chặng đi/về.\"]}",
+    "scope": "assigned lesson content",
+    "assumptions": "Các số mili giây là giả định của mô hình, không phải đo tốc độ một website thật. Bài này chưa mô phỏng hàng đợi hoặc xử lý song song.",
+    "sources": [
+      {
+        "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/First_steps/Client-Server_overview",
+        "edition": "MDN: Client-server overview",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": "options, answer, feedback and guidance compared",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Các số mili giây là giả định của mô hình, không phải đo tốc độ một website thật. Bài này chưa mô phỏng hàng đợi hoặc xử lý song song.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "balance-story",
+    "lessonId": "balance",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "story",
+    "claim": "Trong ngày hội trường, nhiều bạn cùng xem lịch. Mỗi máy xử lý làm được 6 yêu cầu mỗi giây, nhưng nơi lưu lịch chỉ đọc được 4 lần. Thêm máy xử lý có giải quyết chỗ chậm không?",
+    "scope": "assigned lesson content",
+    "assumptions": "Mô hình dùng công suất cố định, mỗi yêu cầu đọc dữ liệu một lần và không có retry. Khi bật cache, giả định 75% lượt được trả lời từ cache; đây không phải hit rate được đo từ workload thật.",
+    "sources": [
+      {
+        "url": "https://sre.google/sre-book/handling-overload/",
+        "edition": "Google SRE: Handling overload",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": null,
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Mô hình dùng công suất cố định, mỗi yêu cầu đọc dữ liệu một lần và không có retry. Khi bật cache, giả định 75% lượt được trả lời từ cache; đây không phải hit rate được đo từ workload thật.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "balance-explanation",
+    "lessonId": "balance",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "explanation",
+    "claim": "Bộ chia tải phân công việc cho các máy. Nhưng nếu tất cả vẫn hỏi cùng một nơi lưu dữ liệu, nơi đó có thể giới hạn số việc làm xong. Hãy thay một yếu tố mỗi lần và so sánh số đang chờ.",
+    "scope": "assigned lesson content",
+    "assumptions": "Mô hình dùng công suất cố định, mỗi yêu cầu đọc dữ liệu một lần và không có retry. Khi bật cache, giả định 75% lượt được trả lời từ cache; đây không phải hit rate được đo từ workload thật.",
+    "sources": [
+      {
+        "url": "https://sre.google/sre-book/handling-overload/",
+        "edition": "Google SRE: Handling overload",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": null,
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Mô hình dùng công suất cố định, mỗi yêu cầu đọc dữ liệu một lần và không có retry. Khi bật cache, giả định 75% lượt được trả lời từ cache; đây không phải hit rate được đo từ workload thật.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "balance-limit",
+    "lessonId": "balance",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "limit",
+    "claim": "Mô hình dùng công suất cố định, mỗi yêu cầu đọc dữ liệu một lần và không có retry. Khi bật cache, giả định 75% lượt được trả lời từ cache; đây không phải hit rate được đo từ workload thật.",
+    "scope": "assigned lesson content",
+    "assumptions": "Mô hình dùng công suất cố định, mỗi yêu cầu đọc dữ liệu một lần và không có retry. Khi bật cache, giả định 75% lượt được trả lời từ cache; đây không phải hit rate được đo từ workload thật.",
+    "sources": [
+      {
+        "url": "https://sre.google/sre-book/handling-overload/",
+        "edition": "Google SRE: Handling overload",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": null,
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Mô hình dùng công suất cố định, mỗi yêu cầu đọc dữ liệu một lần và không có retry. Khi bật cache, giả định 75% lượt được trả lời từ cache; đây không phải hit rate được đo từ workload thật.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "balance-terms",
+    "lessonId": "balance",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "terms",
+    "claim": "[{\"name\": \"Chia tải\", \"english\": \"Load balancing\", \"meaning\": \"Phân yêu cầu cho nhiều máy thay vì dồn vào một máy.\"}, {\"name\": \"Nút thắt\", \"english\": \"Bottleneck\", \"meaning\": \"Thành phần đang giới hạn số việc toàn hệ thống làm xong.\"}]",
+    "scope": "assigned lesson content",
+    "assumptions": "Mô hình dùng công suất cố định, mỗi yêu cầu đọc dữ liệu một lần và không có retry. Khi bật cache, giả định 75% lượt được trả lời từ cache; đây không phải hit rate được đo từ workload thật.",
+    "sources": [
+      {
+        "url": "https://sre.google/sre-book/handling-overload/",
+        "edition": "Google SRE: Handling overload",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": null,
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Mô hình dùng công suất cố định, mỗi yêu cầu đọc dữ liệu một lần và không có retry. Khi bật cache, giả định 75% lượt được trả lời từ cache; đây không phải hit rate được đo từ workload thật.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "balance-prediction",
+    "lessonId": "balance",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "prediction",
+    "claim": "{\"text\": \"Nơi lưu lịch chỉ làm được 4 lượt/giây. Thêm 3 máy xử lý nhưng vẫn hỏi nơi đó có vượt 4 lượt/giây không?\", \"options\": [\"Có, vì máy nhiều hơn.\", \"Chưa, vì nơi lưu lịch vẫn giới hạn công suất.\"], \"answer\": 1, \"explanation\": \"Thêm máy ở trước không thay đổi công suất của nơi lưu dữ liệu dùng chung.\"}",
+    "scope": "assigned lesson content",
+    "assumptions": "Mô hình dùng công suất cố định, mỗi yêu cầu đọc dữ liệu một lần và không có retry. Khi bật cache, giả định 75% lượt được trả lời từ cache; đây không phải hit rate được đo từ workload thật.",
+    "sources": [
+      {
+        "url": "https://sre.google/sre-book/handling-overload/",
+        "edition": "Google SRE: Handling overload",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": "options, answer, feedback and guidance compared",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Mô hình dùng công suất cố định, mỗi yêu cầu đọc dữ liệu một lần và không có retry. Khi bật cache, giả định 75% lượt được trả lời từ cache; đây không phải hit rate được đo từ workload thật.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "balance-challenge",
+    "lessonId": "balance",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "challenge",
+    "claim": "{\"text\": \"Nếu việc pha nước đang chậm, mở thêm quầy nhận đơn có đủ giúp khách nhận nước nhanh hơn không?\", \"options\": [\"Chưa đủ; phải xử lý chỗ pha nước đang giới hạn.\", \"Luôn đủ, quầy nhận đơn càng nhiều càng tốt.\"], \"answer\": 0, \"explanation\": \"Cần cải thiện thành phần đang giới hạn kết quả, rồi đo lại vì nút thắt có thể chuyển sang nơi khác.\"}",
+    "scope": "assigned lesson content",
+    "assumptions": "Mô hình dùng công suất cố định, mỗi yêu cầu đọc dữ liệu một lần và không có retry. Khi bật cache, giả định 75% lượt được trả lời từ cache; đây không phải hit rate được đo từ workload thật.",
+    "sources": [
+      {
+        "url": "https://sre.google/sre-book/handling-overload/",
+        "edition": "Google SRE: Handling overload",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": "options, answer, feedback and guidance compared",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Mô hình dùng công suất cố định, mỗi yêu cầu đọc dữ liệu một lần và không có retry. Khi bật cache, giả định 75% lượt được trả lời từ cache; đây không phải hit rate được đo từ workload thật.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "balance-caseStudy",
+    "lessonId": "balance",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "caseStudy",
+    "claim": "{\"id\": \"case-balance\", \"schemaVersion\": 1, \"revision\": 1, \"familyId\": \"CASE-L2-01\", \"provenance\": {\"kind\": \"authored-scenario\"}, \"title\": \"Mở thêm quầy nhận đơn ngày hội\", \"context\": \"Căng tin mở thêm quầy nhận đơn, nhưng mọi đơn vẫn về cùng chỗ pha nước. Khách cần nhận được nước nhanh hơn.\", \"requirements\": [\"Thành phần pha nước đang giới hạn kết quả.\", \"Đánh giá kết quả cuối, không chỉ số đơn được nhận.\"], \"activityRef\": \"balance\", \"experimentSteps\": [\"Tăng máy nhận yêu cầu và quan sát tải ở nơi lưu dữ liệu.\", \"Thay một yếu tố rồi kiểm tra nút thắt có chuyển chỗ không.\"], \"assessmentRef\": \"challenge\", \"tradeoffs\": [\"Thêm năng lực ở một tầng có thể giúp khi tầng đó nghẽn. Sau mỗi thay đổi cần đo lại các phụ thuộc còn lại.\"], \"limitations\": \"Căng tin là phép so sánh; lab dùng server và nơi lưu dữ liệu với công suất cố định. Chưa mô phỏng session, discovery hay retry.\"}",
+    "scope": "assigned lesson content",
+    "assumptions": "Mô hình dùng công suất cố định, mỗi yêu cầu đọc dữ liệu một lần và không có retry. Khi bật cache, giả định 75% lượt được trả lời từ cache; đây không phải hit rate được đo từ workload thật.",
+    "sources": [
+      {
+        "url": "https://sre.google/sre-book/handling-overload/",
+        "edition": "Google SRE: Handling overload",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": "options, answer, feedback and guidance compared",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Mô hình dùng công suất cố định, mỗi yêu cầu đọc dữ liệu một lần và không có retry. Khi bật cache, giả định 75% lượt được trả lời từ cache; đây không phải hit rate được đo từ workload thật.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "balance-guidance",
+    "lessonId": "balance",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "guidance",
+    "claim": "{\"schemaVersion\": 1, \"prediction\": [\"Nhìn nơi lưu lịch dùng chung. Công suất ở đó có đổi khi thêm máy xử lý ở phía trước không?\", \"Kết quả toàn đường đi bị giới hạn bởi thành phần có công suất thấp nhất. Thêm máy ở một chỗ không tự thay công suất ở chỗ khác.\"], \"challenge\": [\"Tách hai việc: nhận đơn và pha nước. Khách nhận nước sau khi việc nào hoàn tất?\", \"Tìm công đoạn đang hạn chế số đồ uống làm xong. Cải thiện công đoạn khác trước có làm giới hạn này biến mất không?\"]}",
+    "scope": "assigned lesson content",
+    "assumptions": "Mô hình dùng công suất cố định, mỗi yêu cầu đọc dữ liệu một lần và không có retry. Khi bật cache, giả định 75% lượt được trả lời từ cache; đây không phải hit rate được đo từ workload thật.",
+    "sources": [
+      {
+        "url": "https://sre.google/sre-book/handling-overload/",
+        "edition": "Google SRE: Handling overload",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": "options, answer, feedback and guidance compared",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Mô hình dùng công suất cố định, mỗi yêu cầu đọc dữ liệu một lần và không có retry. Khi bật cache, giả định 75% lượt được trả lời từ cache; đây không phải hit rate được đo từ workload thật.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "cache-story",
+    "lessonId": "cache",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "story",
+    "claim": "Website lớp giữ một bản ghi gần để xem lịch thuận tiện. Cô giáo đổi phòng ở lịch chính từ 201 sang 205. Nhưng bản ghi gần chưa đổi. Lần xem tiếp theo sẽ hiển thị gì?",
+    "scope": "assigned lesson content",
+    "assumptions": "Mô hình một bản ghi, nguồn luôn truy cập được và không có retry. Đổi nguồn không tự cập nhật cache. Mỗi lượt miss đọc nguồn đúng một lần. TTL không bảo đảm độ mới trong mọi hệ thống hoặc khi nguồn lỗi.",
+    "sources": [
+      {
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside",
+        "edition": "Azure Architecture: Cache-aside pattern",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": null,
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Mô hình một bản ghi, nguồn luôn truy cập được và không có retry. Đổi nguồn không tự cập nhật cache. Mỗi lượt miss đọc nguồn đúng một lần. TTL không bảo đảm độ mới trong mọi hệ thống hoặc khi nguồn lỗi.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "cache-explanation",
+    "lessonId": "cache",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "explanation",
+    "claim": "Cache là dữ liệu được giữ để dùng lại. Khi nguồn thay đổi, bản ghi có thể vẫn cũ. Hệ thống cần quy tắc cập nhật: lấy mới chủ động hoặc hết hạn rồi đọc lại nguồn khi có yêu cầu.",
+    "scope": "assigned lesson content",
+    "assumptions": "Mô hình một bản ghi, nguồn luôn truy cập được và không có retry. Đổi nguồn không tự cập nhật cache. Mỗi lượt miss đọc nguồn đúng một lần. TTL không bảo đảm độ mới trong mọi hệ thống hoặc khi nguồn lỗi.",
+    "sources": [
+      {
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside",
+        "edition": "Azure Architecture: Cache-aside pattern",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": null,
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Mô hình một bản ghi, nguồn luôn truy cập được và không có retry. Đổi nguồn không tự cập nhật cache. Mỗi lượt miss đọc nguồn đúng một lần. TTL không bảo đảm độ mới trong mọi hệ thống hoặc khi nguồn lỗi.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "cache-limit",
+    "lessonId": "cache",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "limit",
+    "claim": "Mô hình một bản ghi, nguồn luôn truy cập được và không có retry. Đổi nguồn không tự cập nhật cache. Mỗi lượt miss đọc nguồn đúng một lần. TTL không bảo đảm độ mới trong mọi hệ thống hoặc khi nguồn lỗi.",
+    "scope": "assigned lesson content",
+    "assumptions": "Mô hình một bản ghi, nguồn luôn truy cập được và không có retry. Đổi nguồn không tự cập nhật cache. Mỗi lượt miss đọc nguồn đúng một lần. TTL không bảo đảm độ mới trong mọi hệ thống hoặc khi nguồn lỗi.",
+    "sources": [
+      {
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside",
+        "edition": "Azure Architecture: Cache-aside pattern",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": null,
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Mô hình một bản ghi, nguồn luôn truy cập được và không có retry. Đổi nguồn không tự cập nhật cache. Mỗi lượt miss đọc nguồn đúng một lần. TTL không bảo đảm độ mới trong mọi hệ thống hoặc khi nguồn lỗi.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "cache-terms",
+    "lessonId": "cache",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "terms",
+    "claim": "[{\"name\": \"Bản ghi dùng lại\", \"english\": \"Cache\", \"meaning\": \"Dữ liệu được giữ để trả lời những lần tra cứu sau.\"}, {\"name\": \"Thời hạn dùng\", \"english\": \"TTL\", \"meaning\": \"Thời gian một bản ghi còn được dùng trước khi phải lấy mới theo quy tắc bài này.\"}]",
+    "scope": "assigned lesson content",
+    "assumptions": "Mô hình một bản ghi, nguồn luôn truy cập được và không có retry. Đổi nguồn không tự cập nhật cache. Mỗi lượt miss đọc nguồn đúng một lần. TTL không bảo đảm độ mới trong mọi hệ thống hoặc khi nguồn lỗi.",
+    "sources": [
+      {
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside",
+        "edition": "Azure Architecture: Cache-aside pattern",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": null,
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Mô hình một bản ghi, nguồn luôn truy cập được và không có retry. Đổi nguồn không tự cập nhật cache. Mỗi lượt miss đọc nguồn đúng một lần. TTL không bảo đảm độ mới trong mọi hệ thống hoặc khi nguồn lỗi.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "cache-prediction",
+    "lessonId": "cache",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "prediction",
+    "claim": "{\"text\": \"Lịch chính đã là 205, cache còn 201 và chưa hết hạn. Đọc từ cache thấy phòng nào?\", \"options\": [\"Phòng 201\", \"Phòng 205\"], \"answer\": 0, \"explanation\": \"Trang đọc bản ghi hiện có là 201. Nguồn đã đổi không có nghĩa mọi bản sao đổi ngay.\"}",
+    "scope": "assigned lesson content",
+    "assumptions": "Mô hình một bản ghi, nguồn luôn truy cập được và không có retry. Đổi nguồn không tự cập nhật cache. Mỗi lượt miss đọc nguồn đúng một lần. TTL không bảo đảm độ mới trong mọi hệ thống hoặc khi nguồn lỗi.",
+    "sources": [
+      {
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside",
+        "edition": "Azure Architecture: Cache-aside pattern",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": "options, answer, feedback and guidance compared",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Mô hình một bản ghi, nguồn luôn truy cập được và không có retry. Đổi nguồn không tự cập nhật cache. Mỗi lượt miss đọc nguồn đúng một lần. TTL không bảo đảm độ mới trong mọi hệ thống hoặc khi nguồn lỗi.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "cache-challenge",
+    "lessonId": "cache",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "challenge",
+    "claim": "{\"text\": \"Yêu cầu: phòng mới phải hiện trong tối đa một phút. Giữ cache cũ năm phút mà không cập nhật có đạt không?\", \"options\": [\"Có, vì cache đọc nhanh.\", \"Không; dữ liệu có thể cũ quá một phút.\"], \"answer\": 1, \"explanation\": \"Tốc độ và độ mới là hai yêu cầu khác nhau. Một bản ghi nhanh nhưng cũ năm phút không đáp ứng giới hạn một phút.\"}",
+    "scope": "assigned lesson content",
+    "assumptions": "Mô hình một bản ghi, nguồn luôn truy cập được và không có retry. Đổi nguồn không tự cập nhật cache. Mỗi lượt miss đọc nguồn đúng một lần. TTL không bảo đảm độ mới trong mọi hệ thống hoặc khi nguồn lỗi.",
+    "sources": [
+      {
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside",
+        "edition": "Azure Architecture: Cache-aside pattern",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": "options, answer, feedback and guidance compared",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Mô hình một bản ghi, nguồn luôn truy cập được và không có retry. Đổi nguồn không tự cập nhật cache. Mỗi lượt miss đọc nguồn đúng một lần. TTL không bảo đảm độ mới trong mọi hệ thống hoặc khi nguồn lỗi.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "cache-caseStudy",
+    "lessonId": "cache",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "caseStudy",
+    "claim": "{\"id\": \"case-cache\", \"schemaVersion\": 1, \"revision\": 2, \"familyId\": \"CASE-L0-01\", \"provenance\": {\"kind\": \"authored-scenario\"}, \"title\": \"Đổi phòng sinh hoạt câu lạc bộ\", \"context\": \"Cô phụ trách vừa đổi phòng ở lịch chính. Trang tra cứu vẫn có bản ghi của phòng cũ; các bạn cần đến đúng nơi.\", \"requirements\": [\"Phòng mới phải hiển thị trong tối đa một phút.\", \"Phương án đang xét giữ bản ghi cũ năm phút mà không cập nhật.\"], \"activityRef\": \"cache\", \"experimentSteps\": [\"Đổi phòng tại nguồn rồi xem bằng bản ghi gần.\", \"Lấy lịch mới và đối chiếu giá trị ở hai nơi.\"], \"assessmentRef\": \"challenge\", \"tradeoffs\": [\"Bản ghi gần có thể giảm lượt hỏi nguồn. Cần thêm quy tắc cập nhật phù hợp nếu thông tin thay đổi.\"], \"limitations\": \"Đồng hồ trong lab và câu hỏi đều dùng phút mô phỏng. Mô hình này giả định nguồn truy cập được, chưa kiểm chứng một cam kết độ mới của hệ thống thật.\"}",
+    "scope": "assigned lesson content",
+    "assumptions": "Mô hình một bản ghi, nguồn luôn truy cập được và không có retry. Đổi nguồn không tự cập nhật cache. Mỗi lượt miss đọc nguồn đúng một lần. TTL không bảo đảm độ mới trong mọi hệ thống hoặc khi nguồn lỗi.",
+    "sources": [
+      {
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside",
+        "edition": "Azure Architecture: Cache-aside pattern",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": "options, answer, feedback and guidance compared",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Mô hình một bản ghi, nguồn luôn truy cập được và không có retry. Đổi nguồn không tự cập nhật cache. Mỗi lượt miss đọc nguồn đúng một lần. TTL không bảo đảm độ mới trong mọi hệ thống hoặc khi nguồn lỗi.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "cache-guidance",
+    "lessonId": "cache",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "guidance",
+    "claim": "{\"schemaVersion\": 1, \"prediction\": [\"Đề nói trang đọc từ cache. Nhìn riêng phòng trong bản ghi gần và phòng ở nguồn.\", \"Bản ghi gần còn hạn sẽ được dùng cho lần đọc này. Nguồn đổi chưa tự cập nhật cache; hãy theo đúng nơi trang đang đọc.\"], \"challenge\": [\"So sánh giới hạn một phút trong yêu cầu với thời gian bản ghi có thể còn cũ.\", \"Đọc nhanh và đọc dữ liệu mới là hai điều khác nhau. Nếu giữ bản ghi cũ đủ năm phút, có khoảng thời gian nào vượt yêu cầu một phút không?\"]}",
+    "scope": "assigned lesson content",
+    "assumptions": "Mô hình một bản ghi, nguồn luôn truy cập được và không có retry. Đổi nguồn không tự cập nhật cache. Mỗi lượt miss đọc nguồn đúng một lần. TTL không bảo đảm độ mới trong mọi hệ thống hoặc khi nguồn lỗi.",
+    "sources": [
+      {
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside",
+        "edition": "Azure Architecture: Cache-aside pattern",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": "options, answer, feedback and guidance compared",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Mô hình một bản ghi, nguồn luôn truy cập được và không có retry. Đổi nguồn không tự cập nhật cache. Mỗi lượt miss đọc nguồn đúng một lần. TTL không bảo đảm độ mới trong mọi hệ thống hoặc khi nguồn lỗi.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "queue-story",
+    "lessonId": "queue",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "story",
+    "claim": "Câu lạc bộ gửi lời mời cho nhiều bạn. Hệ thống nhận các việc gửi thông báo vào hàng đợi. Mỗi người xử lý làm xong 2 việc mỗi giây. Bạn sẽ giữ hàng chờ ổn định thế nào?",
+    "scope": "assigned lesson content",
+    "assumptions": "Bài cơ bản giả định mỗi việc giống nhau, không mất việc, không retry hay duplicate và được xử lý theo chặng giây. ACK, idempotency và dead-letter queue thuộc bài sâu sau này.",
+    "sources": [
+      {
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling",
+        "edition": "Azure Architecture: Queue-based load leveling",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": null,
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Bài cơ bản giả định mỗi việc giống nhau, không mất việc, không retry hay duplicate và được xử lý theo chặng giây. ACK, idempotency và dead-letter queue thuộc bài sâu sau này.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "queue-explanation",
+    "lessonId": "queue",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "explanation",
+    "claim": "Hàng đợi giữ việc chờ xử lý. Nó giúp tiếp nhận một đợt đông, nhưng không tự tăng công suất. Nếu mỗi giây nhận nhiều hơn làm xong, số việc chờ tiếp tục tăng.",
+    "scope": "assigned lesson content",
+    "assumptions": "Bài cơ bản giả định mỗi việc giống nhau, không mất việc, không retry hay duplicate và được xử lý theo chặng giây. ACK, idempotency và dead-letter queue thuộc bài sâu sau này.",
+    "sources": [
+      {
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling",
+        "edition": "Azure Architecture: Queue-based load leveling",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": null,
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Bài cơ bản giả định mỗi việc giống nhau, không mất việc, không retry hay duplicate và được xử lý theo chặng giây. ACK, idempotency và dead-letter queue thuộc bài sâu sau này.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "queue-limit",
+    "lessonId": "queue",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "limit",
+    "claim": "Bài cơ bản giả định mỗi việc giống nhau, không mất việc, không retry hay duplicate và được xử lý theo chặng giây. ACK, idempotency và dead-letter queue thuộc bài sâu sau này.",
+    "scope": "assigned lesson content",
+    "assumptions": "Bài cơ bản giả định mỗi việc giống nhau, không mất việc, không retry hay duplicate và được xử lý theo chặng giây. ACK, idempotency và dead-letter queue thuộc bài sâu sau này.",
+    "sources": [
+      {
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling",
+        "edition": "Azure Architecture: Queue-based load leveling",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": null,
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Bài cơ bản giả định mỗi việc giống nhau, không mất việc, không retry hay duplicate và được xử lý theo chặng giây. ACK, idempotency và dead-letter queue thuộc bài sâu sau này.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "queue-terms",
+    "lessonId": "queue",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "terms",
+    "claim": "[{\"name\": \"Hàng đợi\", \"english\": \"Queue\", \"meaning\": \"Nơi giữ việc đã nhận nhưng chưa hoàn tất.\"}, {\"name\": \"Người xử lý\", \"english\": \"Worker\", \"meaning\": \"Thành phần lấy việc từ hàng đợi để làm.\"}, {\"name\": \"Việc tồn đọng\", \"english\": \"Backlog\", \"meaning\": \"Các công việc chưa hoàn thành đang tích lại. Trong bài, đây là số việc còn trong hàng đợi sau mỗi chặng giây.\"}]",
+    "scope": "assigned lesson content",
+    "assumptions": "Bài cơ bản giả định mỗi việc giống nhau, không mất việc, không retry hay duplicate và được xử lý theo chặng giây. ACK, idempotency và dead-letter queue thuộc bài sâu sau này.",
+    "sources": [
+      {
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling",
+        "edition": "Azure Architecture: Queue-based load leveling",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": null,
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Bài cơ bản giả định mỗi việc giống nhau, không mất việc, không retry hay duplicate và được xử lý theo chặng giây. ACK, idempotency và dead-letter queue thuộc bài sâu sau này.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "queue-prediction",
+    "lessonId": "queue",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "prediction",
+    "claim": "{\"text\": \"Mỗi giây đến 6 việc, một worker làm xong 2 việc. Hàng chờ có tăng không?\", \"options\": [\"Có, nếu tải này kéo dài.\", \"Không, vì đã có hàng đợi.\"], \"answer\": 0, \"explanation\": \"Mỗi giây có thêm 4 việc chưa được xử lý. Queue giữ chúng nhưng không làm thay worker.\"}",
+    "scope": "assigned lesson content",
+    "assumptions": "Bài cơ bản giả định mỗi việc giống nhau, không mất việc, không retry hay duplicate và được xử lý theo chặng giây. ACK, idempotency và dead-letter queue thuộc bài sâu sau này.",
+    "sources": [
+      {
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling",
+        "edition": "Azure Architecture: Queue-based load leveling",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": "options, answer, feedback and guidance compared",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Bài cơ bản giả định mỗi việc giống nhau, không mất việc, không retry hay duplicate và được xử lý theo chặng giây. ACK, idempotency và dead-letter queue thuộc bài sâu sau này.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "queue-challenge",
+    "lessonId": "queue",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "challenge",
+    "claim": "{\"text\": \"Bài mới: đến 8 việc/giây, mỗi worker làm 2 việc/giây. Ít nhất bao nhiêu worker để hàng chờ không tiếp tục tăng trong mô hình?\", \"options\": [\"2 worker\", \"4 worker\", \"1 worker\"], \"answer\": 1, \"explanation\": \"4 × 2 = 8 việc/giây, bằng tốc độ đến. Cần công suất lớn hơn tốc độ đến để giảm một backlog đã có.\"}",
+    "scope": "assigned lesson content",
+    "assumptions": "Bài cơ bản giả định mỗi việc giống nhau, không mất việc, không retry hay duplicate và được xử lý theo chặng giây. ACK, idempotency và dead-letter queue thuộc bài sâu sau này.",
+    "sources": [
+      {
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling",
+        "edition": "Azure Architecture: Queue-based load leveling",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": "options, answer, feedback and guidance compared",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Bài cơ bản giả định mỗi việc giống nhau, không mất việc, không retry hay duplicate và được xử lý theo chặng giây. ACK, idempotency và dead-letter queue thuộc bài sâu sau này.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "queue-caseStudy",
+    "lessonId": "queue",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "caseStudy",
+    "claim": "{\"id\": \"case-queue\", \"schemaVersion\": 1, \"revision\": 1, \"familyId\": \"CASE-L2-05\", \"provenance\": {\"kind\": \"authored-scenario\"}, \"title\": \"Xử lý giấy xác nhận sau ngày hội\", \"context\": \"Ban tổ chức nhận các công việc tạo giấy xác nhận. Nhận một việc chưa có nghĩa là việc đó đã hoàn tất.\", \"requirements\": [\"Mỗi giây đến tám việc; một worker làm hai việc/giây.\", \"Tìm số worker tối thiểu để hàng chờ không tiếp tục tăng trong mô hình đều.\"], \"activityRef\": \"queue\", \"experimentSteps\": [\"Đổi tốc độ việc đến và số worker, theo dõi số còn chờ.\", \"So công suất bằng tốc độ đến với công suất lớn hơn; thử khi đã có backlog.\"], \"assessmentRef\": \"challenge\", \"tradeoffs\": [\"Thêm worker tăng công suất trong mô hình này nhưng tốn tài nguyên. Cân tốc độ đến chỉ ngăn tăng hàng chờ; giảm hàng chờ cũ cần năng lực dư.\"], \"limitations\": \"Các việc giống nhau và xử lý theo chặng giây; chưa có retry, duplicate hoặc mất ACK.\"}",
+    "scope": "assigned lesson content",
+    "assumptions": "Bài cơ bản giả định mỗi việc giống nhau, không mất việc, không retry hay duplicate và được xử lý theo chặng giây. ACK, idempotency và dead-letter queue thuộc bài sâu sau này.",
+    "sources": [
+      {
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling",
+        "edition": "Azure Architecture: Queue-based load leveling",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": "options, answer, feedback and guidance compared",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Bài cơ bản giả định mỗi việc giống nhau, không mất việc, không retry hay duplicate và được xử lý theo chặng giây. ACK, idempotency và dead-letter queue thuộc bài sâu sau này.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "queue-guidance",
+    "lessonId": "queue",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "guidance",
+    "claim": "{\"schemaVersion\": 1, \"prediction\": [\"Nhìn số việc mới mỗi giây và số việc một worker làm xong trong cùng giây.\", \"Lấy số việc đến trừ số làm xong. Những việc còn lại được giữ trong hàng đợi cho giây sau; hàng đợi không tự xử lý việc.\"], \"challenge\": [\"Tính công suất của từng lựa chọn: số worker × hai việc mỗi giây.\", \"Muốn hàng chờ không tăng, công suất phải ít nhất bằng tám việc mới mỗi giây. Cân bằng chỉ giữ hàng chờ đã có, chưa làm nó giảm.\"]}",
+    "scope": "assigned lesson content",
+    "assumptions": "Bài cơ bản giả định mỗi việc giống nhau, không mất việc, không retry hay duplicate và được xử lý theo chặng giây. ACK, idempotency và dead-letter queue thuộc bài sâu sau này.",
+    "sources": [
+      {
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling",
+        "edition": "Azure Architecture: Queue-based load leveling",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": "options, answer, feedback and guidance compared",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Bài cơ bản giả định mỗi việc giống nhau, không mất việc, không retry hay duplicate và được xử lý theo chặng giây. ACK, idempotency và dead-letter queue thuộc bài sâu sau này.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "replica-story",
+    "lessonId": "replica",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "story",
+    "claim": "Trường có một lịch chính và một bản sao ở bàn khác. Khi lịch chính đổi, thông tin cần thời gian để đến bản sao. Nếu đọc ngay sau khi đổi phòng, hai bàn có thể trả lời khác nhau.",
+    "scope": "assigned lesson content",
+    "assumptions": "Mô hình một nguồn và một replica, thông điệp đến đúng thứ tự với lag cố định. Chưa mô phỏng mất mạng, bầu leader hoặc failover. Replica không thay cho backup.",
+    "sources": [
+      {
+        "url": "https://www.postgresql.org/docs/current/hot-standby.html",
+        "edition": "PostgreSQL: Hot standby",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": null,
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Mô hình một nguồn và một replica, thông điệp đến đúng thứ tự với lag cố định. Chưa mô phỏng mất mạng, bầu leader hoặc failover. Replica không thay cho backup.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "replica-explanation",
+    "lessonId": "replica",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "explanation",
+    "claim": "Replication giữ bản dữ liệu ở nhiều nơi. Trong sao chép bất đồng bộ, bản sao có thể nhận thay đổi muộn. Chọn nơi đọc phải phù hợp với yêu cầu về độ mới.",
+    "scope": "assigned lesson content",
+    "assumptions": "Mô hình một nguồn và một replica, thông điệp đến đúng thứ tự với lag cố định. Chưa mô phỏng mất mạng, bầu leader hoặc failover. Replica không thay cho backup.",
+    "sources": [
+      {
+        "url": "https://www.postgresql.org/docs/current/hot-standby.html",
+        "edition": "PostgreSQL: Hot standby",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": null,
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Mô hình một nguồn và một replica, thông điệp đến đúng thứ tự với lag cố định. Chưa mô phỏng mất mạng, bầu leader hoặc failover. Replica không thay cho backup.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "replica-limit",
+    "lessonId": "replica",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "limit",
+    "claim": "Mô hình một nguồn và một replica, thông điệp đến đúng thứ tự với lag cố định. Chưa mô phỏng mất mạng, bầu leader hoặc failover. Replica không thay cho backup.",
+    "scope": "assigned lesson content",
+    "assumptions": "Mô hình một nguồn và một replica, thông điệp đến đúng thứ tự với lag cố định. Chưa mô phỏng mất mạng, bầu leader hoặc failover. Replica không thay cho backup.",
+    "sources": [
+      {
+        "url": "https://www.postgresql.org/docs/current/hot-standby.html",
+        "edition": "PostgreSQL: Hot standby",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": null,
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Mô hình một nguồn và một replica, thông điệp đến đúng thứ tự với lag cố định. Chưa mô phỏng mất mạng, bầu leader hoặc failover. Replica không thay cho backup.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "replica-terms",
+    "lessonId": "replica",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "terms",
+    "claim": "[{\"name\": \"Bản sao dữ liệu\", \"english\": \"Replica\", \"meaning\": \"Một nơi khác giữ dữ liệu được sao chép từ nguồn.\"}, {\"name\": \"Độ trễ sao chép\", \"english\": \"Replication lag\", \"meaning\": \"Khoảng thời gian trước khi thay đổi đến bản sao trong mô hình này.\"}]",
+    "scope": "assigned lesson content",
+    "assumptions": "Mô hình một nguồn và một replica, thông điệp đến đúng thứ tự với lag cố định. Chưa mô phỏng mất mạng, bầu leader hoặc failover. Replica không thay cho backup.",
+    "sources": [
+      {
+        "url": "https://www.postgresql.org/docs/current/hot-standby.html",
+        "edition": "PostgreSQL: Hot standby",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": null,
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Mô hình một nguồn và một replica, thông điệp đến đúng thứ tự với lag cố định. Chưa mô phỏng mất mạng, bầu leader hoặc failover. Replica không thay cho backup.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "replica-prediction",
+    "lessonId": "replica",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "prediction",
+    "claim": "{\"text\": \"Lag là 3 giây. Đổi nguồn sang 205 rồi đọc bản sao ngay: có thể thấy 201 không?\", \"options\": [\"Có, thay đổi chưa đến bản sao.\", \"Không, mọi bản sao đổi tức thì.\"], \"answer\": 0, \"explanation\": \"Sao chép cần 3 giây mô phỏng. Ngay sau ghi, bản sao vẫn giữ giá trị trước đó.\"}",
+    "scope": "assigned lesson content",
+    "assumptions": "Mô hình một nguồn và một replica, thông điệp đến đúng thứ tự với lag cố định. Chưa mô phỏng mất mạng, bầu leader hoặc failover. Replica không thay cho backup.",
+    "sources": [
+      {
+        "url": "https://www.postgresql.org/docs/current/hot-standby.html",
+        "edition": "PostgreSQL: Hot standby",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": "options, answer, feedback and guidance compared",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Mô hình một nguồn và một replica, thông điệp đến đúng thứ tự với lag cố định. Chưa mô phỏng mất mạng, bầu leader hoặc failover. Replica không thay cho backup.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "replica-challenge",
+    "lessonId": "replica",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "challenge",
+    "claim": "{\"text\": \"Vừa đổi phòng và cần xem ngay kết quả mới. Trong mô hình này, nên đọc đâu?\", \"options\": [\"Bản sao đang trễ.\", \"Nguồn chính vừa được cập nhật.\"], \"answer\": 1, \"explanation\": \"Nguồn chính đã nhận thay đổi; bản sao có thể chưa nhận. Hệ thống thực tế cần định nghĩa bảo đảm đọc sau ghi rõ ràng.\"}",
+    "scope": "assigned lesson content",
+    "assumptions": "Mô hình một nguồn và một replica, thông điệp đến đúng thứ tự với lag cố định. Chưa mô phỏng mất mạng, bầu leader hoặc failover. Replica không thay cho backup.",
+    "sources": [
+      {
+        "url": "https://www.postgresql.org/docs/current/hot-standby.html",
+        "edition": "PostgreSQL: Hot standby",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": "options, answer, feedback and guidance compared",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Mô hình một nguồn và một replica, thông điệp đến đúng thứ tự với lag cố định. Chưa mô phỏng mất mạng, bầu leader hoặc failover. Replica không thay cho backup.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "replica-caseStudy",
+    "lessonId": "replica",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "caseStudy",
+    "claim": "{\"id\": \"case-replica\", \"schemaVersion\": 1, \"revision\": 1, \"familyId\": \"CASE-L2-03\", \"provenance\": {\"kind\": \"authored-scenario\"}, \"title\": \"Vừa sửa phòng, cần nhìn thấy ngay\", \"context\": \"Người quản lý đổi phòng tại nguồn chính rồi mở lại trang để kiểm tra. Bản sao có thể chưa nhận thay đổi.\", \"requirements\": [\"Cần xem ngay thay đổi đã ghi trong mô hình.\", \"Nguồn chính vừa cập nhật và đang truy cập được.\"], \"activityRef\": \"replica\", \"experimentSteps\": [\"Đổi phòng ở nguồn rồi đọc từ nguồn và bản sao.\", \"Cho thời gian trôi, đọc lại để nhận ra độ trễ sao chép.\"], \"assessmentRef\": \"challenge\", \"tradeoffs\": [\"Bản sao có thể chia tải đọc, nhưng đường đọc cần phù hợp yêu cầu đọc sau ghi của người dùng.\"], \"limitations\": \"Một nguồn và một replica, lag cố định, thông điệp đúng thứ tự. Bài chưa kiểm chứng failover hoặc bầu leader.\"}",
+    "scope": "assigned lesson content",
+    "assumptions": "Mô hình một nguồn và một replica, thông điệp đến đúng thứ tự với lag cố định. Chưa mô phỏng mất mạng, bầu leader hoặc failover. Replica không thay cho backup.",
+    "sources": [
+      {
+        "url": "https://www.postgresql.org/docs/current/hot-standby.html",
+        "edition": "PostgreSQL: Hot standby",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": "options, answer, feedback and guidance compared",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Mô hình một nguồn và một replica, thông điệp đến đúng thứ tự với lag cố định. Chưa mô phỏng mất mạng, bầu leader hoặc failover. Replica không thay cho backup.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "replica-guidance",
+    "lessonId": "replica",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "guidance",
+    "claim": "{\"schemaVersion\": 1, \"prediction\": [\"So sánh thời điểm ghi với ba giây độ trễ sao chép được giả định.\", \"Nguồn nhận ghi trước; bản sao chỉ áp dụng khi thay đổi tới lượt. “Đọc ngay” xảy ra trước hay sau thời điểm đó?\"], \"challenge\": [\"Đề cần kết quả của lần ghi vừa rồi. Nơi nào đã nhận ghi, nơi nào có thể còn chờ sao chép?\", \"Chọn đường đọc đáp ứng độ mới trong mô hình này. Một bản sao phục vụ được không có nghĩa nó đã nhận thay đổi mới nhất.\"]}",
+    "scope": "assigned lesson content",
+    "assumptions": "Mô hình một nguồn và một replica, thông điệp đến đúng thứ tự với lag cố định. Chưa mô phỏng mất mạng, bầu leader hoặc failover. Replica không thay cho backup.",
+    "sources": [
+      {
+        "url": "https://www.postgresql.org/docs/current/hot-standby.html",
+        "edition": "PostgreSQL: Hot standby",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": "options, answer, feedback and guidance compared",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Mô hình một nguồn và một replica, thông điệp đến đúng thứ tự với lag cố định. Chưa mô phỏng mất mạng, bầu leader hoặc failover. Replica không thay cho backup.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "design-story",
+    "lessonId": "design",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "story",
+    "claim": "Website ngày hội nhận 12 lượt đọc lịch và 6 việc gửi thông báo mỗi giây. Ngân sách là 6 điểm tài nguyên. Bạn cần trả lời hết lượt đọc và không để hàng gửi thông báo tăng mãi.",
+    "scope": "assigned lesson content",
+    "assumptions": "Đây là bài kết hợp nhập môn, chưa phải capstone URL shortener đầy đủ. Công suất và điểm chi phí là giả lập; cache hit được giả định 75%, dữ liệu không đổi trong cửa sổ thử. Bài chưa đánh giá security, failover hoặc tính đúng đắn khi retry.",
+    "sources": [
+      {
+        "url": "https://sre.google/sre-book/handling-overload/",
+        "edition": "Google SRE: Handling overload",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": null,
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Đây là bài kết hợp nhập môn, chưa phải capstone URL shortener đầy đủ. Công suất và điểm chi phí là giả lập; cache hit được giả định 75%, dữ liệu không đổi trong cửa sổ thử. Bài chưa đánh giá security, failover hoặc tính đúng đắn khi retry.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "design-explanation",
+    "lessonId": "design",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "explanation",
+    "claim": "Mỗi thành phần giải quyết một vấn đề cụ thể. Máy xử lý nhận yêu cầu; cache giảm số lần đọc nguồn trong giả định này; worker làm việc từ hàng đợi. Dùng số liệu để chọn, rồi nghĩ đến dữ liệu cũ và tình huống lỗi.",
+    "scope": "assigned lesson content",
+    "assumptions": "Đây là bài kết hợp nhập môn, chưa phải capstone URL shortener đầy đủ. Công suất và điểm chi phí là giả lập; cache hit được giả định 75%, dữ liệu không đổi trong cửa sổ thử. Bài chưa đánh giá security, failover hoặc tính đúng đắn khi retry.",
+    "sources": [
+      {
+        "url": "https://sre.google/sre-book/handling-overload/",
+        "edition": "Google SRE: Handling overload",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": null,
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Đây là bài kết hợp nhập môn, chưa phải capstone URL shortener đầy đủ. Công suất và điểm chi phí là giả lập; cache hit được giả định 75%, dữ liệu không đổi trong cửa sổ thử. Bài chưa đánh giá security, failover hoặc tính đúng đắn khi retry.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "design-limit",
+    "lessonId": "design",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "limit",
+    "claim": "Đây là bài kết hợp nhập môn, chưa phải capstone URL shortener đầy đủ. Công suất và điểm chi phí là giả lập; cache hit được giả định 75%, dữ liệu không đổi trong cửa sổ thử. Bài chưa đánh giá security, failover hoặc tính đúng đắn khi retry.",
+    "scope": "assigned lesson content",
+    "assumptions": "Đây là bài kết hợp nhập môn, chưa phải capstone URL shortener đầy đủ. Công suất và điểm chi phí là giả lập; cache hit được giả định 75%, dữ liệu không đổi trong cửa sổ thử. Bài chưa đánh giá security, failover hoặc tính đúng đắn khi retry.",
+    "sources": [
+      {
+        "url": "https://sre.google/sre-book/handling-overload/",
+        "edition": "Google SRE: Handling overload",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": null,
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Đây là bài kết hợp nhập môn, chưa phải capstone URL shortener đầy đủ. Công suất và điểm chi phí là giả lập; cache hit được giả định 75%, dữ liệu không đổi trong cửa sổ thử. Bài chưa đánh giá security, failover hoặc tính đúng đắn khi retry.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "design-terms",
+    "lessonId": "design",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "terms",
+    "claim": "[{\"name\": \"Đánh đổi\", \"english\": \"Trade-off\", \"meaning\": \"Một lựa chọn đem lại lợi ích nhưng cũng có chi phí hoặc giới hạn.\"}, {\"name\": \"Công suất\", \"english\": \"Capacity\", \"meaning\": \"Số việc làm được trong một khoảng thời gian theo mô hình.\"}]",
+    "scope": "assigned lesson content",
+    "assumptions": "Đây là bài kết hợp nhập môn, chưa phải capstone URL shortener đầy đủ. Công suất và điểm chi phí là giả lập; cache hit được giả định 75%, dữ liệu không đổi trong cửa sổ thử. Bài chưa đánh giá security, failover hoặc tính đúng đắn khi retry.",
+    "sources": [
+      {
+        "url": "https://sre.google/sre-book/handling-overload/",
+        "edition": "Google SRE: Handling overload",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": null,
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Đây là bài kết hợp nhập môn, chưa phải capstone URL shortener đầy đủ. Công suất và điểm chi phí là giả lập; cache hit được giả định 75%, dữ liệu không đổi trong cửa sổ thử. Bài chưa đánh giá security, failover hoặc tính đúng đắn khi retry.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "design-prediction",
+    "lessonId": "design",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "prediction",
+    "claim": "{\"text\": \"Nếu cache giảm lượt đọc nguồn, nó có tự làm xong việc gửi thông báo không?\", \"options\": [\"Có, cache giải quyết mọi chỗ chậm.\", \"Không, việc gửi thông báo cần worker.\"], \"answer\": 1, \"explanation\": \"Hai loại công việc có đường xử lý khác nhau. Giải pháp cho đọc lịch không tự tăng tốc gửi thông báo.\"}",
+    "scope": "assigned lesson content",
+    "assumptions": "Đây là bài kết hợp nhập môn, chưa phải capstone URL shortener đầy đủ. Công suất và điểm chi phí là giả lập; cache hit được giả định 75%, dữ liệu không đổi trong cửa sổ thử. Bài chưa đánh giá security, failover hoặc tính đúng đắn khi retry.",
+    "sources": [
+      {
+        "url": "https://sre.google/sre-book/handling-overload/",
+        "edition": "Google SRE: Handling overload",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": "options, answer, feedback and guidance compared",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Đây là bài kết hợp nhập môn, chưa phải capstone URL shortener đầy đủ. Công suất và điểm chi phí là giả lập; cache hit được giả định 75%, dữ liệu không đổi trong cửa sổ thử. Bài chưa đánh giá security, failover hoặc tính đúng đắn khi retry.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "design-challenge",
+    "lessonId": "design",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "challenge",
+    "claim": "{\"text\": \"Thiết kế đạt tải đọc nhưng dữ liệu cache cũ quá mức cho phép. Có nên coi thiết kế đã đạt tất cả yêu cầu không?\", \"options\": [\"Chưa; cần kiểm tra và đáp ứng độ mới.\", \"Có, miễn số việc làm xong cao.\"], \"answer\": 0, \"explanation\": \"Hiệu năng là một yêu cầu. Một thiết kế còn cần đúng dữ liệu, độ mới, chi phí và hành vi khi lỗi theo đề bài.\"}",
+    "scope": "assigned lesson content",
+    "assumptions": "Đây là bài kết hợp nhập môn, chưa phải capstone URL shortener đầy đủ. Công suất và điểm chi phí là giả lập; cache hit được giả định 75%, dữ liệu không đổi trong cửa sổ thử. Bài chưa đánh giá security, failover hoặc tính đúng đắn khi retry.",
+    "sources": [
+      {
+        "url": "https://sre.google/sre-book/handling-overload/",
+        "edition": "Google SRE: Handling overload",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": "options, answer, feedback and guidance compared",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Đây là bài kết hợp nhập môn, chưa phải capstone URL shortener đầy đủ. Công suất và điểm chi phí là giả lập; cache hit được giả định 75%, dữ liệu không đổi trong cửa sổ thử. Bài chưa đánh giá security, failover hoặc tính đúng đắn khi retry.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "design-caseStudy",
+    "lessonId": "design",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "caseStudy",
+    "claim": "{\"id\": \"case-design\", \"schemaVersion\": 1, \"revision\": 1, \"familyId\": \"CASE-L2-06\", \"provenance\": {\"kind\": \"authored-scenario\"}, \"title\": \"Cổng đăng ký ngày hội đạt đủ yêu cầu chưa?\", \"context\": \"Nhóm tăng năng lực phục vụ cổng ngày hội. Kết quả tải đọc đã đạt, nhưng lịch hiển thị từ cache cũ hơn mức cho phép.\", \"requirements\": [\"Thiết kế cần đáp ứng tải đọc lẫn độ mới dữ liệu.\", \"Không dùng một chỉ số tốt để kết luận tất cả yêu cầu đều đạt.\"], \"activityRef\": \"design\", \"experimentSteps\": [\"Thay server hoặc worker, đối chiếu kết quả với yêu cầu tải.\", \"Liệt kê điều lab đo được và điều về độ mới còn phải kiểm tra bằng trace khác.\"], \"assessmentRef\": \"challenge\", \"tradeoffs\": [\"Mỗi lựa chọn có chi phí và giới hạn. Cần đối chiếu từng yêu cầu, kể cả những yêu cầu chưa được mô hình hiện tại đo.\"], \"limitations\": \"Lab giữ dữ liệu không đổi trong cửa sổ thử và dùng hit rate giả định. Phần độ mới là suy luận; chưa đánh giá security, failover hoặc retry.\"}",
+    "scope": "assigned lesson content",
+    "assumptions": "Đây là bài kết hợp nhập môn, chưa phải capstone URL shortener đầy đủ. Công suất và điểm chi phí là giả lập; cache hit được giả định 75%, dữ liệu không đổi trong cửa sổ thử. Bài chưa đánh giá security, failover hoặc tính đúng đắn khi retry.",
+    "sources": [
+      {
+        "url": "https://sre.google/sre-book/handling-overload/",
+        "edition": "Google SRE: Handling overload",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": "options, answer, feedback and guidance compared",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Đây là bài kết hợp nhập môn, chưa phải capstone URL shortener đầy đủ. Công suất và điểm chi phí là giả lập; cache hit được giả định 75%, dữ liệu không đổi trong cửa sổ thử. Bài chưa đánh giá security, failover hoặc tính đúng đắn khi retry.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "design-guidance",
+    "lessonId": "design",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/intro.json",
+    "field": "guidance",
+    "claim": "{\"schemaVersion\": 1, \"prediction\": [\"Tách luồng đọc lịch và luồng gửi thông báo. Cache phục vụ loại công việc nào?\", \"Giảm đọc nguồn không tự thêm người gửi thông báo. Kiểm tra công suất của từng luồng riêng thay vì coi một giải pháp xử lý mọi việc.\"], \"challenge\": [\"Liệt kê các yêu cầu: số lượt làm xong, độ mới, chi phí và hành vi khi lỗi.\", \"Một thiết kế chỉ đạt tất cả khi các yêu cầu bắt buộc cùng đạt. Chỉ số hiệu năng cao có thay thế được yêu cầu về dữ liệu mới không?\"]}",
+    "scope": "assigned lesson content",
+    "assumptions": "Đây là bài kết hợp nhập môn, chưa phải capstone URL shortener đầy đủ. Công suất và điểm chi phí là giả lập; cache hit được giả định 75%, dữ liệu không đổi trong cửa sổ thử. Bài chưa đánh giá security, failover hoặc tính đúng đắn khi retry.",
+    "sources": [
+      {
+        "url": "https://sre.google/sre-book/handling-overload/",
+        "edition": "Google SRE: Handling overload",
+        "section": "relevant section",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": "options, answer, feedback and guidance compared",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Đây là bài kết hợp nhập môn, chưa phải capstone URL shortener đầy đủ. Công suất và điểm chi phí là giả lập; cache hit được giả định 75%, dữ liệu không đổi trong cửa sổ thử. Bài chưa đánh giá security, failover hoặc tính đúng đắn khi retry.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "metrics-story",
+    "lessonId": "metrics",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+    "field": "story",
+    "claim": "20 bạn cùng gửi yêu cầu tra sách lúc bắt đầu. Mỗi thủ thư làm một việc trong 100 ms. Bạn có thể thêm thủ thư hoặc làm hai việc cuối chậm hơn. Ai phải chờ lâu nhất?",
+    "scope": "assigned lesson content",
+    "assumptions": "20 yêu cầu đến cùng lúc, được phân theo thứ tự cho 1–4 worker giống nhau. 18 việc đầu mất 100 ms; hai việc cuối mất 100 hoặc 1.000 ms. Không có mạng, lỗi hoặc tải mới. p95 dùng nearest rank: sắp 20 latency tăng dần, lấy giá trị thứ 19. Throughput đo từ lúc bắt đầu đến khi cả đợt xong; không phải công suất ổn định dài hạn.",
+    "sources": [
+      {
+        "url": "https://sre.google/sre-book/monitoring-distributed-systems/",
+        "edition": "Google SRE Book online",
+        "section": "The Four Golden Signals / Worrying About Your Tail",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": null,
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "20 yêu cầu đến cùng lúc, được phân theo thứ tự cho 1–4 worker giống nhau. 18 việc đầu mất 100 ms; hai việc cuối mất 100 hoặc 1.000 ms. Không có mạng, lỗi hoặc tải mới. p95 dùng nearest rank: sắp 20 latency tăng dần, lấy giá trị thứ 19. Throughput đo từ lúc bắt đầu đến khi cả đợt xong; không phải công suất ổn định dài hạn.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "metrics-explanation",
+    "lessonId": "metrics",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+    "field": "explanation",
+    "claim": "Latency tính từ lúc gửi đến lúc nhận kết quả, gồm cả thời gian xếp hàng. Throughput là số việc hoàn tất chia cho thời gian quan sát. Median mô tả giữa nhóm; p95 giúp thấy nhóm chờ lâu. Khi hai việc cuối chậm, median có thể giữ nguyên nhưng p95 tăng.",
+    "scope": "assigned lesson content",
+    "assumptions": "20 yêu cầu đến cùng lúc, được phân theo thứ tự cho 1–4 worker giống nhau. 18 việc đầu mất 100 ms; hai việc cuối mất 100 hoặc 1.000 ms. Không có mạng, lỗi hoặc tải mới. p95 dùng nearest rank: sắp 20 latency tăng dần, lấy giá trị thứ 19. Throughput đo từ lúc bắt đầu đến khi cả đợt xong; không phải công suất ổn định dài hạn.",
+    "sources": [
+      {
+        "url": "https://sre.google/sre-book/monitoring-distributed-systems/",
+        "edition": "Google SRE Book online",
+        "section": "The Four Golden Signals / Worrying About Your Tail",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": "20 arrivals t0/4 FIFO workers: baseline batch ends 500ms, median300ms,p95 500ms; slow last 2 end1400ms, median300ms,p95 1400ms; throughput20/0.5=40/s vs20/1.4=14.286/s",
+    "trace": {
+      "mode": "executed",
+      "input": "workers4, slowLast false/true",
+      "actions": [
+        "measureBatch"
+      ],
+      "actual": "matches independent expected",
+      "artifact": "/private/tmp/sdl-audit-2026-10-17-lessons/current/trace.json",
+      "command": "node --import tsx /private/tmp/sdl-audit-2026-10-17-lessons/current/trace.mts"
+    },
+    "assessmentEvidence": null,
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "20 yêu cầu đến cùng lúc, được phân theo thứ tự cho 1–4 worker giống nhau. 18 việc đầu mất 100 ms; hai việc cuối mất 100 hoặc 1.000 ms. Không có mạng, lỗi hoặc tải mới. p95 dùng nearest rank: sắp 20 latency tăng dần, lấy giá trị thứ 19. Throughput đo từ lúc bắt đầu đến khi cả đợt xong; không phải công suất ổn định dài hạn.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "metrics-limit",
+    "lessonId": "metrics",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+    "field": "limit",
+    "claim": "20 yêu cầu đến cùng lúc, được phân theo thứ tự cho 1–4 worker giống nhau. 18 việc đầu mất 100 ms; hai việc cuối mất 100 hoặc 1.000 ms. Không có mạng, lỗi hoặc tải mới. p95 dùng nearest rank: sắp 20 latency tăng dần, lấy giá trị thứ 19. Throughput đo từ lúc bắt đầu đến khi cả đợt xong; không phải công suất ổn định dài hạn.",
+    "scope": "assigned lesson content",
+    "assumptions": "20 yêu cầu đến cùng lúc, được phân theo thứ tự cho 1–4 worker giống nhau. 18 việc đầu mất 100 ms; hai việc cuối mất 100 hoặc 1.000 ms. Không có mạng, lỗi hoặc tải mới. p95 dùng nearest rank: sắp 20 latency tăng dần, lấy giá trị thứ 19. Throughput đo từ lúc bắt đầu đến khi cả đợt xong; không phải công suất ổn định dài hạn.",
+    "sources": [
+      {
+        "url": "https://sre.google/sre-book/monitoring-distributed-systems/",
+        "edition": "Google SRE Book online",
+        "section": "The Four Golden Signals / Worrying About Your Tail",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": null,
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "20 yêu cầu đến cùng lúc, được phân theo thứ tự cho 1–4 worker giống nhau. 18 việc đầu mất 100 ms; hai việc cuối mất 100 hoặc 1.000 ms. Không có mạng, lỗi hoặc tải mới. p95 dùng nearest rank: sắp 20 latency tăng dần, lấy giá trị thứ 19. Throughput đo từ lúc bắt đầu đến khi cả đợt xong; không phải công suất ổn định dài hạn.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "metrics-terms",
+    "lessonId": "metrics",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+    "field": "terms",
+    "claim": "[{\"name\": \"Thời gian chờ\", \"english\": \"Latency\", \"meaning\": \"Thời gian từ khi yêu cầu đến đến khi nhận kết quả, kể cả xếp hàng.\"}, {\"name\": \"Số việc mỗi giây\", \"english\": \"Throughput\", \"meaning\": \"Số việc hoàn tất chia cho số giây quan sát.\"}, {\"name\": \"Trung vị\", \"english\": \"Median\", \"meaning\": \"Giá trị ở giữa dãy đã sắp; với 20 giá trị là trung bình giá trị thứ 10 và 11.\"}, {\"name\": \"Phân vị 95\", \"english\": \"p95\", \"meaning\": \"Theo cách tính trong bài: giá trị thứ 19 của 20 thời gian đã sắp tăng dần. Ít nhất 95% lượt không vượt giá trị này.\"}, {\"name\": \"Mili giây\", \"english\": \"ms\", \"meaning\": \"Đơn vị thời gian: 1.000 ms = 1 giây; 100 ms = một phần mười giây.\"}]",
+    "scope": "assigned lesson content",
+    "assumptions": "20 yêu cầu đến cùng lúc, được phân theo thứ tự cho 1–4 worker giống nhau. 18 việc đầu mất 100 ms; hai việc cuối mất 100 hoặc 1.000 ms. Không có mạng, lỗi hoặc tải mới. p95 dùng nearest rank: sắp 20 latency tăng dần, lấy giá trị thứ 19. Throughput đo từ lúc bắt đầu đến khi cả đợt xong; không phải công suất ổn định dài hạn.",
+    "sources": [
+      {
+        "url": "https://sre.google/sre-book/monitoring-distributed-systems/",
+        "edition": "Google SRE Book online",
+        "section": "The Four Golden Signals / Worrying About Your Tail",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": null,
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "20 yêu cầu đến cùng lúc, được phân theo thứ tự cho 1–4 worker giống nhau. 18 việc đầu mất 100 ms; hai việc cuối mất 100 hoặc 1.000 ms. Không có mạng, lỗi hoặc tải mới. p95 dùng nearest rank: sắp 20 latency tăng dần, lấy giá trị thứ 19. Throughput đo từ lúc bắt đầu đến khi cả đợt xong; không phải công suất ổn định dài hạn.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "metrics-prediction",
+    "lessonId": "metrics",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+    "field": "prediction",
+    "claim": "{\"text\": \"Chỉ hai việc cuối chậm đi: số ở giữa nhóm có nhất thiết tăng không?\", \"options\": [\"Có, mọi chỉ số đều tăng như nhau.\", \"Không; nhóm chờ lâu có thể thay đổi mà median giữ nguyên.\"], \"answer\": 1, \"explanation\": \"Median chỉ nhìn giữa dãy đã sắp. Hai việc cuối chậm hơn có thể làm p95 tăng mà không đổi hai giá trị ở giữa.\"}",
+    "scope": "assigned lesson content",
+    "assumptions": "20 yêu cầu đến cùng lúc, được phân theo thứ tự cho 1–4 worker giống nhau. 18 việc đầu mất 100 ms; hai việc cuối mất 100 hoặc 1.000 ms. Không có mạng, lỗi hoặc tải mới. p95 dùng nearest rank: sắp 20 latency tăng dần, lấy giá trị thứ 19. Throughput đo từ lúc bắt đầu đến khi cả đợt xong; không phải công suất ổn định dài hạn.",
+    "sources": [
+      {
+        "url": "https://sre.google/sre-book/monitoring-distributed-systems/",
+        "edition": "Google SRE Book online",
+        "section": "The Four Golden Signals / Worrying About Your Tail",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": "options, answer, feedback and guidance compared",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "20 yêu cầu đến cùng lúc, được phân theo thứ tự cho 1–4 worker giống nhau. 18 việc đầu mất 100 ms; hai việc cuối mất 100 hoặc 1.000 ms. Không có mạng, lỗi hoặc tải mới. p95 dùng nearest rank: sắp 20 latency tăng dần, lấy giá trị thứ 19. Throughput đo từ lúc bắt đầu đến khi cả đợt xong; không phải công suất ổn định dài hạn.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "metrics-challenge",
+    "lessonId": "metrics",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+    "field": "challenge",
+    "claim": "{\"text\": \"Một đợt làm xong 40 yêu cầu trong 2 giây. Throughput của cửa sổ đó là bao nhiêu?\", \"options\": [\"20 yêu cầu/giây\", \"40 mili giây\", \"80 yêu cầu/giây\"], \"answer\": 0, \"explanation\": \"40 yêu cầu ÷ 2 giây = 20 yêu cầu/giây. Con số này không cho biết thời gian chờ của từng yêu cầu.\"}",
+    "scope": "assigned lesson content",
+    "assumptions": "20 yêu cầu đến cùng lúc, được phân theo thứ tự cho 1–4 worker giống nhau. 18 việc đầu mất 100 ms; hai việc cuối mất 100 hoặc 1.000 ms. Không có mạng, lỗi hoặc tải mới. p95 dùng nearest rank: sắp 20 latency tăng dần, lấy giá trị thứ 19. Throughput đo từ lúc bắt đầu đến khi cả đợt xong; không phải công suất ổn định dài hạn.",
+    "sources": [
+      {
+        "url": "https://sre.google/sre-book/monitoring-distributed-systems/",
+        "edition": "Google SRE Book online",
+        "section": "The Four Golden Signals / Worrying About Your Tail",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": "options, answer, feedback and guidance compared",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "20 yêu cầu đến cùng lúc, được phân theo thứ tự cho 1–4 worker giống nhau. 18 việc đầu mất 100 ms; hai việc cuối mất 100 hoặc 1.000 ms. Không có mạng, lỗi hoặc tải mới. p95 dùng nearest rank: sắp 20 latency tăng dần, lấy giá trị thứ 19. Throughput đo từ lúc bắt đầu đến khi cả đợt xong; không phải công suất ổn định dài hạn.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "metrics-caseStudy",
+    "lessonId": "metrics",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+    "field": "caseStudy",
+    "claim": "{\"id\": \"case-metrics\", \"schemaVersion\": 1, \"revision\": 1, \"familyId\": \"CASE-L0-06\", \"provenance\": {\"kind\": \"authored-scenario\"}, \"title\": \"Đo một đợt tra sách\", \"context\": \"Nhóm thư viện ghi lại số yêu cầu đã làm xong trong một khoảng thời gian. Bạn cần báo cáo tốc độ phục vụ, rồi xem ai phải chờ lâu.\", \"requirements\": [\"Đợt trong đề làm xong 40 yêu cầu trong hai giây.\", \"Báo cáo tốc độ có đơn vị yêu cầu/giây; thời gian chờ là đại lượng riêng.\"], \"activityRef\": \"metrics\", \"experimentSteps\": [\"Thay số thủ thư, quan sát tốc độ và thời gian chờ.\", \"Làm hai việc cuối chậm hơn rồi so median với p95.\"], \"assessmentRef\": \"challenge\", \"tradeoffs\": [\"Đếm số việc làm xong giúp biết tốc độ phục vụ; cần phân bố thời gian để thấy người phải chờ lâu.\"], \"limitations\": \"Lab có tập yêu cầu riêng. Con số 40 yêu cầu trong hai giây là dữ liệu của câu hỏi, không phải cấu hình được áp ngầm vào lab.\"}",
+    "scope": "assigned lesson content",
+    "assumptions": "20 yêu cầu đến cùng lúc, được phân theo thứ tự cho 1–4 worker giống nhau. 18 việc đầu mất 100 ms; hai việc cuối mất 100 hoặc 1.000 ms. Không có mạng, lỗi hoặc tải mới. p95 dùng nearest rank: sắp 20 latency tăng dần, lấy giá trị thứ 19. Throughput đo từ lúc bắt đầu đến khi cả đợt xong; không phải công suất ổn định dài hạn.",
+    "sources": [
+      {
+        "url": "https://sre.google/sre-book/monitoring-distributed-systems/",
+        "edition": "Google SRE Book online",
+        "section": "The Four Golden Signals / Worrying About Your Tail",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": "options, answer, feedback and guidance compared",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "20 yêu cầu đến cùng lúc, được phân theo thứ tự cho 1–4 worker giống nhau. 18 việc đầu mất 100 ms; hai việc cuối mất 100 hoặc 1.000 ms. Không có mạng, lỗi hoặc tải mới. p95 dùng nearest rank: sắp 20 latency tăng dần, lấy giá trị thứ 19. Throughput đo từ lúc bắt đầu đến khi cả đợt xong; không phải công suất ổn định dài hạn.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "metrics-guidance",
+    "lessonId": "metrics",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+    "field": "guidance",
+    "claim": "{\"schemaVersion\": 1, \"prediction\": [\"Median nằm ở giữa dãy thời gian đã sắp, p95 nhìn gần nhóm chờ lâu nhất.\", \"Với hai việc cuối chậm, kiểm tra hai vị trí giữa dãy có đổi không. Một chỉ số đại diện không cần thay đổi giống mọi chỉ số khác.\"], \"challenge\": [\"Throughput đo số yêu cầu hoàn thành trên một đơn vị thời gian. Đề cho bao nhiêu yêu cầu, trong bao nhiêu giây?\", \"Chia số yêu cầu cho độ dài cửa sổ. Kiểm tra đơn vị kết quả phải là yêu cầu/giây, không phải ms.\"]}",
+    "scope": "assigned lesson content",
+    "assumptions": "20 yêu cầu đến cùng lúc, được phân theo thứ tự cho 1–4 worker giống nhau. 18 việc đầu mất 100 ms; hai việc cuối mất 100 hoặc 1.000 ms. Không có mạng, lỗi hoặc tải mới. p95 dùng nearest rank: sắp 20 latency tăng dần, lấy giá trị thứ 19. Throughput đo từ lúc bắt đầu đến khi cả đợt xong; không phải công suất ổn định dài hạn.",
+    "sources": [
+      {
+        "url": "https://sre.google/sre-book/monitoring-distributed-systems/",
+        "edition": "Google SRE Book online",
+        "section": "The Four Golden Signals / Worrying About Your Tail",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": "options, answer, feedback and guidance compared",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "20 yêu cầu đến cùng lúc, được phân theo thứ tự cho 1–4 worker giống nhau. 18 việc đầu mất 100 ms; hai việc cuối mất 100 hoặc 1.000 ms. Không có mạng, lỗi hoặc tải mới. p95 dùng nearest rank: sắp 20 latency tăng dần, lấy giá trị thứ 19. Throughput đo từ lúc bắt đầu đến khi cả đợt xong; không phải công suất ổn định dài hạn.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "dns-story",
+    "lessonId": "dns",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+    "field": "story",
+    "claim": "Bạn nhớ tên lich.truong.example, nhưng máy cần địa chỉ IP. Bộ tra cứu DNS hỏi các nơi chỉ dẫn để tìm nơi quản lý tên đó. Nó giữ câu trả lời trong 5 giây mô phỏng để dùng lại.",
+    "scope": "assigned lesson content",
+    "assumptions": "Tên .example và IP 203.0.113.x chỉ để minh họa, không gửi truy vấn mạng. Một bản ghi A, TTL 5 giây, mạng luôn hoạt động. Đường root → máy chủ tên miền cấp cao → nơi quản lý tên được rút gọn; bỏ qua cache chỉ dẫn, CNAME, negative caching, DNSSEC và serve-stale. DNS không phải bước tải nội dung web.",
+    "sources": [
+      {
+        "url": "https://www.rfc-editor.org/info/rfc1034/",
+        "edition": "RFC 1034, STD 13, updated by later RFCs",
+        "section": "§§3.6,5; status page",
+        "checkedAt": "2026-10-17",
+        "statusCheck": "RFC info status inspected",
+        "errataCheck": "not fully audited",
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": null,
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Tên .example và IP 203.0.113.x chỉ để minh họa, không gửi truy vấn mạng. Một bản ghi A, TTL 5 giây, mạng luôn hoạt động. Đường root → máy chủ tên miền cấp cao → nơi quản lý tên được rút gọn; bỏ qua cache chỉ dẫn, CNAME, negative caching, DNSSEC và serve-stale. DNS không phải bước tải nội dung web.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "dns-explanation",
+    "lessonId": "dns",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+    "field": "explanation",
+    "claim": "DNS giúp tra thông tin gắn với tên miền, trong bài là địa chỉ IP. Resolver có thể dùng câu trả lời trong cache khi TTL còn hạn. Nơi quản lý tên đổi địa chỉ không tự đẩy thay đổi đến mọi cache; lần tra sau khi hết hạn mới lấy lại trong mô hình này.",
+    "scope": "assigned lesson content",
+    "assumptions": "Tên .example và IP 203.0.113.x chỉ để minh họa, không gửi truy vấn mạng. Một bản ghi A, TTL 5 giây, mạng luôn hoạt động. Đường root → máy chủ tên miền cấp cao → nơi quản lý tên được rút gọn; bỏ qua cache chỉ dẫn, CNAME, negative caching, DNSSEC và serve-stale. DNS không phải bước tải nội dung web.",
+    "sources": [
+      {
+        "url": "https://www.rfc-editor.org/info/rfc1034/",
+        "edition": "RFC 1034, STD 13, updated by later RFCs",
+        "section": "§§3.6,5; status page",
+        "checkedAt": "2026-10-17",
+        "statusCheck": "RFC info status inspected",
+        "errataCheck": "not fully audited",
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": null,
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Tên .example và IP 203.0.113.x chỉ để minh họa, không gửi truy vấn mạng. Một bản ghi A, TTL 5 giây, mạng luôn hoạt động. Đường root → máy chủ tên miền cấp cao → nơi quản lý tên được rút gọn; bỏ qua cache chỉ dẫn, CNAME, negative caching, DNSSEC và serve-stale. DNS không phải bước tải nội dung web.",
+    "uncertainty": "UI source-read tại FoundationLabs.tsx:130-131 dùng mũi tên giữa resolver/root/TLD/authoritative; có nguy cơ bị hiểu là server chuyển tiếp query. Story nói resolver hỏi nơi chỉ dẫn, nên xếp editorial risk, chưa P2.",
+    "impact": null,
+    "retest": "Đổi wording mô tả resolver hỏi từng nơi; kiểm lại khi UI browser-observed."
+  },
+  {
+    "claimId": "dns-limit",
+    "lessonId": "dns",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+    "field": "limit",
+    "claim": "Tên .example và IP 203.0.113.x chỉ để minh họa, không gửi truy vấn mạng. Một bản ghi A, TTL 5 giây, mạng luôn hoạt động. Đường root → máy chủ tên miền cấp cao → nơi quản lý tên được rút gọn; bỏ qua cache chỉ dẫn, CNAME, negative caching, DNSSEC và serve-stale. DNS không phải bước tải nội dung web.",
+    "scope": "assigned lesson content",
+    "assumptions": "Tên .example và IP 203.0.113.x chỉ để minh họa, không gửi truy vấn mạng. Một bản ghi A, TTL 5 giây, mạng luôn hoạt động. Đường root → máy chủ tên miền cấp cao → nơi quản lý tên được rút gọn; bỏ qua cache chỉ dẫn, CNAME, negative caching, DNSSEC và serve-stale. DNS không phải bước tải nội dung web.",
+    "sources": [
+      {
+        "url": "https://www.rfc-editor.org/info/rfc1034/",
+        "edition": "RFC 1034, STD 13, updated by later RFCs",
+        "section": "§§3.6,5; status page",
+        "checkedAt": "2026-10-17",
+        "statusCheck": "RFC info status inspected",
+        "errataCheck": "not fully audited",
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": null,
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Tên .example và IP 203.0.113.x chỉ để minh họa, không gửi truy vấn mạng. Một bản ghi A, TTL 5 giây, mạng luôn hoạt động. Đường root → máy chủ tên miền cấp cao → nơi quản lý tên được rút gọn; bỏ qua cache chỉ dẫn, CNAME, negative caching, DNSSEC và serve-stale. DNS không phải bước tải nội dung web.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "dns-terms",
+    "lessonId": "dns",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+    "field": "terms",
+    "claim": "[{\"name\": \"Bộ tra cứu\", \"english\": \"Resolver\", \"meaning\": \"Thành phần tìm câu trả lời DNS giúp thiết bị và có thể giữ lại kết quả.\"}, {\"name\": \"Địa chỉ mạng\", \"english\": \"IP\", \"meaning\": \"Địa chỉ dùng để chuyển dữ liệu đến một giao diện mạng.\"}, {\"name\": \"Thời hạn dùng\", \"english\": \"TTL\", \"meaning\": \"Số giây bản ghi được phép giữ trong cache theo câu trả lời DNS.\"}]",
+    "scope": "assigned lesson content",
+    "assumptions": "Tên .example và IP 203.0.113.x chỉ để minh họa, không gửi truy vấn mạng. Một bản ghi A, TTL 5 giây, mạng luôn hoạt động. Đường root → máy chủ tên miền cấp cao → nơi quản lý tên được rút gọn; bỏ qua cache chỉ dẫn, CNAME, negative caching, DNSSEC và serve-stale. DNS không phải bước tải nội dung web.",
+    "sources": [
+      {
+        "url": "https://www.rfc-editor.org/info/rfc1034/",
+        "edition": "RFC 1034, STD 13, updated by later RFCs",
+        "section": "§§3.6,5; status page",
+        "checkedAt": "2026-10-17",
+        "statusCheck": "RFC info status inspected",
+        "errataCheck": "not fully audited",
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": null,
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Tên .example và IP 203.0.113.x chỉ để minh họa, không gửi truy vấn mạng. Một bản ghi A, TTL 5 giây, mạng luôn hoạt động. Đường root → máy chủ tên miền cấp cao → nơi quản lý tên được rút gọn; bỏ qua cache chỉ dẫn, CNAME, negative caching, DNSSEC và serve-stale. DNS không phải bước tải nội dung web.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "dns-prediction",
+    "lessonId": "dns",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+    "field": "prediction",
+    "claim": "{\"text\": \"Cache còn hạn giữ địa chỉ .10. Nơi quản lý tên đã đổi sang .20. Tra ngay sẽ thấy gì trong mô hình?\", \"options\": [\"Địa chỉ .10 trong cache.\", \"Luôn thấy .20 ngay.\"], \"answer\": 0, \"explanation\": \"Resolver còn dùng bản ghi .10 chưa hết hạn. Nguồn thay đổi không có nghĩa cache được cập nhật ngay.\"}",
+    "scope": "assigned lesson content",
+    "assumptions": "Tên .example và IP 203.0.113.x chỉ để minh họa, không gửi truy vấn mạng. Một bản ghi A, TTL 5 giây, mạng luôn hoạt động. Đường root → máy chủ tên miền cấp cao → nơi quản lý tên được rút gọn; bỏ qua cache chỉ dẫn, CNAME, negative caching, DNSSEC và serve-stale. DNS không phải bước tải nội dung web.",
+    "sources": [
+      {
+        "url": "https://www.rfc-editor.org/info/rfc1034/",
+        "edition": "RFC 1034, STD 13, updated by later RFCs",
+        "section": "§§3.6,5; status page",
+        "checkedAt": "2026-10-17",
+        "statusCheck": "RFC info status inspected",
+        "errataCheck": "not fully audited",
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": "options, answer, feedback and guidance compared",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Tên .example và IP 203.0.113.x chỉ để minh họa, không gửi truy vấn mạng. Một bản ghi A, TTL 5 giây, mạng luôn hoạt động. Đường root → máy chủ tên miền cấp cao → nơi quản lý tên được rút gọn; bỏ qua cache chỉ dẫn, CNAME, negative caching, DNSSEC và serve-stale. DNS không phải bước tải nội dung web.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "dns-challenge",
+    "lessonId": "dns",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+    "field": "challenge",
+    "claim": "{\"text\": \"Lấy bản ghi lúc giây 0, TTL 5 giây. Lần tra ở đúng giây 5 sẽ làm gì trong mô hình?\", \"options\": [\"Dùng cache cũ thêm 5 giây.\", \"Lấy lại từ nơi quản lý tên.\"], \"answer\": 1, \"explanation\": \"Ở giây 5 thời hạn đã hết. Lần tra này lấy lại nguồn; chỉ trôi thời gian chưa tự gửi truy vấn mới.\"}",
+    "scope": "assigned lesson content",
+    "assumptions": "Tên .example và IP 203.0.113.x chỉ để minh họa, không gửi truy vấn mạng. Một bản ghi A, TTL 5 giây, mạng luôn hoạt động. Đường root → máy chủ tên miền cấp cao → nơi quản lý tên được rút gọn; bỏ qua cache chỉ dẫn, CNAME, negative caching, DNSSEC và serve-stale. DNS không phải bước tải nội dung web.",
+    "sources": [
+      {
+        "url": "https://www.rfc-editor.org/info/rfc1034/",
+        "edition": "RFC 1034, STD 13, updated by later RFCs",
+        "section": "§§3.6,5; status page",
+        "checkedAt": "2026-10-17",
+        "statusCheck": "RFC info status inspected",
+        "errataCheck": "not fully audited",
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": "t=0 fill TTL5 => age5 at t=5, cannot use cache; lookup fetches .20",
+    "trace": {
+      "mode": "executed",
+      "input": "lookup t0, move .10→.20, wait5, lookup",
+      "actions": [
+        "dnsStep"
+      ],
+      "actual": "route authoritative, last .20 at t5",
+      "artifact": "/private/tmp/sdl-audit-2026-10-17-lessons/current/trace.json",
+      "command": "node --import tsx /private/tmp/sdl-audit-2026-10-17-lessons/current/trace.mts"
+    },
+    "assessmentEvidence": "options, answer, feedback and guidance compared",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Tên .example và IP 203.0.113.x chỉ để minh họa, không gửi truy vấn mạng. Một bản ghi A, TTL 5 giây, mạng luôn hoạt động. Đường root → máy chủ tên miền cấp cao → nơi quản lý tên được rút gọn; bỏ qua cache chỉ dẫn, CNAME, negative caching, DNSSEC và serve-stale. DNS không phải bước tải nội dung web.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "dns-caseStudy",
+    "lessonId": "dns",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+    "field": "caseStudy",
+    "claim": "{\"id\": \"case-dns\", \"schemaVersion\": 1, \"revision\": 1, \"familyId\": \"CASE-L0-04\", \"provenance\": {\"kind\": \"authored-scenario\"}, \"title\": \"Website trường chuyển địa chỉ\", \"context\": \"Website trường chuyển sang địa chỉ mới, còn nơi tra tên đang giữ địa chỉ đã lấy trước đó.\", \"requirements\": [\"Bản ghi được lấy lúc giây 0, TTL là năm giây.\", \"Xét một lần tra diễn ra đúng giây 5; nguồn đang truy cập được.\"], \"activityRef\": \"dns\", \"experimentSteps\": [\"Tra địa chỉ rồi đổi IP ở nguồn.\", \"Cho thời gian qua năm giây và tra lại, đối chiếu đường lấy dữ liệu.\"], \"assessmentRef\": \"challenge\", \"tradeoffs\": [\"Giữ bản ghi giúp bớt hỏi lại nguồn. Thời hạn và lần tra tiếp theo quyết định lúc mô hình lấy địa chỉ lại.\"], \"limitations\": \"Chỉ cho thời gian trôi không tự phát truy vấn. Bài chưa mô phỏng đầy đủ các tầng resolver của DNS.\"}",
+    "scope": "assigned lesson content",
+    "assumptions": "Tên .example và IP 203.0.113.x chỉ để minh họa, không gửi truy vấn mạng. Một bản ghi A, TTL 5 giây, mạng luôn hoạt động. Đường root → máy chủ tên miền cấp cao → nơi quản lý tên được rút gọn; bỏ qua cache chỉ dẫn, CNAME, negative caching, DNSSEC và serve-stale. DNS không phải bước tải nội dung web.",
+    "sources": [
+      {
+        "url": "https://www.rfc-editor.org/info/rfc1034/",
+        "edition": "RFC 1034, STD 13, updated by later RFCs",
+        "section": "§§3.6,5; status page",
+        "checkedAt": "2026-10-17",
+        "statusCheck": "RFC info status inspected",
+        "errataCheck": "not fully audited",
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": "options, answer, feedback and guidance compared",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Tên .example và IP 203.0.113.x chỉ để minh họa, không gửi truy vấn mạng. Một bản ghi A, TTL 5 giây, mạng luôn hoạt động. Đường root → máy chủ tên miền cấp cao → nơi quản lý tên được rút gọn; bỏ qua cache chỉ dẫn, CNAME, negative caching, DNSSEC và serve-stale. DNS không phải bước tải nội dung web.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "dns-guidance",
+    "lessonId": "dns",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+    "field": "guidance",
+    "claim": "{\"schemaVersion\": 1, \"prediction\": [\"Đề nói bản ghi gần còn hạn. So sánh địa chỉ trong bản ghi với địa chỉ ở nơi quản lý tên.\", \"Lần tra dùng bản ghi gần khi nó còn hạn; thay đổi nguồn không đẩy cập nhật tức thì đến mọi resolver trong mô hình.\"], \"challenge\": [\"Tính tuổi bản ghi: thời điểm tra trừ thời điểm lấy. So với TTL năm giây.\", \"Bản ghi chỉ được dùng khi tuổi nhỏ hơn TTL. Tại đúng ranh giới hết hạn, lần tra phải quyết định lại nơi lấy địa chỉ; chỉ đồng hồ trôi chưa gửi truy vấn.\"]}",
+    "scope": "assigned lesson content",
+    "assumptions": "Tên .example và IP 203.0.113.x chỉ để minh họa, không gửi truy vấn mạng. Một bản ghi A, TTL 5 giây, mạng luôn hoạt động. Đường root → máy chủ tên miền cấp cao → nơi quản lý tên được rút gọn; bỏ qua cache chỉ dẫn, CNAME, negative caching, DNSSEC và serve-stale. DNS không phải bước tải nội dung web.",
+    "sources": [
+      {
+        "url": "https://www.rfc-editor.org/info/rfc1034/",
+        "edition": "RFC 1034, STD 13, updated by later RFCs",
+        "section": "§§3.6,5; status page",
+        "checkedAt": "2026-10-17",
+        "statusCheck": "RFC info status inspected",
+        "errataCheck": "not fully audited",
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": "options, answer, feedback and guidance compared",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Tên .example và IP 203.0.113.x chỉ để minh họa, không gửi truy vấn mạng. Một bản ghi A, TTL 5 giây, mạng luôn hoạt động. Đường root → máy chủ tên miền cấp cao → nơi quản lý tên được rút gọn; bỏ qua cache chỉ dẫn, CNAME, negative caching, DNSSEC và serve-stale. DNS không phải bước tải nội dung web.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "transport-story",
+    "lessonId": "transport",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+    "field": "story",
+    "claim": "Gửi ba mảnh dữ liệu được đánh số 1, 2, 3. Mảnh số 2 bị mất, số 3 đến trước phần bị thiếu. Với TCP, ứng dụng chưa được đọc phần số 3. Với UDP, từng thông điệp đến độc lập. Hãy thử cả hai.",
+    "scope": "assigned lesson content",
+    "assumptions": "Ba mảnh TCP tượng trưng cho ba vùng byte liền nhau, không phải ranh giới thông điệp ứng dụng. Với UDP chúng là ba datagram. Bài chỉ minh họa một lần mất mảnh 2 rồi TCP gửi lại thành công; không mô phỏng handshake, ACK, timeout, congestion control hoặc tốc độ thực. TCP có thể thất bại nếu kết nối không phục hồi, không bảo đảm giao mãi mãi.",
+    "sources": [
+      {
+        "url": "https://www.rfc-editor.org/info/rfc9293/",
+        "edition": "RFC 9293, STD 7",
+        "section": "§2.2; status page",
+        "checkedAt": "2026-10-17",
+        "statusCheck": "RFC info status inspected",
+        "errataCheck": "not fully audited",
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": null,
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Ba mảnh TCP tượng trưng cho ba vùng byte liền nhau, không phải ranh giới thông điệp ứng dụng. Với UDP chúng là ba datagram. Bài chỉ minh họa một lần mất mảnh 2 rồi TCP gửi lại thành công; không mô phỏng handshake, ACK, timeout, congestion control hoặc tốc độ thực. TCP có thể thất bại nếu kết nối không phục hồi, không bảo đảm giao mãi mãi.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "transport-explanation",
+    "lessonId": "transport",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+    "field": "explanation",
+    "claim": "TCP cung cấp luồng byte tin cậy và đúng thứ tự: phần đến sau có thể phải giữ lại trong khi chờ phần thiếu được gửi lại. UDP gửi datagram riêng lẻ, không tự bảo đảm giao đủ, đúng thứ tự hoặc gửi lại. Ứng dụng dùng UDP vẫn có thể bổ sung các cơ chế đó.",
+    "scope": "assigned lesson content",
+    "assumptions": "Ba mảnh TCP tượng trưng cho ba vùng byte liền nhau, không phải ranh giới thông điệp ứng dụng. Với UDP chúng là ba datagram. Bài chỉ minh họa một lần mất mảnh 2 rồi TCP gửi lại thành công; không mô phỏng handshake, ACK, timeout, congestion control hoặc tốc độ thực. TCP có thể thất bại nếu kết nối không phục hồi, không bảo đảm giao mãi mãi.",
+    "sources": [
+      {
+        "url": "https://www.rfc-editor.org/info/rfc9293/",
+        "edition": "RFC 9293, STD 7",
+        "section": "§2.2; status page",
+        "checkedAt": "2026-10-17",
+        "statusCheck": "RFC info status inspected",
+        "errataCheck": "not fully audited",
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": null,
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Ba mảnh TCP tượng trưng cho ba vùng byte liền nhau, không phải ranh giới thông điệp ứng dụng. Với UDP chúng là ba datagram. Bài chỉ minh họa một lần mất mảnh 2 rồi TCP gửi lại thành công; không mô phỏng handshake, ACK, timeout, congestion control hoặc tốc độ thực. TCP có thể thất bại nếu kết nối không phục hồi, không bảo đảm giao mãi mãi.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "transport-limit",
+    "lessonId": "transport",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+    "field": "limit",
+    "claim": "Ba mảnh TCP tượng trưng cho ba vùng byte liền nhau, không phải ranh giới thông điệp ứng dụng. Với UDP chúng là ba datagram. Bài chỉ minh họa một lần mất mảnh 2 rồi TCP gửi lại thành công; không mô phỏng handshake, ACK, timeout, congestion control hoặc tốc độ thực. TCP có thể thất bại nếu kết nối không phục hồi, không bảo đảm giao mãi mãi.",
+    "scope": "assigned lesson content",
+    "assumptions": "Ba mảnh TCP tượng trưng cho ba vùng byte liền nhau, không phải ranh giới thông điệp ứng dụng. Với UDP chúng là ba datagram. Bài chỉ minh họa một lần mất mảnh 2 rồi TCP gửi lại thành công; không mô phỏng handshake, ACK, timeout, congestion control hoặc tốc độ thực. TCP có thể thất bại nếu kết nối không phục hồi, không bảo đảm giao mãi mãi.",
+    "sources": [
+      {
+        "url": "https://www.rfc-editor.org/info/rfc9293/",
+        "edition": "RFC 9293, STD 7",
+        "section": "§2.2; status page",
+        "checkedAt": "2026-10-17",
+        "statusCheck": "RFC info status inspected",
+        "errataCheck": "not fully audited",
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": null,
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Ba mảnh TCP tượng trưng cho ba vùng byte liền nhau, không phải ranh giới thông điệp ứng dụng. Với UDP chúng là ba datagram. Bài chỉ minh họa một lần mất mảnh 2 rồi TCP gửi lại thành công; không mô phỏng handshake, ACK, timeout, congestion control hoặc tốc độ thực. TCP có thể thất bại nếu kết nối không phục hồi, không bảo đảm giao mãi mãi.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "transport-terms",
+    "lessonId": "transport",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+    "field": "terms",
+    "claim": "[{\"name\": \"Luồng byte\", \"english\": \"TCP\", \"meaning\": \"Giao thức vận chuyển cung cấp cho ứng dụng luồng byte tin cậy và đúng thứ tự khi kết nối hoạt động.\"}, {\"name\": \"Thông điệp độc lập\", \"english\": \"UDP\", \"meaning\": \"Giao thức vận chuyển datagram; không tự bảo đảm dữ liệu đến đủ hoặc đúng thứ tự.\"}, {\"name\": \"Gửi lại\", \"english\": \"Retransmission\", \"meaning\": \"Gửi lại phần dữ liệu bị thiếu để thử khôi phục.\"}]",
+    "scope": "assigned lesson content",
+    "assumptions": "Ba mảnh TCP tượng trưng cho ba vùng byte liền nhau, không phải ranh giới thông điệp ứng dụng. Với UDP chúng là ba datagram. Bài chỉ minh họa một lần mất mảnh 2 rồi TCP gửi lại thành công; không mô phỏng handshake, ACK, timeout, congestion control hoặc tốc độ thực. TCP có thể thất bại nếu kết nối không phục hồi, không bảo đảm giao mãi mãi.",
+    "sources": [
+      {
+        "url": "https://www.rfc-editor.org/info/rfc9293/",
+        "edition": "RFC 9293, STD 7",
+        "section": "§2.2; status page",
+        "checkedAt": "2026-10-17",
+        "statusCheck": "RFC info status inspected",
+        "errataCheck": "not fully audited",
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": null,
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Ba mảnh TCP tượng trưng cho ba vùng byte liền nhau, không phải ranh giới thông điệp ứng dụng. Với UDP chúng là ba datagram. Bài chỉ minh họa một lần mất mảnh 2 rồi TCP gửi lại thành công; không mô phỏng handshake, ACK, timeout, congestion control hoặc tốc độ thực. TCP có thể thất bại nếu kết nối không phục hồi, không bảo đảm giao mãi mãi.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "transport-prediction",
+    "lessonId": "transport",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+    "field": "prediction",
+    "claim": "{\"text\": \"TCP nhận mảnh 1 và 3, còn thiếu 2. Ứng dụng đọc ngay phần 3 được không?\", \"options\": [\"Chưa; cần chờ phần byte bị thiếu.\", \"Được, TCP bỏ qua thứ tự.\"], \"answer\": 0, \"explanation\": \"TCP giữ thứ tự luồng byte. Phần 3 có thể được lưu đệm cho đến khi phần 2 được nhận.\"}",
+    "scope": "assigned lesson content",
+    "assumptions": "Ba mảnh TCP tượng trưng cho ba vùng byte liền nhau, không phải ranh giới thông điệp ứng dụng. Với UDP chúng là ba datagram. Bài chỉ minh họa một lần mất mảnh 2 rồi TCP gửi lại thành công; không mô phỏng handshake, ACK, timeout, congestion control hoặc tốc độ thực. TCP có thể thất bại nếu kết nối không phục hồi, không bảo đảm giao mãi mãi.",
+    "sources": [
+      {
+        "url": "https://www.rfc-editor.org/info/rfc9293/",
+        "edition": "RFC 9293, STD 7",
+        "section": "§2.2; status page",
+        "checkedAt": "2026-10-17",
+        "statusCheck": "RFC info status inspected",
+        "errataCheck": "not fully audited",
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": "byte region2 missing => contiguous prefix only region1 available to app",
+    "trace": {
+      "mode": "executed",
+      "input": "tcp loss, phase2",
+      "actions": [
+        "transferPackets"
+      ],
+      "actual": "received [1,3], delivered [1], buffered1",
+      "artifact": "/private/tmp/sdl-audit-2026-10-17-lessons/current/trace.json",
+      "command": "node --import tsx /private/tmp/sdl-audit-2026-10-17-lessons/current/trace.mts"
+    },
+    "assessmentEvidence": "options, answer, feedback and guidance compared",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Ba mảnh TCP tượng trưng cho ba vùng byte liền nhau, không phải ranh giới thông điệp ứng dụng. Với UDP chúng là ba datagram. Bài chỉ minh họa một lần mất mảnh 2 rồi TCP gửi lại thành công; không mô phỏng handshake, ACK, timeout, congestion control hoặc tốc độ thực. TCP có thể thất bại nếu kết nối không phục hồi, không bảo đảm giao mãi mãi.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "transport-challenge",
+    "lessonId": "transport",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+    "field": "challenge",
+    "claim": "{\"text\": \"Dùng UDP, ứng dụng cần mọi thông điệp đến đủ. Có thể chỉ dựa vào UDP không?\", \"options\": [\"Có, UDP tự gửi lại mọi thông điệp thiếu.\", \"Không; cần cơ chế tin cậy ở lớp khác hoặc giao thức phù hợp.\"], \"answer\": 1, \"explanation\": \"UDP không cung cấp bảo đảm giao đủ. Ứng dụng hoặc một giao thức phía trên có thể thêm xác nhận, gửi lại và các quy tắc cần thiết.\"}",
+    "scope": "assigned lesson content",
+    "assumptions": "Ba mảnh TCP tượng trưng cho ba vùng byte liền nhau, không phải ranh giới thông điệp ứng dụng. Với UDP chúng là ba datagram. Bài chỉ minh họa một lần mất mảnh 2 rồi TCP gửi lại thành công; không mô phỏng handshake, ACK, timeout, congestion control hoặc tốc độ thực. TCP có thể thất bại nếu kết nối không phục hồi, không bảo đảm giao mãi mãi.",
+    "sources": [
+      {
+        "url": "https://www.rfc-editor.org/info/rfc9293/",
+        "edition": "RFC 9293, STD 7",
+        "section": "§2.2; status page",
+        "checkedAt": "2026-10-17",
+        "statusCheck": "RFC info status inspected",
+        "errataCheck": "not fully audited",
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": "options, answer, feedback and guidance compared",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Ba mảnh TCP tượng trưng cho ba vùng byte liền nhau, không phải ranh giới thông điệp ứng dụng. Với UDP chúng là ba datagram. Bài chỉ minh họa một lần mất mảnh 2 rồi TCP gửi lại thành công; không mô phỏng handshake, ACK, timeout, congestion control hoặc tốc độ thực. TCP có thể thất bại nếu kết nối không phục hồi, không bảo đảm giao mãi mãi.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "transport-caseStudy",
+    "lessonId": "transport",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+    "field": "caseStudy",
+    "claim": "{\"id\": \"case-transport\", \"schemaVersion\": 1, \"revision\": 1, \"familyId\": \"CASE-L0-04\", \"provenance\": {\"kind\": \"authored-scenario\"}, \"title\": \"Gửi đầy đủ hướng dẫn tham dự\", \"context\": \"Câu lạc bộ gửi nội dung hướng dẫn gồm nhiều mảnh. Một mảnh có thể bị mất; người nhận cần đầy đủ thông tin để làm đúng.\", \"requirements\": [\"Ứng dụng cần mọi thông điệp đến đủ.\", \"Phương án đang xét chỉ dùng UDP, chưa thêm xác nhận hoặc gửi lại.\"], \"activityRef\": \"transport\", \"experimentSteps\": [\"Chọn UDP, gửi ba mảnh và xem kết quả tại đích.\", \"So với trace TCP và bước khôi phục; chỉ ra lớp nào xử lý mảnh thiếu.\"], \"assessmentRef\": \"challenge\", \"tradeoffs\": [\"Chọn giao thức hoặc bổ sung cơ chế tin cậy phải theo yêu cầu của ứng dụng; việc khôi phục cũng có chi phí và điều kiện.\"], \"limitations\": \"Trace giản lược một lần mất mảnh. Bài không bảo đảm thời hạn giao dữ liệu hoặc mô phỏng mọi trạng thái TCP.\"}",
+    "scope": "assigned lesson content",
+    "assumptions": "Ba mảnh TCP tượng trưng cho ba vùng byte liền nhau, không phải ranh giới thông điệp ứng dụng. Với UDP chúng là ba datagram. Bài chỉ minh họa một lần mất mảnh 2 rồi TCP gửi lại thành công; không mô phỏng handshake, ACK, timeout, congestion control hoặc tốc độ thực. TCP có thể thất bại nếu kết nối không phục hồi, không bảo đảm giao mãi mãi.",
+    "sources": [
+      {
+        "url": "https://www.rfc-editor.org/info/rfc9293/",
+        "edition": "RFC 9293, STD 7",
+        "section": "§2.2; status page",
+        "checkedAt": "2026-10-17",
+        "statusCheck": "RFC info status inspected",
+        "errataCheck": "not fully audited",
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": "options, answer, feedback and guidance compared",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Ba mảnh TCP tượng trưng cho ba vùng byte liền nhau, không phải ranh giới thông điệp ứng dụng. Với UDP chúng là ba datagram. Bài chỉ minh họa một lần mất mảnh 2 rồi TCP gửi lại thành công; không mô phỏng handshake, ACK, timeout, congestion control hoặc tốc độ thực. TCP có thể thất bại nếu kết nối không phục hồi, không bảo đảm giao mãi mãi.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "transport-guidance",
+    "lessonId": "transport",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+    "field": "guidance",
+    "claim": "{\"schemaVersion\": 1, \"prediction\": [\"TCP cung cấp một luồng byte có thứ tự. Nhìn vùng bị thiếu nằm trước hay sau vùng ứng dụng muốn đọc.\", \"Phân biệt dữ liệu đã tới bộ đệm với dữ liệu được giao cho ứng dụng. TCP không nhảy qua một khoảng byte thiếu để giao vùng sau như một thông điệp độc lập.\"], \"challenge\": [\"UDP tự cung cấp xác nhận và gửi lại, hay chỉ gửi các thông điệp độc lập?\", \"Yêu cầu giao đủ cần cơ chế tin cậy. Xem cơ chế đó có nằm trong UDP hay cần do ứng dụng/giao thức khác bổ sung.\"]}",
+    "scope": "assigned lesson content",
+    "assumptions": "Ba mảnh TCP tượng trưng cho ba vùng byte liền nhau, không phải ranh giới thông điệp ứng dụng. Với UDP chúng là ba datagram. Bài chỉ minh họa một lần mất mảnh 2 rồi TCP gửi lại thành công; không mô phỏng handshake, ACK, timeout, congestion control hoặc tốc độ thực. TCP có thể thất bại nếu kết nối không phục hồi, không bảo đảm giao mãi mãi.",
+    "sources": [
+      {
+        "url": "https://www.rfc-editor.org/info/rfc9293/",
+        "edition": "RFC 9293, STD 7",
+        "section": "§2.2; status page",
+        "checkedAt": "2026-10-17",
+        "statusCheck": "RFC info status inspected",
+        "errataCheck": "not fully audited",
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": "options, answer, feedback and guidance compared",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Ba mảnh TCP tượng trưng cho ba vùng byte liền nhau, không phải ranh giới thông điệp ứng dụng. Với UDP chúng là ba datagram. Bài chỉ minh họa một lần mất mảnh 2 rồi TCP gửi lại thành công; không mô phỏng handshake, ACK, timeout, congestion control hoặc tốc độ thực. TCP có thể thất bại nếu kết nối không phục hồi, không bảo đảm giao mãi mãi.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "capacity-story",
+    "lessonId": "capacity",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+    "field": "story",
+    "claim": "Mỗi học sinh có một ảnh riêng trên website. Mỗi lần xem tải lại toàn bộ một ảnh. Bạn biết số học sinh, số lượt mỗi ngày và kích thước ảnh. Hãy tính trước khi chọn máy chủ.",
+    "scope": "assigned lesson content",
+    "assumptions": "Dùng đơn vị thập phân: 1 kB = 1.000 byte, 1 MB = 1.000 kB. Một ảnh riêng cho mỗi học sinh, kích thước bằng nhau, mỗi lượt tải một ảnh. Bỏ qua cache, nén, header, retry, bản sao, metadata và backup. Hệ số đỉnh là giả định cần đo kiểm lại; bài không suy ra số máy hoặc chi phí nhà cung cấp.",
+    "sources": [
+      {
+        "url": "https://physics.nist.gov/cuu/Units/binary.html",
+        "edition": "NIST units page, revision unknown",
+        "section": "Examples and comparisons",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": null,
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Dùng đơn vị thập phân: 1 kB = 1.000 byte, 1 MB = 1.000 kB. Một ảnh riêng cho mỗi học sinh, kích thước bằng nhau, mỗi lượt tải một ảnh. Bỏ qua cache, nén, header, retry, bản sao, metadata và backup. Hệ số đỉnh là giả định cần đo kiểm lại; bài không suy ra số máy hoặc chi phí nhà cung cấp.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "capacity-explanation",
+    "lessonId": "capacity",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+    "field": "explanation",
+    "claim": "Lượt/ngày = số học sinh × lượt mỗi người. Chia cho 86.400 giây để ra lượt/giây trung bình. Tải đỉnh ở đây chỉ là trung bình nhân hệ số bạn giả định. Dữ liệu truyền tăng theo lượt xem; dung lượng ảnh lưu chỉ tính số ảnh duy nhất.",
+    "scope": "assigned lesson content",
+    "assumptions": "Dùng đơn vị thập phân: 1 kB = 1.000 byte, 1 MB = 1.000 kB. Một ảnh riêng cho mỗi học sinh, kích thước bằng nhau, mỗi lượt tải một ảnh. Bỏ qua cache, nén, header, retry, bản sao, metadata và backup. Hệ số đỉnh là giả định cần đo kiểm lại; bài không suy ra số máy hoặc chi phí nhà cung cấp.",
+    "sources": [
+      {
+        "url": "https://physics.nist.gov/cuu/Units/binary.html",
+        "edition": "NIST units page, revision unknown",
+        "section": "Examples and comparisons",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": null,
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Dùng đơn vị thập phân: 1 kB = 1.000 byte, 1 MB = 1.000 kB. Một ảnh riêng cho mỗi học sinh, kích thước bằng nhau, mỗi lượt tải một ảnh. Bỏ qua cache, nén, header, retry, bản sao, metadata và backup. Hệ số đỉnh là giả định cần đo kiểm lại; bài không suy ra số máy hoặc chi phí nhà cung cấp.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "capacity-limit",
+    "lessonId": "capacity",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+    "field": "limit",
+    "claim": "Dùng đơn vị thập phân: 1 kB = 1.000 byte, 1 MB = 1.000 kB. Một ảnh riêng cho mỗi học sinh, kích thước bằng nhau, mỗi lượt tải một ảnh. Bỏ qua cache, nén, header, retry, bản sao, metadata và backup. Hệ số đỉnh là giả định cần đo kiểm lại; bài không suy ra số máy hoặc chi phí nhà cung cấp.",
+    "scope": "assigned lesson content",
+    "assumptions": "Dùng đơn vị thập phân: 1 kB = 1.000 byte, 1 MB = 1.000 kB. Một ảnh riêng cho mỗi học sinh, kích thước bằng nhau, mỗi lượt tải một ảnh. Bỏ qua cache, nén, header, retry, bản sao, metadata và backup. Hệ số đỉnh là giả định cần đo kiểm lại; bài không suy ra số máy hoặc chi phí nhà cung cấp.",
+    "sources": [
+      {
+        "url": "https://physics.nist.gov/cuu/Units/binary.html",
+        "edition": "NIST units page, revision unknown",
+        "section": "Examples and comparisons",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": null,
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Dùng đơn vị thập phân: 1 kB = 1.000 byte, 1 MB = 1.000 kB. Một ảnh riêng cho mỗi học sinh, kích thước bằng nhau, mỗi lượt tải một ảnh. Bỏ qua cache, nén, header, retry, bản sao, metadata và backup. Hệ số đỉnh là giả định cần đo kiểm lại; bài không suy ra số máy hoặc chi phí nhà cung cấp.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "capacity-terms",
+    "lessonId": "capacity",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+    "field": "terms",
+    "claim": "[{\"name\": \"Tải đỉnh\", \"english\": \"Peak load\", \"meaning\": \"Mức tải cao trong một khoảng quan sát; bài đang dùng một giả định nhân với trung bình.\"}, {\"name\": \"Dung lượng lưu\", \"english\": \"Storage\", \"meaning\": \"Lượng dữ liệu cần giữ, trong bài là các ảnh duy nhất.\"}, {\"name\": \"Dữ liệu truyền\", \"english\": \"Transfer\", \"meaning\": \"Tổng lượng dữ liệu gửi đi qua các lượt xem trong cửa sổ đo.\"}]",
+    "scope": "assigned lesson content",
+    "assumptions": "Dùng đơn vị thập phân: 1 kB = 1.000 byte, 1 MB = 1.000 kB. Một ảnh riêng cho mỗi học sinh, kích thước bằng nhau, mỗi lượt tải một ảnh. Bỏ qua cache, nén, header, retry, bản sao, metadata và backup. Hệ số đỉnh là giả định cần đo kiểm lại; bài không suy ra số máy hoặc chi phí nhà cung cấp.",
+    "sources": [
+      {
+        "url": "https://physics.nist.gov/cuu/Units/binary.html",
+        "edition": "NIST units page, revision unknown",
+        "section": "Examples and comparisons",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": null,
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Dùng đơn vị thập phân: 1 kB = 1.000 byte, 1 MB = 1.000 kB. Một ảnh riêng cho mỗi học sinh, kích thước bằng nhau, mỗi lượt tải một ảnh. Bỏ qua cache, nén, header, retry, bản sao, metadata và backup. Hệ số đỉnh là giả định cần đo kiểm lại; bài không suy ra số máy hoặc chi phí nhà cung cấp.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "capacity-prediction",
+    "lessonId": "capacity",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+    "field": "prediction",
+    "claim": "{\"text\": \"Giữ nguyên số ảnh, mỗi người xem gấp đôi. Điều gì tăng trong mô hình?\", \"options\": [\"Dung lượng lưu ảnh tự tăng gấp đôi.\", \"Dữ liệu truyền tăng gấp đôi; dung lượng ảnh lưu không đổi.\"], \"answer\": 1, \"explanation\": \"Ảnh vẫn là những tệp cũ. Tải chúng thêm lần nữa tăng dữ liệu truyền nhưng không tạo thêm ảnh để lưu.\"}",
+    "scope": "assigned lesson content",
+    "assumptions": "Dùng đơn vị thập phân: 1 kB = 1.000 byte, 1 MB = 1.000 kB. Một ảnh riêng cho mỗi học sinh, kích thước bằng nhau, mỗi lượt tải một ảnh. Bỏ qua cache, nén, header, retry, bản sao, metadata và backup. Hệ số đỉnh là giả định cần đo kiểm lại; bài không suy ra số máy hoặc chi phí nhà cung cấp.",
+    "sources": [
+      {
+        "url": "https://physics.nist.gov/cuu/Units/binary.html",
+        "edition": "NIST units page, revision unknown",
+        "section": "Examples and comparisons",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": "options, answer, feedback and guidance compared",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Dùng đơn vị thập phân: 1 kB = 1.000 byte, 1 MB = 1.000 kB. Một ảnh riêng cho mỗi học sinh, kích thước bằng nhau, mỗi lượt tải một ảnh. Bỏ qua cache, nén, header, retry, bản sao, metadata và backup. Hệ số đỉnh là giả định cần đo kiểm lại; bài không suy ra số máy hoặc chi phí nhà cung cấp.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "capacity-challenge",
+    "lessonId": "capacity",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+    "field": "challenge",
+    "claim": "{\"text\": \"2.000 học sinh, mỗi người 1 ảnh 100 kB và xem 5 lượt/ngày. Cần lưu bao nhiêu MB ảnh duy nhất?\", \"options\": [\"1.000 MB\", \"200 MB\", \"10.000 MB\"], \"answer\": 1, \"explanation\": \"2.000 × 100 kB ÷ 1.000 = 200 MB lưu. Dữ liệu truyền là 200 × 5 = 1.000 MB/ngày; đây là hai đại lượng khác nhau.\"}",
+    "scope": "assigned lesson content",
+    "assumptions": "Dùng đơn vị thập phân: 1 kB = 1.000 byte, 1 MB = 1.000 kB. Một ảnh riêng cho mỗi học sinh, kích thước bằng nhau, mỗi lượt tải một ảnh. Bỏ qua cache, nén, header, retry, bản sao, metadata và backup. Hệ số đỉnh là giả định cần đo kiểm lại; bài không suy ra số máy hoặc chi phí nhà cung cấp.",
+    "sources": [
+      {
+        "url": "https://physics.nist.gov/cuu/Units/binary.html",
+        "edition": "NIST units page, revision unknown",
+        "section": "Examples and comparisons",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": "2000*100 kB=200000 kB=200 MB unique storage; 5 views=>1000 MB/day transfer",
+    "trace": {
+      "mode": "executed",
+      "input": "students2000,views5,size100kB,factor4",
+      "actions": [
+        "estimateCapacity"
+      ],
+      "actual": "storageMB200 transferMB1000",
+      "artifact": "/private/tmp/sdl-audit-2026-10-17-lessons/current/trace.json",
+      "command": "node --import tsx /private/tmp/sdl-audit-2026-10-17-lessons/current/trace.mts"
+    },
+    "assessmentEvidence": "options, answer, feedback and guidance compared",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Dùng đơn vị thập phân: 1 kB = 1.000 byte, 1 MB = 1.000 kB. Một ảnh riêng cho mỗi học sinh, kích thước bằng nhau, mỗi lượt tải một ảnh. Bỏ qua cache, nén, header, retry, bản sao, metadata và backup. Hệ số đỉnh là giả định cần đo kiểm lại; bài không suy ra số máy hoặc chi phí nhà cung cấp.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "capacity-caseStudy",
+    "lessonId": "capacity",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+    "field": "caseStudy",
+    "claim": "{\"id\": \"case-capacity\", \"schemaVersion\": 1, \"revision\": 1, \"familyId\": \"CASE-L0-06\", \"provenance\": {\"kind\": \"authored-scenario\"}, \"title\": \"Dự trù kho ảnh ngày hội\", \"context\": \"Mỗi học sinh gửi một ảnh để làm album ngày hội. Nhóm cần tách chỗ lưu ảnh khỏi lượng dữ liệu gửi cho người xem.\", \"requirements\": [\"Có 2.000 học sinh; mỗi người một ảnh 100 kB.\", \"Mỗi ảnh được xem năm lượt/ngày; tính ảnh duy nhất, dùng 1.000 kB = 1 MB.\"], \"activityRef\": \"capacity\", \"experimentSteps\": [\"Tăng số lượt xem trong lab và đối chiếu lưu trữ với dữ liệu truyền.\", \"Đổi kích thước ảnh; ghi đơn vị và đại lượng nào thay đổi.\"], \"assessmentRef\": \"challenge\", \"tradeoffs\": [\"Ảnh lớn hơn làm tăng dữ liệu gốc lẫn lượng truyền. Thêm lượt xem làm tăng lượng truyền, không tự tạo thêm file gốc.\"], \"limitations\": \"Bỏ qua metadata, thumbnail, replica và overhead giao thức. Các giá trị ban đầu của lab khác số liệu đề, không bị thay khi mở tình huống.\"}",
+    "scope": "assigned lesson content",
+    "assumptions": "Dùng đơn vị thập phân: 1 kB = 1.000 byte, 1 MB = 1.000 kB. Một ảnh riêng cho mỗi học sinh, kích thước bằng nhau, mỗi lượt tải một ảnh. Bỏ qua cache, nén, header, retry, bản sao, metadata và backup. Hệ số đỉnh là giả định cần đo kiểm lại; bài không suy ra số máy hoặc chi phí nhà cung cấp.",
+    "sources": [
+      {
+        "url": "https://physics.nist.gov/cuu/Units/binary.html",
+        "edition": "NIST units page, revision unknown",
+        "section": "Examples and comparisons",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": "options, answer, feedback and guidance compared",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Dùng đơn vị thập phân: 1 kB = 1.000 byte, 1 MB = 1.000 kB. Một ảnh riêng cho mỗi học sinh, kích thước bằng nhau, mỗi lượt tải một ảnh. Bỏ qua cache, nén, header, retry, bản sao, metadata và backup. Hệ số đỉnh là giả định cần đo kiểm lại; bài không suy ra số máy hoặc chi phí nhà cung cấp.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "capacity-guidance",
+    "lessonId": "capacity",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/lessons/vi/foundations.json",
+    "field": "guidance",
+    "claim": "{\"schemaVersion\": 1, \"prediction\": [\"Tách ảnh duy nhất đang lưu với số lần tải lại cùng ảnh.\", \"Một lần xem tạo dữ liệu truyền đi, không tạo thêm một tệp ảnh trong mô hình. Nhân lượt xem ảnh hưởng đến đại lượng nào?\"], \"challenge\": [\"Đề hỏi ảnh duy nhất cần lưu, không hỏi tổng dữ liệu truyền qua năm lượt xem.\", \"Lấy số học sinh nhân kích thước một ảnh. Đổi kB sang MB bằng chia 1.000; chỉ nhân lượt xem khi tính truyền mỗi ngày.\"]}",
+    "scope": "assigned lesson content",
+    "assumptions": "Dùng đơn vị thập phân: 1 kB = 1.000 byte, 1 MB = 1.000 kB. Một ảnh riêng cho mỗi học sinh, kích thước bằng nhau, mỗi lượt tải một ảnh. Bỏ qua cache, nén, header, retry, bản sao, metadata và backup. Hệ số đỉnh là giả định cần đo kiểm lại; bài không suy ra số máy hoặc chi phí nhà cung cấp.",
+    "sources": [
+      {
+        "url": "https://physics.nist.gov/cuu/Units/binary.html",
+        "edition": "NIST units page, revision unknown",
+        "section": "Examples and comparisons",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "mechanism only; numeric examples are authored assumptions"
+      }
+    ],
+    "independentExpected": null,
+    "trace": {
+      "mode": "source-read",
+      "input": null,
+      "actions": null,
+      "actual": null,
+      "artifact": null,
+      "command": null
+    },
+    "assessmentEvidence": "options, answer, feedback and guidance compared",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": "Dùng đơn vị thập phân: 1 kB = 1.000 byte, 1 MB = 1.000 kB. Một ảnh riêng cho mỗi học sinh, kích thước bằng nhau, mỗi lượt tải một ảnh. Bỏ qua cache, nén, header, retry, bản sao, metadata và backup. Hệ số đỉnh là giả định cần đo kiểm lại; bài không suy ra số máy hoặc chi phí nhà cung cấp.",
+    "uncertainty": "UI not browser-observed; source does not support toy numbers",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "school-day-opening",
+    "lessonId": "school-day",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/reviews/vi/school-day.json",
+    "field": "scenarios[0]",
+    "claim": "Nhiều bạn cùng xem lịch. Một luồng khác tạo việc gửi thông báo. Trường vừa đổi phòng, nên cần giới hạn thời gian dùng bản ghi gần. Hãy phục vụ đủ lượt đọc, làm hết việc gửi và giữ trong ngân sách. ",
+    "scope": "integrated review",
+    "assumptions": [
+      "Mỗi lần chạy độc lập: phần đọc tính một cửa sổ một giây không có hàng chờ ban đầu; phần gửi chạy bốn giây từ hàng chờ của tình huống. Hai luồng có tải riêng, không suy ra việc gửi từ lượt đọc.",
+      "Mỗi server làm tối đa sáu lượt đọc/giây; nơi lưu lịch làm bốn lượt đọc/giây. Nếu bật cache, giả định đúng 75% lượt không đọc nguồn, giữ cố định cho mọi TTL; không đo hit rate từ TTL hoặc workload thật.",
+      "Độ mới chỉ kiểm policy TTL không quá một phút: giả định không trả bản ghi hết hạn và lấy nguồn mới khi cần. Bỏ qua mạng, thời gian tra nguồn, lỗi cập nhật và bản sao. Đây không phải bảo đảm dữ liệu mới trong hệ thống thật.",
+      "Mỗi worker làm tối đa hai việc/giây, việc đến đều, không retry/mất ACK/lỗi. Điểm ngân sách chỉ để luyện đánh đổi, không phải tiền hay giá dịch vụ.",
+      "Công cụ chỉ kiểm ràng buộc của mô hình; bạn tự đánh giá lời giải thích. Lưu lượt ôn không chứng minh đã thành thạo module hoặc thiết kế production."
+    ],
+    "sources": [
+      {
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside",
+        "edition": "Microsoft Learn live, revision unknown",
+        "section": "Cơ chế đọc cache/nguồn, dữ liệu có thể cũ và cân nhắc expiration. Không chứng minh hit75%, giới hạn độ mới hoặc số công suất của ví dụ.",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "Cơ chế đọc cache/nguồn, dữ liệu có thể cũ và cân nhắc expiration. Không chứng minh hit75%, giới hạn độ mới hoặc số công suất của ví dụ."
+      },
+      {
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling",
+        "edition": "Microsoft Learn live, revision unknown",
+        "section": "Queue tách nhận việc với xử lý, cần công suất xử lý phù hợp để tránh tích hàng chờ. Các tốc độ và điểm chi phí ở bài là giả định tác giả.",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "Queue tách nhận việc với xử lý, cần công suất xử lý phù hợp để tránh tích hàng chờ. Các tốc độ và điểm chi phí ở bài là giả định tác giả."
+      }
+    ],
+    "independentExpected": "opening: 12 reads, db=3 with 75% hit, 3 workers*2=6, cost 2+3+1=6 <=7",
+    "trace": {
+      "mode": "executed",
+      "input": {
+        "servers": 2,
+        "cache": true,
+        "ttl": 1,
+        "workers": 3
+      },
+      "actions": [
+        "evaluateSchoolReview"
+      ],
+      "actual": "all checks true",
+      "artifact": "/private/tmp/sdl-audit-2026-10-17-lessons/current/trace.json",
+      "command": "node --import tsx /private/tmp/sdl-audit-2026-10-17-lessons/current/trace.mts"
+    },
+    "assessmentEvidence": "reflection prompt asks explanation; engine checks only numeric constraints",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": [
+      "Mỗi lần chạy độc lập: phần đọc tính một cửa sổ một giây không có hàng chờ ban đầu; phần gửi chạy bốn giây từ hàng chờ của tình huống. Hai luồng có tải riêng, không suy ra việc gửi từ lượt đọc.",
+      "Mỗi server làm tối đa sáu lượt đọc/giây; nơi lưu lịch làm bốn lượt đọc/giây. Nếu bật cache, giả định đúng 75% lượt không đọc nguồn, giữ cố định cho mọi TTL; không đo hit rate từ TTL hoặc workload thật.",
+      "Độ mới chỉ kiểm policy TTL không quá một phút: giả định không trả bản ghi hết hạn và lấy nguồn mới khi cần. Bỏ qua mạng, thời gian tra nguồn, lỗi cập nhật và bản sao. Đây không phải bảo đảm dữ liệu mới trong hệ thống thật.",
+      "Mỗi worker làm tối đa hai việc/giây, việc đến đều, không retry/mất ACK/lỗi. Điểm ngân sách chỉ để luyện đánh đổi, không phải tiền hay giá dịch vụ.",
+      "Công cụ chỉ kiểm ràng buộc của mô hình; bạn tự đánh giá lời giải thích. Lưu lượt ôn không chứng minh đã thành thạo module hoặc thiết kế production."
+    ],
+    "uncertainty": "No browser observation; fixed 75% cache hit irrespective of TTL is an explicit assumption",
+    "impact": null,
+    "retest": null
+  },
+  {
+    "claimId": "school-day-rush",
+    "lessonId": "school-day",
+    "version": 1,
+    "path": "/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/content/reviews/vi/school-day.json",
+    "field": "scenarios[1]",
+    "claim": "Lượt đọc ít hơn, nhưng việc gửi đến nhiều hơn và đã có hàng chờ từ trước. Thử phương án với yêu cầu mới: làm hết cả phần tồn trước đó trong thời gian cho phép, giữ lịch đủ mới và không vượt ngân sách. ",
+    "scope": "integrated review",
+    "assumptions": [
+      "Mỗi lần chạy độc lập: phần đọc tính một cửa sổ một giây không có hàng chờ ban đầu; phần gửi chạy bốn giây từ hàng chờ của tình huống. Hai luồng có tải riêng, không suy ra việc gửi từ lượt đọc.",
+      "Mỗi server làm tối đa sáu lượt đọc/giây; nơi lưu lịch làm bốn lượt đọc/giây. Nếu bật cache, giả định đúng 75% lượt không đọc nguồn, giữ cố định cho mọi TTL; không đo hit rate từ TTL hoặc workload thật.",
+      "Độ mới chỉ kiểm policy TTL không quá một phút: giả định không trả bản ghi hết hạn và lấy nguồn mới khi cần. Bỏ qua mạng, thời gian tra nguồn, lỗi cập nhật và bản sao. Đây không phải bảo đảm dữ liệu mới trong hệ thống thật.",
+      "Mỗi worker làm tối đa hai việc/giây, việc đến đều, không retry/mất ACK/lỗi. Điểm ngân sách chỉ để luyện đánh đổi, không phải tiền hay giá dịch vụ.",
+      "Công cụ chỉ kiểm ràng buộc của mô hình; bạn tự đánh giá lời giải thích. Lưu lượt ôn không chứng minh đã thành thạo module hoặc thiết kế production."
+    ],
+    "sources": [
+      {
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside",
+        "edition": "Microsoft Learn live, revision unknown",
+        "section": "Cơ chế đọc cache/nguồn, dữ liệu có thể cũ và cân nhắc expiration. Không chứng minh hit75%, giới hạn độ mới hoặc số công suất của ví dụ.",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "Cơ chế đọc cache/nguồn, dữ liệu có thể cũ và cân nhắc expiration. Không chứng minh hit75%, giới hạn độ mới hoặc số công suất của ví dụ."
+      },
+      {
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling",
+        "edition": "Microsoft Learn live, revision unknown",
+        "section": "Queue tách nhận việc với xử lý, cần công suất xử lý phù hợp để tránh tích hàng chờ. Các tốc độ và điểm chi phí ở bài là giả định tác giả.",
+        "checkedAt": "2026-10-17",
+        "statusCheck": null,
+        "errataCheck": null,
+        "support": "Queue tách nhận việc với xử lý, cần công suất xử lý phù hợp để tránh tích hàng chờ. Các tốc độ và điểm chi phí ở bài là giả định tác giả."
+      }
+    ],
+    "independentExpected": "rush: 6 reads, db<=4 with cache, 8 initial+4*8 new=40 jobs, 5 workers*2*4=40, cost 1+5+1=7 <=8",
+    "trace": {
+      "mode": "executed",
+      "input": {
+        "servers": 1,
+        "cache": true,
+        "ttl": 1,
+        "workers": 5
+      },
+      "actions": [
+        "evaluateSchoolReview"
+      ],
+      "actual": "all checks true",
+      "artifact": "/private/tmp/sdl-audit-2026-10-17-lessons/current/trace.json",
+      "command": "node --import tsx /private/tmp/sdl-audit-2026-10-17-lessons/current/trace.mts"
+    },
+    "assessmentEvidence": "reflection prompt asks explanation; engine checks only numeric constraints",
+    "uiEvidence": null,
+    "verdict": "verified-with-conditions",
+    "conditions": [
+      "Mỗi lần chạy độc lập: phần đọc tính một cửa sổ một giây không có hàng chờ ban đầu; phần gửi chạy bốn giây từ hàng chờ của tình huống. Hai luồng có tải riêng, không suy ra việc gửi từ lượt đọc.",
+      "Mỗi server làm tối đa sáu lượt đọc/giây; nơi lưu lịch làm bốn lượt đọc/giây. Nếu bật cache, giả định đúng 75% lượt không đọc nguồn, giữ cố định cho mọi TTL; không đo hit rate từ TTL hoặc workload thật.",
+      "Độ mới chỉ kiểm policy TTL không quá một phút: giả định không trả bản ghi hết hạn và lấy nguồn mới khi cần. Bỏ qua mạng, thời gian tra nguồn, lỗi cập nhật và bản sao. Đây không phải bảo đảm dữ liệu mới trong hệ thống thật.",
+      "Mỗi worker làm tối đa hai việc/giây, việc đến đều, không retry/mất ACK/lỗi. Điểm ngân sách chỉ để luyện đánh đổi, không phải tiền hay giá dịch vụ.",
+      "Công cụ chỉ kiểm ràng buộc của mô hình; bạn tự đánh giá lời giải thích. Lưu lượt ôn không chứng minh đã thành thạo module hoặc thiết kế production."
+    ],
+    "uncertainty": "No browser observation; fixed 75% cache hit irrespective of TTL is an explicit assumption",
+    "impact": null,
+    "retest": null
+  }
+]

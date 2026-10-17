@@ -33,3 +33,15 @@ Profile1.1.0 tại HEADcffdd41; application baselinef5ab318. Lượt đầu ng�
 [Report QA-07](RUN_2026-10-15_QA07.md), [matrix23 claim](claims-2026-10-15-qa07.json), [parent acceptance](../../delivery/QA_07_KNOWLEDGE_REVIEW.md). Bản cuối đọc14 bài và1 bài ôn,19 registry claim+4 school,23 verified-with-conditions trong mô hình nhập môn.75 checked engine cases khớp (24 TLS,8 school,43 older);2 malformed TLS chỉ quan sát. Parent đọc report/matrix, chạy lại độc lập75 phép kiểm, kiểm math/nguồn mẫu và xác nhận không có app diff. Không confirmed P0/P1/P2;75% cache là góp ý diễn đạt, chưa sửa app/phát hành. UI source-only; không browser/pilot/expert/full errata.
 
 Evidence bền vững nằm tại `evidence/qa07-2026-10-15/`; giữ raw firstpass/report/trace, không sửa lịch sử để làm kết quả ban đầu giống đã hoàn tất. Parent sửa lỗi đếm10 RFC và phân biệt section negative caching trong guide sau đọc nguồn; runtime không đổi.
+
+## 2026-10-17 — review toàn học liệu hiện hành, xác minh hai checkout
+
+User yêu cầu kiểm mọi kiến thức đang có và liệt kê điểm sai. Checkout đầu 6a9f917 chỉ có6 bài; phát hiện worktree `/Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning` HEAD8f2afa8 sạch có18 bài+1 ôn. Kết luận chính áp dụng bản18 bài, website Vercel cũng quan sát18; không gán báo cáo cũ cho source mới.
+
+Ba knowledge_reviewer gpt-6-sol/low rà intro/foundations/ôn, curriculum/network/TLS, OS/data structures. Parent đọc reports/source/trace, bổ sung121 assertion khớp và chạy68/68 unit tests trên19files bằng Node26.11.1 sau approved cache write; chưa tái lập runtime khóa24.21.0. Browser thật quan sát homepage/DNS. Không sửa source hoặc deploy.
+
+[Report tổng hợp](RUN_2026-10-17_FULL_AUDIT.md), [matrix96 dòng](evidence/audit-2026-10-17/claim-matrix.json), [manifest](evidence/audit-2026-10-17/manifest.json). Không confirmed P0/P1 cơ chế/đáp án. Parent phát hiện hình request bị dùng nhầm ở3 bài concurrency/cpu-io/TLS; DNS arrows có nguy cơ hiểu sai (reviewer xác nhận mức wording, không quy thành lỗi protocol); cache75% thiếu quy ước làm tròn số đọc nguồn; docs trạng thái13/12 bài còn cũ. Hai nghi vấn cache-counter/replica-lag chỉ tồn tại checkout cũ, bản mới đã có nhãn/giới hạn tương ứng. Không chứng nhận toàn36module, mọi câu/errata, pilot/human-reviewed hoặc production bằng review này.
+
+## 2026-10-17 — QA-08 sửa findings theo yêu cầu người dùng
+
+User giao sửa4 điểm. Source được sửa trên worktree18 bài, nhánh codex/qa-08-knowledge-fixes từ8f2afa8; report tại /Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/docs/delivery/QA_08_KNOWLEDGE_FIXES.md. Engine1.8.1 hiển thị số đọc nguồn kỳ vọng không làm tròn, giữ nhãn lịch sử bảng cũ; ba sketch riêng, DNS resolver/referral rõ và docs18 bài. Node24.21.0/pnpm11.25.0:70unit/19files,28E2E liên quan, content/lint/typecheck/build đạt; ảnh320/390/1280 được review. Không phát hành Vercel; chưa commit/push. Source report ghi resolved trong source, không sửa kết quả audit lịch sử hoặc nhận human-reviewed.

@@ -1,0 +1,526 @@
+{
+  "metrics": {
+    "baseline": {
+      "requests": [
+        {
+          "id": 1,
+          "start": 0,
+          "end": 100,
+          "duration": 100,
+          "worker": 0
+        },
+        {
+          "id": 2,
+          "start": 0,
+          "end": 100,
+          "duration": 100,
+          "worker": 1
+        },
+        {
+          "id": 3,
+          "start": 0,
+          "end": 100,
+          "duration": 100,
+          "worker": 2
+        },
+        {
+          "id": 4,
+          "start": 0,
+          "end": 100,
+          "duration": 100,
+          "worker": 3
+        },
+        {
+          "id": 5,
+          "start": 100,
+          "end": 200,
+          "duration": 100,
+          "worker": 0
+        },
+        {
+          "id": 6,
+          "start": 100,
+          "end": 200,
+          "duration": 100,
+          "worker": 1
+        },
+        {
+          "id": 7,
+          "start": 100,
+          "end": 200,
+          "duration": 100,
+          "worker": 2
+        },
+        {
+          "id": 8,
+          "start": 100,
+          "end": 200,
+          "duration": 100,
+          "worker": 3
+        },
+        {
+          "id": 9,
+          "start": 200,
+          "end": 300,
+          "duration": 100,
+          "worker": 0
+        },
+        {
+          "id": 10,
+          "start": 200,
+          "end": 300,
+          "duration": 100,
+          "worker": 1
+        },
+        {
+          "id": 11,
+          "start": 200,
+          "end": 300,
+          "duration": 100,
+          "worker": 2
+        },
+        {
+          "id": 12,
+          "start": 200,
+          "end": 300,
+          "duration": 100,
+          "worker": 3
+        },
+        {
+          "id": 13,
+          "start": 300,
+          "end": 400,
+          "duration": 100,
+          "worker": 0
+        },
+        {
+          "id": 14,
+          "start": 300,
+          "end": 400,
+          "duration": 100,
+          "worker": 1
+        },
+        {
+          "id": 15,
+          "start": 300,
+          "end": 400,
+          "duration": 100,
+          "worker": 2
+        },
+        {
+          "id": 16,
+          "start": 300,
+          "end": 400,
+          "duration": 100,
+          "worker": 3
+        },
+        {
+          "id": 17,
+          "start": 400,
+          "end": 500,
+          "duration": 100,
+          "worker": 0
+        },
+        {
+          "id": 18,
+          "start": 400,
+          "end": 500,
+          "duration": 100,
+          "worker": 1
+        },
+        {
+          "id": 19,
+          "start": 400,
+          "end": 500,
+          "duration": 100,
+          "worker": 2
+        },
+        {
+          "id": 20,
+          "start": 400,
+          "end": 500,
+          "duration": 100,
+          "worker": 3
+        }
+      ],
+      "windowMs": 500,
+      "median": 300,
+      "p95": 500,
+      "throughput": 40
+    },
+    "slow": {
+      "requests": [
+        {
+          "id": 1,
+          "start": 0,
+          "end": 100,
+          "duration": 100,
+          "worker": 0
+        },
+        {
+          "id": 2,
+          "start": 0,
+          "end": 100,
+          "duration": 100,
+          "worker": 1
+        },
+        {
+          "id": 3,
+          "start": 0,
+          "end": 100,
+          "duration": 100,
+          "worker": 2
+        },
+        {
+          "id": 4,
+          "start": 0,
+          "end": 100,
+          "duration": 100,
+          "worker": 3
+        },
+        {
+          "id": 5,
+          "start": 100,
+          "end": 200,
+          "duration": 100,
+          "worker": 0
+        },
+        {
+          "id": 6,
+          "start": 100,
+          "end": 200,
+          "duration": 100,
+          "worker": 1
+        },
+        {
+          "id": 7,
+          "start": 100,
+          "end": 200,
+          "duration": 100,
+          "worker": 2
+        },
+        {
+          "id": 8,
+          "start": 100,
+          "end": 200,
+          "duration": 100,
+          "worker": 3
+        },
+        {
+          "id": 9,
+          "start": 200,
+          "end": 300,
+          "duration": 100,
+          "worker": 0
+        },
+        {
+          "id": 10,
+          "start": 200,
+          "end": 300,
+          "duration": 100,
+          "worker": 1
+        },
+        {
+          "id": 11,
+          "start": 200,
+          "end": 300,
+          "duration": 100,
+          "worker": 2
+        },
+        {
+          "id": 12,
+          "start": 200,
+          "end": 300,
+          "duration": 100,
+          "worker": 3
+        },
+        {
+          "id": 13,
+          "start": 300,
+          "end": 400,
+          "duration": 100,
+          "worker": 0
+        },
+        {
+          "id": 14,
+          "start": 300,
+          "end": 400,
+          "duration": 100,
+          "worker": 1
+        },
+        {
+          "id": 15,
+          "start": 300,
+          "end": 400,
+          "duration": 100,
+          "worker": 2
+        },
+        {
+          "id": 16,
+          "start": 300,
+          "end": 400,
+          "duration": 100,
+          "worker": 3
+        },
+        {
+          "id": 17,
+          "start": 400,
+          "end": 500,
+          "duration": 100,
+          "worker": 0
+        },
+        {
+          "id": 18,
+          "start": 400,
+          "end": 500,
+          "duration": 100,
+          "worker": 1
+        },
+        {
+          "id": 19,
+          "start": 400,
+          "end": 1400,
+          "duration": 1000,
+          "worker": 2
+        },
+        {
+          "id": 20,
+          "start": 400,
+          "end": 1400,
+          "duration": 1000,
+          "worker": 3
+        }
+      ],
+      "windowMs": 1400,
+      "median": 300,
+      "p95": 1400,
+      "throughput": 14.285714285714286
+    }
+  },
+  "capacity": {
+    "daily": 10000,
+    "averageRps": 0.11574074074074074,
+    "peakRps": 0.46296296296296297,
+    "transferMB": 1000,
+    "storageMB": 200
+  },
+  "dnsBefore": {
+    "time": 0,
+    "source": 20,
+    "cached": 10,
+    "expiresAt": 5,
+    "last": 10,
+    "route": "cache"
+  },
+  "dnsAtExpiry": {
+    "time": 5,
+    "source": 20,
+    "cached": 20,
+    "expiresAt": 10,
+    "last": 20,
+    "route": "authoritative"
+  },
+  "transport": {
+    "tcpLoss2": {
+      "received": [
+        1,
+        3
+      ],
+      "delivered": [
+        1
+      ],
+      "buffered": 1,
+      "retransmissions": 0
+    },
+    "tcpLoss3": {
+      "received": [
+        1,
+        2,
+        3
+      ],
+      "delivered": [
+        1,
+        2,
+        3
+      ],
+      "buffered": 0,
+      "retransmissions": 1
+    },
+    "udpLoss3": {
+      "received": [
+        1,
+        3
+      ],
+      "delivered": [
+        1,
+        3
+      ],
+      "buffered": 0,
+      "retransmissions": 0
+    }
+  },
+  "schoolOpening": {
+    "config": {
+      "servers": 2,
+      "cache": true,
+      "ttl": 1,
+      "workers": 3
+    },
+    "scenario": {
+      "readRate": 12,
+      "jobRate": 6,
+      "initialQueued": 0,
+      "seconds": 4,
+      "budget": 7,
+      "maxAgeMinutes": 1
+    },
+    "reads": {
+      "arrivals": 12,
+      "completed": 12,
+      "waiting": 0,
+      "databaseReads": 3,
+      "capacity": 12,
+      "bottleneck": "máy xử lý"
+    },
+    "queue": {
+      "second": 4,
+      "queued": 0,
+      "processed": 24,
+      "received": 24
+    },
+    "trace": [
+      {
+        "second": 1,
+        "queued": 0,
+        "processed": 6,
+        "received": 6,
+        "doneThisSecond": 6
+      },
+      {
+        "second": 2,
+        "queued": 0,
+        "processed": 12,
+        "received": 12,
+        "doneThisSecond": 6
+      },
+      {
+        "second": 3,
+        "queued": 0,
+        "processed": 18,
+        "received": 18,
+        "doneThisSecond": 6
+      },
+      {
+        "second": 4,
+        "queued": 0,
+        "processed": 24,
+        "received": 24,
+        "doneThisSecond": 6
+      }
+    ],
+    "cost": 6,
+    "checks": {
+      "reads": true,
+      "notifications": true,
+      "freshnessPolicy": true,
+      "budget": true
+    },
+    "passed": true
+  },
+  "schoolRush": {
+    "config": {
+      "servers": 1,
+      "cache": true,
+      "ttl": 1,
+      "workers": 5
+    },
+    "scenario": {
+      "readRate": 6,
+      "jobRate": 8,
+      "initialQueued": 8,
+      "seconds": 4,
+      "budget": 8,
+      "maxAgeMinutes": 1
+    },
+    "reads": {
+      "arrivals": 6,
+      "completed": 6,
+      "waiting": 0,
+      "databaseReads": 2,
+      "capacity": 6,
+      "bottleneck": "máy xử lý"
+    },
+    "queue": {
+      "second": 4,
+      "queued": 0,
+      "processed": 40,
+      "received": 40
+    },
+    "trace": [
+      {
+        "second": 1,
+        "queued": 6,
+        "processed": 10,
+        "received": 16,
+        "doneThisSecond": 10
+      },
+      {
+        "second": 2,
+        "queued": 4,
+        "processed": 20,
+        "received": 24,
+        "doneThisSecond": 10
+      },
+      {
+        "second": 3,
+        "queued": 2,
+        "processed": 30,
+        "received": 32,
+        "doneThisSecond": 10
+      },
+      {
+        "second": 4,
+        "queued": 0,
+        "processed": 40,
+        "received": 40,
+        "doneThisSecond": 10
+      }
+    ],
+    "cost": 7,
+    "checks": {
+      "reads": true,
+      "notifications": true,
+      "freshnessPolicy": true,
+      "budget": true
+    },
+    "passed": true
+  },
+  "replicaDynamic": {
+    "time": 0,
+    "primary": 201,
+    "replica": 201,
+    "pending": [
+      {
+        "at": 5,
+        "value": 205
+      },
+      {
+        "at": 5,
+        "value": 201
+      }
+    ]
+  },
+  "cacheRefresh": {
+    "time": 0,
+    "source": 201,
+    "cached": 201,
+    "refreshedAt": 0,
+    "ttl": 5,
+    "reads": 0,
+    "hits": 0,
+    "misses": 0,
+    "stale": 0,
+    "last": null,
+    "message": "Lấy lịch mới từ nguồn chính: bản ghi gần đổi thành 201."
+  }
+}
