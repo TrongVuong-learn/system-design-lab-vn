@@ -24,4 +24,15 @@ Parent đối chiếu nguyên tắc nguồn với cả sáu trace, predicate dir
 - 24 E2E liên quan đạt: bài mới bốn project browser, responsive320–1440, keyboard/hints/challenge/resume, offline/install failure/update. Chưa phải thiết bị iOS/Android thật.
 - Chromium320/390/1280: ảnh sơ đồ cân đối/lệch đã xem, chữ và số đọc được, không cuộn ngang; export/import, bước đang làm, tải gói/reload offline đều đạt; không pageerror. Highlight có danh sách “Đã xét” và trace chữ tương đương ngoài màu. Cache/ảnh/log ignored trong `.cache/edu18/`.
 - Một lượt kiểm ảnh gặp timeout ở cơ chế duyệt quyền trước khi browser chạy; lần thử lại được phép và đạt. Đây không phải lỗi ứng dụng.
-- Chưa human-reviewed/pilot thật; chưa benchmark, heap hoặc duy trì cân bằng. Phát hành chỉ sau PR/CI và merge master; deployment/source SHA sẽ xác minh trên Vercel.
+- Chưa human-reviewed/pilot thật; chưa benchmark, heap hoặc duy trì cân bằng. Phát hành đã qua PR/CI và master theo bằng chứng dưới đây.
+
+
+## Kết quả phát hành
+
+[PR #6](https://github.com/TrongVuong-learn/system-design-lab-vn/pull/6) đã squash merge thành `df22f74da7f4a3a818032f78137a080e70a442e9` (feature source b140cc7). [Quality run 39019425864](https://github.com/TrongVuong-learn/system-design-lab-vn/actions/runs/39019425864) success: 73 unit, **215 E2E đạt / 1 skip** hover mobile có touch test riêng. Parent rà fixture/invariant, engine/trace, assessment và ảnh trước merge. Không gán kết quả này cho lượt CI tự chạy của commit chỉ tài liệu về sau.
+
+Vercel Git deployment đầu của ứng dụng EDU-18: `dpl_55E4qbw89LSvdS68kESdWmVopzvh`, READY production, branch master, SHA df22f74. Alias https://system-design-lab-vn.vercel.app ; [bài cây](https://system-design-lab-vn.vercel.app/#/learn/search-tree). API xác nhận alias production và source SHA. Cả 18 file static khớp SHA256 artifact local đã kiểm (18 là số file, catalog có 19 bài); HTTP200/cache/MIME đúng, missing JS404.
+
+Chromium production390/1280: catalog19, từng bước trên cây lệch, lưu/reload, tải gói/reload offline và mở bài TLS chưa ghé khi offline đều đạt; không overflow/pageerror. Evidence `.cache/edu18/{tested-artifact,cloud-http,live-browser,release}.json`, ảnh và logs ignored. Commit tài liệu ghi kết quả này không đổi app hoặc artifact; Git deployment tiếp theo vẫn theo master, được xác minh READY khi bàn giao.
+
+EDU-18 hoàn tất lát cắt nhập môn theo scope. Heap/locality và phần còn lại L0.3 vẫn mở; chưa thiết bị thật, human-reviewed hoặc pilot. Gói offline cũ cần tải bản mới ở Tiến độ, rồi đóng mọi tab cũ để kích hoạt; không ép cập nhật hoặc xóa tiến độ.

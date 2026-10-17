@@ -311,3 +311,5 @@ Task Ready ngày 17/10/2026, sau hash table; owner Codex. Bài nối library-sea
 Acceptance: fixtures độc lập cả 6 preset/mọi prefix; invariant BST toàn subtree, tất cả 7 khóa xuất hiện đúng một lần; invalid/version/immutability; E2E bốn browser + responsive/offline, xem ảnh nội dung thật. Cập nhật nguồn chính, commit/PR/CI/merge master rồi Vercel auto-deploy; xác minh READY/source SHA và smoke. Không đóng toàn L0.3 hoặc pilot. Heap/locality và các cấu trúc dữ liệu sâu vẫn còn mở.
 
 Kết quả local EDU-18: source 19 bài + 1 bài ôn; content/build/lint và 73 unit/20files đạt; 24 E2E liên quan đạt. Ảnh và export/import/offline 320/390/1280 đã kiểm. CI/merge/deploy cập nhật theo bằng chứng thực tế trong [báo cáo](EDU_18_SEARCH_TREE.md); không đóng L0.3 hoặc pilot.
+
+EDU-18 hoàn tất scope: [PR #6](https://github.com/TrongVuong-learn/system-design-lab-vn/pull/6) đã merge master; CI 73 unit/215 E2E đạt, 1 skip; Vercel READY đúng SHA và HTTP/browser/offline production đạt. Báo cáo EDU-18 ghi evidence và giới hạn. Catalog hiện 19 bài + 1 bài ôn; việc tiếp theo là heap/hàng đợi ưu tiên, chưa tự đóng L0.3.
