@@ -351,3 +351,15 @@ EDU-20 đã phát hành production READY/master8f7f0ea,18file HTTP/hash/cache đ
 In progress: hai bài L0.3 theo [scope/acceptance](EDU_21_DATA_REPRESENTATION.md), engine1.12.0/model1, progress/storage không đổi. JSONUTF-8/parse và RLEtoy/roundtrip, có phản chứng nén làm dữ liệu lớn hơn; không đồng nhất toy với DEFLATE. Giữ compatibility21ID cũ, thêm haiID/case/competency/source. Sau kiểm chứng/CI/merge master/Vercel tiếp OS và L1 theo §19; chưa đóng L0.3 hoặc ENG-03 đầy đủ.
 
 EDU-21 local:23bài+1ôn,86unit/24files và28/28E2E liên quan đạt sau sửa selector test và chạy lại tuần tự; ảnh/export-import/resume/offline320/390/1280 đạt. CI/merge/production ghi theo evidence thực tế trong báo cáo. ModuleL0.3 và toàn giáo trình vẫn mở.
+
+EDU-21 đã tích hợp PR#13/masterc9b54ab; CI86unit/231E2E đạt/1skip cùng content/coverage/lint/format/build. Catalog23bài+1ôn. Bằng chứng production cập nhật theo [báo cáo EDU-21](EDU_21_DATA_REPRESENTATION.md), không tự đóng L0.3/toàn roadmap.
+
+## 28. EDU-22 — không gian địa chỉ và cách ly tiến trình (Ready)
+
+Đầu ra tiếp theo sau EDU-21: bài L0.2 giúp học sinh phân biệt địa chỉ ảo và vật lý, hai process cùng địa chỉ 0 nhưng dữ liệu riêng, kiểm tra giới hạn trước truy cập. Nguồn đã đọc18/10: [OSTEP1.10 chương13 §13.3–4](https://pages.cs.wisc.edu/~remzi/OSTEP/vm-intro.pdf) và [chương15 §15.3–5](https://pages.cs.wisc.edu/~remzi/OSTEP/vm-mechanism.pdf). Chưa viết source/bài phát hành cho task này.
+
+Mô hình dự kiến: RAM16ô, vùngOS0–3, processA base4/limit4 và B base8/limit4; chỉ địa chỉ ảo0–3 hợp lệ, dịch PA=base+VA. Cho đọc/ghi giá trị dựng sẵn ở VA0/3 và thử VA4 bị chặn, không đọc/ghi vượt biên. OS thiết lập base/limit; app không tự sửa ánh xạ. Minh họa cơ chế base-and-bounds đơn giản, không tuyên bố đây là paging hiện đại hoặc bảo mật tuyệt đối; không swap/TLB/shared-memory/COW/cấp phát/đo hiệu năng. Case CASE-L0-02 và prerequisite concurrency; không nhầm heap vùng nhớ với min-heap.
+
+Acceptance trước beta: core thuần/checkpoint có version; fixtures cả haiprocess/mọi truy cập, bảo toàn RAM sau thao tác bị chặn, cách ly A/B vàOS, replay không tin RAM nhập/invalidversion; assessment đúng giới hạn mô hình, nguồn/claim/review/case/hints; mobile320/390 vàdesktop, keyboard/resume/export/import/offline. Không đóng L0.2; filesystem/nonblocking/eventloop vẫn riêng. Chỉ ghi Verified sau source/QA/CI/release thực tế.
+
+EDU-21 production READY/masterc9b54ab,18file HTTP/hash/cache đúng; cả hai bài export/import/resume/offline320/390/1280 đạt, không lỗiJS/overflow. Scope nhập môn đã phát hành, không đóngL0.3 hoặc toàn giáo trình. Mở hai route serialization/compression trên domain Vercel theo báo cáo release.
