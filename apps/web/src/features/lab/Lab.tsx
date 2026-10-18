@@ -1,3 +1,4 @@
+import { SerializationLab, CompressionLab } from './RepresentationLabs';
 import { LocalityLab } from './LocalityLab';
 import { PriorityHeapLab } from './PriorityHeapLab';
 import { SearchTreeLab } from './SearchTreeLab';
@@ -51,6 +52,8 @@ export function Lab(original: LabProps) {
     'search-tree',
     'priority-heap',
     'locality',
+    'serialization',
+    'compression',
   ].includes(kind);
   const props = extended
     ? {
@@ -92,6 +95,10 @@ export function Lab(original: LabProps) {
       return <CapacityLab {...props} />;
     case 'http':
       return <HttpLab {...props} />;
+    case 'serialization':
+      return <SerializationLab {...props} />;
+    case 'compression':
+      return <CompressionLab {...props} />;
     case 'locality':
       return <LocalityLab {...props} />;
     case 'priority-heap':

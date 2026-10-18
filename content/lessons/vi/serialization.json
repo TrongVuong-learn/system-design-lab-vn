@@ -1,0 +1,104 @@
+[
+  {
+    "id": "serialization",
+    "title": "Làm sao gửi một bản ghi qua mạng?",
+    "subtitle": "Bản ghi → JSON UTF-8 → bản ghi, với tên tiếng Việt và dấu ngoặc kép.",
+    "objective": "Theo dấu biểu diễn một bản ghi bằng JSON UTF-8 rồi khôi phục giá trị và kiểu; phân biệt byte, văn bản và dữ liệu có cấu trúc.",
+    "story": "Nhóm đặt chỗ ngày hội muốn gửi tên người tham gia, số chỗ và trạng thái xác nhận. Một đối tượng trong bộ nhớ không tự đi qua mạng sang máy khác. Hai đầu cần thống nhất cách biểu diễn. Hãy đóng gói bản ghi của An, rồi thử tên Bình hoặc tên có dấu ngoặc kép.",
+    "explanation": "Serialization chuyển dữ liệu có cấu trúc thành dạng có thể lưu hoặc trao đổi. Bài dùng JSON để viết tên trường và giá trị thành văn bản, rồi UTF-8 để biểu diễn văn bản thành byte. Đầu nhận đọc byte và parse JSON để dựng lại dữ liệu. Số 2 khác chuỗi “2”; boolean true khác chuỗi “true”. Khoảng trắng định dạng ngoài chuỗi giúp người đọc nhưng không đổi giá trị JSON. Dấu ngoặc kép bên trong tên phải được escape để không bị hiểu nhầm là dấu kết thúc chuỗi.",
+    "limit": "Chỉ ba bản ghi dựng sẵn với chuỗi Unicode hợp lệ, số nguyên nhỏ và boolean. Không có Date, binary, số vượt độ chính xác, schema evolution hoặc mã tùy ý. Parse JSON không tự kiểm quy tắc nghiệp vụ hoặc xác minh người gửi. Byte được đếm từ UTF-8 thực tế, không từ độ dài chuỗi JavaScript. Không gửi mạng, nén, mã hóa bảo mật hoặc đo hiệu năng.",
+    "prediction": {
+      "text": "Bản ghi có số chỗ là số 2. Khi đọc lại JSON của bài, số chỗ nên trở thành gì?",
+      "options": [
+        "Vẫn là số 2; JSON phân biệt số với chuỗi.",
+        "Luôn là chuỗi “2” vì JSON là văn bản."
+      ],
+      "answer": 0,
+      "explanation": "Văn bản JSON có cú pháp cho nhiều kiểu giá trị. 2 không có dấu ngoặc kép là số; “2” có ngoặc kép là chuỗi. Bài giữ số nguyên nhỏ nên khôi phục được chính xác."
+    },
+    "challenge": {
+      "text": "Cùng bản ghi của Bình, JSON thụt dòng dùng nhiều byte hơn JSON gọn. Điều này có nghĩa đã đổi tên hoặc số chỗ không?",
+      "options": [
+        "Không; khoảng trắng định dạng ngoài chuỗi không đổi giá trị. Cả hai khôi phục cùng bản ghi.",
+        "Có; số byte khác nhau luôn có nghĩa dữ liệu nghiệp vụ khác nhau."
+      ],
+      "answer": 0,
+      "explanation": "Khoảng trắng định dạng làm văn bản dài hơn nhưng không đổi các giá trị. Không được xóa khoảng trắng bên trong chuỗi một cách tùy tiện. Số byte UTF-8 không đồng nghĩa số ký tự nhìn thấy."
+    },
+    "kind": "serialization",
+    "version": 1,
+    "status": "beta",
+    "level": "L0",
+    "moduleId": "L0.3",
+    "minutes": 12,
+    "sources": [
+      {
+        "title": "RFC8259 §1–8,12 — JSON values, strings, UTF-8 và parsing",
+        "url": "https://www.rfc-editor.org/rfc/rfc8259.html"
+      }
+    ],
+    "terms": [
+      {
+        "name": "Tuần tự hóa",
+        "english": "Serialization",
+        "meaning": "Biểu diễn dữ liệu có cấu trúc thành dạng có thể lưu hoặc trao đổi."
+      },
+      {
+        "name": "Khôi phục dữ liệu",
+        "english": "Deserialization",
+        "meaning": "Đọc biểu diễn đã thống nhất để dựng lại dữ liệu."
+      },
+      {
+        "name": "JSON",
+        "english": "JSON",
+        "meaning": "Định dạng văn bản có cú pháp cho chuỗi, số, boolean, null, object và array."
+      },
+      {
+        "name": "UTF-8",
+        "english": "UTF-8",
+        "meaning": "Cách mã hóa văn bản Unicode thành byte; một ký tự có thể cần nhiều byte."
+      },
+      {
+        "name": "Escape",
+        "english": "Escape",
+        "meaning": "Cách viết ký tự đặc biệt trong chuỗi mà không làm hỏng cú pháp."
+      }
+    ],
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Dữ liệu được viết thành văn bản nhưng vẫn có cú pháp phân biệt kiểu.",
+        "So 2 không có ngoặc kép với chuỗi có ngoặc kép."
+      ],
+      "challenge": [
+        "Đổi cách trình bày có nhất thiết đổi giá trị không?",
+        "Thử đọc lại cả hai cách viết: tên, số chỗ và boolean vẫn giống nhau."
+      ]
+    },
+    "caseStudy": {
+      "id": "case-serialization",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L0-03",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Gửi phiếu đặt chỗ ngày hội",
+      "context": "Phiếu có name, seats và confirmed; nhóm muốn hai đầu hiểu giống nhau. Đây là tình huống tự biên soạn, không kết nối dịch vụ đặt chỗ thật.",
+      "requirements": [
+        "Giữ đúng tên Unicode, số chỗ và kiểu boolean.",
+        "So JSON gọn với thụt dòng bằng byte UTF-8, không suy tốc độ truyền."
+      ],
+      "activityRef": "serialization",
+      "experimentSteps": [
+        "Chọn tên Bình, tạo JSON rồi đọc lại.",
+        "Chọn tên có ngoặc kép để xem escape; thử thụt dòng và so byte."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "JSON dễ quan sát, tên trường và định dạng chiếm thêm byte. Thụt dòng dễ đọc hơn nhưng dài hơn; không kết luận mọi định dạng binary luôn nhanh hơn."
+      ],
+      "limitations": "Chỉ ba bản ghi dựng sẵn với chuỗi Unicode hợp lệ, số nguyên nhỏ và boolean. Không có Date, binary, số vượt độ chính xác, schema evolution hoặc mã tùy ý. Parse JSON không tự kiểm quy tắc nghiệp vụ hoặc xác minh người gửi. Byte được đếm từ UTF-8 thực tế, không từ độ dài chuỗi JavaScript. Không gửi mạng, nén, mã hóa bảo mật hoặc đo hiệu năng."
+    }
+  }
+]

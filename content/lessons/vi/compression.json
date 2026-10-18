@@ -1,0 +1,104 @@
+[
+  {
+    "id": "compression",
+    "title": "Nén dữ liệu có luôn làm nó nhỏ hơn?",
+    "subtitle": "Nén và khôi phục chuỗi A/B; thử cả trường hợp 16 → 4 và 16 → 32 byte.",
+    "objective": "Tính kích thước cặp byte trong RLE tự đặt, khôi phục đúng chuỗi và giải thích vì sao dữ liệu có thể lớn hơn sau nén.",
+    "story": "Bảng tín hiệu lớp có 16 vị trí, mỗi vị trí là A hoặc B. Nếu tám chữ A liền nhau, em có thể ghi “8 lần A”. Nhưng khi A và B xen kẽ thì sao? Hãy thử quy tắc nén rất nhỏ, rồi giải nén để kiểm tra có mất thông tin không.",
+    "explanation": "Nén không mất dữ liệu phải cho phép khôi phục đúng dữ liệu ban đầu. Bài tự đặt định dạng RLE: với mỗi dãy ký hiệu liên tiếp, ghi một byte số lần và một byte mã ASCII của ký hiệu. Tám A rồi tám B thành hai cặp, tổng 4 byte thay cho 16 byte gốc. Nếu A/B xen kẽ, mỗi dãy chỉ có một ký hiệu, cần 16 cặp tức 32 byte. Vì vậy lợi ích phụ thuộc dữ liệu và định dạng; không có thuật toán nén không mất dữ liệu làm mọi đầu vào đều nhỏ đi. Nén không phải mã hóa bảo mật.",
+    "limit": "Chỉ hai chuỗi ASCII A/B dài 16; số lần tối đa16 vừa một byte. Định dạng hai byte/cặp tự biên soạn, không header/checksum, không phải gzip/DEFLATE. Byte số lần lưu giá trị nhị phân; văn bản minh họa “8 × A” không dùng để tính kích thước. Không nhận file hoặc Unicode tùy ý, không đo CPU/mạng hoặc độ an toàn.",
+    "prediction": {
+      "text": "Tám A rồi tám B, mỗi dãy lưu hai byte (số lần, ký hiệu). Kết quả có bao nhiêu byte?",
+      "options": [
+        "4 byte: hai dãy, mỗi dãy hai byte.",
+        "2 byte: chỉ có hai loại ký hiệu nên mỗi loại luôn một byte."
+      ],
+      "answer": 0,
+      "explanation": "Có hai dãy A và B. Mỗi dãy cần cả số lần và ký hiệu: [8,65] và [8,66], tổng bốn byte. Không đếm độ dài câu chữ minh họa."
+    },
+    "challenge": {
+      "text": "Chuỗi 16 ký hiệu ABAB… không có hai ký hiệu kề nhau giống nhau. Với định dạng này, sau nén còn bao nhiêu byte?",
+      "options": [
+        "32 byte: 16 dãy một ký hiệu, mỗi dãy hai byte.",
+        "8 byte: mọi phương pháp nén đều bảo đảm giảm một nửa."
+      ],
+      "answer": 0,
+      "explanation": "Mỗi ký hiệu thành một cặp [1,ký hiệu], nên 16 × 2 = 32 byte. Vẫn khôi phục đúng, nhưng lớn hơn 16 byte gốc; tính đúng không đồng nghĩa nén có lợi."
+    },
+    "kind": "compression",
+    "version": 1,
+    "status": "beta",
+    "level": "L0",
+    "moduleId": "L0.3",
+    "minutes": 12,
+    "sources": [
+      {
+        "title": "RFC1951 §1.1 — giới hạn nén không mất dữ liệu",
+        "url": "https://www.rfc-editor.org/rfc/rfc1951.html"
+      }
+    ],
+    "terms": [
+      {
+        "name": "Nén không mất dữ liệu",
+        "english": "Lossless compression",
+        "meaning": "Có thể khôi phục đúng toàn bộ dữ liệu ban đầu từ biểu diễn nén."
+      },
+      {
+        "name": "Dãy lặp liên tiếp",
+        "english": "Run",
+        "meaning": "Nhóm ký hiệu giống nhau đứng liền nhau, không chỉ xuất hiện nhiều lần ở các chỗ khác nhau."
+      },
+      {
+        "name": "Nén theo dãy lặp",
+        "english": "Run-length encoding",
+        "meaning": "Thay từng dãy lặp bằng số lần và ký hiệu theo định dạng đã thống nhất."
+      },
+      {
+        "name": "Giải nén",
+        "english": "Decompression",
+        "meaning": "Đọc biểu diễn nén để dựng lại dữ liệu gốc."
+      },
+      {
+        "name": "Byte",
+        "english": "Byte",
+        "meaning": "Đơn vị 8 bit; trong bài một byte giữ số lần, một byte giữ mã ASCII A hoặc B."
+      }
+    ],
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Đếm số dãy liên tiếp, chưa đếm số ký hiệu khác nhau.",
+        "Có hai dãy, mỗi dãy lưu số lần và ký hiệu: 2 × 2 byte."
+      ],
+      "challenge": [
+        "Khi A và B xen kẽ, mỗi dãy dài bao nhiêu?",
+        "Có 16 dãy dài 1. Định dạng vẫn tốn hai byte cho mỗi dãy."
+      ]
+    },
+    "caseStudy": {
+      "id": "case-compression",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L0-03",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Lưu bảng tín hiệu của lớp",
+      "context": "Nhóm muốn lưu 16 ô A/B và khôi phục đúng từng ô. Tình huống tự biên soạn chỉ dùng để kiểm tra lợi ích và giới hạn của định dạng nhỏ.",
+      "requirements": [
+        "Khôi phục đúng chuỗi gốc ở cả hai mẫu.",
+        "Tính byte từ cặp nhị phân, không từ nhãn hiển thị."
+      ],
+      "activityRef": "compression",
+      "experimentSteps": [
+        "Nén tám A rồi tám B, xem hai cặp byte và giải nén.",
+        "Đổi sang xen kẽ, nén rồi giải nén; so 16 byte gốc với 32 byte nén."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Dãy dài giúp định dạng này tiết kiệm byte; dãy ngắn làm nó lớn hơn. Hệ thống thật còn có header, checksum, chi phí xử lý và lựa chọn thuật toán."
+      ],
+      "limitations": "Chỉ hai chuỗi ASCII A/B dài 16; số lần tối đa16 vừa một byte. Định dạng hai byte/cặp tự biên soạn, không header/checksum, không phải gzip/DEFLATE. Byte số lần lưu giá trị nhị phân; văn bản minh họa “8 × A” không dùng để tính kích thước. Không nhận file hoặc Unicode tùy ý, không đo CPU/mạng hoặc độ an toàn."
+    }
+  }
+]

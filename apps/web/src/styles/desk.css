@@ -1200,3 +1200,40 @@
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
+
+.representation-record {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0.5rem;
+}
+.representation-record dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-weight: 600;
+}
+.representation-wire {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  background: var(--wash);
+  padding: 0.75rem;
+  font-size: 1rem;
+}
+.compression-pairs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  list-style: none;
+  gap: 0.5rem;
+  padding: 0;
+}
+.compression-pairs li {
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.75rem;
+  border: 1px solid var(--line);
+}
+@media (min-width: 640px) {
+  .compression-pairs {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
