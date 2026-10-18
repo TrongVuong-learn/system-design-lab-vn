@@ -6,7 +6,7 @@ import { useEffect, useRef } from 'react';
 import { Link, useParams } from 'react-router';
 import { lessons, editorial } from '../../app/catalog';
 import { useProgress } from '../../app/progress';
-import { newLessonProgress } from '@sdl/learning-core';
+import { newLessonProgress, evaluatePractice } from '@sdl/learning-core';
 import { Lab } from '../lab/Lab';
 import { Icon } from '../../ui/primitives';
 import { NotFound } from '../catalog/Pages';
@@ -39,7 +39,10 @@ export function LessonPage() {
   const revealSolution = correct || !lesson.guidance || hintLevel === 3;
   const saveFailed =
     saveState === 'write-error' || saveState === 'read-error' || saveState === 'conflict';
-  const canNext = p.stage === 0 || (p.stage === 1 && answered) || (p.stage === 2 && p.actions >= 2);
+  const labReady = lesson.practice
+    ? evaluatePractice(lesson.practice.items, p.lab).ready
+    : p.actions >= 2;
+  const canNext = p.stage === 0 || (p.stage === 1 && answered) || (p.stage === 2 && labReady);
   const stageHelp =
     p.stage === 0
       ? 'Đọc tình huống rồi chọn điều bạn nghĩ sẽ xảy ra.'
@@ -50,9 +53,11 @@ export function LessonPage() {
             : 'Thử suy luận, mở gợi ý nếu cần hoặc vào thí nghiệm để kiểm tra dự đoán.'
           : 'Chọn một dự đoán. Đoán sai cũng là một cách học.'
         : p.stage === 2
-          ? p.actions < 2
-            ? `Thử thêm ${2 - p.actions} thao tác để mở chặng áp dụng.`
-            : 'Bạn có thể thử tiếp hoặc áp dụng điều vừa thấy vào tình huống mới.'
+          ? lesson.practice && !labReady
+            ? 'Chọn lời giải cho mọi tình huống và kiểm tra đúng toàn bài để mở chặng áp dụng.'
+            : p.actions < 2
+              ? `Thử thêm ${2 - p.actions} thao tác để mở chặng áp dụng.`
+              : 'Bạn có thể thử tiếp hoặc áp dụng điều vừa thấy vào tình huống mới.'
           : 'Dùng điều vừa học để trả lời một tình huống khác.';
   function next() {
     if (p.stage < 3) {

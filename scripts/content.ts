@@ -55,6 +55,7 @@ const order = [
   'address-space',
   'file-handles',
   'event-loop',
+  'os-practice',
   'library-search',
   'hash-table',
   'search-tree',

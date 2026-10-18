@@ -1,3 +1,4 @@
+import { ModulePracticeLab } from './ModulePracticeLab';
 import { CookieSessionLab, ReverseProxyLab, MultiplexLab } from './WebProtocolLabs';
 import { AddressSpaceLab, FileHandlesLab, EventLoopLab } from './OsLabs';
 import { SerializationLab, CompressionLab } from './RepresentationLabs';
@@ -43,6 +44,7 @@ type LabProps = {
 export function Lab(original: LabProps) {
   const kind = original.lesson.kind;
   const extended = ![
+    'module-practice',
     'cache',
     'queue',
     'network',
@@ -83,6 +85,8 @@ export function Lab(original: LabProps) {
       }
     : original;
   switch (props.lesson.kind) {
+    case 'module-practice':
+      return <ModulePracticeLab {...props} />;
     case 'cache':
       return <CacheLab {...props} />;
     case 'queue':

@@ -20,6 +20,7 @@ for (const width of [320, 360, 390, 430, 768, 1024, 1440]) {
       'address-space',
       'file-handles',
       'event-loop',
+      'os-practice',
       'library-search',
       'hash-table',
       'search-tree',
@@ -70,8 +71,14 @@ for (const width of [320, 360, 390, 430, 768, 1024, 1440]) {
         .getByRole('button', { disabled: false })
         .and(page.locator('button:not(.term-trigger)'))
         .first();
-      await action.tap();
-      await action.tap();
+      if (id === 'os-practice') {
+        for (const [i, answer] of [0, 1, 0, 1, 1, 1].entries())
+          await page.locator('.module-practice-item').nth(i).getByRole('button').nth(answer).tap();
+        await page.getByRole('button', { name: 'Kiểm tra bài áp dụng', exact: true }).tap();
+      } else {
+        await action.tap();
+        await action.tap();
+      }
       await page.getByRole('button', { name: 'Thử tình huống mới' }).tap();
       await expect(page.getByRole('heading', { name: 'Áp dụng', exact: true })).toBeFocused();
       await fits(page);

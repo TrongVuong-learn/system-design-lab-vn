@@ -31,6 +31,11 @@ export function LessonSketch({ kind }: { kind: string }) {
         'B được giao hay còn chờ?',
         'So cùng connection TCP/QUIC có giới hạn',
       ],
+      'module-practice': [
+        'Nối các cơ chế trong một tình huống',
+        'Chọn → giải thích → kiểm tra',
+        'Xem vì sao quyết định cần sửa',
+      ],
       concurrency: [
         'Hai luồng cùng đọc 30',
         'A ghi 31 · B ghi 31',

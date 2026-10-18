@@ -119,6 +119,18 @@ export function validateCatalog(modules: CurriculumModule[], lessons: Lesson[], 
         }
       }
     }
+    if (l.practice) {
+      unique(
+        l.practice.items.map((q) => q.id),
+        'practice item',
+      );
+      for (const q of l.practice.items)
+        for (const id of q.sourceIds) {
+          const source = editorial.sources.find((s) => s.id === id);
+          if (!source || !l.sources.some((s) => s.url === source.url))
+            throw new Error(`Invalid practice source ${l.id}: ${id}`);
+        }
+    }
     unique(record.competencyIds, 'lesson competency');
     unique(record.prerequisiteIds, 'prerequisite');
     for (const id of record.competencyIds) {

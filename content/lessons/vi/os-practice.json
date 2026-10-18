@@ -1,0 +1,180 @@
+[
+  {
+    "id": "os-practice",
+    "kind": "module-practice",
+    "version": 1,
+    "status": "beta",
+    "level": "L0",
+    "moduleId": "L0.2",
+    "minutes": 20,
+    "title": "Ghép các cơ chế OS để sửa ứng dụng ngày hội",
+    "subtitle": "Sáu quyết định về thread, CPU, RAM, file và event loop.",
+    "objective": "Vận dụng các cơ chế OS đã thử để giải thích lỗi, giới hạn tài nguyên và hành vi khi chuyển trạng thái.",
+    "story": "Ứng dụng ngày hội có bộ đếm bị thiếu lượt, hai việc tính toán chờ nhau, hai process dùng cùng địa chỉ 0 và file lịch mất tên trong khi còn mở. Nhóm nói “thêm worker, dùng nonblocking là xong”. Em hãy kiểm tra từng lập luận thay vì áp dụng một giải pháp cho mọi vấn đề.",
+    "explanation": "Một thiết kế có nhiều loại trạng thái và tài nguyên. Thread trong cùng process có thể chia sẻ RAM; process có không gian địa chỉ riêng; worker không tự thêm CPU; tên file khác descriptor đang mở. Nonblocking I/O giải quyết cách chờ, không biến tác vụ CPU dài thành song song. Bài tổng hợp yêu cầu chọn cách giải thích cho từng hiện tượng, xem phản hồi và sửa quyết định. Kết quả tự luyện không chứng nhận đầy đủ mọi năng lực OS.",
+    "limit": "Dùng đúng các mô hình nhỏ của năm bài OS trước: một CPU, vùng RAM liên tục, một file Unix và một luồng event loop. Không code thật, scheduling đaCPU, paging, crash-durability, bảo mật production hoặc benchmark. Đây là bài áp dụng cơ chế, không thay module OS chuyên sâu, pilot hoặc đánh giá chuyên gia.",
+    "terms": [
+      {
+        "name": "Điều luôn cần giữ đúng",
+        "english": "Invariant",
+        "meaning": "Một ràng buộc phải còn đúng qua các bước, ví dụ truy cập bị chặn không được sửa RAM."
+      },
+      {
+        "name": "Giới hạn tài nguyên",
+        "english": "Resource limit",
+        "meaning": "Lượng CPU, vùng nhớ hoặc handle được mô hình cho phép, không tự tăng chỉ vì đổi một tùy chọn."
+      }
+    ],
+    "prediction": {
+      "text": "Cùng một cách “thêm worker” có tự sửa được cả mất lượt cộng, ghi sai vùng nhớ và CPU thiếu không?",
+      "options": [
+        "Không; cần xác định cơ chế và ràng buộc của từng lỗi.",
+        "Có; mọi vấn đề OS đều do thiếu worker."
+      ],
+      "answer": 0,
+      "explanation": "Worker không thay khóa đúng vùng, kiểm địa chỉ hoặc số core CPU. Chẩn đoán cần tách trạng thái chia sẻ, tài nguyên và cách chờ."
+    },
+    "challenge": {
+      "text": "Đã trả lời đúng các tình huống của bài. Có thể coi đó là chứng minh ứng dụng thật không còn lỗi OS không?",
+      "options": [
+        "Không; mô hình có giả định và không thay kiểm thử hoặc đánh giá hệ thống thật.",
+        "Có; sáu đáp án đúng chứng minh mọi trường hợp đều an toàn."
+      ],
+      "answer": 0,
+      "explanation": "Bài chỉ kiểm các cơ chế và tình huống đã nêu. Hệ thống thật còn scheduling, nhiều lỗi và các giới hạn khác; không suy bảo đảm ngoài phạm vi."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "So các vấn đề: có vấn đề nào do sai dữ liệu chia sẻ thay vì thiếu chỗ chạy không?",
+        "Thêm worker không tự thêm CPU, khóa hoặc kiểm giới hạn địa chỉ."
+      ],
+      "challenge": [
+        "Các mô hình có bao phủ mọi lịch lỗi và phần cứng thật không?",
+        "Chỉ được kết luận trong những giả định đã thử; điểm tự luyện không là chứng nhận toàn bộ."
+      ]
+    },
+    "practice": {
+      "version": 1,
+      "items": [
+        {
+          "id": "shared-counter",
+          "text": "Hai thread trong cùng process đều đọc 30 rồi ghi 31. Để hai lượt cộng thành 32, khóa cần bảo vệ phần nào?",
+          "options": [
+            "Cả chuỗi đọc–tăng–ghi của mỗi lượt.",
+            "Chỉ bước ghi, vẫn cho cả hai đọc 30 trước."
+          ],
+          "answer": 0,
+          "explanation": "Nếu cả hai đã đọc 30 thì khóa riêng bước ghi vẫn có thể ghi 31 hai lần. Cần bảo vệ cả vùng đọc–sửa–ghi trong mô hình; thread cùng process chia sẻ vùng nhớ.",
+          "sourceIds": ["source-os-threads"]
+        },
+        {
+          "id": "cpu-workers",
+          "text": "Hai việc mỗi việc cần 4 khoảng CPU trên một CPU, không I/O. Tăng từ 1 lên 2 worker có tự giảm tổng 8 khoảng xuống 4 không?",
+          "options": [
+            "Có; thêm worker luôn tạo thêm CPU.",
+            "Không; một CPU vẫn phải làm tổng 8 khoảng, bỏ qua chi phí chuyển việc như mô hình."
+          ],
+          "answer": 1,
+          "explanation": "Worker không đồng nghĩa core CPU. Có thể chồng thời gian chờ I/O với việc khác, nhưng ở đây không có I/O. Số 8 là kết quả của mô hình, không phải đo máy thật.",
+          "sourceIds": ["source-os-process", "source-os-io"]
+        },
+        {
+          "id": "virtual-address",
+          "text": "Process A có base 4, B có base 8. Cả hai đọc VA 0 hợp lệ. Cách hiểu nào đúng?",
+          "options": [
+            "A đọc PA 4, B đọc PA 8; cùng địa chỉ ảo không đồng nghĩa cùng RAM vật lý.",
+            "Cả hai đọc PA 0 vì VA 0 luôn là RAM vật lý 0."
+          ],
+          "answer": 0,
+          "explanation": "OS thiết lập base của process; phần cứng dịch địa chỉ hợp lệ theo base. Trong mô hình này A/B ở hai vùng liên tục riêng, không phải paging đầy đủ.",
+          "sourceIds": ["ostep-address15"]
+        },
+        {
+          "id": "bounds-before-write",
+          "text": "A có VA 0–3 hợp lệ. Trước lệnh ghi VA 4, mô hình base/limit phải làm gì?",
+          "options": [
+            "Cộng base 4 rồi ghi PA 8 ngay vì RAM có ô 8.",
+            "Chặn trước khi ghi vì VA 4 bằng giới hạn 4."
+          ],
+          "answer": 1,
+          "explanation": "Có ô RAM vật lý 8 không có nghĩa process A được truy cập nó. Địa chỉ ảo phải nhỏ hơn giới hạn; chặn trước đọc/ghi giữ vùng B và OS không đổi.",
+          "sourceIds": ["ostep-address15"]
+        },
+        {
+          "id": "unlink-open",
+          "text": "Ứng dụng mở file qua fd 3, sau đó unlink tên duy nhất. Cách hiểu nào đúng?",
+          "options": [
+            "Xóa tên khiến mọi descriptor tự đóng và dung lượng luôn được giải phóng ngay.",
+            "fd 3 có thể đọc tiếp; file được giải phóng khi không còn tên liên kết và handle mở cuối cùng."
+          ],
+          "answer": 1,
+          "explanation": "Tên trong thư mục khác handle đang mở. Trong ví dụ Unix này, fd 3 giữ file tồn tại tới khi đóng; giải phóng file không bảo đảm byte trên đĩa bị ghi đè an toàn.",
+          "sourceIds": ["linux-unlink"]
+        },
+        {
+          "id": "loop-cpu",
+          "text": "Đã dùng non-blocking I/O nhưng một callback CPU dài vẫn giữ luồng event loop. Cách hiểu nào đúng?",
+          "options": [
+            "Non-blocking I/O khiến mọi callback CPU chạy song song nên không còn chờ.",
+            "Callback trên luồng này vẫn chạy lần lượt; việc khác có thể phải chờ callback CPU dài."
+          ],
+          "answer": 1,
+          "explanation": "Non-blocking giúp không đứng chờ I/O; nó không tự thêm CPU hoặc chia callback CPU dài thành nhiều luồng. Cần tách vấn đề chờ I/O khỏi chi phí CPU.",
+          "sourceIds": ["node-nonblocking"]
+        }
+      ]
+    },
+    "sources": [
+      {
+        "title": "OSTEP1.10 — Ch26 §§26.3–26.4: shared data and interleaving",
+        "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/threads-intro.pdf"
+      },
+      {
+        "title": "OSTEP1.10 — Ch4 §4.4: Ready, Running, Blocked",
+        "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/cpu-intro.pdf"
+      },
+      {
+        "title": "OSTEP1.10 — Ch36 §36.4: CPU work and I/O overlap",
+        "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/file-devices.pdf"
+      },
+      {
+        "title": "OSTEP1.10 chương15 §15.3–5 — base-and-bounds",
+        "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/vm-mechanism.pdf"
+      },
+      {
+        "title": "Linux man-pages unlink(2) — tên file và descriptor đang mở",
+        "url": "https://man7.org/linux/man-pages/man2/unlink.2.html"
+      },
+      {
+        "title": "Node.js Learn — blocking vs non-blocking, concurrency",
+        "url": "https://nodejs.org/learn/asynchronous-work/overview-of-blocking-vs-non-blocking"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-os-practice",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L0-02",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Rà lỗi ứng dụng ngày hội",
+      "context": "Nhóm ghép năm thí nghiệm OS trong một checklist quyết định. Tình huống tự biên soạn, không vận hành ứng dụng thật.",
+      "requirements": [
+        "Giải thích riêng lỗi chia sẻ trạng thái, giới hạn CPU và kiểm truy cập RAM.",
+        "Không nhầm tên file với handle hoặc chờ I/O với công việc CPU."
+      ],
+      "activityRef": "module-practice",
+      "experimentSteps": [
+        "Chọn cách giải thích cho cả sáu tình huống rồi kiểm tra.",
+        "Xem câu cần sửa, thay lựa chọn và kiểm tra lại; reload để tiếp tục bài áp dụng."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Mỗi cơ chế giải quyết một ràng buộc và có giới hạn riêng; không có một nút cấu hình thay mọi kiểm tra tính đúng đắn."
+      ],
+      "limitations": "Dùng đúng các mô hình nhỏ của năm bài OS trước: một CPU, vùng RAM liên tục, một file Unix và một luồng event loop. Không code thật, scheduling đaCPU, paging, crash-durability, bảo mật production hoặc benchmark. Đây là bài áp dụng cơ chế, không thay module OS chuyên sâu, pilot hoặc đánh giá chuyên gia."
+    }
+  }
+]

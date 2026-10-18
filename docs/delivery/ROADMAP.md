@@ -375,3 +375,9 @@ EDU-22B local26bài+1ôn:90unit/25files,20E2E offline/responsive đạt và12/12
 Inprogress18/10/2026 sau EDU-22: cookie/session, reverseproxy, HTTP2/3 multiplexing và một ví dụ transportHOL. [Scope/acceptance](EDU_23_WEB_PROTOCOLS.md). Không thêm login thật, không chờ usertest; giữ26contract cũ, sourceRFC/enginefixture/assessment có giới hạn. Bài streaming/capstone/depth đầy đủ vẫn theo§19; không tự đóngmodule vì thêm baintro.
 
 EDU-23 local29bài+1ôn:94unit/26files,32/32E2E liên quan và3bài×3viewport export/import/resume/offline đạt, ảnh đã review. ChờCI/merge master trước phát hành; không đóngL0.5 hoặc toànplan.
+
+## 31. EDU-24 — bài tập áp dụng tổng hợp module
+
+Inprogress: xây khung module-practice và consumerOS sáu tình huống, theo [scope](EDU_24_MODULE_PRACTICE.md)/ADR0006. Chỉ ID mới, khóa payload câu hỏi trong baseline, không đổi formatprogress hoặc tự diễn giải flags cũ. Chấm đúng/sai/chưatrảlời từ lựa chọn, không tin điểm nhập. Không tự đóngmodule từ sáu câu; plannedcompetency/attemptmigration/depth đầy đủ vẫn mở.
+
+EDU-24 local30bài+1ôn,100unit/27files và24/24E2E liên quan đạt sau sửa cỡnút; checkpoint/corrupt/compatibility29ID/gradegate và export-import/resume/offline320/390/1280 đạt. CI và publication theoevidence; không dùng điểmpractice để tựđóng module.
