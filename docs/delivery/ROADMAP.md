@@ -264,7 +264,7 @@ Yêu cầu: hoàn thành toàn bộ plan. Không thay đổi phạm vi 6 level/3
 | --- | --- | --- |
 | 1 | M4-OFFLINE-01: gói offline của bản beta đang có | Verified trên browser. [Báo cáo](M4_OFFLINE_01.md):187 E2E đạt/1skip,63 unit; manifest/integrity, retry, reload offline, update chờ, xóa giữ tiến độ. Gate OS/thiết bị thật vẫn mở |
 | 2 | ENG-03: contract nội dung/attempt/depth đầy đủ | Còn mở. ADR + migration dữ liệu cũ + schema/version/coverage và assessment đúng độ sâu; không đổi v1 ngầm |
-| 3 | EDU-04: hoàn thiện L0 | Còn mở. L0.3 cấu trúc dữ liệu; OS/non-blocking/event loop; session/proxy/HTTP2–3; availability/durability và các competency thiếu phải có bài/hoạt động/đánh giá |
+| 3 | EDU-04: hoàn thiện L0 | Còn mở. Đã có các bài nhập môn về cấu trúc dữ liệu, bộ nhớ/file/event loop và cookie/proxy/HTTP2–3; vẫn cần streaming, availability/durability, năng lực thiếu và độ sâu/case/rubric đầy đủ. Không tính số bài là module hoàn chỉnh |
 | 4 | EDU-05: L1.1–L1.6 | Còn mở. Requirements/API/data/index/transaction/service delivery; case CASE-L1-01…06 và trace giữ invariant |
 | 5 | EDU-06: L2.1–L2.6 | Còn mở. Các bài nhập môn chưa thay module; thêm failure, invalidation/stampede, sharding, ACK/duplicate và backpressure |
 | 6 | EDU-07: L3.1–L4.6 | Còn mở. Nguồn sơ cấp, lịch lỗi độc lập, assessment có giới hạn; review chuyên môn cho consensus/transaction/security/DR |
@@ -338,7 +338,7 @@ Kết quả ENG-03A local: 80 unit/22 files, content/coverage, lint, format và 
 
 ## 26. EDU-20 — locality bộ nhớ
 
-In progress: bài L0.3 theo [scope/acceptance](EDU_20_MEMORY_LOCALITY.md). Thử cùng tám ô với một khối cache; không đổi assessment cũ, không đo tốc độ thật. Sau QA bổ sung serialization/compression rồi OS/L1 theo §19. ENG-03A là nền bảo vệ compatibility, chưa thay migration attempt đầy đủ.
+Đã phát hành bài L0.3 theo [scope/acceptance](EDU_20_MEMORY_LOCALITY.md). Thử cùng tám ô với một khối cache; không đổi assessment cũ, không đo tốc độ thật. Sau QA bổ sung serialization/compression rồi OS/L1 theo §19. ENG-03A là nền bảo vệ compatibility, chưa thay migration attempt đầy đủ.
 
 Kết quả EDU-20 local: 21bài+1ôn,83unit/23files và24E2E liên quan đạt; ảnh/resume/export-import/offline320/390/1280 đạt. Phần source và review nằm trong EDU-20; chỉ đóng scope sau CI/merge/phát hành, không đóng L0.3.
 
@@ -348,15 +348,15 @@ EDU-20 đã phát hành production READY/master8f7f0ea,18file HTTP/hash/cache đ
 
 ## 27. EDU-21 — serialization và compression (18/10/2026)
 
-In progress: hai bài L0.3 theo [scope/acceptance](EDU_21_DATA_REPRESENTATION.md), engine1.12.0/model1, progress/storage không đổi. JSONUTF-8/parse và RLEtoy/roundtrip, có phản chứng nén làm dữ liệu lớn hơn; không đồng nhất toy với DEFLATE. Giữ compatibility21ID cũ, thêm haiID/case/competency/source. Sau kiểm chứng/CI/merge master/Vercel tiếp OS và L1 theo §19; chưa đóng L0.3 hoặc ENG-03 đầy đủ.
+Đã phát hành hai bài L0.3 theo [scope/acceptance](EDU_21_DATA_REPRESENTATION.md), engine1.12.0/model1, progress/storage không đổi. JSONUTF-8/parse và RLEtoy/roundtrip, có phản chứng nén làm dữ liệu lớn hơn; không đồng nhất toy với DEFLATE. Giữ compatibility21ID cũ, thêm haiID/case/competency/source. Sau kiểm chứng/CI/merge master/Vercel tiếp OS và L1 theo §19; chưa đóng L0.3 hoặc ENG-03 đầy đủ.
 
 EDU-21 local:23bài+1ôn,86unit/24files và28/28E2E liên quan đạt sau sửa selector test và chạy lại tuần tự; ảnh/export-import/resume/offline320/390/1280 đạt. CI/merge/production ghi theo evidence thực tế trong báo cáo. ModuleL0.3 và toàn giáo trình vẫn mở.
 
 EDU-21 đã tích hợp PR#13/masterc9b54ab; CI86unit/231E2E đạt/1skip cùng content/coverage/lint/format/build. Catalog23bài+1ôn. Bằng chứng production cập nhật theo [báo cáo EDU-21](EDU_21_DATA_REPRESENTATION.md), không tự đóng L0.3/toàn roadmap.
 
-## 28. EDU-22 — không gian địa chỉ và cách ly tiến trình (Ready)
+## 28. EDU-22 — đặc tả không gian địa chỉ, đã triển khai trong EDU-22B
 
-Đầu ra tiếp theo sau EDU-21: bài L0.2 giúp học sinh phân biệt địa chỉ ảo và vật lý, hai process cùng địa chỉ 0 nhưng dữ liệu riêng, kiểm tra giới hạn trước truy cập. Nguồn đã đọc18/10: [OSTEP1.10 chương13 §13.3–4](https://pages.cs.wisc.edu/~remzi/OSTEP/vm-intro.pdf) và [chương15 §15.3–5](https://pages.cs.wisc.edu/~remzi/OSTEP/vm-mechanism.pdf). Chưa viết source/bài phát hành cho task này.
+Đầu ra tiếp theo sau EDU-21: bài L0.2 giúp học sinh phân biệt địa chỉ ảo và vật lý, hai process cùng địa chỉ 0 nhưng dữ liệu riêng, kiểm tra giới hạn trước truy cập. Nguồn đã đọc18/10: [OSTEP1.10 chương13 §13.3–4](https://pages.cs.wisc.edu/~remzi/OSTEP/vm-intro.pdf) và [chương15 §15.3–5](https://pages.cs.wisc.edu/~remzi/OSTEP/vm-mechanism.pdf). Phần này đã được hiện thực trong lô EDU-22B; giữ mô hình dưới đây làm đặc tả gốc.
 
 Mô hình dự kiến: RAM16ô, vùngOS0–3, processA base4/limit4 và B base8/limit4; chỉ địa chỉ ảo0–3 hợp lệ, dịch PA=base+VA. Cho đọc/ghi giá trị dựng sẵn ở VA0/3 và thử VA4 bị chặn, không đọc/ghi vượt biên. OS thiết lập base/limit; app không tự sửa ánh xạ. Minh họa cơ chế base-and-bounds đơn giản, không tuyên bố đây là paging hiện đại hoặc bảo mật tuyệt đối; không swap/TLB/shared-memory/COW/cấp phát/đo hiệu năng. Case CASE-L0-02 và prerequisite concurrency; không nhầm heap vùng nhớ với min-heap.
 
@@ -366,18 +366,22 @@ EDU-21 production READY/masterc9b54ab,18file HTTP/hash/cache đúng; cả hai b�
 
 ## 29. EDU-22B — hoàn thiện nền OS theo lô
 
-In progress18/10/2026, mở rộng EDU-22 Ready sang ba bài address-space/file-handles/event-loop để bổ sung phần còn thiếuL0.2. [Scope/acceptance](EDU_22_OS_FOUNDATIONS.md); thêm ba model/lesson/case/competency, giữ23contract và formatprogress cũ. Không chờ user test, vẫn tự QA trước phát hành. Không gọi thêm ba bài là đã đóng toàn module; registry/rubric/depth và phần module còn thiếu tiếp tục theo§19.
+Đã phát hành ngày 18/10/2026, mở rộng EDU-22 Ready sang ba bài address-space/file-handles/event-loop để bổ sung phần còn thiếuL0.2. [Scope/acceptance](EDU_22_OS_FOUNDATIONS.md); thêm ba model/lesson/case/competency, giữ23contract và formatprogress cũ. Không chờ user test, vẫn tự QA trước phát hành. Không gọi thêm ba bài là đã đóng toàn module; registry/rubric/depth và phần module còn thiếu tiếp tục theo§19.
 
 EDU-22B local26bài+1ôn:90unit/25files,20E2E offline/responsive đạt và12/12retest bài mới đạt sau chuẩn hóa aria-label; screenshot/resume/export-import/offline của3bài tại320/390/1280 đạt. CI và phát hành ghi theo evidence; không đóng toànL0.2 hoặc plan.
 
 ## 30. EDU-23 — lô web protocol còn thiếuL0.5
 
-Inprogress18/10/2026 sau EDU-22: cookie/session, reverseproxy, HTTP2/3 multiplexing và một ví dụ transportHOL. [Scope/acceptance](EDU_23_WEB_PROTOCOLS.md). Không thêm login thật, không chờ usertest; giữ26contract cũ, sourceRFC/enginefixture/assessment có giới hạn. Bài streaming/capstone/depth đầy đủ vẫn theo§19; không tự đóngmodule vì thêm baintro.
+Đã phát hành ngày 18/10/2026 sau EDU-22: cookie/session, reverseproxy, HTTP2/3 multiplexing và một ví dụ transportHOL. [Scope/acceptance](EDU_23_WEB_PROTOCOLS.md). Không thêm login thật, không chờ usertest; giữ26contract cũ, sourceRFC/enginefixture/assessment có giới hạn. Bài streaming/capstone/depth đầy đủ vẫn theo§19; không tự đóngmodule vì thêm baintro.
 
-EDU-23 local29bài+1ôn:94unit/26files,32/32E2E liên quan và3bài×3viewport export/import/resume/offline đạt, ảnh đã review. ChờCI/merge master trước phát hành; không đóngL0.5 hoặc toànplan.
+EDU-23 local29bài+1ôn:94unit/26files,32/32E2E liên quan và3bài×3viewport export/import/resume/offline đạt, ảnh đã review. CI/merge master/production đã xác minh theo báo cáo EDU-23; không đóngL0.5 hoặc toànplan.
 
 ## 31. EDU-24 — bài tập áp dụng tổng hợp module
 
-Inprogress: xây khung module-practice và consumerOS sáu tình huống, theo [scope](EDU_24_MODULE_PRACTICE.md)/ADR0006. Chỉ ID mới, khóa payload câu hỏi trong baseline, không đổi formatprogress hoặc tự diễn giải flags cũ. Chấm đúng/sai/chưatrảlời từ lựa chọn, không tin điểm nhập. Không tự đóngmodule từ sáu câu; plannedcompetency/attemptmigration/depth đầy đủ vẫn mở.
+Đã phát hành ngày 18/10/2026: khung module-practice và consumerOS sáu tình huống, theo [scope](EDU_24_MODULE_PRACTICE.md)/ADR0006. Chỉ ID mới, khóa payload câu hỏi trong baseline, không đổi formatprogress hoặc tự diễn giải flags cũ. Chấm đúng/sai/chưatrảlời từ lựa chọn, không tin điểm nhập. Không tự đóngmodule từ sáu câu; plannedcompetency/attemptmigration/depth đầy đủ vẫn mở.
 
 EDU-24 local30bài+1ôn,100unit/27files và24/24E2E liên quan đạt sau sửa cỡnút; checkpoint/corrupt/compatibility29ID/gradegate và export-import/resume/offline320/390/1280 đạt. CI và publication theoevidence; không dùng điểmpractice để tựđóng module.
+
+### Kiểm chứng phát hành EDU-22–24
+
+Ba lô đã merge master qua PR#15/#16/#17, production theo master; chi tiết commit/deployment/nguồn/giới hạn trong từng báo cáo. CI cuối EDU-24: 100 unit, 259 E2E đạt, 1 skip; HTTP 18 file khớp artifact và browser production của bảy bài mới đạt mobile/desktop, xuất/nhập, resume và offline. Catalog hiện có 30 bài và một bài ôn tích hợp; chưa có module nào trong 36 module được chứng nhận đầy đủ. ENG-03, độ sâu/assessment còn thiếu, các module chưa có bài, nhánh chuyên sâu và capstone tiếp tục mở theo §19. Không yêu cầu người dùng test từng lô để tiếp tục triển khai.

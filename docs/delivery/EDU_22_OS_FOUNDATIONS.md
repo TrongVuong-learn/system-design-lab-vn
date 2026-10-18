@@ -13,3 +13,11 @@ Acceptance: kiểm bounds trước truy cập, không chạm RAMOS/B khiAghi, re
 90unit/25files, content/coverage/lint/format/build/typecheck đạt. 23contract cũ deep-equal, chỉ thêm3ID. Lượt E2E đầu28pass/4fail do nhãn select trong RAM gồm cả nội dung option khiến exact label không khớp; bổ sung aria-label rõ cho3select, giữ visiblelabel và expectation. Retest12/12 ba bài trên bốn browser đạt. 20test offline/responsive còn lại đã đạt ở lượt đầu; CI sẽ chạy full trên source cuối. Trong review checkpoint đã sửa nonblocking step6 về0 thay vì clamp thành hoàn tất5, có fixture chặn; không để invalidstep giả hoàn thành.
 
 Standalone sau sửaUI: cả3bài tại320/390/1280 export/import, resume/reload offline và tiếp tục thao tác đều đạt, không overflow/pageerror. Đã review ảnh nội dung thật: RAM có nhãnPA/giá trị, file tách tên/handle/dữ liệu, eventloop timeline chữ. Evidence ảnh/log/fingerprint ignored `.cache/edu22/`. Chưa điện thoại thật/pilot; không dùng beta intro để tự đóngL0.2.
+
+## CI và production
+
+[PR#15](https://github.com/TrongVuong-learn/system-design-lab-vn/pull/15) merge thành `75be58c41cf2dadde69a36cb7f1df49d939eb18f`. [Quality39093005064](https://github.com/TrongVuong-learn/system-design-lab-vn/actions/runs/39093005064) success90unit/243E2E,1skip theo cấu hình hovermobile cũ cótap riêng.
+
+Vercel `dpl_ASArJXT8kcxZ9k8BwfYNHPppn8yz` READY production/master75be58c, alias https://system-design-lab-vn.vercel.app. 18file HTTP/hash/cache/MIME đúng vàmissingJS404. Chromium320/390/1280 cho3bài export/import/checkpoint/reload offline và tiếp tụcđọcghi/chặnRAM, đọcfdđãunlink/đóng, eventloop tớiA5/B2 đạt, khôngoverflow/pageerror. Evidence `.cache/edu22/{release,tested-artifact,cloud-http,live-browser}.json` ignored.
+
+Scope3bài đã phát hành; không đóng toànL0.2/giáo trình, không humanreview/pilot hoặc thiết bịthật mới. BảnEDU23/24 tiếp theo từmaster kếthừa3bài; commit docs cuối không thay cơ chế.
