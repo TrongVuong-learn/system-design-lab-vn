@@ -22,6 +22,8 @@ for (const width of [320, 360, 390, 430, 768, 1024, 1440]) {
       'search-tree',
       'priority-heap',
       'locality',
+      'serialization',
+      'compression',
       'metrics',
       'dns',
       'routing',

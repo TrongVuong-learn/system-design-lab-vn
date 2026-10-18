@@ -57,6 +57,8 @@ const order = [
   'search-tree',
   'priority-heap',
   'locality',
+  'serialization',
+  'compression',
   'metrics',
   'cache',
   'dns',

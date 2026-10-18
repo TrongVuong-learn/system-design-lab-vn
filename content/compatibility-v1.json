@@ -454,6 +454,54 @@
         "answer": 0,
         "explanation": "Cache chỉ giữ một khối. Khối 0–3 và 4–7 liên tục thay nhau, nên cả 8 lượt đều miss. Nếu đọc 0–7 liền nhau thì chỉ nạp 2 lượt trong cùng cấu hình."
       }
+    },
+    {
+      "lessonId": "serialization",
+      "version": 1,
+      "moduleId": "L0.3",
+      "kind": "serialization",
+      "prediction": {
+        "text": "Bản ghi có số chỗ là số 2. Khi đọc lại JSON của bài, số chỗ nên trở thành gì?",
+        "options": [
+          "Vẫn là số 2; JSON phân biệt số với chuỗi.",
+          "Luôn là chuỗi “2” vì JSON là văn bản."
+        ],
+        "answer": 0,
+        "explanation": "Văn bản JSON có cú pháp cho nhiều kiểu giá trị. 2 không có dấu ngoặc kép là số; “2” có ngoặc kép là chuỗi. Bài giữ số nguyên nhỏ nên khôi phục được chính xác."
+      },
+      "challenge": {
+        "text": "Cùng bản ghi của Bình, JSON thụt dòng dùng nhiều byte hơn JSON gọn. Điều này có nghĩa đã đổi tên hoặc số chỗ không?",
+        "options": [
+          "Không; khoảng trắng định dạng ngoài chuỗi không đổi giá trị. Cả hai khôi phục cùng bản ghi.",
+          "Có; số byte khác nhau luôn có nghĩa dữ liệu nghiệp vụ khác nhau."
+        ],
+        "answer": 0,
+        "explanation": "Khoảng trắng định dạng làm văn bản dài hơn nhưng không đổi các giá trị. Không được xóa khoảng trắng bên trong chuỗi một cách tùy tiện. Số byte UTF-8 không đồng nghĩa số ký tự nhìn thấy."
+      }
+    },
+    {
+      "lessonId": "compression",
+      "version": 1,
+      "moduleId": "L0.3",
+      "kind": "compression",
+      "prediction": {
+        "text": "Tám A rồi tám B, mỗi dãy lưu hai byte (số lần, ký hiệu). Kết quả có bao nhiêu byte?",
+        "options": [
+          "4 byte: hai dãy, mỗi dãy hai byte.",
+          "2 byte: chỉ có hai loại ký hiệu nên mỗi loại luôn một byte."
+        ],
+        "answer": 0,
+        "explanation": "Có hai dãy A và B. Mỗi dãy cần cả số lần và ký hiệu: [8,65] và [8,66], tổng bốn byte. Không đếm độ dài câu chữ minh họa."
+      },
+      "challenge": {
+        "text": "Chuỗi 16 ký hiệu ABAB… không có hai ký hiệu kề nhau giống nhau. Với định dạng này, sau nén còn bao nhiêu byte?",
+        "options": [
+          "32 byte: 16 dãy một ký hiệu, mỗi dãy hai byte.",
+          "8 byte: mọi phương pháp nén đều bảo đảm giảm một nửa."
+        ],
+        "answer": 0,
+        "explanation": "Mỗi ký hiệu thành một cặp [1,ký hiệu], nên 16 × 2 = 32 byte. Vẫn khôi phục đúng, nhưng lớn hơn 16 byte gốc; tính đúng không đồng nghĩa nén có lợi."
+      }
     }
   ]
 }

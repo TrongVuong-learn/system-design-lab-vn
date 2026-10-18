@@ -248,6 +248,22 @@
       "revision": "Spring2014 Recitation7 slides8–14",
       "checkedAt": "2026-10-17",
       "attribution": "Carnegie Mellon University, Lou Clark"
+    },
+    {
+      "id": "rfc8259-json",
+      "title": "RFC8259 §1–8,12 — JSON values, strings, UTF-8 và parsing",
+      "url": "https://www.rfc-editor.org/rfc/rfc8259.html",
+      "revision": "RFC cố định tại URL; sections ghi trong title",
+      "checkedAt": "2026-10-18",
+      "attribution": "IETF / RFC Editor"
+    },
+    {
+      "id": "rfc1951-limits",
+      "title": "RFC1951 §1.1 — giới hạn nén không mất dữ liệu",
+      "url": "https://www.rfc-editor.org/rfc/rfc1951.html",
+      "revision": "RFC cố định tại URL; sections ghi trong title",
+      "checkedAt": "2026-10-18",
+      "attribution": "IETF / RFC Editor"
     }
   ],
   "competencies": [
@@ -435,6 +451,20 @@
       "outcome": "Theo dấu một cache chỉ giữ một khối, phân biệt dùng lại cùng ô và đọc ô gần nhau; giải thích vì sao thứ tự đọc ảnh hưởng số lần nạp.",
       "depth": "introductory",
       "planRefs": ["CURRICULUM_MAP.md#l0", "EDU-20"]
+    },
+    {
+      "id": "serialization-intro",
+      "moduleId": "L0.3",
+      "outcome": "Theo dấu biểu diễn một bản ghi bằng JSON UTF-8 rồi khôi phục giá trị và kiểu; phân biệt byte, văn bản và dữ liệu có cấu trúc.",
+      "depth": "introductory",
+      "planRefs": ["CURRICULUM_MAP.md", "EDU-21"]
+    },
+    {
+      "id": "compression-intro",
+      "moduleId": "L0.3",
+      "outcome": "Tính kích thước cặp byte trong RLE tự đặt, khôi phục đúng chuỗi và giải thích vì sao dữ liệu có thể lớn hơn sau nén.",
+      "depth": "introductory",
+      "planRefs": ["CURRICULUM_MAP.md", "EDU-21"]
     }
   ],
   "lessons": [
@@ -1056,6 +1086,62 @@
         "date": "2026-10-17",
         "status": "beta-checked",
         "evidence": "docs/delivery/EDU_20_MEMORY_LOCALITY.md"
+      }
+    },
+    {
+      "lessonId": "serialization",
+      "revision": 1,
+      "competencyIds": ["serialization-intro"],
+      "prerequisiteIds": ["http"],
+      "claims": [
+        {
+          "text": "JSON biểu diễn giá trị có kiểu; UTF-8 dùng cho trao đổi JSON giữa các hệ thống mở; whitespace ngoài chuỗi không đổi giá trị, dấu ngoặc kép trong chuỗi phải escape.",
+          "sourceIds": ["rfc8259-json"]
+        }
+      ],
+      "review": {
+        "reviewer": "Codex parent",
+        "reviewerType": "agent",
+        "date": "2026-10-18",
+        "status": "beta-checked",
+        "evidence": "docs/delivery/EDU_21_DATA_REPRESENTATION.md"
+      },
+      "caseReview": {
+        "caseId": "case-serialization",
+        "revision": 1,
+        "reviewer": "Codex parent",
+        "reviewerType": "agent",
+        "date": "2026-10-18",
+        "status": "beta-checked",
+        "evidence": "docs/delivery/EDU_21_DATA_REPRESENTATION.md"
+      }
+    },
+    {
+      "lessonId": "compression",
+      "revision": 1,
+      "competencyIds": ["compression-intro"],
+      "prerequisiteIds": ["serialization"],
+      "claims": [
+        {
+          "text": "Nén lossless không thể rút ngắn mọi đầu vào. Định dạng RLE hai byte/cặp và số 16/4/32 là mô hình riêng, không mô phỏng DEFLATE hoặc số đo nguồn.",
+          "sourceIds": ["rfc1951-limits"]
+        }
+      ],
+      "review": {
+        "reviewer": "Codex parent",
+        "reviewerType": "agent",
+        "date": "2026-10-18",
+        "status": "beta-checked",
+        "evidence": "docs/delivery/EDU_21_DATA_REPRESENTATION.md"
+      },
+      "caseReview": {
+        "caseId": "case-compression",
+        "revision": 1,
+        "reviewer": "Codex parent",
+        "reviewerType": "agent",
+        "date": "2026-10-18",
+        "status": "beta-checked",
+        "evidence": "docs/delivery/EDU_21_DATA_REPRESENTATION.md"
       }
     }
   ]

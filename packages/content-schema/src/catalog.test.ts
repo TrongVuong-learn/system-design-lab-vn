@@ -1,3 +1,5 @@
+import serialization from '../../../content/lessons/vi/serialization.json';
+import compression from '../../../content/lessons/vi/compression.json';
 import locality from '../../../content/lessons/vi/locality.json';
 import heapLesson from '../../../content/lessons/vi/priority-heap.json';
 import treeLesson from '../../../content/lessons/vi/search-tree.json';
@@ -26,6 +28,8 @@ const lessons = [
   ...treeLesson,
   ...heapLesson,
   ...locality,
+  ...serialization,
+  ...compression,
 ].map((l) => lessonSchema.parse(l));
 const modules = Array.from({ length: 6 }, (_, level) =>
   Array.from({ length: 6 }, (_, i) => ({
@@ -37,7 +41,7 @@ const modules = Array.from({ length: 6 }, (_, level) =>
 ).flat();
 it('validates actual catalog without equating beta coverage with module completion', () => {
   const result = validateCatalog(modules, lessons, registry);
-  expect(result.lessons).toHaveLength(21);
+  expect(result.lessons).toHaveLength(23);
   expect(result.coverage).toHaveLength(36);
   expect(result.coverage.every((c) => !c.complete)).toBe(true);
 });
@@ -148,8 +152,8 @@ it('validates authored two-step guidance without accepting executable fields', (
   ).toThrow();
 });
 
-it('all twenty-one beta lessons have authored two-stage hints while v1 answers stay unchanged', () => {
-  expect(lessons.filter((l) => l.status === 'beta')).toHaveLength(21);
+it('all twenty-three beta lessons have authored two-stage hints while v1 answers stay unchanged', () => {
+  expect(lessons.filter((l) => l.status === 'beta')).toHaveLength(23);
   for (const lesson of lessons.filter((l) => l.status === 'beta')) {
     expect(lesson.guidance?.schemaVersion).toBe(1);
     expect(lesson.guidance?.prediction).toHaveLength(2);

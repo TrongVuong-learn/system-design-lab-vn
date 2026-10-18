@@ -19,7 +19,7 @@ Học sinh cấp 3 chưa từng lập trình có lối bắt đầu riêng trong
 
 Mỗi module được chia thành các bài nhỏ sau khi chốt mục tiêu học. Danh sách module là phạm vi cần phát triển; số lượng tiêu đề không đại diện cho độ sâu hay mức hoàn thiện. Một module chỉ hoàn chỉnh khi năng lực bắt buộc có bài dạy, hoạt động áp dụng, đánh giá và review.
 
-Mỗi bài có mini-case trong chặng Áp dụng; mỗi module có một họ tình huống và bài tổng hợp; mỗi level có capstone. [EDU-09](docs/delivery/EDU_09_CASE_STUDY_PLAN.md) quản lý danh mục đủ 36 module, phân rã tình huống, bảy nhánh, kế hoạch ánh xạ bài beta và thứ tự triển khai. Hiện có mini-case cho 21 bài beta và một bài ôn tổng hợp; họ case module và capstone vẫn đang đặc tả; không tính một case tổng hợp thay mọi năng lực trong module. Chuẩn biên soạn nằm trong TEACHING_GUIDE.
+Mỗi bài có mini-case trong chặng Áp dụng; mỗi module có một họ tình huống và bài tổng hợp; mỗi level có capstone. [EDU-09](docs/delivery/EDU_09_CASE_STUDY_PLAN.md) quản lý danh mục đủ 36 module, phân rã tình huống, bảy nhánh, kế hoạch ánh xạ bài beta và thứ tự triển khai. Hiện có mini-case cho 23 bài beta và một bài ôn tổng hợp; họ case module và capstone vẫn đang đặc tả; không tính một case tổng hợp thay mọi năng lực trong module. Chuẩn biên soạn nằm trong TEACHING_GUIDE.
 
 ## 2. Sáu level cốt lõi
 

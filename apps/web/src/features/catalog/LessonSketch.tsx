@@ -12,6 +12,16 @@ export function LessonSketch({ kind }: { kind: string }) {
         '1 → 2 worker, cùng một CPU',
       ],
       tls: ['Lịch đi qua kênh TLS', 'Giữ kín · Phát hiện sửa', 'Kiểm tra đúng danh tính máy chủ'],
+      serialization: [
+        'Bản ghi → JSON → bản ghi',
+        'Tên · số chỗ · xác nhận',
+        'Khôi phục giá trị và giữ đúng kiểu',
+      ],
+      compression: [
+        'Cùng 16 ký hiệu A/B',
+        '16 → 4 hoặc 32 byte',
+        'Nén có thể nhỏ hơn hoặc lớn hơn',
+      ],
       locality: [
         'Cùng tám ô, đổi thứ tự đọc',
         '2 hoặc 8 lượt nạp khối',
