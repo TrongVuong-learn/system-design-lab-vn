@@ -369,3 +369,9 @@ EDU-21 production READY/masterc9b54ab,18file HTTP/hash/cache đúng; cả hai b�
 In progress18/10/2026, mở rộng EDU-22 Ready sang ba bài address-space/file-handles/event-loop để bổ sung phần còn thiếuL0.2. [Scope/acceptance](EDU_22_OS_FOUNDATIONS.md); thêm ba model/lesson/case/competency, giữ23contract và formatprogress cũ. Không chờ user test, vẫn tự QA trước phát hành. Không gọi thêm ba bài là đã đóng toàn module; registry/rubric/depth và phần module còn thiếu tiếp tục theo§19.
 
 EDU-22B local26bài+1ôn:90unit/25files,20E2E offline/responsive đạt và12/12retest bài mới đạt sau chuẩn hóa aria-label; screenshot/resume/export-import/offline của3bài tại320/390/1280 đạt. CI và phát hành ghi theo evidence; không đóng toànL0.2 hoặc plan.
+
+## 30. EDU-23 — lô web protocol còn thiếuL0.5
+
+Inprogress18/10/2026 sau EDU-22: cookie/session, reverseproxy, HTTP2/3 multiplexing và một ví dụ transportHOL. [Scope/acceptance](EDU_23_WEB_PROTOCOLS.md). Không thêm login thật, không chờ usertest; giữ26contract cũ, sourceRFC/enginefixture/assessment có giới hạn. Bài streaming/capstone/depth đầy đủ vẫn theo§19; không tự đóngmodule vì thêm baintro.
+
+EDU-23 local29bài+1ôn:94unit/26files,32/32E2E liên quan và3bài×3viewport export/import/resume/offline đạt, ảnh đã review. ChờCI/merge master trước phát hành; không đóngL0.5 hoặc toànplan.

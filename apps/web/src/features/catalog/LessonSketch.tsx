@@ -16,6 +16,21 @@ export function LessonSketch({ kind }: { kind: string }) {
         'B xong mốc 2 hoặc 6',
         'Một luồng, không thêm CPU',
       ],
+      'cookie-session': [
+        'Browser giữ ID, server giữ phiên',
+        'sid=S1 → còn hiệu lực?',
+        'Thu hồi phiên không tự xóa cookie',
+      ],
+      'reverse-proxy': [
+        'Một tên miền, hai backend',
+        '/lop → lịch · /anh → ảnh',
+        'Cửa vào phía server, không tự là cache',
+      ],
+      multiplexing: [
+        'A bị mất, B đã tới',
+        'B được giao hay còn chờ?',
+        'So cùng connection TCP/QUIC có giới hạn',
+      ],
       concurrency: [
         'Hai luồng cùng đọc 30',
         'A ghi 31 · B ghi 31',

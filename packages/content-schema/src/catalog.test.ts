@@ -1,3 +1,4 @@
+import webProtocols from '../../../content/lessons/vi/web-protocols.json';
 import osLessons from '../../../content/lessons/vi/os-foundations.json';
 import serialization from '../../../content/lessons/vi/serialization.json';
 import compression from '../../../content/lessons/vi/compression.json';
@@ -32,6 +33,7 @@ const lessons = [
   ...serialization,
   ...compression,
   ...osLessons,
+  ...webProtocols,
 ].map((l) => lessonSchema.parse(l));
 const modules = Array.from({ length: 6 }, (_, level) =>
   Array.from({ length: 6 }, (_, i) => ({
@@ -43,7 +45,7 @@ const modules = Array.from({ length: 6 }, (_, level) =>
 ).flat();
 it('validates actual catalog without equating beta coverage with module completion', () => {
   const result = validateCatalog(modules, lessons, registry);
-  expect(result.lessons).toHaveLength(26);
+  expect(result.lessons).toHaveLength(29);
   expect(result.coverage).toHaveLength(36);
   expect(result.coverage.every((c) => !c.complete)).toBe(true);
 });
@@ -154,8 +156,8 @@ it('validates authored two-step guidance without accepting executable fields', (
   ).toThrow();
 });
 
-it('all twenty-six beta lessons have authored two-stage hints while v1 answers stay unchanged', () => {
-  expect(lessons.filter((l) => l.status === 'beta')).toHaveLength(26);
+it('all twenty-nine beta lessons have authored two-stage hints while v1 answers stay unchanged', () => {
+  expect(lessons.filter((l) => l.status === 'beta')).toHaveLength(29);
   for (const lesson of lessons.filter((l) => l.status === 'beta')) {
     expect(lesson.guidance?.schemaVersion).toBe(1);
     expect(lesson.guidance?.prediction).toHaveLength(2);

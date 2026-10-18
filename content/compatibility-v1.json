@@ -568,6 +568,78 @@
         "answer": 0,
         "explanation": "B tận dụng khoảng luồng không cần đứng chờ. A vẫn có cùng thời lượngCPU/I/O; mô hình không thêmCPU hay rút ngắn thao tác thiết bị."
       }
+    },
+    {
+      "lessonId": "cookie-session",
+      "version": 1,
+      "moduleId": "L0.5",
+      "kind": "cookie-session",
+      "prediction": {
+        "text": "Cookie của bài giữ sid=S1, server có bảngS1→An. Toàn bộ dữ liệu phiên có bắt buộc nằm trong cookie không?",
+        "options": [
+          "Không; cookie chỉ giữ ID trong thiết kế này, dữ liệu phiên nằm ở server.",
+          "Có; mọi cookie luôn chứa toàn bộ phiên."
+        ],
+        "answer": 0,
+        "explanation": "Bài chọn session phía server: sid là khóa tra cứu, không phải bản sao toàn bộ phiên. Cookie còn có nhiều mục đích và kiểu dữ liệu khác."
+      },
+      "challenge": {
+        "text": "Browser vẫn gửi sid=S1 nhưng server đã thu hồiS1. Theo mô hình, request mới được nhận diện là ai?",
+        "options": [
+          "Khách, vì server không còn phiênS1 hợp lệ.",
+          "An, vì còn cookie là luôn được xác thực."
+        ],
+        "answer": 0,
+        "explanation": "Cookie chỉ cung cấp ID để tra. Không còn record hợp lệ thì không nhận diệnAn bằng cơ chế này; thu hồi server không tự xóa cookie ở browser."
+      }
+    },
+    {
+      "lessonId": "reverse-proxy",
+      "version": 1,
+      "moduleId": "L0.5",
+      "kind": "reverse-proxy",
+      "prediction": {
+        "text": "Browser gọi portal.example/lop qua reverse proxy. Backend phục vụ có bắt buộc mang cùng tên portal.example không?",
+        "options": [
+          "Không; proxy chuyển tới máy lịch phía sau theo cấu hình.",
+          "Có; URL browser luôn là tên máy cuối cùng xử lý dữ liệu."
+        ],
+        "answer": 0,
+        "explanation": "Reverse proxy là điểm vào mà browser liên hệ; server phía sau có thể khác. Bài map/lop→Máy lịch và/anh→Máy ảnh."
+      },
+      "challenge": {
+        "text": "Chỉ biết có reverse proxy chuyển request tới backend. Có thể kết luận request đã được cache và luôn nhanh hơn không?",
+        "options": [
+          "Không; routing không tự chứng minh có cache hoặc cải thiện hiệu năng.",
+          "Có; mọi reverse proxy đều luôn trả dữ liệu cache không cần backend."
+        ],
+        "answer": 0,
+        "explanation": "Cache là chức năng cần cấu hình/chính sách riêng. Mô hình này chuyển mọi request tới backend, không đo thời gian hoặc lưu response."
+      }
+    },
+    {
+      "lessonId": "multiplexing",
+      "version": 1,
+      "moduleId": "L0.5",
+      "kind": "multiplexing",
+      "prediction": {
+        "text": "HTTP/2 dùng cùng TCPconnection, thiếu khoảng byteA trước dữ liệuB. B đã đến phía nhận. Có chắc B được giao ngay cho HTTP không?",
+        "options": [
+          "Không; TCP giữ byte đến sau khi còn khoảng trước bị thiếu.",
+          "Có; có streamHTTP/2 là TCP tự giao mọi byte ngoài thứ tự."
+        ],
+        "answer": 0,
+        "explanation": "Multiplexing ở HTTP2 không loại bỏ head-of-line blocking của byte stream TCP. B có thể đã tới nhưng còn bị giữ sau dữ liệuA thiếu."
+      },
+      "challenge": {
+        "text": "Trong mô hình HTTP/3, B độc lập và header đã giải mã. B được giao khi A bị mất. Có nghĩa HTTP/3 luôn không bị bất kỳ loại chờ nào không?",
+        "options": [
+          "Không; còn thứ tự trong stream, congestion/flow control và phụ thuộc khác ngoài mô hình.",
+          "Có; QUIC loại bỏ mọi tắc nghẽn và mọi phụ thuộc ứng dụng."
+        ],
+        "answer": 0,
+        "explanation": "Độc lập stream tránh loại chờ do khoảng thiếu ở stream khác trong ví dụ. Không xóa giới hạn mạng, điều khiển luồng, phụ thuộc header hoặc logic ứng dụng."
+      }
     }
   ]
 }

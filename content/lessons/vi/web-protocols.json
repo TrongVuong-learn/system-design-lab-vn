@@ -1,0 +1,293 @@
+[
+  {
+    "id": "cookie-session",
+    "title": "Website nhớ phiên của em bằng cách nào?",
+    "subtitle": "Tách cookie ở browser khỏi dữ liệu phiên trên server.",
+    "objective": "Theo dấu Set-Cookie/Cookie và lookup phiên phía server; phân biệt cookie mất với phiên bị thu hồi.",
+    "story": "Sau khi nhận diện An, server tạo một phiên. Lần sau browser gửi request mới, server biết đó là ai bằng cách nào? Nếu browser vẫn giữ cookie nhưng server đã thu hồi phiên, có thể nhận diện An chỉ bằng việc thấy cookie còn không?",
+    "explanation": "Cookie là dữ liệu browser có thể lưu theo chỉ dẫn Set-Cookie và gửi trong Cookie khi request phù hợp phạm vi. Trong thiết kế của bài, cookie chỉ giữ ID; server tra ID trong bảng phiên để biết người dùng. Dữ liệu phiên và cookie có vòng đời riêng: browser không gửi ID thì không tìm phiên theo cách này; server thu hồi phiên thì ID cũ không còn nhận diện được. Đây là một thiết kế session phía server, không có nghĩa mọi cookie đều là session hoặc luôn chứa toàn bộ thông tin người dùng.",
+    "limit": "Một browser/server, cookie đúng phạm vi, ID minh họaS1, người dùng giả địnhAn. Ba chặng: tạo phiên, giữ/thu hồi server, request lại. Không cookie thật/đăng nhập thật/credential. Không Domain/Path/SameSite, expiry, TLS, CSRF/XSS, ID ngẫu nhiên hoặc authorization production. S1 không phải ví dụ ID an toàn.",
+    "prediction": {
+      "text": "Cookie của bài giữ sid=S1, server có bảngS1→An. Toàn bộ dữ liệu phiên có bắt buộc nằm trong cookie không?",
+      "options": [
+        "Không; cookie chỉ giữ ID trong thiết kế này, dữ liệu phiên nằm ở server.",
+        "Có; mọi cookie luôn chứa toàn bộ phiên."
+      ],
+      "answer": 0,
+      "explanation": "Bài chọn session phía server: sid là khóa tra cứu, không phải bản sao toàn bộ phiên. Cookie còn có nhiều mục đích và kiểu dữ liệu khác."
+    },
+    "challenge": {
+      "text": "Browser vẫn gửi sid=S1 nhưng server đã thu hồiS1. Theo mô hình, request mới được nhận diện là ai?",
+      "options": [
+        "Khách, vì server không còn phiênS1 hợp lệ.",
+        "An, vì còn cookie là luôn được xác thực."
+      ],
+      "answer": 0,
+      "explanation": "Cookie chỉ cung cấp ID để tra. Không còn record hợp lệ thì không nhận diệnAn bằng cơ chế này; thu hồi server không tự xóa cookie ở browser."
+    },
+    "kind": "cookie-session",
+    "version": 1,
+    "status": "beta",
+    "level": "L0",
+    "moduleId": "L0.5",
+    "minutes": 14,
+    "terms": [
+      {
+        "name": "Cookie",
+        "english": "Cookie",
+        "meaning": "Dữ liệu browser lưu và có thể gửi lại theo phạm vi/quy tắc cookie."
+      },
+      {
+        "name": "Phiên",
+        "english": "Session",
+        "meaning": "Trạng thái ứng dụng liên kết nhiều request; bài lưu record phiên ở server."
+      },
+      {
+        "name": "ID phiên",
+        "english": "Session identifier",
+        "meaning": "Giá trị dùng để tra phiên; S1 chỉ là nhãn giả định của bài."
+      },
+      {
+        "name": "Thu hồi phiên",
+        "english": "Revocation",
+        "meaning": "Server làm phiên không còn hợp lệ, dù browser có thể còn ID cũ."
+      }
+    ],
+    "sources": [
+      {
+        "title": "RFC6265 §1/3/8.4 — cookie và session identifier",
+        "url": "https://www.rfc-editor.org/rfc/rfc6265.html"
+      }
+    ],
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Quan sát hai cột browser giữ gì và server giữ gì.",
+        "Browser giữ sid, server giữ ánh xạS1→An."
+      ],
+      "challenge": [
+        "Cookie và record phiên có cùng vòng đời không?",
+        "Server không cònS1 hợp lệ thì traID cũ không nhận raAn."
+      ]
+    },
+    "caseStudy": {
+      "id": "case-cookie-session",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L0-05",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Mở lại lịch sau khi phiên bị thu hồi",
+      "context": "Ứng dụng lịch dùng ID cookie để tra phiên ở server. Đây là tình huống tự biên soạn, không thêm tính năng đăng nhập cho website học.",
+      "requirements": [
+        "Nhận diện khi có cả ID được gửi và phiên hợp lệ.",
+        "Không coi cookie còn là bằng chứng quyền truy cập tự đủ."
+      ],
+      "activityRef": "cookie-session",
+      "experimentSteps": [
+        "Tiến hết ba chặng với phiên hợp lệ, xem An được nhận diện.",
+        "Đổi sang thu hồi phiên rồi thử lại; cookie còn nhưng server trảKhách."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Session phía server giúp thu hồi record tập trung nhưng cần nơi lưu/tra phiên. Mô hình chưa nói về scale, replication, bảo mật hoặc mọi kiểu token/cookie."
+      ],
+      "limitations": "Một browser/server, cookie đúng phạm vi, ID minh họaS1, người dùng giả địnhAn. Ba chặng: tạo phiên, giữ/thu hồi server, request lại. Không cookie thật/đăng nhập thật/credential. Không Domain/Path/SameSite, expiry, TLS, CSRF/XSS, ID ngẫu nhiên hoặc authorization production. S1 không phải ví dụ ID an toàn."
+    }
+  },
+  {
+    "id": "reverse-proxy",
+    "title": "Một địa chỉ web chuyển tới nhiều dịch vụ thế nào?",
+    "subtitle": "Theo dấu reverse proxy chọn backend theo đường dẫn.",
+    "objective": "Phân biệt browser-facing host và backend; mô tả reverse proxy khác forward proxy và cache.",
+    "story": "Trang ngày hội có lịch lớp và ảnh, được hai dịch vụ khác nhau xử lý. Em muốn browser chỉ gọi portal.example. Một reverse proxy có thể đứng ở cửa vào để chuyển /lop sang máy lịch và /anh sang máy ảnh.",
+    "explanation": "Reverse proxy nhận request phía client như một điểm vào của dịch vụ, rồi chuyển request tới server phía sau. Trong ví dụ, cùng hostportal.example có hai đường dẫn đi tới hai backend. Browser không phải chọn trực tiếp tên máy lịch hay máy ảnh. Forward proxy là vai trò phía client chọn để chuyển request; khác vai trò cửa vào phía server. Một proxy có thể được cấu hình cache hoặc các chức năng khác, nhưng chuyển request không tự có nghĩa đang cache hoặc làm ứng dụng nhanh hơn.",
+    "limit": "Hai path /lop và /anh, hai backend dựng sẵn, response200 thành công, ba chặng chỉ để theo dấu. Không cache, TLS termination, cân bằng tải, healthcheck, lỗi upstream, timeout hoặc benchmark. Tên miền.example là minh họa, không request thật. Không kết luận ít chặng hơn luôn nhanh hơn.",
+    "prediction": {
+      "text": "Browser gọi portal.example/lop qua reverse proxy. Backend phục vụ có bắt buộc mang cùng tên portal.example không?",
+      "options": [
+        "Không; proxy chuyển tới máy lịch phía sau theo cấu hình.",
+        "Có; URL browser luôn là tên máy cuối cùng xử lý dữ liệu."
+      ],
+      "answer": 0,
+      "explanation": "Reverse proxy là điểm vào mà browser liên hệ; server phía sau có thể khác. Bài map/lop→Máy lịch và/anh→Máy ảnh."
+    },
+    "challenge": {
+      "text": "Chỉ biết có reverse proxy chuyển request tới backend. Có thể kết luận request đã được cache và luôn nhanh hơn không?",
+      "options": [
+        "Không; routing không tự chứng minh có cache hoặc cải thiện hiệu năng.",
+        "Có; mọi reverse proxy đều luôn trả dữ liệu cache không cần backend."
+      ],
+      "answer": 0,
+      "explanation": "Cache là chức năng cần cấu hình/chính sách riêng. Mô hình này chuyển mọi request tới backend, không đo thời gian hoặc lưu response."
+    },
+    "kind": "reverse-proxy",
+    "version": 1,
+    "status": "beta",
+    "level": "L0",
+    "moduleId": "L0.5",
+    "minutes": 14,
+    "terms": [
+      {
+        "name": "Máy phục vụ phía sau",
+        "english": "Backend",
+        "meaning": "Dịch vụ xử lý request sau cửa vào trong ví dụ."
+      },
+      {
+        "name": "Cổng chuyển tiếp phía server",
+        "english": "Reverse proxy",
+        "meaning": "Điểm vào nhận request rồi chuyển tới server khác theo cấu hình."
+      },
+      {
+        "name": "Proxy phía client",
+        "english": "Forward proxy",
+        "meaning": "Trung gian được phía client chọn để chuyển request, khác vai trò reverse proxy."
+      },
+      {
+        "name": "Chọn đường theo path",
+        "english": "Path routing",
+        "meaning": "Dùng phần đường dẫn để chọn backend trong mô hình này."
+      }
+    ],
+    "sources": [
+      {
+        "title": "RFC9110 §3.7 — intermediaries, proxy và gateway",
+        "url": "https://www.rfc-editor.org/rfc/rfc9110.html"
+      }
+    ],
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Browser liên hệ ai trước, ai xử lý cuối?",
+        "portal.example là cửa vào, /lop được chuyển sang máy lịch."
+      ],
+      "challenge": [
+        "Tìm xem mô hình có store response đã trả hay không.",
+        "Mỗi lượt vẫn đi tới backend; thêm proxy không tự thêm cache."
+      ]
+    },
+    "caseStudy": {
+      "id": "case-reverse-proxy",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L0-05",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Cửa vào chung của cổng ngày hội",
+      "context": "Hai dịch vụ lịch/ảnh cùng nằm sau portal.example trong mô hình. Tình huống tự biên soạn, không cấu hình proxy thật.",
+      "requirements": [
+        "Giữ một host phía browser cho cả hai tài nguyên khi dùng proxy.",
+        "Chọn đúng backend theo path, không gán tác dụng cache chưa có."
+      ],
+      "activityRef": "reverse-proxy",
+      "experimentSteps": [
+        "Theo ba chặng /lop qua proxy rồi thử /anh.",
+        "Đổi sang truy cập trực tiếp; so host browser gọi và backend, không so ms."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Một cửa vào cho phép tách backend nhưng thêm thành phần phải cấu hình và vận hành. Ví dụ không chứng minh availability, TLS, an toàn hoặc hiệu năng."
+      ],
+      "limitations": "Hai path /lop và /anh, hai backend dựng sẵn, response200 thành công, ba chặng chỉ để theo dấu. Không cache, TLS termination, cân bằng tải, healthcheck, lỗi upstream, timeout hoặc benchmark. Tên miền.example là minh họa, không request thật. Không kết luận ít chặng hơn luôn nhanh hơn."
+    }
+  },
+  {
+    "id": "multiplexing",
+    "title": "Mất dữ liệu của một request có làm request khác chờ?",
+    "subtitle": "So một ví dụ head-of-line blocking giữa HTTP/2 và HTTP/3.",
+    "objective": "Phân biệt dữ liệu đã đến với dữ liệu được giao cho ứng dụng; giải thích giới hạn độc lập stream của QUIC trong một ví dụ mất gói.",
+    "story": "A là dữ liệu ảnh, B là lịch lớp. Hai response đi chung một connection, dữ liệuA được gửi trước nhưng bị mất, dữ liệuB vẫn đến. Ứng dụng có đọc được B trước khi phục hồiA không? Hãy đổi giữa HTTP/2 trênTCP và HTTP/3 trênQUIC trong cùng lịch sự kiện.",
+    "explanation": "HTTP/2 cho xen kẽ nhiều stream nhưng chạy trên luồng byte TCP giao dữ liệu theo thứ tự. Một khoảng byte trước bị thiếu có thể làm dữ liệu nhận phía sau chưa được giao, dù thuộc stream HTTP khác. HTTP/3 ánh xạ HTTP lên QUIC với giao dữ liệu tin cậy theo từng stream. Trong ví dụ độc lập của bài, B có thể được giao trong lúc streamA chờ dữ liệu thiếu. Điều này không biến QUIC thành không có thứ tự hay không cần phục hồi; thứ tự vẫn được giữ trong từng stream.",
+    "limit": "Một connection đã thiết lập, hai response độc lập, header đã giải mã; góiA riêng/góiB riêng. Dữ liệuA đứng trướcB trong byteTCP. Bước1A đến/mất, bước2B đến, bước3phục hồiA nếu cần. Không TCPseq/QUICpacketnumber/timer/handshake, loss chung, QPACK/header dependency, flowcontrol, congestion dynamics hoặc số đo hiệu năng. QUIC có congestioncontrol chung connection; phụ thuộc ứng dụng vẫn làm chờ. Không kết luận HTTP3 luôn nhanh hơn.",
+    "prediction": {
+      "text": "HTTP/2 dùng cùng TCPconnection, thiếu khoảng byteA trước dữ liệuB. B đã đến phía nhận. Có chắc B được giao ngay cho HTTP không?",
+      "options": [
+        "Không; TCP giữ byte đến sau khi còn khoảng trước bị thiếu.",
+        "Có; có streamHTTP/2 là TCP tự giao mọi byte ngoài thứ tự."
+      ],
+      "answer": 0,
+      "explanation": "Multiplexing ở HTTP2 không loại bỏ head-of-line blocking của byte stream TCP. B có thể đã tới nhưng còn bị giữ sau dữ liệuA thiếu."
+    },
+    "challenge": {
+      "text": "Trong mô hình HTTP/3, B độc lập và header đã giải mã. B được giao khi A bị mất. Có nghĩa HTTP/3 luôn không bị bất kỳ loại chờ nào không?",
+      "options": [
+        "Không; còn thứ tự trong stream, congestion/flow control và phụ thuộc khác ngoài mô hình.",
+        "Có; QUIC loại bỏ mọi tắc nghẽn và mọi phụ thuộc ứng dụng."
+      ],
+      "answer": 0,
+      "explanation": "Độc lập stream tránh loại chờ do khoảng thiếu ở stream khác trong ví dụ. Không xóa giới hạn mạng, điều khiển luồng, phụ thuộc header hoặc logic ứng dụng."
+    },
+    "kind": "multiplexing",
+    "version": 1,
+    "status": "beta",
+    "level": "L0",
+    "moduleId": "L0.5",
+    "minutes": 14,
+    "terms": [
+      {
+        "name": "Xen kẽ nhiều luồng",
+        "english": "Multiplexing",
+        "meaning": "Mang nhiều trao đổi request/response qua các stream trên một connection."
+      },
+      {
+        "name": "Stream",
+        "english": "Stream",
+        "meaning": "Luồng dữ liệu được phân biệt; TCP và QUIC cung cấp đơn vị giao có thứ tự khác nhau trong ví dụ."
+      },
+      {
+        "name": "Chờ phần đầu còn thiếu",
+        "english": "Head-of-line blocking",
+        "meaning": "Dữ liệu/việc phía sau phải chờ vì phần trước chưa thể đi tiếp."
+      },
+      {
+        "name": "QUIC",
+        "english": "QUIC",
+        "meaning": "Transport được HTTP3 dùng, cung cấp stream với giao dữ liệu tin cậy theo thứ tự trong từng stream."
+      }
+    ],
+    "sources": [
+      {
+        "title": "RFC9114 §1.1–2 — TCP head-of-line và HTTP/3 trên QUIC",
+        "url": "https://www.rfc-editor.org/rfc/rfc9114.html"
+      }
+    ],
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Phân biệt đã nhận dữ liệuB và giao dữ liệuB cho ứng dụng.",
+        "TCP cần lấp khoảng byteA còn thiếu trước khi giao phầnB đứng sau."
+      ],
+      "challenge": [
+        "Mô hình có tính congestion, flow control và phụ thuộc header không?",
+        "Bài chỉ loại bỏ một kiểu chờ giữa stream; không nói mọi loại chờ biến mất."
+      ]
+    },
+    "caseStudy": {
+      "id": "case-multiplexing",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L0-05",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Ảnh bị mất gói trong lúc tải lịch",
+      "context": "Hai response độc lập qua connection sẵn; header đã giải mã. Tình huống tự biên soạn, không capture traffic hoặc đo HTTP thực.",
+      "requirements": [
+        "Giữ cùng lịch mấtA/nhậnB khi đổi transport.",
+        "Không suy từ stream độc lập thành bảo đảm không có chờ hoặc luôn nhanh hơn."
+      ],
+      "activityRef": "multiplexing",
+      "experimentSteps": [
+        "ChọnHTTP2 có mấtA, qua hai sự kiện và xem B đã đến nhưng chưa giao.",
+        "ĐổiHTTP3 cùng lỗi, qua hai sự kiện rồi phục hồiA; thử không mất để so giới hạn ví dụ."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Đơn vị phục hồi/giao dữ liệu theo stream của QUIC tránh kiểu HOL này, nhưng HTTP3 vẫn có chi phí và phụ thuộc khác. Lựa chọn cần đo workload thực, không chỉ nhìn ba bước."
+      ],
+      "limitations": "Một connection đã thiết lập, hai response độc lập, header đã giải mã; góiA riêng/góiB riêng. Dữ liệuA đứng trướcB trong byteTCP. Bước1A đến/mất, bước2B đến, bước3phục hồiA nếu cần. Không TCPseq/QUICpacketnumber/timer/handshake, loss chung, QPACK/header dependency, flowcontrol, congestion dynamics hoặc số đo hiệu năng. QUIC có congestioncontrol chung connection; phụ thuộc ứng dụng vẫn làm chờ. Không kết luận HTTP3 luôn nhanh hơn."
+    }
+  }
+]
