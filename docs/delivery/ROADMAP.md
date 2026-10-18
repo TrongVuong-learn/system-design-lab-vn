@@ -1,6 +1,6 @@
 # Kế hoạch triển khai và nghiệm thu
 
-Trạng thái: roadmap và ước lượng; web beta có 20 bài nhập môn, các gate hoàn thiện level còn mở. Trạng thái thực thi theo [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md); các gate chưa đạt vẫn còn mở. Phạm vi kiến thức theo [CURRICULUM_MAP.md](../../CURRICULUM_MAP.md), tiêu chuẩn học theo [TEACHING_GUIDE.md](../../TEACHING_GUIDE.md).
+Trạng thái: roadmap và ước lượng; web beta có 30 bài beta và một bài ôn tổng hợp, các gate hoàn thiện level còn mở. Trạng thái thực thi theo [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md); các gate chưa đạt vẫn còn mở. Phạm vi kiến thức theo [CURRICULUM_MAP.md](../../CURRICULUM_MAP.md), tiêu chuẩn học theo [TEACHING_GUIDE.md](../../TEACHING_GUIDE.md).
 
 Quy trình thực hiện từng task, Git/review, release và quản lý thư mục áp dụng theo [WORKFLOW.md](WORKFLOW.md) và [CONTRIBUTING.md](../../CONTRIBUTING.md).
 
