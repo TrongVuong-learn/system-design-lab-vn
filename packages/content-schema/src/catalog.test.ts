@@ -1,3 +1,4 @@
+import osPractice from '../../../content/lessons/vi/os-practice.json';
 import webProtocols from '../../../content/lessons/vi/web-protocols.json';
 import osLessons from '../../../content/lessons/vi/os-foundations.json';
 import serialization from '../../../content/lessons/vi/serialization.json';
@@ -34,6 +35,7 @@ const lessons = [
   ...compression,
   ...osLessons,
   ...webProtocols,
+  ...osPractice,
 ].map((l) => lessonSchema.parse(l));
 const modules = Array.from({ length: 6 }, (_, level) =>
   Array.from({ length: 6 }, (_, i) => ({
@@ -45,7 +47,7 @@ const modules = Array.from({ length: 6 }, (_, level) =>
 ).flat();
 it('validates actual catalog without equating beta coverage with module completion', () => {
   const result = validateCatalog(modules, lessons, registry);
-  expect(result.lessons).toHaveLength(29);
+  expect(result.lessons).toHaveLength(30);
   expect(result.coverage).toHaveLength(36);
   expect(result.coverage.every((c) => !c.complete)).toBe(true);
 });
@@ -156,11 +158,35 @@ it('validates authored two-step guidance without accepting executable fields', (
   ).toThrow();
 });
 
-it('all twenty-nine beta lessons have authored two-stage hints while v1 answers stay unchanged', () => {
-  expect(lessons.filter((l) => l.status === 'beta')).toHaveLength(29);
+it('all thirty beta lessons have authored two-stage hints while v1 answers stay unchanged', () => {
+  expect(lessons.filter((l) => l.status === 'beta')).toHaveLength(30);
   for (const lesson of lessons.filter((l) => l.status === 'beta')) {
     expect(lesson.guidance?.schemaVersion).toBe(1);
     expect(lesson.guidance?.prediction).toHaveLength(2);
     expect(lesson.guidance?.challenge).toHaveLength(2);
   }
+});
+
+it('locks practice payload and validates activity bindings, item IDs and sources', async () => {
+  const { validateCompatibility } = await import('./compatibility');
+  const { default: baseline } = await import('../../../content/compatibility-v1.json');
+  const l = lessons.find((l) => l.id === 'os-practice')!;
+  expect(() => lessonSchema.parse({ ...l, practice: undefined })).toThrow(
+    'Practice activity/data mismatch',
+  );
+  expect(() =>
+    lessonSchema.parse({ ...l, practice: { ...l.practice, code: 'execute()' } }),
+  ).toThrow();
+  const changed = structuredClone(lessons);
+  changed.find((l) => l.id === 'os-practice')!.practice!.items[0]!.answer = 1;
+  expect(() => validateCompatibility(changed, baseline)).toThrow('Progress migration');
+  const duplicate = structuredClone(lessons);
+  duplicate.find((l) => l.id === 'os-practice')!.practice!.items[1]!.id = l.practice!.items[0]!.id;
+  expect(() => validateCatalog(modules, duplicate, registry)).toThrow('Duplicate practice');
+  const missing = structuredClone(lessons);
+  missing.find((l) => l.id === 'os-practice')!.practice!.items[0]!.sourceIds = ['missing'];
+  expect(() => validateCatalog(modules, missing, registry)).toThrow('Invalid practice source');
+  const invalid = structuredClone(l);
+  invalid.practice!.items[0]!.answer = 99;
+  expect(() => lessonSchema.parse(invalid)).toThrow('Practice answer');
 });

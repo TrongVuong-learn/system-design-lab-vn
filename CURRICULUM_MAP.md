@@ -19,7 +19,7 @@ Học sinh cấp 3 chưa từng lập trình có lối bắt đầu riêng trong
 
 Mỗi module được chia thành các bài nhỏ sau khi chốt mục tiêu học. Danh sách module là phạm vi cần phát triển; số lượng tiêu đề không đại diện cho độ sâu hay mức hoàn thiện. Một module chỉ hoàn chỉnh khi năng lực bắt buộc có bài dạy, hoạt động áp dụng, đánh giá và review.
 
-Mỗi bài có mini-case trong chặng Áp dụng; mỗi module có một họ tình huống và bài tổng hợp; mỗi level có capstone. [EDU-09](docs/delivery/EDU_09_CASE_STUDY_PLAN.md) quản lý danh mục đủ 36 module, phân rã tình huống, bảy nhánh, kế hoạch ánh xạ bài beta và thứ tự triển khai. Hiện có mini-case cho 29 bài beta và một bài ôn tổng hợp; họ case module và capstone vẫn đang đặc tả; không tính một case tổng hợp thay mọi năng lực trong module. Chuẩn biên soạn nằm trong TEACHING_GUIDE.
+Mỗi bài có mini-case trong chặng Áp dụng; mỗi module có một họ tình huống và bài tổng hợp; mỗi level có capstone. [EDU-09](docs/delivery/EDU_09_CASE_STUDY_PLAN.md) quản lý danh mục đủ 36 module, phân rã tình huống, bảy nhánh, kế hoạch ánh xạ bài beta và thứ tự triển khai. Hiện có mini-case cho 30 bài beta và một bài ôn tổng hợp; họ case module và capstone vẫn đang đặc tả; không tính một case tổng hợp thay mọi năng lực trong module. Chuẩn biên soạn nằm trong TEACHING_GUIDE.
 
 ## 2. Sáu level cốt lõi
 
@@ -234,7 +234,7 @@ Mỗi bài cụ thể vẫn cần nguồn trực tiếp cho cơ chế được g
 
 Nguồn: **The System Design Primer — Donne Martin và contributors**, commit `ae9bbd7b02d90b9866215de185217d33f39ab733`, ngày commit 20/03/2026; truy xuất 12/10/2026. [README cố định][primer], [license CC BY 4.0][primer-license]. Đây là bản chuyển thành kế hoạch giảng dạy tiếng Việt: phân lại level, thêm ví dụ trường học, hoạt động mobile, bài phản chứng và tiêu chí đánh giá. Không nhập nguyên code, hình hoặc bộ Anki; không đại diện cho sự chứng thực của tác giả.
 
-Giữ 6 level/36 module/7 nhánh. **23 nhóm PRIMER-K bên dưới là nhóm công việc biên soạn trong module hiện hữu**, không phải 23 module mới hoặc 29 bài đã phát hành. Một nhóm có thể cần nhiều bài nhỏ. Các ID này truy vết kế hoạch; chưa phải competency registry chạy trong ứng dụng. Trạng thái toàn bộ bổ sung: **đã đặc tả, chưa biên soạn/duyệt/phát hành**. Phần sáu bài beta hiện có chỉ được tái sử dụng khi đáp ứng mục tiêu tương ứng.
+Giữ 6 level/36 module/7 nhánh. **23 nhóm PRIMER-K bên dưới là nhóm công việc biên soạn trong module hiện hữu**, không phải 23 module mới hoặc 30 bài đã phát hành. Một nhóm có thể cần nhiều bài nhỏ. Các ID này truy vết kế hoạch; chưa phải competency registry chạy trong ứng dụng. Trạng thái toàn bộ bổ sung: **đã đặc tả, chưa biên soạn/duyệt/phát hành**. Phần sáu bài beta hiện có chỉ được tái sử dụng khi đáp ứng mục tiêu tương ứng.
 
 ### 9.2. Kiến thức, hoạt động và đầu ra bắt buộc
 

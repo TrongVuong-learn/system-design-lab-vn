@@ -640,6 +640,101 @@
         "answer": 0,
         "explanation": "Độc lập stream tránh loại chờ do khoảng thiếu ở stream khác trong ví dụ. Không xóa giới hạn mạng, điều khiển luồng, phụ thuộc header hoặc logic ứng dụng."
       }
+    },
+    {
+      "lessonId": "os-practice",
+      "version": 1,
+      "moduleId": "L0.2",
+      "kind": "module-practice",
+      "prediction": {
+        "text": "Cùng một cách “thêm worker” có tự sửa được cả mất lượt cộng, ghi sai vùng nhớ và CPU thiếu không?",
+        "options": [
+          "Không; cần xác định cơ chế và ràng buộc của từng lỗi.",
+          "Có; mọi vấn đề OS đều do thiếu worker."
+        ],
+        "answer": 0,
+        "explanation": "Worker không thay khóa đúng vùng, kiểm địa chỉ hoặc số core CPU. Chẩn đoán cần tách trạng thái chia sẻ, tài nguyên và cách chờ."
+      },
+      "challenge": {
+        "text": "Đã trả lời đúng các tình huống của bài. Có thể coi đó là chứng minh ứng dụng thật không còn lỗi OS không?",
+        "options": [
+          "Không; mô hình có giả định và không thay kiểm thử hoặc đánh giá hệ thống thật.",
+          "Có; sáu đáp án đúng chứng minh mọi trường hợp đều an toàn."
+        ],
+        "answer": 0,
+        "explanation": "Bài chỉ kiểm các cơ chế và tình huống đã nêu. Hệ thống thật còn scheduling, nhiều lỗi và các giới hạn khác; không suy bảo đảm ngoài phạm vi."
+      },
+      "practice": {
+        "version": 1,
+        "items": [
+          {
+            "id": "shared-counter",
+            "text": "Hai thread trong cùng process đều đọc 30 rồi ghi 31. Để hai lượt cộng thành 32, khóa cần bảo vệ phần nào?",
+            "options": [
+              "Cả chuỗi đọc–tăng–ghi của mỗi lượt.",
+              "Chỉ bước ghi, vẫn cho cả hai đọc 30 trước."
+            ],
+            "answer": 0,
+            "explanation": "Nếu cả hai đã đọc 30 thì khóa riêng bước ghi vẫn có thể ghi 31 hai lần. Cần bảo vệ cả vùng đọc–sửa–ghi trong mô hình; thread cùng process chia sẻ vùng nhớ.",
+            "sourceIds": ["source-os-threads"]
+          },
+          {
+            "id": "cpu-workers",
+            "text": "Hai việc mỗi việc cần 4 khoảng CPU trên một CPU, không I/O. Tăng từ 1 lên 2 worker có tự giảm tổng 8 khoảng xuống 4 không?",
+            "options": [
+              "Có; thêm worker luôn tạo thêm CPU.",
+              "Không; một CPU vẫn phải làm tổng 8 khoảng, bỏ qua chi phí chuyển việc như mô hình."
+            ],
+            "answer": 1,
+            "explanation": "Worker không đồng nghĩa core CPU. Có thể chồng thời gian chờ I/O với việc khác, nhưng ở đây không có I/O. Số 8 là kết quả của mô hình, không phải đo máy thật.",
+            "sourceIds": ["source-os-process", "source-os-io"]
+          },
+          {
+            "id": "virtual-address",
+            "text": "Process A có base 4, B có base 8. Cả hai đọc VA 0 hợp lệ. Cách hiểu nào đúng?",
+            "options": [
+              "A đọc PA 4, B đọc PA 8; cùng địa chỉ ảo không đồng nghĩa cùng RAM vật lý.",
+              "Cả hai đọc PA 0 vì VA 0 luôn là RAM vật lý 0."
+            ],
+            "answer": 0,
+            "explanation": "OS thiết lập base của process; phần cứng dịch địa chỉ hợp lệ theo base. Trong mô hình này A/B ở hai vùng liên tục riêng, không phải paging đầy đủ.",
+            "sourceIds": ["ostep-address15"]
+          },
+          {
+            "id": "bounds-before-write",
+            "text": "A có VA 0–3 hợp lệ. Trước lệnh ghi VA 4, mô hình base/limit phải làm gì?",
+            "options": [
+              "Cộng base 4 rồi ghi PA 8 ngay vì RAM có ô 8.",
+              "Chặn trước khi ghi vì VA 4 bằng giới hạn 4."
+            ],
+            "answer": 1,
+            "explanation": "Có ô RAM vật lý 8 không có nghĩa process A được truy cập nó. Địa chỉ ảo phải nhỏ hơn giới hạn; chặn trước đọc/ghi giữ vùng B và OS không đổi.",
+            "sourceIds": ["ostep-address15"]
+          },
+          {
+            "id": "unlink-open",
+            "text": "Ứng dụng mở file qua fd 3, sau đó unlink tên duy nhất. Cách hiểu nào đúng?",
+            "options": [
+              "Xóa tên khiến mọi descriptor tự đóng và dung lượng luôn được giải phóng ngay.",
+              "fd 3 có thể đọc tiếp; file được giải phóng khi không còn tên liên kết và handle mở cuối cùng."
+            ],
+            "answer": 1,
+            "explanation": "Tên trong thư mục khác handle đang mở. Trong ví dụ Unix này, fd 3 giữ file tồn tại tới khi đóng; giải phóng file không bảo đảm byte trên đĩa bị ghi đè an toàn.",
+            "sourceIds": ["linux-unlink"]
+          },
+          {
+            "id": "loop-cpu",
+            "text": "Đã dùng non-blocking I/O nhưng một callback CPU dài vẫn giữ luồng event loop. Cách hiểu nào đúng?",
+            "options": [
+              "Non-blocking I/O khiến mọi callback CPU chạy song song nên không còn chờ.",
+              "Callback trên luồng này vẫn chạy lần lượt; việc khác có thể phải chờ callback CPU dài."
+            ],
+            "answer": 1,
+            "explanation": "Non-blocking giúp không đứng chờ I/O; nó không tự thêm CPU hoặc chia callback CPU dài thành nhiều luồng. Cần tách vấn đề chờ I/O khỏi chi phí CPU.",
+            "sourceIds": ["node-nonblocking"]
+          }
+        ]
+      }
     }
   ]
 }

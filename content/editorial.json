@@ -555,6 +555,13 @@
       "outcome": "Phân biệt dữ liệu đã đến với dữ liệu được giao cho ứng dụng; giải thích giới hạn độc lập stream của QUIC trong một ví dụ mất gói.",
       "depth": "introductory",
       "planRefs": ["CURRICULUM_MAP.md", "EDU-23"]
+    },
+    {
+      "id": "os-mechanism-application",
+      "moduleId": "L0.2",
+      "outcome": "Vận dụng các cơ chế OS đã thử để giải thích lỗi, giới hạn tài nguyên và hành vi khi chuyển trạng thái.",
+      "depth": "mechanism",
+      "planRefs": ["CURRICULUM_MAP.md", "EDU-24"]
     }
   ],
   "lessons": [
@@ -1400,6 +1407,41 @@
         "date": "2026-10-18",
         "status": "beta-checked",
         "evidence": "docs/delivery/EDU_23_WEB_PROTOCOLS.md"
+      }
+    },
+    {
+      "lessonId": "os-practice",
+      "revision": 1,
+      "competencyIds": ["os-mechanism-application"],
+      "prerequisiteIds": ["concurrency", "cpu-io", "address-space", "file-handles", "event-loop"],
+      "claims": [
+        {
+          "text": "Các cơ chế áp dụng theo nguồn từng câu; không suy đảm bảo ngoài mô hình, kết quả chỉ là tự luyện.",
+          "sourceIds": [
+            "source-os-threads",
+            "source-os-process",
+            "source-os-io",
+            "ostep-address15",
+            "linux-unlink",
+            "node-nonblocking"
+          ]
+        }
+      ],
+      "review": {
+        "reviewer": "Codex parent",
+        "reviewerType": "agent",
+        "date": "2026-10-18",
+        "status": "beta-checked",
+        "evidence": "docs/delivery/EDU_24_MODULE_PRACTICE.md"
+      },
+      "caseReview": {
+        "caseId": "case-os-practice",
+        "revision": 1,
+        "reviewer": "Codex parent",
+        "reviewerType": "agent",
+        "date": "2026-10-18",
+        "status": "beta-checked",
+        "evidence": "docs/delivery/EDU_24_MODULE_PRACTICE.md"
       }
     }
   ]

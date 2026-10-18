@@ -71,3 +71,5 @@ export function updateSchoolReview(progress: Progress, review: SchoolReviewProgr
     reviews: { ...progress.reviews, 'school-day': review },
   });
 }
+
+export { evaluatePractice, PRACTICE_MODEL_VERSION } from './module-practice';
