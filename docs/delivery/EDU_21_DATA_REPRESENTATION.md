@@ -19,3 +19,15 @@ Lượt E2E đầu23pass/5fail:4test JSON dùng selector tên khớp option/dd/s
 Standalone browser sau sửaUI: cả hai bài tại320/390/1280 export/import bản lưu step1, mở lại/reload offline rồi parse/giải nén thành công, không overflow/pageerror; `.cache/edu21/local-browser.json`/ảnh/log/fingerprint ignored. Không pilot hoặc điện thoại thật; không coi emulation là nghiệm thu OS lifecycle.
 
 Bộ cuối28/28E2E liên quan đạt:8test hai bài trên Chromium mobile/desktop, Firefox/WebKit;12offline;7responsive320–1440px và1reduced-motion/landscape. Artifact fingerprint sau build đã ghi; CI full vẫn là gate trước merge/phát hành.
+
+## CI và tích hợp
+
+[PR#13](https://github.com/TrongVuong-learn/system-design-lab-vn/pull/13) squash merge thành `c9b54ab8f6e4c0144e6dcaf062ec79e903c1607b`. Cây source bằng tree16aadcd đã kiểm (git diff rỗng). [Quality39091873061](https://github.com/TrongVuong-learn/system-design-lab-vn/actions/runs/39091873061) success:86unit/24files,231E2E đạt/1skip, content/coverage/lint/format/build. Skip hover mobile theo cấu hình cũ có tap test riêng; không gọi emulation là thiết bị thật. Không gán run CI của commit tài liệu sau này thành kiểm chứng mới cho app.
+
+## Phát hành
+
+Vercel Git deployment `dpl_Fp2Xsj9T2nSuFxgaqT39wBSWduNi` READY production, branch master/SHAc9b54ab; alias https://system-design-lab-vn.vercel.app. [Serialization](https://system-design-lab-vn.vercel.app/#/learn/serialization), [compression](https://system-design-lab-vn.vercel.app/#/learn/compression). 18file static khớp SHA256 artifact đã kiểm; assets immutable, shell/SW/manifest no-cache, MIMEJS đúng, missingJS404. Filecount không phải số bài: catalog23bài+1ôn.
+
+Chromium production320/390/1280 cho cả hai bài: export/import step1, mở/reload offline rồi parse/giải nén hoàn tất, không overflow/pageerror. Evidence ignored `.cache/edu21/{tested-artifact,cloud-http,release,live-browser}.json`, ảnh/log. Gói cũ cần tải lại tại Tiến độ rồi đóng các tab cũ; không xóa tiến độ hoặc ép cập nhật giữa lượt học.
+
+Đóng scope nhập môn EDU-21; chưa đóngL0.3/toàn roadmap, chưa human review/pilot/thiết bị thật. EDU-22 OS address-space/base-and-bounds được đặc tả Ready tại ROADMAP, chưa viết source. Commit tài liệu sau release không đổi app/artifact; deployment cuối được kiểm READY theo master khi bàn giao.
