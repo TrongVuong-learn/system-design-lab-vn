@@ -363,3 +363,9 @@ Mô hình dự kiến: RAM16ô, vùngOS0–3, processA base4/limit4 và B base8/
 Acceptance trước beta: core thuần/checkpoint có version; fixtures cả haiprocess/mọi truy cập, bảo toàn RAM sau thao tác bị chặn, cách ly A/B vàOS, replay không tin RAM nhập/invalidversion; assessment đúng giới hạn mô hình, nguồn/claim/review/case/hints; mobile320/390 vàdesktop, keyboard/resume/export/import/offline. Không đóng L0.2; filesystem/nonblocking/eventloop vẫn riêng. Chỉ ghi Verified sau source/QA/CI/release thực tế.
 
 EDU-21 production READY/masterc9b54ab,18file HTTP/hash/cache đúng; cả hai bài export/import/resume/offline320/390/1280 đạt, không lỗiJS/overflow. Scope nhập môn đã phát hành, không đóngL0.3 hoặc toàn giáo trình. Mở hai route serialization/compression trên domain Vercel theo báo cáo release.
+
+## 29. EDU-22B — hoàn thiện nền OS theo lô
+
+In progress18/10/2026, mở rộng EDU-22 Ready sang ba bài address-space/file-handles/event-loop để bổ sung phần còn thiếuL0.2. [Scope/acceptance](EDU_22_OS_FOUNDATIONS.md); thêm ba model/lesson/case/competency, giữ23contract và formatprogress cũ. Không chờ user test, vẫn tự QA trước phát hành. Không gọi thêm ba bài là đã đóng toàn module; registry/rubric/depth và phần module còn thiếu tiếp tục theo§19.
+
+EDU-22B local26bài+1ôn:90unit/25files,20E2E offline/responsive đạt và12/12retest bài mới đạt sau chuẩn hóa aria-label; screenshot/resume/export-import/offline của3bài tại320/390/1280 đạt. CI và phát hành ghi theo evidence; không đóng toànL0.2 hoặc plan.

@@ -1,6 +1,21 @@
 export function LessonSketch({ kind }: { kind: string }) {
   const foundation = (
     {
+      'address-space': [
+        'Hai process, cùng địa chỉ 0',
+        'A → PA4 · B → PA8',
+        'Kiểm tra giới hạn rồi dịch địa chỉ',
+      ],
+      'file-handles': [
+        'Tên file khác handle đang mở',
+        'Mở → unlink → đọc → đóng',
+        'Xóa tên không tự đóng descriptor',
+      ],
+      'event-loop': [
+        'A chờ I/O, B có việc CPU',
+        'B xong mốc 2 hoặc 6',
+        'Một luồng, không thêm CPU',
+      ],
       concurrency: [
         'Hai luồng cùng đọc 30',
         'A ghi 31 · B ghi 31',
