@@ -1,4 +1,4 @@
-export const ENGINE_VERSION = '1.13.0';
+export const ENGINE_VERSION = '1.14.0';
 export interface CacheState {
   time: number;
   source: number;
@@ -266,3 +266,10 @@ export { memoryLocality, LOCALITY_MODEL_VERSION } from './locality';
 export { serializeRecord, compressRuns, REPRESENTATION_MODEL_VERSION } from './representation';
 
 export { addressSpace, fileHandles, ioLoop, OS_MODEL_VERSION } from './os-foundations';
+
+export {
+  cookieSession,
+  reverseProxy,
+  multiplexLoss,
+  WEB_PROTOCOL_MODEL_VERSION,
+} from './web-protocols';

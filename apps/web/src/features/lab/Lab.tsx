@@ -1,3 +1,4 @@
+import { CookieSessionLab, ReverseProxyLab, MultiplexLab } from './WebProtocolLabs';
 import { AddressSpaceLab, FileHandlesLab, EventLoopLab } from './OsLabs';
 import { SerializationLab, CompressionLab } from './RepresentationLabs';
 import { LocalityLab } from './LocalityLab';
@@ -53,6 +54,9 @@ export function Lab(original: LabProps) {
     'search-tree',
     'priority-heap',
     'locality',
+    'cookie-session',
+    'reverse-proxy',
+    'multiplexing',
     'address-space',
     'file-handles',
     'event-loop',
@@ -109,6 +113,12 @@ export function Lab(original: LabProps) {
       return <FileHandlesLab {...props} />;
     case 'event-loop':
       return <EventLoopLab {...props} />;
+    case 'cookie-session':
+      return <CookieSessionLab {...props} />;
+    case 'reverse-proxy':
+      return <ReverseProxyLab {...props} />;
+    case 'multiplexing':
+      return <MultiplexLab {...props} />;
     case 'locality':
       return <LocalityLab {...props} />;
     case 'priority-heap':

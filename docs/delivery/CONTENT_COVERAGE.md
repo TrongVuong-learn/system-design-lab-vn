@@ -11,7 +11,7 @@ Phạm vi bắt buộc vẫn ở [CURRICULUM_MAP](../../CURRICULUM_MAP.md) và [
 | L0.2 | concurrency, cpu-io, address-space, file-handles, event-loop | 5 / 0 / 0 | Chưa hoàn chỉnh |
 | L0.3 | compression, hash-table, library-search, locality, priority-heap, search-tree, serialization | 7 / 0 / 0 | Chưa hoàn chỉnh |
 | L0.4 | dns, transport, routing, tls, network | 5 / 0 / 0 | Chưa hoàn chỉnh |
-| L0.5 | http | 1 / 0 / 0 | Chưa hoàn chỉnh |
+| L0.5 | http, cookie-session, reverse-proxy, multiplexing | 4 / 0 / 0 | Chưa hoàn chỉnh |
 | L0.6 | metrics, capacity | 2 / 0 / 0 | Chưa hoàn chỉnh |
 | L1.1 | — | 0 / 0 / 0 | Chưa hoàn chỉnh |
 | L1.2 | — | 0 / 0 / 0 | Chưa hoàn chỉnh |
@@ -44,5 +44,5 @@ Phạm vi bắt buộc vẫn ở [CURRICULUM_MAP](../../CURRICULUM_MAP.md) và [
 | L5.5 | — | 0 / 0 / 0 | Chưa hoàn chỉnh |
 | L5.6 | — | 0 / 0 / 0 | Chưa hoàn chỉnh |
 
-Tổng: 26 bài beta; 10/36 module có ít nhất một bài; 0/36 module được công nhận hoàn chỉnh.
+Tổng: 29 bài beta; 10/36 module có ít nhất một bài; 0/36 module được công nhận hoàn chỉnh.
 Không tính bài ôn liên module thành một module đầy đủ. Bảy track và sáu capstone vẫn theo kế hoạch riêng, chưa được chứng nhận bởi bảng này.

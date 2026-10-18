@@ -2,11 +2,11 @@
 
 Nền tảng học System Design tiếng Việt, trực quan, tương tác, thiết kế từ điện thoại. Có lối bắt đầu cho học sinh cấp 3 chưa biết lập trình và lộ trình tiến tới thiết kế hệ thống chuyên sâu.
 
-**Trạng thái:** bản thử nghiệm web đã được hiện thực với hai mươi sáu bài nhập môn, mô phỏng cục bộ và lưu tiến độ. Gói tải offline của 26 bài và bài ôn đã có tại Tiến độ; giáo trình chuyên sâu, PWA cài đặt, sync và app tiếp tục theo roadmap. Bản thử nghiệm chưa được pilot với học sinh hoặc kiểm tra trên điện thoại thật.
+**Trạng thái:** bản thử nghiệm web đã được hiện thực với hai mươi chín bài nhập môn, mô phỏng cục bộ và lưu tiến độ. Gói tải offline của 29 bài và bài ôn đã có tại Tiến độ; giáo trình chuyên sâu, PWA cài đặt, sync và app tiếp tục theo roadmap. Bản thử nghiệm chưa được pilot với học sinh hoặc kiểm tra trên điện thoại thật.
 
 ## Website đang hoạt động
 
-**[Mở System Design Lab trên Vercel](https://system-design-lab-vn.vercel.app)** —26 bài nhập môn +1 bài ôn, học không cần tài khoản. Có thể gửi production URL này cho AI khác test; [prompt review](docs/research/AI_REVIEW_HANDOFF.md) chỉ cách kiểm nguồn/trace/assessment.
+**[Mở System Design Lab trên Vercel](https://system-design-lab-vn.vercel.app)** —29 bài nhập môn +1 bài ôn, học không cần tài khoản. Có thể gửi production URL này cho AI khác test; [prompt review](docs/research/AI_REVIEW_HANDOFF.md) chỉ cách kiểm nguồn/trace/assessment.
 
 Vercel là nơi triển khai chính theo yêu cầu16/10/2026; đã nối GitHub với production branch `master`; code được merge vào master sẽ tự triển khai. Site ChatGPT cũ giữ nguyên để chuyển tiến độ: xuất ở địa chỉ cũ, nhập tại Vercel vì hai origin có storage riêng. Xem [báo cáo phát hành](docs/delivery/REL_02_VERCEL.md).
 
@@ -41,7 +41,7 @@ pnpm test:e2e
 - Stack đã triển khai: TypeScript + React + Vite; engine độc lập giao diện; Capacitor cho app khi đạt điều kiện.
 - Nội dung đi từ tình huống dễ hiểu đến thao tác, giải thích và cơ chế kỹ thuật.
 - Phi thương mại, chia sẻ quy mô nhỏ: học không cần tài khoản; ưu tiên cách giảng, tiến độ lưu trên thiết bị.
-- Cả 26 bài beta có so sánh bước trước–sau và gợi ý mở dần; xem [EDU-11](docs/delivery/EDU_11_FEEDBACK_ALL_LESSONS.md).
+- Cả 29 bài beta có so sánh bước trước–sau và gợi ý mở dần; xem [EDU-11](docs/delivery/EDU_11_FEEDBACK_ALL_LESSONS.md).
 - Một bài ôn website trường kết hợp chia tải/cache/queue, hai tình huống và nhận định tự viết; xem [EDU-12](docs/delivery/EDU_12_SCHOOL_REVIEW.md).
 
 ## Đọc tài liệu theo thứ tự
@@ -67,7 +67,7 @@ Quy tắc cho agent được lưu trong [AGENTS.md](AGENTS.md). Repository có E
 
 ## Mốc bắt đầu triển khai
 
-Đã có workspace, schema, core, renderer, content pipeline và bài cache từ tình huống đến assessment/resume. Hai mươi sáu bài có tình huống giả định trong chặng Áp dụng theo [EDU-09](docs/delivery/EDU_09_CASE_STUDY_IMPLEMENTATION.md); vẫn là lớp nhập môn, không thay thế các module hoặc capstone đầy đủ. Báo cáo hiện thực và phần còn lại nằm trong [IMPLEMENTATION_STATUS.md](docs/delivery/IMPLEMENTATION_STATUS.md).
+Đã có workspace, schema, core, renderer, content pipeline và bài cache từ tình huống đến assessment/resume. Hai mươi chín bài có tình huống giả định trong chặng Áp dụng theo [EDU-09](docs/delivery/EDU_09_CASE_STUDY_IMPLEMENTATION.md); vẫn là lớp nhập môn, không thay thế các module hoặc capstone đầy đủ. Báo cáo hiện thực và phần còn lại nằm trong [IMPLEMENTATION_STATUS.md](docs/delivery/IMPLEMENTATION_STATUS.md).
 
 Bài HTTPS/TLS mới tại L0.4: [phạm vi, nguồn và QA EDU-13](docs/delivery/EDU_13_HTTPS_TLS.md). Đây vẫn là học liệu nhập môn, chưa hoàn tất36 module.
 
@@ -83,6 +83,6 @@ Triển khai Vercel: [REL-02](docs/delivery/REL_02_VERCEL.md). Giao AI khác ki�
 
 ## Tooling cho agent
 
-[Skill đã cài và giới hạn áp dụng](docs/engineering/AGENT_SKILLS.md); kiểm inventory/checksum bằng `node scripts/check-skills.mjs`. [Review plan ngày 12/10](docs/delivery/PLAN_REVIEW_2026-10-12.md) là bản lịch sử, không thay trạng thái 26 bài hiện hành.
+[Skill đã cài và giới hạn áp dụng](docs/engineering/AGENT_SKILLS.md); kiểm inventory/checksum bằng `node scripts/check-skills.mjs`. [Review plan ngày 12/10](docs/delivery/PLAN_REVIEW_2026-10-12.md) là bản lịch sử, không thay trạng thái 29 bài hiện hành.
 
 Độ bao phủ theo module được kiểm tự động tại [CONTENT_COVERAGE](docs/delivery/CONTENT_COVERAGE.md); kiểm tra hợp đồng đáp án đã phát hành nằm trong `pnpm content:check`.

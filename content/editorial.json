@@ -288,6 +288,30 @@
       "revision": "Section trong title; truy cập18/10/2026",
       "checkedAt": "2026-10-18",
       "attribution": "Tác giả nguồn tại URL"
+    },
+    {
+      "id": "rfc6265-session",
+      "title": "RFC6265 §1/3/8.4 — cookie và session identifier",
+      "url": "https://www.rfc-editor.org/rfc/rfc6265.html",
+      "revision": "RFC cố định; section trong title, truy cập18/10/2026",
+      "checkedAt": "2026-10-18",
+      "attribution": "IETF/RFC Editor và tác giả RFC"
+    },
+    {
+      "id": "rfc9110-proxy",
+      "title": "RFC9110 §3.7 — intermediaries, proxy và gateway",
+      "url": "https://www.rfc-editor.org/rfc/rfc9110.html",
+      "revision": "RFC cố định; section trong title, truy cập18/10/2026",
+      "checkedAt": "2026-10-18",
+      "attribution": "IETF/RFC Editor và tác giả RFC"
+    },
+    {
+      "id": "rfc9114-streams",
+      "title": "RFC9114 §1.1–2 — TCP head-of-line và HTTP/3 trên QUIC",
+      "url": "https://www.rfc-editor.org/rfc/rfc9114.html",
+      "revision": "RFC cố định; section trong title, truy cập18/10/2026",
+      "checkedAt": "2026-10-18",
+      "attribution": "IETF/RFC Editor và tác giả RFC"
     }
   ],
   "competencies": [
@@ -510,6 +534,27 @@
       "outcome": "Theo dấu luồng event loop khi chờ I/O, phân biệt thời điểm I/O sẵn sàng và callback được chạy; không nhầm concurrency với thêm CPU.",
       "depth": "introductory",
       "planRefs": ["CURRICULUM_MAP.md", "EDU-22"]
+    },
+    {
+      "id": "cookie-session-intro",
+      "moduleId": "L0.5",
+      "outcome": "Theo dấu Set-Cookie/Cookie và lookup phiên phía server; phân biệt cookie mất với phiên bị thu hồi.",
+      "depth": "introductory",
+      "planRefs": ["CURRICULUM_MAP.md", "EDU-23"]
+    },
+    {
+      "id": "reverse-proxy-intro",
+      "moduleId": "L0.5",
+      "outcome": "Phân biệt browser-facing host và backend; mô tả reverse proxy khác forward proxy và cache.",
+      "depth": "introductory",
+      "planRefs": ["CURRICULUM_MAP.md", "EDU-23"]
+    },
+    {
+      "id": "multiplexing-intro",
+      "moduleId": "L0.5",
+      "outcome": "Phân biệt dữ liệu đã đến với dữ liệu được giao cho ứng dụng; giải thích giới hạn độc lập stream của QUIC trong một ví dụ mất gói.",
+      "depth": "introductory",
+      "planRefs": ["CURRICULUM_MAP.md", "EDU-23"]
     }
   ],
   "lessons": [
@@ -1271,6 +1316,90 @@
         "date": "2026-10-18",
         "status": "beta-checked",
         "evidence": "docs/delivery/EDU_22_OS_FOUNDATIONS.md"
+      }
+    },
+    {
+      "lessonId": "cookie-session",
+      "revision": 1,
+      "competencyIds": ["cookie-session-intro"],
+      "prerequisiteIds": ["http"],
+      "claims": [
+        {
+          "text": "Set-Cookie/Cookie truyền dữ liệu trạng thái; một ứng dụng có thể dùng cookieID để tra session phía server, hai trạng thái có vòng đời riêng.",
+          "sourceIds": ["rfc6265-session"]
+        }
+      ],
+      "review": {
+        "reviewer": "Codex parent",
+        "reviewerType": "agent",
+        "date": "2026-10-18",
+        "status": "beta-checked",
+        "evidence": "docs/delivery/EDU_23_WEB_PROTOCOLS.md"
+      },
+      "caseReview": {
+        "caseId": "case-cookie-session",
+        "revision": 1,
+        "reviewer": "Codex parent",
+        "reviewerType": "agent",
+        "date": "2026-10-18",
+        "status": "beta-checked",
+        "evidence": "docs/delivery/EDU_23_WEB_PROTOCOLS.md"
+      }
+    },
+    {
+      "lessonId": "reverse-proxy",
+      "revision": 1,
+      "competencyIds": ["reverse-proxy-intro"],
+      "prerequisiteIds": ["http"],
+      "claims": [
+        {
+          "text": "RFC9110 phân biệt proxy do client chọn và gateway/reverse proxy nhận rồi chuyển request tới server khác; cache là chức năng riêng.",
+          "sourceIds": ["rfc9110-proxy"]
+        }
+      ],
+      "review": {
+        "reviewer": "Codex parent",
+        "reviewerType": "agent",
+        "date": "2026-10-18",
+        "status": "beta-checked",
+        "evidence": "docs/delivery/EDU_23_WEB_PROTOCOLS.md"
+      },
+      "caseReview": {
+        "caseId": "case-reverse-proxy",
+        "revision": 1,
+        "reviewer": "Codex parent",
+        "reviewerType": "agent",
+        "date": "2026-10-18",
+        "status": "beta-checked",
+        "evidence": "docs/delivery/EDU_23_WEB_PROTOCOLS.md"
+      }
+    },
+    {
+      "lessonId": "multiplexing",
+      "revision": 1,
+      "competencyIds": ["multiplexing-intro"],
+      "prerequisiteIds": ["transport", "http"],
+      "claims": [
+        {
+          "text": "HTTP2 multiplexing không bỏ TCPHOL; HTTP3 dùngQUIC giao có thứ tự theo stream, có reliability perstream và congestioncontrol chung connection theo RFC9114§1–2.",
+          "sourceIds": ["rfc9114-streams"]
+        }
+      ],
+      "review": {
+        "reviewer": "Codex parent",
+        "reviewerType": "agent",
+        "date": "2026-10-18",
+        "status": "beta-checked",
+        "evidence": "docs/delivery/EDU_23_WEB_PROTOCOLS.md"
+      },
+      "caseReview": {
+        "caseId": "case-multiplexing",
+        "revision": 1,
+        "reviewer": "Codex parent",
+        "reviewerType": "agent",
+        "date": "2026-10-18",
+        "status": "beta-checked",
+        "evidence": "docs/delivery/EDU_23_WEB_PROTOCOLS.md"
       }
     }
   ]
