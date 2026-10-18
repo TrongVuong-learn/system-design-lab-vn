@@ -1,6 +1,6 @@
 # Giao bản học thử cho AI khác kiểm tra
 
-Bản hiện tại 23 bài +1 bài ôn, không phải toàn bộ36module. Người dùng dùng để tự học, chưa có reviewer con người; có thể dùng bản học thử ngay, ghi rõ lỗi phát hiện để sửa. AI review không tự biến thành human-reviewed.
+Bản hiện tại 26 bài +1 bài ôn, không phải toàn bộ36module. Người dùng dùng để tự học, chưa có reviewer con người; có thể dùng bản học thử ngay, ghi rõ lỗi phát hiện để sửa. AI review không tự biến thành human-reviewed.
 
 ## Prompt có thể sao chép
 

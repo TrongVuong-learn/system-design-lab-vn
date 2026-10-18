@@ -1,3 +1,4 @@
+import { AddressSpaceLab, FileHandlesLab, EventLoopLab } from './OsLabs';
 import { SerializationLab, CompressionLab } from './RepresentationLabs';
 import { LocalityLab } from './LocalityLab';
 import { PriorityHeapLab } from './PriorityHeapLab';
@@ -52,6 +53,9 @@ export function Lab(original: LabProps) {
     'search-tree',
     'priority-heap',
     'locality',
+    'address-space',
+    'file-handles',
+    'event-loop',
     'serialization',
     'compression',
   ].includes(kind);
@@ -99,6 +103,12 @@ export function Lab(original: LabProps) {
       return <SerializationLab {...props} />;
     case 'compression':
       return <CompressionLab {...props} />;
+    case 'address-space':
+      return <AddressSpaceLab {...props} />;
+    case 'file-handles':
+      return <FileHandlesLab {...props} />;
+    case 'event-loop':
+      return <EventLoopLab {...props} />;
     case 'locality':
       return <LocalityLab {...props} />;
     case 'priority-heap':

@@ -264,6 +264,30 @@
       "revision": "RFC cố định tại URL; sections ghi trong title",
       "checkedAt": "2026-10-18",
       "attribution": "IETF / RFC Editor"
+    },
+    {
+      "id": "ostep-address15",
+      "title": "OSTEP1.10 chương15 §15.3–5 — base-and-bounds",
+      "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/vm-mechanism.pdf",
+      "revision": "Section trong title; truy cập18/10/2026",
+      "checkedAt": "2026-10-18",
+      "attribution": "Tác giả nguồn tại URL"
+    },
+    {
+      "id": "linux-unlink",
+      "title": "Linux man-pages unlink(2) — tên file và descriptor đang mở",
+      "url": "https://man7.org/linux/man-pages/man2/unlink.2.html",
+      "revision": "Section trong title; truy cập18/10/2026",
+      "checkedAt": "2026-10-18",
+      "attribution": "Tác giả nguồn tại URL"
+    },
+    {
+      "id": "node-nonblocking",
+      "title": "Node.js Learn — blocking vs non-blocking, concurrency",
+      "url": "https://nodejs.org/learn/asynchronous-work/overview-of-blocking-vs-non-blocking",
+      "revision": "Section trong title; truy cập18/10/2026",
+      "checkedAt": "2026-10-18",
+      "attribution": "Tác giả nguồn tại URL"
     }
   ],
   "competencies": [
@@ -465,6 +489,27 @@
       "outcome": "Tính kích thước cặp byte trong RLE tự đặt, khôi phục đúng chuỗi và giải thích vì sao dữ liệu có thể lớn hơn sau nén.",
       "depth": "introductory",
       "planRefs": ["CURRICULUM_MAP.md", "EDU-21"]
+    },
+    {
+      "id": "address-space-intro",
+      "moduleId": "L0.2",
+      "outcome": "Theo dấu base-and-bounds, phân biệt địa chỉ ảo/vật lý và giải thích cách ly vùng nhớ của hai process.",
+      "depth": "introductory",
+      "planRefs": ["CURRICULUM_MAP.md", "EDU-22"]
+    },
+    {
+      "id": "file-handles-intro",
+      "moduleId": "L0.2",
+      "outcome": "Phân biệt tên file với handle đang mở, giải thích unlink và thời điểm giải phóng file trong mô hình một liên kết.",
+      "depth": "introductory",
+      "planRefs": ["CURRICULUM_MAP.md", "EDU-22"]
+    },
+    {
+      "id": "event-loop-intro",
+      "moduleId": "L0.2",
+      "outcome": "Theo dấu luồng event loop khi chờ I/O, phân biệt thời điểm I/O sẵn sàng và callback được chạy; không nhầm concurrency với thêm CPU.",
+      "depth": "introductory",
+      "planRefs": ["CURRICULUM_MAP.md", "EDU-22"]
     }
   ],
   "lessons": [
@@ -1142,6 +1187,90 @@
         "date": "2026-10-18",
         "status": "beta-checked",
         "evidence": "docs/delivery/EDU_21_DATA_REPRESENTATION.md"
+      }
+    },
+    {
+      "lessonId": "address-space",
+      "revision": 1,
+      "competencyIds": ["address-space-intro"],
+      "prerequisiteIds": ["concurrency"],
+      "claims": [
+        {
+          "text": "Base-and-bounds kiểm địa chỉ so với độ dài vùng trước truy cập và dịch bằng base; OS quản lý thanh ghi, phần cứng thực hiện dịch/kiểm.",
+          "sourceIds": ["ostep-address15"]
+        }
+      ],
+      "review": {
+        "reviewer": "Codex parent",
+        "reviewerType": "agent",
+        "date": "2026-10-18",
+        "status": "beta-checked",
+        "evidence": "docs/delivery/EDU_22_OS_FOUNDATIONS.md"
+      },
+      "caseReview": {
+        "caseId": "case-address-space",
+        "revision": 1,
+        "reviewer": "Codex parent",
+        "reviewerType": "agent",
+        "date": "2026-10-18",
+        "status": "beta-checked",
+        "evidence": "docs/delivery/EDU_22_OS_FOUNDATIONS.md"
+      }
+    },
+    {
+      "lessonId": "file-handles",
+      "revision": 1,
+      "competencyIds": ["file-handles-intro"],
+      "prerequisiteIds": ["request"],
+      "claims": [
+        {
+          "text": "Unlink bỏ tên; file có descriptor mở được giữ tới khi descriptor cuối đóng, nếu không còn hard link.",
+          "sourceIds": ["linux-unlink"]
+        }
+      ],
+      "review": {
+        "reviewer": "Codex parent",
+        "reviewerType": "agent",
+        "date": "2026-10-18",
+        "status": "beta-checked",
+        "evidence": "docs/delivery/EDU_22_OS_FOUNDATIONS.md"
+      },
+      "caseReview": {
+        "caseId": "case-file-handles",
+        "revision": 1,
+        "reviewer": "Codex parent",
+        "reviewerType": "agent",
+        "date": "2026-10-18",
+        "status": "beta-checked",
+        "evidence": "docs/delivery/EDU_22_OS_FOUNDATIONS.md"
+      }
+    },
+    {
+      "lessonId": "event-loop",
+      "revision": 1,
+      "competencyIds": ["event-loop-intro"],
+      "prerequisiteIds": ["cpu-io"],
+      "claims": [
+        {
+          "text": "Non-blocking cho vòng lặp tiếp tục xử lý khiI/O đang diễn ra; callback CPU trên vòng lặp chạy lần lượt, không tự thêmCPU. Timeline5/6 là mô hình riêng.",
+          "sourceIds": ["node-nonblocking"]
+        }
+      ],
+      "review": {
+        "reviewer": "Codex parent",
+        "reviewerType": "agent",
+        "date": "2026-10-18",
+        "status": "beta-checked",
+        "evidence": "docs/delivery/EDU_22_OS_FOUNDATIONS.md"
+      },
+      "caseReview": {
+        "caseId": "case-event-loop",
+        "revision": 1,
+        "reviewer": "Codex parent",
+        "reviewerType": "agent",
+        "date": "2026-10-18",
+        "status": "beta-checked",
+        "evidence": "docs/delivery/EDU_22_OS_FOUNDATIONS.md"
       }
     }
   ]

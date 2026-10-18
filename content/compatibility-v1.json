@@ -502,6 +502,72 @@
         "answer": 0,
         "explanation": "Mỗi ký hiệu thành một cặp [1,ký hiệu], nên 16 × 2 = 32 byte. Vẫn khôi phục đúng, nhưng lớn hơn 16 byte gốc; tính đúng không đồng nghĩa nén có lợi."
       }
+    },
+    {
+      "lessonId": "address-space",
+      "version": 1,
+      "moduleId": "L0.2",
+      "kind": "address-space",
+      "prediction": {
+        "text": "A có base4, B có base8. Cả hai đọc địa chỉ ảo0 hợp lệ. Chúng có bắt buộc đọc cùng ô RAM không?",
+        "options": ["Không; A tới PA4, B tới PA8.", "Có; số0 luôn là ô RAM vật lý0."],
+        "answer": 0,
+        "explanation": "Địa chỉ ảo được dịch theo base của process đang chạy: A4+0, B8+0. Cùng số địa chỉ ảo không đồng nghĩa cùng địa chỉ vật lý."
+      },
+      "challenge": {
+        "text": "ProcessA có bốn ô hợp lệ VA0–3. Nếu ghi VA4, mô hình phải làm gì?",
+        "options": ["Chặn trước khi ghi, RAM không đổi.", "Ghi PA8 vì chỉ cần cộng base4 với4."],
+        "answer": 0,
+        "explanation": "Phải kiểm VA < limit trước khi truy cập. VA4 bằng giới hạn4 nên không hợp lệ; cộng base rồi ghi ngay sẽ chạm vùng của B."
+      }
+    },
+    {
+      "lessonId": "file-handles",
+      "version": 1,
+      "moduleId": "L0.2",
+      "kind": "file-handles",
+      "prediction": {
+        "text": "File đã mở qua fd3, sau đó tên duy nhất bị unlink. Trước khi đóng fd3, ứng dụng đọc qua fd3 được không?",
+        "options": [
+          "Được trong mô hình Unix này; descriptor vẫn giữ tham chiếu mở.",
+          "Không bao giờ được; xóa tên tự đóng mọi descriptor."
+        ],
+        "answer": 0,
+        "explanation": "Unlink xóa liên kết tên. Descriptor đang mở không bị tự đóng; sau bước unlink, file vẫn được giữ để đọc qua fd3."
+      },
+      "challenge": {
+        "text": "Tên đã bị unlink và fd3 là handle mở cuối cùng. Khi đóng fd3, điều gì xảy ra trong mô hình?",
+        "options": [
+          "File được giải phóng vì không còn tên liên kết hoặc handle mở.",
+          "Tên cũ tự xuất hiện trở lại trong thư mục."
+        ],
+        "answer": 0,
+        "explanation": "Đóng descriptor cuối cùng bỏ tham chiếu mở còn lại; không có tên liên kết nên file có thể được giải phóng. Đóng không tạo lại đường dẫn đã xóa."
+      }
+    },
+    {
+      "lessonId": "event-loop",
+      "version": 1,
+      "moduleId": "L0.2",
+      "kind": "event-loop",
+      "prediction": {
+        "text": "A gửi I/O lúc hết khoảng đầu, thiết bị làm tới mốc4. Với non-blocking và B đã sẵn sàng, B có thể chạy trong khoảng[1,2) không?",
+        "options": [
+          "Có; vòng lặp không phải đứng chờ I/O của A.",
+          "Không; phải có thêm CPU thì mới làm được B."
+        ],
+        "answer": 0,
+        "explanation": "Trong lúc thiết bị xử lý A, luồng dùng CPU cho B. Đây là chồng thời gian chờI/O với công việcCPU, không phải chạy hai callback CPU cùng lúc."
+      },
+      "challenge": {
+        "text": "Trong cả hai chế độ, I/O của A vẫn hoàn tất mốc4 và phần CPU cuối của A kết thúc mốc5. Điều gì đổi với B?",
+        "options": [
+          "B xong mốc2 ở nonblocking thay vì mốc6; A không tự nhanh hơn.",
+          "Cả A và B đều nhanh gấp đôi vì nonblocking tạo thêm CPU."
+        ],
+        "answer": 0,
+        "explanation": "B tận dụng khoảng luồng không cần đứng chờ. A vẫn có cùng thời lượngCPU/I/O; mô hình không thêmCPU hay rút ngắn thao tác thiết bị."
+      }
     }
   ]
 }

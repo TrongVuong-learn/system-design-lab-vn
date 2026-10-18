@@ -1,4 +1,4 @@
-export const ENGINE_VERSION = '1.12.0';
+export const ENGINE_VERSION = '1.13.0';
 export interface CacheState {
   time: number;
   source: number;
@@ -264,3 +264,5 @@ export { priorityHeap, HEAP_MODEL_VERSION, type HeapJob, type HeapRemoval } from
 export { memoryLocality, LOCALITY_MODEL_VERSION } from './locality';
 
 export { serializeRecord, compressRuns, REPRESENTATION_MODEL_VERSION } from './representation';
+
+export { addressSpace, fileHandles, ioLoop, OS_MODEL_VERSION } from './os-foundations';

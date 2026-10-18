@@ -1,0 +1,292 @@
+[
+  {
+    "id": "address-space",
+    "title": "Hai chương trình cùng dùng địa chỉ 0 có sao không?",
+    "subtitle": "Dịch địa chỉ ảo sang RAM và chặn truy cập ngoài vùng.",
+    "objective": "Theo dấu base-and-bounds, phân biệt địa chỉ ảo/vật lý và giải thích cách ly vùng nhớ của hai process.",
+    "story": "Hai ứng dụng A và B đều có một ô mà chúng gọi là “địa chỉ 0”. Nếu đó là cùng chỗ trong RAM thì A có thể sửa nhầm dữ liệu của B. Hãy xem một mô hình dịch địa chỉ nhỏ: A dùng vùng bắt đầu ở ô 4, B bắt đầu ở ô 8.",
+    "explanation": "Chương trình đang chạy là process. Nó nhìn thấy một không gian địa chỉ; địa chỉ chương trình dùng chưa nhất thiết là vị trí thật trong RAM. Trong mô hình base-and-bounds, OS thiết lập vị trí đầu vùng và độ dài hợp lệ; phần cứng kiểm tra giới hạn rồi dịch địa chỉ. Hai process cùng VA0 có thể tới PA khác nhau. Mô hình chỉ cấp mỗi process bốn ô: VA0–3 hợp lệ, VA4 bị chặn trước truy cập. Đây là cơ chế đơn giản để thấy vai trò OS và phần cứng, không phải bản mô phỏng paging hiện đại.",
+    "limit": "RAM16ô: OS0–3, A4–7, B8–11, vùng12–15 trống. BaseA4/B8, limit4; chỉ VA0/3/4, read hoặc write giá trị dựng sẵn. Đổi lựa chọn khởi tạo RAM lại, không giữ lần ghi trước. Không paging/TLB/swap/shared-memory/COW, cấp phát hay hiệu năng; ô không phải byte thật. Không gian riêng không bảo đảm tránh mọi lỗi hoặc tấn công.",
+    "prediction": {
+      "text": "A có base4, B có base8. Cả hai đọc địa chỉ ảo0 hợp lệ. Chúng có bắt buộc đọc cùng ô RAM không?",
+      "options": ["Không; A tới PA4, B tới PA8.", "Có; số0 luôn là ô RAM vật lý0."],
+      "answer": 0,
+      "explanation": "Địa chỉ ảo được dịch theo base của process đang chạy: A4+0, B8+0. Cùng số địa chỉ ảo không đồng nghĩa cùng địa chỉ vật lý."
+    },
+    "challenge": {
+      "text": "ProcessA có bốn ô hợp lệ VA0–3. Nếu ghi VA4, mô hình phải làm gì?",
+      "options": ["Chặn trước khi ghi, RAM không đổi.", "Ghi PA8 vì chỉ cần cộng base4 với4."],
+      "answer": 0,
+      "explanation": "Phải kiểm VA < limit trước khi truy cập. VA4 bằng giới hạn4 nên không hợp lệ; cộng base rồi ghi ngay sẽ chạm vùng của B."
+    },
+    "kind": "address-space",
+    "version": 1,
+    "status": "beta",
+    "level": "L0",
+    "moduleId": "L0.2",
+    "minutes": 14,
+    "terms": [
+      {
+        "name": "Tiến trình",
+        "english": "Process",
+        "meaning": "Một chương trình đang chạy với trạng thái thực thi của nó."
+      },
+      {
+        "name": "Địa chỉ ảo",
+        "english": "Virtual address",
+        "meaning": "Địa chỉ chương trình dùng trong không gian địa chỉ của nó."
+      },
+      {
+        "name": "Địa chỉ vật lý",
+        "english": "Physical address",
+        "meaning": "Vị trí được truy cập trong RAM sau khi dịch địa chỉ."
+      },
+      {
+        "name": "Đầu vùng và giới hạn",
+        "english": "Base and bounds",
+        "meaning": "Cơ chế mô hình dùng vị trí đầu vùng và độ dài hợp lệ để dịch và kiểm truy cập."
+      }
+    ],
+    "sources": [
+      {
+        "title": "OSTEP1.10 chương15 §15.3–5 — base-and-bounds",
+        "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/vm-mechanism.pdf"
+      }
+    ],
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "So base của A và B trước khi cộng địa chỉ0.",
+        "4+0 và8+0 cho hai vị trí khác nhau."
+      ],
+      "challenge": [
+        "Bốn ô đánh số từ0 thì ô cuối là mấy?",
+        "Giới hạn4 nghĩa là địa chỉ phải nhỏ hơn4, không phải nhỏ hơn hoặc bằng4."
+      ]
+    },
+    "caseStudy": {
+      "id": "case-address-space",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L0-02",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Hai ứng dụng ghi danh cùng chạy",
+      "context": "Hai process trong mô hình có dữ liệu riêng và cùng gọi ô đầu là0. Tình huống tự biên soạn, không truy cập RAM thật.",
+      "requirements": [
+        "Dịch cùng VA sang hai PA riêng.",
+        "Không sửa RAM khi địa chỉ bằng hoặc vượt limit."
+      ],
+      "activityRef": "address-space",
+      "experimentSteps": [
+        "Đọc VA0 của A rồi bắt đầu lượt mới với B, so PA và giá trị.",
+        "Thử ghi VA3 hợp lệ rồi VA4 bị chặn, quan sát vùng OS/B không đổi."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Cần kiểm giới hạn và dịch địa chỉ thay vì cho ứng dụng truy cập RAM tùy ý. Mô hình vùng liên tục dễ theo dấu nhưng không thay paging hoặc quản lý bộ nhớ thực."
+      ],
+      "limitations": "RAM16ô: OS0–3, A4–7, B8–11, vùng12–15 trống. BaseA4/B8, limit4; chỉ VA0/3/4, read hoặc write giá trị dựng sẵn. Đổi lựa chọn khởi tạo RAM lại, không giữ lần ghi trước. Không paging/TLB/swap/shared-memory/COW, cấp phát hay hiệu năng; ô không phải byte thật. Không gian riêng không bảo đảm tránh mọi lỗi hoặc tấn công."
+    }
+  },
+  {
+    "id": "file-handles",
+    "title": "Xóa tên file có làm file đang mở biến mất ngay không?",
+    "subtitle": "Theo dấu tên đường dẫn, descriptor và dữ liệu trong mô hình Unix.",
+    "objective": "Phân biệt tên file với handle đang mở, giải thích unlink và thời điểm giải phóng file trong mô hình một liên kết.",
+    "story": "Một ứng dụng đang mở lịch lớp. Người quản lý xóa tên lich.txt trong thư mục. Ứng dụng đã mở file có đọc tiếp được không? Hãy theo dõi tên trong thư mục và descriptor của ứng dụng như hai thứ khác nhau.",
+    "explanation": "Thư mục ánh xạ tên dễ đọc tới file. Mở file thành công trả về descriptor để process dùng cho các thao tác tiếp theo. Trong mô hình Unix/POSIX, unlink bỏ tên liên kết; descriptor mở sẵn vẫn tham chiếu file. Vì vậy mở mới bằng tên đã bỏ không được, nhưng đọc bằng descriptor cũ còn có thể thực hiện. Chỉ khi không còn tên liên kết và tham chiếu mở thì file mới được giải phóng. Tên đường dẫn không phải toàn bộ trạng thái của một file.",
+    "limit": "Một file, một tên /lop/lich.txt và một descriptor fd3, bốn thao tác dựng sẵn thành công theo thứ tự. Dữ liệu “Lịch: phòng205”. Không chạm filesystem thật; không Windows, nhiều hardlink, symlink, quyền, crash, fsync/journal hoặc phục hồi dữ liệu. Giải phóng file không chứng minh byte trên đĩa đã bị ghi đè an toàn.",
+    "prediction": {
+      "text": "File đã mở qua fd3, sau đó tên duy nhất bị unlink. Trước khi đóng fd3, ứng dụng đọc qua fd3 được không?",
+      "options": [
+        "Được trong mô hình Unix này; descriptor vẫn giữ tham chiếu mở.",
+        "Không bao giờ được; xóa tên tự đóng mọi descriptor."
+      ],
+      "answer": 0,
+      "explanation": "Unlink xóa liên kết tên. Descriptor đang mở không bị tự đóng; sau bước unlink, file vẫn được giữ để đọc qua fd3."
+    },
+    "challenge": {
+      "text": "Tên đã bị unlink và fd3 là handle mở cuối cùng. Khi đóng fd3, điều gì xảy ra trong mô hình?",
+      "options": [
+        "File được giải phóng vì không còn tên liên kết hoặc handle mở.",
+        "Tên cũ tự xuất hiện trở lại trong thư mục."
+      ],
+      "answer": 0,
+      "explanation": "Đóng descriptor cuối cùng bỏ tham chiếu mở còn lại; không có tên liên kết nên file có thể được giải phóng. Đóng không tạo lại đường dẫn đã xóa."
+    },
+    "kind": "file-handles",
+    "version": 1,
+    "status": "beta",
+    "level": "L0",
+    "moduleId": "L0.2",
+    "minutes": 14,
+    "terms": [
+      {
+        "name": "Hệ thống file",
+        "english": "Filesystem",
+        "meaning": "Cách hệ điều hành tổ chức file, thư mục và thông tin quản lý dữ liệu lưu trữ."
+      },
+      {
+        "name": "Đường dẫn",
+        "english": "Path",
+        "meaning": "Tên xác định vị trí trong cấu trúc thư mục, ví dụ /lop/lich.txt."
+      },
+      {
+        "name": "Descriptor file",
+        "english": "File descriptor",
+        "meaning": "Số process nhận khi mở file để tham chiếu một đối tượng đang mở."
+      },
+      {
+        "name": "Bỏ liên kết tên",
+        "english": "Unlink",
+        "meaning": "Gỡ một tên khỏi thư mục; không tự đóng các descriptor đang mở."
+      }
+    ],
+    "sources": [
+      {
+        "title": "Linux man-pages unlink(2) — tên file và descriptor đang mở",
+        "url": "https://man7.org/linux/man-pages/man2/unlink.2.html"
+      }
+    ],
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Tên trong thư mục và handle process có phải cùng một thứ?",
+        "fd3 vẫn đang mở sau khi tên bị bỏ."
+      ],
+      "challenge": [
+        "Sau đóng có còn tên liên kết hoặc handle nào không?",
+        "Trong ví dụ chỉ có một tên và một handle; cả hai lúc này đều không còn."
+      ]
+    },
+    "caseStudy": {
+      "id": "case-file-handles",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L0-02",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Ứng dụng đang đọc lịch bị xóa tên",
+      "context": "Một file lịch Unix được mở trước khi người quản lý unlink tên. Tình huống tự biên soạn, không xóa file trên máy người học.",
+      "requirements": [
+        "Phân biệt mất tên với mất handle.",
+        "Chỉ giải phóng sau khi bỏ cả tên và tham chiếu mở cuối."
+      ],
+      "activityRef": "file-handles",
+      "experimentSteps": [
+        "Mở file, unlink tên, đọc bằng fd3 rồi xem dữ liệu vẫn có.",
+        "Đóng fd3 và so tên/handle/file trước–sau."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Handle mở cho phép tiếp tục truy cập file đã mất tên, nhưng dung lượng có thể còn bị giữ. Xóa tên không có nghĩa dữ liệu trên thiết bị đã được xóa an toàn."
+      ],
+      "limitations": "Một file, một tên /lop/lich.txt và một descriptor fd3, bốn thao tác dựng sẵn thành công theo thứ tự. Dữ liệu “Lịch: phòng205”. Không chạm filesystem thật; không Windows, nhiều hardlink, symlink, quyền, crash, fsync/journal hoặc phục hồi dữ liệu. Giải phóng file không chứng minh byte trên đĩa đã bị ghi đè an toàn."
+    }
+  },
+  {
+    "id": "event-loop",
+    "title": "Chờ dữ liệu mà vẫn xử lý được việc khác thế nào?",
+    "subtitle": "So blocking và non-blocking trên cùng một luồng vòng lặp.",
+    "objective": "Theo dấu luồng event loop khi chờ I/O, phân biệt thời điểm I/O sẵn sàng và callback được chạy; không nhầm concurrency với thêm CPU.",
+    "story": "A cần lấy dữ liệu từ thiết bị, B chỉ cần tính một việc ngắn. Cả hai cùng tới. Nếu luồng đứng chờ A, B sẽ phải đợi. Nếu A gửi yêu cầu rồi nhường vòng lặp trong lúc thiết bị làm việc thì B có được xử lý sớm không?",
+    "explanation": "Với blocking I/O, luồng gọi có thể phải chờ thao tác hoàn tất. Trong mô hình non-blocking này, vòng lặp gửi I/O rồi tiếp tục xử lý việc sẵn khác; kết quả tới thì phần xử lý tiếp của A được đưa ra chạy khi luồng rảnh. Callback không đồng nghĩa một CPU mới: các phần CPU vẫn chạy lần lượt trên một luồng. Đến lúc dữ liệu sẵn sàng chưa có nghĩa callback đã chạy xong. Một tác vụ CPU dài vẫn có thể giữ vòng lặp và làm việc khác chờ.",
+    "limit": "A/B đến mốc0, một luồng/mộtCPU, thiết bịI/O độc lập. ACPU[0,1), I/O[1,4), CPU[4,5). BCPU[1,2) khi nonblocking hoặc[5,6) khiblocking. Thời gian giả định theo khoảng, không benchmarkNode. Không phase/timer/microtask/threadpool/cancellation hoặc API thật. Blocking là cách chờ của mô hình; không mô phỏng mọi hệ điều hành hoặc runtime.",
+    "prediction": {
+      "text": "A gửi I/O lúc hết khoảng đầu, thiết bị làm tới mốc4. Với non-blocking và B đã sẵn sàng, B có thể chạy trong khoảng[1,2) không?",
+      "options": [
+        "Có; vòng lặp không phải đứng chờ I/O của A.",
+        "Không; phải có thêm CPU thì mới làm được B."
+      ],
+      "answer": 0,
+      "explanation": "Trong lúc thiết bị xử lý A, luồng dùng CPU cho B. Đây là chồng thời gian chờI/O với công việcCPU, không phải chạy hai callback CPU cùng lúc."
+    },
+    "challenge": {
+      "text": "Trong cả hai chế độ, I/O của A vẫn hoàn tất mốc4 và phần CPU cuối của A kết thúc mốc5. Điều gì đổi với B?",
+      "options": [
+        "B xong mốc2 ở nonblocking thay vì mốc6; A không tự nhanh hơn.",
+        "Cả A và B đều nhanh gấp đôi vì nonblocking tạo thêm CPU."
+      ],
+      "answer": 0,
+      "explanation": "B tận dụng khoảng luồng không cần đứng chờ. A vẫn có cùng thời lượngCPU/I/O; mô hình không thêmCPU hay rút ngắn thao tác thiết bị."
+    },
+    "kind": "event-loop",
+    "version": 1,
+    "status": "beta",
+    "level": "L0",
+    "moduleId": "L0.2",
+    "minutes": 14,
+    "terms": [
+      {
+        "name": "I/O",
+        "english": "Input/output",
+        "meaning": "Trao đổi dữ liệu với thiết bị hoặc mạng, khác phần tính toán CPU của ví dụ."
+      },
+      {
+        "name": "Chờ chặn luồng",
+        "english": "Blocking I/O",
+        "meaning": "Luồng gọi phải chờ thao tác I/O hoàn tất trước khi đi tiếp."
+      },
+      {
+        "name": "Không giữ luồng chờ",
+        "english": "Non-blocking",
+        "meaning": "Cho phép luồng tiếp tục làm việc khác thay vì đứng đợi thao tác I/O của ví dụ."
+      },
+      {
+        "name": "Vòng lặp sự kiện",
+        "english": "Event loop",
+        "meaning": "Cơ chế xử lý các công việc hoặc callback sẵn sàng trên luồng vòng lặp."
+      },
+      {
+        "name": "Hàm xử lý kết quả",
+        "english": "Callback",
+        "meaning": "Phần việc được gọi khi đến lượt xử lý kết quả; sẵn sàng không có nghĩa đã thực thi."
+      }
+    ],
+    "sources": [
+      {
+        "title": "Node.js Learn — blocking vs non-blocking, concurrency",
+        "url": "https://nodejs.org/learn/asynchronous-work/overview-of-blocking-vs-non-blocking"
+      }
+    ],
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Thiết bịI/O có dùng luồngCPU để đứng chờ không?",
+        "A đang chờ thiết bị; B có thể dùng một khoảng CPU trên cùng luồng."
+      ],
+      "challenge": [
+        "So mốc hoàn tấtA trước; nó có đổi không?",
+        "A vẫn5. Thay đổi là B được chạy khi A đang chờI/O."
+      ]
+    },
+    "caseStudy": {
+      "id": "case-event-loop",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L0-02",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Lấy ảnh và trả thông báo ngắn",
+      "context": "Hai việc A/B đến cùng lúc; A chờ thiết bị còn B tính ngắn. Đây là mô hình tự biên soạn, không gửi request thật hoặc đo runtime.",
+      "requirements": [
+        "Giữ một luồngCPU ở cả hai cấu hình.",
+        "Tách thời điểm thiết bị hoàn tất khỏi thời điểm callback chạy."
+      ],
+      "activityRef": "event-loop",
+      "experimentSteps": [
+        "Qua từng khoảng ở nonblocking, ghi khi B xong và khi kết quả A sẵn sàng.",
+        "Bắt đầu lại bằng blocking, so mốc B; kiểm A vẫn xong5."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Nonblocking giúp luồng làm việc khác lúc chờI/O; vẫn phải quản lý thứ tự xử lý kết quả. Nó không chữa tác vụCPU dài hoặc tự làm thiết bị nhanh hơn."
+      ],
+      "limitations": "A/B đến mốc0, một luồng/mộtCPU, thiết bịI/O độc lập. ACPU[0,1), I/O[1,4), CPU[4,5). BCPU[1,2) khi nonblocking hoặc[5,6) khiblocking. Thời gian giả định theo khoảng, không benchmarkNode. Không phase/timer/microtask/threadpool/cancellation hoặc API thật. Blocking là cách chờ của mô hình; không mô phỏng mọi hệ điều hành hoặc runtime."
+    }
+  }
+]
