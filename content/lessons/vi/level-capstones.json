@@ -1,0 +1,1618 @@
+[
+  {
+    "id": "capstone-foundations",
+    "version": 1,
+    "status": "beta",
+    "kind": "module-practice",
+    "level": "L0",
+    "moduleId": "L0.6",
+    "minutes": 60,
+    "title": "Tổng hợp L0: theo dấu một lần nộp bài",
+    "subtitle": "An nộp tệp2MB trên mạng giả định1MB/s; DNS20ms, kết nối/TLS80ms, server xử lý100ms, các bước nối tiếp và không có mất gói.",
+    "objective": "Kết hợp kiến thức trong level để lập luận, kiểm lịch thao tác và thiết kế dưới ràng buộc mới.",
+    "story": "An nộp tệp2MB trên mạng giả định1MB/s; DNS20ms, kết nối/TLS80ms, server xử lý100ms, các bước nối tiếp và không có mất gói. Màn hình đổi trước khi server trả lời.",
+    "explanation": "Vẽ các chặng trước khi cộng thời gian. Theo trạng thái khi đường mạng bị cắt. Đặt yêu cầu và chọn dữ liệu cần giữ.",
+    "limit": "Bài tổng hợp bằng fixture/lập luận và bản thiết kế tự viết; không chạy hệ thống thật. Viết đủ mục không được coi là đã chấm đúng thiết kế.",
+    "terms": [
+      {
+        "name": "Luồng bình thường",
+        "english": "Normal flow",
+        "meaning": "Chuỗi thao tác khi các thành phần trả lời như dự kiến."
+      },
+      {
+        "name": "Tình huống lỗi",
+        "english": "Failure scenario",
+        "meaning": "Thứ tự sự kiện có một hoặc nhiều lỗi cần kiểm."
+      },
+      {
+        "name": "Tiêu chí đối chiếu",
+        "english": "Rubric",
+        "meaning": "Các yêu cầu cụ thể để tự xem bản thiết kế còn thiếu gì."
+      },
+      {
+        "name": "Điều kiện luôn phải giữ",
+        "english": "invariant",
+        "meaning": "Quy tắc dữ liệu không được vi phạm, kể cả khi có lỗi; ví dụ số vé đã xác nhận không vượt sức chứa."
+      },
+      {
+        "name": "Cấu trúc dữ liệu đã quy định",
+        "english": "schema",
+        "meaning": "Hợp đồng về trường, kiểu và ràng buộc. Dữ liệu đúng cấu trúc vẫn có thể sai về nội dung nghiệp vụ."
+      }
+    ],
+    "chapters": {
+      "version": 1,
+      "items": [
+        {
+          "id": "phase-1",
+          "title": "Vẽ các chặng trước khi cộng thời gian",
+          "explanation": "DNS tìm địa chỉ; IP/port giúp tới dịch vụ; transport/TLS và HTTP có trách nhiệm khác nhau. CPU xử lý, I/O chờ dữ liệu; state client khác phiếu server. Mô hình nối tiếp ở đề là giả định, hệ thật có cache/reuse/chồng lấn.",
+          "example": "Tải2MB/1MB/s=2s; cộng0,02+0,08+0,10=0,20s, tổng2,20s theo đề. Không gán2,20s cho mọi mạng.",
+          "steps": [
+            "Đổi mọi thời gian sang giây và ghi từng chặng.",
+            "Cộng các chặng nối tiếp theo đề, không quên thời gian truyền."
+          ],
+          "misconception": "Bandwidth khác RTT; tăng bandwidth không tự giảm tất cả chặng.",
+          "sourceIds": [
+            "http-rfc",
+            "c4",
+            "security-owasp"
+          ]
+        },
+        {
+          "id": "phase-2",
+          "title": "Theo trạng thái khi đường mạng bị cắt",
+          "explanation": "Client có thể biết đã chọn tệp nhưng chưa biết server đã lưu. Mất response sau commit tạo kết quả chưa rõ; lưu ở RAM khác bền trên storage theo failure model. Giao thức truyền bytes không thay hợp đồng nghiệp vụ.",
+          "example": "Server đã giữ phiếu P9, response mất. An reload không thấy trong cache cũ; điều này chưa chứng minh P9 mất ở nguồn.",
+          "steps": [
+            "Ghi state client, server và cache riêng.",
+            "Chọn tra nguồn/trạng thái thay vì tự tạo phiếu mới."
+          ],
+          "misconception": "TLS bảo vệ kênh không tự chống phiếu trùng hoặc bảo đảm durability.",
+          "sourceIds": [
+            "http-rfc",
+            "c4",
+            "security-owasp"
+          ]
+        },
+        {
+          "id": "phase-3",
+          "title": "Đặt yêu cầu và chọn dữ liệu cần giữ",
+          "explanation": "Yêu cầu có hành vi, chất lượng và quyền. Mã phiếu định danh; nơi lưu phiếu là nguồn, cache/list/index phục vụ query. Chọn cấu trúc theo thao tác cần làm, không theo tên quen.",
+          "example": "Cần tra phiếu bằng mã và liệt kê theo thời gian: equality và range là hai access pattern. Quyền xem phiếu theo người sở hữu phải kiểm ở server.",
+          "steps": [
+            "Viết yêu cầu “xem phiếu của mình” và điều kiện lỗi.",
+            "Nêu dữ liệu gốc, index/cache và thông tin cần đo latency."
+          ],
+          "misconception": "Biết mã phiếu không tự cấp quyền xem.",
+          "sourceIds": [
+            "http-rfc",
+            "c4",
+            "security-owasp"
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "version": 1,
+      "items": [
+        {
+          "id": "phase-1",
+          "text": "Tổng thời gian lý tưởng theo đề là bao nhiêu?",
+          "options": [
+            "0,20s.",
+            "2,20s.",
+            "220s."
+          ],
+          "answer": 1,
+          "explanation": "Tải2MB/1MB/s=2s; cộng0,02+0,08+0,10=0,20s, tổng2,20s theo đề. Không gán2,20s cho mọi mạng. Bandwidth khác RTT; tăng bandwidth không tự giảm tất cả chặng.",
+          "sourceIds": [
+            "http-rfc",
+            "c4",
+            "security-owasp"
+          ]
+        },
+        {
+          "id": "phase-2",
+          "text": "Mất response sau lưu có chứng minh chưa nộp?",
+          "options": [
+            "Có vì màn hình chưa đổi.",
+            "Không; kết quả chưa rõ tại client.",
+            "Có vì cache chưa thấy."
+          ],
+          "answer": 1,
+          "explanation": "Server đã giữ phiếu P9, response mất. An reload không thấy trong cache cũ; điều này chưa chứng minh P9 mất ở nguồn. TLS bảo vệ kênh không tự chống phiếu trùng hoặc bảo đảm durability.",
+          "sourceIds": [
+            "http-rfc",
+            "c4",
+            "security-owasp"
+          ]
+        },
+        {
+          "id": "phase-3",
+          "text": "An biết mã phiếu Bình có tự được xem không?",
+          "options": [
+            "Có vì mã là đủ.",
+            "Không; phải kiểm quyền tài nguyên.",
+            "Có nếu mạng nhanh."
+          ],
+          "answer": 1,
+          "explanation": "Cần tra phiếu bằng mã và liệt kê theo thời gian: equality và range là hai access pattern. Quyền xem phiếu theo người sở hữu phải kiểm ở server. Biết mã phiếu không tự cấp quyền xem.",
+          "sourceIds": [
+            "http-rfc",
+            "c4",
+            "security-owasp"
+          ]
+        }
+      ]
+    },
+    "prediction": {
+      "text": "Thời gian truyền2MB ở1MB/s là bao nhiêu?",
+      "options": [
+        "2ms.",
+        "2s."
+      ],
+      "answer": 1,
+      "explanation": "Chia dung lượng cho tốc độ với cùng đơn vị."
+    },
+    "challenge": {
+      "text": "Đổi mạng thành2MB/s, các chặng khác giữ nguyên. Tổng lý tưởng?",
+      "options": [
+        "1,10s.",
+        "2,20ms.",
+        "1,20s."
+      ],
+      "answer": 2,
+      "explanation": "Truyền còn1s, chặng khác vẫn0,20s."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Theo dấu nơi giữ trạng thái và điều đã được xác nhận.",
+        "Chia dung lượng cho tốc độ với cùng đơn vị."
+      ],
+      "challenge": [
+        "Kiểm tra yêu cầu mới; tìm lịch thao tác có thể làm phương án sai.",
+        "Truyền còn1s, chặng khác vẫn0,20s."
+      ]
+    },
+    "sources": [
+      {
+        "title": "RFC 9110 — HTTP Semantics",
+        "url": "https://www.rfc-editor.org/rfc/rfc9110.html"
+      },
+      {
+        "title": "Simon Brown — C4 model",
+        "url": "https://c4model.com/"
+      },
+      {
+        "title": "OWASP — Authorization cheat sheet",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-capstone-foundations",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L0-06",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "An nộp tệp2MB trên mạng giả định1MB/s; DNS20ms, kết nối/TLS80ms, server xử lý100ms, các bước nối tiếp và không có mất gói.",
+      "context": "An nộp tệp2MB trên mạng giả định1MB/s; DNS20ms, kết nối/TLS80ms, server xử lý100ms, các bước nối tiếp và không có mất gói. Màn hình đổi trước khi server trả lời.",
+      "requirements": [
+        "Kết hợp kiến thức trong level để lập luận, kiểm lịch thao tác và thiết kế dưới ràng buộc mới.",
+        "Giải thích được một tình huống lỗi và điều kiện để phương án còn đúng."
+      ],
+      "activityRef": "module-practice",
+      "experimentSteps": [
+        "Theo từng bước trong các ví dụ và tự tính kết quả trước khi xem giải thích.",
+        "Chọn phương án cho từng tình huống, kiểm tra và sửa lựa chọn.",
+        "Áp dụng sang yêu cầu mới; nêu điều kiện và giới hạn của quyết định."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Bandwidth khác RTT; tăng bandwidth không tự giảm tất cả chặng.",
+        "Biết mã phiếu không tự cấp quyền xem."
+      ],
+      "limitations": "Bài tổng hợp bằng fixture/lập luận và bản thiết kế tự viết; không chạy hệ thống thật. Viết đủ mục không được coi là đã chấm đúng thiết kế."
+    },
+    "designTask": {
+      "version": 1,
+      "prompt": "An nộp tệp2MB trên mạng giả định1MB/s; DNS20ms, kết nối/TLS80ms, server xử lý100ms, các bước nối tiếp và không có mất gói. Màn hình đổi trước khi server trả lời.",
+      "deliverables": [
+        {
+          "id": "part-1",
+          "prompt": "Vẽ luồng từ client qua mạng tới phiếu server, ghi trách nhiệm từng chặng."
+        },
+        {
+          "id": "part-2",
+          "prompt": "Tính thời gian theo đề; chỉ rõ giả định nối tiếp và đơn vị."
+        },
+        {
+          "id": "part-3",
+          "prompt": "Mô tả response mất, trạng thái chưa rõ và quyền xem phiếu."
+        }
+      ],
+      "rubric": [
+        "Có yêu cầu/invariant, phép tính và đơn vị nhất quán với đề.",
+        "Luồng bình thường nêu nguồn có thẩm quyền và trạng thái từng bước.",
+        "Trace lỗi có vị trí lỗi, điều đã biết/chưa biết và cách phục hồi.",
+        "Nêu quyền, chi phí, giới hạn; phân biệt giả định với kết quả chưa được đo."
+      ],
+      "variation": "DNS đã cache nhưng server chậm thêm500ms. Tính lại và giải thích bottleneck thay đổi."
+    }
+  },
+  {
+    "id": "capstone-service",
+    "version": 1,
+    "status": "beta",
+    "kind": "module-practice",
+    "level": "L1",
+    "moduleId": "L1.6",
+    "minutes": 60,
+    "title": "Tổng hợp L1: thư viện giữ đúng lượt mượn",
+    "subtitle": "Thư viện có3 bản sách, mỗi học sinh chỉ có một phiếu đang mượn cho cùng đầu sách.",
+    "objective": "Kết hợp kiến thức trong level để lập luận, kiểm lịch thao tác và thiết kế dưới ràng buộc mới.",
+    "story": "Thư viện có3 bản sách, mỗi học sinh chỉ có một phiếu đang mượn cho cùng đầu sách. Hai người cùng lấy bản cuối, một client retry sau timeout và thumbnail bìa chạy nền.",
+    "explanation": "Từ yêu cầu tới API và schema. Chọn index cùng chi phí cập nhật. Tách phiếu khỏi việc nền.",
+    "limit": "Bài tổng hợp bằng fixture/lập luận và bản thiết kế tự viết; không chạy hệ thống thật. Viết đủ mục không được coi là đã chấm đúng thiết kế.",
+    "terms": [
+      {
+        "name": "Luồng bình thường",
+        "english": "Normal flow",
+        "meaning": "Chuỗi thao tác khi các thành phần trả lời như dự kiến."
+      },
+      {
+        "name": "Tình huống lỗi",
+        "english": "Failure scenario",
+        "meaning": "Thứ tự sự kiện có một hoặc nhiều lỗi cần kiểm."
+      },
+      {
+        "name": "Tiêu chí đối chiếu",
+        "english": "Rubric",
+        "meaning": "Các yêu cầu cụ thể để tự xem bản thiết kế còn thiếu gì."
+      },
+      {
+        "name": "Điều kiện luôn phải giữ",
+        "english": "invariant",
+        "meaning": "Quy tắc dữ liệu không được vi phạm, kể cả khi có lỗi; ví dụ số vé đã xác nhận không vượt sức chứa."
+      },
+      {
+        "name": "Thông báo xác nhận",
+        "english": "ACK",
+        "meaning": "Phản hồi cho biết một bước đã được bên nhận xác nhận. Phải đọc hợp đồng để biết đó là nhận, lưu bền hay áp dụng."
+      },
+      {
+        "name": "Thử lại",
+        "english": "retry",
+        "meaning": "Gửi hoặc thực hiện lại một thao tác sau lỗi/chờ quá hạn. Lần đầu có thể đã có hiệu ứng nên phải xét xử lý trùng."
+      },
+      {
+        "name": "Hết thời gian chờ",
+        "english": "timeout",
+        "meaning": "Bên gọi dừng chờ khi vượt thời hạn. Điều này không chứng minh bên nhận chưa thực hiện thao tác."
+      },
+      {
+        "name": "Quay về trạng thái trước",
+        "english": "rollback",
+        "meaning": "Khôi phục theo cơ chế cụ thể. Quay lại bản code cũ không tự hoàn tác dữ liệu hoặc giao dịch ở hệ thống khác."
+      },
+      {
+        "name": "Cấu trúc dữ liệu đã quy định",
+        "english": "schema",
+        "meaning": "Hợp đồng về trường, kiểu và ràng buộc. Dữ liệu đúng cấu trúc vẫn có thể sai về nội dung nghiệp vụ."
+      }
+    ],
+    "chapters": {
+      "version": 1,
+      "items": [
+        {
+          "id": "phase-1",
+          "title": "Từ yêu cầu tới API và schema",
+          "explanation": "Phiếu mượn có ID/owner/book/status; kho giữ số bản hoặc bản vật lý cụ thể. Constraint và transaction phải phản ánh invariant. API nêu lỗi hết sách, trùng ý định và trạng thái chưa rõ; index đi theo truy vấn.",
+          "example": "Khi còn1, chỉ một thao tác nguyên tử giữ bản cuối thành công. Unique theo chính sách phiếu đang hoạt động cần mô hình phù hợp, không chỉ kiểm ở UI.",
+          "steps": [
+            "Viết bảng/khóa và nguồn quyết định còn sách.",
+            "Viết endpoint tạo/tra phiếu và scope key retry."
+          ],
+          "misconception": "CHECK trên một dòng không tự giữ mọi tổng nhiều dòng.",
+          "sourceIds": [
+            "pg-transactions",
+            "pg-constraints",
+            "outbox-aws"
+          ]
+        },
+        {
+          "id": "phase-2",
+          "title": "Chọn index cùng chi phí cập nhật",
+          "explanation": "Index theo studentId/status hỗ trợ xem phiếu đang mượn; bookId hỗ trợ tra đầu sách. Thêm index tốn lưu/ghi và cần query plan/workload. Dữ liệu suy ra như tổng mượn có thể trễ nếu đã ghi rõ.",
+          "example": "Một query lọc studentId và sort thời gian cần xét index thứ tự cột và limit. Không thêm mọi permutation chỉ vì một màn còn chậm.",
+          "steps": [
+            "Liệt kê hai query cùng số lượng/độ chọn lọc.",
+            "Đề xuất index và chi phí ghi, rồi cách đo trên dataset đại diện."
+          ],
+          "misconception": "Ít dòng xét không tự là số ms thực tế.",
+          "sourceIds": [
+            "pg-transactions",
+            "pg-constraints",
+            "outbox-aws"
+          ]
+        },
+        {
+          "id": "phase-3",
+          "title": "Tách phiếu khỏi việc nền",
+          "explanation": "Phiếu và ý định tạo thumbnail/email cần ranh giới rõ. Lưu phiếu thành công rồi công việc nền lỗi phải có trạng thái/retry. Upload object và DB không tự cùng transaction; cần đối soát/dọn mồ côi.",
+          "example": "Response tạo phiếu mất sau commit; retry cùng ý định trả P9 thay vì tạo P10. Thumbnail lỗi không xóa phiếu đã mượn đúng.",
+          "steps": [
+            "Dựng lịch commit → mất response → retry.",
+            "Nêu ID/trạng thái job và cách tìm/dọn output không được dùng."
+          ],
+          "misconception": "Rollback code không tự rollback phiếu hoặc file đã lưu.",
+          "sourceIds": [
+            "pg-transactions",
+            "pg-constraints",
+            "outbox-aws"
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "version": 1,
+      "items": [
+        {
+          "id": "phase-1",
+          "text": "Đọc còn1 rồi insert độc lập có đủ chống hai người mượn?",
+          "options": [
+            "Có; cả hai đều đọc đúng lúc đầu.",
+            "Không; cần ràng buộc/transaction phù hợp.",
+            "Có nếu index nhanh."
+          ],
+          "answer": 1,
+          "explanation": "Khi còn1, chỉ một thao tác nguyên tử giữ bản cuối thành công. Unique theo chính sách phiếu đang hoạt động cần mô hình phù hợp, không chỉ kiểm ở UI. CHECK trên một dòng không tự giữ mọi tổng nhiều dòng.",
+          "sourceIds": [
+            "pg-transactions",
+            "pg-constraints",
+            "outbox-aws"
+          ]
+        },
+        {
+          "id": "phase-2",
+          "text": "Index có miễn phí khi ghi phiếu không?",
+          "options": [
+            "Có; index chỉ có trong lúc đọc.",
+            "Không; phải cập nhật/lưu cấu trúc index.",
+            "Có nếu tên index ngắn."
+          ],
+          "answer": 1,
+          "explanation": "Một query lọc studentId và sort thời gian cần xét index thứ tự cột và limit. Không thêm mọi permutation chỉ vì một màn còn chậm. Ít dòng xét không tự là số ms thực tế.",
+          "sourceIds": [
+            "pg-transactions",
+            "pg-constraints",
+            "outbox-aws"
+          ]
+        },
+        {
+          "id": "phase-3",
+          "text": "Thumbnail lỗi có bắt buộc coi phiếu đã commit là chưa tồn tại?",
+          "options": [
+            "Có; mọi bước chung một biến.",
+            "Không; hai trạng thái khác nhau theo thiết kế.",
+            "Có; xóa phiếu là cách retry."
+          ],
+          "answer": 1,
+          "explanation": "Response tạo phiếu mất sau commit; retry cùng ý định trả P9 thay vì tạo P10. Thumbnail lỗi không xóa phiếu đã mượn đúng. Rollback code không tự rollback phiếu hoặc file đã lưu.",
+          "sourceIds": [
+            "pg-transactions",
+            "pg-constraints",
+            "outbox-aws"
+          ]
+        }
+      ]
+    },
+    "prediction": {
+      "text": "Hai người tranh bản cuối cần giữ invariant ở đâu?",
+      "options": [
+        "Nguồn có thẩm quyền bằng cơ chế nguyên tử phù hợp.",
+        "Chỉ ở nút UI."
+      ],
+      "answer": 0,
+      "explanation": "UI không điều phối mọi caller."
+    },
+    "challenge": {
+      "text": "Client cũ không hiểu status mới do V2 ghi. Rollback V1 đã chắc an toàn?",
+      "options": [
+        "Rồi; rollback image sửa mọi dữ liệu.",
+        "Chưa; phải kiểm tương thích dữ liệu."
+      ],
+      "answer": 1,
+      "explanation": "Dữ liệu tồn tại qua deploy."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Theo dấu nơi giữ trạng thái và điều đã được xác nhận.",
+        "UI không điều phối mọi caller."
+      ],
+      "challenge": [
+        "Kiểm tra yêu cầu mới; tìm lịch thao tác có thể làm phương án sai.",
+        "Dữ liệu tồn tại qua deploy."
+      ]
+    },
+    "sources": [
+      {
+        "title": "PostgreSQL 18 — Transaction isolation",
+        "url": "https://www.postgresql.org/docs/18/transaction-iso.html"
+      },
+      {
+        "title": "PostgreSQL 18 — Constraints",
+        "url": "https://www.postgresql.org/docs/18/ddl-constraints.html"
+      },
+      {
+        "title": "AWS — Transactional outbox",
+        "url": "https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/transactional-outbox.html"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-capstone-service",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L1-06",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Thư viện có3 bản sách, mỗi học sinh chỉ có một phiếu đang mượn cho cùng đầu sách.",
+      "context": "Thư viện có3 bản sách, mỗi học sinh chỉ có một phiếu đang mượn cho cùng đầu sách. Hai người cùng lấy bản cuối, một client retry sau timeout và thumbnail bìa chạy nền.",
+      "requirements": [
+        "Kết hợp kiến thức trong level để lập luận, kiểm lịch thao tác và thiết kế dưới ràng buộc mới.",
+        "Giải thích được một tình huống lỗi và điều kiện để phương án còn đúng."
+      ],
+      "activityRef": "module-practice",
+      "experimentSteps": [
+        "Theo từng bước trong các ví dụ và tự tính kết quả trước khi xem giải thích.",
+        "Chọn phương án cho từng tình huống, kiểm tra và sửa lựa chọn.",
+        "Áp dụng sang yêu cầu mới; nêu điều kiện và giới hạn của quyết định."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "CHECK trên một dòng không tự giữ mọi tổng nhiều dòng.",
+        "Rollback code không tự rollback phiếu hoặc file đã lưu."
+      ],
+      "limitations": "Bài tổng hợp bằng fixture/lập luận và bản thiết kế tự viết; không chạy hệ thống thật. Viết đủ mục không được coi là đã chấm đúng thiết kế."
+    },
+    "designTask": {
+      "version": 1,
+      "prompt": "Thư viện có3 bản sách, mỗi học sinh chỉ có một phiếu đang mượn cho cùng đầu sách. Hai người cùng lấy bản cuối, một client retry sau timeout và thumbnail bìa chạy nền.",
+      "deliverables": [
+        {
+          "id": "part-1",
+          "prompt": "Viết API và schema với invariant/constraint, quyền đọc/ghi."
+        },
+        {
+          "id": "part-2",
+          "prompt": "Chọn index cho hai query và nêu kế hoạch kiểm."
+        },
+        {
+          "id": "part-3",
+          "prompt": "Vẽ trace tranh bản cuối, timeout/retry và job lỗi; nêu rollback."
+        }
+      ],
+      "rubric": [
+        "Có yêu cầu/invariant, phép tính và đơn vị nhất quán với đề.",
+        "Luồng bình thường nêu nguồn có thẩm quyền và trạng thái từng bước.",
+        "Trace lỗi có vị trí lỗi, điều đã biết/chưa biết và cách phục hồi.",
+        "Nêu quyền, chi phí, giới hạn; phân biệt giả định với kết quả chưa được đo."
+      ],
+      "variation": "Một phiếu có thể gia hạn tối đa2 lần trong khi job nhắc chạy. Bổ sung version/trạng thái và kiểm concurrency."
+    }
+  },
+  {
+    "id": "capstone-scaling",
+    "version": 1,
+    "status": "beta",
+    "kind": "module-practice",
+    "level": "L2",
+    "moduleId": "L2.6",
+    "minutes": 60,
+    "title": "Tổng hợp L2: ngày hội mở cổng đăng ký",
+    "subtitle": "Cổng nhận200 lượt đọc/s và20 lượt ghi/s.",
+    "objective": "Kết hợp kiến thức trong level để lập luận, kiểm lịch thao tác và thiết kế dưới ràng buộc mới.",
+    "story": "Cổng nhận200 lượt đọc/s và20 lượt ghi/s. Cache hit80% cho đọc công khai; mỗi miss đọc DB một lần. DB chịu60 thao tác/s theo mô hình, chưa tính retry. Queue thông báo nhận20 việc/s và làm15 việc/s.",
+    "explanation": "Tính tải còn lại sau cache. Queue hấp thụ một đợt nhưng không chịu mãi. Scale dữ liệu theo yêu cầu đọc/ghi.",
+    "limit": "Bài tổng hợp bằng fixture/lập luận và bản thiết kế tự viết; không chạy hệ thống thật. Viết đủ mục không được coi là đã chấm đúng thiết kế.",
+    "terms": [
+      {
+        "name": "Luồng bình thường",
+        "english": "Normal flow",
+        "meaning": "Chuỗi thao tác khi các thành phần trả lời như dự kiến."
+      },
+      {
+        "name": "Tình huống lỗi",
+        "english": "Failure scenario",
+        "meaning": "Thứ tự sự kiện có một hoặc nhiều lỗi cần kiểm."
+      },
+      {
+        "name": "Tiêu chí đối chiếu",
+        "english": "Rubric",
+        "meaning": "Các yêu cầu cụ thể để tự xem bản thiết kế còn thiếu gì."
+      },
+      {
+        "name": "Điều kiện luôn phải giữ",
+        "english": "invariant",
+        "meaning": "Quy tắc dữ liệu không được vi phạm, kể cả khi có lỗi; ví dụ số vé đã xác nhận không vượt sức chứa."
+      },
+      {
+        "name": "Thông báo xác nhận",
+        "english": "ACK",
+        "meaning": "Phản hồi cho biết một bước đã được bên nhận xác nhận. Phải đọc hợp đồng để biết đó là nhận, lưu bền hay áp dụng."
+      },
+      {
+        "name": "Thử lại",
+        "english": "retry",
+        "meaning": "Gửi hoặc thực hiện lại một thao tác sau lỗi/chờ quá hạn. Lần đầu có thể đã có hiệu ứng nên phải xét xử lý trùng."
+      },
+      {
+        "name": "Cấu trúc dữ liệu đã quy định",
+        "english": "schema",
+        "meaning": "Hợp đồng về trường, kiểu và ràng buộc. Dữ liệu đúng cấu trúc vẫn có thể sai về nội dung nghiệp vụ."
+      },
+      {
+        "name": "Nhóm dùng chung nền tảng",
+        "english": "tenant",
+        "meaning": "Một tổ chức hoặc nhóm khách hàng dùng chung hệ thống nhưng cần tách dữ liệu, quyền và ngân sách tài nguyên."
+      },
+      {
+        "name": "Hạn mức tài nguyên",
+        "english": "quota",
+        "meaning": "Giới hạn lượng tài nguyên hoặc thao tác một nhóm được dùng trong phạm vi đã định."
+      }
+    ],
+    "chapters": {
+      "version": 1,
+      "items": [
+        {
+          "id": "phase-1",
+          "title": "Tính tải còn lại sau cache",
+          "explanation": "Với giả định mỗi miss một đọc và mỗi ghi một thao tác, tải DB=đọc×(1−hit)+ghi. Cache không được xác nhận chỗ cuối. Cold start/hot key có thể làm hit giả định không còn đúng.",
+          "example": "200×0,2+20=60 thao tác/s: đúng trần, chưa có headroom. Nếu cold hit0%, tải220/s vượt trần.",
+          "steps": [
+            "Tính riêng40 đọc và20 ghi.",
+            "Thử cache trống, retry và skew trước kết luận đủ."
+          ],
+          "misconception": "Hit80% là giả định workload, không bảo đảm chỉ vì bật cache.",
+          "sourceIds": [
+            "cache-azure",
+            "overload-google",
+            "replication-pg",
+            "kafka-design"
+          ]
+        },
+        {
+          "id": "phase-2",
+          "title": "Queue hấp thụ một đợt nhưng không chịu mãi",
+          "explanation": "Queue tăng theo đến−xong. Worker scale cần giới hạn downstream, retry/dedup và thời gian khởi động. Backpressure/quota điều tiết khi không đủ công suất; DLQ cần theo dõi riêng.",
+          "example": "20−15=5 việc/s. Sau60s bắt đầu rỗng có300 việc chờ; ngừng nhận cần20s rút hết ở15/s theo mô hình.",
+          "steps": [
+            "Tính300 việc rồi thời gian rút300/15.",
+            "Nêu điều kiện tải trở về thấp hơn công suất và chính sách từ chối."
+          ],
+          "misconception": "Queue dài không là bằng chứng hệ thống có thể nhận vô hạn.",
+          "sourceIds": [
+            "cache-azure",
+            "overload-google",
+            "replication-pg",
+            "kafka-design"
+          ]
+        },
+        {
+          "id": "phase-3",
+          "title": "Scale dữ liệu theo yêu cầu đọc/ghi",
+          "explanation": "Replica phục vụ đọc có lag; shard chia dữ liệu/tải nhưng thêm cross-shard và migration. Đọc sau ghi cần nguồn/mốc phù hợp. Khi thêm app, tổng pool phải nằm trong budget DB.",
+          "example": "Bốn app×25 kết nối=100. Nếu DB chỉ cho app80 thì vượt20 dù CPU app nhàn. Không dùng replica cũ để quyết định chỗ cuối.",
+          "steps": [
+            "Tính tổng pool và đường đọc cần fresh.",
+            "Chọn shard key theo hot tenant và thiết kế move/đối soát."
+          ],
+          "misconception": "Thêm app không tự thêm công suất DB hoặc sửa lag.",
+          "sourceIds": [
+            "cache-azure",
+            "overload-google",
+            "replication-pg",
+            "kafka-design"
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "version": 1,
+      "items": [
+        {
+          "id": "phase-1",
+          "text": "Tải DB theo giả định ban đầu?",
+          "options": [
+            "40 thao tác/s vì bỏ ghi.",
+            "60 thao tác/s.",
+            "220 thao tác/s lúc cache hit80%."
+          ],
+          "answer": 1,
+          "explanation": "200×0,2+20=60 thao tác/s: đúng trần, chưa có headroom. Nếu cold hit0%, tải220/s vượt trần. Hit80% là giả định workload, không bảo đảm chỉ vì bật cache.",
+          "sourceIds": [
+            "cache-azure",
+            "overload-google",
+            "replication-pg",
+            "kafka-design"
+          ]
+        },
+        {
+          "id": "phase-2",
+          "text": "Backlog sau60s là bao nhiêu?",
+          "options": [
+            "5 việc.",
+            "300 việc.",
+            "900 việc đã chờ."
+          ],
+          "answer": 1,
+          "explanation": "20−15=5 việc/s. Sau60s bắt đầu rỗng có300 việc chờ; ngừng nhận cần20s rút hết ở15/s theo mô hình. Queue dài không là bằng chứng hệ thống có thể nhận vô hạn.",
+          "sourceIds": [
+            "cache-azure",
+            "overload-google",
+            "replication-pg",
+            "kafka-design"
+          ]
+        },
+        {
+          "id": "phase-3",
+          "text": "Bốn pool25 với budget80 có vượt không?",
+          "options": [
+            "Không; mỗi pool dưới80.",
+            "Có, vượt20 kết nối.",
+            "Không; kết nối không là tài nguyên."
+          ],
+          "answer": 1,
+          "explanation": "Bốn app×25 kết nối=100. Nếu DB chỉ cho app80 thì vượt20 dù CPU app nhàn. Không dùng replica cũ để quyết định chỗ cuối. Thêm app không tự thêm công suất DB hoặc sửa lag.",
+          "sourceIds": [
+            "cache-azure",
+            "overload-google",
+            "replication-pg",
+            "kafka-design"
+          ]
+        }
+      ]
+    },
+    "prediction": {
+      "text": "Tải DB đúng bằng trần60/s đã có dự phòng chưa?",
+      "options": [
+        "Có; bằng trần nghĩa vô hạn.",
+        "Chưa; biến động/cold start có thể vượt."
+      ],
+      "answer": 1,
+      "explanation": "Headroom là phần ngoài nhu cầu dự kiến."
+    },
+    "challenge": {
+      "text": "Ngày hội hit giảm từ80% xuống50%. DB chịu tải bao nhiêu theo cùng giả định?",
+      "options": [
+        "60 thao tác/s.",
+        "100 lượt tổng kể cả ghi.",
+        "120 thao tác/s."
+      ],
+      "answer": 2,
+      "explanation": "Một nửa của 200 lượt đọc là 100 miss, cộng 20 lượt ghi thành 120 thao tác mỗi giây."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Theo dấu nơi giữ trạng thái và điều đã được xác nhận.",
+        "Headroom là phần ngoài nhu cầu dự kiến."
+      ],
+      "challenge": [
+        "Kiểm tra yêu cầu mới; tìm lịch thao tác có thể làm phương án sai.",
+        "200×0,5+20=120."
+      ]
+    },
+    "sources": [
+      {
+        "title": "Microsoft — Cache-aside",
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside"
+      },
+      {
+        "title": "Google SRE — Handling overload",
+        "url": "https://sre.google/sre-book/handling-overload/"
+      },
+      {
+        "title": "PostgreSQL 18 — Log-shipping standby servers",
+        "url": "https://www.postgresql.org/docs/18/warm-standby.html"
+      },
+      {
+        "title": "Apache Kafka 4.1 — Design",
+        "url": "https://kafka.apache.org/41/design/design/"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-capstone-scaling",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L2-06",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Cổng nhận200 lượt đọc/s và20 lượt ghi/s.",
+      "context": "Cổng nhận200 lượt đọc/s và20 lượt ghi/s. Cache hit80% cho đọc công khai; mỗi miss đọc DB một lần. DB chịu60 thao tác/s theo mô hình, chưa tính retry. Queue thông báo nhận20 việc/s và làm15 việc/s.",
+      "requirements": [
+        "Kết hợp kiến thức trong level để lập luận, kiểm lịch thao tác và thiết kế dưới ràng buộc mới.",
+        "Giải thích được một tình huống lỗi và điều kiện để phương án còn đúng."
+      ],
+      "activityRef": "module-practice",
+      "experimentSteps": [
+        "Theo từng bước trong các ví dụ và tự tính kết quả trước khi xem giải thích.",
+        "Chọn phương án cho từng tình huống, kiểm tra và sửa lựa chọn.",
+        "Áp dụng sang yêu cầu mới; nêu điều kiện và giới hạn của quyết định."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Hit80% là giả định workload, không bảo đảm chỉ vì bật cache.",
+        "Thêm app không tự thêm công suất DB hoặc sửa lag."
+      ],
+      "limitations": "Bài tổng hợp bằng fixture/lập luận và bản thiết kế tự viết; không chạy hệ thống thật. Viết đủ mục không được coi là đã chấm đúng thiết kế."
+    },
+    "designTask": {
+      "version": 1,
+      "prompt": "Cổng nhận200 lượt đọc/s và20 lượt ghi/s. Cache hit80% cho đọc công khai; mỗi miss đọc DB một lần. DB chịu60 thao tác/s theo mô hình, chưa tính retry. Queue thông báo nhận20 việc/s và làm15 việc/s.",
+      "deliverables": [
+        {
+          "id": "part-1",
+          "prompt": "Tính bảng tải warm/cold, pool và backlog có đơn vị."
+        },
+        {
+          "id": "part-2",
+          "prompt": "Vẽ read/write/cache/replica/queue và nguồn giữ chỗ."
+        },
+        {
+          "id": "part-3",
+          "prompt": "Nêu quota, retry/dedup, autoscaling delay và cách thử skew."
+        }
+      ],
+      "rubric": [
+        "Có yêu cầu/invariant, phép tính và đơn vị nhất quán với đề.",
+        "Luồng bình thường nêu nguồn có thẩm quyền và trạng thái từng bước.",
+        "Trace lỗi có vị trí lỗi, điều đã biết/chưa biết và cách phục hồi.",
+        "Nêu quyền, chi phí, giới hạn; phân biệt giả định với kết quả chưa được đo."
+      ],
+      "variation": "Một CLB chiếm90% request, replica lag5s. Sửa đường đọc và quyết định mở rộng theo invariant."
+    }
+  },
+  {
+    "id": "capstone-distributed",
+    "version": 1,
+    "status": "beta",
+    "kind": "module-practice",
+    "level": "L3",
+    "moduleId": "L3.6",
+    "minutes": 60,
+    "title": "Tổng hợp L3: giữ chỗ giữa hai khu trường",
+    "subtitle": "Hai khu A/B cùng xem số chỗ; mạng giữa khu có thể đứt.",
+    "objective": "Kết hợp kiến thức trong level để lập luận, kiểm lịch thao tác và thiết kế dưới ràng buộc mới.",
+    "story": "Hai khu A/B cùng xem số chỗ; mạng giữa khu có thể đứt. Hệ thống phải không xác nhận quá sức chứa và không mất dấu giao dịch chưa rõ kết quả.",
+    "explanation": "Chốt lời hứa trong lúc chia mạng. Phân biệt leader, lease và nơi thực thi quyền. Phục hồi cả luồng dữ liệu và thông báo.",
+    "limit": "Bài tổng hợp bằng fixture/lập luận và bản thiết kế tự viết; không chạy hệ thống thật. Viết đủ mục không được coi là đã chấm đúng thiết kế.",
+    "terms": [
+      {
+        "name": "Luồng bình thường",
+        "english": "Normal flow",
+        "meaning": "Chuỗi thao tác khi các thành phần trả lời như dự kiến."
+      },
+      {
+        "name": "Tình huống lỗi",
+        "english": "Failure scenario",
+        "meaning": "Thứ tự sự kiện có một hoặc nhiều lỗi cần kiểm."
+      },
+      {
+        "name": "Tiêu chí đối chiếu",
+        "english": "Rubric",
+        "meaning": "Các yêu cầu cụ thể để tự xem bản thiết kế còn thiếu gì."
+      },
+      {
+        "name": "Số nút cần tham gia",
+        "english": "quorum",
+        "meaning": "Tập nút đủ điều kiện để chấp nhận một thao tác theo giao thức. Điều kiện còn phụ thuộc membership, phiên bản và cách xử lý xung đột."
+      },
+      {
+        "name": "Điều kiện luôn phải giữ",
+        "english": "invariant",
+        "meaning": "Quy tắc dữ liệu không được vi phạm, kể cả khi có lỗi; ví dụ số vé đã xác nhận không vượt sức chứa."
+      },
+      {
+        "name": "Thông báo xác nhận",
+        "english": "ACK",
+        "meaning": "Phản hồi cho biết một bước đã được bên nhận xác nhận. Phải đọc hợp đồng để biết đó là nhận, lưu bền hay áp dụng."
+      },
+      {
+        "name": "Thử lại",
+        "english": "retry",
+        "meaning": "Gửi hoặc thực hiện lại một thao tác sau lỗi/chờ quá hạn. Lần đầu có thể đã có hiệu ứng nên phải xét xử lý trùng."
+      },
+      {
+        "name": "Cấu trúc dữ liệu đã quy định",
+        "english": "schema",
+        "meaning": "Hợp đồng về trường, kiểu và ràng buộc. Dữ liệu đúng cấu trúc vẫn có thể sai về nội dung nghiệp vụ."
+      }
+    ],
+    "chapters": {
+      "version": 1,
+      "items": [
+        {
+          "id": "phase-1",
+          "title": "Chốt lời hứa trong lúc chia mạng",
+          "explanation": "Nếu invariant không bán quá chỗ cần quyền bán/phối hợp rõ. Có thể một phía từ chối/chờ, hoặc phân bổ quyền trước theo mô hình riêng. Không để cả hai tự tiêu cùng một chỗ và gọi đó là linearizable.",
+          "example": "Còn1, A/B đều nhận ghi độc lập rồi xác nhận1: tổng2 vi phạm. Đọc thấy cũ khác với ghi vi phạm invariant.",
+          "steps": [
+            "Dựng lịch cùng đọc1 rồi cùng xác nhận.",
+            "Nêu thao tác nào phải chờ/từ chối khi không có quyền."
+          ],
+          "misconception": "Hội tụ thành hai phiếu không sửa việc đã bán thừa.",
+          "sourceIds": [
+            "cap-paper",
+            "raft-paper",
+            "fencing",
+            "outbox-aws"
+          ]
+        },
+        {
+          "id": "phase-2",
+          "title": "Phân biệt leader, lease và nơi thực thi quyền",
+          "explanation": "Consensus log có điều kiện quorum/term; lease không dừng process cũ; fencing cần tài nguyên từ chối token lỗi thời. Membership và read semantics phải theo protocol, không chỉ quyết định tên leader.",
+          "example": "A token7 pause, B token8 ghi. Khi A tỉnh, kho đã thấy8 phải từ chối7. Nếu kho không kiểm thì sơ đồ lock không bảo vệ được.",
+          "steps": [
+            "Ghi token từng lần cấp quyền và mốc kho chấp nhận.",
+            "Thử request cũ tới sau và kiểm từ chối nguyên tử."
+          ],
+          "misconception": "Một dịch vụ khóa không tự bọc mọi tác dụng ngoài thành transaction.",
+          "sourceIds": [
+            "cap-paper",
+            "raft-paper",
+            "fencing",
+            "outbox-aws"
+          ]
+        },
+        {
+          "id": "phase-3",
+          "title": "Phục hồi cả luồng dữ liệu và thông báo",
+          "explanation": "Outbox giữ ý định event cùng phiếu; consumer chịu duplicate. Failover phải chọn nguồn đủ điều kiện, ghi nhận data loss nếu có và đối soát. Failback không nhận ghi cũ trước khi bắt kịp.",
+          "example": "Phiếu P9 và event E9 commit. Relay gửi rồi chết trước đánh dấu: E9 có thể lặp. B chưa có P9 không được tuyên bố mọi phiếu đã ACK còn nguyên khi promote.",
+          "steps": [
+            "Đặt crash sau commit và sau relay gửi.",
+            "Đối chiếu log/phiếu/event qua failover; ghi RPO/RTO có evidence."
+          ],
+          "misconception": "Đúng một lần ở broker không tự đồng nghĩa email/phiếu đúng một lần end-to-end.",
+          "sourceIds": [
+            "cap-paper",
+            "raft-paper",
+            "fencing",
+            "outbox-aws"
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "version": 1,
+      "items": [
+        {
+          "id": "phase-1",
+          "text": "Hai bên cùng xác nhận chỗ cuối có đúng invariant?",
+          "options": [
+            "Có nếu merge sau.",
+            "Không, nếu cùng tiêu một sức chứa1.",
+            "Có vì mỗi nơi chỉ bán1."
+          ],
+          "answer": 1,
+          "explanation": "Còn1, A/B đều nhận ghi độc lập rồi xác nhận1: tổng2 vi phạm. Đọc thấy cũ khác với ghi vi phạm invariant. Hội tụ thành hai phiếu không sửa việc đã bán thừa.",
+          "sourceIds": [
+            "cap-paper",
+            "raft-paper",
+            "fencing",
+            "outbox-aws"
+          ]
+        },
+        {
+          "id": "phase-2",
+          "text": "Kho thấy8 rồi nhận7. Kết quả cần là gì?",
+          "options": [
+            "Chấp nhận vì tới sau.",
+            "Từ chối chủ cũ theo fencing.",
+            "Đổi8 về7."
+          ],
+          "answer": 1,
+          "explanation": "A token7 pause, B token8 ghi. Khi A tỉnh, kho đã thấy8 phải từ chối7. Nếu kho không kiểm thì sơ đồ lock không bảo vệ được. Một dịch vụ khóa không tự bọc mọi tác dụng ngoài thành transaction.",
+          "sourceIds": [
+            "cap-paper",
+            "raft-paper",
+            "fencing",
+            "outbox-aws"
+          ]
+        },
+        {
+          "id": "phase-3",
+          "text": "Relay gửi rồi chết trước đánh dấu có thể gây gì?",
+          "options": [
+            "Tự xóa event khỏi mọi nơi.",
+            "Event giao lại; consumer phải xử lý trùng.",
+            "Không thể retry."
+          ],
+          "answer": 1,
+          "explanation": "Phiếu P9 và event E9 commit. Relay gửi rồi chết trước đánh dấu: E9 có thể lặp. B chưa có P9 không được tuyên bố mọi phiếu đã ACK còn nguyên khi promote. Đúng một lần ở broker không tự đồng nghĩa email/phiếu đúng một lần end-to-end.",
+          "sourceIds": [
+            "cap-paper",
+            "raft-paper",
+            "fencing",
+            "outbox-aws"
+          ]
+        }
+      ]
+    },
+    "prediction": {
+      "text": "Cần giữ chỗ cuối đúng khi partition thì có thể phải từ chối một phía?",
+      "options": [
+        "Có, tùy quyền/protocol và invariant.",
+        "Không, mọi yêu cầu luôn phải thành công."
+      ],
+      "answer": 0,
+      "explanation": "Không thể hứa mọi điều bất chấp liên lạc và quyền."
+    },
+    "challenge": {
+      "text": "A trở lại với log cũ, cho ghi ngay có an toàn?",
+      "options": [
+        "Có vì A từng là leader.",
+        "Không; phải bắt kịp/đối soát và cấp quyền đúng."
+      ],
+      "answer": 1,
+      "explanation": "Quyền cũ và dữ liệu cũ không đủ."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Theo dấu nơi giữ trạng thái và điều đã được xác nhận.",
+        "Không thể hứa mọi điều bất chấp liên lạc và quyền."
+      ],
+      "challenge": [
+        "Kiểm tra yêu cầu mới; tìm lịch thao tác có thể làm phương án sai.",
+        "Quyền cũ và dữ liệu cũ không đủ."
+      ]
+    },
+    "sources": [
+      {
+        "title": "Gilbert và Lynch — Perspectives on CAP",
+        "url": "https://groups.csail.mit.edu/tds/papers/Gilbert/Brewer2.pdf"
+      },
+      {
+        "title": "Ongaro và Ousterhout — Raft (2014)",
+        "url": "https://raft.github.io/raft.pdf"
+      },
+      {
+        "title": "Martin Kleppmann — Distributed locking (2016)",
+        "url": "https://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html"
+      },
+      {
+        "title": "AWS — Transactional outbox",
+        "url": "https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/transactional-outbox.html"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-capstone-distributed",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L3-06",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Hai khu A/B cùng xem số chỗ; mạng giữa khu có thể đứt.",
+      "context": "Hai khu A/B cùng xem số chỗ; mạng giữa khu có thể đứt. Hệ thống phải không xác nhận quá sức chứa và không mất dấu giao dịch chưa rõ kết quả.",
+      "requirements": [
+        "Kết hợp kiến thức trong level để lập luận, kiểm lịch thao tác và thiết kế dưới ràng buộc mới.",
+        "Giải thích được một tình huống lỗi và điều kiện để phương án còn đúng."
+      ],
+      "activityRef": "module-practice",
+      "experimentSteps": [
+        "Theo từng bước trong các ví dụ và tự tính kết quả trước khi xem giải thích.",
+        "Chọn phương án cho từng tình huống, kiểm tra và sửa lựa chọn.",
+        "Áp dụng sang yêu cầu mới; nêu điều kiện và giới hạn của quyết định."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Hội tụ thành hai phiếu không sửa việc đã bán thừa.",
+        "Đúng một lần ở broker không tự đồng nghĩa email/phiếu đúng một lần end-to-end."
+      ],
+      "limitations": "Bài tổng hợp bằng fixture/lập luận và bản thiết kế tự viết; không chạy hệ thống thật. Viết đủ mục không được coi là đã chấm đúng thiết kế."
+    },
+    "designTask": {
+      "version": 1,
+      "prompt": "Hai khu A/B cùng xem số chỗ; mạng giữa khu có thể đứt. Hệ thống phải không xác nhận quá sức chứa và không mất dấu giao dịch chưa rõ kết quả.",
+      "deliverables": [
+        {
+          "id": "part-1",
+          "prompt": "Viết invariant và hành vi từng phía khi partition."
+        },
+        {
+          "id": "part-2",
+          "prompt": "Dựng trace quorum/lease/fencing và crash outbox với trạng thái rõ."
+        },
+        {
+          "id": "part-3",
+          "prompt": "Nêu failover/failback, RPO/RTO và phần cần protocol đã kiểm."
+        }
+      ],
+      "rubric": [
+        "Có yêu cầu/invariant, phép tính và đơn vị nhất quán với đề.",
+        "Luồng bình thường nêu nguồn có thẩm quyền và trạng thái từng bước.",
+        "Trace lỗi có vị trí lỗi, điều đã biết/chưa biết và cách phục hồi.",
+        "Nêu quyền, chi phí, giới hạn; phân biệt giả định với kết quả chưa được đo."
+      ],
+      "variation": "Thêm yêu cầu cả hai khu được bán offline. Đề xuất phân bổ quyền trước hoặc nêu ràng buộc phải thay; không hứa bán chung chỗ cuối độc lập."
+    }
+  },
+  {
+    "id": "capstone-production",
+    "version": 1,
+    "status": "beta",
+    "kind": "module-practice",
+    "level": "L4",
+    "moduleId": "L4.6",
+    "minutes": 60,
+    "title": "Tổng hợp L4: điều tra lỗi sau một lần phát hành",
+    "subtitle": "Canary10% traffic có lỗi20%, bản cũ lỗi1%.",
+    "objective": "Kết hợp kiến thức trong level để lập luận, kiểm lịch thao tác và thiết kế dưới ràng buộc mới.",
+    "story": "Canary10% traffic có lỗi20%, bản cũ lỗi1%. Tổng10.000 request chia đúng tỷ lệ đó; SLO99% trong cửa sổ này. Restore đã đo90 phút nhưng mục tiêu60.",
+    "explanation": "Tách ảnh hưởng của bản mới. Giảm tác động mà không làm mất dữ liệu. Khép sự cố bằng kiểm chứng và hành động.",
+    "limit": "Bài tổng hợp bằng fixture/lập luận và bản thiết kế tự viết; không chạy hệ thống thật. Viết đủ mục không được coi là đã chấm đúng thiết kế.",
+    "terms": [
+      {
+        "name": "Luồng bình thường",
+        "english": "Normal flow",
+        "meaning": "Chuỗi thao tác khi các thành phần trả lời như dự kiến."
+      },
+      {
+        "name": "Tình huống lỗi",
+        "english": "Failure scenario",
+        "meaning": "Thứ tự sự kiện có một hoặc nhiều lỗi cần kiểm."
+      },
+      {
+        "name": "Tiêu chí đối chiếu",
+        "english": "Rubric",
+        "meaning": "Các yêu cầu cụ thể để tự xem bản thiết kế còn thiếu gì."
+      },
+      {
+        "name": "Điều kiện luôn phải giữ",
+        "english": "invariant",
+        "meaning": "Quy tắc dữ liệu không được vi phạm, kể cả khi có lỗi; ví dụ số vé đã xác nhận không vượt sức chứa."
+      },
+      {
+        "name": "Thông báo xác nhận",
+        "english": "ACK",
+        "meaning": "Phản hồi cho biết một bước đã được bên nhận xác nhận. Phải đọc hợp đồng để biết đó là nhận, lưu bền hay áp dụng."
+      },
+      {
+        "name": "Thử lại",
+        "english": "retry",
+        "meaning": "Gửi hoặc thực hiện lại một thao tác sau lỗi/chờ quá hạn. Lần đầu có thể đã có hiệu ứng nên phải xét xử lý trùng."
+      },
+      {
+        "name": "Quay về trạng thái trước",
+        "english": "rollback",
+        "meaning": "Khôi phục theo cơ chế cụ thể. Quay lại bản code cũ không tự hoàn tác dữ liệu hoặc giao dịch ở hệ thống khác."
+      },
+      {
+        "name": "Cấu trúc dữ liệu đã quy định",
+        "english": "schema",
+        "meaning": "Hợp đồng về trường, kiểu và ràng buộc. Dữ liệu đúng cấu trúc vẫn có thể sai về nội dung nghiệp vụ."
+      },
+      {
+        "name": "Nhóm dùng chung nền tảng",
+        "english": "tenant",
+        "meaning": "Một tổ chức hoặc nhóm khách hàng dùng chung hệ thống nhưng cần tách dữ liệu, quyền và ngân sách tài nguyên."
+      }
+    ],
+    "chapters": {
+      "version": 1,
+      "items": [
+        {
+          "id": "phase-1",
+          "title": "Tách ảnh hưởng của bản mới",
+          "explanation": "SLI theo request phải đếm cả hai nhóm và cùng tiêu chí. Canary so với baseline giúp tìm lỗi tập trung; tổng trung bình có thể che ảnh hưởng. Error budget tính từ SLO và số lần đủ điều kiện.",
+          "example": "Mới1.000×20%=200 lỗi; cũ9.000×1%=90; tổng290/10.000=2,9% lỗi, success97,1%. Budget1%=100, vượt190.",
+          "steps": [
+            "Tính lỗi từng nhóm rồi cộng.",
+            "So290 với100, dừng rollout theo policy và giữ evidence."
+          ],
+          "misconception": "Không bỏ lỗi canary khỏi mẫu số để làm SLO xanh.",
+          "sourceIds": [
+            "slo-google",
+            "cascade-google",
+            "deploy-k8s",
+            "postmortem",
+            "dr-aws"
+          ]
+        },
+        {
+          "id": "phase-2",
+          "title": "Giảm tác động mà không làm mất dữ liệu",
+          "explanation": "Rollback phải đọc được dữ liệu mới; flag/degrade chỉ dùng khi giữ invariant/quyền. Retry giới hạn tránh storm, bulkhead giữ phần cốt lõi. Incident có người điều phối và timeline, không chờ biết mọi nguyên nhân mới giảm ảnh hưởng.",
+          "example": "V2 ghi status mới V1 không hiểu. Rollback image ngay có thể tiếp tục lỗi; chọn tắt hành vi mới/forward fix tương thích theo kế hoạch đã kiểm.",
+          "steps": [
+            "Kiểm schema/state trước đổi route.",
+            "Đo luồng nộp, lỗi, queue và retry khi giảm tác động."
+          ],
+          "misconception": "Trả thành công giả không là graceful degradation.",
+          "sourceIds": [
+            "slo-google",
+            "cascade-google",
+            "deploy-k8s",
+            "postmortem",
+            "dr-aws"
+          ]
+        },
+        {
+          "id": "phase-3",
+          "title": "Khép sự cố bằng kiểm chứng và hành động",
+          "explanation": "Restore drill so toàn thời gian với RTO, dữ liệu với RPO; log/audit cần privacy. Postmortem ghi yếu tố góp phần và action có owner/điều kiện kiểm, không chỉ “cẩn thận hơn”. Cost gồm dự phòng và công trực.",
+          "example": "Đo restore90 phút với mục tiêu60 là chưa đạt30 phút. Cần phân rã timeline để cải thiện và diễn tập lại, không sửa số mục tiêu trong báo cáo cho đẹp.",
+          "steps": [
+            "Ghi chênh lệch mục tiêu/số đo và điểm cần giảm.",
+            "Chọn hai action kiểm được, một về phát hành và một về phục hồi."
+          ],
+          "misconception": "Review bởi AI hoặc test browser không thay diễn tập hạ tầng thật.",
+          "sourceIds": [
+            "slo-google",
+            "cascade-google",
+            "deploy-k8s",
+            "postmortem",
+            "dr-aws"
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "version": 1,
+      "items": [
+        {
+          "id": "phase-1",
+          "text": "Tổng lỗi là bao nhiêu?",
+          "options": [
+            "200.",
+            "290.",
+            "100."
+          ],
+          "answer": 1,
+          "explanation": "Mới1.000×20%=200 lỗi; cũ9.000×1%=90; tổng290/10.000=2,9% lỗi, success97,1%. Budget1%=100, vượt190. Không bỏ lỗi canary khỏi mẫu số để làm SLO xanh.",
+          "sourceIds": [
+            "slo-google",
+            "cascade-google",
+            "deploy-k8s",
+            "postmortem",
+            "dr-aws"
+          ]
+        },
+        {
+          "id": "phase-2",
+          "text": "V1 không đọc state V2. Rollback đã chắc an toàn?",
+          "options": [
+            "Rồi; image cũ luôn tốt.",
+            "Chưa; phải giải quyết tương thích.",
+            "Rồi; deployment tự undo DB."
+          ],
+          "answer": 1,
+          "explanation": "V2 ghi status mới V1 không hiểu. Rollback image ngay có thể tiếp tục lỗi; chọn tắt hành vi mới/forward fix tương thích theo kế hoạch đã kiểm. Trả thành công giả không là graceful degradation.",
+          "sourceIds": [
+            "slo-google",
+            "cascade-google",
+            "deploy-k8s",
+            "postmortem",
+            "dr-aws"
+          ]
+        },
+        {
+          "id": "phase-3",
+          "text": "Restore90 so RTO60 có đạt không?",
+          "options": [
+            "Có vì restore xong.",
+            "Chưa, chậm30 phút theo ranh giới đã chốt.",
+            "Có nếu chỉ tính bước copy40 phút."
+          ],
+          "answer": 1,
+          "explanation": "Đo restore90 phút với mục tiêu60 là chưa đạt30 phút. Cần phân rã timeline để cải thiện và diễn tập lại, không sửa số mục tiêu trong báo cáo cho đẹp. Review bởi AI hoặc test browser không thay diễn tập hạ tầng thật.",
+          "sourceIds": [
+            "slo-google",
+            "cascade-google",
+            "deploy-k8s",
+            "postmortem",
+            "dr-aws"
+          ]
+        }
+      ]
+    },
+    "prediction": {
+      "text": "SLO99% trên10.000 request cho phép bao nhiêu lỗi?",
+      "options": [
+        "1.000.",
+        "100."
+      ],
+      "answer": 1,
+      "explanation": "Ngân sách lỗi là 1% của 10.000 request đủ điều kiện, tức 100 request trong cửa sổ đo."
+    },
+    "challenge": {
+      "text": "Sau sửa chỉ xem trang chủ200 có đủ khép lỗi nộp bài?",
+      "options": [
+        "Không; cần kiểm luồng bị ảnh hưởng và dữ liệu.",
+        "Có; process sống là xong."
+      ],
+      "answer": 0,
+      "explanation": "Nghiệm thu phải theo triệu chứng/invariant ban đầu."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Theo dấu nơi giữ trạng thái và điều đã được xác nhận.",
+        "1%×10.000=100."
+      ],
+      "challenge": [
+        "Kiểm tra yêu cầu mới; tìm lịch thao tác có thể làm phương án sai.",
+        "Nghiệm thu phải theo triệu chứng/invariant ban đầu."
+      ]
+    },
+    "sources": [
+      {
+        "title": "Google SRE Workbook — Implementing SLOs",
+        "url": "https://sre.google/workbook/implementing-slos/"
+      },
+      {
+        "title": "Google SRE — Addressing cascading failures",
+        "url": "https://sre.google/sre-book/addressing-cascading-failures/"
+      },
+      {
+        "title": "Kubernetes — Deployments",
+        "url": "https://kubernetes.io/docs/concepts/workloads/controllers/deployment/"
+      },
+      {
+        "title": "Google SRE — Postmortem culture",
+        "url": "https://sre.google/sre-book/postmortem-culture/"
+      },
+      {
+        "title": "AWS Well-Architected — Disaster recovery",
+        "url": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/plan-for-disaster-recovery-dr.html"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-capstone-production",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L4-06",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Canary10% traffic có lỗi20%, bản cũ lỗi1%.",
+      "context": "Canary10% traffic có lỗi20%, bản cũ lỗi1%. Tổng10.000 request chia đúng tỷ lệ đó; SLO99% trong cửa sổ này. Restore đã đo90 phút nhưng mục tiêu60.",
+      "requirements": [
+        "Kết hợp kiến thức trong level để lập luận, kiểm lịch thao tác và thiết kế dưới ràng buộc mới.",
+        "Giải thích được một tình huống lỗi và điều kiện để phương án còn đúng."
+      ],
+      "activityRef": "module-practice",
+      "experimentSteps": [
+        "Theo từng bước trong các ví dụ và tự tính kết quả trước khi xem giải thích.",
+        "Chọn phương án cho từng tình huống, kiểm tra và sửa lựa chọn.",
+        "Áp dụng sang yêu cầu mới; nêu điều kiện và giới hạn của quyết định."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Không bỏ lỗi canary khỏi mẫu số để làm SLO xanh.",
+        "Review bởi AI hoặc test browser không thay diễn tập hạ tầng thật."
+      ],
+      "limitations": "Bài tổng hợp bằng fixture/lập luận và bản thiết kế tự viết; không chạy hệ thống thật. Viết đủ mục không được coi là đã chấm đúng thiết kế."
+    },
+    "designTask": {
+      "version": 1,
+      "prompt": "Canary10% traffic có lỗi20%, bản cũ lỗi1%. Tổng10.000 request chia đúng tỷ lệ đó; SLO99% trong cửa sổ này. Restore đã đo90 phút nhưng mục tiêu60.",
+      "deliverables": [
+        {
+          "id": "part-1",
+          "prompt": "Tính SLI/error budget theo hai nhóm và quyết định rollout."
+        },
+        {
+          "id": "part-2",
+          "prompt": "Viết timeline giảm tác động, kiểm quyền/dữ liệu và retry."
+        },
+        {
+          "id": "part-3",
+          "prompt": "Đề xuất hai action postmortem có owner, cách kiểm; kế hoạch RPO/RTO/cost."
+        }
+      ],
+      "rubric": [
+        "Có yêu cầu/invariant, phép tính và đơn vị nhất quán với đề.",
+        "Luồng bình thường nêu nguồn có thẩm quyền và trạng thái từng bước.",
+        "Trace lỗi có vị trí lỗi, điều đã biết/chưa biết và cách phục hồi.",
+        "Nêu quyền, chi phí, giới hạn; phân biệt giả định với kết quả chưa được đo."
+      ],
+      "variation": "Lỗi chỉ ở một tenant và trace sampling bỏ sót tenant đó. Sửa cách đo mà không đưa dữ liệu riêng vào log."
+    }
+  },
+  {
+    "id": "capstone-architecture",
+    "version": 1,
+    "status": "beta",
+    "kind": "module-practice",
+    "level": "L5",
+    "moduleId": "L5.6",
+    "minutes": 60,
+    "title": "Tổng hợp L5: bảo vệ và sửa một bản thiết kế",
+    "subtitle": "Cổng trường từ2.",
+    "objective": "Kết hợp kiến thức trong level để lập luận, kiểm lịch thao tác và thiết kế dưới ràng buộc mới.",
+    "story": "Cổng trường từ2.000 lên20.000 học sinh, nhóm từ2 lên4 người; thêm yêu cầu offline và không mất phiếu đã xác nhận khi mất một máy. Bản cũ dùng một app và một database.",
+    "explanation": "Đổi quy mô không tự chỉ định kiến trúc. Tiến hóa qua các mốc có thể quay lại. Review để chọn và biết khi cần đổi.",
+    "limit": "Bài tổng hợp bằng fixture/lập luận và bản thiết kế tự viết; không chạy hệ thống thật. Viết đủ mục không được coi là đã chấm đúng thiết kế.",
+    "terms": [
+      {
+        "name": "Luồng bình thường",
+        "english": "Normal flow",
+        "meaning": "Chuỗi thao tác khi các thành phần trả lời như dự kiến."
+      },
+      {
+        "name": "Tình huống lỗi",
+        "english": "Failure scenario",
+        "meaning": "Thứ tự sự kiện có một hoặc nhiều lỗi cần kiểm."
+      },
+      {
+        "name": "Tiêu chí đối chiếu",
+        "english": "Rubric",
+        "meaning": "Các yêu cầu cụ thể để tự xem bản thiết kế còn thiếu gì."
+      },
+      {
+        "name": "Điều kiện luôn phải giữ",
+        "english": "invariant",
+        "meaning": "Quy tắc dữ liệu không được vi phạm, kể cả khi có lỗi; ví dụ số vé đã xác nhận không vượt sức chứa."
+      },
+      {
+        "name": "Thông báo xác nhận",
+        "english": "ACK",
+        "meaning": "Phản hồi cho biết một bước đã được bên nhận xác nhận. Phải đọc hợp đồng để biết đó là nhận, lưu bền hay áp dụng."
+      },
+      {
+        "name": "Thử lại",
+        "english": "retry",
+        "meaning": "Gửi hoặc thực hiện lại một thao tác sau lỗi/chờ quá hạn. Lần đầu có thể đã có hiệu ứng nên phải xét xử lý trùng."
+      },
+      {
+        "name": "Quay về trạng thái trước",
+        "english": "rollback",
+        "meaning": "Khôi phục theo cơ chế cụ thể. Quay lại bản code cũ không tự hoàn tác dữ liệu hoặc giao dịch ở hệ thống khác."
+      },
+      {
+        "name": "Bổ sung dữ liệu lịch sử",
+        "english": "backfill",
+        "meaning": "Chạy xử lý cho dữ liệu cũ còn thiếu; cần phối hợp với luồng đang chạy để không bỏ sót hoặc đếm trùng."
+      },
+      {
+        "name": "Cấu trúc dữ liệu đã quy định",
+        "english": "schema",
+        "meaning": "Hợp đồng về trường, kiểu và ràng buộc. Dữ liệu đúng cấu trúc vẫn có thể sai về nội dung nghiệp vụ."
+      }
+    ],
+    "chapters": {
+      "version": 1,
+      "items": [
+        {
+          "id": "phase-1",
+          "title": "Đổi quy mô không tự chỉ định kiến trúc",
+          "explanation": "Tính lại workload, invariant và năng lực vận hành. Không suy10×user là10×peak nếu hành vi khác; dùng giả định và đo. Modular monolith có thể vẫn phù hợp; service/shard thêm chi phí cần lý do.",
+          "example": "Nếu mỗi người gửi2 lượt trong600s,20.000×2/600≈66,67 lượt/s trung bình. Peak và đọc/ghi cần đo riêng trước quyết định.",
+          "steps": [
+            "Ghi giả định hành vi và khoảng biến động.",
+            "So hai phương án đạt cùng yêu cầu, gồm công trực và lỗi mới."
+          ],
+          "misconception": "Nhiều service không là thước đo độ trưởng thành.",
+          "sourceIds": [
+            "c4",
+            "adr",
+            "strangler",
+            "cap-paper",
+            "dr-aws"
+          ]
+        },
+        {
+          "id": "phase-2",
+          "title": "Tiến hóa qua các mốc có thể quay lại",
+          "explanation": "Chọn boundary/data owner, contract nhiều phiên bản và migration có đối soát. Offline cần sync/conflict/right policy, không chỉ cache asset. Ràng buộc không mất phiếu cần ACK/failure model và failover phù hợp.",
+          "example": "V1/V2 cùng chạy; backfill thiếu cập nhật v5 thì chưa cutover. Offline gửi lại phiếu cần ID/version và kiểm chỗ ở nguồn theo chính sách.",
+          "steps": [
+            "Viết phase expand/backfill/cutover/contract.",
+            "Chèn lỗi và retry tại mỗi phase, nêu dữ liệu/consumer còn sống."
+          ],
+          "misconception": "Offline tải trang không tự cho phép xác nhận chỗ an toàn khi không liên lạc nguồn.",
+          "sourceIds": [
+            "c4",
+            "adr",
+            "strangler",
+            "cap-paper",
+            "dr-aws"
+          ]
+        },
+        {
+          "id": "phase-3",
+          "title": "Review để chọn và biết khi cần đổi",
+          "explanation": "ADR ghi lựa chọn, alternatives, constraints và trigger. Review claim bằng trace, benchmark cùng workload và source đúng revision. Chọn spike giảm bất định có thể đảo quyết định; roadmap gồm owner và điều kiện xác minh.",
+          "example": "Chưa biết một DB chịu peak: load test đại diện và contention giúp quyết định hơn việc dựng mười service chưa có dữ liệu. Nếu không đạt, review bottleneck trước thay toàn kiến trúc.",
+          "steps": [
+            "Lập ma trận hard constraints rồi cost/latency/ops.",
+            "Viết hai finding có evidence và phép thử để xác nhận sửa."
+          ],
+          "misconception": "Một bản thiết kế được viết xong không đồng nghĩa đã vận hành ở quy mô đó.",
+          "sourceIds": [
+            "c4",
+            "adr",
+            "strangler",
+            "cap-paper",
+            "dr-aws"
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "version": 1,
+      "items": [
+        {
+          "id": "phase-1",
+          "text": "Trung bình theo ví dụ mới là bao nhiêu?",
+          "options": [
+            "6.667 lượt/s.",
+            "Khoảng66,67 lượt/s.",
+            "20.000 lượt/s chắc chắn."
+          ],
+          "answer": 1,
+          "explanation": "Nếu mỗi người gửi2 lượt trong600s,20.000×2/600≈66,67 lượt/s trung bình. Peak và đọc/ghi cần đo riêng trước quyết định. Nhiều service không là thước đo độ trưởng thành.",
+          "sourceIds": [
+            "c4",
+            "adr",
+            "strangler",
+            "cap-paper",
+            "dr-aws"
+          ]
+        },
+        {
+          "id": "phase-2",
+          "text": "Có asset offline có đủ bán chỗ cuối offline không?",
+          "options": [
+            "Có; service worker là consensus.",
+            "Không; còn quyền/invariant và protocol đồng bộ.",
+            "Có; browser storage đủ cho mọi người."
+          ],
+          "answer": 1,
+          "explanation": "V1/V2 cùng chạy; backfill thiếu cập nhật v5 thì chưa cutover. Offline gửi lại phiếu cần ID/version và kiểm chỗ ở nguồn theo chính sách. Offline tải trang không tự cho phép xác nhận chỗ an toàn khi không liên lạc nguồn.",
+          "sourceIds": [
+            "c4",
+            "adr",
+            "strangler",
+            "cap-paper",
+            "dr-aws"
+          ]
+        },
+        {
+          "id": "phase-3",
+          "text": "Chưa có benchmark có nên ghi “đã chịu peak20.000 user” không?",
+          "options": [
+            "Có; số node trong sơ đồ là bằng chứng.",
+            "Không; chỉ ghi giả thuyết và kế hoạch đo.",
+            "Có nếu review bằng AI."
+          ],
+          "answer": 1,
+          "explanation": "Chưa biết một DB chịu peak: load test đại diện và contention giúp quyết định hơn việc dựng mười service chưa có dữ liệu. Nếu không đạt, review bottleneck trước thay toàn kiến trúc. Một bản thiết kế được viết xong không đồng nghĩa đã vận hành ở quy mô đó.",
+          "sourceIds": [
+            "c4",
+            "adr",
+            "strangler",
+            "cap-paper",
+            "dr-aws"
+          ]
+        }
+      ]
+    },
+    "prediction": {
+      "text": "User tăng10 lần có bắt buộc microservices ngay?",
+      "options": [
+        "Không; cần workload, ranh giới và evidence.",
+        "Có; đó là định luật kiến trúc."
+      ],
+      "answer": 0,
+      "explanation": "Kiến trúc phục vụ ràng buộc cụ thể."
+    },
+    "challenge": {
+      "text": "Yêu cầu offline mâu thuẫn với bán chỗ chung khi partition. Cần làm gì?",
+      "options": [
+        "Hứa cả hai vô điều kiện.",
+        "Nêu đánh đổi, quyền bán hoặc thay hợp đồng; không che mâu thuẫn.",
+        "Chỉ thêm một cache."
+      ],
+      "answer": 1,
+      "explanation": "Thiết kế phải công khai điều không thể bảo đảm cùng lúc."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Theo dấu nơi giữ trạng thái và điều đã được xác nhận.",
+        "Kiến trúc phục vụ ràng buộc cụ thể."
+      ],
+      "challenge": [
+        "Kiểm tra yêu cầu mới; tìm lịch thao tác có thể làm phương án sai.",
+        "Thiết kế phải công khai điều không thể bảo đảm cùng lúc."
+      ]
+    },
+    "sources": [
+      {
+        "title": "Simon Brown — C4 model",
+        "url": "https://c4model.com/"
+      },
+      {
+        "title": "Michael Nygard — Documenting architecture decisions",
+        "url": "https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions"
+      },
+      {
+        "title": "Martin Fowler — Strangler Fig Application",
+        "url": "https://martinfowler.com/bliki/StranglerFigApplication.html"
+      },
+      {
+        "title": "Gilbert và Lynch — Perspectives on CAP",
+        "url": "https://groups.csail.mit.edu/tds/papers/Gilbert/Brewer2.pdf"
+      },
+      {
+        "title": "AWS Well-Architected — Disaster recovery",
+        "url": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/plan-for-disaster-recovery-dr.html"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-capstone-architecture",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L5-06",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Cổng trường từ2.",
+      "context": "Cổng trường từ2.000 lên20.000 học sinh, nhóm từ2 lên4 người; thêm yêu cầu offline và không mất phiếu đã xác nhận khi mất một máy. Bản cũ dùng một app và một database.",
+      "requirements": [
+        "Kết hợp kiến thức trong level để lập luận, kiểm lịch thao tác và thiết kế dưới ràng buộc mới.",
+        "Giải thích được một tình huống lỗi và điều kiện để phương án còn đúng."
+      ],
+      "activityRef": "module-practice",
+      "experimentSteps": [
+        "Theo từng bước trong các ví dụ và tự tính kết quả trước khi xem giải thích.",
+        "Chọn phương án cho từng tình huống, kiểm tra và sửa lựa chọn.",
+        "Áp dụng sang yêu cầu mới; nêu điều kiện và giới hạn của quyết định."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Nhiều service không là thước đo độ trưởng thành.",
+        "Một bản thiết kế được viết xong không đồng nghĩa đã vận hành ở quy mô đó."
+      ],
+      "limitations": "Bài tổng hợp bằng fixture/lập luận và bản thiết kế tự viết; không chạy hệ thống thật. Viết đủ mục không được coi là đã chấm đúng thiết kế."
+    },
+    "designTask": {
+      "version": 1,
+      "prompt": "Cổng trường từ2.000 lên20.000 học sinh, nhóm từ2 lên4 người; thêm yêu cầu offline và không mất phiếu đã xác nhận khi mất một máy. Bản cũ dùng một app và một database.",
+      "deliverables": [
+        {
+          "id": "part-1",
+          "prompt": "Viết bản thiết kế1 trang: yêu cầu/workload/API/data/flow và ownership."
+        },
+        {
+          "id": "part-2",
+          "prompt": "Lập migration, trace lỗi/offline và quyền; xác định phạm vi rollback."
+        },
+        {
+          "id": "part-3",
+          "prompt": "Viết ADR, cost/risk và kế hoạch kiểm chứng theo từng milestone."
+        }
+      ],
+      "rubric": [
+        "Có yêu cầu/invariant, phép tính và đơn vị nhất quán với đề.",
+        "Luồng bình thường nêu nguồn có thẩm quyền và trạng thái từng bước.",
+        "Trace lỗi có vị trí lỗi, điều đã biết/chưa biết và cách phục hồi.",
+        "Nêu quyền, chi phí, giới hạn; phân biệt giả định với kết quả chưa được đo."
+      ],
+      "variation": "Ngân sách giảm một nửa, cần phục vụ thêm một vùng. Sửa phương án và nêu điều kiện nghiệm thu còn thiếu."
+    }
+  }
+]

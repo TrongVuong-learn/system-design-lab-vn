@@ -1,0 +1,2086 @@
+[
+  {
+    "id": "case-short-links",
+    "version": 1,
+    "status": "beta",
+    "kind": "module-practice",
+    "level": "L2",
+    "moduleId": "L2.2",
+    "minutes": 45,
+    "title": "Case: ghi chú lớp bằng mã ngắn",
+    "subtitle": "Lớp chia sẻ ghi chú qua mã6 ký tự, có thời hạn24 giờ và quyền riêng/tự công khai.",
+    "objective": "Thiết kế link ngắn: tạo mã không trùng, tra cứu khi cache cũ, hết hạn và xử lý đổi đích.",
+    "story": "Lớp chia sẻ ghi chú qua mã6 ký tự, có thời hạn24 giờ và quyền riêng/tự công khai. Một mã có thể bị sinh trùng; thống kê lượt mở xử lý nền.",
+    "explanation": "Cấp mã phải bảo vệ ánh xạ cũ. Hết hạn phải theo hợp đồng tại nơi phục vụ. Thống kê không nên chặn đường đọc cốt lõi.",
+    "limit": "Case tự biên soạn trên dữ liệu giả lập bằng chữ; không mô tả kiến trúc hiện tại của công ty, không truy cập dữ liệu người thật hoặc hệ thống ngoài.",
+    "terms": [
+      {
+        "name": "Nguồn dữ liệu",
+        "english": "Source of truth",
+        "meaning": "Nơi chịu trách nhiệm quyết định dữ liệu gốc."
+      },
+      {
+        "name": "Dấu vết thao tác",
+        "english": "Trace",
+        "meaning": "Danh sách hành động có thứ tự để giải thích kết quả."
+      },
+      {
+        "name": "Điều kiện luôn phải giữ",
+        "english": "invariant",
+        "meaning": "Quy tắc dữ liệu không được vi phạm, kể cả khi có lỗi; ví dụ số vé đã xác nhận không vượt sức chứa."
+      },
+      {
+        "name": "Thử lại",
+        "english": "retry",
+        "meaning": "Gửi hoặc thực hiện lại một thao tác sau lỗi/chờ quá hạn. Lần đầu có thể đã có hiệu ứng nên phải xét xử lý trùng."
+      },
+      {
+        "name": "Cấu trúc dữ liệu đã quy định",
+        "english": "schema",
+        "meaning": "Hợp đồng về trường, kiểu và ràng buộc. Dữ liệu đúng cấu trúc vẫn có thể sai về nội dung nghiệp vụ."
+      },
+      {
+        "name": "Chạy lại dữ liệu đã ghi",
+        "english": "replay",
+        "meaning": "Đọc và áp dụng lại lịch sử theo quy tắc; cần tránh lặp hiệu ứng bên ngoài."
+      },
+      {
+        "name": "Sự đánh đổi",
+        "english": "trade-off",
+        "meaning": "Một phương án đem lại lợi ích kèm chi phí hoặc rủi ro; cần chỉ rõ điều kiện và thước đo."
+      }
+    ],
+    "chapters": {
+      "version": 1,
+      "items": [
+        {
+          "id": "step-1",
+          "title": "Cấp mã phải bảo vệ ánh xạ cũ",
+          "explanation": "Encoding đổi cách biểu diễn có thể đảo ngược theo quy tắc; hashing ánh xạ có thể collision. Mã ngắn cần namespace/unique và retry khi trùng, không ghi đè link cũ. URL khó đoán không thay quyền.",
+          "example": "Bộ sinh ra k7 cho ghi chú B nhưng k7 đã trỏ A: insert phải bị conflict và cấp mã khác cho B. Không cập nhật k7→B như thể thành công.",
+          "steps": [
+            "Ghi bảng k7→A trước thao tác.",
+            "Thử insert B cùng k7, giữ A và cấp mã mới."
+          ],
+          "misconception": "Xác suất collision thấp không xóa nhu cầu xử lý conflict.",
+          "sourceIds": [
+            "pg-constraints",
+            "cache-rfc",
+            "security-owasp",
+            "kafka-design"
+          ]
+        },
+        {
+          "id": "step-2",
+          "title": "Hết hạn phải theo hợp đồng tại nơi phục vụ",
+          "explanation": "ExpiresAt và quyền cần được kiểm ở API/cache/CDN theo chính sách. TTL cache phải tương thích expiry; link có thể bị thu hồi trước hạn. Truy cập sau expiry không được mặc nhiên trả nội dung cũ từ cache.",
+          "example": "Link hết lúc12:00, cache được tạo11:59 TTL10 phút. Nếu chỉ dựa TTL thì có thể phục vụ tới12:09 trái yêu cầu.",
+          "steps": [
+            "So expiresAt với thời điểm phục vụ.",
+            "Thiết kế TTL/validation và thử thu hồi quyền trước expiry."
+          ],
+          "misconception": "TTL cache không phải quyền truy cập vĩnh viễn tới lúc eviction.",
+          "sourceIds": [
+            "pg-constraints",
+            "cache-rfc",
+            "security-owasp",
+            "kafka-design"
+          ]
+        },
+        {
+          "id": "step-3",
+          "title": "Thống kê không nên chặn đường đọc cốt lõi",
+          "explanation": "Click analytics có eventId và policy chống duplicate; định nghĩa đếm mở/unique user khác nhau. Có thể xử lý nền với freshness công khai. Dữ liệu riêng và bot cần policy; không lấy số click làm số người chắc chắn.",
+          "example": "Ba event E1,E2,E1 replay: đếm theo eventId là2, không3. Nếu hai event thuộc cùng người thì unique người còn có định nghĩa khác.",
+          "steps": [
+            "Chọn đơn vị đếm và thời hạn dedup.",
+            "Thử queue chậm, giữ đường mở link theo SLO và trạng thái thống kê trễ."
+          ],
+          "misconception": "Ba request không tự bằng ba người độc lập.",
+          "sourceIds": [
+            "pg-constraints",
+            "cache-rfc",
+            "security-owasp",
+            "kafka-design"
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "version": 1,
+      "items": [
+        {
+          "id": "step-1",
+          "text": "Sinh mã trùng đang trỏ A thì làm gì?",
+          "options": [
+            "Giữ ánh xạ cũ, xử lý conflict và cấp mã khác.",
+            "Ghi đè A bằng B.",
+            "Bỏ constraint vì hiếm."
+          ],
+          "answer": 0,
+          "explanation": "Bộ sinh ra k7 cho ghi chú B nhưng k7 đã trỏ A: insert phải bị conflict và cấp mã khác cho B. Không cập nhật k7→B như thể thành công. Xác suất collision thấp không xóa nhu cầu xử lý conflict.",
+          "sourceIds": [
+            "pg-constraints",
+            "cache-rfc",
+            "security-owasp",
+            "kafka-design"
+          ]
+        },
+        {
+          "id": "step-2",
+          "text": "Cache tới12:09 nhưng link hết12:00 có được trả sau12:00 theo yêu cầu?",
+          "options": [
+            "Không; phải giữ đúng expiry và quyền.",
+            "Có vì cache hit.",
+            "Có nếu mã vẫn đẹp."
+          ],
+          "answer": 0,
+          "explanation": "Link hết lúc12:00, cache được tạo11:59 TTL10 phút. Nếu chỉ dựa TTL thì có thể phục vụ tới12:09 trái yêu cầu. TTL cache không phải quyền truy cập vĩnh viễn tới lúc eviction.",
+          "sourceIds": [
+            "pg-constraints",
+            "cache-rfc",
+            "security-owasp",
+            "kafka-design"
+          ]
+        },
+        {
+          "id": "step-3",
+          "text": "E1,E2,E1 cùng replay đếm event duy nhất là?",
+          "options": [
+            "2.",
+            "3.",
+            "1."
+          ],
+          "answer": 0,
+          "explanation": "Ba event E1,E2,E1 replay: đếm theo eventId là2, không3. Nếu hai event thuộc cùng người thì unique người còn có định nghĩa khác. Ba request không tự bằng ba người độc lập.",
+          "sourceIds": [
+            "pg-constraints",
+            "cache-rfc",
+            "security-owasp",
+            "kafka-design"
+          ]
+        }
+      ]
+    },
+    "prediction": {
+      "text": "Sinh mã trùng đang trỏ A thì làm gì?",
+      "options": [
+        "Ghi đè A bằng B.",
+        "Giữ ánh xạ cũ, xử lý conflict và cấp mã khác.",
+        "Bỏ constraint vì hiếm."
+      ],
+      "answer": 1,
+      "explanation": "Bộ sinh ra k7 cho ghi chú B nhưng k7 đã trỏ A: insert phải bị conflict và cấp mã khác cho B. Không cập nhật k7→B như thể thành công. Xác suất collision thấp không xóa nhu cầu xử lý conflict."
+    },
+    "challenge": {
+      "text": "Cache chứa ghi chú riêng nhưng key không có scope quyền. Điều gì phải sửa?",
+      "options": [
+        "Chỉ rút mã xuống4 ký tự.",
+        "Chỉ tăng TTL.",
+        "Quy tắc cache/authorization để không phục vụ chéo người."
+      ],
+      "answer": 2,
+      "explanation": "Identity và quyền cần được thực thi ngoài sự khó đoán."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Theo dấu nơi giữ trạng thái và điều đã được xác nhận.",
+        "Bộ sinh ra k7 cho ghi chú B nhưng k7 đã trỏ A: insert phải bị conflict và cấp mã khác cho B. Không cập nhật k7→B như thể thành công. Xác suất collision thấp không xóa nhu cầu xử lý conflict."
+      ],
+      "challenge": [
+        "Kiểm tra yêu cầu mới; tìm lịch thao tác có thể làm phương án sai.",
+        "Identity và quyền cần được thực thi ngoài sự khó đoán."
+      ]
+    },
+    "sources": [
+      {
+        "title": "PostgreSQL 18 — Constraints",
+        "url": "https://www.postgresql.org/docs/18/ddl-constraints.html"
+      },
+      {
+        "title": "RFC 9111 — HTTP Caching",
+        "url": "https://www.rfc-editor.org/rfc/rfc9111.html"
+      },
+      {
+        "title": "OWASP — Authorization cheat sheet",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+      },
+      {
+        "title": "Apache Kafka 4.1 — Design",
+        "url": "https://kafka.apache.org/41/design/design/"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-case-short-links",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L2-02",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Lớp chia sẻ ghi chú qua mã6 ký tự, có thời hạn24 giờ và quyền riêng/tự công khai.",
+      "context": "Lớp chia sẻ ghi chú qua mã6 ký tự, có thời hạn24 giờ và quyền riêng/tự công khai. Một mã có thể bị sinh trùng; thống kê lượt mở xử lý nền.",
+      "requirements": [
+        "Thiết kế link ngắn: tạo mã không trùng, tra cứu khi cache cũ, hết hạn và xử lý đổi đích.",
+        "Giải thích được một tình huống lỗi và điều kiện để phương án còn đúng."
+      ],
+      "activityRef": "module-practice",
+      "experimentSteps": [
+        "Theo từng bước trong các ví dụ và tự tính kết quả trước khi xem giải thích.",
+        "Chọn phương án cho từng tình huống, kiểm tra và sửa lựa chọn.",
+        "Áp dụng sang yêu cầu mới; nêu điều kiện và giới hạn của quyết định."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Xác suất collision thấp không xóa nhu cầu xử lý conflict.",
+        "Ba request không tự bằng ba người độc lập."
+      ],
+      "limitations": "Case tự biên soạn trên dữ liệu giả lập bằng chữ; không mô tả kiến trúc hiện tại của công ty, không truy cập dữ liệu người thật hoặc hệ thống ngoài."
+    },
+    "designTask": {
+      "version": 1,
+      "prompt": "Lớp chia sẻ ghi chú qua mã6 ký tự, có thời hạn24 giờ và quyền riêng/tự công khai. Một mã có thể bị sinh trùng; thống kê lượt mở xử lý nền.",
+      "deliverables": [
+        {
+          "id": "part-1",
+          "prompt": "Viết yêu cầu, workload/đơn vị, API và schema nguồn của case."
+        },
+        {
+          "id": "part-2",
+          "prompt": "Tự tính/vẽ trace ví dụ; nêu một lịch lỗi và cơ chế giữ invariant."
+        },
+        {
+          "id": "part-3",
+          "prompt": "Đề xuất phương án cho ràng buộc mới, quyền/chi phí và cách kiểm."
+        }
+      ],
+      "rubric": [
+        "Có số liệu tự tính, đúng scope và trạng thái theo trace.",
+        "Xác định nguồn, định danh, retry và quyền theo case.",
+        "Nêu trade-off và phản ví dụ; không gọi fixture là benchmark production."
+      ],
+      "variation": "Ghi chú có thể bị thu hồi ngay, còn CDN ở nhiều vùng. Nêu cách bảo đảm và giới hạn độ trễ thu hồi."
+    }
+  },
+  {
+    "id": "case-school-feed",
+    "version": 1,
+    "status": "beta",
+    "kind": "module-practice",
+    "level": "L2",
+    "moduleId": "L2.5",
+    "minutes": 45,
+    "title": "Case: bảng tin câu lạc bộ",
+    "subtitle": "Mỗi ngày100 bài đăng; tài khoản thường có20 follower, một tài khoản có10.",
+    "objective": "Thiết kế bảng tin trường: chọn đẩy/kéo bài viết, giữ thứ tự, chống trùng và thu hồi quyền đọc.",
+    "story": "Mỗi ngày100 bài đăng; tài khoản thường có20 follower, một tài khoản có10.000. Cần feed, tìm kiếm và thu hồi bài riêng theo quyền.",
+    "explanation": "Fan-out khi ghi và khi đọc có chi phí khác. Queue và index cần chống lặp và biết độ trễ. Feed nhanh vẫn cần đúng quyền.",
+    "limit": "Case tự biên soạn trên dữ liệu giả lập bằng chữ; không mô tả kiến trúc hiện tại của công ty, không truy cập dữ liệu người thật hoặc hệ thống ngoài.",
+    "terms": [
+      {
+        "name": "Nguồn dữ liệu",
+        "english": "Source of truth",
+        "meaning": "Nơi chịu trách nhiệm quyết định dữ liệu gốc."
+      },
+      {
+        "name": "Dấu vết thao tác",
+        "english": "Trace",
+        "meaning": "Danh sách hành động có thứ tự để giải thích kết quả."
+      },
+      {
+        "name": "Điều kiện luôn phải giữ",
+        "english": "invariant",
+        "meaning": "Quy tắc dữ liệu không được vi phạm, kể cả khi có lỗi; ví dụ số vé đã xác nhận không vượt sức chứa."
+      },
+      {
+        "name": "Thử lại",
+        "english": "retry",
+        "meaning": "Gửi hoặc thực hiện lại một thao tác sau lỗi/chờ quá hạn. Lần đầu có thể đã có hiệu ứng nên phải xét xử lý trùng."
+      },
+      {
+        "name": "Hạn hoàn tất",
+        "english": "deadline",
+        "meaning": "Mốc thời gian mà sau đó kết quả không còn hữu ích cho yêu cầu; phải chia ngân sách qua các bước."
+      },
+      {
+        "name": "Cấu trúc dữ liệu đã quy định",
+        "english": "schema",
+        "meaning": "Hợp đồng về trường, kiểu và ràng buộc. Dữ liệu đúng cấu trúc vẫn có thể sai về nội dung nghiệp vụ."
+      },
+      {
+        "name": "Sự đánh đổi",
+        "english": "trade-off",
+        "meaning": "Một phương án đem lại lợi ích kèm chi phí hoặc rủi ro; cần chỉ rõ điều kiện và thước đo."
+      }
+    ],
+    "chapters": {
+      "version": 1,
+      "items": [
+        {
+          "id": "step-1",
+          "title": "Fan-out khi ghi và khi đọc có chi phí khác",
+          "explanation": "Fan-out-on-write chuẩn bị feed người nhận lúc đăng, giúp đọc nhanh nhưng tốn ghi theo follower. Fan-out-on-read gom lúc đọc, giảm một số ghi nhưng tăng chi phí truy vấn. Hybrid có thể tách tài khoản quá nhiều follower.",
+          "example": "Một bài từ tài khoản10.000 follower cần tới10.000 mục feed theo mô hình write fan-out; bài thường20. Nếu100 bài đều thường thì2.000 mục, khác xa100 bài đều nổi tiếng là1.000.000.",
+          "steps": [
+            "Tính số mục theo phân bố follower.",
+            "So lượt đọc/ghi và yêu cầu freshness trước chọn hybrid."
+          ],
+          "misconception": "Số user trung bình che được celebrity/hot key.",
+          "sourceIds": [
+            "kafka-design",
+            "security-owasp",
+            "overload-google"
+          ]
+        },
+        {
+          "id": "step-2",
+          "title": "Queue và index cần chống lặp và biết độ trễ",
+          "explanation": "Event post có ID/version; worker fan-out hoặc index có thể retry. Feed item unique theo người nhận/post/version policy; search là view có lag. Post xóa/sửa cần cập nhật các bản và kiểm quyền khi đọc.",
+          "example": "E9 bị giao hai lần. Nếu feed insert không có key ổn định, một post hiện hai lần; index cập nhật version cũ đến sau có thể làm sống lại bản bị xóa.",
+          "steps": [
+            "Theo postId/version qua queue, feed và index.",
+            "Thử duplicate, reorder và event xóa đến trước update cũ."
+          ],
+          "misconception": "Broker ordering không tự đảm bảo mọi hiệu ứng cùng thứ tự.",
+          "sourceIds": [
+            "kafka-design",
+            "security-owasp",
+            "overload-google"
+          ]
+        },
+        {
+          "id": "step-3",
+          "title": "Feed nhanh vẫn cần đúng quyền",
+          "explanation": "Feed cache chứa ID hoặc nội dung cần policy quyền/expiry phù hợp. Thu hồi thành viên hoặc đổi post private không chỉ xóa nút UI. Ranking/ordering cần quy tắc và giải thích freshness; tải một phần không nói đã đủ.",
+          "example": "An bị loại khỏi CLB nhưng feed cache còn bài riêng. API phải chặn theo quyền hiện hành hoặc policy thu hồi đã chốt, không tin danh sách cache là quyền.",
+          "steps": [
+            "Tách danh sách ứng viên khỏi quyền đọc nội dung.",
+            "Thử thay quyền giữa lúc tạo feed và lúc mở bài."
+          ],
+          "misconception": "Bài từng được nhìn thấy không nghĩa có quyền xem mọi phiên bản về sau.",
+          "sourceIds": [
+            "kafka-design",
+            "security-owasp",
+            "overload-google"
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "version": 1,
+      "items": [
+        {
+          "id": "step-1",
+          "text": "Một bài10.000 follower tạo bao nhiêu mục theo mô hình write fan-out?",
+          "options": [
+            "10.000 mục.",
+            "1 mục cho toàn bộ mà không có công việc khác.",
+            "20 mục."
+          ],
+          "answer": 0,
+          "explanation": "Một bài từ tài khoản10.000 follower cần tới10.000 mục feed theo mô hình write fan-out; bài thường20. Nếu100 bài đều thường thì2.000 mục, khác xa100 bài đều nổi tiếng là1.000.000. Số user trung bình che được celebrity/hot key.",
+          "sourceIds": [
+            "kafka-design",
+            "security-owasp",
+            "overload-google"
+          ]
+        },
+        {
+          "id": "step-2",
+          "text": "E9 giao lại có nên tạo thêm một post mới trong feed?",
+          "options": [
+            "Không nếu là cùng ý định/post; cần dedup.",
+            "Có vì mỗi lần giao là nội dung mới.",
+            "Có nếu dùng partition khác."
+          ],
+          "answer": 0,
+          "explanation": "E9 bị giao hai lần. Nếu feed insert không có key ổn định, một post hiện hai lần; index cập nhật version cũ đến sau có thể làm sống lại bản bị xóa. Broker ordering không tự đảm bảo mọi hiệu ứng cùng thứ tự.",
+          "sourceIds": [
+            "kafka-design",
+            "security-owasp",
+            "overload-google"
+          ]
+        },
+        {
+          "id": "step-3",
+          "text": "Feed cache có post riêng sau thu hồi quyền. Có tự đủ quyền đọc?",
+          "options": [
+            "Không; phải kiểm policy quyền hiện hành.",
+            "Có vì từng được fan-out.",
+            "Có vì postId là UUID."
+          ],
+          "answer": 0,
+          "explanation": "An bị loại khỏi CLB nhưng feed cache còn bài riêng. API phải chặn theo quyền hiện hành hoặc policy thu hồi đã chốt, không tin danh sách cache là quyền. Bài từng được nhìn thấy không nghĩa có quyền xem mọi phiên bản về sau.",
+          "sourceIds": [
+            "kafka-design",
+            "security-owasp",
+            "overload-google"
+          ]
+        }
+      ]
+    },
+    "prediction": {
+      "text": "Một bài10.000 follower tạo bao nhiêu mục theo mô hình write fan-out?",
+      "options": [
+        "1 mục cho toàn bộ mà không có công việc khác.",
+        "10.000 mục.",
+        "20 mục."
+      ],
+      "answer": 1,
+      "explanation": "Một bài từ tài khoản10.000 follower cần tới10.000 mục feed theo mô hình write fan-out; bài thường20. Nếu100 bài đều thường thì2.000 mục, khác xa100 bài đều nổi tiếng là1.000.000. Số user trung bình che được celebrity/hot key."
+    },
+    "challenge": {
+      "text": "Một celebrity tăng follower100 lần. Phần nào cần tính lại?",
+      "options": [
+        "Chỉ màu avatar.",
+        "Công việc fan-out, queue, freshness và chiến lược hybrid.",
+        "Không phần nào vì số post giữ nguyên."
+      ],
+      "answer": 1,
+      "explanation": "Workload phụ thuộc phân bố follower, không chỉ số post."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Theo dấu nơi giữ trạng thái và điều đã được xác nhận.",
+        "Một bài từ tài khoản10.000 follower cần tới10.000 mục feed theo mô hình write fan-out; bài thường20. Nếu100 bài đều thường thì2.000 mục, khác xa100 bài đều nổi tiếng là1.000.000. Số user trung bình che được celebrity/hot key."
+      ],
+      "challenge": [
+        "Kiểm tra yêu cầu mới; tìm lịch thao tác có thể làm phương án sai.",
+        "Workload phụ thuộc phân bố follower, không chỉ số post."
+      ]
+    },
+    "sources": [
+      {
+        "title": "Apache Kafka 4.1 — Design",
+        "url": "https://kafka.apache.org/41/design/design/"
+      },
+      {
+        "title": "OWASP — Authorization cheat sheet",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+      },
+      {
+        "title": "Google SRE — Handling overload",
+        "url": "https://sre.google/sre-book/handling-overload/"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-case-school-feed",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L2-05",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Mỗi ngày100 bài đăng; tài khoản thường có20 follower, một tài khoản có10.",
+      "context": "Mỗi ngày100 bài đăng; tài khoản thường có20 follower, một tài khoản có10.000. Cần feed, tìm kiếm và thu hồi bài riêng theo quyền.",
+      "requirements": [
+        "Thiết kế bảng tin trường: chọn đẩy/kéo bài viết, giữ thứ tự, chống trùng và thu hồi quyền đọc.",
+        "Giải thích được một tình huống lỗi và điều kiện để phương án còn đúng."
+      ],
+      "activityRef": "module-practice",
+      "experimentSteps": [
+        "Theo từng bước trong các ví dụ và tự tính kết quả trước khi xem giải thích.",
+        "Chọn phương án cho từng tình huống, kiểm tra và sửa lựa chọn.",
+        "Áp dụng sang yêu cầu mới; nêu điều kiện và giới hạn của quyết định."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Số user trung bình che được celebrity/hot key.",
+        "Bài từng được nhìn thấy không nghĩa có quyền xem mọi phiên bản về sau."
+      ],
+      "limitations": "Case tự biên soạn trên dữ liệu giả lập bằng chữ; không mô tả kiến trúc hiện tại của công ty, không truy cập dữ liệu người thật hoặc hệ thống ngoài."
+    },
+    "designTask": {
+      "version": 1,
+      "prompt": "Mỗi ngày100 bài đăng; tài khoản thường có20 follower, một tài khoản có10.000. Cần feed, tìm kiếm và thu hồi bài riêng theo quyền.",
+      "deliverables": [
+        {
+          "id": "part-1",
+          "prompt": "Viết yêu cầu, workload/đơn vị, API và schema nguồn của case."
+        },
+        {
+          "id": "part-2",
+          "prompt": "Tự tính/vẽ trace ví dụ; nêu một lịch lỗi và cơ chế giữ invariant."
+        },
+        {
+          "id": "part-3",
+          "prompt": "Đề xuất phương án cho ràng buộc mới, quyền/chi phí và cách kiểm."
+        }
+      ],
+      "rubric": [
+        "Có số liệu tự tính, đúng scope và trạng thái theo trace.",
+        "Xác định nguồn, định danh, retry và quyền theo case.",
+        "Nêu trade-off và phản ví dụ; không gọi fixture là benchmark production."
+      ],
+      "variation": "Cần đưa post mới lên feed trong5 giây nhưng chấp nhận search trễ1 phút. Đặt metric/deadline riêng."
+    }
+  },
+  {
+    "id": "case-fixture-crawler",
+    "version": 1,
+    "status": "beta",
+    "kind": "module-practice",
+    "level": "L5",
+    "moduleId": "L5.4",
+    "minutes": 45,
+    "title": "Case: thu thập kho trang thư viện",
+    "subtitle": "Kho giả lập có A→B,C; B→C; C→A,D; D không có link.",
+    "objective": "Thiết kế bộ thu thập trang thử nghiệm: frontier, chống trùng, hạn mức theo host, lỗi và cập nhật chỉ mục.",
+    "story": "Kho giả lập có A→B,C; B→C; C→A,D; D không có link. Chỉ duyệt fixture, không crawl Internet. Mỗi trang chỉ xử lý một lần trong lượt và cần lịch thu thập lại có giới hạn.",
+    "explanation": "Frontier phải ngăn chu kỳ ngay lúc đưa vào. Tôn trọng host và phân biệt lỗi với không tồn tại. Chỉ mục là bản suy ra có version.",
+    "limit": "Case tự biên soạn trên dữ liệu giả lập bằng chữ; không mô tả kiến trúc hiện tại của công ty, không truy cập dữ liệu người thật hoặc hệ thống ngoài.",
+    "terms": [
+      {
+        "name": "Nguồn dữ liệu",
+        "english": "Source of truth",
+        "meaning": "Nơi chịu trách nhiệm quyết định dữ liệu gốc."
+      },
+      {
+        "name": "Dấu vết thao tác",
+        "english": "Trace",
+        "meaning": "Danh sách hành động có thứ tự để giải thích kết quả."
+      },
+      {
+        "name": "Điều kiện luôn phải giữ",
+        "english": "invariant",
+        "meaning": "Quy tắc dữ liệu không được vi phạm, kể cả khi có lỗi; ví dụ số vé đã xác nhận không vượt sức chứa."
+      },
+      {
+        "name": "Thông báo xác nhận",
+        "english": "ACK",
+        "meaning": "Phản hồi cho biết một bước đã được bên nhận xác nhận. Phải đọc hợp đồng để biết đó là nhận, lưu bền hay áp dụng."
+      },
+      {
+        "name": "Thử lại",
+        "english": "retry",
+        "meaning": "Gửi hoặc thực hiện lại một thao tác sau lỗi/chờ quá hạn. Lần đầu có thể đã có hiệu ứng nên phải xét xử lý trùng."
+      },
+      {
+        "name": "Hết thời gian chờ",
+        "english": "timeout",
+        "meaning": "Bên gọi dừng chờ khi vượt thời hạn. Điều này không chứng minh bên nhận chưa thực hiện thao tác."
+      },
+      {
+        "name": "Cấu trúc dữ liệu đã quy định",
+        "english": "schema",
+        "meaning": "Hợp đồng về trường, kiểu và ràng buộc. Dữ liệu đúng cấu trúc vẫn có thể sai về nội dung nghiệp vụ."
+      },
+      {
+        "name": "Hạn mức tài nguyên",
+        "english": "quota",
+        "meaning": "Giới hạn lượng tài nguyên hoặc thao tác một nhóm được dùng trong phạm vi đã định."
+      },
+      {
+        "name": "Sự đánh đổi",
+        "english": "trade-off",
+        "meaning": "Một phương án đem lại lợi ích kèm chi phí hoặc rủi ro; cần chỉ rõ điều kiện và thước đo."
+      }
+    ],
+    "chapters": {
+      "version": 1,
+      "items": [
+        {
+          "id": "step-1",
+          "title": "Frontier phải ngăn chu kỳ ngay lúc đưa vào",
+          "explanation": "Frontier giữ URL chờ; visited/scheduled ghi URL đã nhận theo quy tắc chuẩn hóa. Chu kỳ graph không tự dừng. Mark khi enqueue giúp tránh cùng URL được xếp nhiều lần trước xử lý; hệ phân tán cần claim/unique thích hợp.",
+          "example": "Bắt đầu A: frontier[B,C]; xử lýB thấyC đã scheduled nên không thêm; xử lýC bỏA, thêmD; cuối xử lýD. Thứ tự BFS A,B,C,D theo thứ tự link đề cho.",
+          "steps": [
+            "Theo frontier và scheduled sau mỗi bước.",
+            "Đếm4 trang duy nhất, giữ giới hạn độ sâu/số trang theo mục tiêu."
+          ],
+          "misconception": "URL khác chuỗi có thể cùng nội dung; chuẩn hóa sai cũng có thể gộp nhầm tài nguyên.",
+          "sourceIds": [
+            "algorithms",
+            "robots",
+            "kafka-design"
+          ]
+        },
+        {
+          "id": "step-2",
+          "title": "Tôn trọng host và phân biệt lỗi với không tồn tại",
+          "explanation": "Trong crawler thật cần robots/policy, quota theo host, timeout/backoff và quyền truy cập; robots không là authorization. Bài này chỉ fixture nên không phát request. Retry lỗi tạm khác giữ404 theo policy; scheduler recrawl dựa freshness/budget.",
+          "example": "Nếu C tạm timeout, không kết luận D không tồn tại. Lưu lỗi và lịch thử lại hữu hạn; không để retry một host chiếm hết worker.",
+          "steps": [
+            "Ghi status fetch, số retry và thời điểm thử lại.",
+            "Giới hạn theo host và tổng công suất; giữ failure rõ."
+          ],
+          "misconception": "robots.txt không cấp quyền truy cập nội dung riêng.",
+          "sourceIds": [
+            "algorithms",
+            "robots",
+            "kafka-design"
+          ]
+        },
+        {
+          "id": "step-3",
+          "title": "Chỉ mục là bản suy ra có version",
+          "explanation": "Fetch→parse→dedup content→index có thể lỗi riêng. Lưu source URL/version/hash/thời gian để truy dấu; content hash hỗ trợ nhận biết giống nhưng không thay quyền/canonical policy. Xóa/đổi trang cần cập nhật index.",
+          "example": "A version2 có nội dung mới, index còn version1: kết quả tìm kiếm trễ, không phải nguồn chưa đổi. Retry index v1 đến sau v2 không được làm lùi tùy tiện.",
+          "steps": [
+            "Gắn fetch/version cho tài liệu đi vào index.",
+            "Thử parse lỗi, duplicate và update đảo thứ tự."
+          ],
+          "misconception": "Crawl xong không nghĩa index đã cập nhật và nội dung đúng quyền.",
+          "sourceIds": [
+            "algorithms",
+            "robots",
+            "kafka-design"
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "version": 1,
+      "items": [
+        {
+          "id": "step-1",
+          "text": "Thứ tự BFS theo fixture là gì?",
+          "options": [
+            "A,B,C,D.",
+            "A,B,C,A,B mãi.",
+            "A,D,B,C."
+          ],
+          "answer": 0,
+          "explanation": "Bắt đầu A: frontier[B,C]; xử lýB thấyC đã scheduled nên không thêm; xử lýC bỏA, thêmD; cuối xử lýD. Thứ tự BFS A,B,C,D theo thứ tự link đề cho. URL khác chuỗi có thể cùng nội dung; chuẩn hóa sai cũng có thể gộp nhầm tài nguyên.",
+          "sourceIds": [
+            "algorithms",
+            "robots",
+            "kafka-design"
+          ]
+        },
+        {
+          "id": "step-2",
+          "text": "C timeout có chứng minh mọi trang sauC không tồn tại?",
+          "options": [
+            "Không; chưa thu được đủ dữ liệu.",
+            "Có vì không thấy link.",
+            "Có nếu retry một lần."
+          ],
+          "answer": 0,
+          "explanation": "Nếu C tạm timeout, không kết luận D không tồn tại. Lưu lỗi và lịch thử lại hữu hạn; không để retry một host chiếm hết worker. robots.txt không cấp quyền truy cập nội dung riêng.",
+          "sourceIds": [
+            "algorithms",
+            "robots",
+            "kafka-design"
+          ]
+        },
+        {
+          "id": "step-3",
+          "text": "Indexv1, nguồn v2. Có thể khẳng định search mới nhất?",
+          "options": [
+            "Không; phải đo freshness/version.",
+            "Có vì job fetch xanh.",
+            "Có nếu search trả nhanh."
+          ],
+          "answer": 0,
+          "explanation": "A version2 có nội dung mới, index còn version1: kết quả tìm kiếm trễ, không phải nguồn chưa đổi. Retry index v1 đến sau v2 không được làm lùi tùy tiện. Crawl xong không nghĩa index đã cập nhật và nội dung đúng quyền.",
+          "sourceIds": [
+            "algorithms",
+            "robots",
+            "kafka-design"
+          ]
+        }
+      ]
+    },
+    "prediction": {
+      "text": "Thứ tự BFS theo fixture là gì?",
+      "options": [
+        "A,B,C,A,B mãi.",
+        "A,B,C,D.",
+        "A,D,B,C."
+      ],
+      "answer": 1,
+      "explanation": "Bắt đầu A: frontier[B,C]; xử lýB thấyC đã scheduled nên không thêm; xử lýC bỏA, thêmD; cuối xử lýD. Thứ tự BFS A,B,C,D theo thứ tự link đề cho. URL khác chuỗi có thể cùng nội dung; chuẩn hóa sai cũng có thể gộp nhầm tài nguyên."
+    },
+    "challenge": {
+      "text": "Nếu không giữ visited trong graph A→C→A, nguy cơ gì?",
+      "options": [
+        "Tự dừng vì URL là chữ.",
+        "Luôn duyệt đúng4 trang.",
+        "Lặp vô hạn hoặc lặp tới khi cạn budget."
+      ],
+      "answer": 2,
+      "explanation": "Chu kỳ cần trạng thái/giới hạn để dừng."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Theo dấu nơi giữ trạng thái và điều đã được xác nhận.",
+        "Bắt đầu A: frontier[B,C]; xử lýB thấyC đã scheduled nên không thêm; xử lýC bỏA, thêmD; cuối xử lýD. Thứ tự BFS A,B,C,D theo thứ tự link đề cho. URL khác chuỗi có thể cùng nội dung; chuẩn hóa sai cũng có thể gộp nhầm tài nguyên."
+      ],
+      "challenge": [
+        "Kiểm tra yêu cầu mới; tìm lịch thao tác có thể làm phương án sai.",
+        "Chu kỳ cần trạng thái/giới hạn để dừng."
+      ]
+    },
+    "sources": [
+      {
+        "title": "MIT OCW — Algorithms lecture notes",
+        "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/pages/lecture-notes/"
+      },
+      {
+        "title": "RFC 9309 — Robots Exclusion Protocol",
+        "url": "https://www.rfc-editor.org/rfc/rfc9309.html"
+      },
+      {
+        "title": "Apache Kafka 4.1 — Design",
+        "url": "https://kafka.apache.org/41/design/design/"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-case-fixture-crawler",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L5-04",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Kho giả lập có A→B,C; B→C; C→A,D; D không có link.",
+      "context": "Kho giả lập có A→B,C; B→C; C→A,D; D không có link. Chỉ duyệt fixture, không crawl Internet. Mỗi trang chỉ xử lý một lần trong lượt và cần lịch thu thập lại có giới hạn.",
+      "requirements": [
+        "Thiết kế bộ thu thập trang thử nghiệm: frontier, chống trùng, hạn mức theo host, lỗi và cập nhật chỉ mục.",
+        "Giải thích được một tình huống lỗi và điều kiện để phương án còn đúng."
+      ],
+      "activityRef": "module-practice",
+      "experimentSteps": [
+        "Theo từng bước trong các ví dụ và tự tính kết quả trước khi xem giải thích.",
+        "Chọn phương án cho từng tình huống, kiểm tra và sửa lựa chọn.",
+        "Áp dụng sang yêu cầu mới; nêu điều kiện và giới hạn của quyết định."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "URL khác chuỗi có thể cùng nội dung; chuẩn hóa sai cũng có thể gộp nhầm tài nguyên.",
+        "Crawl xong không nghĩa index đã cập nhật và nội dung đúng quyền."
+      ],
+      "limitations": "Case tự biên soạn trên dữ liệu giả lập bằng chữ; không mô tả kiến trúc hiện tại của công ty, không truy cập dữ liệu người thật hoặc hệ thống ngoài."
+    },
+    "designTask": {
+      "version": 1,
+      "prompt": "Kho giả lập có A→B,C; B→C; C→A,D; D không có link. Chỉ duyệt fixture, không crawl Internet. Mỗi trang chỉ xử lý một lần trong lượt và cần lịch thu thập lại có giới hạn.",
+      "deliverables": [
+        {
+          "id": "part-1",
+          "prompt": "Viết yêu cầu, workload/đơn vị, API và schema nguồn của case."
+        },
+        {
+          "id": "part-2",
+          "prompt": "Tự tính/vẽ trace ví dụ; nêu một lịch lỗi và cơ chế giữ invariant."
+        },
+        {
+          "id": "part-3",
+          "prompt": "Đề xuất phương án cho ràng buộc mới, quyền/chi phí và cách kiểm."
+        }
+      ],
+      "rubric": [
+        "Có số liệu tự tính, đúng scope và trạng thái theo trace.",
+        "Xác định nguồn, định danh, retry và quyền theo case.",
+        "Nêu trade-off và phản ví dụ; không gọi fixture là benchmark production."
+      ],
+      "variation": "Thêm100 URL trỏ cùng nội dung và một host lỗi. Nêu canonical/dedup, quota và cách không bỏ trang hợp lệ."
+    }
+  },
+  {
+    "id": "case-club-ledger",
+    "version": 1,
+    "status": "beta",
+    "kind": "module-practice",
+    "level": "L5",
+    "moduleId": "L5.4",
+    "minutes": 45,
+    "title": "Case: sổ quỹ câu lạc bộ",
+    "subtitle": "Dữ liệu giả lập nhập T1:+100,T2:−30 rồi T1 gửi lại.",
+    "objective": "Thiết kế sổ thu–chi câu lạc bộ: ghi nhận một lần, lưu dấu vết, tính số dư và đối soát.",
+    "story": "Dữ liệu giả lập nhập T1:+100,T2:−30 rồi T1 gửi lại. Người dùng tự phân loại T2; lần nhập sau nguồn đổi ghi chú nhưng không được xóa phân loại thủ công.",
+    "explanation": "Nhập cùng giao dịch không được cộng lần nữa. Dữ liệu nguồn và sửa tay cần ownership riêng. Tổng hợp và cảnh báo cần cùng ngữ nghĩa.",
+    "limit": "Case tự biên soạn trên dữ liệu giả lập bằng chữ; không mô tả kiến trúc hiện tại của công ty, không truy cập dữ liệu người thật hoặc hệ thống ngoài.",
+    "terms": [
+      {
+        "name": "Nguồn dữ liệu",
+        "english": "Source of truth",
+        "meaning": "Nơi chịu trách nhiệm quyết định dữ liệu gốc."
+      },
+      {
+        "name": "Dấu vết thao tác",
+        "english": "Trace",
+        "meaning": "Danh sách hành động có thứ tự để giải thích kết quả."
+      },
+      {
+        "name": "Điều kiện luôn phải giữ",
+        "english": "invariant",
+        "meaning": "Quy tắc dữ liệu không được vi phạm, kể cả khi có lỗi; ví dụ số vé đã xác nhận không vượt sức chứa."
+      },
+      {
+        "name": "Thử lại",
+        "english": "retry",
+        "meaning": "Gửi hoặc thực hiện lại một thao tác sau lỗi/chờ quá hạn. Lần đầu có thể đã có hiệu ứng nên phải xét xử lý trùng."
+      },
+      {
+        "name": "Cấu trúc dữ liệu đã quy định",
+        "english": "schema",
+        "meaning": "Hợp đồng về trường, kiểu và ràng buộc. Dữ liệu đúng cấu trúc vẫn có thể sai về nội dung nghiệp vụ."
+      },
+      {
+        "name": "Chạy lại dữ liệu đã ghi",
+        "english": "replay",
+        "meaning": "Đọc và áp dụng lại lịch sử theo quy tắc; cần tránh lặp hiệu ứng bên ngoài."
+      },
+      {
+        "name": "Thời hạn giữ dữ liệu",
+        "english": "retention",
+        "meaning": "Khoảng thời gian dữ liệu hoặc bản sao được giữ trước khi xóa theo chính sách."
+      },
+      {
+        "name": "Sự đánh đổi",
+        "english": "trade-off",
+        "meaning": "Một phương án đem lại lợi ích kèm chi phí hoặc rủi ro; cần chỉ rõ điều kiện và thước đo."
+      }
+    ],
+    "chapters": {
+      "version": 1,
+      "items": [
+        {
+          "id": "step-1",
+          "title": "Nhập cùng giao dịch không được cộng lần nữa",
+          "explanation": "Dùng định danh nguồn/account/transaction theo hợp đồng, lưu raw/version và upsert phù hợp. Tổng dựa giao dịch duy nhất, không số message nhận. Nếu provider sửa bản ghi cần policy update/reversal rõ.",
+          "example": "T1:+100,T2:−30,T1:+100 replay cho tổng70, không170. Mô hình không phí, đơn vị là điểm quỹ giả lập.",
+          "steps": [
+            "Tách transactionId khỏi deliveryId.",
+            "Đối chiếu tập T1,T2 trước tính tổng."
+          ],
+          "misconception": "Cùng số tiền/ngày không đủ chứng minh hai giao dịch là một.",
+          "sourceIds": [
+            "pg-transactions",
+            "pg-constraints",
+            "kafka-design",
+            "security-owasp"
+          ]
+        },
+        {
+          "id": "step-2",
+          "title": "Dữ liệu nguồn và sửa tay cần ownership riêng",
+          "explanation": "Lưu categorySuggested và categoryOverride riêng hoặc policy tương đương. Bản nhập mới cập nhật phần thuộc nguồn; không ghi đè override của người dùng. Version và audit giúp giải thích tổng/nhãn đã đổi vì đâu.",
+          "example": "T2 gợi ý “khác”, thủ quỹ chọn “sách”. Import mới đổi memo không được tự xóa “sách” nếu policy ưu tiên sửa tay còn hiệu lực.",
+          "steps": [
+            "Ghi field nào nguồn sở hữu, field nào người dùng sở hữu.",
+            "Thử import update, xóa override có chủ đích và audit thay đổi."
+          ],
+          "misconception": "Last-write-wins toàn bản ghi có thể phá ý định sửa tay.",
+          "sourceIds": [
+            "pg-transactions",
+            "pg-constraints",
+            "kafka-design",
+            "security-owasp"
+          ]
+        },
+        {
+          "id": "step-3",
+          "title": "Tổng hợp và cảnh báo cần cùng ngữ nghĩa",
+          "explanation": "Aggregation theo kỳ cần timezone/event date và policy điều chỉnh. Alert có ID/điều kiện để replay không gửi trùng vô hạn. Quyền xem/sửa sổ theo vai trò, export/audit có retention.",
+          "example": "Ngưỡng chi50, T2 chi30 chưa vượt. Nếu một correction thành−60, cần update tổng theo version và một cảnh báo theo policy; không cộng thêm60 như giao dịch mới khi cùngT2.",
+          "steps": [
+            "Nêu kỳ tính, timezone và điều kiện alert.",
+            "Thử correction/replay và xem ai được sửa/đọc."
+          ],
+          "misconception": "Dashboard cân bằng không chứng minh đã đối soát với mọi nguồn ngoài.",
+          "sourceIds": [
+            "pg-transactions",
+            "pg-constraints",
+            "kafka-design",
+            "security-owasp"
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "version": 1,
+      "items": [
+        {
+          "id": "step-1",
+          "text": "Tổng sau chống lặp trong fixture là?",
+          "options": [
+            "70 đơn vị.",
+            "170 đơn vị.",
+            "130 đơn vị."
+          ],
+          "answer": 0,
+          "explanation": "T1:+100,T2:−30,T1:+100 replay cho tổng70, không170. Mô hình không phí, đơn vị là điểm quỹ giả lập. Cùng số tiền/ngày không đủ chứng minh hai giao dịch là một.",
+          "sourceIds": [
+            "pg-transactions",
+            "pg-constraints",
+            "kafka-design",
+            "security-owasp"
+          ]
+        },
+        {
+          "id": "step-2",
+          "text": "Nguồn đổi memo có nên xóa category thủ công theo đề?",
+          "options": [
+            "Không; giữ override theo ownership.",
+            "Có vì dữ liệu mới luôn đúng hơn.",
+            "Có nếu import chạy đêm."
+          ],
+          "answer": 0,
+          "explanation": "T2 gợi ý “khác”, thủ quỹ chọn “sách”. Import mới đổi memo không được tự xóa “sách” nếu policy ưu tiên sửa tay còn hiệu lực. Last-write-wins toàn bản ghi có thể phá ý định sửa tay.",
+          "sourceIds": [
+            "pg-transactions",
+            "pg-constraints",
+            "kafka-design",
+            "security-owasp"
+          ]
+        },
+        {
+          "id": "step-3",
+          "text": "T2 đổi−30 thành−60 cùng ID. Cộng thêm−60 vô điều kiện có đúng?",
+          "options": [
+            "Không; phải xử lý correction theo version/policy.",
+            "Có; mọi message là giao dịch mới.",
+            "Có nếu tổng nhỏ hơn."
+          ],
+          "answer": 0,
+          "explanation": "Ngưỡng chi50, T2 chi30 chưa vượt. Nếu một correction thành−60, cần update tổng theo version và một cảnh báo theo policy; không cộng thêm60 như giao dịch mới khi cùngT2. Dashboard cân bằng không chứng minh đã đối soát với mọi nguồn ngoài.",
+          "sourceIds": [
+            "pg-transactions",
+            "pg-constraints",
+            "kafka-design",
+            "security-owasp"
+          ]
+        }
+      ]
+    },
+    "prediction": {
+      "text": "Tổng sau chống lặp trong fixture là?",
+      "options": [
+        "170 đơn vị.",
+        "70 đơn vị.",
+        "130 đơn vị."
+      ],
+      "answer": 1,
+      "explanation": "T1:+100,T2:−30,T1:+100 replay cho tổng70, không170. Mô hình không phí, đơn vị là điểm quỹ giả lập. Cùng số tiền/ngày không đủ chứng minh hai giao dịch là một."
+    },
+    "challenge": {
+      "text": "Hai giao dịch cùng100 nhưng ID khác có tự là duplicate?",
+      "options": [
+        "Có; số tiền trùng là đủ.",
+        "Không; phải theo danh tính/hợp đồng nguồn."
+      ],
+      "answer": 1,
+      "explanation": "Dedup sai có thể làm mất giao dịch hợp lệ."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Theo dấu nơi giữ trạng thái và điều đã được xác nhận.",
+        "T1:+100,T2:−30,T1:+100 replay cho tổng70, không170. Mô hình không phí, đơn vị là điểm quỹ giả lập. Cùng số tiền/ngày không đủ chứng minh hai giao dịch là một."
+      ],
+      "challenge": [
+        "Kiểm tra yêu cầu mới; tìm lịch thao tác có thể làm phương án sai.",
+        "Dedup sai có thể làm mất giao dịch hợp lệ."
+      ]
+    },
+    "sources": [
+      {
+        "title": "PostgreSQL 18 — Transaction isolation",
+        "url": "https://www.postgresql.org/docs/18/transaction-iso.html"
+      },
+      {
+        "title": "PostgreSQL 18 — Constraints",
+        "url": "https://www.postgresql.org/docs/18/ddl-constraints.html"
+      },
+      {
+        "title": "Apache Kafka 4.1 — Design",
+        "url": "https://kafka.apache.org/41/design/design/"
+      },
+      {
+        "title": "OWASP — Authorization cheat sheet",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-case-club-ledger",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L5-04",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Dữ liệu giả lập nhập T1:+100,T2:−30 rồi T1 gửi lại.",
+      "context": "Dữ liệu giả lập nhập T1:+100,T2:−30 rồi T1 gửi lại. Người dùng tự phân loại T2; lần nhập sau nguồn đổi ghi chú nhưng không được xóa phân loại thủ công.",
+      "requirements": [
+        "Thiết kế sổ thu–chi câu lạc bộ: ghi nhận một lần, lưu dấu vết, tính số dư và đối soát.",
+        "Giải thích được một tình huống lỗi và điều kiện để phương án còn đúng."
+      ],
+      "activityRef": "module-practice",
+      "experimentSteps": [
+        "Theo từng bước trong các ví dụ và tự tính kết quả trước khi xem giải thích.",
+        "Chọn phương án cho từng tình huống, kiểm tra và sửa lựa chọn.",
+        "Áp dụng sang yêu cầu mới; nêu điều kiện và giới hạn của quyết định."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Cùng số tiền/ngày không đủ chứng minh hai giao dịch là một.",
+        "Dashboard cân bằng không chứng minh đã đối soát với mọi nguồn ngoài."
+      ],
+      "limitations": "Case tự biên soạn trên dữ liệu giả lập bằng chữ; không mô tả kiến trúc hiện tại của công ty, không truy cập dữ liệu người thật hoặc hệ thống ngoài."
+    },
+    "designTask": {
+      "version": 1,
+      "prompt": "Dữ liệu giả lập nhập T1:+100,T2:−30 rồi T1 gửi lại. Người dùng tự phân loại T2; lần nhập sau nguồn đổi ghi chú nhưng không được xóa phân loại thủ công.",
+      "deliverables": [
+        {
+          "id": "part-1",
+          "prompt": "Viết yêu cầu, workload/đơn vị, API và schema nguồn của case."
+        },
+        {
+          "id": "part-2",
+          "prompt": "Tự tính/vẽ trace ví dụ; nêu một lịch lỗi và cơ chế giữ invariant."
+        },
+        {
+          "id": "part-3",
+          "prompt": "Đề xuất phương án cho ràng buộc mới, quyền/chi phí và cách kiểm."
+        }
+      ],
+      "rubric": [
+        "Có số liệu tự tính, đúng scope và trạng thái theo trace.",
+        "Xác định nguồn, định danh, retry và quyền theo case.",
+        "Nêu trade-off và phản ví dụ; không gọi fixture là benchmark production."
+      ],
+      "variation": "Thêm giao dịch điều chỉnh tháng trước và người dùng đổi category trong lúc import. Viết policy version/đối soát."
+    }
+  },
+  {
+    "id": "case-social-path",
+    "version": 1,
+    "status": "beta",
+    "kind": "module-practice",
+    "level": "L2",
+    "moduleId": "L2.4",
+    "minutes": 45,
+    "title": "Case: đường quen biết ngắn nhất",
+    "subtitle": "Graph vô hướng không trọng số: A-B,A-C,B-D,C-E,D-F,E-F.",
+    "objective": "Tìm đường liên hệ trong đồ thị: chọn BFS, giới hạn mở rộng và giữ quyền riêng tư.",
+    "story": "Graph vô hướng không trọng số: A-B,A-C,B-D,C-E,D-F,E-F. Tìm đường từA tớiF; láng giềng xét theo chữ cái. Các đỉnh có thể nằm ở shard khác.",
+    "explanation": "BFS mở rộng từng lớp khoảng cách. Chia shard thêm chi phí đọc biên. Quyền và thay đổi graph ảnh hưởng kết quả.",
+    "limit": "Case tự biên soạn trên dữ liệu giả lập bằng chữ; không mô tả kiến trúc hiện tại của công ty, không truy cập dữ liệu người thật hoặc hệ thống ngoài.",
+    "terms": [
+      {
+        "name": "Nguồn dữ liệu",
+        "english": "Source of truth",
+        "meaning": "Nơi chịu trách nhiệm quyết định dữ liệu gốc."
+      },
+      {
+        "name": "Dấu vết thao tác",
+        "english": "Trace",
+        "meaning": "Danh sách hành động có thứ tự để giải thích kết quả."
+      },
+      {
+        "name": "Điều kiện luôn phải giữ",
+        "english": "invariant",
+        "meaning": "Quy tắc dữ liệu không được vi phạm, kể cả khi có lỗi; ví dụ số vé đã xác nhận không vượt sức chứa."
+      },
+      {
+        "name": "Thử lại",
+        "english": "retry",
+        "meaning": "Gửi hoặc thực hiện lại một thao tác sau lỗi/chờ quá hạn. Lần đầu có thể đã có hiệu ứng nên phải xét xử lý trùng."
+      },
+      {
+        "name": "Cấu trúc dữ liệu đã quy định",
+        "english": "schema",
+        "meaning": "Hợp đồng về trường, kiểu và ràng buộc. Dữ liệu đúng cấu trúc vẫn có thể sai về nội dung nghiệp vụ."
+      },
+      {
+        "name": "Sự đánh đổi",
+        "english": "trade-off",
+        "meaning": "Một phương án đem lại lợi ích kèm chi phí hoặc rủi ro; cần chỉ rõ điều kiện và thước đo."
+      }
+    ],
+    "chapters": {
+      "version": 1,
+      "items": [
+        {
+          "id": "step-1",
+          "title": "BFS mở rộng từng lớp khoảng cách",
+          "explanation": "Trong graph không trọng số, BFS dùng FIFO và visited khi enqueue; lần đầu tới đỉnh cho số cạnh ngắn nhất. Lưu parent để dựng đường. Với trọng số khác nhau, BFS không tự cho chi phí nhỏ nhất.",
+          "example": "TừA: lớp0 A; lớp1 B,C; lớp2 D,E; lớp3 F. Theo thứ tự chữ, parentF=D nên đường A-B-D-F dài3 cạnh; A-C-E-F cũng dài3.",
+          "steps": [
+            "Ghi queue/parent từng lượt.",
+            "Lần đầu gặpF dựng ngược parent rồi đảo thứ tự."
+          ],
+          "misconception": "Đường ngắn nhất có thể không duy nhất; không gọi BFS là tối ưu mọi graph có trọng số.",
+          "sourceIds": [
+            "algorithms",
+            "security-owasp",
+            "shards-aws"
+          ]
+        },
+        {
+          "id": "step-2",
+          "title": "Chia shard thêm chi phí đọc biên",
+          "explanation": "Giữ adjacency theo đỉnh giúp đọc láng giềng nhưng BFS có thể qua nhiều shard. Số cạnh/nút xét khác số request mạng nhờ batching/cache. GraphQL là kiểu API, không tự là graph database hoặc thuật toán BFS.",
+          "example": "Shard1 chứaA,B,D; shard2 chứaC,E,F. Các cạnh A-C,D-F nối shard. Đường A-B-D-F qua biên ở D-F theo bố trí đã nêu, nhưng tìm kiếm có thể đọc cả nhánhC/E.",
+          "steps": [
+            "Đánh dấu shard mỗi đỉnh và cạnh qua biên.",
+            "Đếm lượt đọc thực của thuật toán, không chỉ cạnh trên đáp án cuối."
+          ],
+          "misconception": "Chi phí tìm đường không chỉ bằng độ dài đường tìm được.",
+          "sourceIds": [
+            "algorithms",
+            "security-owasp",
+            "shards-aws"
+          ]
+        },
+        {
+          "id": "step-3",
+          "title": "Quyền và thay đổi graph ảnh hưởng kết quả",
+          "explanation": "Quan hệ riêng không được lộ qua đường suy ra. Cần snapshot/version hoặc hợp đồng kết quả khi graph đổi; giới hạn độ sâu/budget tránh tìm không hạn. Nếu dừng vì budget phải báo chưa đủ, không kết luận không có đường.",
+          "example": "Dừng sau lớp1 vì budget: chưa thấyF nhưng graph có đường dài3. Thông báo “không tìm trong giới hạn” khác “không tồn tại đường”.",
+          "steps": [
+            "Xác định quyền xem cạnh và graph ở mốc nào.",
+            "Thử xóa cạnh/giới hạn độ sâu rồi phân biệt no-path với incomplete."
+          ],
+          "misconception": "Không thấy trong phạm vi tìm không chứng minh không tồn tại toàn graph.",
+          "sourceIds": [
+            "algorithms",
+            "security-owasp",
+            "shards-aws"
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "version": 1,
+      "items": [
+        {
+          "id": "step-1",
+          "text": "Độ dài đường ngắn nhất A→F là?",
+          "options": [
+            "3 cạnh.",
+            "2 cạnh.",
+            "6 cạnh."
+          ],
+          "answer": 0,
+          "explanation": "TừA: lớp0 A; lớp1 B,C; lớp2 D,E; lớp3 F. Theo thứ tự chữ, parentF=D nên đường A-B-D-F dài3 cạnh; A-C-E-F cũng dài3. Đường ngắn nhất có thể không duy nhất; không gọi BFS là tối ưu mọi graph có trọng số.",
+          "sourceIds": [
+            "algorithms",
+            "security-owasp",
+            "shards-aws"
+          ]
+        },
+        {
+          "id": "step-2",
+          "text": "Chỉ đếm3 cạnh của đáp án có đủ tính mọi lượt đọc BFS?",
+          "options": [
+            "Không; thuật toán có thể khám phá nhánh khác.",
+            "Có; không cần tìm kiếm.",
+            "Có vì GraphQL tự bỏ mọi nhánh."
+          ],
+          "answer": 0,
+          "explanation": "Shard1 chứaA,B,D; shard2 chứaC,E,F. Các cạnh A-C,D-F nối shard. Đường A-B-D-F qua biên ở D-F theo bố trí đã nêu, nhưng tìm kiếm có thể đọc cả nhánhC/E. Chi phí tìm đường không chỉ bằng độ dài đường tìm được.",
+          "sourceIds": [
+            "algorithms",
+            "security-owasp",
+            "shards-aws"
+          ]
+        },
+        {
+          "id": "step-3",
+          "text": "Dừng ở lớp1 chưa thấyF có thể kết luận vô đường?",
+          "options": [
+            "Không; kết quả chưa đầy đủ.",
+            "Có; BFS luôn xong trong1 lớp.",
+            "Có nếu có nhiều shard."
+          ],
+          "answer": 0,
+          "explanation": "Dừng sau lớp1 vì budget: chưa thấyF nhưng graph có đường dài3. Thông báo “không tìm trong giới hạn” khác “không tồn tại đường”. Không thấy trong phạm vi tìm không chứng minh không tồn tại toàn graph.",
+          "sourceIds": [
+            "algorithms",
+            "security-owasp",
+            "shards-aws"
+          ]
+        }
+      ]
+    },
+    "prediction": {
+      "text": "Độ dài đường ngắn nhất A→F là?",
+      "options": [
+        "2 cạnh.",
+        "3 cạnh.",
+        "6 cạnh."
+      ],
+      "answer": 1,
+      "explanation": "TừA: lớp0 A; lớp1 B,C; lớp2 D,E; lớp3 F. Theo thứ tự chữ, parentF=D nên đường A-B-D-F dài3 cạnh; A-C-E-F cũng dài3. Đường ngắn nhất có thể không duy nhất; không gọi BFS là tối ưu mọi graph có trọng số."
+    },
+    "challenge": {
+      "text": "Thêm trọng số khác nhau vào cạnh, BFS còn tự cho chi phí nhỏ nhất?",
+      "options": [
+        "Không; phải chọn thuật toán theo trọng số và giả định.",
+        "Có; số cạnh luôn bằng chi phí."
+      ],
+      "answer": 0,
+      "explanation": "BFS ngắn số cạnh trong graph không trọng số."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Theo dấu nơi giữ trạng thái và điều đã được xác nhận.",
+        "TừA: lớp0 A; lớp1 B,C; lớp2 D,E; lớp3 F. Theo thứ tự chữ, parentF=D nên đường A-B-D-F dài3 cạnh; A-C-E-F cũng dài3. Đường ngắn nhất có thể không duy nhất; không gọi BFS là tối ưu mọi graph có trọng số."
+      ],
+      "challenge": [
+        "Kiểm tra yêu cầu mới; tìm lịch thao tác có thể làm phương án sai.",
+        "BFS ngắn số cạnh trong graph không trọng số."
+      ]
+    },
+    "sources": [
+      {
+        "title": "MIT OCW — Algorithms lecture notes",
+        "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/pages/lecture-notes/"
+      },
+      {
+        "title": "OWASP — Authorization cheat sheet",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+      },
+      {
+        "title": "Amazon DynamoDB — Partition key design",
+        "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-partition-key-design.html"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-case-social-path",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L2-04",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Graph vô hướng không trọng số: A-B,A-C,B-D,C-E,D-F,E-F.",
+      "context": "Graph vô hướng không trọng số: A-B,A-C,B-D,C-E,D-F,E-F. Tìm đường từA tớiF; láng giềng xét theo chữ cái. Các đỉnh có thể nằm ở shard khác.",
+      "requirements": [
+        "Tìm đường liên hệ trong đồ thị: chọn BFS, giới hạn mở rộng và giữ quyền riêng tư.",
+        "Giải thích được một tình huống lỗi và điều kiện để phương án còn đúng."
+      ],
+      "activityRef": "module-practice",
+      "experimentSteps": [
+        "Theo từng bước trong các ví dụ và tự tính kết quả trước khi xem giải thích.",
+        "Chọn phương án cho từng tình huống, kiểm tra và sửa lựa chọn.",
+        "Áp dụng sang yêu cầu mới; nêu điều kiện và giới hạn của quyết định."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Đường ngắn nhất có thể không duy nhất; không gọi BFS là tối ưu mọi graph có trọng số.",
+        "Không thấy trong phạm vi tìm không chứng minh không tồn tại toàn graph."
+      ],
+      "limitations": "Case tự biên soạn trên dữ liệu giả lập bằng chữ; không mô tả kiến trúc hiện tại của công ty, không truy cập dữ liệu người thật hoặc hệ thống ngoài."
+    },
+    "designTask": {
+      "version": 1,
+      "prompt": "Graph vô hướng không trọng số: A-B,A-C,B-D,C-E,D-F,E-F. Tìm đường từA tớiF; láng giềng xét theo chữ cái. Các đỉnh có thể nằm ở shard khác.",
+      "deliverables": [
+        {
+          "id": "part-1",
+          "prompt": "Viết yêu cầu, workload/đơn vị, API và schema nguồn của case."
+        },
+        {
+          "id": "part-2",
+          "prompt": "Tự tính/vẽ trace ví dụ; nêu một lịch lỗi và cơ chế giữ invariant."
+        },
+        {
+          "id": "part-3",
+          "prompt": "Đề xuất phương án cho ràng buộc mới, quyền/chi phí và cách kiểm."
+        }
+      ],
+      "rubric": [
+        "Có số liệu tự tính, đúng scope và trạng thái theo trace.",
+        "Xác định nguồn, định danh, retry và quyền theo case.",
+        "Nêu trade-off và phản ví dụ; không gọi fixture là benchmark production."
+      ],
+      "variation": "Ẩn cạnhB-D với người xem và tăng graph lên1 triệu đỉnh. Nêu policy quyền, budget, batching và cách trình bày kết quả."
+    }
+  },
+  {
+    "id": "case-query-cache",
+    "version": 1,
+    "status": "beta",
+    "kind": "module-practice",
+    "level": "L2",
+    "moduleId": "L2.2",
+    "minutes": 45,
+    "title": "Case: cache tra thư viện có hai chỗ",
+    "subtitle": "Cache LRU giữ2 kết quả, bắt đầu rỗng; truy cập A,B,A,C,B.",
+    "objective": "Thiết kế cache kết quả truy vấn: khóa đúng ngữ cảnh, xử lý sửa dữ liệu, hết hạn và đồng thời nhiều miss.",
+    "story": "Cache LRU giữ2 kết quả, bắt đầu rỗng; truy cập A,B,A,C,B. Không có TTL hết hạn trong trace đầu. Sau đó nguồnA đổi version và thêm node cache.",
+    "explanation": "Tính hit/miss và eviction từng bước. TTL không biết mọi thay đổi nguồn. Thêm node có chi phí cold cache và skew.",
+    "limit": "Case tự biên soạn trên dữ liệu giả lập bằng chữ; không mô tả kiến trúc hiện tại của công ty, không truy cập dữ liệu người thật hoặc hệ thống ngoài.",
+    "terms": [
+      {
+        "name": "Nguồn dữ liệu",
+        "english": "Source of truth",
+        "meaning": "Nơi chịu trách nhiệm quyết định dữ liệu gốc."
+      },
+      {
+        "name": "Dấu vết thao tác",
+        "english": "Trace",
+        "meaning": "Danh sách hành động có thứ tự để giải thích kết quả."
+      },
+      {
+        "name": "Điều kiện luôn phải giữ",
+        "english": "invariant",
+        "meaning": "Quy tắc dữ liệu không được vi phạm, kể cả khi có lỗi; ví dụ số vé đã xác nhận không vượt sức chứa."
+      },
+      {
+        "name": "Thử lại",
+        "english": "retry",
+        "meaning": "Gửi hoặc thực hiện lại một thao tác sau lỗi/chờ quá hạn. Lần đầu có thể đã có hiệu ứng nên phải xét xử lý trùng."
+      },
+      {
+        "name": "Cấu trúc dữ liệu đã quy định",
+        "english": "schema",
+        "meaning": "Hợp đồng về trường, kiểu và ràng buộc. Dữ liệu đúng cấu trúc vẫn có thể sai về nội dung nghiệp vụ."
+      },
+      {
+        "name": "Sự đánh đổi",
+        "english": "trade-off",
+        "meaning": "Một phương án đem lại lợi ích kèm chi phí hoặc rủi ro; cần chỉ rõ điều kiện và thước đo."
+      }
+    ],
+    "chapters": {
+      "version": 1,
+      "items": [
+        {
+          "id": "step-1",
+          "title": "Tính hit/miss và eviction từng bước",
+          "explanation": "LRU đẩy mục ít được dùng gần đây nhất khi cần chỗ. Hit làm mục thành vừa dùng; miss nạp từ nguồn theo giả định. Dung lượng và freshness là hai trục khác nhau.",
+          "example": "A miss:[A]; B miss:[B,A]; A hit:[A,B]; C miss đẩyB:[C,A]; B miss đẩyA:[B,C]. Tổng1 hit/5 lượt=20%.",
+          "steps": [
+            "Ghi thứ tự mới→cũ sau từng lượt.",
+            "Đếm miss4, không nhầm lần đưa lạiB thành hit."
+          ],
+          "misconception": "FIFO có thể cho trace khác vì hit không đổi thứ tự vào.",
+          "sourceIds": [
+            "cache-azure",
+            "cache-rfc",
+            "dynamo-paper"
+          ]
+        },
+        {
+          "id": "step-2",
+          "title": "TTL không biết mọi thay đổi nguồn",
+          "explanation": "TTL hết thì phải xử lý theo policy nguồn/stale/error. Invalidation/version để tránh trả sai sau update; concurrent fill có thể tái đưa bản cũ. Query cache key chứa query params, schema/data version và scope quyền phù hợp.",
+          "example": "A version1 đang cache, nguồn thànhv2 trước TTL. Đọc hit có thể vẫnv1; cập nhật nguồn không tự báo mọi cache.",
+          "steps": [
+            "Đánh dấu version nguồn/cache và thời điểm.",
+            "Thử update quyền, TTL hết và nguồn lỗi; nêu contract cho phép gì."
+          ],
+          "misconception": "Hit không đồng nghĩa dữ liệu mới hoặc đúng quyền.",
+          "sourceIds": [
+            "cache-azure",
+            "cache-rfc",
+            "dynamo-paper"
+          ]
+        },
+        {
+          "id": "step-3",
+          "title": "Thêm node có chi phí cold cache và skew",
+          "explanation": "Đổi phân phối key làm một phần hoặc nhiều cache miss; consistent hashing giảm chuyển vùng theo mô hình nhưng hot key vẫn nóng. Cần nguồn chịu cold load, gộp lượt tải và giới hạn, không chỉ đo tổng RAM.",
+          "example": "Từ2 lên3 node bằng k modN có thể đổi nơi nhiều key; node mới chưa có bản dù nguồn còn. Một key nhận90% lượt vẫn không chia đều chỉ nhờ hash.",
+          "steps": [
+            "Theo key→node trước/sau và số miss dự kiến.",
+            "Thử cold start và hot key, kiểm queue nguồn và quyền."
+          ],
+          "misconception": "Thêm cache node có thể tạm tăng tải nguồn.",
+          "sourceIds": [
+            "cache-azure",
+            "cache-rfc",
+            "dynamo-paper"
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "version": 1,
+      "items": [
+        {
+          "id": "step-1",
+          "text": "Trace A,B,A,C,B có mấy hit?",
+          "options": [
+            "1 hit.",
+            "2 hit.",
+            "4 hit."
+          ],
+          "answer": 0,
+          "explanation": "A miss:[A]; B miss:[B,A]; A hit:[A,B]; C miss đẩyB:[C,A]; B miss đẩyA:[B,C]. Tổng1 hit/5 lượt=20%. FIFO có thể cho trace khác vì hit không đổi thứ tự vào.",
+          "sourceIds": [
+            "cache-azure",
+            "cache-rfc",
+            "dynamo-paper"
+          ]
+        },
+        {
+          "id": "step-2",
+          "text": "NguồnA lênv2, cachev1 còn TTL có thể trả cũ không?",
+          "options": [
+            "Có nếu chưa có cơ chế làm mới/vô hiệu khác.",
+            "Không; cache tự biết mọi ghi.",
+            "Không; LRU kiểm version."
+          ],
+          "answer": 0,
+          "explanation": "A version1 đang cache, nguồn thànhv2 trước TTL. Đọc hit có thể vẫnv1; cập nhật nguồn không tự báo mọi cache. Hit không đồng nghĩa dữ liệu mới hoặc đúng quyền.",
+          "sourceIds": [
+            "cache-azure",
+            "cache-rfc",
+            "dynamo-paper"
+          ]
+        },
+        {
+          "id": "step-3",
+          "text": "Node mới rỗng có thể làm tải nguồn tăng tạm thời?",
+          "options": [
+            "Có, vì cold miss/remapping.",
+            "Không; thêm RAM luôn giảm tải ngay.",
+            "Không; hash tự chép mọi bytes."
+          ],
+          "answer": 0,
+          "explanation": "Từ2 lên3 node bằng k modN có thể đổi nơi nhiều key; node mới chưa có bản dù nguồn còn. Một key nhận90% lượt vẫn không chia đều chỉ nhờ hash. Thêm cache node có thể tạm tăng tải nguồn.",
+          "sourceIds": [
+            "cache-azure",
+            "cache-rfc",
+            "dynamo-paper"
+          ]
+        }
+      ]
+    },
+    "prediction": {
+      "text": "Trace A,B,A,C,B có mấy hit?",
+      "options": [
+        "2 hit.",
+        "1 hit.",
+        "4 hit."
+      ],
+      "answer": 1,
+      "explanation": "A miss:[A]; B miss:[B,A]; A hit:[A,B]; C miss đẩyB:[C,A]; B miss đẩyA:[B,C]. Tổng1 hit/5 lượt=20%. FIFO có thể cho trace khác vì hit không đổi thứ tự vào."
+    },
+    "challenge": {
+      "text": "Cache hit20% với5 lượt có bao nhiêu lượt cần nguồn theo mô hình?",
+      "options": [
+        "1 lượt.",
+        "4 lượt.",
+        "0 lượt."
+      ],
+      "answer": 1,
+      "explanation": "Bốn miss, mỗi miss một đọc nguồn."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Theo dấu nơi giữ trạng thái và điều đã được xác nhận.",
+        "A miss:[A]; B miss:[B,A]; A hit:[A,B]; C miss đẩyB:[C,A]; B miss đẩyA:[B,C]. Tổng1 hit/5 lượt=20%. FIFO có thể cho trace khác vì hit không đổi thứ tự vào."
+      ],
+      "challenge": [
+        "Kiểm tra yêu cầu mới; tìm lịch thao tác có thể làm phương án sai.",
+        "Bốn miss, mỗi miss một đọc nguồn."
+      ]
+    },
+    "sources": [
+      {
+        "title": "Microsoft — Cache-aside",
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside"
+      },
+      {
+        "title": "RFC 9111 — HTTP Caching",
+        "url": "https://www.rfc-editor.org/rfc/rfc9111.html"
+      },
+      {
+        "title": "Amazon — Dynamo paper (2007)",
+        "url": "https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-case-query-cache",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L2-02",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Cache LRU giữ2 kết quả, bắt đầu rỗng; truy cập A,B,A,C,B.",
+      "context": "Cache LRU giữ2 kết quả, bắt đầu rỗng; truy cập A,B,A,C,B. Không có TTL hết hạn trong trace đầu. Sau đó nguồnA đổi version và thêm node cache.",
+      "requirements": [
+        "Thiết kế cache kết quả truy vấn: khóa đúng ngữ cảnh, xử lý sửa dữ liệu, hết hạn và đồng thời nhiều miss.",
+        "Giải thích được một tình huống lỗi và điều kiện để phương án còn đúng."
+      ],
+      "activityRef": "module-practice",
+      "experimentSteps": [
+        "Theo từng bước trong các ví dụ và tự tính kết quả trước khi xem giải thích.",
+        "Chọn phương án cho từng tình huống, kiểm tra và sửa lựa chọn.",
+        "Áp dụng sang yêu cầu mới; nêu điều kiện và giới hạn của quyết định."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "FIFO có thể cho trace khác vì hit không đổi thứ tự vào.",
+        "Thêm cache node có thể tạm tăng tải nguồn."
+      ],
+      "limitations": "Case tự biên soạn trên dữ liệu giả lập bằng chữ; không mô tả kiến trúc hiện tại của công ty, không truy cập dữ liệu người thật hoặc hệ thống ngoài."
+    },
+    "designTask": {
+      "version": 1,
+      "prompt": "Cache LRU giữ2 kết quả, bắt đầu rỗng; truy cập A,B,A,C,B. Không có TTL hết hạn trong trace đầu. Sau đó nguồnA đổi version và thêm node cache.",
+      "deliverables": [
+        {
+          "id": "part-1",
+          "prompt": "Viết yêu cầu, workload/đơn vị, API và schema nguồn của case."
+        },
+        {
+          "id": "part-2",
+          "prompt": "Tự tính/vẽ trace ví dụ; nêu một lịch lỗi và cơ chế giữ invariant."
+        },
+        {
+          "id": "part-3",
+          "prompt": "Đề xuất phương án cho ràng buộc mới, quyền/chi phí và cách kiểm."
+        }
+      ],
+      "rubric": [
+        "Có số liệu tự tính, đúng scope và trạng thái theo trace.",
+        "Xác định nguồn, định danh, retry và quyền theo case.",
+        "Nêu trade-off và phản ví dụ; không gọi fixture là benchmark production."
+      ],
+      "variation": "CảA/B hết TTL cùng lúc khi100 client mở trang. Thêm coalescing và policy nguồn lỗi, không dùng cache cho quyết định chỗ cuối."
+    }
+  },
+  {
+    "id": "case-book-ranking",
+    "version": 1,
+    "status": "beta",
+    "kind": "module-practice",
+    "level": "L5",
+    "moduleId": "L5.4",
+    "minutes": 45,
+    "title": "Case: xếp hạng sách theo lượt mượn",
+    "subtitle": "Trong cửa sổ09:00–10:00 có E1:A lúc09:10,E2:B lúc09:20,E3:A lúc09:55 tới11:00 và E1 gửi lại.",
+    "objective": "Thiết kế bảng xếp hạng sách: xử lý sự kiện muộn/trùng, top-k, cập nhật và tính lại.",
+    "story": "Trong cửa sổ09:00–10:00 có E1:A lúc09:10,E2:B lúc09:20,E3:A lúc09:55 tới11:00 và E1 gửi lại. Bảng xếp hạng dùng event time, cho cập nhật muộn theo policy.",
+    "explanation": "Định nghĩa cửa sổ và danh tính trước tính tổng. Giữ raw để replay có kiểm soát. Phục vụ bảng cần ghi mốc và xử lý sửa nguồn.",
+    "limit": "Case tự biên soạn trên dữ liệu giả lập bằng chữ; không mô tả kiến trúc hiện tại của công ty, không truy cập dữ liệu người thật hoặc hệ thống ngoài.",
+    "terms": [
+      {
+        "name": "Nguồn dữ liệu",
+        "english": "Source of truth",
+        "meaning": "Nơi chịu trách nhiệm quyết định dữ liệu gốc."
+      },
+      {
+        "name": "Dấu vết thao tác",
+        "english": "Trace",
+        "meaning": "Danh sách hành động có thứ tự để giải thích kết quả."
+      },
+      {
+        "name": "Điều kiện luôn phải giữ",
+        "english": "invariant",
+        "meaning": "Quy tắc dữ liệu không được vi phạm, kể cả khi có lỗi; ví dụ số vé đã xác nhận không vượt sức chứa."
+      },
+      {
+        "name": "Thông báo xác nhận",
+        "english": "ACK",
+        "meaning": "Phản hồi cho biết một bước đã được bên nhận xác nhận. Phải đọc hợp đồng để biết đó là nhận, lưu bền hay áp dụng."
+      },
+      {
+        "name": "Thử lại",
+        "english": "retry",
+        "meaning": "Gửi hoặc thực hiện lại một thao tác sau lỗi/chờ quá hạn. Lần đầu có thể đã có hiệu ứng nên phải xét xử lý trùng."
+      },
+      {
+        "name": "Bổ sung dữ liệu lịch sử",
+        "english": "backfill",
+        "meaning": "Chạy xử lý cho dữ liệu cũ còn thiếu; cần phối hợp với luồng đang chạy để không bỏ sót hoặc đếm trùng."
+      },
+      {
+        "name": "Cấu trúc dữ liệu đã quy định",
+        "english": "schema",
+        "meaning": "Hợp đồng về trường, kiểu và ràng buộc. Dữ liệu đúng cấu trúc vẫn có thể sai về nội dung nghiệp vụ."
+      },
+      {
+        "name": "Mốc để tiếp tục xử lý",
+        "english": "checkpoint",
+        "meaning": "Lưu vị trí và trạng thái phù hợp để phục hồi; hiệu ứng ở nơi khác còn cần transaction hoặc chống trùng."
+      },
+      {
+        "name": "Chạy lại dữ liệu đã ghi",
+        "english": "replay",
+        "meaning": "Đọc và áp dụng lại lịch sử theo quy tắc; cần tránh lặp hiệu ứng bên ngoài."
+      },
+      {
+        "name": "Sự đánh đổi",
+        "english": "trade-off",
+        "meaning": "Một phương án đem lại lợi ích kèm chi phí hoặc rủi ro; cần chỉ rõ điều kiện và thước đo."
+      }
+    ],
+    "chapters": {
+      "version": 1,
+      "items": [
+        {
+          "id": "step-1",
+          "title": "Định nghĩa cửa sổ và danh tính trước tính tổng",
+          "explanation": "Xếp hạng theo event time khác theo arrival time. Dedup theo eventId; category có thể nhiều nên một event thuộc nhiều bảng theo quy tắc rõ. Tie-break ổn định giúp tái lập; policy late update cần công khai.",
+          "example": "Sau đủ event duy nhất E1,E2,E3: A=2,B=1. E1 replay không tăngA lên3. TrướcE3 tới, A=B=1 và bảng có thể là tạm.",
+          "steps": [
+            "Đặt E3 vào cửa sổ giờ09 dù tới11h.",
+            "DedupE1 rồi sort count giảm dần, mã sách khi hòa."
+          ],
+          "misconception": "Freshness của bảng và tốc độ đọc bảng là hai chỉ số khác.",
+          "sourceIds": [
+            "flink-time",
+            "kafka-design",
+            "security-owasp"
+          ]
+        },
+        {
+          "id": "step-2",
+          "title": "Giữ raw để replay có kiểm soát",
+          "explanation": "Aggregate là view; raw/version/checkpoint cho phép sửa logic và backfill. Upsert kết quả theo window/book/version hoặc transaction phù hợp tránh nhân đôi khi chạy lại. Nếu policy bỏ muộn, cần side output/đối soát thay vì giấu mất.",
+          "example": "Job tínhA=2 rồi crash trước checkpoint. Replay không được cộng thêm2 vào tổng đã có nếu mục đích là thay snapshot window.",
+          "steps": [
+            "Ghi ID window, book và version logic.",
+            "Thử replay cùng input và kiểm output không đổi."
+          ],
+          "misconception": "Replay không có dedup/overwrite policy có thể nhân đôi kết quả.",
+          "sourceIds": [
+            "flink-time",
+            "kafka-design",
+            "security-owasp"
+          ]
+        },
+        {
+          "id": "step-3",
+          "title": "Phục vụ bảng cần ghi mốc và xử lý sửa nguồn",
+          "explanation": "Cache/index có freshness riêng; hiển thị mốc cập nhật và policy final/tạm. Event correction/cancel cần đảo/cập nhật contribution theo định danh. Bảo vệ quyền và không lộ lịch mượn cá nhân qua dữ liệu quá chi tiết.",
+          "example": "E3 bị hủy theo policy: A từ2 về1 trong window, không xóa sáchA khỏi mọi lịch sử. Nếu tie A=B, dùng tie-break đã chốt.",
+          "steps": [
+            "Theo contribution của từngevent và correction.",
+            "Nêu thời gian phản ánh correction tới bảng/cache và bảo vệ dữ liệu riêng."
+          ],
+          "misconception": "Bảng tổng hợp vẫn có thể lộ dữ liệu khi nhóm quá nhỏ; cần scope phù hợp.",
+          "sourceIds": [
+            "flink-time",
+            "kafka-design",
+            "security-owasp"
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "version": 1,
+      "items": [
+        {
+          "id": "step-1",
+          "text": "Kết quả đầy đủ theo fixture là?",
+          "options": [
+            "A=2,B=1.",
+            "A=3,B=1.",
+            "A=1,B=2."
+          ],
+          "answer": 0,
+          "explanation": "Sau đủ event duy nhất E1,E2,E3: A=2,B=1. E1 replay không tăngA lên3. TrướcE3 tới, A=B=1 và bảng có thể là tạm. Freshness của bảng và tốc độ đọc bảng là hai chỉ số khác.",
+          "sourceIds": [
+            "flink-time",
+            "kafka-design",
+            "security-owasp"
+          ]
+        },
+        {
+          "id": "step-2",
+          "text": "Tính lại cùng window có nên cộng tiếp toàn tổng cũ?",
+          "options": [
+            "Không nếu đang rebuild cùng dữ liệu; cần upsert/version phù hợp.",
+            "Có; mỗi job là thời gian mới.",
+            "Có nếu worker nhiều hơn."
+          ],
+          "answer": 0,
+          "explanation": "Job tínhA=2 rồi crash trước checkpoint. Replay không được cộng thêm2 vào tổng đã có nếu mục đích là thay snapshot window. Replay không có dedup/overwrite policy có thể nhân đôi kết quả.",
+          "sourceIds": [
+            "flink-time",
+            "kafka-design",
+            "security-owasp"
+          ]
+        },
+        {
+          "id": "step-3",
+          "text": "HủyE3 theo fixture làmA bằng bao nhiêu?",
+          "options": [
+            "1.",
+            "0.",
+            "3."
+          ],
+          "answer": 0,
+          "explanation": "E3 bị hủy theo policy: A từ2 về1 trong window, không xóa sáchA khỏi mọi lịch sử. Nếu tie A=B, dùng tie-break đã chốt. Bảng tổng hợp vẫn có thể lộ dữ liệu khi nhóm quá nhỏ; cần scope phù hợp.",
+          "sourceIds": [
+            "flink-time",
+            "kafka-design",
+            "security-owasp"
+          ]
+        }
+      ]
+    },
+    "prediction": {
+      "text": "Kết quả đầy đủ theo fixture là?",
+      "options": [
+        "A=3,B=1.",
+        "A=2,B=1.",
+        "A=1,B=2."
+      ],
+      "answer": 1,
+      "explanation": "Sau đủ event duy nhất E1,E2,E3: A=2,B=1. E1 replay không tăngA lên3. TrướcE3 tới, A=B=1 và bảng có thể là tạm. Freshness của bảng và tốc độ đọc bảng là hai chỉ số khác."
+    },
+    "challenge": {
+      "text": "Trước event muộn tới, bảngA=B=1 có nhất thiết là cuối cùng?",
+      "options": [
+        "Không; policy cho phép cập nhật khiE3 tới.",
+        "Có; đã xuất bảng thì bất biến."
+      ],
+      "answer": 0,
+      "explanation": "Mốc/độ đầy đủ phải công khai."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Theo dấu nơi giữ trạng thái và điều đã được xác nhận.",
+        "Sau đủ event duy nhất E1,E2,E3: A=2,B=1. E1 replay không tăngA lên3. TrướcE3 tới, A=B=1 và bảng có thể là tạm. Freshness của bảng và tốc độ đọc bảng là hai chỉ số khác."
+      ],
+      "challenge": [
+        "Kiểm tra yêu cầu mới; tìm lịch thao tác có thể làm phương án sai.",
+        "Mốc/độ đầy đủ phải công khai."
+      ]
+    },
+    "sources": [
+      {
+        "title": "Apache Flink — Event time and watermarks",
+        "url": "https://nightlies.apache.org/flink/flink-docs-release-2.0/docs/concepts/time/"
+      },
+      {
+        "title": "Apache Kafka 4.1 — Design",
+        "url": "https://kafka.apache.org/41/design/design/"
+      },
+      {
+        "title": "OWASP — Authorization cheat sheet",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-case-book-ranking",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L5-04",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Trong cửa sổ09:00–10:00 có E1:A lúc09:10,E2:B lúc09:20,E3:A lúc09:55 tới11:00 và E1 gửi lại.",
+      "context": "Trong cửa sổ09:00–10:00 có E1:A lúc09:10,E2:B lúc09:20,E3:A lúc09:55 tới11:00 và E1 gửi lại. Bảng xếp hạng dùng event time, cho cập nhật muộn theo policy.",
+      "requirements": [
+        "Thiết kế bảng xếp hạng sách: xử lý sự kiện muộn/trùng, top-k, cập nhật và tính lại.",
+        "Giải thích được một tình huống lỗi và điều kiện để phương án còn đúng."
+      ],
+      "activityRef": "module-practice",
+      "experimentSteps": [
+        "Theo từng bước trong các ví dụ và tự tính kết quả trước khi xem giải thích.",
+        "Chọn phương án cho từng tình huống, kiểm tra và sửa lựa chọn.",
+        "Áp dụng sang yêu cầu mới; nêu điều kiện và giới hạn của quyết định."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Freshness của bảng và tốc độ đọc bảng là hai chỉ số khác.",
+        "Bảng tổng hợp vẫn có thể lộ dữ liệu khi nhóm quá nhỏ; cần scope phù hợp."
+      ],
+      "limitations": "Case tự biên soạn trên dữ liệu giả lập bằng chữ; không mô tả kiến trúc hiện tại của công ty, không truy cập dữ liệu người thật hoặc hệ thống ngoài."
+    },
+    "designTask": {
+      "version": 1,
+      "prompt": "Trong cửa sổ09:00–10:00 có E1:A lúc09:10,E2:B lúc09:20,E3:A lúc09:55 tới11:00 và E1 gửi lại. Bảng xếp hạng dùng event time, cho cập nhật muộn theo policy.",
+      "deliverables": [
+        {
+          "id": "part-1",
+          "prompt": "Viết yêu cầu, workload/đơn vị, API và schema nguồn của case."
+        },
+        {
+          "id": "part-2",
+          "prompt": "Tự tính/vẽ trace ví dụ; nêu một lịch lỗi và cơ chế giữ invariant."
+        },
+        {
+          "id": "part-3",
+          "prompt": "Đề xuất phương án cho ràng buộc mới, quyền/chi phí và cách kiểm."
+        }
+      ],
+      "rubric": [
+        "Có số liệu tự tính, đúng scope và trạng thái theo trace.",
+        "Xác định nguồn, định danh, retry và quyền theo case.",
+        "Nêu trade-off và phản ví dụ; không gọi fixture là benchmark production."
+      ],
+      "variation": "Cần top10 theo nhiều danh mục, E3 đổi danh mục sau một ngày. Nêu correction, backfill, tie-break và freshness."
+    }
+  },
+  {
+    "id": "case-growth-roadmap",
+    "version": 1,
+    "status": "beta",
+    "kind": "module-practice",
+    "level": "L5",
+    "moduleId": "L5.3",
+    "minutes": 45,
+    "title": "Case: cổng trường lớn dần qua từng nút thắt",
+    "subtitle": "Một máy web và database phục vụ200 học sinh.",
+    "objective": "Lập lộ trình tăng trưởng: đo nút thắt, ước lượng tải và chi phí, chọn bước thay đổi có thể kiểm chứng.",
+    "story": "Một máy web và database phục vụ200 học sinh. Dự kiến lên20.000, nhưng chưa có số peak hay profile. Nhóm muốn lộ trình có thể kiểm và quay lại.",
+    "explanation": "Bắt đầu từ số đo và giới hạn thật. Mỗi bước mở rộng thêm rủi ro cần kiểm. Roadmap có gate thay vì ngày hứa vô căn cứ.",
+    "limit": "Case tự biên soạn trên dữ liệu giả lập bằng chữ; không mô tả kiến trúc hiện tại của công ty, không truy cập dữ liệu người thật hoặc hệ thống ngoài.",
+    "terms": [
+      {
+        "name": "Nguồn dữ liệu",
+        "english": "Source of truth",
+        "meaning": "Nơi chịu trách nhiệm quyết định dữ liệu gốc."
+      },
+      {
+        "name": "Dấu vết thao tác",
+        "english": "Trace",
+        "meaning": "Danh sách hành động có thứ tự để giải thích kết quả."
+      },
+      {
+        "name": "Điều kiện luôn phải giữ",
+        "english": "invariant",
+        "meaning": "Quy tắc dữ liệu không được vi phạm, kể cả khi có lỗi; ví dụ số vé đã xác nhận không vượt sức chứa."
+      },
+      {
+        "name": "Thông báo xác nhận",
+        "english": "ACK",
+        "meaning": "Phản hồi cho biết một bước đã được bên nhận xác nhận. Phải đọc hợp đồng để biết đó là nhận, lưu bền hay áp dụng."
+      },
+      {
+        "name": "Thử lại",
+        "english": "retry",
+        "meaning": "Gửi hoặc thực hiện lại một thao tác sau lỗi/chờ quá hạn. Lần đầu có thể đã có hiệu ứng nên phải xét xử lý trùng."
+      },
+      {
+        "name": "Quay về trạng thái trước",
+        "english": "rollback",
+        "meaning": "Khôi phục theo cơ chế cụ thể. Quay lại bản code cũ không tự hoàn tác dữ liệu hoặc giao dịch ở hệ thống khác."
+      },
+      {
+        "name": "Cấu trúc dữ liệu đã quy định",
+        "english": "schema",
+        "meaning": "Hợp đồng về trường, kiểu và ràng buộc. Dữ liệu đúng cấu trúc vẫn có thể sai về nội dung nghiệp vụ."
+      },
+      {
+        "name": "Sự đánh đổi",
+        "english": "trade-off",
+        "meaning": "Một phương án đem lại lợi ích kèm chi phí hoặc rủi ro; cần chỉ rõ điều kiện và thước đo."
+      }
+    ],
+    "chapters": {
+      "version": 1,
+      "items": [
+        {
+          "id": "step-1",
+          "title": "Bắt đầu từ số đo và giới hạn thật",
+          "explanation": "Đo đường quan trọng, tải đọc/ghi/peak, latency/error/saturation và kế hoạch tăng. Tách web/database hoặc thêm index khi bằng chứng phù hợp, không vì sơ đồ tham khảo có nhiều ô. Cloud vendor là lớp triển khai, không thay nguyên lý.",
+          "example": "Nếu query thiếu index quét nhiều dòng chiếm thời gian, thêm web không giảm lượng DB làm. Kiểm query plan và workload trước đổi kiến trúc.",
+          "steps": [
+            "Ghi baseline và bottleneck với chỉ số có đơn vị.",
+            "Chọn thay đổi nhỏ nhắm đúng giới hạn và cách kiểm sau thay."
+          ],
+          "misconception": "Tăng user không tự cho biết CPU, I/O, khóa hay mạng là nút thắt.",
+          "sourceIds": [
+            "sre-objectives",
+            "replication-pg",
+            "adr",
+            "deploy-k8s"
+          ]
+        },
+        {
+          "id": "step-2",
+          "title": "Mỗi bước mở rộng thêm rủi ro cần kiểm",
+          "explanation": "Load balancer cần state/health/pool; cache cần freshness/quyền/cold-start; replica có lag/failover; shard có key/migration. Chọn theo vấn đề đã đo và giữ contract với client cũ.",
+          "example": "Thêm replica giúp đọc cho phép trễ, nhưng đọc sau ghi vẫn cần route/mốc. Tổng pool tăng khi thêm app cần budget DB.",
+          "steps": [
+            "Với mỗi thành phần viết lợi ích, lỗi mới và owner.",
+            "Thử source chậm/cache trống/replica lag theo scope thay đổi."
+          ],
+          "misconception": "Không có bước “bật cloud” làm mọi bảo đảm tự xuất hiện.",
+          "sourceIds": [
+            "sre-objectives",
+            "replication-pg",
+            "adr",
+            "deploy-k8s"
+          ]
+        },
+        {
+          "id": "step-3",
+          "title": "Roadmap có gate thay vì ngày hứa vô căn cứ",
+          "explanation": "Mỗi milestone có hypothesis, workload test, invariant/security, cost và rollback tương thích. Build/buy theo năng lực trực; migration expand-contract và đối soát trước cutover. Giữ evidence/version để không gọi kế hoạch thành đã chạy.",
+          "example": "Mốc1 index đạt p95 theo tải đã chốt; mốc2 cache chỉ cho dữ liệu công khai; mốc3 replica khi đọc thành bottleneck. Không bắt buộc đạt mọi mốc nếu chưa cần.",
+          "steps": [
+            "Viết điều kiện kích hoạt và hoàn tất mỗi bước.",
+            "Thêm điều kiện dừng/rollback và dữ liệu phải kiểm."
+          ],
+          "misconception": "Roadmap không phải cam kết đã triển khai hoặc benchmark mọi quy mô.",
+          "sourceIds": [
+            "sre-objectives",
+            "replication-pg",
+            "adr",
+            "deploy-k8s"
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "version": 1,
+      "items": [
+        {
+          "id": "step-1",
+          "text": "DB query là nút thắt, thêm web có tự sửa query?",
+          "options": [
+            "Không; cần xử lý đường dữ liệu theo evidence.",
+            "Có; mọi tài nguyên cộng chung.",
+            "Có nếu web ở cloud khác."
+          ],
+          "answer": 0,
+          "explanation": "Nếu query thiếu index quét nhiều dòng chiếm thời gian, thêm web không giảm lượng DB làm. Kiểm query plan và workload trước đổi kiến trúc. Tăng user không tự cho biết CPU, I/O, khóa hay mạng là nút thắt.",
+          "sourceIds": [
+            "sre-objectives",
+            "replication-pg",
+            "adr",
+            "deploy-k8s"
+          ]
+        },
+        {
+          "id": "step-2",
+          "text": "Thêm replica đọc có tự bảo đảm mọi đọc sau ghi thấy mới?",
+          "options": [
+            "Không; cần routing/chờ mốc hoặc contract phù hợp.",
+            "Có; replica nghĩa tức thì.",
+            "Có nếu có ba bản."
+          ],
+          "answer": 0,
+          "explanation": "Thêm replica giúp đọc cho phép trễ, nhưng đọc sau ghi vẫn cần route/mốc. Tổng pool tăng khi thêm app cần budget DB. Không có bước “bật cloud” làm mọi bảo đảm tự xuất hiện.",
+          "sourceIds": [
+            "sre-objectives",
+            "replication-pg",
+            "adr",
+            "deploy-k8s"
+          ]
+        },
+        {
+          "id": "step-3",
+          "text": "Một milestone chưa có test nhưng có sơ đồ có thể ghi Verified?",
+          "options": [
+            "Không; ghi đặc tả/source đúng trạng thái.",
+            "Có nếu có ngày.",
+            "Có nếu AI đồng ý."
+          ],
+          "answer": 0,
+          "explanation": "Mốc1 index đạt p95 theo tải đã chốt; mốc2 cache chỉ cho dữ liệu công khai; mốc3 replica khi đọc thành bottleneck. Không bắt buộc đạt mọi mốc nếu chưa cần. Roadmap không phải cam kết đã triển khai hoặc benchmark mọi quy mô.",
+          "sourceIds": [
+            "sre-objectives",
+            "replication-pg",
+            "adr",
+            "deploy-k8s"
+          ]
+        }
+      ]
+    },
+    "prediction": {
+      "text": "DB query là nút thắt, thêm web có tự sửa query?",
+      "options": [
+        "Có; mọi tài nguyên cộng chung.",
+        "Không; cần xử lý đường dữ liệu theo evidence.",
+        "Có nếu web ở cloud khác."
+      ],
+      "answer": 1,
+      "explanation": "Nếu query thiếu index quét nhiều dòng chiếm thời gian, thêm web không giảm lượng DB làm. Kiểm query plan và workload trước đổi kiến trúc. Tăng user không tự cho biết CPU, I/O, khóa hay mạng là nút thắt."
+    },
+    "challenge": {
+      "text": "Chưa đo peak nhưng đã chọn100 máy. Điều gì còn thiếu?",
+      "options": [
+        "Chỉ tên máy.",
+        "Workload/giả định và evidence về bottleneck, chi phí, nhu cầu.",
+        "Không thiếu gì vì nhiều luôn tốt."
+      ],
+      "answer": 1,
+      "explanation": "Capacity planning cần điều kiện rõ."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Theo dấu nơi giữ trạng thái và điều đã được xác nhận.",
+        "Nếu query thiếu index quét nhiều dòng chiếm thời gian, thêm web không giảm lượng DB làm. Kiểm query plan và workload trước đổi kiến trúc. Tăng user không tự cho biết CPU, I/O, khóa hay mạng là nút thắt."
+      ],
+      "challenge": [
+        "Kiểm tra yêu cầu mới; tìm lịch thao tác có thể làm phương án sai.",
+        "Capacity planning cần điều kiện rõ."
+      ]
+    },
+    "sources": [
+      {
+        "title": "Google SRE — Service level objectives",
+        "url": "https://sre.google/sre-book/service-level-objectives/"
+      },
+      {
+        "title": "PostgreSQL 18 — Log-shipping standby servers",
+        "url": "https://www.postgresql.org/docs/18/warm-standby.html"
+      },
+      {
+        "title": "Michael Nygard — Documenting architecture decisions",
+        "url": "https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions"
+      },
+      {
+        "title": "Kubernetes — Deployments",
+        "url": "https://kubernetes.io/docs/concepts/workloads/controllers/deployment/"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-case-growth-roadmap",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L5-03",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Một máy web và database phục vụ200 học sinh.",
+      "context": "Một máy web và database phục vụ200 học sinh. Dự kiến lên20.000, nhưng chưa có số peak hay profile. Nhóm muốn lộ trình có thể kiểm và quay lại.",
+      "requirements": [
+        "Lập lộ trình tăng trưởng: đo nút thắt, ước lượng tải và chi phí, chọn bước thay đổi có thể kiểm chứng.",
+        "Giải thích được một tình huống lỗi và điều kiện để phương án còn đúng."
+      ],
+      "activityRef": "module-practice",
+      "experimentSteps": [
+        "Theo từng bước trong các ví dụ và tự tính kết quả trước khi xem giải thích.",
+        "Chọn phương án cho từng tình huống, kiểm tra và sửa lựa chọn.",
+        "Áp dụng sang yêu cầu mới; nêu điều kiện và giới hạn của quyết định."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Tăng user không tự cho biết CPU, I/O, khóa hay mạng là nút thắt.",
+        "Roadmap không phải cam kết đã triển khai hoặc benchmark mọi quy mô."
+      ],
+      "limitations": "Case tự biên soạn trên dữ liệu giả lập bằng chữ; không mô tả kiến trúc hiện tại của công ty, không truy cập dữ liệu người thật hoặc hệ thống ngoài."
+    },
+    "designTask": {
+      "version": 1,
+      "prompt": "Một máy web và database phục vụ200 học sinh. Dự kiến lên20.000, nhưng chưa có số peak hay profile. Nhóm muốn lộ trình có thể kiểm và quay lại.",
+      "deliverables": [
+        {
+          "id": "part-1",
+          "prompt": "Viết yêu cầu, workload/đơn vị, API và schema nguồn của case."
+        },
+        {
+          "id": "part-2",
+          "prompt": "Tự tính/vẽ trace ví dụ; nêu một lịch lỗi và cơ chế giữ invariant."
+        },
+        {
+          "id": "part-3",
+          "prompt": "Đề xuất phương án cho ràng buộc mới, quyền/chi phí và cách kiểm."
+        }
+      ],
+      "rubric": [
+        "Có số liệu tự tính, đúng scope và trạng thái theo trace.",
+        "Xác định nguồn, định danh, retry và quyền theo case.",
+        "Nêu trade-off và phản ví dụ; không gọi fixture là benchmark production."
+      ],
+      "variation": "Ngân sách giảm50% và thêm mục tiêuRPO5 phút. Sắp lại roadmap với ràng buộc dữ liệu, cost và vận hành."
+    }
+  }
+]

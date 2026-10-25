@@ -12,6 +12,8 @@ const contract = z
     prediction: z.unknown(),
     challenge: z.unknown(),
     practice: z.unknown().optional(),
+    chapters: z.unknown().optional(),
+    designTask: z.unknown().optional(),
   })
   .strict();
 export const compatibilitySchema = z
@@ -31,6 +33,8 @@ export function lessonContract(lesson: Lesson) {
     prediction: lesson.prediction,
     challenge: lesson.challenge,
     ...(lesson.practice ? { practice: lesson.practice } : {}),
+    ...(lesson.chapters ? { chapters: lesson.chapters } : {}),
+    ...(lesson.designTask ? { designTask: lesson.designTask } : {}),
   };
 }
 

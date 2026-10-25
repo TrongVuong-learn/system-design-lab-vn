@@ -119,6 +119,18 @@ export function validateCatalog(modules: CurriculumModule[], lessons: Lesson[], 
         }
       }
     }
+    if (l.chapters) {
+      unique(
+        l.chapters.items.map((c) => c.id),
+        'chapter',
+      );
+      for (const c of l.chapters.items)
+        for (const id of c.sourceIds) {
+          const source = editorial.sources.find((s) => s.id === id);
+          if (!source || !l.sources.some((s) => s.url === source.url))
+            throw new Error(`Invalid chapter source ${l.id}: ${id}`);
+        }
+    }
     if (l.practice) {
       unique(
         l.practice.items.map((q) => q.id),

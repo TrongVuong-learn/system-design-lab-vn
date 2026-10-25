@@ -184,3 +184,7 @@ EDU-15 thêm cpu-io, engine1.6.0/model1 thuầnTS; derive timeline từ config/s
 Đã có adapter `apps/web/src/adapters/offline.ts`, UI `features/offline/` và build tool `scripts/offline.ts` với worker template riêng. Core học/mô phỏng không phụ thuộc service worker. Vite closeBundle sinh `offline.json`/`sw.js`; hash version gồm tài nguyên và logic worker, mỗi request có SHA256 integrity. Hiện artifact nhỏ và cùng bundle nên tải cả bản beta, chưa hỗ trợ gói riêng từng module hoặc content blocks native.
 
 Opt-in download tại Tiến độ. Cache Storage giữ static artifact; IndexedDB tiếp tục giữ progress riêng. Cache chỉ ready sau khi đầy đủ và được kiểm tra lại qua message worker. Repair chủ động dùng addAll, không xóa progress. Worker mới chờ toàn bộ client cũ đóng, không ép reload/skipWaiting. Gói có thể bị browser thu hồi; user cần backup tiến độ. Xem báo cáo `docs/delivery/M4_OFFLINE_01.md`; chưa đóng gate thiết bị/PWA install/native.
+
+## Học liệu thiết kế và đường học — EDU-26
+
+Hiện thực theo ADR0008: content-schema xác thực chapters/designTask/pathways; learning-core thuần kiểm sự hiện diện văn bản trong draft, không chấm thiết kế. Web render các chương và trường viết, adapter progress đang có lưu khóa design-* trong lab; không đổi progressJSON1/IndexedDB2. content/pathways.json tham chiếu ID bài beta và được kiểm trong content pipeline; registry nguồn/prerequisite/case/compatibility vẫn là biên nội dung. Không thêm package, backend hoặc native runtime.

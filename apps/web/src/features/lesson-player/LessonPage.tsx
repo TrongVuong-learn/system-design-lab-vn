@@ -1,4 +1,6 @@
 import { QuestionFeedback } from './QuestionFeedback';
+import { LessonChapters } from './LessonChapters';
+import { DesignDraft } from './DesignDraft';
 import { CaseStudyContext, CaseStudyReflection } from './CaseStudyPanel';
 import { AnnotatedText, TermNote } from './TermNote';
 import { SaveStatus } from '../progress/SaveStatus';
@@ -6,7 +8,12 @@ import { useEffect, useRef } from 'react';
 import { Link, useParams } from 'react-router';
 import { lessons, editorial } from '../../app/catalog';
 import { useProgress } from '../../app/progress';
-import { newLessonProgress, evaluatePractice } from '@sdl/learning-core';
+import {
+  newLessonProgress,
+  evaluatePractice,
+  readDesignDraft,
+  isLessonComplete,
+} from '@sdl/learning-core';
 import { Lab } from '../lab/Lab';
 import { Icon } from '../../ui/primitives';
 import { NotFound } from '../catalog/Pages';
@@ -42,6 +49,8 @@ export function LessonPage() {
   const labReady = lesson.practice
     ? evaluatePractice(lesson.practice.items, p.lab).ready
     : p.actions >= 2;
+  const draftReady = !lesson.designTask || readDesignDraft(lesson.designTask, p.lab).ready;
+  const completed = isLessonComplete(lesson, p);
   const canNext = p.stage === 0 || (p.stage === 1 && answered) || (p.stage === 2 && labReady);
   const stageHelp =
     p.stage === 0
@@ -128,6 +137,7 @@ export function LessonPage() {
         </section>
       )}
       {p.stage === 3 && <CaseStudyContext lesson={lesson} />}
+      {(p.stage === 0 || p.stage === 2) && <LessonChapters lesson={lesson} />}
       {(p.stage === 1 || p.stage === 3) && (
         <section className="question-panel">
           <span className="eyebrow">{p.stage === 1 ? 'Dự đoán của bạn' : 'Tình huống mới'}</span>
@@ -179,15 +189,27 @@ export function LessonPage() {
             />
           )}
           {p.stage === 3 && answered && correct && (
+            <DesignDraft
+              lesson={lesson}
+              progress={p}
+              onChange={(patch) => update(lesson.id, patch)}
+            />
+          )}
+          {p.stage === 3 && answered && correct && (
             <button
               className="button primary"
+              disabled={!draftReady || !labReady}
               onClick={() => update(lesson.id, { completed: true })}
             >
-              {p.completed ? 'Đã hoàn thành bài nhập môn' : 'Lưu bài đã hoàn thành'}
+              {completed
+                ? lesson.designTask
+                  ? 'Đã lưu bài tự luyện và bản thiết kế'
+                  : 'Đã hoàn thành bài nhập môn'
+                : 'Lưu bài đã hoàn thành'}
               <Icon name="check" />
             </button>
           )}
-          {p.stage === 3 && p.completed && (
+          {p.stage === 3 && completed && (
             <div className="completion">
               <h3>Một bước hiểu mới của bạn.</h3>
               <p>

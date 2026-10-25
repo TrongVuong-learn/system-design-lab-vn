@@ -68,3 +68,7 @@ Một mục tại Tiến độ, cùng kiểu transfer-panel: phạm vi → dung 
 ### Tìm mã sách
 
 Ba lựa chọn ngắn → xem một mục/chạy xong → số mục và phạm vi còn lại → before/after → trace chữ mở khi cần. Không vẽ128 ô quá nhỏ hoặc dùng ms giả. Danh mục đã sắp, vị trí bắt đầu từ1 trong UI; đổi config bắt đầu lại rõ ràng. Giữ palette và font, kiểm320/390/1280px.
+
+### Học liệu theo lộ trình và bản thiết kế — EDU-25/26
+
+Giữ palette/font bàn thí nghiệm. Trang đầu có sáu bài nhập môn; Khám phá có bộ lọc level/nhánh/capstone/case và tìm kiếm có mã module. Mỗi module dẫn thẳng tới bài. Chương cơ chế dùng details có tiêu đề thật, ví dụ và bước suy luận; không dùng hình trang trí thay nội dung. Bản thiết kế nằm sau câu chuyển giao đúng, một cột textarea có nhãn rõ, đếm ký tự, rubric mở khi cần và phần đổi ràng buộc. Viết từng mục được lưu ngay; lời nhắc chỉ nói đủ bản nháp, không tự đánh giá đúng. Kiểm screenshots thực tế320/390/1280 và tương tác bàn phím/chạm trước phát hành.

@@ -1,0 +1,1539 @@
+[
+  {
+    "id": "scaling-service",
+    "version": 1,
+    "status": "beta",
+    "kind": "module-practice",
+    "level": "L2",
+    "moduleId": "L2.1",
+    "minutes": 30,
+    "title": "Thêm máy mà website vẫn chậm?",
+    "subtitle": "Cổng đăng ký có bốn máy nhưng chỉ một nơi ghi dữ liệu.",
+    "objective": "Chọn mở rộng dọc/ngang, vị trí state, L4/L7, discovery, health check và pool theo nút thắt.",
+    "story": "Ngày mở đăng ký, nhóm tăng từ hai lên bốn máy web. Mỗi máy giữ riêng phiên đăng nhập và mở 40 kết nối tới database có giới hạn 100. Học sinh lúc vào được, lúc mất phiên. Ta theo dấu hai tài nguyên: phiên và kết nối.",
+    "explanation": "Tăng sức một máy hay chia việc cho nhiều máy. Phiên học phải tìm lại được sau khi đổi máy. Sống không có nghĩa là còn khả năng nhận việc. Giới hạn kết nối là ngân sách chung.",
+    "limit": "Số công suất là giả định cố định để tính trần, không benchmark; không triển khai load balancer hay session thật.",
+    "terms": [
+      {
+        "name": "Máy xử lý",
+        "english": "Replica",
+        "meaning": "Một instance cùng phục vụ vai trò ứng dụng."
+      },
+      {
+        "name": "Kho kết nối",
+        "english": "Connection pool",
+        "meaning": "Một tập kết nối hữu hạn được dùng lại."
+      },
+      {
+        "name": "Tìm dịch vụ",
+        "english": "Service discovery",
+        "meaning": "Cơ chế tra các địa chỉ đang phục vụ một dịch vụ."
+      },
+      {
+        "name": "Thông báo xác nhận",
+        "english": "ACK",
+        "meaning": "Phản hồi cho biết một bước đã được bên nhận xác nhận. Phải đọc hợp đồng để biết đó là nhận, lưu bền hay áp dụng."
+      },
+      {
+        "name": "Hạn hoàn tất",
+        "english": "deadline",
+        "meaning": "Mốc thời gian mà sau đó kết quả không còn hữu ích cho yêu cầu; phải chia ngân sách qua các bước."
+      },
+      {
+        "name": "Hết thời gian chờ",
+        "english": "timeout",
+        "meaning": "Bên gọi dừng chờ khi vượt thời hạn. Điều này không chứng minh bên nhận chưa thực hiện thao tác."
+      },
+      {
+        "name": "Cấu trúc dữ liệu đã quy định",
+        "english": "schema",
+        "meaning": "Hợp đồng về trường, kiểu và ràng buộc. Dữ liệu đúng cấu trúc vẫn có thể sai về nội dung nghiệp vụ."
+      }
+    ],
+    "chapters": {
+      "version": 1,
+      "items": [
+        {
+          "id": "scale",
+          "title": "Tăng sức một máy hay chia việc cho nhiều máy",
+          "explanation": "Mở rộng dọc tăng tài nguyên một máy; mở rộng ngang thêm máy. Chỉ phần việc chia được mới hưởng lợi. Stateless nghĩa là lần gọi tiếp không cần state riêng của đúng máy trước; state vẫn tồn tại ở database hoặc kho phiên.",
+          "example": "Mỗi máy web nhận 60 yêu cầu/s; database chỉ ghi 80 yêu cầu/s. Hai máy hay bốn máy đều không làm đường ghi vượt 80 nếu mỗi yêu cầu cần một lần ghi như cũ.",
+          "steps": [
+            "Tính trần web: 2 × 60 = 120 yêu cầu/s.",
+            "So với trần database 80; tìm tài nguyên bị xếp hàng trước."
+          ],
+          "misconception": "Không cộng công suất của các tầng nối tiếp; tầng chậm có thể chặn toàn luồng.",
+          "sourceIds": [
+            "scale-google"
+          ]
+        },
+        {
+          "id": "state",
+          "title": "Phiên học phải tìm lại được sau khi đổi máy",
+          "explanation": "L4 chọn backend theo thông tin kết nối; L7 có thể định tuyến theo nội dung HTTP như host/path. Sticky session cố giữ người dùng tại một máy nhưng không tự sao lưu state. Discovery cung cấp địa chỉ dịch vụ; danh sách đó có thể tạm cũ.",
+          "example": "Máy A giữ phiên S trong RAM. Lần sau load balancer gửi tới B. B không có S nên không nhận ra người học nếu thiếu cơ chế chia sẻ hoặc token được kiểm đúng.",
+          "steps": [
+            "Theo phiên S từ A sang B.",
+            "Chọn kho phiên dùng chung hoặc cơ chế xác thực phù hợp; kiểm cả lúc A mất."
+          ],
+          "misconception": "Load balancer không tự chuyển RAM và không biến mọi backend thành bản sao dữ liệu.",
+          "sourceIds": [
+            "scale-google",
+            "security-owasp"
+          ]
+        },
+        {
+          "id": "health",
+          "title": "Sống không có nghĩa là còn khả năng nhận việc",
+          "explanation": "Health check cần phân biệt process sống, sẵn sàng và còn công suất. Khi rút máy, ngừng nhận việc mới rồi chờ hoặc xử lý việc đang chạy theo deadline. Kiểm phụ thuộc quá rộng cũng có thể rút cả cụm khi một dependency chung lỗi.",
+          "example": "A trả health 200 nhưng đang xử lý 100 việc, B chỉ 10. Round robin theo số request có thể vẫn gửi đều dù mỗi việc tốn tài nguyên khác nhau.",
+          "steps": [
+            "Đọc tín hiệu hàng chờ và latency theo máy.",
+            "Thử rút A: ngừng nhận mới, theo dõi việc cũ và lỗi được trả về."
+          ],
+          "misconception": "Health check đạt không chứng minh latency tốt hay mọi giao dịch nghiệp vụ thành công.",
+          "sourceIds": [
+            "scale-google",
+            "overload-google"
+          ]
+        },
+        {
+          "id": "pool",
+          "title": "Giới hạn kết nối là ngân sách chung",
+          "explanation": "Connection pool tái sử dụng số kết nối hữu hạn. Pool quá lớn gây tranh chấp ở database, quá nhỏ có thể tạo hàng chờ ở app. Phải tính tổng qua mọi replica, dành chỗ cho vận hành và đặt timeout chờ.",
+          "example": "Bốn máy × 40 kết nối = 160, vượt giới hạn 100. Nếu dành 20 cho vận hành, mỗi máy tối đa 20 trong cấu hình chia đều này; đây là trần ngân sách, chưa phải cấu hình tối ưu.",
+          "steps": [
+            "Tính tổng 160 so với ngân sách ứng dụng 80.",
+            "Thử pool nhỏ hơn cùng workload và quan sát chờ/kết quả, kể cả autoscaling."
+          ],
+          "misconception": "Thêm replica app mà giữ nguyên pool có thể làm downstream quá tải hơn.",
+          "sourceIds": [
+            "cascade-google"
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "version": 1,
+      "items": [
+        {
+          "id": "scale",
+          "text": "Thêm hai máy web trong ví dụ có nâng trần ghi lên 240 yêu cầu/s?",
+          "options": [
+            "Có; cộng tất cả máy là đủ.",
+            "Có; stateless xóa nhu cầu ghi database.",
+            "Không; database vẫn giới hạn 80 yêu cầu/s."
+          ],
+          "answer": 2,
+          "explanation": "Mỗi máy web nhận 60 yêu cầu/s; database chỉ ghi 80 yêu cầu/s. Hai máy hay bốn máy đều không làm đường ghi vượt 80 nếu mỗi yêu cầu cần một lần ghi như cũ. Không cộng công suất của các tầng nối tiếp; tầng chậm có thể chặn toàn luồng.",
+          "sourceIds": [
+            "scale-google"
+          ]
+        },
+        {
+          "id": "state",
+          "text": "Cách nào giữ phiên qua lần chuyển máy mà không phụ thuộc A còn sống?",
+          "options": [
+            "Chỉ bật sticky session.",
+            "Chỉ đổi cân bằng tải từ L4 sang L7.",
+            "Thiết kế state dùng chung hoặc token được xác thực và quản lý vòng đời."
+          ],
+          "answer": 2,
+          "explanation": "Máy A giữ phiên S trong RAM. Lần sau load balancer gửi tới B. B không có S nên không nhận ra người học nếu thiếu cơ chế chia sẻ hoặc token được kiểm đúng. Load balancer không tự chuyển RAM và không biến mọi backend thành bản sao dữ liệu.",
+          "sourceIds": [
+            "scale-google",
+            "security-owasp"
+          ]
+        },
+        {
+          "id": "health",
+          "text": "A trả health 200 nhưng hàng chờ tăng. Cần kết luận nào?",
+          "options": [
+            "Phải kiểm công suất và tải thực, không chỉ mã health.",
+            "A chắc chắn khỏe hơn B.",
+            "Tất cả request tới A đã hoàn tất."
+          ],
+          "answer": 0,
+          "explanation": "A trả health 200 nhưng đang xử lý 100 việc, B chỉ 10. Round robin theo số request có thể vẫn gửi đều dù mỗi việc tốn tài nguyên khác nhau. Health check đạt không chứng minh latency tốt hay mọi giao dịch nghiệp vụ thành công.",
+          "sourceIds": [
+            "scale-google",
+            "overload-google"
+          ]
+        },
+        {
+          "id": "pool",
+          "text": "Bốn máy chia đều 80 kết nối cho app thì trần mỗi pool là bao nhiêu?",
+          "options": [
+            "40 kết nối.",
+            "20 kết nối.",
+            "80 kết nối."
+          ],
+          "answer": 1,
+          "explanation": "Bốn máy × 40 kết nối = 160, vượt giới hạn 100. Nếu dành 20 cho vận hành, mỗi máy tối đa 20 trong cấu hình chia đều này; đây là trần ngân sách, chưa phải cấu hình tối ưu. Thêm replica app mà giữ nguyên pool có thể làm downstream quá tải hơn.",
+          "sourceIds": [
+            "cascade-google"
+          ]
+        }
+      ]
+    },
+    "prediction": {
+      "text": "Hai tầng nối tiếp có công suất 120 và 80 việc/s. Trần luồng là bao nhiêu trong mô hình?",
+      "options": [
+        "200 việc/s.",
+        "Không quá 80 việc/s.",
+        "120 việc/s."
+      ],
+      "answer": 1,
+      "explanation": "Mỗi việc đi qua cả hai tầng; tầng 80 là giới hạn."
+    },
+    "challenge": {
+      "text": "Ứng dụng ảnh tăng replica 4 lên 8 nhưng kho ảnh bắt đầu từ chối. Thử gì trước?",
+      "options": [
+        "Tiếp tục nhân đôi replica vô hạn.",
+        "Tắt mọi timeout.",
+        "Đo giới hạn kho và tổng kết nối, rồi điều chỉnh ngân sách và mức nhận."
+      ],
+      "answer": 2,
+      "explanation": "Nút thắt đã ở phụ thuộc; tăng caller có thể khuếch đại tải."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Theo dấu nơi giữ trạng thái và điều đã được xác nhận.",
+        "Mỗi việc đi qua cả hai tầng; tầng 80 là giới hạn."
+      ],
+      "challenge": [
+        "Kiểm tra yêu cầu mới; tìm lịch thao tác có thể làm phương án sai.",
+        "Nút thắt đã ở phụ thuộc; tăng caller có thể khuếch đại tải."
+      ]
+    },
+    "sources": [
+      {
+        "title": "Google SRE — Load balancing in the datacenter",
+        "url": "https://sre.google/sre-book/load-balancing-datacenter/"
+      },
+      {
+        "title": "OWASP — Authorization cheat sheet",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+      },
+      {
+        "title": "Google SRE — Handling overload",
+        "url": "https://sre.google/sre-book/handling-overload/"
+      },
+      {
+        "title": "Google SRE — Addressing cascading failures",
+        "url": "https://sre.google/sre-book/addressing-cascading-failures/"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-scaling-service",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L2-01",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Cổng đăng ký có bốn máy nhưng chỉ một nơi ghi dữ liệu.",
+      "context": "Ngày mở đăng ký, nhóm tăng từ hai lên bốn máy web. Mỗi máy giữ riêng phiên đăng nhập và mở 40 kết nối tới database có giới hạn 100. Học sinh lúc vào được, lúc mất phiên. Ta theo dấu hai tài nguyên: phiên và kết nối.",
+      "requirements": [
+        "Chọn mở rộng dọc/ngang, vị trí state, L4/L7, discovery, health check và pool theo nút thắt.",
+        "Giải thích được một tình huống lỗi và điều kiện để phương án còn đúng."
+      ],
+      "activityRef": "module-practice",
+      "experimentSteps": [
+        "Theo từng bước trong các ví dụ và tự tính kết quả trước khi xem giải thích.",
+        "Chọn phương án cho từng tình huống, kiểm tra và sửa lựa chọn.",
+        "Áp dụng sang yêu cầu mới; nêu điều kiện và giới hạn của quyết định."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Không cộng công suất của các tầng nối tiếp; tầng chậm có thể chặn toàn luồng.",
+        "Thêm replica app mà giữ nguyên pool có thể làm downstream quá tải hơn."
+      ],
+      "limitations": "Số công suất là giả định cố định để tính trần, không benchmark; không triển khai load balancer hay session thật."
+    }
+  },
+  {
+    "id": "cache-policies",
+    "version": 1,
+    "status": "beta",
+    "kind": "module-practice",
+    "level": "L2",
+    "moduleId": "L2.2",
+    "minutes": 30,
+    "title": "Lưu bản gần thế nào để không phát nhầm dữ liệu?",
+    "subtitle": "Lịch riêng của lớp bị dùng chung trong cache.",
+    "objective": "Theo trace đọc/ghi để phân biệt các chính sách cache, TTL/eviction/invalidation, stampede, hot key và CDN.",
+    "story": "Website lưu kết quả xem lịch. Nhóm muốn giảm truy vấn nhưng vừa đổi lịch, người dùng vẫn thấy phòng cũ; một khóa cache thiếu mã lớp còn trả nhầm lịch. Cùng lúc, tất cả mục hết hạn khiến nguồn chính chịu dồn tải.",
+    "explanation": "Theo đường đọc và đường xác nhận ghi. Ba lý do khác nhau để bỏ một bản cache. Một mục nóng và nhiều lần hết hạn cùng lúc. Cache key và CDN phải tôn trọng người xem.",
+    "limit": "Trace cache được tính bằng tay; không thực thi CDN, invalidation phân tán hoặc cam kết độ mới trong mọi lỗi.",
+    "terms": [
+      {
+        "name": "Hết hạn",
+        "english": "TTL",
+        "meaning": "Thời hạn sử dụng mục theo chính sách cache."
+      },
+      {
+        "name": "Đẩy khỏi cache",
+        "english": "Eviction",
+        "meaning": "Bỏ mục để quản lý dung lượng."
+      },
+      {
+        "name": "Vô hiệu",
+        "english": "Invalidation",
+        "meaning": "Bỏ hoặc đánh dấu mục không còn dùng được."
+      },
+      {
+        "name": "Khóa nóng",
+        "english": "Hot key",
+        "meaning": "Khóa nhận tỷ lệ tải lớn."
+      },
+      {
+        "name": "Thông báo xác nhận",
+        "english": "ACK",
+        "meaning": "Phản hồi cho biết một bước đã được bên nhận xác nhận. Phải đọc hợp đồng để biết đó là nhận, lưu bền hay áp dụng."
+      },
+      {
+        "name": "Cấu trúc dữ liệu đã quy định",
+        "english": "schema",
+        "meaning": "Hợp đồng về trường, kiểu và ràng buộc. Dữ liệu đúng cấu trúc vẫn có thể sai về nội dung nghiệp vụ."
+      },
+      {
+        "name": "Nhóm dùng chung nền tảng",
+        "english": "tenant",
+        "meaning": "Một tổ chức hoặc nhóm khách hàng dùng chung hệ thống nhưng cần tách dữ liệu, quyền và ngân sách tài nguyên."
+      }
+    ],
+    "chapters": {
+      "version": 1,
+      "items": [
+        {
+          "id": "paths",
+          "title": "Theo đường đọc và đường xác nhận ghi",
+          "explanation": "Cache-aside để ứng dụng tra cache rồi lấy nguồn khi miss. Read-through giao việc lấy nguồn cho lớp cache. Write-through chỉ xác nhận theo hợp đồng ghi xuyên tới nguồn; write-back xác nhận trước khi đẩy về nguồn nên cần cơ chế bền vững nếu không được mất ghi.",
+          "example": "Nguồn phòng 201, cache 201. Write-back nhận 205 rồi cache mất trước khi lưu nguồn: nguồn còn 201. Trace này khác cache-aside ghi nguồn trước rồi vô hiệu bản gần.",
+          "steps": [
+            "Ghi trạng thái của nguồn và cache sau từng bước.",
+            "Đánh dấu thời điểm ACK cho người dùng và thử mất cache ngay sau đó."
+          ],
+          "misconception": "ACK của cache không tự chứng minh dữ liệu đã bền vững ở nguồn.",
+          "sourceIds": [
+            "cache-azure"
+          ]
+        },
+        {
+          "id": "freshness",
+          "title": "Ba lý do khác nhau để bỏ một bản cache",
+          "explanation": "TTL giới hạn thời gian giữ theo chính sách; eviction đẩy mục ra do dung lượng/chính sách như LRU; invalidation bỏ mục vì dữ liệu/quyền đã đổi. Một cuộc đọc nguồn cũ đang chạy có thể điền lại cache sau invalidation, nên yêu cầu chặt cần version/đồng bộ thích hợp.",
+          "example": "Cache hai chỗ, truy cập A, B, A, C: LRU đẩy B. Đây không chứng minh A còn mới; A có thể vừa bị sửa ở nguồn.",
+          "steps": [
+            "Theo thứ tự dùng gần nhất: A → B,A → A,B → C,A.",
+            "Tách câu hỏi còn chỗ lưu khỏi câu hỏi dữ liệu có còn hợp lệ."
+          ],
+          "misconception": "TTL và LRU không thay kiểm quyền hoặc transaction giữ số chỗ.",
+          "sourceIds": [
+            "cache-azure",
+            "cache-rfc"
+          ]
+        },
+        {
+          "id": "storm",
+          "title": "Một mục nóng và nhiều lần hết hạn cùng lúc",
+          "explanation": "Hot key tập trung nhiều lượt vào một khóa. Stampede xảy ra khi nhiều caller cùng miss rồi cùng hỏi nguồn. Gộp lượt tải cùng khóa, làm mới có kiểm soát và rải thời điểm hết hạn có thể giảm đợt dồn; vẫn cần giới hạn tổng tải.",
+          "example": "100 người cùng hỏi lịch lúc cache trống. Nếu mỗi miss tạo một đọc nguồn sẽ có 100 đọc; gộp cùng khóa thành một lượt đang chạy giảm còn một trong mô hình, nhưng cần xử lý lượt đó lỗi.",
+          "steps": [
+            "Đếm số miss và số lượt thực sự gửi về nguồn.",
+            "Thử nguồn lỗi: chờ hữu hạn, báo lỗi hoặc dùng dữ liệu cũ theo hợp đồng."
+          ],
+          "misconception": "Không được trả stale cho mọi dữ liệu chỉ để tránh tải; quyền và số chỗ có yêu cầu riêng.",
+          "sourceIds": [
+            "cache-azure",
+            "overload-google"
+          ]
+        },
+        {
+          "id": "edge",
+          "title": "Cache key và CDN phải tôn trọng người xem",
+          "explanation": "CDN đặt bản sao ở edge; pull lấy khi miss, prewarm/push chuẩn bị trước. Cache key cần đủ phạm vi như phiên bản và tenant khi dữ liệu phụ thuộc chúng. Nội dung riêng phải có chính sách cache/authorization thích hợp. Negative caching giữ kết quả không tìm thấy trong một thời hạn có chủ đích.",
+          "example": "URL /lich giống nhau nhưng lớp 10A và 10B có lịch khác. Key chỉ là URL có thể trộn kết quả. Với ảnh công khai có tên chứa version, đổi URL giúp các bản mới không dùng key cũ.",
+          "steps": [
+            "Liệt kê yếu tố làm response khác: lớp, quyền, ngôn ngữ, version.",
+            "Thử đổi quyền và tạo tài nguyên vừa bị cache là không tồn tại; kiểm quy tắc làm mới."
+          ],
+          "misconception": "CDN hit cao không chứng minh không lộ dữ liệu hoặc đáp ứng độ mới.",
+          "sourceIds": [
+            "cache-rfc"
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "version": 1,
+      "items": [
+        {
+          "id": "paths",
+          "text": "Write-back ACK 205 rồi mất cache trước khi flush. Nguồn có thể còn gì?",
+          "options": [
+            "Luôn là 205.",
+            "Tự biến thành rỗng.",
+            "201 nếu chưa có cơ chế bền vững khác."
+          ],
+          "answer": 2,
+          "explanation": "Nguồn phòng 201, cache 201. Write-back nhận 205 rồi cache mất trước khi lưu nguồn: nguồn còn 201. Trace này khác cache-aside ghi nguồn trước rồi vô hiệu bản gần. ACK của cache không tự chứng minh dữ liệu đã bền vững ở nguồn.",
+          "sourceIds": [
+            "cache-azure"
+          ]
+        },
+        {
+          "id": "freshness",
+          "text": "Sau A,B,A,C với cache hai mục và LRU, mục bị đẩy là gì?",
+          "options": [
+            "B, vì dùng gần nhất lâu hơn A.",
+            "A vì vào trước.",
+            "C vì mới nhất."
+          ],
+          "answer": 0,
+          "explanation": "Cache hai chỗ, truy cập A, B, A, C: LRU đẩy B. Đây không chứng minh A còn mới; A có thể vừa bị sửa ở nguồn. TTL và LRU không thay kiểm quyền hoặc transaction giữ số chỗ.",
+          "sourceIds": [
+            "cache-azure",
+            "cache-rfc"
+          ]
+        },
+        {
+          "id": "storm",
+          "text": "Gộp lượt tải cùng khóa nhằm giảm điều gì?",
+          "options": [
+            "Mọi lỗi của database.",
+            "Nhu cầu kiểm quyền người gọi.",
+            "Nhiều lần cùng đọc nguồn cho một cache miss."
+          ],
+          "answer": 2,
+          "explanation": "100 người cùng hỏi lịch lúc cache trống. Nếu mỗi miss tạo một đọc nguồn sẽ có 100 đọc; gộp cùng khóa thành một lượt đang chạy giảm còn một trong mô hình, nhưng cần xử lý lượt đó lỗi. Không được trả stale cho mọi dữ liệu chỉ để tránh tải; quyền và số chỗ có yêu cầu riêng.",
+          "sourceIds": [
+            "cache-azure",
+            "overload-google"
+          ]
+        },
+        {
+          "id": "edge",
+          "text": "Hai lớp dùng /lich nhưng nội dung riêng khác nhau. Key chỉ URL có đủ không?",
+          "options": [
+            "Đủ vì URL luôn xác định mọi quyền.",
+            "Không; cần phạm vi phù hợp và quy tắc cho dữ liệu riêng.",
+            "Đủ nếu TTL rất dài."
+          ],
+          "answer": 1,
+          "explanation": "URL /lich giống nhau nhưng lớp 10A và 10B có lịch khác. Key chỉ là URL có thể trộn kết quả. Với ảnh công khai có tên chứa version, đổi URL giúp các bản mới không dùng key cũ. CDN hit cao không chứng minh không lộ dữ liệu hoặc đáp ứng độ mới.",
+          "sourceIds": [
+            "cache-rfc"
+          ]
+        }
+      ]
+    },
+    "prediction": {
+      "text": "Tăng tỷ lệ hit có đủ chứng minh cache đúng?",
+      "options": [
+        "Chưa; còn quyền, độ mới và tính bền vững.",
+        "Đủ; hit càng cao càng đúng."
+      ],
+      "answer": 0,
+      "explanation": "Một response sai cũng có thể được hit nhiều lần."
+    },
+    "challenge": {
+      "text": "Bảng điểm bị thu hồi quyền nhưng bản CDN còn hạn một giờ. Cần làm gì?",
+      "options": [
+        "Tăng TTL để giảm tải.",
+        "Thiết kế thu hồi và kiểm quyền đáp ứng yêu cầu, không chờ TTL một cách mù quáng.",
+        "Đổi thuật toán LRU là đủ."
+      ],
+      "answer": 1,
+      "explanation": "TTL quản lý thời gian cache, không tự thực thi quyền đã thay đổi."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Theo dấu nơi giữ trạng thái và điều đã được xác nhận.",
+        "Một response sai cũng có thể được hit nhiều lần."
+      ],
+      "challenge": [
+        "Kiểm tra yêu cầu mới; tìm lịch thao tác có thể làm phương án sai.",
+        "TTL quản lý thời gian cache, không tự thực thi quyền đã thay đổi."
+      ]
+    },
+    "sources": [
+      {
+        "title": "Microsoft — Cache-aside",
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside"
+      },
+      {
+        "title": "RFC 9111 — HTTP Caching",
+        "url": "https://www.rfc-editor.org/rfc/rfc9111.html"
+      },
+      {
+        "title": "Google SRE — Handling overload",
+        "url": "https://sre.google/sre-book/handling-overload/"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-cache-policies",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L2-02",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Lịch riêng của lớp bị dùng chung trong cache.",
+      "context": "Website lưu kết quả xem lịch. Nhóm muốn giảm truy vấn nhưng vừa đổi lịch, người dùng vẫn thấy phòng cũ; một khóa cache thiếu mã lớp còn trả nhầm lịch. Cùng lúc, tất cả mục hết hạn khiến nguồn chính chịu dồn tải.",
+      "requirements": [
+        "Theo trace đọc/ghi để phân biệt các chính sách cache, TTL/eviction/invalidation, stampede, hot key và CDN.",
+        "Giải thích được một tình huống lỗi và điều kiện để phương án còn đúng."
+      ],
+      "activityRef": "module-practice",
+      "experimentSteps": [
+        "Theo từng bước trong các ví dụ và tự tính kết quả trước khi xem giải thích.",
+        "Chọn phương án cho từng tình huống, kiểm tra và sửa lựa chọn.",
+        "Áp dụng sang yêu cầu mới; nêu điều kiện và giới hạn của quyết định."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "ACK của cache không tự chứng minh dữ liệu đã bền vững ở nguồn.",
+        "CDN hit cao không chứng minh không lộ dữ liệu hoặc đáp ứng độ mới."
+      ],
+      "limitations": "Trace cache được tính bằng tay; không thực thi CDN, invalidation phân tán hoặc cam kết độ mới trong mọi lỗi."
+    }
+  },
+  {
+    "id": "replication-failover",
+    "version": 1,
+    "status": "beta",
+    "kind": "module-practice",
+    "level": "L2",
+    "moduleId": "L2.3",
+    "minutes": 30,
+    "title": "Bản sao có cứu được lần ghi vừa xong?",
+    "subtitle": "Phiếu đăng ký được xác nhận rồi máy chính mất.",
+    "objective": "Phân biệt async/sync, nhận/flush/apply, read routing, failover và điều kiện không mất ghi.",
+    "story": "Phiếu S9 được ghi tại A, bản B còn chậm một bước. Người học được báo thành công nhưng khi đọc ở B chưa thấy phiếu. Nếu A mất ngay lúc này, việc chuyển B thành primary cần xét dữ liệu nào đã tới B.",
+    "explanation": "Xác nhận ở đâu quyết định điều đã biết. Chọn nơi đọc theo yêu cầu của người dùng. Chuyển primary cần cô lập người ghi cũ. Sao chép lỗi không phải khôi phục lịch sử.",
+    "limit": "Không chạy PostgreSQL hoặc đo lag thật; lịch lỗi giả định, không chứng minh HA cho mọi failure model.",
+    "terms": [
+      {
+        "name": "Độ trễ sao chép",
+        "english": "Replication lag",
+        "meaning": "Khoảng chênh giữa trạng thái nguồn và bản sao."
+      },
+      {
+        "name": "Chuyển vai trò",
+        "english": "Failover",
+        "meaning": "Đưa một thành phần đủ điều kiện nhận vai trò phục vụ."
+      },
+      {
+        "name": "Áp dụng",
+        "english": "Apply",
+        "meaning": "Thực hiện thay đổi từ log vào trạng thái đọc được."
+      },
+      {
+        "name": "Điều kiện luôn phải giữ",
+        "english": "invariant",
+        "meaning": "Quy tắc dữ liệu không được vi phạm, kể cả khi có lỗi; ví dụ số vé đã xác nhận không vượt sức chứa."
+      },
+      {
+        "name": "Thông báo xác nhận",
+        "english": "ACK",
+        "meaning": "Phản hồi cho biết một bước đã được bên nhận xác nhận. Phải đọc hợp đồng để biết đó là nhận, lưu bền hay áp dụng."
+      },
+      {
+        "name": "Hết thời gian chờ",
+        "english": "timeout",
+        "meaning": "Bên gọi dừng chờ khi vượt thời hạn. Điều này không chứng minh bên nhận chưa thực hiện thao tác."
+      },
+      {
+        "name": "Cấu trúc dữ liệu đã quy định",
+        "english": "schema",
+        "meaning": "Hợp đồng về trường, kiểu và ràng buộc. Dữ liệu đúng cấu trúc vẫn có thể sai về nội dung nghiệp vụ."
+      },
+      {
+        "name": "Thời hạn giữ dữ liệu",
+        "english": "retention",
+        "meaning": "Khoảng thời gian dữ liệu hoặc bản sao được giữ trước khi xóa theo chính sách."
+      }
+    ],
+    "chapters": {
+      "version": 1,
+      "items": [
+        {
+          "id": "ack",
+          "title": "Xác nhận ở đâu quyết định điều đã biết",
+          "explanation": "Replication async có thể ACK trước khi replica nhận. Sync chờ theo mức được cấu hình: nhận bytes, lưu bền hay áp dụng là các mốc khác nhau. Mức ACK nào bảo vệ lỗi nào phải được ghi rõ.",
+          "example": "A ghi S9 và ACK, B mới có S8. A mất dữ liệu trước khi S9 tới B: promote B không tự tạo lại S9.",
+          "steps": [
+            "Đánh dấu A có S9, B chỉ S8 tại lúc ACK.",
+            "Thử mất A trước và sau khi B có bản bền vững."
+          ],
+          "misconception": "Tên synchronous không đủ; cần biết chờ replica nào và đến mốc nào.",
+          "sourceIds": [
+            "replication-pg"
+          ]
+        },
+        {
+          "id": "reads",
+          "title": "Chọn nơi đọc theo yêu cầu của người dùng",
+          "explanation": "Đọc replica giảm tải primary nhưng có thể cũ. Đọc sau ghi có thể đi primary đang hợp lệ hoặc chờ replica đạt vị trí đã ghi. Chờ có timeout và lỗi rõ; mốc flush khác apply nên dữ liệu lưu bền chưa chắc đã nhìn thấy.",
+          "example": "Client giữ mốc S9. B đang ở S8 thì chưa được dùng B cho yêu cầu phải thấy S9. Đọc thống kê chấp nhận trễ có thể có chính sách khác.",
+          "steps": [
+            "Phân loại màn cần thấy ngay và màn cho phép trễ.",
+            "Chọn route hoặc chờ mốc; khi hết hạn trả trạng thái rõ ràng."
+          ],
+          "misconception": "Đọc primary cũ sau failover cũng không tự an toàn; phải biết primary hiện có thẩm quyền.",
+          "sourceIds": [
+            "replication-pg"
+          ]
+        },
+        {
+          "id": "promote",
+          "title": "Chuyển primary cần cô lập người ghi cũ",
+          "explanation": "Failure detector chỉ nghi ngờ qua timeout. Mạng đứt không chứng minh A đã chết. Failover cần xác định quyền ghi, cô lập/fence primary cũ, chọn replica phù hợp và chuyển client; failback cần đồng bộ lại trước khi nhận ghi.",
+          "example": "A bị cô lập khỏi bộ điều khiển nhưng vẫn nhận client. Nếu B cũng ghi S10 cho cùng chỗ cuối, có thể có hai kết quả xung đột.",
+          "steps": [
+            "Ngừng hoặc chặn quyền ghi của A theo cơ chế đã chọn.",
+            "Kiểm vị trí B, promote và định tuyến; khi A trở lại phải theo vai trò mới."
+          ],
+          "misconception": "DNS chuyển địa chỉ không tự ngăn primary cũ nhận ghi.",
+          "sourceIds": [
+            "replication-pg",
+            "fencing"
+          ]
+        },
+        {
+          "id": "backup",
+          "title": "Sao chép lỗi không phải khôi phục lịch sử",
+          "explanation": "Replica thường nhận cả thao tác xóa nhầm. Backup cùng log lưu trữ hỗ trợ khôi phục một mốc quá khứ trong phạm vi đã giữ. Phải thử restore và kiểm invariant; có nhiều replica không thay retention hoặc quyền tách biệt của backup.",
+          "example": "Lúc 10:05 người quản trị xóa nhầm S9. B áp dụng ngay thao tác đó. Cần bản trước lỗi và log phù hợp, không chỉ chuyển đọc sang B.",
+          "steps": [
+            "Tìm mốc cuối dữ liệu đúng trước 10:05.",
+            "Khôi phục ở môi trường cách ly và đối chiếu trước thay nguồn đang dùng."
+          ],
+          "misconception": "Replication bảo vệ một số lỗi máy; không tự bảo vệ xóa nhầm và mọi lỗi chung.",
+          "sourceIds": [
+            "backup-pg"
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "version": 1,
+      "items": [
+        {
+          "id": "ack",
+          "text": "Async ACK có bảo đảm mọi replica đã áp dụng S9?",
+          "options": [
+            "Không; replica có thể còn trễ.",
+            "Có; ACK luôn chờ tất cả.",
+            "Có nếu người dùng reload."
+          ],
+          "answer": 0,
+          "explanation": "A ghi S9 và ACK, B mới có S8. A mất dữ liệu trước khi S9 tới B: promote B không tự tạo lại S9. Tên synchronous không đủ; cần biết chờ replica nào và đến mốc nào.",
+          "sourceIds": [
+            "replication-pg"
+          ]
+        },
+        {
+          "id": "reads",
+          "text": "Yêu cầu phải thấy S9 nhưng B mới S8. Có thể đọc B ngay?",
+          "options": [
+            "Có vì B là replica.",
+            "Có vì flush luôn bằng apply.",
+            "Chỉ nếu đổi yêu cầu chấp nhận cũ; còn không phải chờ hoặc đổi nguồn hợp lệ."
+          ],
+          "answer": 2,
+          "explanation": "Client giữ mốc S9. B đang ở S8 thì chưa được dùng B cho yêu cầu phải thấy S9. Đọc thống kê chấp nhận trễ có thể có chính sách khác. Đọc primary cũ sau failover cũng không tự an toàn; phải biết primary hiện có thẩm quyền.",
+          "sourceIds": [
+            "replication-pg"
+          ]
+        },
+        {
+          "id": "promote",
+          "text": "Timeout tới A có đủ để cho A và B cùng nhận ghi cùng dữ liệu?",
+          "options": [
+            "Đủ; timeout chứng minh A đã chết.",
+            "Không; phải giải quyết quyền ghi và split brain.",
+            "Đủ nếu cả hai có cùng tên bảng."
+          ],
+          "answer": 1,
+          "explanation": "A bị cô lập khỏi bộ điều khiển nhưng vẫn nhận client. Nếu B cũng ghi S10 cho cùng chỗ cuối, có thể có hai kết quả xung đột. DNS chuyển địa chỉ không tự ngăn primary cũ nhận ghi.",
+          "sourceIds": [
+            "replication-pg",
+            "fencing"
+          ]
+        },
+        {
+          "id": "backup",
+          "text": "B đã sao chép lệnh xóa nhầm. Đọc B có lấy lại S9 không?",
+          "options": [
+            "Không; cần quy trình khôi phục lịch sử phù hợp.",
+            "Có; replica tự giữ mọi phiên bản.",
+            "Có; đổi B thành primary đảo ngược lệnh xóa."
+          ],
+          "answer": 0,
+          "explanation": "Lúc 10:05 người quản trị xóa nhầm S9. B áp dụng ngay thao tác đó. Cần bản trước lỗi và log phù hợp, không chỉ chuyển đọc sang B. Replication bảo vệ một số lỗi máy; không tự bảo vệ xóa nhầm và mọi lỗi chung.",
+          "sourceIds": [
+            "backup-pg"
+          ]
+        }
+      ]
+    },
+    "prediction": {
+      "text": "Primary vừa ACK có nghĩa replica đã nhìn thấy bản ghi?",
+      "options": [
+        "Luôn luôn có.",
+        "Chỉ biết khi hợp đồng ACK bao gồm điều đó."
+      ],
+      "answer": 1,
+      "explanation": "Mốc nhận, lưu bền và áp dụng khác nhau."
+    },
+    "challenge": {
+      "text": "Hệ thống điểm danh yêu cầu không mất phiếu đã ACK khi mất một máy. Nên chốt gì?",
+      "options": [
+        "Chỉ số lượng replica trên sơ đồ.",
+        "Chỉ TTL của DNS.",
+        "Failure model, mức ACK bền vững và failover chỉ từ bản đủ điều kiện."
+      ],
+      "answer": 2,
+      "explanation": "Bảo đảm là thuộc cả protocol ghi và quy tắc chuyển vai trò."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Theo dấu nơi giữ trạng thái và điều đã được xác nhận.",
+        "Mốc nhận, lưu bền và áp dụng khác nhau."
+      ],
+      "challenge": [
+        "Kiểm tra yêu cầu mới; tìm lịch thao tác có thể làm phương án sai.",
+        "Bảo đảm là thuộc cả protocol ghi và quy tắc chuyển vai trò."
+      ]
+    },
+    "sources": [
+      {
+        "title": "PostgreSQL 18 — Log-shipping standby servers",
+        "url": "https://www.postgresql.org/docs/18/warm-standby.html"
+      },
+      {
+        "title": "Martin Kleppmann — Distributed locking (2016)",
+        "url": "https://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html"
+      },
+      {
+        "title": "PostgreSQL 18 — Continuous archiving and PITR",
+        "url": "https://www.postgresql.org/docs/18/continuous-archiving.html"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-replication-failover",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L2-03",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Phiếu đăng ký được xác nhận rồi máy chính mất.",
+      "context": "Phiếu S9 được ghi tại A, bản B còn chậm một bước. Người học được báo thành công nhưng khi đọc ở B chưa thấy phiếu. Nếu A mất ngay lúc này, việc chuyển B thành primary cần xét dữ liệu nào đã tới B.",
+      "requirements": [
+        "Phân biệt async/sync, nhận/flush/apply, read routing, failover và điều kiện không mất ghi.",
+        "Giải thích được một tình huống lỗi và điều kiện để phương án còn đúng."
+      ],
+      "activityRef": "module-practice",
+      "experimentSteps": [
+        "Theo từng bước trong các ví dụ và tự tính kết quả trước khi xem giải thích.",
+        "Chọn phương án cho từng tình huống, kiểm tra và sửa lựa chọn.",
+        "Áp dụng sang yêu cầu mới; nêu điều kiện và giới hạn của quyết định."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Tên synchronous không đủ; cần biết chờ replica nào và đến mốc nào.",
+        "Replication bảo vệ một số lỗi máy; không tự bảo vệ xóa nhầm và mọi lỗi chung."
+      ],
+      "limitations": "Không chạy PostgreSQL hoặc đo lag thật; lịch lỗi giả định, không chứng minh HA cho mọi failure model."
+    }
+  },
+  {
+    "id": "partitioning",
+    "version": 1,
+    "status": "beta",
+    "kind": "module-practice",
+    "level": "L2",
+    "moduleId": "L2.4",
+    "minutes": 30,
+    "title": "Chia dữ liệu đều mà một máy vẫn quá tải?",
+    "subtitle": "Một lớp tạo phần lớn lượt đọc trên shard riêng.",
+    "objective": "Chọn hash/range/shard key, phân biệt data skew và traffic skew, truy vấn xuyên shard và chuyển dữ liệu có kiểm chứng.",
+    "story": "Trường chia hồ sơ theo lớp. Mỗi shard có 100 hồ sơ, nhưng lớp tổ chức hội thi có 90% lượt đọc. Chia đều số hồ sơ chưa chia đều tải; thêm máy cũng cần biết những khóa nào sẽ chuyển.",
+    "explanation": "Khóa chia dữ liệu là quyết định về truy vấn. Thêm shard làm thay đổi nơi tìm khóa. Chỉ mục phụ có thể cần hỏi nhiều nơi. Di chuyển phải biết ai đang là nguồn có thẩm quyền.",
+    "limit": "Sơ đồ và phép chia số nhỏ; không chạy reshard thật hoặc khẳng định mọi database dùng cùng cơ chế.",
+    "terms": [
+      {
+        "name": "Mảnh dữ liệu",
+        "english": "Shard",
+        "meaning": "Một phần dữ liệu có nơi phục vụ riêng."
+      },
+      {
+        "name": "Khóa chia",
+        "english": "Shard key",
+        "meaning": "Giá trị dùng để chọn nơi lưu/đọc."
+      },
+      {
+        "name": "Đối soát",
+        "english": "Reconciliation",
+        "meaning": "So bản ghi và xử lý chênh lệch theo nguồn có thẩm quyền."
+      },
+      {
+        "name": "Điều kiện luôn phải giữ",
+        "english": "invariant",
+        "meaning": "Quy tắc dữ liệu không được vi phạm, kể cả khi có lỗi; ví dụ số vé đã xác nhận không vượt sức chứa."
+      },
+      {
+        "name": "Thông báo xác nhận",
+        "english": "ACK",
+        "meaning": "Phản hồi cho biết một bước đã được bên nhận xác nhận. Phải đọc hợp đồng để biết đó là nhận, lưu bền hay áp dụng."
+      },
+      {
+        "name": "Hết thời gian chờ",
+        "english": "timeout",
+        "meaning": "Bên gọi dừng chờ khi vượt thời hạn. Điều này không chứng minh bên nhận chưa thực hiện thao tác."
+      },
+      {
+        "name": "Quay về trạng thái trước",
+        "english": "rollback",
+        "meaning": "Khôi phục theo cơ chế cụ thể. Quay lại bản code cũ không tự hoàn tác dữ liệu hoặc giao dịch ở hệ thống khác."
+      },
+      {
+        "name": "Bổ sung dữ liệu lịch sử",
+        "english": "backfill",
+        "meaning": "Chạy xử lý cho dữ liệu cũ còn thiếu; cần phối hợp với luồng đang chạy để không bỏ sót hoặc đếm trùng."
+      },
+      {
+        "name": "Cấu trúc dữ liệu đã quy định",
+        "english": "schema",
+        "meaning": "Hợp đồng về trường, kiểu và ràng buộc. Dữ liệu đúng cấu trúc vẫn có thể sai về nội dung nghiệp vụ."
+      }
+    ],
+    "chapters": {
+      "version": 1,
+      "items": [
+        {
+          "id": "keys",
+          "title": "Khóa chia dữ liệu là quyết định về truy vấn",
+          "explanation": "Range giữ khóa gần nhau, thuận tiện duyệt đoạn nhưng dễ nóng ở cuối tăng dần. Hash trải khóa nhưng truy vấn đoạn có thể phải hỏi nhiều shard. Shard key nên xét số giá trị, phân bố tải và đường truy vấn, không chỉ số dòng.",
+          "example": "Chia theo lớp đặt mọi hồ sơ 10A cùng nơi; tra cả lớp dễ nhưng 10A quá đông có thể nóng. Chia theo mã học sinh trải tải hơn nhưng lấy cả lớp cần gom nhiều nơi.",
+          "steps": [
+            "Ghi hai truy vấn thường dùng và lượng truy cập mỗi nhóm.",
+            "So số shard bị hỏi theo mỗi khóa ứng viên."
+          ],
+          "misconception": "Hash nhiều khóa không chia được tải của một khóa đơn cực nóng.",
+          "sourceIds": [
+            "shards-aws"
+          ]
+        },
+        {
+          "id": "ring",
+          "title": "Thêm shard làm thay đổi nơi tìm khóa",
+          "explanation": "Hash modulo theo số shard có thể đổi nhiều ánh xạ khi N thay đổi. Consistent hashing đặt node/key trên vòng, thường chỉ chuyển vùng liên quan node mới; virtual nodes giúp phân bố nhưng không tự chữa hot key hoặc lệch trọng số.",
+          "example": "Với k mod 2: 0→0,1→1,2→0,3→1,4→0,5→1. Sang mod 3: 0→0,1→1,2→2,3→0,4→1,5→2. Bốn trong sáu khóa đổi nơi.",
+          "steps": [
+            "Tự so hai danh sách nơi lưu.",
+            "Tách yêu cầu chuyển ít khóa khỏi yêu cầu phân bố tải đều."
+          ],
+          "misconception": "Consistent hashing giảm phạm vi chuyển theo mô hình, không bảo đảm số request bằng nhau.",
+          "sourceIds": [
+            "dynamo-paper"
+          ]
+        },
+        {
+          "id": "queries",
+          "title": "Chỉ mục phụ có thể cần hỏi nhiều nơi",
+          "explanation": "Tra đúng shard key có thể đi một shard. Tra trường khác cần index cục bộ rồi scatter/gather hoặc index toàn cục có cơ chế cập nhật. Join và transaction xuyên shard thêm độ trễ, lỗi một phần và yêu cầu nhất quán.",
+          "example": "Hồ sơ theo studentId nhưng tìm email. Hỏi mọi shard có thể được đáp án, song một shard timeout thì không thể khẳng định email không tồn tại.",
+          "steps": [
+            "Xác định một index chỉ đúng shard hay từng shard đều cần đọc.",
+            "Phân biệt không tìm thấy hoàn chỉnh với kết quả chưa đủ do một shard lỗi."
+          ],
+          "misconception": "Kết quả rỗng từ một phần shard không chứng minh toàn bộ hệ thống rỗng.",
+          "sourceIds": [
+            "shards-aws",
+            "pg-constraints"
+          ]
+        },
+        {
+          "id": "move",
+          "title": "Di chuyển phải biết ai đang là nguồn có thẩm quyền",
+          "explanation": "Reshard cần snapshot/backfill, bắt kịp ghi phát sinh, kiểm đối soát rồi đổi định tuyến có version. Dual write có thể thành công một nơi và thất bại nơi kia. Giữ đường rollback và chống ghi vào bản cũ sau cutover.",
+          "example": "S9 sao sang B lúc version 4. A nhận version 5 trong lúc copy. Nếu đổi route ngay, B trả bản 4 dù việc copy đã báo xong.",
+          "steps": [
+            "Copy và theo thay đổi sau mốc snapshot.",
+            "Đối chiếu đến mốc chốt, chuyển quyền/route rồi theo dõi trước dọn bản cũ."
+          ],
+          "misconception": "Copy xong số dòng không chứng minh đã bắt kịp các cập nhật đồng thời.",
+          "sourceIds": [
+            "dynamo-paper",
+            "outbox-aws"
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "version": 1,
+      "items": [
+        {
+          "id": "keys",
+          "text": "Dữ liệu đều nhưng một lớp nhận 90% lượt đọc. Chỉ đếm dòng có tìm ra nút thắt?",
+          "options": [
+            "Có; số dòng quyết định toàn bộ tải.",
+            "Không; cần đo phân bố request và chi phí mỗi request.",
+            "Có; hash xóa mọi skew."
+          ],
+          "answer": 1,
+          "explanation": "Chia theo lớp đặt mọi hồ sơ 10A cùng nơi; tra cả lớp dễ nhưng 10A quá đông có thể nóng. Chia theo mã học sinh trải tải hơn nhưng lấy cả lớp cần gom nhiều nơi. Hash nhiều khóa không chia được tải của một khóa đơn cực nóng.",
+          "sourceIds": [
+            "shards-aws"
+          ]
+        },
+        {
+          "id": "ring",
+          "text": "Trong ví dụ sáu khóa, có bao nhiêu khóa đổi shard?",
+          "options": [
+            "2 khóa: 0,1.",
+            "4 khóa: 2,3,4,5.",
+            "Cả 6 khóa."
+          ],
+          "answer": 1,
+          "explanation": "Với k mod 2: 0→0,1→1,2→0,3→1,4→0,5→1. Sang mod 3: 0→0,1→1,2→2,3→0,4→1,5→2. Bốn trong sáu khóa đổi nơi. Consistent hashing giảm phạm vi chuyển theo mô hình, không bảo đảm số request bằng nhau.",
+          "sourceIds": [
+            "dynamo-paper"
+          ]
+        },
+        {
+          "id": "queries",
+          "text": "Hai trong ba shard trả rỗng, shard cuối timeout. Có thể nói email không tồn tại?",
+          "options": [
+            "Có; đa số trả rỗng là đủ cho mọi truy vấn.",
+            "Chưa; kết quả còn thiếu.",
+            "Có; index phụ luôn toàn cục."
+          ],
+          "answer": 1,
+          "explanation": "Hồ sơ theo studentId nhưng tìm email. Hỏi mọi shard có thể được đáp án, song một shard timeout thì không thể khẳng định email không tồn tại. Kết quả rỗng từ một phần shard không chứng minh toàn bộ hệ thống rỗng.",
+          "sourceIds": [
+            "shards-aws",
+            "pg-constraints"
+          ]
+        },
+        {
+          "id": "move",
+          "text": "B có đủ số dòng nhưng thiếu version 5 của S9. Đã an toàn cutover chưa?",
+          "options": [
+            "Rồi; đếm dòng là đủ.",
+            "Chưa; phải bắt kịp và đối soát thay đổi.",
+            "Rồi; chỉ cần đổi DNS."
+          ],
+          "answer": 1,
+          "explanation": "S9 sao sang B lúc version 4. A nhận version 5 trong lúc copy. Nếu đổi route ngay, B trả bản 4 dù việc copy đã báo xong. Copy xong số dòng không chứng minh đã bắt kịp các cập nhật đồng thời.",
+          "sourceIds": [
+            "dynamo-paper",
+            "outbox-aws"
+          ]
+        }
+      ]
+    },
+    "prediction": {
+      "text": "Các shard có cùng số dòng thì có cùng tải?",
+      "options": [
+        "Không; tần suất và chi phí truy cập có thể khác.",
+        "Có, luôn đúng."
+      ],
+      "answer": 0,
+      "explanation": "Một khóa nóng có thể nhận phần lớn lượt đọc."
+    },
+    "challenge": {
+      "text": "Hệ thống vé chia theo eventId, một sự kiện chiếm 95% tải. Thêm shard không đổi khóa có giải quyết ngay?",
+      "options": [
+        "Có; tổng số máy quyết định mọi thứ.",
+        "Không; cần xử lý hot partition và invariant của sự kiện đó.",
+        "Có; cache được phép xác nhận chỗ cuối."
+      ],
+      "answer": 1,
+      "explanation": "Tải vẫn tới một nhóm khóa; chia thêm phải giữ đúng ràng buộc đặt vé."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Theo dấu nơi giữ trạng thái và điều đã được xác nhận.",
+        "Một khóa nóng có thể nhận phần lớn lượt đọc."
+      ],
+      "challenge": [
+        "Kiểm tra yêu cầu mới; tìm lịch thao tác có thể làm phương án sai.",
+        "Tải vẫn tới một nhóm khóa; chia thêm phải giữ đúng ràng buộc đặt vé."
+      ]
+    },
+    "sources": [
+      {
+        "title": "Amazon DynamoDB — Partition key design",
+        "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-partition-key-design.html"
+      },
+      {
+        "title": "Amazon — Dynamo paper (2007)",
+        "url": "https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf"
+      },
+      {
+        "title": "PostgreSQL 18 — Constraints",
+        "url": "https://www.postgresql.org/docs/18/ddl-constraints.html"
+      },
+      {
+        "title": "AWS — Transactional outbox",
+        "url": "https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/transactional-outbox.html"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-partitioning",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L2-04",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Một lớp tạo phần lớn lượt đọc trên shard riêng.",
+      "context": "Trường chia hồ sơ theo lớp. Mỗi shard có 100 hồ sơ, nhưng lớp tổ chức hội thi có 90% lượt đọc. Chia đều số hồ sơ chưa chia đều tải; thêm máy cũng cần biết những khóa nào sẽ chuyển.",
+      "requirements": [
+        "Chọn hash/range/shard key, phân biệt data skew và traffic skew, truy vấn xuyên shard và chuyển dữ liệu có kiểm chứng.",
+        "Giải thích được một tình huống lỗi và điều kiện để phương án còn đúng."
+      ],
+      "activityRef": "module-practice",
+      "experimentSteps": [
+        "Theo từng bước trong các ví dụ và tự tính kết quả trước khi xem giải thích.",
+        "Chọn phương án cho từng tình huống, kiểm tra và sửa lựa chọn.",
+        "Áp dụng sang yêu cầu mới; nêu điều kiện và giới hạn của quyết định."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Hash nhiều khóa không chia được tải của một khóa đơn cực nóng.",
+        "Copy xong số dòng không chứng minh đã bắt kịp các cập nhật đồng thời."
+      ],
+      "limitations": "Sơ đồ và phép chia số nhỏ; không chạy reshard thật hoặc khẳng định mọi database dùng cùng cơ chế."
+    }
+  },
+  {
+    "id": "messaging-delivery",
+    "version": 1,
+    "status": "beta",
+    "kind": "module-practice",
+    "level": "L2",
+    "moduleId": "L2.5",
+    "minutes": 30,
+    "title": "Đã nhận tin rồi, vì sao vẫn gửi lại?",
+    "subtitle": "Worker lưu phiếu rồi mất ACK.",
+    "objective": "Theo log/queue/pub-sub, partition ordering, ACK/retry/dedup và DLQ để bảo vệ hiệu ứng.",
+    "story": "Mỗi phiếu đăng ký tạo việc gửi thông báo. Worker đã xử lý nhưng mất xác nhận. Khi nhận lại cùng việc, nhóm phải phân biệt tin được giao lần nữa với tác dụng phụ bị tạo lần nữa.",
+    "explanation": "Queue, pub-sub và log trả lời nhu cầu khác nhau. Thứ tự có phạm vi và có chi phí. ACK sau hiệu ứng có thể dẫn tới giao lại. Việc lỗi mãi cần lối xử lý riêng.",
+    "limit": "Lịch message và crash giả định; không chạy Kafka/email hoặc hứa exactly-once end-to-end.",
+    "terms": [
+      {
+        "name": "Xác nhận",
+        "english": "ACK",
+        "meaning": "Tín hiệu báo đã nhận/xử lý theo hợp đồng cụ thể."
+      },
+      {
+        "name": "Chống lặp",
+        "english": "Deduplication",
+        "meaning": "Nhận biết cùng định danh đã xử lý."
+      },
+      {
+        "name": "Hàng lỗi",
+        "english": "Dead-letter queue",
+        "meaning": "Nơi giữ việc cần điều tra sau chính sách lỗi."
+      },
+      {
+        "name": "Thử lại",
+        "english": "retry",
+        "meaning": "Gửi hoặc thực hiện lại một thao tác sau lỗi/chờ quá hạn. Lần đầu có thể đã có hiệu ứng nên phải xét xử lý trùng."
+      },
+      {
+        "name": "Giữ một hiệu ứng khi thử lại",
+        "english": "idempotency",
+        "meaning": "Cùng một thao tác theo hợp đồng được thử lại mà không nhân thêm hiệu ứng ngoài ý muốn; cần xác định khóa, phạm vi và thời hạn."
+      },
+      {
+        "name": "Hết thời gian chờ",
+        "english": "timeout",
+        "meaning": "Bên gọi dừng chờ khi vượt thời hạn. Điều này không chứng minh bên nhận chưa thực hiện thao tác."
+      },
+      {
+        "name": "Cấu trúc dữ liệu đã quy định",
+        "english": "schema",
+        "meaning": "Hợp đồng về trường, kiểu và ràng buộc. Dữ liệu đúng cấu trúc vẫn có thể sai về nội dung nghiệp vụ."
+      },
+      {
+        "name": "Chạy lại dữ liệu đã ghi",
+        "english": "replay",
+        "meaning": "Đọc và áp dụng lại lịch sử theo quy tắc; cần tránh lặp hiệu ứng bên ngoài."
+      },
+      {
+        "name": "Thời hạn giữ dữ liệu",
+        "english": "retention",
+        "meaning": "Khoảng thời gian dữ liệu hoặc bản sao được giữ trước khi xóa theo chính sách."
+      }
+    ],
+    "chapters": {
+      "version": 1,
+      "items": [
+        {
+          "id": "models",
+          "title": "Queue, pub-sub và log trả lời nhu cầu khác nhau",
+          "explanation": "Queue chia việc giữa worker. Pub-sub đưa thông điệp tới các nhóm người nhận theo subscription. Log lưu chuỗi bản ghi và vị trí đọc để có thể replay theo retention. Một sản phẩm có thể cung cấp nhiều cơ chế; cần đọc hợp đồng thay vì suy từ tên.",
+          "example": "Nhóm gửi thư và nhóm thống kê đều cần sự kiện S9. Nếu cùng tranh một work queue, chỉ một bên có thể lấy; hai subscription/group riêng phục vụ hai mục đích.",
+          "steps": [
+            "Liệt kê ai phải thấy mỗi sự kiện.",
+            "Chọn phân phối giữa worker trong nhóm và giữa các nhóm."
+          ],
+          "misconception": "Thêm consumer vào cùng nhóm không mặc nhiên phát bản sao cho mọi nghiệp vụ.",
+          "sourceIds": [
+            "kafka-design"
+          ]
+        },
+        {
+          "id": "ordering",
+          "title": "Thứ tự có phạm vi và có chi phí",
+          "explanation": "Log partition có thứ tự bên trong partition; không suy ra thứ tự toàn hệ thống. Khóa cùng phiếu có thể giúp đưa vào cùng partition, nhưng xử lý song song hoặc retry vẫn phải tôn trọng version. Một partition có giới hạn thông lượng.",
+          "example": "S9: tạo v1 rồi hủy v2. Nếu worker v2 hoàn tất trước v1, ghi v1 sau có thể làm sống lại phiếu đã hủy khi không kiểm phiên bản.",
+          "steps": [
+            "Gắn key S9 và version cho hai sự kiện.",
+            "Thử đảo thứ tự hoàn tất; chặn trạng thái lùi theo hợp đồng."
+          ],
+          "misconception": "Thứ tự giao không luôn bằng thứ tự tác dụng phụ hoàn tất.",
+          "sourceIds": [
+            "kafka-design"
+          ]
+        },
+        {
+          "id": "duplicates",
+          "title": "ACK sau hiệu ứng có thể dẫn tới giao lại",
+          "explanation": "At-most-once có thể mất việc; at-least-once có thể giao trùng. Với tác dụng trong một database, ghi hiệu ứng cùng dấu đã xử lý trong một transaction có thể chống lặp theo eventId. Với email/API ngoài cần hợp đồng idempotency/đối soát riêng.",
+          "example": "Nhận E9 → cộng điểm → crash trước ACK. Lần sau E9 tới lại: nếu chỉ cộng tiếp sẽ thành hai lần. Dấu E9 và phép cộng cần cùng ranh giới nguyên tử để không có khe hở.",
+          "steps": [
+            "Thử crash trước hiệu ứng, sau hiệu ứng và sau dấu dedup.",
+            "Kiểm lần xử lý lại có tạo thêm hiệu ứng hay làm mất hiệu ứng không."
+          ],
+          "misconception": "Exactly-once trong một phạm vi của broker không bảo đảm mọi API ngoài chỉ chạy một lần.",
+          "sourceIds": [
+            "kafka-design",
+            "outbox-aws"
+          ]
+        },
+        {
+          "id": "poison",
+          "title": "Việc lỗi mãi cần lối xử lý riêng",
+          "explanation": "Retry có giới hạn và khoảng chờ; phân biệt lỗi tạm thời với payload không hợp lệ. DLQ giữ việc cần điều tra, không tự sửa hay chứng nhận xử lý xong. Replay phải giữ ID gốc, schema phù hợp và kiểm tác dụng phụ.",
+          "example": "E10 thiếu địa chỉ nhận; retry 100 lần không tạo ra địa chỉ. Chuyển DLQ kèm lý do, sửa theo chính sách rồi replay cùng định danh có kiểm soát.",
+          "steps": [
+            "Phân loại lỗi và đặt số lần/tuổi tối đa.",
+            "Đo tuổi việc cũ nhất, DLQ và tốc độ hoàn tất; thử replay an toàn."
+          ],
+          "misconception": "Backlog bằng không có thể vì việc bị bỏ hoặc chuyển DLQ, không phải mọi người đã nhận thư.",
+          "sourceIds": [
+            "kafka-design",
+            "overload-google"
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "version": 1,
+      "items": [
+        {
+          "id": "models",
+          "text": "Gửi thư và thống kê đều cần S9. Hai worker cạnh tranh cùng queue có đủ không?",
+          "options": [
+            "Không nếu mỗi việc chỉ giao một worker; cần nhóm/subscription theo mục đích.",
+            "Đủ; mọi queue luôn broadcast.",
+            "Đủ nếu tăng số partition bằng không."
+          ],
+          "answer": 0,
+          "explanation": "Nhóm gửi thư và nhóm thống kê đều cần sự kiện S9. Nếu cùng tranh một work queue, chỉ một bên có thể lấy; hai subscription/group riêng phục vụ hai mục đích. Thêm consumer vào cùng nhóm không mặc nhiên phát bản sao cho mọi nghiệp vụ.",
+          "sourceIds": [
+            "kafka-design"
+          ]
+        },
+        {
+          "id": "ordering",
+          "text": "v2 hủy xong rồi v1 tạo đến trễ. Nên làm gì?",
+          "options": [
+            "Luôn ghi đè theo lúc nhận.",
+            "Xóa khóa định danh khỏi event.",
+            "Kiểm version/trạng thái để không làm phiếu sống lại."
+          ],
+          "answer": 2,
+          "explanation": "S9: tạo v1 rồi hủy v2. Nếu worker v2 hoàn tất trước v1, ghi v1 sau có thể làm sống lại phiếu đã hủy khi không kiểm phiên bản. Thứ tự giao không luôn bằng thứ tự tác dụng phụ hoàn tất.",
+          "sourceIds": [
+            "kafka-design"
+          ]
+        },
+        {
+          "id": "duplicates",
+          "text": "Chỉ ACK trước khi cộng điểm để tránh trùng có rủi ro gì?",
+          "options": [
+            "Không có rủi ro.",
+            "Crash sau ACK có thể làm mất lần cộng.",
+            "Luôn làm cộng hai lần."
+          ],
+          "answer": 1,
+          "explanation": "Nhận E9 → cộng điểm → crash trước ACK. Lần sau E9 tới lại: nếu chỉ cộng tiếp sẽ thành hai lần. Dấu E9 và phép cộng cần cùng ranh giới nguyên tử để không có khe hở. Exactly-once trong một phạm vi của broker không bảo đảm mọi API ngoài chỉ chạy một lần.",
+          "sourceIds": [
+            "kafka-design",
+            "outbox-aws"
+          ]
+        },
+        {
+          "id": "poison",
+          "text": "DLQ có E10 nghĩa là gì?",
+          "options": [
+            "Việc chưa giải quyết, cần điều tra và xử lý tiếp.",
+            "Đã thành công chắc chắn.",
+            "Không cần theo dõi nữa."
+          ],
+          "answer": 0,
+          "explanation": "E10 thiếu địa chỉ nhận; retry 100 lần không tạo ra địa chỉ. Chuyển DLQ kèm lý do, sửa theo chính sách rồi replay cùng định danh có kiểm soát. Backlog bằng không có thể vì việc bị bỏ hoặc chuyển DLQ, không phải mọi người đã nhận thư.",
+          "sourceIds": [
+            "kafka-design",
+            "overload-google"
+          ]
+        }
+      ]
+    },
+    "prediction": {
+      "text": "Mất ACK sau khi xử lý có chứng minh việc chưa chạy?",
+      "options": [
+        "Có; ACK là thao tác duy nhất tạo kết quả.",
+        "Không; kết quả xử lý có thể đã xảy ra."
+      ],
+      "answer": 1,
+      "explanation": "Tác dụng phụ và xác nhận là hai thời điểm khác nhau."
+    },
+    "challenge": {
+      "text": "Thanh toán ngoài đã nhận tiền nhưng worker mất mạng trước lưu trạng thái. Cần gì khi retry?",
+      "options": [
+        "Gửi mã giao dịch mới để chắc chạy lại.",
+        "Chỉ đổi queue thành FIFO.",
+        "Khóa idempotency/hợp đồng nhà cung cấp và tra cứu, đối soát kết quả."
+      ],
+      "answer": 2,
+      "explanation": "Không thể suy ra thất bại từ timeout; phải giữ danh tính thao tác và ranh giới bảo đảm."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Theo dấu nơi giữ trạng thái và điều đã được xác nhận.",
+        "Tác dụng phụ và xác nhận là hai thời điểm khác nhau."
+      ],
+      "challenge": [
+        "Kiểm tra yêu cầu mới; tìm lịch thao tác có thể làm phương án sai.",
+        "Không thể suy ra thất bại từ timeout; phải giữ danh tính thao tác và ranh giới bảo đảm."
+      ]
+    },
+    "sources": [
+      {
+        "title": "Apache Kafka 4.1 — Design",
+        "url": "https://kafka.apache.org/41/design/design/"
+      },
+      {
+        "title": "AWS — Transactional outbox",
+        "url": "https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/transactional-outbox.html"
+      },
+      {
+        "title": "Google SRE — Handling overload",
+        "url": "https://sre.google/sre-book/handling-overload/"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-messaging-delivery",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L2-05",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Worker lưu phiếu rồi mất ACK.",
+      "context": "Mỗi phiếu đăng ký tạo việc gửi thông báo. Worker đã xử lý nhưng mất xác nhận. Khi nhận lại cùng việc, nhóm phải phân biệt tin được giao lần nữa với tác dụng phụ bị tạo lần nữa.",
+      "requirements": [
+        "Theo log/queue/pub-sub, partition ordering, ACK/retry/dedup và DLQ để bảo vệ hiệu ứng.",
+        "Giải thích được một tình huống lỗi và điều kiện để phương án còn đúng."
+      ],
+      "activityRef": "module-practice",
+      "experimentSteps": [
+        "Theo từng bước trong các ví dụ và tự tính kết quả trước khi xem giải thích.",
+        "Chọn phương án cho từng tình huống, kiểm tra và sửa lựa chọn.",
+        "Áp dụng sang yêu cầu mới; nêu điều kiện và giới hạn của quyết định."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Thêm consumer vào cùng nhóm không mặc nhiên phát bản sao cho mọi nghiệp vụ.",
+        "Backlog bằng không có thể vì việc bị bỏ hoặc chuyển DLQ, không phải mọi người đã nhận thư."
+      ],
+      "limitations": "Lịch message và crash giả định; không chạy Kafka/email hoặc hứa exactly-once end-to-end."
+    }
+  },
+  {
+    "id": "admission-backpressure",
+    "version": 1,
+    "status": "beta",
+    "kind": "module-practice",
+    "level": "L2",
+    "moduleId": "L2.6",
+    "minutes": 30,
+    "title": "Khi việc đến nhanh hơn sức làm, nên nhận bao nhiêu?",
+    "subtitle": "Hàng chờ tăng dù vừa thêm worker.",
+    "objective": "Tính backlog, token bucket, admission/backpressure/batching và độ trễ autoscaling dưới burst và tải kéo dài.",
+    "story": "Trong 10 giây, hệ thống nhận 12 việc/s nhưng làm được 8 việc/s. Nhóm có thể xếp hàng, từ chối bớt hoặc đòi bên gửi chậm lại. Mỗi cách ảnh hưởng người dùng khác nhau.",
+    "explanation": "Hàng chờ che tải trong bao lâu?. Giới hạn tốc độ khác giới hạn đồng thời. Từ chối sớm hoặc báo bên gửi chậm lại. Gom lô và thêm máy đều có thời gian chờ.",
+    "limit": "Phép tính tốc độ cố định, không benchmark hoặc mô phỏng autoscaler thật.",
+    "terms": [
+      {
+        "name": "Điều tiết đầu vào",
+        "english": "Admission control",
+        "meaning": "Quyết định có nhận thêm việc hay không."
+      },
+      {
+        "name": "Báo giảm nhịp",
+        "english": "Backpressure",
+        "meaning": "Truyền sức ép từ nơi xử lý tới nơi tạo việc."
+      },
+      {
+        "name": "Dự phòng công suất",
+        "english": "Headroom",
+        "meaning": "Phần tài nguyên chưa dùng để chịu biến động."
+      },
+      {
+        "name": "Thông báo xác nhận",
+        "english": "ACK",
+        "meaning": "Phản hồi cho biết một bước đã được bên nhận xác nhận. Phải đọc hợp đồng để biết đó là nhận, lưu bền hay áp dụng."
+      },
+      {
+        "name": "Thử lại",
+        "english": "retry",
+        "meaning": "Gửi hoặc thực hiện lại một thao tác sau lỗi/chờ quá hạn. Lần đầu có thể đã có hiệu ứng nên phải xét xử lý trùng."
+      },
+      {
+        "name": "Hạn hoàn tất",
+        "english": "deadline",
+        "meaning": "Mốc thời gian mà sau đó kết quả không còn hữu ích cho yêu cầu; phải chia ngân sách qua các bước."
+      },
+      {
+        "name": "Hết thời gian chờ",
+        "english": "timeout",
+        "meaning": "Bên gọi dừng chờ khi vượt thời hạn. Điều này không chứng minh bên nhận chưa thực hiện thao tác."
+      },
+      {
+        "name": "Cấu trúc dữ liệu đã quy định",
+        "english": "schema",
+        "meaning": "Hợp đồng về trường, kiểu và ràng buộc. Dữ liệu đúng cấu trúc vẫn có thể sai về nội dung nghiệp vụ."
+      },
+      {
+        "name": "Nhóm dùng chung nền tảng",
+        "english": "tenant",
+        "meaning": "Một tổ chức hoặc nhóm khách hàng dùng chung hệ thống nhưng cần tách dữ liệu, quyền và ngân sách tài nguyên."
+      },
+      {
+        "name": "Hạn mức tài nguyên",
+        "english": "quota",
+        "meaning": "Giới hạn lượng tài nguyên hoặc thao tác một nhóm được dùng trong phạm vi đã định."
+      }
+    ],
+    "chapters": {
+      "version": 1,
+      "items": [
+        {
+          "id": "backlog",
+          "title": "Hàng chờ che tải trong bao lâu?",
+          "explanation": "Trong mô hình không rơi việc, backlog cuối bằng backlog đầu cộng số đến trừ số hoàn tất. Queue hấp thụ burst hữu hạn nhưng không tạo thêm công suất; nếu tốc độ đến luôn cao hơn ra thì chờ tăng không giới hạn khi không có giới hạn queue.",
+          "example": "Bắt đầu rỗng, 12 đến/s, 8 xong/s trong 10s: 120−80=40 việc chờ. Khi ngừng nhận, cần thêm 40/8=5s để rút hết theo giả định.",
+          "steps": [
+            "Đếm đến và xong trong cùng cửa sổ.",
+            "Thử giữ tải 12/s thêm 10s: backlog thành 80, không tự ổn định."
+          ],
+          "misconception": "Queue không sửa được thiếu công suất kéo dài.",
+          "sourceIds": [
+            "overload-google"
+          ]
+        },
+        {
+          "id": "tokens",
+          "title": "Giới hạn tốc độ khác giới hạn đồng thời",
+          "explanation": "Token bucket tích token tới sức chứa B, nạp r mỗi giây; mỗi việc tiêu token theo chi phí đã định. Cho burst tới số token hiện có nhưng giới hạn dài hạn. Giới hạn concurrency chặn số việc đang chạy, cần khi thời gian mỗi việc thay đổi.",
+          "example": "Bucket có 5 token, không nạp thêm trong thời điểm xét. 7 việc cùng tới, mỗi việc một token: nhận tối đa 5, hai việc chờ/từ chối theo hợp đồng. Đây không nói năm việc hoàn tất ngay.",
+          "steps": [
+            "Trừ một token sau mỗi việc được nhận.",
+            "Nêu cách phản hồi khi hết token; tách số đang chạy khỏi số được nhận mỗi giây."
+          ],
+          "misconception": "Rate limit theo IP có thể gộp nhiều học sinh cùng mạng; quota cần chọn chủ thể phù hợp.",
+          "sourceIds": [
+            "overload-google"
+          ]
+        },
+        {
+          "id": "pressure",
+          "title": "Từ chối sớm hoặc báo bên gửi chậm lại",
+          "explanation": "Admission control quyết định nhận hay từ chối trước khi tốn tài nguyên lớn. Backpressure truyền tín hiệu giảm nhịp tới bên tạo việc. Load shedding bỏ bớt tải theo ưu tiên rõ; cần công bằng để một tenant không chiếm hết.",
+          "example": "Nếu queue chỉ còn hai chỗ, nhận mười việc rồi để timeout tốn kết nối hơn trả lỗi/quy tắc retry rõ cho tám việc chưa nhận. Hủy ở client không chắc dừng công việc server đã bắt đầu.",
+          "steps": [
+            "Chọn điểm quyết định trước tài nguyên đắt.",
+            "Theo dõi số từ chối và deadline, không chỉ latency của việc được nhận."
+          ],
+          "misconception": "Giảm latency bằng cách giấu lỗi bị từ chối không phải cải thiện trải nghiệm toàn bộ.",
+          "sourceIds": [
+            "overload-google",
+            "cascade-google"
+          ]
+        },
+        {
+          "id": "delay",
+          "title": "Gom lô và thêm máy đều có thời gian chờ",
+          "explanation": "Batching chia chi phí cố định cho nhiều mục nhưng thêm thời gian đợi lô và ảnh hưởng tail. Autoscaling cần thời gian phát hiện, khởi động, warmup; nên có headroom và quota theo downstream. Không dùng số máy mới như công suất có sẵn ngay.",
+          "example": "Burst dài 20s, máy mới sẵn sau 60s. Autoscaling phản ứng sau khi burst qua; queue/giới hạn nhận/headroom mới quyết định trải nghiệm lúc đó.",
+          "steps": [
+            "Vẽ 0s bắt đầu burst, 20s hết burst, 60s máy mới sẵn.",
+            "So thay đổi batch size và deadline, rồi giới hạn tổng kết nối tới downstream."
+          ],
+          "misconception": "Thêm máy sau một phút không cứu được deadline 2s đã hết.",
+          "sourceIds": [
+            "cascade-google",
+            "overload-google"
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "version": 1,
+      "items": [
+        {
+          "id": "backlog",
+          "text": "Sau 10s có bao nhiêu việc chờ trong ví dụ?",
+          "options": [
+            "4 việc.",
+            "40 việc.",
+            "120 việc đã hoàn tất."
+          ],
+          "answer": 1,
+          "explanation": "Bắt đầu rỗng, 12 đến/s, 8 xong/s trong 10s: 120−80=40 việc chờ. Khi ngừng nhận, cần thêm 40/8=5s để rút hết theo giả định. Queue không sửa được thiếu công suất kéo dài.",
+          "sourceIds": [
+            "overload-google"
+          ]
+        },
+        {
+          "id": "tokens",
+          "text": "Bucket 5 token nhận 7 việc tức thời, mỗi việc tốn 1. Có thể nhận ngay tối đa?",
+          "options": [
+            "5 việc.",
+            "7 việc.",
+            "Không việc nào."
+          ],
+          "answer": 0,
+          "explanation": "Bucket có 5 token, không nạp thêm trong thời điểm xét. 7 việc cùng tới, mỗi việc một token: nhận tối đa 5, hai việc chờ/từ chối theo hợp đồng. Đây không nói năm việc hoàn tất ngay. Rate limit theo IP có thể gộp nhiều học sinh cùng mạng; quota cần chọn chủ thể phù hợp.",
+          "sourceIds": [
+            "overload-google"
+          ]
+        },
+        {
+          "id": "pressure",
+          "text": "Chỉ đo latency việc thành công khi bỏ 80% request có đủ?",
+          "options": [
+            "Đủ; lỗi không thuộc người dùng.",
+            "Đủ nếu dashboard màu xanh.",
+            "Không; phải đo cả tỷ lệ từ chối và thành công theo yêu cầu."
+          ],
+          "answer": 2,
+          "explanation": "Nếu queue chỉ còn hai chỗ, nhận mười việc rồi để timeout tốn kết nối hơn trả lỗi/quy tắc retry rõ cho tám việc chưa nhận. Hủy ở client không chắc dừng công việc server đã bắt đầu. Giảm latency bằng cách giấu lỗi bị từ chối không phải cải thiện trải nghiệm toàn bộ.",
+          "sourceIds": [
+            "overload-google",
+            "cascade-google"
+          ]
+        },
+        {
+          "id": "delay",
+          "text": "Máy mới sẵn ở giây 60 có trực tiếp cứu deadline 2s của burst lúc đầu?",
+          "options": [
+            "Có; request quá hạn được tự quay ngược thời gian.",
+            "Có; autoscaling không có độ trễ.",
+            "Không; cần công suất/điều tiết ngay lúc burst."
+          ],
+          "answer": 2,
+          "explanation": "Burst dài 20s, máy mới sẵn sau 60s. Autoscaling phản ứng sau khi burst qua; queue/giới hạn nhận/headroom mới quyết định trải nghiệm lúc đó. Thêm máy sau một phút không cứu được deadline 2s đã hết.",
+          "sourceIds": [
+            "cascade-google",
+            "overload-google"
+          ]
+        }
+      ]
+    },
+    "prediction": {
+      "text": "Queue lớn gấp đôi có làm tốc độ xử lý gấp đôi?",
+      "options": [
+        "Không; nó chỉ tăng chỗ chờ theo mô hình.",
+        "Có; dung lượng queue là công suất worker."
+      ],
+      "answer": 0,
+      "explanation": "Tốc độ ra vẫn do worker và downstream quyết định."
+    },
+    "challenge": {
+      "text": "Một tenant chiếm hết worker, tenant khác có ít việc quan trọng. Nên thử gì?",
+      "options": [
+        "Chỉ tăng queue chung vô hạn.",
+        "Ngân sách theo tenant và cô lập tài nguyên, đo cả công bằng và tổng tải.",
+        "Bỏ mọi giới hạn retry."
+      ],
+      "answer": 1,
+      "explanation": "Quota/cô lập giúp giới hạn ảnh hưởng; vẫn phải xét công suất chung."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Theo dấu nơi giữ trạng thái và điều đã được xác nhận.",
+        "Tốc độ ra vẫn do worker và downstream quyết định."
+      ],
+      "challenge": [
+        "Kiểm tra yêu cầu mới; tìm lịch thao tác có thể làm phương án sai.",
+        "Quota/cô lập giúp giới hạn ảnh hưởng; vẫn phải xét công suất chung."
+      ]
+    },
+    "sources": [
+      {
+        "title": "Google SRE — Handling overload",
+        "url": "https://sre.google/sre-book/handling-overload/"
+      },
+      {
+        "title": "Google SRE — Addressing cascading failures",
+        "url": "https://sre.google/sre-book/addressing-cascading-failures/"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-admission-backpressure",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L2-06",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Hàng chờ tăng dù vừa thêm worker.",
+      "context": "Trong 10 giây, hệ thống nhận 12 việc/s nhưng làm được 8 việc/s. Nhóm có thể xếp hàng, từ chối bớt hoặc đòi bên gửi chậm lại. Mỗi cách ảnh hưởng người dùng khác nhau.",
+      "requirements": [
+        "Tính backlog, token bucket, admission/backpressure/batching và độ trễ autoscaling dưới burst và tải kéo dài.",
+        "Giải thích được một tình huống lỗi và điều kiện để phương án còn đúng."
+      ],
+      "activityRef": "module-practice",
+      "experimentSteps": [
+        "Theo từng bước trong các ví dụ và tự tính kết quả trước khi xem giải thích.",
+        "Chọn phương án cho từng tình huống, kiểm tra và sửa lựa chọn.",
+        "Áp dụng sang yêu cầu mới; nêu điều kiện và giới hạn của quyết định."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Queue không sửa được thiếu công suất kéo dài.",
+        "Thêm máy sau một phút không cứu được deadline 2s đã hết."
+      ],
+      "limitations": "Phép tính tốc độ cố định, không benchmark hoặc mô phỏng autoscaler thật."
+    }
+  }
+]

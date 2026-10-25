@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "tracks": [
+    {
+      "id": "ai",
+      "title": "AI / ML Systems",
+      "lessonIds": [
+        "track-ai"
+      ]
+    },
+    {
+      "id": "data",
+      "title": "Data Engineering",
+      "lessonIds": [
+        "track-data",
+        "case-fixture-crawler",
+        "case-club-ledger",
+        "case-book-ranking"
+      ]
+    },
+    {
+      "id": "search",
+      "title": "Search, Recommendation và Geo",
+      "lessonIds": [
+        "track-search",
+        "case-school-feed",
+        "case-fixture-crawler",
+        "case-social-path",
+        "case-book-ranking"
+      ]
+    },
+    {
+      "id": "realtime",
+      "title": "Realtime và Collaboration",
+      "lessonIds": [
+        "track-realtime",
+        "case-school-feed"
+      ]
+    },
+    {
+      "id": "media",
+      "title": "Media và Streaming",
+      "lessonIds": [
+        "track-media"
+      ]
+    },
+    {
+      "id": "platform",
+      "title": "Cloud, Platform và Edge",
+      "lessonIds": [
+        "track-platform",
+        "case-growth-roadmap"
+      ]
+    },
+    {
+      "id": "business",
+      "title": "Hệ thống nghiệp vụ",
+      "lessonIds": [
+        "track-business",
+        "case-club-ledger"
+      ]
+    }
+  ],
+  "capstones": [
+    "capstone-foundations",
+    "capstone-service",
+    "capstone-scaling",
+    "capstone-distributed",
+    "capstone-production",
+    "capstone-architecture"
+  ],
+  "cases": [
+    "case-short-links",
+    "case-school-feed",
+    "case-fixture-crawler",
+    "case-club-ledger",
+    "case-social-path",
+    "case-query-cache",
+    "case-book-ranking",
+    "case-growth-roadmap"
+  ]
+}

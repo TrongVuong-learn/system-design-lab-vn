@@ -1,6 +1,6 @@
 # Bản đồ giáo trình System Design Lab
 
-Phiên bản đề xuất: 6 — 17/10/2026; bổ sung kế hoạch case theo module, giữ nguyên phạm vi 6 level/36 module/7 nhánh. Tài liệu đặc tả phạm vi; các module dưới đây chưa phải học liệu đã xây dựng. Kế hoạch sản phẩm: [SYSTEM_DESIGN_WEB_PLAN.md](SYSTEM_DESIGN_WEB_PLAN.md). Chuẩn giảng dạy: [TEACHING_GUIDE.md](TEACHING_GUIDE.md).
+Phiên bản: 7 — 25/10/2026; bổ sung kế hoạch case theo module, giữ nguyên phạm vi 6 level/36 module/7 nhánh. Tài liệu đặc tả phạm vi năng lực. EDU-26 đã bổ sung bài beta cho cả 36 module; độ sâu và bằng chứng nghiệm thu từng module vẫn theo báo cáo coverage. Kế hoạch sản phẩm: [SYSTEM_DESIGN_WEB_PLAN.md](SYSTEM_DESIGN_WEB_PLAN.md). Chuẩn giảng dạy: [TEACHING_GUIDE.md](TEACHING_GUIDE.md).
 
 ## 1. Nguyên tắc bao phủ và phân level
 
@@ -19,7 +19,7 @@ Học sinh cấp 3 chưa từng lập trình có lối bắt đầu riêng trong
 
 Mỗi module được chia thành các bài nhỏ sau khi chốt mục tiêu học. Danh sách module là phạm vi cần phát triển; số lượng tiêu đề không đại diện cho độ sâu hay mức hoàn thiện. Một module chỉ hoàn chỉnh khi năng lực bắt buộc có bài dạy, hoạt động áp dụng, đánh giá và review.
 
-Mỗi bài có mini-case trong chặng Áp dụng; mỗi module có một họ tình huống và bài tổng hợp; mỗi level có capstone. [EDU-09](docs/delivery/EDU_09_CASE_STUDY_PLAN.md) quản lý danh mục đủ 36 module, phân rã tình huống, bảy nhánh, kế hoạch ánh xạ bài beta và thứ tự triển khai. Hiện có mini-case cho 30 bài beta và một bài ôn tổng hợp; họ case module và capstone vẫn đang đặc tả; không tính một case tổng hợp thay mọi năng lực trong module. Chuẩn biên soạn nằm trong TEACHING_GUIDE.
+Mỗi bài có mini-case trong chặng Áp dụng; mỗi module có một họ tình huống và bài tổng hợp; mỗi level có capstone. [EDU-09](docs/delivery/EDU_09_CASE_STUDY_PLAN.md) quản lý danh mục đủ 36 module, phân rã tình huống, bảy nhánh, kế hoạch ánh xạ bài beta và thứ tự triển khai. Hiện có mini-case cho 85 bài beta, một bài ôn tổng hợp, sáu capstone, bảy bài nhánh chuyên sâu và tám case tích hợp. Các bài thiết kế có bản tự viết và rubric; không tính một case tổng hợp thay mọi năng lực trong module. Học liệu và liên kết khả dụng được kiểm từ content/pathways.json, trạng thái kiểm chứng ở EDU-26. Chuẩn biên soạn nằm trong TEACHING_GUIDE.
 
 ## 2. Sáu level cốt lõi
 

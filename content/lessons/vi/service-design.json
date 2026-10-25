@@ -1,0 +1,1636 @@
+[
+  {
+    "id": "requirements-boundaries",
+    "kind": "module-practice",
+    "version": 1,
+    "status": "beta",
+    "level": "L1",
+    "moduleId": "L1.1",
+    "minutes": 30,
+    "title": "Từ lời nhờ làm app đến bản thiết kế có thể kiểm tra",
+    "subtitle": "Thiết kế đăng ký câu lạc bộ trước khi chọn database.",
+    "objective": "Phân biệt chức năng, mục tiêu chất lượng, ràng buộc và giả định; vẽ ranh giới, truy vết một yêu cầu đến kiểm chứng.",
+    "story": "Cô phụ trách muốn app đăng ký câu lạc bộ “nhanh và không lỗi”. Trường có 1.200 học sinh, mỗi em đăng ký tối đa hai câu lạc bộ; có 80 chỗ cho robot. Nhóm định vẽ ngay nhiều server. Nhưng “nhanh” là bao lâu, ai sửa danh sách và hai bạn giành chỗ cuối sẽ được xử lý ra sao?",
+    "explanation": "Bản thiết kế bắt đầu từ hành vi người dùng và điều phải giữ đúng. Viết rõ luồng đọc/ghi, ranh giới và trách nhiệm giúp chọn thành phần có lý do. Số tải là giả định cần kiểm tra, không phải hiệu năng đo được.",
+    "limit": "Tình huống do tác giả dựng; các số người dùng, chỗ và mục tiêu là yêu cầu mẫu. Sơ đồ không chứng minh capacity, an toàn hay độ sẵn sàng. Bài ra quyết định không thay phỏng vấn stakeholder hoặc thử tải thực tế.",
+    "terms": [
+      {
+        "name": "Điều luôn đúng",
+        "english": "Invariant",
+        "meaning": "Ràng buộc nghiệp vụ phải được bảo vệ ở mọi bước, ví dụ không vượt 80 chỗ."
+      },
+      {
+        "name": "Mẫu truy cập",
+        "english": "Access pattern",
+        "meaning": "Ai đọc hoặc ghi dữ liệu gì, theo khóa nào và thường xuyên ra sao."
+      },
+      {
+        "name": "Ranh giới hệ thống",
+        "english": "System boundary",
+        "meaning": "Phần nhóm chịu trách nhiệm và các hệ thống bên ngoài phải trao đổi."
+      },
+      {
+        "name": "Hợp đồng thành phần",
+        "english": "Interface contract",
+        "meaning": "Đầu vào, kết quả, lỗi và trách nhiệm mà hai thành phần thống nhất."
+      }
+    ],
+    "chapters": {
+      "version": 1,
+      "items": [
+        {
+          "id": "requirements",
+          "title": "Biến “nhanh và đúng” thành tiêu chí cụ thể",
+          "explanation": "Chức năng mô tả việc người dùng làm; yêu cầu chất lượng nêu mức phục vụ; ràng buộc giới hạn phương án. “Đăng ký robot” là chức năng. “95% yêu cầu hoàn tất trong 2 giây ở tải đã nêu” là mục tiêu mẫu, chưa phải kết quả. Ngân sách và giờ mở đăng ký là ràng buộc của case.",
+          "example": "Trong giờ mở, giả sử 300 em gửi một yêu cầu trong 60 giây: trung bình 5 yêu cầu/giây. Không suy ra đỉnh tải chỉ từ trung bình.",
+          "steps": [
+            "Ghi tác nhân, luồng đăng ký và kết quả mong muốn.",
+            "Ghi cửa sổ đo, loại request và mục tiêu độ trễ.",
+            "Tách dữ liệu đã biết khỏi giả định 300 yêu cầu; thử thêm tình huống dồn trong 1 giây."
+          ],
+          "misconception": "Không chọn số server từ tổng số học sinh mà bỏ qua tốc độ request, tài nguyên và dữ liệu truy cập.",
+          "sourceIds": ["c4-context", "source-10"]
+        },
+        {
+          "id": "invariants",
+          "title": "Chọn điều phải giữ đúng khi có cạnh tranh",
+          "explanation": "State là dữ liệu còn tồn tại qua nhiều request. Một học sinh có nhiều lượt đăng ký; số chỗ là trạng thái dùng chung. “Mỗi em tối đa hai CLB” và “robot tối đa 80 chỗ” cần được kiểm tại nơi quyết định ghi dữ liệu, không chỉ trên giao diện.",
+          "example": "Còn 1 chỗ; An và Bình đều nhìn thấy 1. Nếu cả hai đều được ghi mà không có kiểm tra cạnh tranh, tổng có thể thành 81.",
+          "steps": [
+            "Liệt kê invariant trước khi viết thành phần.",
+            "Xác định thao tác nào có thể phá invariant.",
+            "Đặt kiểm tra và ghi trong cơ chế nhất quán phù hợp; thử hai request xen kẽ."
+          ],
+          "misconception": "Ẩn nút hoặc kiểm tra ở browser không ngăn request đồng thời hoặc client khác.",
+          "sourceIds": ["pg-tx18", "pg-constraints18"]
+        },
+        {
+          "id": "boundaries",
+          "title": "Vẽ bức tranh lớn rồi phân trách nhiệm",
+          "explanation": "Context đặt app giữa học sinh, quản trị viên và hệ thống ngoài. Container trong C4 là ứng dụng hoặc nơi lưu dữ liệu, không nhất thiết là Docker. Khi zoom vào, browser hiển thị; API kiểm quy tắc; database giữ bản ghi. Phân trách nhiệm trước khi chia thành nhiều dịch vụ.",
+          "example": "Trường dùng hệ thống gửi email ngoài: app tạo đăng ký, nhà cung cấp gửi thông báo. Email hỏng không tự có nghĩa đăng ký chưa lưu.",
+          "steps": [
+            "Vẽ học sinh → app đăng ký và app → dịch vụ email bên ngoài.",
+            "Zoom vào app: browser → API → database.",
+            "Ghi chủ sở hữu, dữ liệu qua mỗi mũi tên và lỗi có thể xảy ra."
+          ],
+          "misconception": "Sơ đồ container không tự mô tả số replica, failover hoặc cấu hình triển khai.",
+          "sourceIds": ["c4-context", "c4-container"]
+        },
+        {
+          "id": "traceability",
+          "title": "Nối mỗi yêu cầu với một cách kiểm chứng",
+          "explanation": "Mỗi thành phần cần lý do tồn tại, hợp đồng và cách quan sát. Tách hiển thị, quy tắc đăng ký và lưu trữ giúp đổi một phần ít kéo theo phần khác; không bảo đảm hết coupling. Ghi việc chưa làm để tránh âm thầm phình phạm vi.",
+          "example": "Phiên bản đầu chưa thu tiền. Không đưa cổng thanh toán vào đường đăng ký. Tạo ma trận yêu cầu → cơ chế → test cho chỗ cuối và giới hạn hai CLB.",
+          "steps": [
+            "Chọn một yêu cầu và chỉ ra thành phần chịu trách nhiệm.",
+            "Nêu thành công, lỗi và tín hiệu để nhận biết.",
+            "Đặt test hoặc thí nghiệm có thể bác bỏ thiết kế; ghi quyết định cần xác minh tiếp."
+          ],
+          "misconception": "Sơ đồ đẹp và nhiều công nghệ không thay bằng chứng yêu cầu được đáp ứng.",
+          "sourceIds": ["c4-container", "source-10"]
+        }
+      ]
+    },
+    "practice": {
+      "version": 1,
+      "items": [
+        {
+          "id": "functional",
+          "text": "“Học sinh hủy đăng ký của chính mình” thuộc loại nào?",
+          "options": ["Chức năng cần hỗ trợ.", "Số core CPU bắt buộc."],
+          "answer": 0,
+          "explanation": "Đây là một hành vi có đầu vào, kiểm quyền và kết quả nghiệp vụ; chưa nói mức hiệu năng hoặc cấu hình máy.",
+          "sourceIds": ["c4-context"]
+        },
+        {
+          "id": "quality",
+          "text": "Cách viết nào kiểm được chữ “nhanh” trong case?",
+          "options": [
+            "Nhanh nhất có thể với mọi tải.",
+            "95% request đăng ký xong trong 2 giây, ở tải và cửa sổ đo đã xác định."
+          ],
+          "answer": 1,
+          "explanation": "Cần phạm vi request, cửa sổ, tải và ngưỡng; 2 giây là mục tiêu giả định, chưa phải số đã đo.",
+          "sourceIds": ["source-6"]
+        },
+        {
+          "id": "burst",
+          "text": "300 request trong 60 giây có chứng minh đỉnh tải là 5 request/giây không?",
+          "options": [
+            "Không; đó là trung bình, request có thể dồn.",
+            "Có; mọi giây bắt buộc có đúng 5 request."
+          ],
+          "answer": 0,
+          "explanation": "300/60 bằng trung bình 5; phân bố thời điểm chưa biết. Cần thử burst riêng, không lấy trung bình làm giới hạn.",
+          "sourceIds": ["source-10"]
+        },
+        {
+          "id": "last-seat",
+          "text": "Còn 1 chỗ và hai browser cùng thấy 1. Kiểm ở browser có đủ giữ tối đa 80 chỗ?",
+          "options": [
+            "Có; hai browser luôn chia sẻ cùng bộ nhớ.",
+            "Chưa; nơi ghi cần bảo vệ invariant trước request cạnh tranh."
+          ],
+          "answer": 1,
+          "explanation": "Hai client có thể đọc cùng trạng thái trước khi ghi; cần cơ chế kiểm/ghi nhất quán, không chỉ khóa nút UI.",
+          "sourceIds": ["pg-tx18"]
+        },
+        {
+          "id": "context",
+          "text": "Context diagram nên ưu tiên điều gì?",
+          "options": [
+            "Người dùng, app và hệ thống ngoài tương tác với app.",
+            "Mọi pod, chỉ mục và biến môi trường."
+          ],
+          "answer": 0,
+          "explanation": "Context là góc nhìn tổng thể; container và deployment mô tả mức chi tiết khác.",
+          "sourceIds": ["c4-context"]
+        },
+        {
+          "id": "container",
+          "text": "“Container” trong C4 có bắt buộc là Docker không?",
+          "options": ["Có; C4 chỉ mô tả Docker.", "Không; có thể là ứng dụng hoặc data store."],
+          "answer": 1,
+          "explanation": "Thuật ngữ C4 là phân lớp kiến trúc; không buộc công nghệ container runtime cụ thể.",
+          "sourceIds": ["c4-container"]
+        }
+      ]
+    },
+    "prediction": {
+      "text": "Có nên chốt nhiều server trước khi làm rõ “nhanh và không lỗi”?",
+      "options": [
+        "Chưa; cần hành vi, mục tiêu đo được, invariant và tải giả định.",
+        "Nên; càng nhiều server càng chắc đáp ứng mọi yêu cầu."
+      ],
+      "answer": 0,
+      "explanation": "Số server chỉ có ý nghĩa khi gắn workload và trách nhiệm; nhiều máy không tự giải quyết quy tắc dữ liệu."
+    },
+    "challenge": {
+      "text": "Trường thêm yêu cầu thu tiền. Bước thiết kế đầu tiên hợp lý là gì?",
+      "options": [
+        "Chỉ thêm logo thanh toán vào sơ đồ cũ.",
+        "Làm rõ trạng thái tiền/đăng ký, ranh giới nhà cung cấp và hành vi khi một phía lỗi."
+      ],
+      "answer": 1,
+      "explanation": "Yêu cầu mới thay đổi invariant và phụ thuộc; cần cập nhật luồng, trách nhiệm, lỗi và kiểm chứng trước chọn thành phần."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Đọc lại yêu cầu và giả định của tình huống trước khi chọn công nghệ.",
+        "Số server chỉ có ý nghĩa khi gắn workload và trách nhiệm; nhiều máy không tự giải quyết quy tắc dữ liệu."
+      ],
+      "challenge": [
+        "Tách điều đã biết, điều chưa biết và cơ chế đang bảo vệ dữ liệu.",
+        "Yêu cầu mới thay đổi invariant và phụ thuộc; cần cập nhật luồng, trách nhiệm, lỗi và kiểm chứng trước chọn thành phần."
+      ]
+    },
+    "sources": [
+      {
+        "title": "C4 — system context",
+        "url": "https://c4model.com/diagrams/system-context"
+      },
+      {
+        "title": "System Design Primer: thiết kế và ước lượng",
+        "url": "https://github.com/donnemartin/system-design-primer/blob/ae9bbd7b02d90b9866215de185217d33f39ab733/README.md"
+      },
+      {
+        "title": "PostgreSQL 18 — transactions",
+        "url": "https://www.postgresql.org/docs/18/tutorial-transactions.html"
+      },
+      {
+        "title": "PostgreSQL 18 — constraints",
+        "url": "https://www.postgresql.org/docs/18/ddl-constraints.html"
+      },
+      {
+        "title": "C4 — container diagram",
+        "url": "https://c4model.com/diagrams/container"
+      },
+      {
+        "title": "Google SRE: Monitoring distributed systems",
+        "url": "https://sre.google/sre-book/monitoring-distributed-systems/"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-requirements-boundaries",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L1-01",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Thiết kế đăng ký câu lạc bộ trước khi chọn database.",
+      "context": "Cô phụ trách muốn app đăng ký câu lạc bộ “nhanh và không lỗi”. Trường có 1.200 học sinh, mỗi em đăng ký tối đa hai câu lạc bộ; có 80 chỗ cho robot. Nhóm định vẽ ngay nhiều server. Nhưng “nhanh” là bao lâu, ai sửa danh sách và hai bạn giành chỗ cuối sẽ được xử lý ra sao?",
+      "requirements": [
+        "Phân biệt chức năng, mục tiêu chất lượng, ràng buộc và giả định; vẽ ranh giới, truy vết một yêu cầu đến kiểm chứng.",
+        "Giải thích được giới hạn của quyết định khi yêu cầu hoặc lịch lỗi thay đổi."
+      ],
+      "activityRef": "module-practice",
+      "experimentSteps": [
+        "Đọc từng chương và theo các bước của ví dụ.",
+        "Chọn quyết định cho các tình huống, kiểm tra rồi sửa những phần chưa đúng.",
+        "Áp dụng sang tình huống mới ở cuối bài."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Đổi thiết kế để đáp ứng yêu cầu phải xét cả chi phí dữ liệu, độ trễ và vận hành.",
+        "Kết quả bài áp dụng chỉ đúng trong giả định đã nêu; hệ thống thật cần thử nghiệm và review."
+      ],
+      "limitations": "Tình huống do tác giả dựng; các số người dùng, chỗ và mục tiêu là yêu cầu mẫu. Sơ đồ không chứng minh capacity, an toàn hay độ sẵn sàng. Bài ra quyết định không thay phỏng vấn stakeholder hoặc thử tải thực tế."
+    }
+  },
+  {
+    "id": "api-contracts",
+    "kind": "module-practice",
+    "version": 1,
+    "status": "beta",
+    "level": "L1",
+    "moduleId": "L1.2",
+    "minutes": 30,
+    "title": "Gửi lại đăng ký mà không tạo thêm một lượt",
+    "subtitle": "Request bị timeout: trường đã nhận hay chưa?",
+    "objective": "Giải thích hợp đồng API, phân trang, validation, quyền và retry khi kết quả chưa rõ; phân biệt REST/RPC/gRPC/GraphQL.",
+    "story": "An bấm đăng ký robot, browser chờ rồi báo timeout. Server có thể đã lưu xong nhưng phản hồi bị mất. An bấm lại. Nhóm cần API cho phép tra kết quả, tránh tạo hai lượt và không cho An đọc đăng ký riêng của Bình.",
+    "explanation": "Hợp đồng API gồm ý nghĩa thao tác, dữ liệu, lỗi, quyền và cách gọi lại. Timeout chỉ cho biết client chưa nhận kết quả kịp; không tự xác nhận server rollback. Các kiểu API khác nhau vẫn phải xử lý cùng quy tắc đúng đắn.",
+    "limit": "Chỉ phân tích hợp đồng và lịch request giả định, không chạy network/auth thật. Idempotency cần phạm vi người gọi, payload, thời hạn và ghi nguyên tử phù hợp; không bảo đảm exactly-once mọi hệ thống.",
+    "terms": [
+      {
+        "name": "Hợp đồng API",
+        "english": "API contract",
+        "meaning": "Thống nhất thao tác, trường dữ liệu, quyền, lỗi và cách client xử lý."
+      },
+      {
+        "name": "Gửi lặp giữ tác động",
+        "english": "Idempotency",
+        "meaning": "Gửi lại cùng ý định không làm tăng tác động nghiệp vụ ngoài lần đầu theo hợp đồng."
+      },
+      {
+        "name": "Phân trang theo mốc",
+        "english": "Cursor pagination",
+        "meaning": "Dùng mốc từ trang trước để tìm trang tiếp theo theo thứ tự đã xác định."
+      },
+      {
+        "name": "Xác thực",
+        "english": "Authentication",
+        "meaning": "Kiểm tra người gọi là ai."
+      },
+      {
+        "name": "Phân quyền",
+        "english": "Authorization",
+        "meaning": "Kiểm tra người đó được làm gì với tài nguyên cụ thể."
+      }
+    ],
+    "chapters": {
+      "version": 1,
+      "items": [
+        {
+          "id": "styles",
+          "title": "Chọn kiểu API theo cách trao đổi",
+          "explanation": "API theo tài nguyên dùng các định danh và ngữ nghĩa HTTP; chỉ dùng JSON chưa đủ gọi là REST. RPC tổ chức quanh thao tác gọi từ xa. gRPC định nghĩa service/method và message, thường dùng Protocol Buffers, hỗ trợ unary và streaming. GraphQL cho client chọn trường từ schema; resolver vẫn cần kiểm quyền và kiểm soát chi phí.",
+          "example": "Trang CLB cần tên và số chỗ; hệ thống khác cần gọi “xác nhận đăng ký”. Có thể chọn kiểu phù hợp mà không đổi quy tắc tối đa chỗ.",
+          "steps": [
+            "Viết nhu cầu trao đổi và client trước.",
+            "So tài nguyên cần đọc với thao tác cần gọi.",
+            "Xét tooling, schema, streaming và chi phí vận hành; tránh chọn theo khẩu hiệu."
+          ],
+          "misconception": "GraphQL không tự xóa mọi N+1; gRPC không mặc định nhanh hơn mọi REST API.",
+          "sourceIds": ["source-11", "grpc-concepts", "graphql-queries"]
+        },
+        {
+          "id": "retry",
+          "title": "Theo dấu request bị mất phản hồi",
+          "explanation": "Idempotent nói về tác động chủ đích khi lặp, không buộc response giống hệt. POST tạo đăng ký có thể hỗ trợ khóa ý định của client theo hợp đồng riêng. Server cần ghi nhận khóa và hiệu ứng nhất quán; cùng khóa nhưng payload khác phải được xử lý rõ, không âm thầm coi là cùng request.",
+          "example": "Khóa K7 của An, payload robot: lần đầu lưu R42, response mất. Gửi lại cùng K7 và payload có thể trả R42. Thêm khóa mới có thể là ý định mới, không tự deduplicate.",
+          "steps": [
+            "Client giữ khóa cho cùng một ý định trong cửa sổ hợp đồng.",
+            "Server kiểm người gọi, khóa và payload; ghi khóa cùng kết quả nghiệp vụ bằng cơ chế nguyên tử phù hợp.",
+            "Nếu timeout, tra trạng thái hoặc retry có kiểm soát; không mặc định request thất bại."
+          ],
+          "misconception": "Client hủy chờ không chứng minh server chưa commit; không tự hoàn tác tác động đã xảy ra.",
+          "sourceIds": ["aws-idempotency", "source-11", "grpc-concepts"]
+        },
+        {
+          "id": "pagination",
+          "title": "Phân trang cần thứ tự và chính sách dữ liệu đổi",
+          "explanation": "OFFSET bỏ qua một số dòng; nếu có chèn/xóa trước mốc, trang sau có thể lặp hoặc sót. Cursor theo khóa sắp xếp ổn định giúp tránh một số dịch chuyển đó, nhưng không tự tạo snapshot bất biến. Nếu cần danh sách đúng tại một thời điểm, phải thiết kế snapshot/version phù hợp.",
+          "example": "Danh sách theo (createdAt, id). Có hai đăng ký cùng createdAt nên cần id làm khóa phụ. Cursor chỉ timestamp có thể bỏ qua một dòng cùng mốc.",
+          "steps": [
+            "Chốt bộ lọc và thứ tự có khóa phân biệt.",
+            "Trả mốc cuối và dùng cùng quy tắc khi lấy trang tiếp.",
+            "Nêu rõ thay đổi dữ liệu được nhìn thấy thế nào; không hứa snapshot nếu chưa có."
+          ],
+          "misconception": "Cursor có thể là chuỗi opaque; có cursor không tự bảo đảm nhất quán hoặc phân quyền.",
+          "sourceIds": ["pg-select18"]
+        },
+        {
+          "id": "errors",
+          "title": "Validation và phiên bản giúp client sửa đúng lỗi",
+          "explanation": "Kiểm kiểu, miền giá trị và quy tắc ở server; client validation chủ yếu giúp phản hồi sớm. Trả lỗi có mã ổn định và hướng xử lý, không đưa stacktrace hoặc secret. Thêm trường cũng cần xem client cũ có chấp nhận không; đổi nghĩa trường/enum có thể phá hợp đồng dù JSON vẫn parse.",
+          "example": "API cũ dùng trạng thái “confirmed”. Đổi thành “paid” không chỉ đổi chữ nếu client cũ kiểm giá trị chính xác. Cần chiến lược tương thích và test client cũ.",
+          "steps": [
+            "Kiểm đầu vào trước hiệu ứng và trả mã lỗi theo hợp đồng.",
+            "Tách lỗi sửa dữ liệu khỏi lỗi tạm thời; không retry mọi lỗi.",
+            "Version hoặc giữ tương thích khi đổi nghĩa; chạy contract test."
+          ],
+          "misconception": "HTTP 200 không tự chứng minh nghiệp vụ thành công nếu body định nghĩa kết quả khác; cần đọc hợp đồng.",
+          "sourceIds": ["source-11", "aws-idempotency"]
+        },
+        {
+          "id": "permissions",
+          "title": "Danh tính đúng vẫn phải kiểm quyền",
+          "explanation": "Cookie/session có thể giúp nhận diện; quyền truy cập phải được kiểm ở từng request và tài nguyên. Không nhận ownerId từ client làm bằng chứng quyền. Kiểm mặc định từ chối và quyền tối thiểu theo chính sách của ứng dụng.",
+          "example": "An đã đăng nhập nhưng GET /registrations/R43 thuộc Bình vẫn cần bị từ chối theo chính sách; đoán đúng ID không cấp quyền.",
+          "steps": [
+            "Xác định danh tính bằng cơ chế tin cậy phía server.",
+            "Đọc chủ sở hữu/tenant và kiểm hành động được phép.",
+            "Thử request chéo người dùng và quyền vừa bị thu hồi."
+          ],
+          "misconception": "Authentication khác authorization; UUID khó đoán không thay kiểm quyền.",
+          "sourceIds": ["owasp-authz"]
+        }
+      ]
+    },
+    "practice": {
+      "version": 1,
+      "items": [
+        {
+          "id": "timeout",
+          "text": "Browser timeout sau khi gửi đăng ký. Kết luận nào chắc chắn?",
+          "options": [
+            "Client chưa nhận kết quả kịp; server có thể đã lưu.",
+            "Server chắc chắn rollback và không có đăng ký."
+          ],
+          "answer": 0,
+          "explanation": "Timeout là quan sát phía client. Trạng thái server cần tra hoặc retry bằng hợp đồng an toàn.",
+          "sourceIds": ["aws-idempotency"]
+        },
+        {
+          "id": "token",
+          "text": "Retry cùng ý định K7 cần gửi gì?",
+          "options": [
+            "Khóa mới mỗi lần retry.",
+            "Cùng khóa, người gọi và payload theo hợp đồng còn hiệu lực."
+          ],
+          "answer": 1,
+          "explanation": "Đổi khóa làm mất liên hệ với ý định cũ; server còn phải ghi nhận và áp dụng hiệu ứng nhất quán.",
+          "sourceIds": ["aws-idempotency"]
+        },
+        {
+          "id": "payload",
+          "text": "Cùng K7 nhưng lần sau đổi robot sang bóng rổ thì sao?",
+          "options": [
+            "Cần lỗi/xử lý rõ payload mismatch, không tự coi là cùng ý định.",
+            "Bắt buộc tạo thêm cả hai mà vẫn gọi idempotent."
+          ],
+          "answer": 0,
+          "explanation": "Phạm vi và payload là một phần hợp đồng; token trùng không cho phép âm thầm đổi tác động.",
+          "sourceIds": ["aws-idempotency"]
+        },
+        {
+          "id": "cancel",
+          "text": "Client đóng màn hình sau khi server commit. Có thể coi đăng ký đã hủy?",
+          "options": [
+            "Có; đóng màn hình hoàn tác server.",
+            "Không; cần thao tác hủy riêng theo trạng thái thực."
+          ],
+          "answer": 1,
+          "explanation": "Cancellation không đảo ngược tác động đã xảy ra. Client phải tra trạng thái và gọi nghiệp vụ hủy nếu được phép.",
+          "sourceIds": ["grpc-concepts"]
+        },
+        {
+          "id": "order",
+          "text": "Hai dòng có cùng createdAt. Cursor chỉ dùng createdAt có vấn đề gì?",
+          "options": [
+            "Có thể sót/lặp; cần thứ tự phân biệt như (createdAt,id) và chính sách thay đổi.",
+            "Không cần thứ tự cho phân trang."
+          ],
+          "answer": 0,
+          "explanation": "Mốc cần phân biệt các dòng. Cursor ổn định vẫn không tự tạo snapshot của toàn bộ các trang.",
+          "sourceIds": ["pg-select18"]
+        },
+        {
+          "id": "access",
+          "text": "An có session hợp lệ và biết ID của đăng ký Bình. Server cần gì?",
+          "options": ["Chỉ kiểm cookie tồn tại.", "Kiểm danh tính và quyền với đăng ký đó."],
+          "answer": 1,
+          "explanation": "Nhận diện người gọi không đồng nghĩa được đọc/sửa mọi tài nguyên; cần kiểm ownership/tenant/action.",
+          "sourceIds": ["owasp-authz"]
+        },
+        {
+          "id": "graphql",
+          "text": "Dùng GraphQL có tự loại bỏ việc kiểm quyền không?",
+          "options": [
+            "Không; resolver và dịch vụ vẫn phải thực thi quyền và giới hạn.",
+            "Có; schema tự cấp đúng quyền cho mọi field."
+          ],
+          "answer": 0,
+          "explanation": "Kiểu API không thay chính sách authorization; cần kiểm tra cả dữ liệu và thao tác.",
+          "sourceIds": ["graphql-queries", "owasp-authz"]
+        },
+        {
+          "id": "version",
+          "text": "Đổi nghĩa một trường nhưng giữ cùng tên có chắc tương thích?",
+          "options": [
+            "Có; JSON hợp lệ là đủ.",
+            "Chưa; client cũ có thể hiểu nghĩa cũ, cần contract test và chiến lược version."
+          ],
+          "answer": 1,
+          "explanation": "Tương thích gồm ngữ nghĩa và hành vi client, không chỉ cấu trúc parse được.",
+          "sourceIds": ["source-11"]
+        }
+      ]
+    },
+    "prediction": {
+      "text": "Timeout có cho phép gửi tạo mới tùy ý mà chắc không trùng?",
+      "options": [
+        "Không; cần biết trạng thái hoặc hợp đồng retry cùng ý định.",
+        "Có; timeout chứng minh chưa lưu."
+      ],
+      "answer": 0,
+      "explanation": "Client có thể mất response sau commit. Retry vô điều kiện có thể nhân đôi hiệu ứng."
+    },
+    "challenge": {
+      "text": "Ứng dụng đặt đồ ăn cũng mất response sau khi tạo đơn. Cách chuyển giao hợp lý?",
+      "options": [
+        "Retry mãi với khóa mới cho đến khi thấy response.",
+        "Dùng khóa cùng ý định có phạm vi/thời hạn rõ và tra kết quả đơn trước tạo ý định mới."
+      ],
+      "answer": 1,
+      "explanation": "Cơ chế cần đi cùng ghi nguyên tử, xử lý payload khác và cửa sổ lưu khóa; không chỉ thêm một header rồi hứa exactly-once."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Đọc lại yêu cầu và giả định của tình huống trước khi chọn công nghệ.",
+        "Client có thể mất response sau commit. Retry vô điều kiện có thể nhân đôi hiệu ứng."
+      ],
+      "challenge": [
+        "Tách điều đã biết, điều chưa biết và cơ chế đang bảo vệ dữ liệu.",
+        "Cơ chế cần đi cùng ghi nguyên tử, xử lý payload khác và cửa sổ lưu khóa; không chỉ thêm một header rồi hứa exactly-once."
+      ]
+    },
+    "sources": [
+      {
+        "title": "RFC 9110: HTTP Semantics",
+        "url": "https://www.rfc-editor.org/rfc/rfc9110.html"
+      },
+      {
+        "title": "gRPC — core concepts",
+        "url": "https://grpc.io/docs/what-is-grpc/core-concepts/"
+      },
+      {
+        "title": "GraphQL — queries",
+        "url": "https://graphql.org/learn/queries/"
+      },
+      {
+        "title": "AWS Builders Library — retries and idempotency",
+        "url": "https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/"
+      },
+      {
+        "title": "PostgreSQL 18 — SELECT / LIMIT",
+        "url": "https://www.postgresql.org/docs/18/sql-select.html"
+      },
+      {
+        "title": "OWASP — authorization",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-api-contracts",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L1-02",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Request bị timeout: trường đã nhận hay chưa?",
+      "context": "An bấm đăng ký robot, browser chờ rồi báo timeout. Server có thể đã lưu xong nhưng phản hồi bị mất. An bấm lại. Nhóm cần API cho phép tra kết quả, tránh tạo hai lượt và không cho An đọc đăng ký riêng của Bình.",
+      "requirements": [
+        "Giải thích hợp đồng API, phân trang, validation, quyền và retry khi kết quả chưa rõ; phân biệt REST/RPC/gRPC/GraphQL.",
+        "Giải thích được giới hạn của quyết định khi yêu cầu hoặc lịch lỗi thay đổi."
+      ],
+      "activityRef": "module-practice",
+      "experimentSteps": [
+        "Đọc từng chương và theo các bước của ví dụ.",
+        "Chọn quyết định cho các tình huống, kiểm tra rồi sửa những phần chưa đúng.",
+        "Áp dụng sang tình huống mới ở cuối bài."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Đổi thiết kế để đáp ứng yêu cầu phải xét cả chi phí dữ liệu, độ trễ và vận hành.",
+        "Kết quả bài áp dụng chỉ đúng trong giả định đã nêu; hệ thống thật cần thử nghiệm và review."
+      ],
+      "limitations": "Chỉ phân tích hợp đồng và lịch request giả định, không chạy network/auth thật. Idempotency cần phạm vi người gọi, payload, thời hạn và ghi nguyên tử phù hợp; không bảo đảm exactly-once mọi hệ thống."
+    }
+  },
+  {
+    "id": "data-models",
+    "kind": "module-practice",
+    "version": 1,
+    "status": "beta",
+    "level": "L1",
+    "moduleId": "L1.3",
+    "minutes": 30,
+    "title": "Lưu dữ liệu để trả lời đúng câu hỏi",
+    "subtitle": "Một học sinh đổi tên: sửa một nơi hay hàng trăm phiếu?",
+    "objective": "Chọn mô hình dữ liệu từ access pattern, phân biệt schema/constraint, dữ liệu gốc/dữ liệu suy ra và đánh đổi sao chép.",
+    "story": "Trường lưu học sinh, CLB và đăng ký. Nếu chép tên học sinh vào mọi phiếu, đổi tên phải sửa nhiều nơi. Nếu chỉ giữ mã, khi in danh sách cần nối thông tin. Nhóm còn muốn màn hình hồ sơ, tra đăng ký theo mã và tìm quan hệ bạn bè cùng CLB.",
+    "explanation": "Không có database tốt nhất cho mọi câu hỏi. Quan hệ, document, key-value, graph và wide-column tổ chức truy cập theo các cách khác nhau. Cần chọn nguồn sự thật, ràng buộc và cách cập nhật dữ liệu suy ra; đừng dùng tên SQL/NoSQL làm bảo đảm tính đúng hoặc tốc độ.",
+    "limit": "Ví dụ schema và truy vấn được đọc/suy luận, không chạy database thật. Không benchmark các sản phẩm hoặc chứng minh schema đã chuẩn hóa đến một normal form cụ thể. Transaction/index/quyền của từng sản phẩm còn tùy cấu hình.",
+    "terms": [
+      {
+        "name": "Lược đồ dữ liệu",
+        "english": "Schema",
+        "meaning": "Cấu trúc, kiểu và cách các bản ghi liên hệ."
+      },
+      {
+        "name": "Ràng buộc dữ liệu",
+        "english": "Constraint",
+        "meaning": "Quy tắc database kiểm, như NOT NULL, UNIQUE hoặc khóa ngoại."
+      },
+      {
+        "name": "Dữ liệu gốc",
+        "english": "Source of truth",
+        "meaning": "Nơi được chọn là bản có thẩm quyền cho một loại thông tin."
+      },
+      {
+        "name": "Dữ liệu suy ra",
+        "english": "Derived data",
+        "meaning": "Dữ liệu tính hoặc sao chép từ nguồn, như số đăng ký theo CLB."
+      },
+      {
+        "name": "Giảm trùng lặp",
+        "english": "Normalization",
+        "meaning": "Tổ chức thông tin để giảm dư thừa và bất thường khi cập nhật; phải dựa quan hệ phụ thuộc."
+      }
+    ],
+    "chapters": {
+      "version": 1,
+      "items": [
+        {
+          "id": "relational",
+          "title": "Bảng, khóa và phép nối",
+          "explanation": "Mô hình quan hệ dùng các bảng có hàng/cột. Student(id,name), Club(id,title), Registration(studentId,clubId) tách các thông tin có vòng đời riêng. JOIN ghép hàng theo điều kiện. SQL mô tả kết quả cần lấy; engine chọn cách thực hiện. Một schema tốt vẫn phải dựa câu hỏi và ràng buộc.",
+          "example": "Student S7 là An; Registration có (S7,C2). Đổi tên trong Student thành Anh không phải sửa mọi Registration. JOIN theo studentId lấy tên hiện tại, không tự giữ tên lịch sử.",
+          "steps": [
+            "Chọn ID ổn định và thuộc tính của từng thực thể.",
+            "Viết câu hỏi “ai đăng ký C2?” trước chọn nơi lưu.",
+            "Ghép Registration với Student theo ID; nếu cần tên lúc đăng ký, mô hình hóa snapshot lịch sử riêng."
+          ],
+          "misconception": "Tách bảng không có nghĩa mọi thao tác đều nhanh hơn hoặc mọi giá trị lặp đều sai.",
+          "sourceIds": ["pg-join18", "pg-constraints18"]
+        },
+        {
+          "id": "models",
+          "title": "Document, key-value, graph và wide-column",
+          "explanation": "Document có thể đặt dữ liệu hay đọc cùng trong một cấu trúc, nhưng phải xét kích thước và tần suất cập nhật. Key-value tra theo khóa phù hợp như registration:R42. Graph thể hiện node/quan hệ để đi theo đường liên kết. Wide-column như Cassandra thiết kế quanh query, partition key và clustering; không đồng nghĩa bảng tính hoặc columnar analytics.",
+          "example": "Hồ sơ có vài địa chỉ có thể cân nhắc document. Tra phiếu theo mã phù hợp khóa. Tìm bạn của bạn cần quan hệ. Lịch sử theo lớp/thời gian cần thiết kế partition có giới hạn.",
+          "steps": [
+            "Liệt kê key, filter, sort, lượng dữ liệu và kiểu cập nhật.",
+            "So cách truy cập của từng mô hình thay vì chọn theo độ nổi tiếng.",
+            "Kiểm giới hạn partition/document và những truy vấn khó của phương án đã chọn."
+          ],
+          "misconception": "NoSQL không có nghĩa không schema, không transaction hoặc luôn nhanh hơn SQL.",
+          "sourceIds": ["mongo-model", "dynamo-intro", "neo4j-concepts", "cassandra-model"]
+        },
+        {
+          "id": "constraints",
+          "title": "Đặt ràng buộc tại dữ liệu",
+          "explanation": "Primary key nhận diện duy nhất và không null; foreign key kiểm tham chiếu; UNIQUE trên cặp studentId/clubId có thể ngăn trùng đăng ký. Quy tắc một dòng như số chỗ không âm khác quy tắc tổng trên nhiều dòng. PostgreSQL CHECK không phù hợp để tự kiểm tổng dữ liệu bảng khác.",
+          "example": "Hai request cùng ghi (S7,C2). Một UNIQUE phù hợp ở database vẫn chặn trùng dù cả hai browser đã kiểm “chưa có”. Giới hạn tối đa hai CLB còn cần cơ chế cạnh tranh riêng.",
+          "steps": [
+            "Viết invariant thành quy tắc cụ thể.",
+            "Chọn NOT NULL, UNIQUE, foreign key hoặc cơ chế transaction phù hợp.",
+            "Thử request đồng thời, giá trị null và dữ liệu tham chiếu thiếu."
+          ],
+          "misconception": "UNIQUE theo cặp không tự bảo vệ tổng chỗ của CLB hoặc số CLB của một em.",
+          "sourceIds": ["pg-constraints18"]
+        },
+        {
+          "id": "derived",
+          "title": "Sao chép có chủ đích và cách sửa lệch",
+          "explanation": "Denormalization thêm bản sao hoặc dữ liệu tổng hợp để phục vụ truy cập. Đổi lại, ghi phải cập nhật nhiều nơi hoặc chấp nhận dữ liệu trễ và đối soát. Nguồn gốc và dữ liệu suy ra cần được ghi rõ, kể cả cách rebuild khi mất bản suy ra.",
+          "example": "Registration là nguồn, ClubCount là tổng. Nếu ghi phiếu thành công nhưng cập nhật tổng thất bại, tổng có thể sai. Đếm lại từ Registration hoặc cập nhật nguyên tử trong phạm vi database là những lựa chọn có đánh đổi.",
+          "steps": [
+            "Chọn bản có thẩm quyền và yêu cầu độ mới của tổng.",
+            "Thiết kế cập nhật và phát hiện khi hai phía lệch.",
+            "Thử rebuild từ nguồn; đừng coi dữ liệu cache là bản duy nhất nếu nó có thể mất."
+          ],
+          "misconception": "Sao chép dữ liệu không tự làm hệ thống sai; không có kế hoạch nhất quán và sửa lệch mới là vấn đề cần giải.",
+          "sourceIds": ["mongo-model", "pg-tx18"]
+        }
+      ]
+    },
+    "practice": {
+      "version": 1,
+      "items": [
+        {
+          "id": "name",
+          "text": "Muốn tên hiện tại chỉ sửa một nơi trong case thì sao?",
+          "options": [
+            "Giữ Student theo ID và đăng ký tham chiếu ID; JOIN khi cần tên.",
+            "Chép tên vào mọi phiếu mà không có kế hoạch cập nhật."
+          ],
+          "answer": 0,
+          "explanation": "Tách thông tin học sinh tránh phải sửa tên hiện tại ở mỗi phiếu; tên lịch sử cần mô hình riêng nếu có yêu cầu.",
+          "sourceIds": ["pg-join18"]
+        },
+        {
+          "id": "duplicate",
+          "text": "Cơ chế nào phù hợp ngăn trùng đúng cặp học sinh/CLB ở database?",
+          "options": [
+            "Chỉ ẩn nút đăng ký sau click.",
+            "UNIQUE(studentId,clubId) với cột cần thiết không null."
+          ],
+          "answer": 1,
+          "explanation": "Ràng buộc duy nhất kiểm cả request từ client khác; không thay quy tắc tổng số chỗ hoặc kiểm quyền.",
+          "sourceIds": ["pg-constraints18"]
+        },
+        {
+          "id": "query",
+          "text": "Tra đúng mã R42 là access pattern nào?",
+          "options": [
+            "Tra theo khóa; key-value là một ứng viên cần xét yêu cầu khác.",
+            "Duyệt bạn của bạn bắt buộc qua graph."
+          ],
+          "answer": 0,
+          "explanation": "Chọn mô hình dựa câu hỏi; nhận diện pattern không chứng minh chỉ có một loại database làm được.",
+          "sourceIds": ["dynamo-intro"]
+        },
+        {
+          "id": "nosql",
+          "text": "Document database có nghĩa không cần quy tắc dữ liệu?",
+          "options": [
+            "Có; mọi document tự nhất quán với nhau.",
+            "Không; vẫn cần schema/validation và cơ chế cập nhật phù hợp."
+          ],
+          "answer": 1,
+          "explanation": "Tính linh hoạt không loại bỏ cấu trúc, ràng buộc nghiệp vụ hoặc kế hoạch tương thích.",
+          "sourceIds": ["mongo-model"]
+        },
+        {
+          "id": "count",
+          "text": "Phiếu là nguồn; tổng CLB lệch sau lỗi cập nhật. Cần gì?",
+          "options": [
+            "Cơ chế phát hiện và rebuild/đối soát từ nguồn, cùng yêu cầu độ mới rõ.",
+            "Xóa nguồn vì tổng luôn đúng hơn."
+          ],
+          "answer": 0,
+          "explanation": "Tổng là dữ liệu suy ra; thiết kế phải biết nó có thể trễ/lệch và phục hồi thế nào.",
+          "sourceIds": ["pg-tx18", "mongo-model"]
+        },
+        {
+          "id": "crossrow",
+          "text": "CHECK đơn giản trên một dòng có tự bảo vệ tổng đăng ký nhiều dòng?",
+          "options": [
+            "Có; CHECK luôn quét toàn database.",
+            "Không; cần cơ chế phù hợp invariant nhiều dòng và cạnh tranh."
+          ],
+          "answer": 1,
+          "explanation": "PostgreSQL không hỗ trợ CHECK tham chiếu dữ liệu ngoài dòng hiện tại để bảo đảm invariant như vậy.",
+          "sourceIds": ["pg-constraints18"]
+        }
+      ]
+    },
+    "prediction": {
+      "text": "Nên chọn database trước hay ghi các truy vấn và ràng buộc trước?",
+      "options": [
+        "Ghi truy vấn, dữ liệu và ràng buộc trước để so phương án.",
+        "Chỉ cần chọn loại đang phổ biến."
+      ],
+      "answer": 0,
+      "explanation": "Access pattern, invariant và vận hành quyết định mức phù hợp, không tên sản phẩm."
+    },
+    "challenge": {
+      "text": "Ứng dụng thư viện cần giữ tên người mượn tại ngày mượn dù sau đó họ đổi tên. Chỉ JOIN tên hiện tại có đủ?",
+      "options": [
+        "Đủ; tên hiện tại luôn là tên lịch sử.",
+        "Chưa; cần mô hình tên lịch sử/snapshot có ý nghĩa riêng và chính sách dữ liệu rõ."
+      ],
+      "answer": 1,
+      "explanation": "Không phải mọi bản sao đều dư thừa sai: thông tin tại thời điểm giao dịch có thể là yêu cầu nghiệp vụ riêng."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Đọc lại yêu cầu và giả định của tình huống trước khi chọn công nghệ.",
+        "Access pattern, invariant và vận hành quyết định mức phù hợp, không tên sản phẩm."
+      ],
+      "challenge": [
+        "Tách điều đã biết, điều chưa biết và cơ chế đang bảo vệ dữ liệu.",
+        "Không phải mọi bản sao đều dư thừa sai: thông tin tại thời điểm giao dịch có thể là yêu cầu nghiệp vụ riêng."
+      ]
+    },
+    "sources": [
+      {
+        "title": "PostgreSQL 18 — joins",
+        "url": "https://www.postgresql.org/docs/18/tutorial-join.html"
+      },
+      {
+        "title": "PostgreSQL 18 — constraints",
+        "url": "https://www.postgresql.org/docs/18/ddl-constraints.html"
+      },
+      {
+        "title": "MongoDB — data modeling",
+        "url": "https://www.mongodb.com/docs/manual/data-modeling/"
+      },
+      {
+        "title": "DynamoDB — introduction",
+        "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html"
+      },
+      {
+        "title": "Neo4j — graph concepts",
+        "url": "https://neo4j.com/docs/getting-started/appendix/graphdb-concepts/"
+      },
+      {
+        "title": "Cassandra — data modeling",
+        "url": "https://cassandra.apache.org/doc/latest/cassandra/developing/data-modeling/intro.html"
+      },
+      {
+        "title": "PostgreSQL 18 — transactions",
+        "url": "https://www.postgresql.org/docs/18/tutorial-transactions.html"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-data-models",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L1-03",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Một học sinh đổi tên: sửa một nơi hay hàng trăm phiếu?",
+      "context": "Trường lưu học sinh, CLB và đăng ký. Nếu chép tên học sinh vào mọi phiếu, đổi tên phải sửa nhiều nơi. Nếu chỉ giữ mã, khi in danh sách cần nối thông tin. Nhóm còn muốn màn hình hồ sơ, tra đăng ký theo mã và tìm quan hệ bạn bè cùng CLB.",
+      "requirements": [
+        "Chọn mô hình dữ liệu từ access pattern, phân biệt schema/constraint, dữ liệu gốc/dữ liệu suy ra và đánh đổi sao chép.",
+        "Giải thích được giới hạn của quyết định khi yêu cầu hoặc lịch lỗi thay đổi."
+      ],
+      "activityRef": "module-practice",
+      "experimentSteps": [
+        "Đọc từng chương và theo các bước của ví dụ.",
+        "Chọn quyết định cho các tình huống, kiểm tra rồi sửa những phần chưa đúng.",
+        "Áp dụng sang tình huống mới ở cuối bài."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Đổi thiết kế để đáp ứng yêu cầu phải xét cả chi phí dữ liệu, độ trễ và vận hành.",
+        "Kết quả bài áp dụng chỉ đúng trong giả định đã nêu; hệ thống thật cần thử nghiệm và review."
+      ],
+      "limitations": "Ví dụ schema và truy vấn được đọc/suy luận, không chạy database thật. Không benchmark các sản phẩm hoặc chứng minh schema đã chuẩn hóa đến một normal form cụ thể. Transaction/index/quyền của từng sản phẩm còn tùy cấu hình."
+    }
+  },
+  {
+    "id": "database-indexes",
+    "kind": "module-practice",
+    "version": 1,
+    "status": "beta",
+    "level": "L1",
+    "moduleId": "L1.4",
+    "minutes": 30,
+    "title": "Tìm đúng vài dòng mà không đọc cả kho",
+    "subtitle": "Có index nhưng query vẫn chậm: xem đường đi của dữ liệu.",
+    "objective": "Phân biệt B-tree/hash/LSM, đọc scan/join/sort trong query plan và giải thích chi phí đọc/ghi cùng index phù hợp truy vấn.",
+    "story": "Danh sách đăng ký có nhiều dòng. Cô muốn 20 phiếu mới nhất của CLB robot. Nhóm thêm index tên học sinh nhưng màn hình vẫn chậm. Có người nói “index mọi cột” và “hash O(1), lúc nào cũng tốt hơn cây”. Em cần kiểm lại truy vấn và đường đọc.",
+    "explanation": "Index là cấu trúc phụ giúp một số truy vấn tìm dữ liệu; nó tốn dung lượng và công cập nhật. Query plan là cách engine thực hiện scan, join và sort. Khả năng dùng index phụ thuộc truy vấn, dữ liệu, thống kê và loại index; phải đo trước kết luận tốc độ.",
+    "limit": "Chương dùng plan minh họa và nguyên lý, không chạy SQL/EXPLAIN hay đo hiệu năng. LSM là tổng quan RocksDB, không phải index có sẵn của PostgreSQL. Không đồng nhất BST bảy nút với B+ tree database.",
+    "terms": [
+      {
+        "name": "Chỉ mục",
+        "english": "Index",
+        "meaning": "Cấu trúc phụ giúp tìm hàng theo khóa/điều kiện, có chi phí khi ghi."
+      },
+      {
+        "name": "Kế hoạch truy vấn",
+        "english": "Query plan",
+        "meaning": "Cây thao tác engine chọn để đọc, ghép, sắp và trả dữ liệu."
+      },
+      {
+        "name": "Chi phí ghi thêm",
+        "english": "Write amplification",
+        "meaning": "Lượng ghi vật lý có thể lớn hơn dữ liệu ứng dụng ghi do duy trì cấu trúc/compaction."
+      },
+      {
+        "name": "Bộ đệm dữ liệu",
+        "english": "Buffer cache",
+        "meaning": "Vùng RAM giữ trang dữ liệu để có thể giảm đọc storage ở lần sau."
+      },
+      {
+        "name": "Cây chỉ mục nhiều nhánh",
+        "english": "B-tree",
+        "meaning": "Cấu trúc có nhiều khóa và nhánh trên mỗi nút/trang; hỗ trợ tìm bằng và theo khoảng khi engine cho phép."
+      },
+      {
+        "name": "Hợp nhất các lớp đã sắp",
+        "english": "LSM",
+        "meaning": "Cách tổ chức ghi qua bộ đệm và các file sắp xếp, rồi hợp nhất dần; có đánh đổi đọc, ghi và dung lượng."
+      },
+      {
+        "name": "Bộ lọc có thể-có",
+        "english": "Bloom filter",
+        "meaning": "Cấu trúc có thể báo một khóa chắc chắn không có trong tập hoặc có thể có; kết quả có thể có vẫn cần kiểm tra."
+      },
+      {
+        "name": "Độ chọn lọc điều kiện",
+        "english": "Selectivity",
+        "meaning": "Tỷ lệ/số hàng phù hợp với điều kiện; tác động đến lượng dữ liệu cần xử lý và cách planner chọn đường đọc."
+      }
+    ],
+    "chapters": {
+      "version": 1,
+      "items": [
+        {
+          "id": "tree-hash",
+          "title": "Cây nhiều nhánh khác bảng băm",
+          "explanation": "B-tree database có nhiều khóa/con trỏ trên trang, giảm số tầng truy cập so với cây nhị phân ngây thơ. Biến thể B+ tree thường đặt bản ghi/điểm trỏ ở lá và hỗ trợ duyệt khoảng; cấu trúc cụ thể tùy engine. PostgreSQL B-tree hỗ trợ equality/range và có thể cấp thứ tự; hash index của PostgreSQL chỉ equality.",
+          "example": "Muốn tìm createdAt trong một khoảng hoặc lấy theo thứ tự, B-tree là ứng viên. Tìm một mã bằng equality có nhiều lựa chọn; không kết luận hash luôn nhanh hơn.",
+          "steps": [
+            "Xác định equality, range và ORDER BY của truy vấn.",
+            "Chọn loại index hỗ trợ toán tử đó.",
+            "Xem plan và đo trên dữ liệu/workload thực trước quyết định."
+          ],
+          "misconception": "Hash O(1) trung bình ở mô hình không phải cam kết số I/O, độ trễ hoặc range scan của database thật.",
+          "sourceIds": ["pg-indextypes18", "pg-index18", "pg-btree18"]
+        },
+        {
+          "id": "composite",
+          "title": "Thứ tự khóa của index ghép cần theo truy vấn",
+          "explanation": "Với WHERE clubId=C2 ORDER BY createdAt DESC,id DESC LIMIT 20, index ghép (clubId,createdAt,id) là một ứng viên. Nó hỗ trợ gom theo CLB rồi tìm thứ tự trong nhóm; chiều quét, điều kiện và engine còn quyết định. Không có quy tắc “index nào chứa đủ cột cũng giống nhau”.",
+          "example": "Đổi sang tra một học sinh trên mọi CLB là câu hỏi khác. Index đặt clubId trước chưa chắc là lựa chọn tốt nhất; PostgreSQL còn có những tối ưu như skip scan trong điều kiện phù hợp.",
+          "steps": [
+            "Ghi điều kiện bằng, khoảng và thứ tự của màn hình.",
+            "So một index theo truy vấn với index tên học sinh đang có.",
+            "Kiểm plan, selectivity và chi phí ghi; tránh một công thức tuyệt đối cho mọi trường hợp."
+          ],
+          "misconception": "Có index không có nghĩa planner luôn chọn nó; đọc phần lớn bảng có thể dùng scan tuần tự hợp lý hơn.",
+          "sourceIds": ["pg-multicolumn18", "pg-explain18"]
+        },
+        {
+          "id": "plans",
+          "title": "Đọc scan → join → sort rồi mới sửa",
+          "explanation": "Plan là cây: scan lấy hàng, join ghép theo điều kiện, sort sắp kết quả khi cần. EXPLAIN có cost/rows ước lượng; cost không phải milliseconds. EXPLAIN ANALYZE thực thi query và đưa số đo, nên dùng thận trọng với câu có hiệu ứng. Cache nóng/lạnh, thống kê và lượng kết quả ảnh hưởng khác nhau.",
+          "example": "Plan minh họa: quét Registration → lọc CLB → nối Student → sắp ngày → lấy 20. Nếu lọc còn quá nhiều dòng, cần xem số hàng ở từng bước, không chỉ nhìn chữ “Index Scan”.",
+          "steps": [
+            "Đọc từ nguồn hàng lên các thao tác dùng kết quả.",
+            "So ước lượng với số đo ở môi trường kiểm soát khi được phép.",
+            "Đổi một giả thuyết rồi đo cả đọc/ghi và tài nguyên."
+          ],
+          "misconception": "Seq Scan không tự là lỗi; cost thấp hơn không tự chứng minh độ trễ người dùng giảm trong mọi tải.",
+          "sourceIds": ["pg-explain18", "pg-join18"]
+        },
+        {
+          "id": "lsm",
+          "title": "LSM đổi cách tổ chức ghi và đọc",
+          "explanation": "RocksDB tổ chức ghi vào memtable, flush thành các bảng sắp trên storage và dùng compaction hợp nhất. WAL có vai trò phục hồi tùy cấu hình. Đọc có thể phải xét nhiều lớp; Bloom filter/cache giúp giảm một số việc. Compaction gây công ghi thêm; không có miễn phí cho cả đọc, ghi và dung lượng.",
+          "example": "Ứng dụng ghi nhiều phiên bản cùng khóa: dữ liệu cũ có thể còn trong các file cho đến compaction. Tốc độ put cao không chứng minh mọi range scan hoặc tail latency tốt hơn B-tree.",
+          "steps": [
+            "Theo một cập nhật qua bộ đệm, log và file sắp.",
+            "Khi đọc, xét nơi có phiên bản mới nhất theo thiết kế.",
+            "Tính cả compaction, cache và chi phí giữ nhiều lớp khi so workload."
+          ],
+          "misconception": "LSM không đồng nghĩa không cần log, không cần index hoặc luôn thắng cây. Đây không là mô phỏng engine thật.",
+          "sourceIds": ["rocks-overview", "rocks-bloom"]
+        }
+      ]
+    },
+    "practice": {
+      "version": 1,
+      "items": [
+        {
+          "id": "range",
+          "text": "Muốn lọc khoảng ngày và sắp ngày trong PostgreSQL thì index nào hỗ trợ các toán tử đó?",
+          "options": [
+            "B-tree là ứng viên phù hợp để kiểm plan.",
+            "Hash index bắt buộc tốt hơn vì hỗ trợ mọi khoảng."
+          ],
+          "answer": 0,
+          "explanation": "B-tree hỗ trợ equality/range/order trong điều kiện phù hợp; hash index PostgreSQL chỉ equality.",
+          "sourceIds": ["pg-indextypes18"]
+        },
+        {
+          "id": "cost",
+          "text": "EXPLAIN ghi cost=100 có nghĩa đúng 100 ms không?",
+          "options": [
+            "Có; cost luôn là milliseconds.",
+            "Không; đó là đơn vị chi phí ước lượng của planner."
+          ],
+          "answer": 1,
+          "explanation": "Cần phân biệt ước lượng cost với số đo runtime, và runtime với trải nghiệm người dùng dưới tải.",
+          "sourceIds": ["pg-explain18"]
+        },
+        {
+          "id": "writes",
+          "text": "Thêm index lên mọi cột có đánh đổi gì?",
+          "options": [
+            "Tốn storage và công duy trì khi ghi; cần lý do từ truy vấn.",
+            "Không tốn gì vì index chỉ dùng lúc đọc."
+          ],
+          "answer": 0,
+          "explanation": "Index là cấu trúc phụ được lưu và cập nhật, không là tăng tốc miễn phí.",
+          "sourceIds": ["pg-index18"]
+        },
+        {
+          "id": "seq",
+          "text": "Planner chọn quét tuần tự khi cần đọc phần lớn bảng. Có chắc sai?",
+          "options": [
+            "Chắc sai vì index luôn nhanh nhất.",
+            "Không; có thể hợp lý, cần xem chi phí, thống kê và số đo."
+          ],
+          "answer": 1,
+          "explanation": "Đọc phần lớn hàng có thể làm index không lợi; tên node không thay phân tích workload.",
+          "sourceIds": ["pg-explain18"]
+        },
+        {
+          "id": "lsm-write",
+          "text": "RocksDB compaction liên quan đánh đổi nào?",
+          "options": [
+            "Hợp nhất các file có thể làm ghi thêm và ảnh hưởng tài nguyên.",
+            "Xóa toàn bộ chi phí ghi sau put."
+          ],
+          "answer": 0,
+          "explanation": "LSM chuyển công việc giữa đường ghi/đọc/dung lượng; cần tính cả compaction và trạng thái cache.",
+          "sourceIds": ["rocks-overview"]
+        },
+        {
+          "id": "query-index",
+          "text": "Index tên học sinh có tự giải quyết lọc clubId và sắp ngày không?",
+          "options": [
+            "Có; mọi index đều tương đương.",
+            "Chưa; cần index và plan phù hợp điều kiện/thứ tự thực tế."
+          ],
+          "answer": 1,
+          "explanation": "Một index chỉ có ích khi cơ chế truy cập phù hợp query; index ghép cũng phụ thuộc thứ tự và engine.",
+          "sourceIds": ["pg-multicolumn18"]
+        }
+      ]
+    },
+    "prediction": {
+      "text": "Chỉ thấy “query chậm”, bước đầu nên làm gì?",
+      "options": ["Xác định query, dữ liệu và plan rồi đặt giả thuyết.", "Tạo index mọi cột ngay."],
+      "answer": 0,
+      "explanation": "Không biết query và điểm tốn công thì không biết index mới có ích hoặc gây chi phí nào."
+    },
+    "challenge": {
+      "text": "Kho sách cần 20 bản mới nhất theo từng lớp, nhưng index hiện chỉ theo tên sách. Cách kiểm chứng phù hợp?",
+      "options": [
+        "Khẳng định thêm RAM luôn đủ.",
+        "So plan/index phù hợp lớp và thứ tự, đo cùng workload và cả chi phí ghi."
+      ],
+      "answer": 1,
+      "explanation": "Chuyển kiến thức bằng access pattern, không dùng công thức tốc độ chung cho mọi database."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Đọc lại yêu cầu và giả định của tình huống trước khi chọn công nghệ.",
+        "Không biết query và điểm tốn công thì không biết index mới có ích hoặc gây chi phí nào."
+      ],
+      "challenge": [
+        "Tách điều đã biết, điều chưa biết và cơ chế đang bảo vệ dữ liệu.",
+        "Chuyển kiến thức bằng access pattern, không dùng công thức tốc độ chung cho mọi database."
+      ]
+    },
+    "sources": [
+      {
+        "title": "PostgreSQL 18 — index types",
+        "url": "https://www.postgresql.org/docs/18/indexes-types.html"
+      },
+      {
+        "title": "PostgreSQL 18 — index introduction",
+        "url": "https://www.postgresql.org/docs/18/indexes-intro.html"
+      },
+      {
+        "title": "PostgreSQL 18 — multicolumn indexes",
+        "url": "https://www.postgresql.org/docs/18/indexes-multicolumn.html"
+      },
+      {
+        "title": "PostgreSQL 18 — using EXPLAIN",
+        "url": "https://www.postgresql.org/docs/18/using-explain.html"
+      },
+      {
+        "title": "PostgreSQL 18 — joins",
+        "url": "https://www.postgresql.org/docs/18/tutorial-join.html"
+      },
+      {
+        "title": "RocksDB — overview",
+        "url": "https://github.com/facebook/rocksdb/wiki/RocksDB-Overview"
+      },
+      {
+        "title": "PostgreSQL 18 — B-tree indexes",
+        "url": "https://www.postgresql.org/docs/18/btree.html"
+      },
+      {
+        "title": "RocksDB — Bloom filters",
+        "url": "https://github.com/facebook/rocksdb/wiki/RocksDB-Bloom-Filter"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-database-indexes",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L1-04",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Có index nhưng query vẫn chậm: xem đường đi của dữ liệu.",
+      "context": "Danh sách đăng ký có nhiều dòng. Cô muốn 20 phiếu mới nhất của CLB robot. Nhóm thêm index tên học sinh nhưng màn hình vẫn chậm. Có người nói “index mọi cột” và “hash O(1), lúc nào cũng tốt hơn cây”. Em cần kiểm lại truy vấn và đường đọc.",
+      "requirements": [
+        "Phân biệt B-tree/hash/LSM, đọc scan/join/sort trong query plan và giải thích chi phí đọc/ghi cùng index phù hợp truy vấn.",
+        "Giải thích được giới hạn của quyết định khi yêu cầu hoặc lịch lỗi thay đổi."
+      ],
+      "activityRef": "module-practice",
+      "experimentSteps": [
+        "Đọc từng chương và theo các bước của ví dụ.",
+        "Chọn quyết định cho các tình huống, kiểm tra rồi sửa những phần chưa đúng.",
+        "Áp dụng sang tình huống mới ở cuối bài."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Đổi thiết kế để đáp ứng yêu cầu phải xét cả chi phí dữ liệu, độ trễ và vận hành.",
+        "Kết quả bài áp dụng chỉ đúng trong giả định đã nêu; hệ thống thật cần thử nghiệm và review."
+      ],
+      "limitations": "Chương dùng plan minh họa và nguyên lý, không chạy SQL/EXPLAIN hay đo hiệu năng. LSM là tổng quan RocksDB, không phải index có sẵn của PostgreSQL. Không đồng nhất BST bảy nút với B+ tree database."
+    }
+  },
+  {
+    "id": "transactions-isolation",
+    "kind": "module-practice",
+    "version": 1,
+    "status": "beta",
+    "level": "L1",
+    "moduleId": "L1.5",
+    "minutes": 30,
+    "title": "Giữ chỗ cuối khi hai người cùng đăng ký",
+    "subtitle": "Một transaction không tự làm mọi lịch chạy đều đúng.",
+    "objective": "Phân biệt ACID, snapshot và isolation; giải thích lịch tranh chỗ, khóa/phiên bản, deadlock và vai trò WAL trong giới hạn PostgreSQL.",
+    "story": "Robot còn một chỗ. An và Bình cùng đọc thấy còn chỗ rồi mỗi người ghi đăng ký. Nhóm thêm BEGIN/COMMIT quanh mỗi request và nghĩ thế là hết lỗi. Cần biết hai transaction được thấy dữ liệu nào, khi nào phải chờ hoặc thử lại.",
+    "explanation": "Atomicity gom thay đổi trong một transaction; isolation điều khiển tương tác đồng thời. Invariant nghiệp vụ vẫn cần schema, truy vấn và mức cô lập đúng. Dữ liệu nhiều phiên bản giúp đọc snapshot nhưng không tự loại hết anomaly; serializable có thể yêu cầu retry.",
+    "limit": "Ví dụ lịch thao tác và PostgreSQL 18, không chạy SQL hoặc thực thi scheduler database thật. Không chứng minh mọi invariant với mọi isolation/DB; không transaction phân tán, replica failover hoặc email rollback. Durability còn phụ thuộc cấu hình và failure model.",
+    "terms": [
+      {
+        "name": "Giao dịch dữ liệu",
+        "english": "Transaction",
+        "meaning": "Nhóm thay đổi có ranh giới commit/rollback ở database."
+      },
+      {
+        "name": "Mức cô lập",
+        "english": "Isolation level",
+        "meaning": "Quy tắc transaction thấy và tương tác với thay đổi đồng thời."
+      },
+      {
+        "name": "Ảnh dữ liệu",
+        "english": "Snapshot",
+        "meaning": "Góc nhìn dữ liệu theo quy tắc và thời điểm của transaction/câu lệnh."
+      },
+      {
+        "name": "Nhiều phiên bản",
+        "english": "MVCC",
+        "meaning": "Giữ nhiều phiên bản hàng để các góc nhìn đọc phù hợp không chỉ dựa khóa chặn mọi đọc."
+      },
+      {
+        "name": "Chờ khóa vòng",
+        "english": "Deadlock",
+        "meaning": "Hai hay nhiều transaction giữ tài nguyên và chờ nhau theo vòng."
+      },
+      {
+        "name": "Nhật ký trước dữ liệu",
+        "english": "Write-ahead log",
+        "meaning": "Ghi log bền vững theo quy tắc trước khi ghi các trang dữ liệu liên quan, phục vụ recovery."
+      }
+    ],
+    "chapters": {
+      "version": 1,
+      "items": [
+        {
+          "id": "acid",
+          "title": "Tách bốn ý nghĩa trong ACID",
+          "explanation": "Atomicity: các thay đổi trong transaction cùng có hiệu lực hoặc không. Consistency nói việc giữ quy tắc dữ liệu đúng, nhưng database không biết mọi quy tắc app chưa được mô hình hóa. Isolation nói ảnh hưởng đồng thời. Durability nói kết quả commit tồn tại qua lỗi trong bảo đảm/config đã chọn; không phải không bao giờ mất trong mọi thảm họa.",
+          "example": "Ghi Registration và trừ chỗ phải cùng commit trong phạm vi phù hợp. Gửi email ngoài database không tự rollback cùng SQL nếu giữa chừng lỗi.",
+          "steps": [
+            "Chỉ rõ các bản ghi thuộc transaction.",
+            "Nêu invariant và cơ chế bảo vệ từng invariant.",
+            "Tách hiệu ứng bên ngoài như email và thiết kế xử lý/retry riêng."
+          ],
+          "misconception": "ACID không tự chọn đúng invariant, isolation hoặc làm transaction xuyên mọi dịch vụ.",
+          "sourceIds": ["pg-tx18", "pg-constraints18", "pg-wal18"]
+        },
+        {
+          "id": "snapshots",
+          "title": "MVCC và Read Committed cho thấy điều gì?",
+          "explanation": "Trong PostgreSQL Read Committed, mỗi SELECT thông thường nhìn dữ liệu đã commit trước khi câu lệnh bắt đầu và thay đổi trước đó của chính transaction. Hai SELECT kế tiếp có thể khác nếu transaction khác commit ở giữa. MVCC không có nghĩa mọi đọc đều dùng cùng snapshot suốt transaction hoặc không bao giờ cần khóa.",
+          "example": "An đọc remaining=1. Bình commit giảm remaining=0. SELECT thứ hai của An ở Read Committed có thể thấy 0; chưa có gì tự buộc quyết định cũ của An hợp lệ.",
+          "steps": [
+            "Đánh dấu thời điểm từng câu lệnh bắt đầu và từng commit.",
+            "Xác định snapshot theo isolation cụ thể.",
+            "Kiểm xem quyết định ghi dựa vào dữ liệu cũ có còn hợp lệ không."
+          ],
+          "misconception": "Đừng lấy hành vi snapshot của một DB/isolation để khẳng định mọi DB giống nhau.",
+          "sourceIds": ["pg-isolation18", "pg-mvcc18"]
+        },
+        {
+          "id": "seat",
+          "title": "Bảo vệ chỗ bằng cập nhật có điều kiện",
+          "explanation": "Với một dòng Club chứa remaining, có thể cân nhắc UPDATE Club SET remaining=remaining-1 WHERE id=C2 AND remaining>0, kiểm số dòng cập nhật, rồi thêm Registration trong cùng transaction. Ở PostgreSQL Read Committed, cập nhật cạnh tranh trên cùng dòng có thể chờ và đánh giá lại điều kiện sau thay đổi đã commit. Phải rollback nếu bước tiếp theo lỗi.",
+          "example": "Ban đầu remaining=1. A cập nhật thành 0 và commit. B đang cạnh tranh phải kiểm điều kiện trên bản cập nhật; không được cứ dùng giá trị 1 đã đọc để ghi thành 0 và coi mình cũng có chỗ.",
+          "steps": [
+            "Giữ điều kiện còn chỗ ngay trong thao tác cập nhật phù hợp.",
+            "Chỉ ghi đăng ký nếu có đúng dòng đã cập nhật; cùng transaction với invariant còn lại.",
+            "Thử hai request, rollback và trùng student/club; không suy bảo vệ mọi quy tắc từ một dòng."
+          ],
+          "misconception": "Đoạn UPDATE một mình không giữ giới hạn hai CLB/người hoặc quyền; những invariant đó cần cơ chế riêng.",
+          "sourceIds": ["pg-isolation18", "pg-constraints18"]
+        },
+        {
+          "id": "coordination",
+          "title": "Khóa trước hay kiểm phiên bản sau?",
+          "explanation": "Pessimistic locking giữ khóa phù hợp khi đọc/ghi tài nguyên cạnh tranh. Optimistic concurrency lưu version; UPDATE ... WHERE version=versionDaDoc, chỉ chấp nhận khi còn khớp rồi tăng version, xử lý trường hợp không cập nhật được. Cả hai đều cần ranh giới transaction đúng. Serializable hướng tới lịch sử tương đương một thứ tự tuần tự, có thể hủy transaction cần thử lại từ đầu.",
+          "example": "Hai yêu cầu cùng đọc version=7. Yêu cầu đầu đổi dữ liệu/version thành 8. Yêu cầu sau điều kiện version=7 không còn khớp; không được báo thành công như đã ghi.",
+          "steps": [
+            "Chọn khóa hoặc kiểm version dựa contention và yêu cầu.",
+            "Định nghĩa phản hồi conflict/retry và giới hạn retry.",
+            "Với Serializable, xử lý serialization failure bằng retry toàn transaction và kiểm hiệu ứng bên ngoài."
+          ],
+          "misconception": "Optimistic không là bỏ kiểm tra; Serializable không nghĩa mọi transaction đều thành công ngay hoặc chạy vật lý từng cái.",
+          "sourceIds": ["pg-lock18", "pg-isolation18"]
+        },
+        {
+          "id": "recovery",
+          "title": "Deadlock khác crash và WAL giúp việc gì?",
+          "explanation": "A giữ dòng X, chờ Y; B giữ Y, chờ X là vòng deadlock. PostgreSQL phát hiện và hủy một transaction để phá vòng; app cần xử lý lỗi, có thể giảm bằng thứ tự lấy khóa nhất quán. WAL ghi thông tin thay đổi trước trang dữ liệu theo quy tắc, giúp redo sau crash; không thay một backup có thể restore.",
+          "example": "Đổi thứ tự để mọi request khóa X rồi Y tránh vòng cụ thể X↔Y. Nếu máy crash sau commit, recovery dựa log/trang và cấu hình bền vững, không dựa browser còn mở.",
+          "steps": [
+            "Vẽ tài nguyên đang giữ và đang chờ để tìm vòng.",
+            "Phá vòng/xử lý transaction bị hủy, thử lại có giới hạn.",
+            "Tách kiểm concurrency khỏi crash recovery và kiểm restore backup riêng."
+          ],
+          "misconception": "WAL không là cách tự hoàn tác email hoặc đảm bảo sống sót khi mất cả log/data và backup.",
+          "sourceIds": ["pg-lock18", "pg-wal18"]
+        }
+      ]
+    },
+    "practice": {
+      "version": 1,
+      "items": [
+        {
+          "id": "begin",
+          "text": "Chỉ thêm BEGIN/COMMIT có tự ngăn mọi lỗi tranh chỗ?",
+          "options": [
+            "Không; còn phải thiết kế invariant, truy vấn và isolation phù hợp.",
+            "Có; transaction bất kỳ luôn tương đương một server chỉ xử lý một request."
+          ],
+          "answer": 0,
+          "explanation": "Atomicity không tự loại mọi anomaly cạnh tranh; cách đọc/ghi và isolation quyết định.",
+          "sourceIds": ["pg-isolation18", "pg-tx18"]
+        },
+        {
+          "id": "read",
+          "text": "Hai SELECT trong cùng transaction Read Committed của PostgreSQL có bắt buộc cùng kết quả?",
+          "options": [
+            "Có; cùng transaction luôn một snapshot cố định.",
+            "Không; commit của bên khác giữa hai câu có thể được thấy ở câu sau."
+          ],
+          "answer": 1,
+          "explanation": "Snapshot SELECT thông thường được lấy theo từng câu lệnh ở mức này, ngoài thay đổi trước đó của chính transaction.",
+          "sourceIds": ["pg-isolation18"]
+        },
+        {
+          "id": "conditional",
+          "text": "UPDATE có điều kiện remaining>0 cập nhật 0 dòng. App nên làm gì?",
+          "options": [
+            "Không ghi đăng ký như đã có chỗ; trả kết quả theo trạng thái và hợp đồng.",
+            "Bỏ qua số dòng và báo đăng ký thành công."
+          ],
+          "answer": 0,
+          "explanation": "Kiểm kết quả cập nhật là một phần cơ chế; viết đăng ký bất chấp có thể phá invariant.",
+          "sourceIds": ["pg-isolation18"]
+        },
+        {
+          "id": "version",
+          "text": "Đã đọc version7, lúc ghi version thực là8. Cách optimistic đúng?",
+          "options": [
+            "Ghi đè vì client đã đọc trước.",
+            "Từ chối/xử lý conflict hoặc đọc lại theo hợp đồng, không báo đã ghi."
+          ],
+          "answer": 1,
+          "explanation": "Điều kiện version là kiểm cạnh tranh; không khớp phải được xử lý, không chỉ gắn version để trang trí.",
+          "sourceIds": ["pg-isolation18"]
+        },
+        {
+          "id": "serializable",
+          "text": "Serializable bị serialization failure. Điều nào đúng?",
+          "options": [
+            "Có thể cần retry toàn transaction; không tự coi mọi bước cũ vẫn đã commit.",
+            "Mức Serializable bảo đảm không bao giờ có lỗi cần retry."
+          ],
+          "answer": 0,
+          "explanation": "Bảo đảm isolation có thể đi cùng việc hủy một transaction; ứng dụng cần xử lý retry và hiệu ứng ngoài DB.",
+          "sourceIds": ["pg-isolation18"]
+        },
+        {
+          "id": "deadlock",
+          "text": "A giữ X chờ Y, B giữ Y chờ X là gì?",
+          "options": [
+            "Một cache miss luôn tự hết ngay.",
+            "Deadlock; cần phá vòng/xử lý transaction bị hủy."
+          ],
+          "answer": 1,
+          "explanation": "PostgreSQL có thể phát hiện và abort một transaction; thứ tự lấy khóa nhất quán giúp tránh vòng cụ thể.",
+          "sourceIds": ["pg-lock18"]
+        },
+        {
+          "id": "wal",
+          "text": "Vai trò của WAL trong phạm vi bài là gì?",
+          "options": [
+            "Ghi log theo thứ tự bền vững phù hợp để recovery/redo, không thay backup.",
+            "Chứng minh hệ thống không thể mất dữ liệu dưới mọi lỗi."
+          ],
+          "answer": 0,
+          "explanation": "Recovery có failure model và cấu hình; mất cả log/data có thể cần backup phục hồi.",
+          "sourceIds": ["pg-wal18"]
+        },
+        {
+          "id": "email",
+          "text": "Rollback transaction SQL có tự thu hồi email đã gửi ngoài DB?",
+          "options": [
+            "Có; mọi hệ thống tự cùng transaction.",
+            "Không; cần thiết kế hiệu ứng ngoài và khôi phục/retry riêng."
+          ],
+          "answer": 1,
+          "explanation": "Ranh giới transaction database không tự bao gồm nhà cung cấp email. Đây là điểm phải mô hình hóa riêng.",
+          "sourceIds": ["pg-tx18"]
+        }
+      ]
+    },
+    "prediction": {
+      "text": "Hai transaction cùng thấy 1 chỗ, có thể cứ đọc rồi ghi độc lập?",
+      "options": [
+        "Không nên suy an toàn; cần cơ chế bảo vệ cạnh tranh phù hợp.",
+        "Được; nhìn thấy cùng số chứng minh cả hai có chỗ riêng."
+      ],
+      "answer": 0,
+      "explanation": "Một state dùng chung có thể bị nhiều quyết định dựa trên dữ liệu cũ; cần kiểm ngay nơi ghi."
+    },
+    "challenge": {
+      "text": "Thư viện chỉ có một bản sách. Muốn ghi người mượn và đổi trạng thái còn sách, cần gì?",
+      "options": [
+        "Chỉ khóa nút UI người mượn đầu.",
+        "Transaction và cơ chế cạnh tranh/ràng buộc phù hợp, kiểm kết quả; thông báo gửi ngoài xử lý riêng."
+      ],
+      "answer": 1,
+      "explanation": "Chuyển invariant chỗ cuối sang bản sách cuối; ranh giới dữ liệu và hiệu ứng ngoài phải rõ."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Đọc lại yêu cầu và giả định của tình huống trước khi chọn công nghệ.",
+        "Một state dùng chung có thể bị nhiều quyết định dựa trên dữ liệu cũ; cần kiểm ngay nơi ghi."
+      ],
+      "challenge": [
+        "Tách điều đã biết, điều chưa biết và cơ chế đang bảo vệ dữ liệu.",
+        "Chuyển invariant chỗ cuối sang bản sách cuối; ranh giới dữ liệu và hiệu ứng ngoài phải rõ."
+      ]
+    },
+    "sources": [
+      {
+        "title": "PostgreSQL 18 — transactions",
+        "url": "https://www.postgresql.org/docs/18/tutorial-transactions.html"
+      },
+      {
+        "title": "PostgreSQL 18 — constraints",
+        "url": "https://www.postgresql.org/docs/18/ddl-constraints.html"
+      },
+      {
+        "title": "PostgreSQL 18 — WAL",
+        "url": "https://www.postgresql.org/docs/18/wal-intro.html"
+      },
+      {
+        "title": "PostgreSQL 18 — transaction isolation",
+        "url": "https://www.postgresql.org/docs/18/transaction-iso.html"
+      },
+      {
+        "title": "PostgreSQL 18 — MVCC introduction",
+        "url": "https://www.postgresql.org/docs/18/mvcc-intro.html"
+      },
+      {
+        "title": "PostgreSQL 18 — explicit locking",
+        "url": "https://www.postgresql.org/docs/18/explicit-locking.html"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-transactions-isolation",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L1-05",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Một transaction không tự làm mọi lịch chạy đều đúng.",
+      "context": "Robot còn một chỗ. An và Bình cùng đọc thấy còn chỗ rồi mỗi người ghi đăng ký. Nhóm thêm BEGIN/COMMIT quanh mỗi request và nghĩ thế là hết lỗi. Cần biết hai transaction được thấy dữ liệu nào, khi nào phải chờ hoặc thử lại.",
+      "requirements": [
+        "Phân biệt ACID, snapshot và isolation; giải thích lịch tranh chỗ, khóa/phiên bản, deadlock và vai trò WAL trong giới hạn PostgreSQL.",
+        "Giải thích được giới hạn của quyết định khi yêu cầu hoặc lịch lỗi thay đổi."
+      ],
+      "activityRef": "module-practice",
+      "experimentSteps": [
+        "Đọc từng chương và theo các bước của ví dụ.",
+        "Chọn quyết định cho các tình huống, kiểm tra rồi sửa những phần chưa đúng.",
+        "Áp dụng sang tình huống mới ở cuối bài."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Đổi thiết kế để đáp ứng yêu cầu phải xét cả chi phí dữ liệu, độ trễ và vận hành.",
+        "Kết quả bài áp dụng chỉ đúng trong giả định đã nêu; hệ thống thật cần thử nghiệm và review."
+      ],
+      "limitations": "Ví dụ lịch thao tác và PostgreSQL 18, không chạy SQL hoặc thực thi scheduler database thật. Không chứng minh mọi invariant với mọi isolation/DB; không transaction phân tán, replica failover hoặc email rollback. Durability còn phụ thuộc cấu hình và failure model."
+    }
+  },
+  {
+    "id": "service-delivery",
+    "kind": "module-practice",
+    "version": 1,
+    "status": "beta",
+    "level": "L1",
+    "moduleId": "L1.6",
+    "minutes": 30,
+    "title": "Đưa dịch vụ nộp bài vào hoạt động và biết khi nào nó hỏng",
+    "subtitle": "File đã lên kho nhưng phiếu nộp chưa lưu thì sao?",
+    "objective": "Phân biệt file/block/object storage, ID/quyền, background job, config/secret, tín hiệu vận hành và rollback có tương thích dữ liệu.",
+    "story": "Ứng dụng trường nhận bài PDF. Học sinh cần thấy phiếu nộp, giáo viên được đọc file lớp mình; tạo thumbnail mất thời gian. Một hôm file đã lên kho nhưng database lỗi. Lần khác deploy mới đọc sai trường dữ liệu cũ. Nhóm cần một luồng có thể phát hiện lỗi và phục hồi.",
+    "explanation": "Dịch vụ thật không chỉ là endpoint chạy được. Cần chọn nơi lưu bytes và metadata, trạng thái từng bước, ID/ràng buộc, xử lý nền, cấu hình an toàn, tín hiệu và kế hoạch phát hành. Mỗi ranh giới có thể lỗi riêng; rollback code không tự phục hồi dữ liệu.",
+    "limit": "Chỉ thiết kế luồng giả định và bài quyết định, không upload file thật hoặc cấp quyền cloud. Không triển khai Kubernetes vào app học này, không benchmark hay cam kết bảo mật/DR. Quy trình sản xuất còn cần threat model, backup và kiểm chứng riêng.",
+    "terms": [
+      {
+        "name": "Lưu object",
+        "english": "Object storage",
+        "meaning": "Lưu bytes cùng metadata theo object key trong kho, thường truy cập qua API."
+      },
+      {
+        "name": "Mã định danh",
+        "english": "Identifier",
+        "meaning": "Giá trị chỉ một tài nguyên theo phạm vi và quy tắc cấp mã."
+      },
+      {
+        "name": "Công việc nền",
+        "english": "Background job",
+        "meaning": "Việc xử lý tách khỏi chờ trả response chính, cần theo trạng thái và lỗi."
+      },
+      {
+        "name": "Bí mật hệ thống",
+        "english": "Secret",
+        "meaning": "Thông tin như khóa dịch vụ không được đưa vào source hoặc frontend công khai."
+      },
+      {
+        "name": "Quay lại phiên bản",
+        "english": "Rollback",
+        "meaning": "Chuyển code/cấu hình về phiên bản trước; không tự đảo mọi thay đổi dữ liệu."
+      }
+    ],
+    "chapters": {
+      "version": 1,
+      "items": [
+        {
+          "id": "storage",
+          "title": "Tách bytes của file khỏi hồ sơ nộp bài",
+          "explanation": "File storage cung cấp cây thư mục và thao tác file; block storage cung cấp khối để hệ điều hành/database tổ chức phía trên; object storage lưu object theo key qua API. Đây là các giao diện, không là quy tắc “loại nào luôn tốt hơn”. Có thể lưu PDF ở object storage và phiếu/owner/trạng thái ở database.",
+          "example": "PDF ở key bài/abc, Submission S9 tham chiếu key. Tạo object xong nhưng ghi S9 lỗi sẽ có object mồ côi; cần cleanup/đối soát theo chính sách. Không được báo “đã nộp” chỉ vì upload xong.",
+          "steps": [
+            "Chọn nơi có thẩm quyền cho phiếu và nơi giữ bytes.",
+            "Ghi các trạng thái chờ upload, sẵn sàng hoặc lỗi; kiểm trước cho tải file.",
+            "Thiết kế retry và dọn dữ liệu mồ côi an toàn, không xóa object đang được dùng."
+          ],
+          "misconception": "Một thao tác upload object không tự là transaction nguyên tử với database riêng.",
+          "sourceIds": ["s3-intro", "pg-tx18", "aws-block", "aws-file"]
+        },
+        {
+          "id": "ids",
+          "title": "ID duy nhất không tự cấp quyền",
+          "explanation": "Có thể cấp ID bằng sequence trung tâm hoặc UUID theo yêu cầu; mỗi cách có đánh đổi điều phối, thứ tự, độ dài và xác suất trùng. UUID không là mật khẩu hoặc quyền truy cập; vẫn cần ràng buộc duy nhất và kiểm người gọi. Mã ngắn kiểu URL shortener phải xử lý trùng trong phạm vi namespace.",
+          "example": "Hai phiếu cùng mã ngắn phải bị phát hiện và cấp lại theo hợp đồng, không ghi đè. Giáo viên có ID file của lớp khác cũng chưa được phép xem.",
+          "steps": [
+            "Chốt phạm vi unique và hành vi khi trùng.",
+            "Dùng cơ chế tạo mã đúng đặc tả và constraint phù hợp.",
+            "Kiểm quyền theo chủ sở hữu/lớp trước khi cấp đọc hoặc URL truy cập giới hạn."
+          ],
+          "misconception": "Mã có vẻ ngẫu nhiên, kể cả UUID, không thay authorization hoặc kiểm quyền file.",
+          "sourceIds": ["uuid9562", "pg-constraints18", "owasp-authz"]
+        },
+        {
+          "id": "jobs",
+          "title": "Việc nền cần kết quả, retry và giới hạn",
+          "explanation": "Tạo thumbnail có thể tách khỏi response nộp bài. Trạng thái accepted khác ready. Worker có thể crash sau khi đã ghi thumbnail nhưng trước khi báo xong; xử lý lại cần tránh nhân đôi hiệu ứng theo khóa job/phiên bản. Có job lỗi kéo dài cần giới hạn retry, báo và cách xử lý tiếp.",
+          "example": "Phiếu S9 đã accepted, thumbnail chưa ready. UI hiển thị đang xử lý. Khi worker thử lại cùng việc, nó kiểm kết quả và cập nhật nhất quán thay vì tạo vô hạn file phụ.",
+          "steps": [
+            "Lưu ý định công việc đáng tin cậy cùng dữ liệu phù hợp hoặc cơ chế chuyển giao có đối soát.",
+            "Worker xử lý, ghi kết quả theo khóa ổn định và cập nhật trạng thái.",
+            "Theo dõi backlog, tuổi job và lỗi; không retry mãi một file hỏng."
+          ],
+          "misconception": "Đưa vào queue không tự bảo đảm đúng một lần hoặc công việc đã xong.",
+          "sourceIds": ["source-4", "aws-idempotency"]
+        },
+        {
+          "id": "secrets",
+          "title": "Cấu hình công khai khác khóa bí mật",
+          "explanation": "Giới hạn upload là config; khóa đọc/ghi kho là secret. JavaScript gửi xuống browser là công khai với người dùng, kể cả biến có tên “secret”. Dùng cơ chế cấp quyền tối thiểu, quản lý vòng đời/thu hồi và không ghi secret vào log. Tính đúng còn cần server kiểm kích thước/loại file, không chỉ tin browser.",
+          "example": "Nếu khóa kho nằm trong bundle frontend, chuyển nó sang biến môi trường lúc build vẫn có thể lộ khi bị nhúng. Cần luồng server/cấp quyền ngắn hạn phù hợp, không chỉ đổi tên biến.",
+          "steps": [
+            "Phân loại config có thể công khai với secret.",
+            "Đặt secret ở nơi thực thi tin cậy, giới hạn quyền và thời hạn cần thiết.",
+            "Lên kế hoạch xoay/thu hồi; kiểm source, bundle và log không chứa khóa."
+          ],
+          "misconception": "Ẩn trong file .env không tự giữ bí mật nếu build đưa giá trị vào frontend. Đây không là triển khai cơ chế upload an toàn hoàn chỉnh.",
+          "sourceIds": ["owasp-secrets", "owasp-authz"]
+        },
+        {
+          "id": "delivery",
+          "title": "Đo hành vi và phát hành có đường quay lại",
+          "explanation": "Logs giúp xem sự kiện có ngữ cảnh; metrics đo xu hướng như request, lỗi, latency và saturation. Tránh đưa dữ liệu riêng/secret vào log. Khi deploy, kiểm bản mới với client và dữ liệu cũ, theo tín hiệu có hành động. Rollback code chỉ an toàn nếu vẫn đọc/ghi được schema và dữ liệu đang có.",
+          "example": "V2 đổi trường status nhưng V1 không hiểu giá trị mới. Quay về V1 có thể vẫn lỗi; cần chiến lược tương thích như thêm trường trước, chuyển dần và chỉ xóa sau khi không còn consumer cũ.",
+          "steps": [
+            "Kiểm unit, contract, luồng chính và trường hợp lỗi trước phát hành.",
+            "Phát hành phạm vi nhỏ nếu phù hợp, theo dõi lỗi/latency và tiêu chí dừng.",
+            "Thử rollback với dữ liệu đã được bản mới ghi; backup/restore có kế hoạch riêng."
+          ],
+          "misconception": "HTTP server đang chạy không chứng minh người dùng nộp được bài; rollback container không tự rollback database.",
+          "sourceIds": ["source-6", "k8s-deploy"]
+        }
+      ]
+    },
+    "practice": {
+      "version": 1,
+      "items": [
+        {
+          "id": "partial",
+          "text": "Object upload xong nhưng phiếu database lỗi. Có chắc đã nộp thành công?",
+          "options": [
+            "Chưa; cần trạng thái/đối soát và xử lý object mồ côi.",
+            "Chắc chắn; object và mọi database luôn cùng transaction."
+          ],
+          "answer": 0,
+          "explanation": "Hai hệ thống có ranh giới lỗi riêng, phải biết bản ghi nào xác nhận đã nộp và cách khôi phục.",
+          "sourceIds": ["s3-intro", "pg-tx18"]
+        },
+        {
+          "id": "unique",
+          "text": "Sinh UUID có tự cho người có mã quyền đọc file?",
+          "options": [
+            "Có; UUID là access token bảo đảm quyền.",
+            "Không; ID không thay kiểm quyền tài nguyên."
+          ],
+          "answer": 1,
+          "explanation": "Nhận diện khác quyền; cần chính sách owner/lớp, kể cả ID khó đoán.",
+          "sourceIds": ["uuid9562", "owasp-authz"]
+        },
+        {
+          "id": "job",
+          "text": "Worker tạo thumbnail rồi crash trước ACK. Cần chuẩn bị gì?",
+          "options": [
+            "Khả năng xử lý lại an toàn theo job/key và trạng thái, không giả định chỉ một lần.",
+            "Khẳng định queue không thể gửi lại."
+          ],
+          "answer": 0,
+          "explanation": "Chưa xác nhận có thể dẫn tới retry; hiệu ứng cần idempotency hoặc kiểm soát trùng phù hợp.",
+          "sourceIds": ["aws-idempotency", "source-4"]
+        },
+        {
+          "id": "bundle",
+          "text": "Khóa kho được nhúng vào JS từ .env khi build có bí mật với browser không?",
+          "options": [
+            "Có; tên .env tự mã hóa khóa.",
+            "Không; nội dung bundle được gửi xuống client là công khai."
+          ],
+          "answer": 1,
+          "explanation": "Cần giữ secret ở nơi tin cậy và cấp quyền thích hợp, không chỉ đổi cách viết biến.",
+          "sourceIds": ["owasp-secrets"]
+        },
+        {
+          "id": "signals",
+          "text": "Server trả 200 ở trang chủ nhưng nộp bài liên tục lỗi. Tín hiệu nào cần?",
+          "options": [
+            "Kết quả/latency luồng nộp, lỗi và trạng thái xử lý, không chỉ uptime trang chủ.",
+            "Chỉ số lần process được khởi động."
+          ],
+          "answer": 0,
+          "explanation": "Giám sát phải phản ánh hành vi người dùng và tín hiệu có hành động; process sống không chứng minh nghiệp vụ đúng.",
+          "sourceIds": ["source-6"]
+        },
+        {
+          "id": "rollback",
+          "text": "V2 đã ghi status mới V1 không hiểu. Rollback code có tự giải quyết hết?",
+          "options": [
+            "Có; rollback container đảo ngược mọi dữ liệu.",
+            "Không; phải kiểm tương thích schema/dữ liệu và kế hoạch khôi phục riêng."
+          ],
+          "answer": 1,
+          "explanation": "Cơ chế rollback deployment quay lại template code; dữ liệu ngoài nó không tự trở lại trạng thái cũ.",
+          "sourceIds": ["k8s-deploy"]
+        }
+      ]
+    },
+    "prediction": {
+      "text": "File đã lên kho có đủ chứng minh toàn luồng nộp bài thành công?",
+      "options": [
+        "Chưa; còn metadata, quyền, trạng thái và xử lý lỗi giữa các bước.",
+        "Đủ; mọi hệ thống còn lại tự cập nhật nguyên tử."
+      ],
+      "answer": 0,
+      "explanation": "Có nhiều nguồn trạng thái và ranh giới; cần hợp đồng xác nhận và đối soát."
+    },
+    "challenge": {
+      "text": "Dịch vụ URL ngắn sinh mã trùng và ghi đè link cũ. Thay đổi nào trực tiếp bảo vệ đúng ánh xạ?",
+      "options": [
+        "Chỉ thêm dashboard đẹp.",
+        "Unique trong namespace, xử lý collision khi cấp mã và kiểm quyền thay đổi link."
+      ],
+      "answer": 1,
+      "explanation": "Tách invariant không ghi đè khỏi xác suất mã trùng; constraint và xử lý conflict vẫn cần dù bộ sinh mã tốt."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Đọc lại yêu cầu và giả định của tình huống trước khi chọn công nghệ.",
+        "Có nhiều nguồn trạng thái và ranh giới; cần hợp đồng xác nhận và đối soát."
+      ],
+      "challenge": [
+        "Tách điều đã biết, điều chưa biết và cơ chế đang bảo vệ dữ liệu.",
+        "Tách invariant không ghi đè khỏi xác suất mã trùng; constraint và xử lý conflict vẫn cần dù bộ sinh mã tốt."
+      ]
+    },
+    "sources": [
+      {
+        "title": "Amazon S3 — object storage",
+        "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html"
+      },
+      {
+        "title": "PostgreSQL 18 — transactions",
+        "url": "https://www.postgresql.org/docs/18/tutorial-transactions.html"
+      },
+      {
+        "title": "RFC 9562 — UUIDs",
+        "url": "https://www.rfc-editor.org/rfc/rfc9562.html"
+      },
+      {
+        "title": "PostgreSQL 18 — constraints",
+        "url": "https://www.postgresql.org/docs/18/ddl-constraints.html"
+      },
+      {
+        "title": "OWASP — authorization",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+      },
+      {
+        "title": "Azure Architecture: Queue-based load leveling",
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling"
+      },
+      {
+        "title": "AWS Builders Library — retries and idempotency",
+        "url": "https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/"
+      },
+      {
+        "title": "OWASP — secrets management",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html"
+      },
+      {
+        "title": "Google SRE: Monitoring distributed systems",
+        "url": "https://sre.google/sre-book/monitoring-distributed-systems/"
+      },
+      {
+        "title": "Kubernetes — deployments and rollback",
+        "url": "https://kubernetes.io/docs/concepts/workloads/controllers/deployment/"
+      },
+      {
+        "title": "Amazon EBS — block storage",
+        "url": "https://docs.aws.amazon.com/ebs/latest/userguide/what-is-ebs.html"
+      },
+      {
+        "title": "Amazon EFS — file storage",
+        "url": "https://docs.aws.amazon.com/efs/latest/ug/whatisefs.html"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-service-delivery",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L1-06",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "File đã lên kho nhưng phiếu nộp chưa lưu thì sao?",
+      "context": "Ứng dụng trường nhận bài PDF. Học sinh cần thấy phiếu nộp, giáo viên được đọc file lớp mình; tạo thumbnail mất thời gian. Một hôm file đã lên kho nhưng database lỗi. Lần khác deploy mới đọc sai trường dữ liệu cũ. Nhóm cần một luồng có thể phát hiện lỗi và phục hồi.",
+      "requirements": [
+        "Phân biệt file/block/object storage, ID/quyền, background job, config/secret, tín hiệu vận hành và rollback có tương thích dữ liệu.",
+        "Giải thích được giới hạn của quyết định khi yêu cầu hoặc lịch lỗi thay đổi."
+      ],
+      "activityRef": "module-practice",
+      "experimentSteps": [
+        "Đọc từng chương và theo các bước của ví dụ.",
+        "Chọn quyết định cho các tình huống, kiểm tra rồi sửa những phần chưa đúng.",
+        "Áp dụng sang tình huống mới ở cuối bài."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Đổi thiết kế để đáp ứng yêu cầu phải xét cả chi phí dữ liệu, độ trễ và vận hành.",
+        "Kết quả bài áp dụng chỉ đúng trong giả định đã nêu; hệ thống thật cần thử nghiệm và review."
+      ],
+      "limitations": "Chỉ thiết kế luồng giả định và bài quyết định, không upload file thật hoặc cấp quyền cloud. Không triển khai Kubernetes vào app học này, không benchmark hay cam kết bảo mật/DR. Quy trình sản xuất còn cần threat model, backup và kiểm chứng riêng."
+    }
+  }
+]

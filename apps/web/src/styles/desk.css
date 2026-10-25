@@ -1286,3 +1286,93 @@
   border-left: 3px solid var(--accent);
   padding-left: 0.75rem;
 }
+
+.lesson-chapters {
+  margin-block: 1.5rem;
+  max-width: 72ch;
+}
+.lesson-chapter {
+  border-block-end: 1px solid var(--line, #d8dfeb);
+  padding-block: 0.5rem 1rem;
+  overflow-wrap: anywhere;
+}
+.lesson-chapter summary {
+  min-height: 48px;
+  padding-block: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.lesson-chapter p,
+.lesson-chapter li {
+  line-height: 1.75;
+}
+.lesson-chapter li + li {
+  margin-block-start: 0.6rem;
+}
+.lesson-chapter ol {
+  padding-inline-start: 1.4rem;
+}
+.chapter-misconception {
+  border-inline-start: 3px solid #244edb;
+  padding-inline-start: 1rem;
+}
+
+/* EDU-26: curriculum navigation and saved design drafts use the existing reading rhythm. */
+.pathway-filter {
+  display: grid;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+  max-width: 42rem;
+}
+.pathway-filter label,
+.design-field label {
+  font-weight: 600;
+}
+.pathway-filter select {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.6rem;
+  font: inherit;
+  color: inherit;
+  background: #fff;
+  border: 1px solid #d8dfeb;
+  border-radius: 8px;
+}
+.design-draft {
+  margin: 2rem 0;
+  border-top: 2px solid #d8dfeb;
+  padding-top: 1.5rem;
+  max-width: 48rem;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.design-field {
+  display: grid;
+  gap: 0.6rem;
+  margin: 1.5rem 0;
+}
+.design-field textarea {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  resize: vertical;
+  font: inherit;
+  line-height: 1.65;
+  color: #17233d;
+  background: #fff;
+  border: 1px solid #d8dfeb;
+  border-radius: 8px;
+  padding: 0.75rem;
+}
+.design-field textarea:focus-visible,
+.pathway-filter select:focus-visible {
+  outline: 3px solid #244edb;
+  outline-offset: 3px;
+}
+.design-draft li {
+  margin: 0.75rem 0;
+}
+.track-list button {
+  white-space: normal;
+  text-align: left;
+}

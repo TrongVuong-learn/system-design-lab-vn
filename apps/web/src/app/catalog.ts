@@ -52,15 +52,15 @@ export const levels = [
     icon: 'book',
   },
 ];
-export const tracks = [
-  'AI / ML Systems',
-  'Data Engineering',
-  'Search & Recommendation',
-  'Realtime & Collaboration',
-  'Media & Streaming',
-  'Cloud & Platform',
-  'Hệ thống nghiệp vụ',
-];
+export const pathways = data.pathways;
+export const tracks = pathways.tracks;
+export function lessonLabel(id: string) {
+  if (pathways.capstones.includes(id)) return 'Bài tổng hợp';
+  if (pathways.cases.includes(id)) return 'Case thiết kế';
+  if (tracks.some((t) => t.lessonIds[0] === id)) return 'Nhánh chuyên sâu';
+  const lesson = lessons.find((l) => l.id === id);
+  return lesson?.designTask ? 'Bài thiết kế' : lesson?.chapters ? 'Bài cơ chế' : 'Bài nhập môn';
+}
 
 export const editorial = data.editorial;
 

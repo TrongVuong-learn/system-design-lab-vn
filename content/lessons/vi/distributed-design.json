@@ -1,0 +1,1541 @@
+[
+  {
+    "id": "distributed-order",
+    "version": 1,
+    "status": "beta",
+    "kind": "module-practice",
+    "level": "L3",
+    "moduleId": "L3.1",
+    "minutes": 30,
+    "title": "Hai máy không liên lạc được: ai đang đúng?",
+    "subtitle": "Hai bàn cùng giữ thông tin chỗ cuối.",
+    "objective": "Phân biệt partial failure, nhân quả, Lamport/vector clocks, các mô hình nhất quán và đánh đổi CAP/PACELC.",
+    "story": "Bàn A và B đều biết còn một chỗ. A nhận đăng ký nhưng đường tới B đứt. B nhận người khác. Ta phải quyết định lời hứa nào có thể giữ, thay vì gọi mọi trạng thái là “đã đồng bộ”.",
+    "explanation": "Timeout cho biết đã chờ quá lâu, không cho biết toàn bộ kết quả. Nhân quả không cần hai đồng hồ cùng giờ. Nhất quán là hợp đồng quan sát được. Chọn hành vi khi chia mạng và khi mạng bình thường.",
+    "limit": "Lịch sử nhỏ, không triển khai consensus; vector cố định hai nút, không xử lý thu gom metadata/membership.",
+    "terms": [
+      {
+        "name": "Lỗi một phần",
+        "english": "Partial failure",
+        "meaning": "Một phần hệ thống lỗi trong khi phần khác còn chạy."
+      },
+      {
+        "name": "Quan hệ nhân quả",
+        "english": "Happens-before",
+        "meaning": "Quan hệ từ thứ tự nội bộ và truyền thông điệp."
+      },
+      {
+        "name": "Như một điểm nguyên tử",
+        "english": "Linearizability",
+        "meaning": "Thao tác trông như xảy ra tại một điểm trong khoảng gọi–trả."
+      },
+      {
+        "name": "Điều kiện luôn phải giữ",
+        "english": "invariant",
+        "meaning": "Quy tắc dữ liệu không được vi phạm, kể cả khi có lỗi; ví dụ số vé đã xác nhận không vượt sức chứa."
+      },
+      {
+        "name": "Thông báo xác nhận",
+        "english": "ACK",
+        "meaning": "Phản hồi cho biết một bước đã được bên nhận xác nhận. Phải đọc hợp đồng để biết đó là nhận, lưu bền hay áp dụng."
+      },
+      {
+        "name": "Thử lại",
+        "english": "retry",
+        "meaning": "Gửi hoặc thực hiện lại một thao tác sau lỗi/chờ quá hạn. Lần đầu có thể đã có hiệu ứng nên phải xét xử lý trùng."
+      },
+      {
+        "name": "Hết thời gian chờ",
+        "english": "timeout",
+        "meaning": "Bên gọi dừng chờ khi vượt thời hạn. Điều này không chứng minh bên nhận chưa thực hiện thao tác."
+      },
+      {
+        "name": "Quay về trạng thái trước",
+        "english": "rollback",
+        "meaning": "Khôi phục theo cơ chế cụ thể. Quay lại bản code cũ không tự hoàn tác dữ liệu hoặc giao dịch ở hệ thống khác."
+      },
+      {
+        "name": "Cấu trúc dữ liệu đã quy định",
+        "english": "schema",
+        "meaning": "Hợp đồng về trường, kiểu và ràng buộc. Dữ liệu đúng cấu trúc vẫn có thể sai về nội dung nghiệp vụ."
+      }
+    ],
+    "chapters": {
+      "version": 1,
+      "items": [
+        {
+          "id": "unknown",
+          "title": "Timeout cho biết đã chờ quá lâu, không cho biết toàn bộ kết quả",
+          "explanation": "Partial failure nghĩa một phần vẫn hoạt động khi phần khác lỗi/chậm. Một request có thể chưa đến, đang chạy hoặc đã commit nhưng response mất. Partition làm hai nhóm không trao đổi được; nó không buộc mọi máy phải dừng.",
+          "example": "A commit phiếu P rồi response rơi. Client timeout. Trạng thái đúng là chưa biết kết quả tại client; gửi yêu cầu mới với ID mới có thể tạo phiếu thứ hai.",
+          "steps": [
+            "Đánh dấu gửi, commit và nhận response trên ba mốc riêng.",
+            "Thử cắt đường ở mỗi mốc và chỉ ghi điều client thực sự biết."
+          ],
+          "misconception": "Không được đồng nhất timeout với rollback.",
+          "sourceIds": [
+            "cap-paper",
+            "retry-aws"
+          ]
+        },
+        {
+          "id": "clocks",
+          "title": "Nhân quả không cần hai đồng hồ cùng giờ",
+          "explanation": "Happens-before gồm thứ tự trong một process, gửi trước nhận và tính bắc cầu. Lamport tăng theo sự kiện và nhận max(local,received)+1, bảo đảm nhân quả kéo theo thứ tự số; chiều ngược không đúng. Vector clock theo thành phần có thể nhận biết hai version không so sánh được trong mô hình thành viên đã xác định.",
+          "example": "A gửi ở Lamport 4; B đang 2 nhận thành 5. Hai vector [2,0] và [0,3] không cái nào ≤ cái kia theo mọi thành phần, nên chúng đồng thời theo mô hình nhân quả.",
+          "steps": [
+            "Tính max(2,4)+1=5 khi B nhận.",
+            "So từng thành phần hai vector; đừng lấy tổng để suy ra nhân quả."
+          ],
+          "misconception": "Timestamp nhỏ hơn không chứng minh sự kiện gây ra sự kiện kia; đồng hồ tường còn có thể lệch.",
+          "sourceIds": [
+            "lamport-clocks",
+            "dynamo-paper"
+          ]
+        },
+        {
+          "id": "models",
+          "title": "Nhất quán là hợp đồng quan sát được",
+          "explanation": "Linearizability làm mỗi thao tác như có một điểm nguyên tử giữa lúc gọi/trả và giữ thứ tự thực khi thao tác không chồng lấn. Causal consistency giữ quan hệ nhân quả nhưng có thể khác thứ tự các việc độc lập. Eventual convergence cần cập nhật được truyền và cơ chế giải quyết xung đột, không hứa thời gian cụ thể.",
+          "example": "W(x=1) trả xong rồi R(x) mới bắt đầu. Nếu không có ghi xen giữa, đọc 0 vi phạm linearizability. Hai ghi đồng thời phải được xét theo hợp đồng cụ thể.",
+          "steps": [
+            "Vẽ khoảng bắt đầu–kết thúc của từng thao tác.",
+            "Tìm thứ tự tuần tự hợp lệ giữ thứ tự thực và kết quả đọc."
+          ],
+          "misconception": "ACID consistency là giữ invariant của ứng dụng, khác consistency của lịch sử phân tán.",
+          "sourceIds": [
+            "cap-paper",
+            "lamport-clocks"
+          ]
+        },
+        {
+          "id": "cap",
+          "title": "Chọn hành vi khi chia mạng và khi mạng bình thường",
+          "explanation": "Trong mô hình CAP, khi có partition không thể đồng thời giữ linearizability và đáp ứng mọi yêu cầu tới nút không lỗi. Đó không là quy tắc chọn hai nhãn tùy ý. PACELC nhắc thêm đánh đổi latency/consistency khi không partition; lựa chọn còn tùy thao tác và thiết kế.",
+          "example": "Chỗ cuối không được bán hai lần: khi A/B không phối hợp, có thể chỉ phía có thẩm quyền nhận hoặc tạm từ chối. Trang tin chấp nhận dữ liệu cũ có thể tiếp tục đọc với nhãn phù hợp.",
+          "steps": [
+            "Chốt invariant trước khi chọn có nhận ghi ở cả hai phía.",
+            "Khi mạng tốt, đo chi phí chờ phối hợp thay vì cho rằng đánh đổi biến mất."
+          ],
+          "misconception": "Availability trong CAP không phải phần trăm uptime của SLA.",
+          "sourceIds": [
+            "cap-paper",
+            "pacelc"
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "version": 1,
+      "items": [
+        {
+          "id": "unknown",
+          "text": "Client timeout sau khi A commit. Có thể kết luận P chưa tồn tại?",
+          "options": [
+            "Có, vì client không thấy response.",
+            "Không; cần tra trạng thái hoặc retry an toàn theo định danh.",
+            "Có, vì partition xóa dữ liệu."
+          ],
+          "answer": 1,
+          "explanation": "A commit phiếu P rồi response rơi. Client timeout. Trạng thái đúng là chưa biết kết quả tại client; gửi yêu cầu mới với ID mới có thể tạo phiếu thứ hai. Không được đồng nhất timeout với rollback.",
+          "sourceIds": [
+            "cap-paper",
+            "retry-aws"
+          ]
+        },
+        {
+          "id": "clocks",
+          "text": "Hai vector [2,0] và [0,3] cho biết gì?",
+          "options": [
+            "Không so sánh được; hai version đồng thời theo mô hình.",
+            "[0,3] chắc biết [2,0] vì tổng lớn hơn.",
+            "Hai version giống hệt nhau."
+          ],
+          "answer": 0,
+          "explanation": "A gửi ở Lamport 4; B đang 2 nhận thành 5. Hai vector [2,0] và [0,3] không cái nào ≤ cái kia theo mọi thành phần, nên chúng đồng thời theo mô hình nhân quả. Timestamp nhỏ hơn không chứng minh sự kiện gây ra sự kiện kia; đồng hồ tường còn có thể lệch.",
+          "sourceIds": [
+            "lamport-clocks",
+            "dynamo-paper"
+          ]
+        },
+        {
+          "id": "models",
+          "text": "W(1) đã trả xong, R mới gọi đọc 0, không ghi khác. Có linearizable không?",
+          "options": [
+            "Không, vì đọc mới phải thấy ghi đã hoàn tất.",
+            "Có vì eventual luôn đồng nghĩa linearizable.",
+            "Có nếu đồng hồ R chậm."
+          ],
+          "answer": 0,
+          "explanation": "W(x=1) trả xong rồi R(x) mới bắt đầu. Nếu không có ghi xen giữa, đọc 0 vi phạm linearizability. Hai ghi đồng thời phải được xét theo hợp đồng cụ thể. ACID consistency là giữ invariant của ứng dụng, khác consistency của lịch sử phân tán.",
+          "sourceIds": [
+            "cap-paper",
+            "lamport-clocks"
+          ]
+        },
+        {
+          "id": "cap",
+          "text": "Muốn không bán hai lần chỗ cuối khi A/B đứt liên lạc, phương án nào hợp lý?",
+          "options": [
+            "Giới hạn quyền ghi hoặc chờ/từ chối ở phía không bảo đảm invariant.",
+            "Cả hai xác nhận độc lập rồi gọi đó là linearizable.",
+            "Chỉ đổi tên database thành CP."
+          ],
+          "answer": 0,
+          "explanation": "Chỗ cuối không được bán hai lần: khi A/B không phối hợp, có thể chỉ phía có thẩm quyền nhận hoặc tạm từ chối. Trang tin chấp nhận dữ liệu cũ có thể tiếp tục đọc với nhãn phù hợp. Availability trong CAP không phải phần trăm uptime của SLA.",
+          "sourceIds": [
+            "cap-paper",
+            "pacelc"
+          ]
+        }
+      ]
+    },
+    "prediction": {
+      "text": "Hai bản đều trả lời ngay khi không liên lạc có tự bảo đảm chỗ cuối không bán hai lần?",
+      "options": [
+        "Có; mỗi máy đều nhanh là đủ.",
+        "Không; cần cơ chế quyền ghi hoặc phối hợp phù hợp."
+      ],
+      "answer": 1,
+      "explanation": "Tính đúng phải xét cùng invariant qua hai nơi."
+    },
+    "challenge": {
+      "text": "Chat cho phép nhận tin offline nhưng đặt vé không được vượt chỗ. Có nên ép cùng chính sách ghi?",
+      "options": [
+        "Có; một nhãn CAP áp dụng mọi thao tác.",
+        "Có; timestamp giải quyết mọi xung đột.",
+        "Không; chọn theo invariant và hợp đồng từng luồng."
+      ],
+      "answer": 2,
+      "explanation": "Đáp ứng nhanh và tính đúng có đánh đổi khác nhau theo nghiệp vụ."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Theo dấu nơi giữ trạng thái và điều đã được xác nhận.",
+        "Tính đúng phải xét cùng invariant qua hai nơi."
+      ],
+      "challenge": [
+        "Kiểm tra yêu cầu mới; tìm lịch thao tác có thể làm phương án sai.",
+        "Đáp ứng nhanh và tính đúng có đánh đổi khác nhau theo nghiệp vụ."
+      ]
+    },
+    "sources": [
+      {
+        "title": "Gilbert và Lynch — Perspectives on CAP",
+        "url": "https://groups.csail.mit.edu/tds/papers/Gilbert/Brewer2.pdf"
+      },
+      {
+        "title": "AWS Builders Library — Timeouts, retries and jitter",
+        "url": "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/"
+      },
+      {
+        "title": "Leslie Lamport — Time, clocks and ordering (1978)",
+        "url": "https://lamport.azurewebsites.net/pubs/time-clocks.pdf"
+      },
+      {
+        "title": "Amazon — Dynamo paper (2007)",
+        "url": "https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf"
+      },
+      {
+        "title": "Daniel Abadi — Consistency tradeoffs in distributed databases (2012)",
+        "url": "https://www.cs.umd.edu/~abadi/papers/abadi-pacelc.pdf"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-distributed-order",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L3-01",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Hai bàn cùng giữ thông tin chỗ cuối.",
+      "context": "Bàn A và B đều biết còn một chỗ. A nhận đăng ký nhưng đường tới B đứt. B nhận người khác. Ta phải quyết định lời hứa nào có thể giữ, thay vì gọi mọi trạng thái là “đã đồng bộ”.",
+      "requirements": [
+        "Phân biệt partial failure, nhân quả, Lamport/vector clocks, các mô hình nhất quán và đánh đổi CAP/PACELC.",
+        "Giải thích được một tình huống lỗi và điều kiện để phương án còn đúng."
+      ],
+      "activityRef": "module-practice",
+      "experimentSteps": [
+        "Theo từng bước trong các ví dụ và tự tính kết quả trước khi xem giải thích.",
+        "Chọn phương án cho từng tình huống, kiểm tra và sửa lựa chọn.",
+        "Áp dụng sang yêu cầu mới; nêu điều kiện và giới hạn của quyết định."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Không được đồng nhất timeout với rollback.",
+        "Availability trong CAP không phải phần trăm uptime của SLA."
+      ],
+      "limitations": "Lịch sử nhỏ, không triển khai consensus; vector cố định hai nút, không xử lý thu gom metadata/membership."
+    }
+  },
+  {
+    "id": "consensus-raft",
+    "version": 1,
+    "status": "beta",
+    "kind": "module-practice",
+    "level": "L3",
+    "moduleId": "L3.2",
+    "minutes": 30,
+    "title": "Ba bản sao thống nhất quyết định bằng cách nào?",
+    "subtitle": "Leader mất sau khi ghi log nhưng chưa trả lời.",
+    "objective": "Theo term, vote, log, commit và apply trong Raft; tách safety/liveness và so vai trò consensus/Paxos.",
+    "story": "Ba nút A,B,C giữ nhật ký đặt chỗ. Một nút dẫn dắt ghi lệnh, nhưng chỉ có log cục bộ chưa đủ để gọi là quyết định của cả nhóm. Ta lần theo các mốc thay vì coi một cuộc bầu chọn là toàn bộ giao thức.",
+    "explanation": "Cùng lệnh, cùng thứ tự, cùng máy trạng thái. Bầu leader theo term và điều kiện log. Có log khác với được commit. Giữ an toàn có thể phải dừng tiến triển.",
+    "limit": "Walkthrough Raft, không engine thực thi đầy đủ hoặc chứng minh hình thức; không dạy Paxos như giao thức tương đương từng bước.",
+    "terms": [
+      {
+        "name": "Nhiệm kỳ",
+        "english": "Term",
+        "meaning": "Số logic phân biệt vòng lãnh đạo trong Raft."
+      },
+      {
+        "name": "Cam kết log",
+        "english": "Commit",
+        "meaning": "Entry đã đạt điều kiện không bị thay theo protocol."
+      },
+      {
+        "name": "An toàn",
+        "english": "Safety",
+        "meaning": "Không xuất hiện kết quả bị cấm."
+      },
+      {
+        "name": "Tiến triển",
+        "english": "Liveness",
+        "meaning": "Cuối cùng có kết quả khi điều kiện mô hình cho phép."
+      },
+      {
+        "name": "Số nút cần tham gia",
+        "english": "quorum",
+        "meaning": "Tập nút đủ điều kiện để chấp nhận một thao tác theo giao thức. Điều kiện còn phụ thuộc membership, phiên bản và cách xử lý xung đột."
+      },
+      {
+        "name": "Thử lại",
+        "english": "retry",
+        "meaning": "Gửi hoặc thực hiện lại một thao tác sau lỗi/chờ quá hạn. Lần đầu có thể đã có hiệu ứng nên phải xét xử lý trùng."
+      },
+      {
+        "name": "Hết thời gian chờ",
+        "english": "timeout",
+        "meaning": "Bên gọi dừng chờ khi vượt thời hạn. Điều này không chứng minh bên nhận chưa thực hiện thao tác."
+      },
+      {
+        "name": "Cấu trúc dữ liệu đã quy định",
+        "english": "schema",
+        "meaning": "Hợp đồng về trường, kiểu và ràng buộc. Dữ liệu đúng cấu trúc vẫn có thể sai về nội dung nghiệp vụ."
+      }
+    ],
+    "chapters": {
+      "version": 1,
+      "items": [
+        {
+          "id": "machine",
+          "title": "Cùng lệnh, cùng thứ tự, cùng máy trạng thái",
+          "explanation": "Replicated state machine áp dụng chuỗi lệnh xác định để các bản có cùng trạng thái. Consensus chọn chuỗi được chấp nhận dù có lỗi trong mô hình. Safety là không có quyết định mâu thuẫn; liveness là tiếp tục có quyết định khi điều kiện tiến triển được thỏa.",
+          "example": "Trạng thái còn 2 chỗ. Log [đặt A, đặt B] đưa về 0 tại mọi bản nếu cùng quy tắc; một bản bỏ qua lệnh B sẽ lệch dù cùng code.",
+          "steps": [
+            "Bắt đầu từ cùng trạng thái 2.",
+            "Áp dụng từng lệnh cùng thứ tự và so kết quả, không lấy đồng hồ tường để sắp."
+          ],
+          "misconception": "Consensus không làm code nghiệp vụ sai thành đúng hoặc chống mọi lỗi Byzantine.",
+          "sourceIds": [
+            "raft-paper"
+          ]
+        },
+        {
+          "id": "votes",
+          "title": "Bầu leader theo term và điều kiện log",
+          "explanation": "Raft dùng term tăng, mỗi nút tối đa một phiếu mỗi term, đa số và kiểm độ mới log ứng viên. Timeout bầu cử ngẫu nhiên hỗ trợ tiến triển, không chứng minh nút cũ chết. Nút thấy term cao hơn cập nhật vai trò theo protocol.",
+          "example": "Cụm ba nút cần hai phiếu. A chỉ liên lạc được chính mình không tự bầu leader hợp lệ bằng một phiếu; B và C có thể đạt đa số nếu điều kiện log/vote phù hợp.",
+          "steps": [
+            "Đếm đa số của ba là hai.",
+            "Kiểm cả term, phiếu đã dùng và độ mới log trước trả lời bầu."
+          ],
+          "misconception": "Đa số phiếu không đủ nếu bỏ quy tắc vote/log; không tùy ý viết lại membership.",
+          "sourceIds": [
+            "raft-paper"
+          ]
+        },
+        {
+          "id": "commit",
+          "title": "Có log khác với được commit",
+          "explanation": "Leader Raft nhân log và chỉ trực tiếp tiến commit bằng đếm đa số cho entry của term hiện tại, theo quy tắc giao thức. Các entry trước đó được commit gián tiếp qua prefix. Commit khác apply; log chưa commit có thể bị thay khi đổi leader.",
+          "example": "Term 4: A thêm X, B lưu X, C chưa có. Nếu X thuộc term 4 và các điều kiện Raft thỏa, đa số A/B cho phép commit. A có X một mình thì chưa đủ.",
+          "steps": [
+            "Đánh dấu entry trên từng nút, term của X và commitIndex.",
+            "Chỉ sau commit mới áp dụng theo thứ tự; kiểm response và retry client riêng."
+          ],
+          "misconception": "Đếm bản sao của entry term cũ rồi tự commit bỏ qua quy tắc term có thể sai.",
+          "sourceIds": [
+            "raft-paper"
+          ]
+        },
+        {
+          "id": "progress",
+          "title": "Giữ an toàn có thể phải dừng tiến triển",
+          "explanation": "Một nhóm thiểu số không được tự commit khi không đủ quorum. Để tiến triển cần thời gian có leader ổn định và liên lạc đủ nút. Paxos cũng giải bài toán đồng thuận với vai trò/pha khác; không phải chọn máy theo bốc thăm rồi tin mọi lệnh. Thay cấu hình phải dùng protocol an toàn.",
+          "example": "Partition 2+1: phía hai nút có khả năng tiến triển khi điều kiện thỏa, phía một nút không được tự tạo quyết định mâu thuẫn. Đọc cũng cần điều kiện bảo đảm, không cứ tự xưng leader là đọc mới nhất.",
+          "steps": [
+            "Thử chia 2+1 rồi cho phía thiểu số nhận ghi.",
+            "Nêu vì sao từ chối có thể giữ safety, rồi nêu điều kiện để tiếp tục khi nối lại."
+          ],
+          "misconception": "Consensus không bảo đảm luôn sẵn sàng dưới mọi độ trễ và mọi số lỗi.",
+          "sourceIds": [
+            "raft-paper",
+            "cap-paper"
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "version": 1,
+      "items": [
+        {
+          "id": "machine",
+          "text": "Các replica có cùng code nhưng áp dụng khác log có chắc cùng state?",
+          "options": [
+            "Có, cùng code là đủ.",
+            "Không; còn cần cùng trạng thái đầu và chuỗi lệnh.",
+            "Có nếu đổi tên leader."
+          ],
+          "answer": 1,
+          "explanation": "Trạng thái còn 2 chỗ. Log [đặt A, đặt B] đưa về 0 tại mọi bản nếu cùng quy tắc; một bản bỏ qua lệnh B sẽ lệch dù cùng code. Consensus không làm code nghiệp vụ sai thành đúng hoặc chống mọi lỗi Byzantine.",
+          "sourceIds": [
+            "raft-paper"
+          ]
+        },
+        {
+          "id": "votes",
+          "text": "Một nút trong cụm ba chỉ có một phiếu có đủ trở thành leader mới?",
+          "options": [
+            "Có; timeout tự cho quyền.",
+            "Có nếu là máy nhanh nhất.",
+            "Không; cần đa số và điều kiện bầu hợp lệ."
+          ],
+          "answer": 2,
+          "explanation": "Cụm ba nút cần hai phiếu. A chỉ liên lạc được chính mình không tự bầu leader hợp lệ bằng một phiếu; B và C có thể đạt đa số nếu điều kiện log/vote phù hợp. Đa số phiếu không đủ nếu bỏ quy tắc vote/log; không tùy ý viết lại membership.",
+          "sourceIds": [
+            "raft-paper"
+          ]
+        },
+        {
+          "id": "commit",
+          "text": "X chỉ ở A, chưa tới B/C. Có thể gọi X đã commit theo đa số?",
+          "options": [
+            "Chưa; mới có một trong ba.",
+            "Có; leader luôn đúng.",
+            "Có nếu client đã timeout."
+          ],
+          "answer": 0,
+          "explanation": "Term 4: A thêm X, B lưu X, C chưa có. Nếu X thuộc term 4 và các điều kiện Raft thỏa, đa số A/B cho phép commit. A có X một mình thì chưa đủ. Đếm bản sao của entry term cũ rồi tự commit bỏ qua quy tắc term có thể sai.",
+          "sourceIds": [
+            "raft-paper"
+          ]
+        },
+        {
+          "id": "progress",
+          "text": "Mất liên lạc với đa số, nên tiếp tục commit tùy ý để giữ uptime?",
+          "options": [
+            "Có; uptime cao hơn nghĩa đúng hơn.",
+            "Có nếu chỉ ghi một ký tự.",
+            "Không; điều đó có thể phá safety."
+          ],
+          "answer": 2,
+          "explanation": "Partition 2+1: phía hai nút có khả năng tiến triển khi điều kiện thỏa, phía một nút không được tự tạo quyết định mâu thuẫn. Đọc cũng cần điều kiện bảo đảm, không cứ tự xưng leader là đọc mới nhất. Consensus không bảo đảm luôn sẵn sàng dưới mọi độ trễ và mọi số lỗi.",
+          "sourceIds": [
+            "raft-paper",
+            "cap-paper"
+          ]
+        }
+      ]
+    },
+    "prediction": {
+      "text": "Log chỉ có trên leader có đồng nghĩa quyết định của nhóm?",
+      "options": [
+        "Có, leader không cần các nút khác.",
+        "Không; còn điều kiện commit của protocol."
+      ],
+      "answer": 1,
+      "explanation": "Log chưa commit có thể bị thay."
+    },
+    "challenge": {
+      "text": "Cụm năm nút mất liên lạc thành 2+2+1. Nhóm nào tự đủ đa số?",
+      "options": [
+        "Hai nhóm hai đều đủ.",
+        "Nhóm một vì ít tranh chấp.",
+        "Không nhóm nào; đa số cần ba."
+      ],
+      "answer": 2,
+      "explanation": "Không có quorum ba trong từng nhóm, nên cần khôi phục liên lạc hoặc quy trình phục hồi được thiết kế."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Theo dấu nơi giữ trạng thái và điều đã được xác nhận.",
+        "Log chưa commit có thể bị thay."
+      ],
+      "challenge": [
+        "Kiểm tra yêu cầu mới; tìm lịch thao tác có thể làm phương án sai.",
+        "Không có quorum ba trong từng nhóm, nên cần khôi phục liên lạc hoặc quy trình phục hồi được thiết kế."
+      ]
+    },
+    "sources": [
+      {
+        "title": "Ongaro và Ousterhout — Raft (2014)",
+        "url": "https://raft.github.io/raft.pdf"
+      },
+      {
+        "title": "Gilbert và Lynch — Perspectives on CAP",
+        "url": "https://groups.csail.mit.edu/tds/papers/Gilbert/Brewer2.pdf"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-consensus-raft",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L3-02",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Leader mất sau khi ghi log nhưng chưa trả lời.",
+      "context": "Ba nút A,B,C giữ nhật ký đặt chỗ. Một nút dẫn dắt ghi lệnh, nhưng chỉ có log cục bộ chưa đủ để gọi là quyết định của cả nhóm. Ta lần theo các mốc thay vì coi một cuộc bầu chọn là toàn bộ giao thức.",
+      "requirements": [
+        "Theo term, vote, log, commit và apply trong Raft; tách safety/liveness và so vai trò consensus/Paxos.",
+        "Giải thích được một tình huống lỗi và điều kiện để phương án còn đúng."
+      ],
+      "activityRef": "module-practice",
+      "experimentSteps": [
+        "Theo từng bước trong các ví dụ và tự tính kết quả trước khi xem giải thích.",
+        "Chọn phương án cho từng tình huống, kiểm tra và sửa lựa chọn.",
+        "Áp dụng sang yêu cầu mới; nêu điều kiện và giới hạn của quyết định."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Consensus không làm code nghiệp vụ sai thành đúng hoặc chống mọi lỗi Byzantine.",
+        "Consensus không bảo đảm luôn sẵn sàng dưới mọi độ trễ và mọi số lỗi."
+      ],
+      "limitations": "Walkthrough Raft, không engine thực thi đầy đủ hoặc chứng minh hình thức; không dạy Paxos như giao thức tương đương từng bước."
+    }
+  },
+  {
+    "id": "quorum-fencing",
+    "version": 1,
+    "status": "beta",
+    "kind": "module-practice",
+    "level": "L3",
+    "moduleId": "L3.3",
+    "minutes": 30,
+    "title": "Người giữ khóa cũ tỉnh lại: ai được ghi?",
+    "subtitle": "Lease hết hạn trong lúc worker bị dừng lâu.",
+    "objective": "Kiểm giao quorum có điều kiện, membership, failure detection, lease và fencing tại tài nguyên.",
+    "story": "A nhận quyền ghi rồi bị pause. Lease của A hết, B được cấp quyền mới và ghi. A tỉnh lại vẫn giữ biến “tôi có khóa” trong RAM; tài nguyên phải nhận ra yêu cầu cũ.",
+    "explanation": "Quorum giao nhau chưa là toàn bộ thuật toán. Cần biết các phiếu thuộc cấu hình nào. Hết hạn quyền không dừng được chương trình cũ. Tài nguyên phải từ chối token cũ.",
+    "limit": "Ví dụ token đơn giản; không triển khai lock service, không chứng minh an toàn theo đồng hồ thực.",
+    "terms": [
+      {
+        "name": "Tập xác nhận",
+        "english": "Quorum",
+        "meaning": "Tập nút đủ điều kiện tham gia đọc/ghi hoặc quyết định."
+      },
+      {
+        "name": "Quyền có hạn",
+        "english": "Lease",
+        "meaning": "Quyền sử dụng có thời hạn và giả định thời gian."
+      },
+      {
+        "name": "Chặn chủ cũ",
+        "english": "Fencing",
+        "meaning": "Cơ chế tài nguyên từ chối quyền ghi lỗi thời."
+      },
+      {
+        "name": "Thông báo xác nhận",
+        "english": "ACK",
+        "meaning": "Phản hồi cho biết một bước đã được bên nhận xác nhận. Phải đọc hợp đồng để biết đó là nhận, lưu bền hay áp dụng."
+      },
+      {
+        "name": "Thử lại",
+        "english": "retry",
+        "meaning": "Gửi hoặc thực hiện lại một thao tác sau lỗi/chờ quá hạn. Lần đầu có thể đã có hiệu ứng nên phải xét xử lý trùng."
+      },
+      {
+        "name": "Hết thời gian chờ",
+        "english": "timeout",
+        "meaning": "Bên gọi dừng chờ khi vượt thời hạn. Điều này không chứng minh bên nhận chưa thực hiện thao tác."
+      },
+      {
+        "name": "Cấu trúc dữ liệu đã quy định",
+        "english": "schema",
+        "meaning": "Hợp đồng về trường, kiểu và ràng buộc. Dữ liệu đúng cấu trúc vẫn có thể sai về nội dung nghiệp vụ."
+      }
+    ],
+    "chapters": {
+      "version": 1,
+      "items": [
+        {
+          "id": "intersection",
+          "title": "Quorum giao nhau chưa là toàn bộ thuật toán",
+          "explanation": "Với cùng tập N replica cố định, W nơi ACK ghi và R nơi đọc thỏa R+W>N thì tập đọc giao tập ghi. Còn cần quy tắc version, xử lý ghi đồng thời/chưa hoàn tất, loại quorum và membership để kết luận độ nhất quán.",
+          "example": "N=5,W=3,R=3: hai tập bất kỳ có ít nhất một nút chung. Nhưng chỉ đọc một giá trị tùy tiện từ ba phản hồi có thể bỏ qua version mới.",
+          "steps": [
+            "Tính 3+3>5 và xác định điểm giao.",
+            "Kiểm cách chọn version và bảo đảm của ghi đã ACK; không dừng ở phép cộng."
+          ],
+          "misconception": "R+W>N tự nó không chứng minh linearizability trong mọi hệ thống.",
+          "sourceIds": [
+            "dynamo-paper",
+            "cap-paper"
+          ]
+        },
+        {
+          "id": "members",
+          "title": "Cần biết các phiếu thuộc cấu hình nào",
+          "explanation": "Membership là tập nút có quyền tham gia. Đổi tập tùy tiện có thể tạo hai đa số không giao nhau. Failure detector dựa thời gian chỉ nghi ngờ; giao thức đổi cấu hình cần bảo toàn giao/điều kiện safety.",
+          "example": "Cấu hình cũ {A,B,C}, mới {D,E,F}. Đa số A/B và D/E không giao. Chỉ đổi file cấu hình cùng tên không bảo đảm không có hai leader.",
+          "steps": [
+            "Vẽ đa số của tập cũ và mới.",
+            "Dùng quy trình chuyển cấu hình của protocol, không tự bỏ nút vì timeout đơn lẻ."
+          ],
+          "misconception": "Hai “đa số” ở hai tập khác nhau không nhất thiết chia sẻ một nút.",
+          "sourceIds": [
+            "raft-paper"
+          ]
+        },
+        {
+          "id": "lease",
+          "title": "Hết hạn quyền không dừng được chương trình cũ",
+          "explanation": "Lease cho quyền có hạn theo giả định thời gian. Pause/GC/network delay có thể làm client tiếp tục sau khi quyền hết. Chỉ kiểm lease trước thao tác không đủ nếu bị pause giữa kiểm và ghi.",
+          "example": "A kiểm lease còn hạn → pause 30s → B có quyền mới và ghi → A tiếp tục gửi dữ liệu cũ. Không có kiểm tra tại tài nguyên thì A có thể ghi đè B.",
+          "steps": [
+            "Đặt pause ngay sau kiểm quyền của A.",
+            "Cho B nhận quyền và ghi, rồi thử cho A gửi yêu cầu cũ."
+          ],
+          "misconception": "Khóa phân tán không giống mutex trong một process; người cũ có thể còn chạy.",
+          "sourceIds": [
+            "fencing"
+          ]
+        },
+        {
+          "id": "token",
+          "title": "Tài nguyên phải từ chối token cũ",
+          "explanation": "Fencing token tăng theo lần cấp quyền. Tài nguyên lưu token cao nhất được chấp nhận và từ chối thấp hơn; việc so token và ghi cần nguyên tử. Nguồn cấp token cũng phải có bảo đảm thích hợp; chỉ gắn số ở client không đủ.",
+          "example": "A token 7, B token 8. Kho đã chấp nhận 8 thì từ chối ghi 7 đến muộn. Retry cùng token và nhiều thao tác còn cần ID/sequence theo hợp đồng; fencing không tự là dedup.",
+          "steps": [
+            "B ghi token 8 và cập nhật mốc 8 nguyên tử.",
+            "Gửi A với 7: từ chối; kiểm tài nguyên thật có thực thi quy tắc."
+          ],
+          "misconception": "Một token không được nơi nhận kiểm tra chỉ là nhãn.",
+          "sourceIds": [
+            "fencing"
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "version": 1,
+      "items": [
+        {
+          "id": "intersection",
+          "text": "N=5,R=3,W=3 đủ để kết luận mọi cách đọc đều linearizable?",
+          "options": [
+            "Không; mới chứng minh giao tập dưới giả định cố định.",
+            "Có; không cần version hoặc protocol.",
+            "Có kể cả các tập nằm ở hai membership khác nhau."
+          ],
+          "answer": 0,
+          "explanation": "N=5,W=3,R=3: hai tập bất kỳ có ít nhất một nút chung. Nhưng chỉ đọc một giá trị tùy tiện từ ba phản hồi có thể bỏ qua version mới. R+W>N tự nó không chứng minh linearizability trong mọi hệ thống.",
+          "sourceIds": [
+            "dynamo-paper",
+            "cap-paper"
+          ]
+        },
+        {
+          "id": "members",
+          "text": "Đa số {A,B} và {D,E} từ hai cấu hình rời nhau có giao không?",
+          "options": [
+            "Có vì đều là đa số.",
+            "Không; đổi membership cần protocol an toàn.",
+            "Có vì tên dịch vụ giống nhau."
+          ],
+          "answer": 1,
+          "explanation": "Cấu hình cũ {A,B,C}, mới {D,E,F}. Đa số A/B và D/E không giao. Chỉ đổi file cấu hình cùng tên không bảo đảm không có hai leader. Hai “đa số” ở hai tập khác nhau không nhất thiết chia sẻ một nút.",
+          "sourceIds": [
+            "raft-paper"
+          ]
+        },
+        {
+          "id": "lease",
+          "text": "A đã kiểm lease trước pause. Khi tỉnh lại có chắc còn quyền?",
+          "options": [
+            "Có; kiểm một lần là vĩnh viễn.",
+            "Có; khóa tự giết process.",
+            "Không; quyền có thể đã hết trong lúc pause."
+          ],
+          "answer": 2,
+          "explanation": "A kiểm lease còn hạn → pause 30s → B có quyền mới và ghi → A tiếp tục gửi dữ liệu cũ. Không có kiểm tra tại tài nguyên thì A có thể ghi đè B. Khóa phân tán không giống mutex trong một process; người cũ có thể còn chạy.",
+          "sourceIds": [
+            "fencing"
+          ]
+        },
+        {
+          "id": "token",
+          "text": "Kho đã nhận token 8, yêu cầu token 7 tới sau. Làm gì?",
+          "options": [
+            "Chấp nhận vì tới sau thì mới hơn.",
+            "Xóa mốc 8 để chiều lòng cả hai.",
+            "Từ chối yêu cầu cũ theo quy tắc fencing."
+          ],
+          "answer": 2,
+          "explanation": "A token 7, B token 8. Kho đã chấp nhận 8 thì từ chối ghi 7 đến muộn. Retry cùng token và nhiều thao tác còn cần ID/sequence theo hợp đồng; fencing không tự là dedup. Một token không được nơi nhận kiểm tra chỉ là nhãn.",
+          "sourceIds": [
+            "fencing"
+          ]
+        }
+      ]
+    },
+    "prediction": {
+      "text": "Lease hết hạn có tự dừng worker giữ quyền cũ?",
+      "options": [
+        "Không; phải bảo vệ tác dụng ở nơi nhận.",
+        "Có; lease là lệnh kill."
+      ],
+      "answer": 0,
+      "explanation": "Pause hoặc message trễ có thể vượt thời hạn."
+    },
+    "challenge": {
+      "text": "Dịch vụ lưu file không hỗ trợ kiểm token nguyên tử. Chỉ thêm token vào request đã đủ chống ghi cũ?",
+      "options": [
+        "Đủ; token có phép thuật đồng bộ.",
+        "Chưa; cần nơi thực thi từ chối hoặc một cơ chế quyền ghi khác.",
+        "Đủ nếu token được in vào log."
+      ],
+      "answer": 1,
+      "explanation": "Safety phụ thuộc kiểm tại tài nguyên, không phải sự hiện diện của trường dữ liệu."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Theo dấu nơi giữ trạng thái và điều đã được xác nhận.",
+        "Pause hoặc message trễ có thể vượt thời hạn."
+      ],
+      "challenge": [
+        "Kiểm tra yêu cầu mới; tìm lịch thao tác có thể làm phương án sai.",
+        "Safety phụ thuộc kiểm tại tài nguyên, không phải sự hiện diện của trường dữ liệu."
+      ]
+    },
+    "sources": [
+      {
+        "title": "Amazon — Dynamo paper (2007)",
+        "url": "https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf"
+      },
+      {
+        "title": "Gilbert và Lynch — Perspectives on CAP",
+        "url": "https://groups.csail.mit.edu/tds/papers/Gilbert/Brewer2.pdf"
+      },
+      {
+        "title": "Ongaro và Ousterhout — Raft (2014)",
+        "url": "https://raft.github.io/raft.pdf"
+      },
+      {
+        "title": "Martin Kleppmann — Distributed locking (2016)",
+        "url": "https://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-quorum-fencing",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L3-03",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Lease hết hạn trong lúc worker bị dừng lâu.",
+      "context": "A nhận quyền ghi rồi bị pause. Lease của A hết, B được cấp quyền mới và ghi. A tỉnh lại vẫn giữ biến “tôi có khóa” trong RAM; tài nguyên phải nhận ra yêu cầu cũ.",
+      "requirements": [
+        "Kiểm giao quorum có điều kiện, membership, failure detection, lease và fencing tại tài nguyên.",
+        "Giải thích được một tình huống lỗi và điều kiện để phương án còn đúng."
+      ],
+      "activityRef": "module-practice",
+      "experimentSteps": [
+        "Theo từng bước trong các ví dụ và tự tính kết quả trước khi xem giải thích.",
+        "Chọn phương án cho từng tình huống, kiểm tra và sửa lựa chọn.",
+        "Áp dụng sang yêu cầu mới; nêu điều kiện và giới hạn của quyết định."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "R+W>N tự nó không chứng minh linearizability trong mọi hệ thống.",
+        "Một token không được nơi nhận kiểm tra chỉ là nhãn."
+      ],
+      "limitations": "Ví dụ token đơn giản; không triển khai lock service, không chứng minh an toàn theo đồng hồ thực."
+    }
+  },
+  {
+    "id": "distributed-workflows",
+    "version": 1,
+    "status": "beta",
+    "kind": "module-practice",
+    "level": "L3",
+    "moduleId": "L3.4",
+    "minutes": 30,
+    "title": "Ghi phiếu xong nhưng chưa gửi sự kiện thì sao?",
+    "subtitle": "Hai hệ thống có thể lỗi ở hai thời điểm khác nhau.",
+    "objective": "So 2PC, saga, outbox/inbox, CDC, event sourcing/CQRS và ranh giới exactly-once.",
+    "story": "Một lần đặt chỗ cần lưu phiếu, trừ chỗ và gửi thông báo. Nếu lưu xong rồi process chết trước gửi, dữ liệu và người nhận không còn khớp. Ta xác định ranh giới nguyên tử trước khi chọn mẫu thiết kế.",
+    "explanation": "Hai pha giữ quyết định nhưng có thể phải chờ. Bù trừ là một hành động mới. Giữ ý định gửi trong cùng transaction. Nguồn sự kiện khác bản phục vụ đọc.",
+    "limit": "Lịch giả định; không chạy 2PC hoặc tích hợp thanh toán; mỗi bảo đảm chỉ trong ranh giới được nêu.",
+    "terms": [
+      {
+        "name": "Chuẩn bị cam kết",
+        "english": "Prepare",
+        "meaning": "Participant lưu trạng thái sẵn sàng chấp hành quyết định toàn cục."
+      },
+      {
+        "name": "Bù trừ",
+        "english": "Compensation",
+        "meaning": "Hành động nghiệp vụ mới khắc phục tác động đã xảy ra."
+      },
+      {
+        "name": "Hộp gửi",
+        "english": "Outbox",
+        "meaning": "Ý định gửi event lưu cùng thay đổi nghiệp vụ."
+      },
+      {
+        "name": "Điều kiện luôn phải giữ",
+        "english": "invariant",
+        "meaning": "Quy tắc dữ liệu không được vi phạm, kể cả khi có lỗi; ví dụ số vé đã xác nhận không vượt sức chứa."
+      },
+      {
+        "name": "Thông báo xác nhận",
+        "english": "ACK",
+        "meaning": "Phản hồi cho biết một bước đã được bên nhận xác nhận. Phải đọc hợp đồng để biết đó là nhận, lưu bền hay áp dụng."
+      },
+      {
+        "name": "Thử lại",
+        "english": "retry",
+        "meaning": "Gửi hoặc thực hiện lại một thao tác sau lỗi/chờ quá hạn. Lần đầu có thể đã có hiệu ứng nên phải xét xử lý trùng."
+      },
+      {
+        "name": "Hết thời gian chờ",
+        "english": "timeout",
+        "meaning": "Bên gọi dừng chờ khi vượt thời hạn. Điều này không chứng minh bên nhận chưa thực hiện thao tác."
+      },
+      {
+        "name": "Quay về trạng thái trước",
+        "english": "rollback",
+        "meaning": "Khôi phục theo cơ chế cụ thể. Quay lại bản code cũ không tự hoàn tác dữ liệu hoặc giao dịch ở hệ thống khác."
+      },
+      {
+        "name": "Theo dõi thay đổi dữ liệu",
+        "english": "CDC",
+        "meaning": "Change Data Capture lấy các thay đổi từ nguồn để cập nhật nơi khác; không tự bảo đảm mọi hiệu ứng đúng một lần."
+      },
+      {
+        "name": "Cấu trúc dữ liệu đã quy định",
+        "english": "schema",
+        "meaning": "Hợp đồng về trường, kiểu và ràng buộc. Dữ liệu đúng cấu trúc vẫn có thể sai về nội dung nghiệp vụ."
+      },
+      {
+        "name": "Mốc để tiếp tục xử lý",
+        "english": "checkpoint",
+        "meaning": "Lưu vị trí và trạng thái phù hợp để phục hồi; hiệu ứng ở nơi khác còn cần transaction hoặc chống trùng."
+      },
+      {
+        "name": "Chạy lại dữ liệu đã ghi",
+        "english": "replay",
+        "meaning": "Đọc và áp dụng lại lịch sử theo quy tắc; cần tránh lặp hiệu ứng bên ngoài."
+      }
+    ],
+    "chapters": {
+      "version": 1,
+      "items": [
+        {
+          "id": "prepare",
+          "title": "Hai pha giữ quyết định nhưng có thể phải chờ",
+          "explanation": "2PC có pha chuẩn bị: participant ghi đủ trạng thái để cam kết thực hiện quyết định; sau đó coordinator ra commit/abort. Participant đã prepared không tự đoán abort khi chưa biết quyết định. Tài nguyên/khóa có thể bị giữ trong lúc chờ phục hồi.",
+          "example": "A và B đều prepared. Coordinator mất trước khi B nhận quyết định. B cần quy trình phục hồi/tra quyết định, không tự commit vì A còn sống.",
+          "steps": [
+            "Ghi trạng thái active → prepared → committed/aborted.",
+            "Thử coordinator mất sau chuẩn bị và liệt kê điều mỗi bên đã biết."
+          ],
+          "misconception": "2PC không đồng nghĩa luôn không chặn hoặc cùng một bước với consensus.",
+          "sourceIds": [
+            "two-phase"
+          ]
+        },
+        {
+          "id": "saga",
+          "title": "Bù trừ là một hành động mới",
+          "explanation": "Saga nối các transaction cục bộ; khi bước sau lỗi thì thực hiện hành động bù phù hợp. Compensation có thể thất bại và không xóa lịch sử đã quan sát; email đã đọc không thể “chưa từng gửi”. Cần trạng thái workflow, retry và đường can thiệp.",
+          "example": "Giữ chỗ thành công nhưng thu tiền thất bại xác định: trả lại chỗ theo phiên giữ hợp lệ. Nếu thu tiền timeout, tra kết quả trước khi vừa trả chỗ vừa thu lại.",
+          "steps": [
+            "Liệt kê từng trạng thái và lỗi chưa biết kết quả.",
+            "Chọn hành động bù có ID, retry và điều kiện; không ghi hoàn tất khi bù còn lỗi."
+          ],
+          "misconception": "Saga không mang isolation nguyên khối của một transaction database.",
+          "sourceIds": [
+            "saga-azure"
+          ]
+        },
+        {
+          "id": "outbox",
+          "title": "Giữ ý định gửi trong cùng transaction",
+          "explanation": "Transactional outbox lưu thay đổi nghiệp vụ và ý định event trong cùng transaction. Relay/CDC đưa event ra ngoài; relay có thể gửi lại. Inbox/dedup ở consumer cần cùng transaction với hiệu ứng cục bộ để tránh khe hở.",
+          "example": "DB commit phiếu S9 và outbox E9. Relay gửi E9 rồi chết trước đánh dấu đã gửi. E9 sẽ có thể gửi lại, nên consumer không được cộng hai lượt đăng ký.",
+          "steps": [
+            "Thử crash trước commit: không có cả phiếu lẫn event.",
+            "Thử crash sau gửi trước đánh dấu: event có thể lặp; kiểm consumer."
+          ],
+          "misconception": "Outbox giải khe hở ghi DB/gửi event, không tự loại mọi duplicate.",
+          "sourceIds": [
+            "outbox-aws",
+            "kafka-design"
+          ]
+        },
+        {
+          "id": "views",
+          "title": "Nguồn sự kiện khác bản phục vụ đọc",
+          "explanation": "Event sourcing lưu các sự kiện nghiệp vụ làm nguồn; replay tạo trạng thái theo version quy tắc. CQRS tách mô hình ghi và đọc, không bắt buộc event sourcing. CDC phản ánh thay đổi dữ liệu nhưng không tự chứa mọi ý định nghiệp vụ. View có thể trễ và cần rebuild/schema evolution.",
+          "example": "Log “đăng ký E1, hủy E2” tạo view còn 0 lượt. Nếu replay E1 hai lần không chống lặp thì view sai; nếu đổi ý nghĩa hủy mà không version thì replay có thể đổi kết quả lịch sử.",
+          "steps": [
+            "Nêu nguồn có thẩm quyền và checkpoint của view.",
+            "Thử rebuild rồi so invariant; tách replay dựng view khỏi gửi lại email."
+          ],
+          "misconception": "Replay dữ liệu không nên mặc nhiên lặp mọi tác dụng ngoài như thanh toán.",
+          "sourceIds": [
+            "kafka-design",
+            "outbox-aws"
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "version": 1,
+      "items": [
+        {
+          "id": "prepare",
+          "text": "B đã prepared nhưng chưa biết quyết định toàn cục. Có được tự abort vì chờ lâu?",
+          "options": [
+            "Có; timeout luôn là abort.",
+            "Không theo cách tùy tiện; phải theo protocol phục hồi quyết định.",
+            "Có; prepared nghĩa chưa ghi gì quan trọng."
+          ],
+          "answer": 1,
+          "explanation": "A và B đều prepared. Coordinator mất trước khi B nhận quyết định. B cần quy trình phục hồi/tra quyết định, không tự commit vì A còn sống. 2PC không đồng nghĩa luôn không chặn hoặc cùng một bước với consensus.",
+          "sourceIds": [
+            "two-phase"
+          ]
+        },
+        {
+          "id": "saga",
+          "text": "Email đã đọc có thể rollback như chưa từng tồn tại không?",
+          "options": [
+            "Có; chỉ xóa dòng database.",
+            "Không; có thể gửi đính chính nhưng đó là hành động mới.",
+            "Có; saga xóa trí nhớ người nhận."
+          ],
+          "answer": 1,
+          "explanation": "Giữ chỗ thành công nhưng thu tiền thất bại xác định: trả lại chỗ theo phiên giữ hợp lệ. Nếu thu tiền timeout, tra kết quả trước khi vừa trả chỗ vừa thu lại. Saga không mang isolation nguyên khối của một transaction database.",
+          "sourceIds": [
+            "saga-azure"
+          ]
+        },
+        {
+          "id": "outbox",
+          "text": "Relay gửi E9 rồi crash trước đánh dấu. Cần dự kiến gì?",
+          "options": [
+            "E9 có thể được gửi lại.",
+            "E9 chắc chỉ có một bản.",
+            "Transaction DB tự thu hồi event từ mọi consumer."
+          ],
+          "answer": 0,
+          "explanation": "DB commit phiếu S9 và outbox E9. Relay gửi E9 rồi chết trước đánh dấu đã gửi. E9 sẽ có thể gửi lại, nên consumer không được cộng hai lượt đăng ký. Outbox giải khe hở ghi DB/gửi event, không tự loại mọi duplicate.",
+          "sourceIds": [
+            "outbox-aws",
+            "kafka-design"
+          ]
+        },
+        {
+          "id": "views",
+          "text": "Rebuild view có nên gửi lại toàn bộ email lịch sử?",
+          "options": [
+            "Có; mọi replay phải lặp mọi tác dụng.",
+            "Có; CQRS bảo đảm email chỉ nhận một lần.",
+            "Không mặc nhiên; tách dựng state khỏi side effect và có chính sách replay."
+          ],
+          "answer": 2,
+          "explanation": "Log “đăng ký E1, hủy E2” tạo view còn 0 lượt. Nếu replay E1 hai lần không chống lặp thì view sai; nếu đổi ý nghĩa hủy mà không version thì replay có thể đổi kết quả lịch sử. Replay dữ liệu không nên mặc nhiên lặp mọi tác dụng ngoài như thanh toán.",
+          "sourceIds": [
+            "kafka-design",
+            "outbox-aws"
+          ]
+        }
+      ]
+    },
+    "prediction": {
+      "text": "Ghi DB rồi gửi event bằng hai lời gọi độc lập có nguyên tử không?",
+      "options": [
+        "Có nếu đặt cạnh nhau trong code.",
+        "Không; có thể chỉ một lời gọi thành công."
+      ],
+      "answer": 1,
+      "explanation": "Process có thể chết giữa hai ranh giới."
+    },
+    "challenge": {
+      "text": "Đơn hàng đã thu tiền, bước giao hàng lỗi và hoàn tiền cũng lỗi. Trạng thái nào đúng?",
+      "options": [
+        "Đã rollback hoàn toàn.",
+        "Xóa đơn để không còn lỗi.",
+        "Workflow chưa giải quyết, cần retry/đối soát/can thiệp có dấu vết."
+      ],
+      "answer": 2,
+      "explanation": "Bù trừ có trạng thái và lỗi riêng, không được giấu khoản tiền đang chờ."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Theo dấu nơi giữ trạng thái và điều đã được xác nhận.",
+        "Process có thể chết giữa hai ranh giới."
+      ],
+      "challenge": [
+        "Kiểm tra yêu cầu mới; tìm lịch thao tác có thể làm phương án sai.",
+        "Bù trừ có trạng thái và lỗi riêng, không được giấu khoản tiền đang chờ."
+      ]
+    },
+    "sources": [
+      {
+        "title": "PostgreSQL 18 — PREPARE TRANSACTION",
+        "url": "https://www.postgresql.org/docs/18/sql-prepare-transaction.html"
+      },
+      {
+        "title": "Microsoft — Saga pattern",
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/saga"
+      },
+      {
+        "title": "AWS — Transactional outbox",
+        "url": "https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/transactional-outbox.html"
+      },
+      {
+        "title": "Apache Kafka 4.1 — Design",
+        "url": "https://kafka.apache.org/41/design/design/"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-distributed-workflows",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L3-04",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Hai hệ thống có thể lỗi ở hai thời điểm khác nhau.",
+      "context": "Một lần đặt chỗ cần lưu phiếu, trừ chỗ và gửi thông báo. Nếu lưu xong rồi process chết trước gửi, dữ liệu và người nhận không còn khớp. Ta xác định ranh giới nguyên tử trước khi chọn mẫu thiết kế.",
+      "requirements": [
+        "So 2PC, saga, outbox/inbox, CDC, event sourcing/CQRS và ranh giới exactly-once.",
+        "Giải thích được một tình huống lỗi và điều kiện để phương án còn đúng."
+      ],
+      "activityRef": "module-practice",
+      "experimentSteps": [
+        "Theo từng bước trong các ví dụ và tự tính kết quả trước khi xem giải thích.",
+        "Chọn phương án cho từng tình huống, kiểm tra và sửa lựa chọn.",
+        "Áp dụng sang yêu cầu mới; nêu điều kiện và giới hạn của quyết định."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "2PC không đồng nghĩa luôn không chặn hoặc cùng một bước với consensus.",
+        "Replay dữ liệu không nên mặc nhiên lặp mọi tác dụng ngoài như thanh toán."
+      ],
+      "limitations": "Lịch giả định; không chạy 2PC hoặc tích hợp thanh toán; mỗi bảo đảm chỉ trong ranh giới được nêu."
+    }
+  },
+  {
+    "id": "conflicts-crdt",
+    "version": 1,
+    "status": "beta",
+    "kind": "module-practice",
+    "level": "L3",
+    "moduleId": "L3.5",
+    "minutes": 30,
+    "title": "Hai bạn sửa offline: ghép thế nào để không mất ý?",
+    "subtitle": "Mỗi máy đều có phiên bản riêng của cùng dữ liệu.",
+    "objective": "So version/LWW/hợp nhất nghiệp vụ, CRDT tăng đơn điệu, anti-entropy/read repair và giới hạn invariant.",
+    "story": "A và B offline cùng cập nhật danh sách câu lạc bộ. Khi nối lại, lấy bản “ghi sau” có thể bỏ thay đổi của bạn kia. Một số kiểu dữ liệu ghép được theo phép toán, nhưng không phải mọi invariant đều chịu được ghi độc lập.",
+    "explanation": "Cùng xuất phát không có nghĩa cùng kết quả. Đếm theo từng nút rồi ghép bằng max. Thêm và xóa cần quy tắc về cạnh tranh. Truyền lại giúp hội tụ, không tự giữ mọi invariant.",
+    "limit": "Chỉ G-counter hai writer và ví dụ set có tag; không cung cấp thư viện CRDT hay chứng minh thuật toán text editor.",
+    "terms": [
+      {
+        "name": "Gộp bản",
+        "english": "Merge",
+        "meaning": "Kết hợp các trạng thái theo quy tắc xác định."
+      },
+      {
+        "name": "Lũy đẳng",
+        "english": "Idempotent merge",
+        "meaning": "Ghép lại cùng trạng thái không đổi kết quả."
+      },
+      {
+        "name": "Đối chiếu bản sao",
+        "english": "Anti-entropy",
+        "meaning": "Cơ chế trao đổi để phát hiện và sửa chênh lệch."
+      },
+      {
+        "name": "Điều kiện luôn phải giữ",
+        "english": "invariant",
+        "meaning": "Quy tắc dữ liệu không được vi phạm, kể cả khi có lỗi; ví dụ số vé đã xác nhận không vượt sức chứa."
+      },
+      {
+        "name": "Cấu trúc dữ liệu đã quy định",
+        "english": "schema",
+        "meaning": "Hợp đồng về trường, kiểu và ràng buộc. Dữ liệu đúng cấu trúc vẫn có thể sai về nội dung nghiệp vụ."
+      }
+    ],
+    "chapters": {
+      "version": 1,
+      "items": [
+        {
+          "id": "versions",
+          "title": "Cùng xuất phát không có nghĩa cùng kết quả",
+          "explanation": "Version hoặc vector giúp nhận biết kế thừa và xung đột. Last-write-wins chọn một bản theo thứ tự được định nghĩa, thường timestamp cùng tie-break; nó có thể làm mất ý định và chịu clock skew. Có thể giữ sibling để người dùng/hàm nghiệp vụ xử lý.",
+          "example": "A đổi tên từ CLB thành Sách, B đổi thành Cờ khi đều chưa thấy nhau. Chọn tên theo timestamp không có nghĩa đã hiểu ý định của cả hai.",
+          "steps": [
+            "Ghi version cha chung và hai nhánh.",
+            "Phân biệt ghi sau khi đã đọc bản kia với hai ghi chưa biết nhau."
+          ],
+          "misconception": "Giá trị timestamp lớn hơn không chứng minh đúng hơn về nghiệp vụ.",
+          "sourceIds": [
+            "dynamo-paper",
+            "lamport-clocks"
+          ]
+        },
+        {
+          "id": "counter",
+          "title": "Đếm theo từng nút rồi ghép bằng max",
+          "explanation": "G-counter có một thành phần tăng đơn điệu cho mỗi writer. Writer chỉ tăng phần của mình; merge lấy max từng thành phần, giá trị là tổng. Phép merge giao hoán/kết hợp/lũy đẳng giúp hội tụ khi các cập nhật được truyền đầy đủ.",
+          "example": "A=[2,0], B=[0,3]. Merge=[2,3], tổng 5. Nhận lại A rồi merge vẫn [2,3], không thành 7 vì merge dùng max, không cộng toàn vector.",
+          "steps": [
+            "Lấy max(2,0)=2 và max(0,3)=3.",
+            "Merge cùng A lần nữa và xác nhận kết quả không đổi."
+          ],
+          "misconception": "G-counter này chỉ tăng; không tự dùng để đặt chỗ có giới hạn hoặc xóa phiếu.",
+          "sourceIds": [
+            "crdt-paper"
+          ]
+        },
+        {
+          "id": "sets",
+          "title": "Thêm và xóa cần quy tắc về cạnh tranh",
+          "explanation": "Set CRDT có nhiều ngữ nghĩa: grow-only chỉ thêm; observed-remove gắn tag cho lần thêm và xóa các tag đã quan sát. Thêm đồng thời chưa được thấy có thể còn sau merge theo add-wins. Tombstone/version metadata cần chính sách thu gom an toàn.",
+          "example": "A xóa tag t1 đã thấy của sách X. B đồng thời thêm X với tag t2. Theo observed-remove add-wins, t2 còn nên X vẫn trong set; đây là quyết định ngữ nghĩa chứ không lỗi merge.",
+          "steps": [
+            "Ghi t1/t2 thay vì chỉ một boolean có/không.",
+            "Xóa đúng tag đã thấy, rồi hợp nhất và giải thích t2 còn."
+          ],
+          "misconception": "Hội tụ không đồng nghĩa kết quả hợp ý mọi người; phải chọn ngữ nghĩa phù hợp.",
+          "sourceIds": [
+            "crdt-paper"
+          ]
+        },
+        {
+          "id": "repair",
+          "title": "Truyền lại giúp hội tụ, không tự giữ mọi invariant",
+          "explanation": "Anti-entropy định kỳ so/trao đổi trạng thái; read repair sửa chênh lệch gặp khi đọc. Hội tụ cần điều kiện giao nhận và merge đúng. Giới hạn tổng như “chỉ một chỗ” có thể cần phối hợp hoặc phân bổ quyền/escrow, không dùng hai bộ đếm độc lập rồi hy vọng.",
+          "example": "Hai phía mỗi bên thấy còn 1 rồi cùng xác nhận 1 vé. Merge ra hai vé có thể hội tụ hoàn hảo nhưng đã vượt sức chứa một.",
+          "steps": [
+            "Đối chiếu số vé cuối với invariant ≤1.",
+            "Chọn phối hợp hoặc chia quyền bán trước; xử lý mạng đứt theo quyền còn lại."
+          ],
+          "misconception": "CRDT không làm mọi transaction và ràng buộc tổng trở nên không cần coordination.",
+          "sourceIds": [
+            "crdt-paper",
+            "dynamo-paper"
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "version": 1,
+      "items": [
+        {
+          "id": "versions",
+          "text": "A/B đổi tên độc lập. LWW bảo đảm giữ cả hai ý định?",
+          "options": [
+            "Có; timestamp lưu tất cả ý nghĩa.",
+            "Có nếu giờ ghi chính xác đến nanosecond.",
+            "Không; nó chọn một giá trị và có thể bỏ giá trị kia."
+          ],
+          "answer": 2,
+          "explanation": "A đổi tên từ CLB thành Sách, B đổi thành Cờ khi đều chưa thấy nhau. Chọn tên theo timestamp không có nghĩa đã hiểu ý định của cả hai. Giá trị timestamp lớn hơn không chứng minh đúng hơn về nghiệp vụ.",
+          "sourceIds": [
+            "dynamo-paper",
+            "lamport-clocks"
+          ]
+        },
+        {
+          "id": "counter",
+          "text": "Merge [2,0] với [0,3] rồi nhận lại [2,0] cho tổng bao nhiêu?",
+          "options": [
+            "7.",
+            "5.",
+            "2."
+          ],
+          "answer": 1,
+          "explanation": "A=[2,0], B=[0,3]. Merge=[2,3], tổng 5. Nhận lại A rồi merge vẫn [2,3], không thành 7 vì merge dùng max, không cộng toàn vector. G-counter này chỉ tăng; không tự dùng để đặt chỗ có giới hạn hoặc xóa phiếu.",
+          "sourceIds": [
+            "crdt-paper"
+          ]
+        },
+        {
+          "id": "sets",
+          "text": "A xóa t1, B thêm t2 đồng thời theo mô hình đã nêu. X có thể còn không?",
+          "options": [
+            "Không; mọi kiểu CRDT đều delete-wins.",
+            "Có, vì t2 chưa bị xóa.",
+            "Không; timestamp tự loại t2."
+          ],
+          "answer": 1,
+          "explanation": "A xóa tag t1 đã thấy của sách X. B đồng thời thêm X với tag t2. Theo observed-remove add-wins, t2 còn nên X vẫn trong set; đây là quyết định ngữ nghĩa chứ không lỗi merge. Hội tụ không đồng nghĩa kết quả hợp ý mọi người; phải chọn ngữ nghĩa phù hợp.",
+          "sourceIds": [
+            "crdt-paper"
+          ]
+        },
+        {
+          "id": "repair",
+          "text": "Hai vé hội tụ giống nhau ở mọi replica cho hội trường một chỗ đã đúng nghiệp vụ?",
+          "options": [
+            "Chưa; hội tụ nhưng vi phạm sức chứa.",
+            "Đúng; hội tụ là mọi tính đúng.",
+            "Đúng nếu xóa log sau đó."
+          ],
+          "answer": 0,
+          "explanation": "Hai phía mỗi bên thấy còn 1 rồi cùng xác nhận 1 vé. Merge ra hai vé có thể hội tụ hoàn hảo nhưng đã vượt sức chứa một. CRDT không làm mọi transaction và ràng buộc tổng trở nên không cần coordination.",
+          "sourceIds": [
+            "crdt-paper",
+            "dynamo-paper"
+          ]
+        }
+      ]
+    },
+    "prediction": {
+      "text": "Chọn bản timestamp lớn nhất có luôn giữ mọi thay đổi offline?",
+      "options": [
+        "Không; có thể bỏ mất thay đổi cạnh tranh.",
+        "Có, đó là định nghĩa đồng bộ."
+      ],
+      "answer": 0,
+      "explanation": "Cần chính sách merge theo kiểu dữ liệu và ý định."
+    },
+    "challenge": {
+      "text": "Ứng dụng vẽ cho phép ghép nét nhưng ví điện tử không được âm. Có thể dùng cùng merge không xét invariant?",
+      "options": [
+        "Có; CRDT giải mọi ràng buộc.",
+        "Không; kiểu dữ liệu và ràng buộc quyết định phối hợp cần thiết.",
+        "Có; lấy max mọi trường là đủ."
+      ],
+      "answer": 1,
+      "explanation": "Hội tụ của dữ liệu và invariant nghiệp vụ là hai yêu cầu cần kiểm riêng."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Theo dấu nơi giữ trạng thái và điều đã được xác nhận.",
+        "Cần chính sách merge theo kiểu dữ liệu và ý định."
+      ],
+      "challenge": [
+        "Kiểm tra yêu cầu mới; tìm lịch thao tác có thể làm phương án sai.",
+        "Hội tụ của dữ liệu và invariant nghiệp vụ là hai yêu cầu cần kiểm riêng."
+      ]
+    },
+    "sources": [
+      {
+        "title": "Amazon — Dynamo paper (2007)",
+        "url": "https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf"
+      },
+      {
+        "title": "Leslie Lamport — Time, clocks and ordering (1978)",
+        "url": "https://lamport.azurewebsites.net/pubs/time-clocks.pdf"
+      },
+      {
+        "title": "Preguiça, Baquero và Shapiro — CRDTs (2018)",
+        "url": "https://arxiv.org/abs/1805.06358"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-conflicts-crdt",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L3-05",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Mỗi máy đều có phiên bản riêng của cùng dữ liệu.",
+      "context": "A và B offline cùng cập nhật danh sách câu lạc bộ. Khi nối lại, lấy bản “ghi sau” có thể bỏ thay đổi của bạn kia. Một số kiểu dữ liệu ghép được theo phép toán, nhưng không phải mọi invariant đều chịu được ghi độc lập.",
+      "requirements": [
+        "So version/LWW/hợp nhất nghiệp vụ, CRDT tăng đơn điệu, anti-entropy/read repair và giới hạn invariant.",
+        "Giải thích được một tình huống lỗi và điều kiện để phương án còn đúng."
+      ],
+      "activityRef": "module-practice",
+      "experimentSteps": [
+        "Theo từng bước trong các ví dụ và tự tính kết quả trước khi xem giải thích.",
+        "Chọn phương án cho từng tình huống, kiểm tra và sửa lựa chọn.",
+        "Áp dụng sang yêu cầu mới; nêu điều kiện và giới hạn của quyết định."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Giá trị timestamp lớn hơn không chứng minh đúng hơn về nghiệp vụ.",
+        "CRDT không làm mọi transaction và ràng buộc tổng trở nên không cần coordination."
+      ],
+      "limitations": "Chỉ G-counter hai writer và ví dụ set có tag; không cung cấp thư viện CRDT hay chứng minh thuật toán text editor."
+    }
+  },
+  {
+    "id": "multi-region",
+    "version": 1,
+    "status": "beta",
+    "kind": "module-practice",
+    "level": "L3",
+    "moduleId": "L3.6",
+    "minutes": 30,
+    "title": "Mất một vùng, chuyển sang đâu và mất gì?",
+    "subtitle": "Khu vực dự phòng còn thiếu lần ghi mới nhất.",
+    "objective": "Thiết kế data placement/routing, active-passive/active-active, latency, failover và failback theo RPO/RTO.",
+    "story": "Cổng trường phục vụ hai miền. Nhóm đặt replica ở vùng khác để dự phòng, nhưng mạng liên vùng chậm và một vùng không giữ đủ dữ liệu. Sơ đồ có hai vùng chỉ là điểm bắt đầu của kế hoạch phục hồi.",
+    "explanation": "Đặt dữ liệu gần ai và ai được ghi?. Active-active cần định nghĩa cả đọc lẫn ghi. Thời gian phục hồi và điểm mất dữ liệu là hai trục. Vùng trở lại phải bắt kịp trước nhận quyền.",
+    "limit": "Thiết kế giả định, không diễn tập DR cloud thật; vị trí dữ liệu không là tư vấn tuân thủ pháp luật.",
+    "terms": [
+      {
+        "name": "Mục tiêu mất dữ liệu",
+        "english": "RPO",
+        "meaning": "Mục tiêu khoảng dữ liệu có thể mất sau sự cố."
+      },
+      {
+        "name": "Mục tiêu khôi phục",
+        "english": "RTO",
+        "meaning": "Thời gian mục tiêu để khôi phục dịch vụ."
+      },
+      {
+        "name": "Chuyển trở lại",
+        "english": "Failback",
+        "meaning": "Đưa phục vụ về vùng trước sau khi đã khôi phục an toàn."
+      },
+      {
+        "name": "Điều kiện luôn phải giữ",
+        "english": "invariant",
+        "meaning": "Quy tắc dữ liệu không được vi phạm, kể cả khi có lỗi; ví dụ số vé đã xác nhận không vượt sức chứa."
+      },
+      {
+        "name": "Thông báo xác nhận",
+        "english": "ACK",
+        "meaning": "Phản hồi cho biết một bước đã được bên nhận xác nhận. Phải đọc hợp đồng để biết đó là nhận, lưu bền hay áp dụng."
+      },
+      {
+        "name": "Cấu trúc dữ liệu đã quy định",
+        "english": "schema",
+        "meaning": "Hợp đồng về trường, kiểu và ràng buộc. Dữ liệu đúng cấu trúc vẫn có thể sai về nội dung nghiệp vụ."
+      }
+    ],
+    "chapters": {
+      "version": 1,
+      "items": [
+        {
+          "id": "place",
+          "title": "Đặt dữ liệu gần ai và ai được ghi?",
+          "explanation": "Data placement quyết định dữ liệu/replica ở vùng nào. Locality giảm một số chặng mạng cho người gần dữ liệu nhưng ghi cần phối hợp xa có thể tăng latency. Quy định vị trí dữ liệu phải bao gồm backup/log/index, không chỉ database chính.",
+          "example": "Người A ở miền Bắc, nguồn ghi ở miền Nam. Nếu mỗi ghi chờ thêm một lượt liên vùng giả định 50ms, chuyển web gần A không xóa lượt chờ đó.",
+          "steps": [
+            "Vẽ đường client → web → nguồn ghi → replica cần ACK.",
+            "Ghi từng lần qua vùng và loại dữ liệu được sao chép."
+          ],
+          "misconception": "Gần client không đồng nghĩa gần mọi phụ thuộc hoặc đúng chính sách dữ liệu.",
+          "sourceIds": [
+            "replication-pg",
+            "dr-aws"
+          ]
+        },
+        {
+          "id": "modes",
+          "title": "Active-active cần định nghĩa cả đọc lẫn ghi",
+          "explanation": "Active-passive giữ nơi dự phòng, cần đủ công suất và quy trình chuyển. Active-active có thể cùng phục vụ đọc nhưng chỉ một nơi ghi từng key; nếu nhiều nơi ghi cùng key, phải giải quyết xung đột/invariant. Tên chế độ không mô tả đầy đủ consistency.",
+          "example": "A/B đều phục vụ web nhưng studentId S9 chỉ có vùng A làm chủ ghi. Đây khác với cả A/B cùng bán chỗ cuối của S9 khi partition.",
+          "steps": [
+            "Ghi quyền đọc/ghi theo key cho từng vùng.",
+            "Thử đứt liên vùng và xác định thao tác tiếp tục hay bị từ chối."
+          ],
+          "misconception": "Hai vùng đều nhận HTTP không chứng minh dữ liệu hỗ trợ multi-writer an toàn.",
+          "sourceIds": [
+            "cap-paper",
+            "replication-pg"
+          ]
+        },
+        {
+          "id": "recovery",
+          "title": "Thời gian phục hồi và điểm mất dữ liệu là hai trục",
+          "explanation": "RTO là mục tiêu thời gian khôi phục dịch vụ, RPO là mục tiêu về khoảng dữ liệu có thể mất. Cần đo phát hiện, quyết định, promote, route, warmup và xác minh; DNS/cache/connection cũ có thể kéo dài chuyển hướng.",
+          "example": "A ACK tới S10, B bền vững tới S8. Promote B có thể phục vụ nhanh nhưng thiếu S9/S10. Không được báo RPO=0 chỉ vì trang mở được trong một phút.",
+          "steps": [
+            "Liệt kê các ghi ACK nhưng chưa tới nơi sống sót.",
+            "Đo timeline phục hồi đến lúc nghiệp vụ đúng, không chỉ process chạy."
+          ],
+          "misconception": "RTO nhỏ không tự kéo RPO về không.",
+          "sourceIds": [
+            "dr-aws",
+            "replication-pg"
+          ]
+        },
+        {
+          "id": "return",
+          "title": "Vùng trở lại phải bắt kịp trước nhận quyền",
+          "explanation": "Failback cần đồng bộ từ nguồn hiện có thẩm quyền, đối soát conflict, kiểm schema/config và chuyển có kiểm soát. Hai vùng có thể cùng lỗi vì chung IAM, DNS, artifact hoặc thao tác quản trị; không được nhân xác suất nếu không có giả định độc lập.",
+          "example": "A trở lại với S8 trong khi B đã tới S12. Cho A ghi ngay có thể làm lùi dữ liệu. Khôi phục A thành replica rồi xác minh trước thay quyền.",
+          "steps": [
+            "Chặn ghi cũ và bắt kịp từ B theo protocol.",
+            "Thử lỗi chung như config sai và đánh giá blast radius của cả hai vùng."
+          ],
+          "misconception": "Nhiều vùng không tự bảo vệ lỗi chung và không tự gộp lịch sử phân nhánh.",
+          "sourceIds": [
+            "dr-aws",
+            "fencing"
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "version": 1,
+      "items": [
+        {
+          "id": "place",
+          "text": "Chuyển web gần client có tự xóa latency ghi chờ replica xa không?",
+          "options": [
+            "Có; web gần là mọi thứ gần.",
+            "Có nếu dùng CDN cho giao dịch.",
+            "Không; chặng phối hợp liên vùng vẫn còn."
+          ],
+          "answer": 2,
+          "explanation": "Người A ở miền Bắc, nguồn ghi ở miền Nam. Nếu mỗi ghi chờ thêm một lượt liên vùng giả định 50ms, chuyển web gần A không xóa lượt chờ đó. Gần client không đồng nghĩa gần mọi phụ thuộc hoặc đúng chính sách dữ liệu.",
+          "sourceIds": [
+            "replication-pg",
+            "dr-aws"
+          ]
+        },
+        {
+          "id": "modes",
+          "text": "Hai vùng phục vụ web có đủ chứng minh cả hai được ghi cùng key?",
+          "options": [
+            "Có; đó là active-active trong mọi nghĩa.",
+            "Có nếu hostname giống nhau.",
+            "Không; phải xem quyền ghi và protocol dữ liệu."
+          ],
+          "answer": 2,
+          "explanation": "A/B đều phục vụ web nhưng studentId S9 chỉ có vùng A làm chủ ghi. Đây khác với cả A/B cùng bán chỗ cuối của S9 khi partition. Hai vùng đều nhận HTTP không chứng minh dữ liệu hỗ trợ multi-writer an toàn.",
+          "sourceIds": [
+            "cap-paper",
+            "replication-pg"
+          ]
+        },
+        {
+          "id": "recovery",
+          "text": "B mở trang sau một phút nhưng thiếu hai phiếu ACK. Điều gì chưa đạt nếu yêu cầu không mất phiếu?",
+          "options": [
+            "Không có vấn đề vì HTTP 200.",
+            "Chỉ vấn đề màu giao diện.",
+            "Mục tiêu dữ liệu/RPO; phục vụ lại nhanh chưa đủ."
+          ],
+          "answer": 2,
+          "explanation": "A ACK tới S10, B bền vững tới S8. Promote B có thể phục vụ nhanh nhưng thiếu S9/S10. Không được báo RPO=0 chỉ vì trang mở được trong một phút. RTO nhỏ không tự kéo RPO về không.",
+          "sourceIds": [
+            "dr-aws",
+            "replication-pg"
+          ]
+        },
+        {
+          "id": "return",
+          "text": "A trở lại ở S8, B đang S12. Nên chuyển toàn bộ ghi về A ngay?",
+          "options": [
+            "Không; cần bắt kịp/đối soát và chuyển quyền an toàn.",
+            "Có; vùng gốc luôn đúng nhất.",
+            "Có; DNS sẽ tự chép dữ liệu."
+          ],
+          "answer": 0,
+          "explanation": "A trở lại với S8 trong khi B đã tới S12. Cho A ghi ngay có thể làm lùi dữ liệu. Khôi phục A thành replica rồi xác minh trước thay quyền. Nhiều vùng không tự bảo vệ lỗi chung và không tự gộp lịch sử phân nhánh.",
+          "sourceIds": [
+            "dr-aws",
+            "fencing"
+          ]
+        }
+      ]
+    },
+    "prediction": {
+      "text": "Có replica vùng xa là đủ để cam kết không mất dữ liệu?",
+      "options": [
+        "Đủ nếu vùng ở xa.",
+        "Chưa; phải xét ACK, lag, lỗi và failover."
+      ],
+      "answer": 1,
+      "explanation": "Khoảng cách không quyết định mức dữ liệu được bảo vệ."
+    },
+    "challenge": {
+      "text": "Hai vùng dùng chung bản cấu hình sai và cùng lỗi. Có thể dùng giả định lỗi độc lập để tính availability?",
+      "options": [
+        "Có vì nằm ở hai thành phố.",
+        "Có vì có hai logo cloud.",
+        "Không; phải mô hình hóa nguyên nhân lỗi chung."
+      ],
+      "answer": 2,
+      "explanation": "Độc lập là giả định cần evidence, không suy từ số vùng."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Theo dấu nơi giữ trạng thái và điều đã được xác nhận.",
+        "Khoảng cách không quyết định mức dữ liệu được bảo vệ."
+      ],
+      "challenge": [
+        "Kiểm tra yêu cầu mới; tìm lịch thao tác có thể làm phương án sai.",
+        "Độc lập là giả định cần evidence, không suy từ số vùng."
+      ]
+    },
+    "sources": [
+      {
+        "title": "PostgreSQL 18 — Log-shipping standby servers",
+        "url": "https://www.postgresql.org/docs/18/warm-standby.html"
+      },
+      {
+        "title": "AWS Well-Architected — Disaster recovery",
+        "url": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/plan-for-disaster-recovery-dr.html"
+      },
+      {
+        "title": "Gilbert và Lynch — Perspectives on CAP",
+        "url": "https://groups.csail.mit.edu/tds/papers/Gilbert/Brewer2.pdf"
+      },
+      {
+        "title": "Martin Kleppmann — Distributed locking (2016)",
+        "url": "https://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-multi-region",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L3-06",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Khu vực dự phòng còn thiếu lần ghi mới nhất.",
+      "context": "Cổng trường phục vụ hai miền. Nhóm đặt replica ở vùng khác để dự phòng, nhưng mạng liên vùng chậm và một vùng không giữ đủ dữ liệu. Sơ đồ có hai vùng chỉ là điểm bắt đầu của kế hoạch phục hồi.",
+      "requirements": [
+        "Thiết kế data placement/routing, active-passive/active-active, latency, failover và failback theo RPO/RTO.",
+        "Giải thích được một tình huống lỗi và điều kiện để phương án còn đúng."
+      ],
+      "activityRef": "module-practice",
+      "experimentSteps": [
+        "Theo từng bước trong các ví dụ và tự tính kết quả trước khi xem giải thích.",
+        "Chọn phương án cho từng tình huống, kiểm tra và sửa lựa chọn.",
+        "Áp dụng sang yêu cầu mới; nêu điều kiện và giới hạn của quyết định."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Gần client không đồng nghĩa gần mọi phụ thuộc hoặc đúng chính sách dữ liệu.",
+        "Nhiều vùng không tự bảo vệ lỗi chung và không tự gộp lịch sử phân nhánh."
+      ],
+      "limitations": "Thiết kế giả định, không diễn tập DR cloud thật; vị trí dữ liệu không là tư vấn tuân thủ pháp luật."
+    }
+  }
+]

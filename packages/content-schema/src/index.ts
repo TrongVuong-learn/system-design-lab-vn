@@ -69,12 +69,58 @@ export const caseStudySchema = z
   })
   .strict();
 export type CaseStudy = z.infer<typeof caseStudySchema>;
+export const designTaskSchema = z
+  .object({
+    version: z.literal(1),
+    prompt: caseText,
+    deliverables: z
+      .array(
+        z
+          .object({
+            id: z.string().regex(/^[a-z][a-z0-9-]+$/),
+            prompt: caseText,
+          })
+          .strict(),
+      )
+      .min(2)
+      .max(6),
+    rubric: z.array(caseText).min(2).max(6),
+    variation: caseText,
+  })
+  .strict()
+  .refine(
+    (task) => new Set(task.deliverables.map((d) => d.id)).size === task.deliverables.length,
+    'Duplicate design deliverable',
+  );
 export const lessonSchema = z
   .object({
     id: z.string().regex(/^[a-z][a-z0-9-]+$/),
     version: z.literal(1),
     status: z.enum(['draft', 'beta']),
     kind: activityKind,
+    designTask: designTaskSchema.optional(),
+    chapters: z
+      .object({
+        version: z.literal(1),
+        items: z
+          .array(
+            z
+              .object({
+                id: z.string().regex(/^[a-z][a-z0-9-]+$/),
+                title: z.string().trim().min(8).max(180),
+                explanation: z.string().trim().min(40).max(2000),
+                example: z.string().trim().min(20).max(1600),
+                steps: z.array(z.string().trim().min(8).max(700)).min(2).max(5),
+                misconception: z.string().trim().min(20).max(1000),
+                sourceIds: z.array(z.string().min(1)).min(1),
+              })
+              .strict(),
+          )
+          .min(2)
+          .max(8),
+      })
+      .strict()
+      .optional(),
     guidance: z
       .object({
         schemaVersion: z.literal(1),
@@ -159,6 +205,7 @@ export type Progress = z.infer<typeof progressSchema>;
 export type LessonProgress = z.infer<typeof lessonProgressSchema>;
 
 export { validateCatalog, editorialSchema } from './catalog';
+export { validatePathways, pathwaysSchema } from './pathways';
 
 export {
   schoolConfigSchema,

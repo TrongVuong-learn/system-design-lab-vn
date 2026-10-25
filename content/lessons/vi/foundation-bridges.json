@@ -1,0 +1,847 @@
+[
+  {
+    "id": "system-boundaries",
+    "version": 1,
+    "status": "beta",
+    "kind": "module-practice",
+    "level": "L0",
+    "moduleId": "L0.1",
+    "minutes": 25,
+    "title": "Một lần bấm được giữ ở đâu?",
+    "subtitle": "Màn hình đổi chưa chắc dữ liệu đã được lưu.",
+    "objective": "Theo client/server/state, nguồn dữ liệu, phụ thuộc và yêu cầu chức năng/phi chức năng.",
+    "story": "An bấm đăng ký. Nút chuyển thành đã chọn ngay, rồi mạng đứt. Màn hình và nơi giữ phiếu có thể biết hai điều khác nhau; ta vẽ luồng để biết lời báo nào đáng tin.",
+    "explanation": "Trạng thái ở màn hình và ở server khác nhau. Ranh giới giúp chỉ rõ trách nhiệm. Nói rõ cần làm gì và làm tốt đến đâu.",
+    "limit": "Sơ đồ giáo dục, không có request mạng thật trong bài.",
+    "terms": [
+      {
+        "name": "Trạng thái",
+        "english": "State",
+        "meaning": "Thông tin còn ảnh hưởng bước xử lý sau."
+      },
+      {
+        "name": "Nguồn có thẩm quyền",
+        "english": "Source of truth",
+        "meaning": "Nơi được thiết kế chịu trách nhiệm quyết định dữ liệu gốc."
+      },
+      {
+        "name": "Cấu trúc dữ liệu đã quy định",
+        "english": "schema",
+        "meaning": "Hợp đồng về trường, kiểu và ràng buộc. Dữ liệu đúng cấu trúc vẫn có thể sai về nội dung nghiệp vụ."
+      }
+    ],
+    "chapters": {
+      "version": 1,
+      "items": [
+        {
+          "id": "state",
+          "title": "Trạng thái ở màn hình và ở server khác nhau",
+          "explanation": "Client là bên gửi yêu cầu trong lượt giao tiếp; server xử lý và trả kết quả. Một thiết bị có thể đóng vai khác trong lượt khác. State là thông tin còn ảnh hưởng bước sau, như lựa chọn đang nhập hoặc phiếu đã lưu.",
+          "example": "Client đổi nút trước response gọi là cập nhật lạc quan. Nếu server từ chối vì hết chỗ, client phải sửa trạng thái và giải thích, không giữ nhãn thành công sai.",
+          "steps": [
+            "Ghi hai cột: màn hình đã chọn, server chưa xác nhận.",
+            "Cho response thất bại rồi cập nhật đúng cả nhãn và dữ liệu hiển thị."
+          ],
+          "misconception": "Màu xanh trên màn hình không chứng minh đã lưu bền vững.",
+          "sourceIds": [
+            "mdn-client",
+            "http-rfc"
+          ]
+        },
+        {
+          "id": "boundary",
+          "title": "Ranh giới giúp chỉ rõ trách nhiệm",
+          "explanation": "Một hệ thống gồm thành phần và quan hệ phục vụ mục tiêu. Vẽ boundary để biết phần mình quản lý và phần phụ thuộc như email. Nguồn có thẩm quyền quyết định bản đúng cho dữ liệu; cache và màn hình có thể là bản suy ra.",
+          "example": "API trường lưu phiếu, dịch vụ email bên ngoài gửi thư. Email chậm không nhất thiết phiếu chưa lưu; phiếu lưu không chứng minh thư đã tới.",
+          "steps": [
+            "Vẽ học sinh → API → nơi giữ phiếu; thêm nhánh email.",
+            "Đánh dấu phần nào có quyền sửa phiếu và phần nào chỉ thông báo."
+          ],
+          "misconception": "Một sơ đồ có mũi tên không làm các bước thành công cùng lúc.",
+          "sourceIds": [
+            "c4",
+            "mdn-client"
+          ]
+        },
+        {
+          "id": "requirements",
+          "title": "Nói rõ cần làm gì và làm tốt đến đâu",
+          "explanation": "Yêu cầu chức năng mô tả hành vi như tạo phiếu; yêu cầu chất lượng mô tả độ trễ, dữ liệu, quyền hoặc giới hạn. Dùng câu có thể kiểm: ai, thao tác gì, điều kiện nào, kết quả ra sao. Các yêu cầu có thể đánh đổi nên không nói “nhanh vô hạn”.",
+          "example": "Chức năng: xem phiếu của mình. Chất lượng giả định: 95% lượt xem hợp lệ dưới 1s trong tải đã chốt. Quyền: An không được xem phiếu của Bình dù biết ID.",
+          "steps": [
+            "Viết một câu hành vi và một câu chất lượng có đơn vị.",
+            "Thử một người khác truy cập và một request chậm để biết cách kiểm."
+          ],
+          "misconception": "“Dễ dùng, nhanh, an toàn” là mong muốn nhưng chưa là tiêu chí đo đủ rõ.",
+          "sourceIds": [
+            "c4",
+            "sre-objectives",
+            "security-owasp"
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "version": 1,
+      "items": [
+        {
+          "id": "state",
+          "text": "Nút đổi trước server xác nhận có đủ chứng minh đã đăng ký?",
+          "options": [
+            "Có; giao diện là nguồn luôn đúng.",
+            "Có nếu bấm hai lần.",
+            "Chưa; đó có thể chỉ là trạng thái client."
+          ],
+          "answer": 2,
+          "explanation": "Client đổi nút trước response gọi là cập nhật lạc quan. Nếu server từ chối vì hết chỗ, client phải sửa trạng thái và giải thích, không giữ nhãn thành công sai. Màu xanh trên màn hình không chứng minh đã lưu bền vững.",
+          "sourceIds": [
+            "mdn-client",
+            "http-rfc"
+          ]
+        },
+        {
+          "id": "boundary",
+          "text": "Email chậm có bắt buộc nghĩa phiếu chưa lưu?",
+          "options": [
+            "Có; mọi thành phần là một thao tác duy nhất.",
+            "Có; server không thể lưu khi email lỗi.",
+            "Không; phải xem trạng thái của bước lưu."
+          ],
+          "answer": 2,
+          "explanation": "API trường lưu phiếu, dịch vụ email bên ngoài gửi thư. Email chậm không nhất thiết phiếu chưa lưu; phiếu lưu không chứng minh thư đã tới. Một sơ đồ có mũi tên không làm các bước thành công cùng lúc.",
+          "sourceIds": [
+            "c4",
+            "mdn-client"
+          ]
+        },
+        {
+          "id": "requirements",
+          "text": "Câu nào kiểm được rõ hơn?",
+          "options": [
+            "95% lượt xem dưới 1s trong workload đã mô tả.",
+            "Nhanh nhất có thể.",
+            "Dùng công nghệ hiện đại."
+          ],
+          "answer": 0,
+          "explanation": "Chức năng: xem phiếu của mình. Chất lượng giả định: 95% lượt xem hợp lệ dưới 1s trong tải đã chốt. Quyền: An không được xem phiếu của Bình dù biết ID. “Dễ dùng, nhanh, an toàn” là mong muốn nhưng chưa là tiêu chí đo đủ rõ.",
+          "sourceIds": [
+            "c4",
+            "sre-objectives",
+            "security-owasp"
+          ]
+        }
+      ]
+    },
+    "prediction": {
+      "text": "Màn hình và server có thể tạm khác trạng thái không?",
+      "options": [
+        "Có, do xử lý và truyền thông tin mất thời gian hoặc lỗi.",
+        "Không; chúng luôn là một bộ nhớ."
+      ],
+      "answer": 0,
+      "explanation": "Client cần theo dõi chưa xác nhận/thành công/lỗi."
+    },
+    "challenge": {
+      "text": "Website báo đã gửi bài chỉ vì file được chọn trên máy. Cần sửa gì?",
+      "options": [
+        "Chỉ đổi màu thành xanh đậm.",
+        "Phân biệt đã chọn, đang gửi và đã được nơi lưu xác nhận.",
+        "Bỏ mọi thông báo lỗi."
+      ],
+      "answer": 1,
+      "explanation": "Trạng thái hiển thị phải khớp mốc thật trong luồng."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Theo dấu nơi giữ trạng thái và điều đã được xác nhận.",
+        "Client cần theo dõi chưa xác nhận/thành công/lỗi."
+      ],
+      "challenge": [
+        "Kiểm tra yêu cầu mới; tìm lịch thao tác có thể làm phương án sai.",
+        "Trạng thái hiển thị phải khớp mốc thật trong luồng."
+      ]
+    },
+    "sources": [
+      {
+        "title": "MDN — Client-server overview",
+        "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/First_steps/Client-Server_overview"
+      },
+      {
+        "title": "RFC 9110 — HTTP Semantics",
+        "url": "https://www.rfc-editor.org/rfc/rfc9110.html"
+      },
+      {
+        "title": "Simon Brown — C4 model",
+        "url": "https://c4model.com/"
+      },
+      {
+        "title": "Google SRE — Service level objectives",
+        "url": "https://sre.google/sre-book/service-level-objectives/"
+      },
+      {
+        "title": "OWASP — Authorization cheat sheet",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-system-boundaries",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L0-01",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Màn hình đổi chưa chắc dữ liệu đã được lưu.",
+      "context": "An bấm đăng ký. Nút chuyển thành đã chọn ngay, rồi mạng đứt. Màn hình và nơi giữ phiếu có thể biết hai điều khác nhau; ta vẽ luồng để biết lời báo nào đáng tin.",
+      "requirements": [
+        "Theo client/server/state, nguồn dữ liệu, phụ thuộc và yêu cầu chức năng/phi chức năng.",
+        "Giải thích được một tình huống lỗi và điều kiện để phương án còn đúng."
+      ],
+      "activityRef": "module-practice",
+      "experimentSteps": [
+        "Theo từng bước trong các ví dụ và tự tính kết quả trước khi xem giải thích.",
+        "Chọn phương án cho từng tình huống, kiểm tra và sửa lựa chọn.",
+        "Áp dụng sang yêu cầu mới; nêu điều kiện và giới hạn của quyết định."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Màu xanh trên màn hình không chứng minh đã lưu bền vững.",
+        "“Dễ dùng, nhanh, an toàn” là mong muốn nhưng chưa là tiêu chí đo đủ rõ."
+      ],
+      "limitations": "Sơ đồ giáo dục, không có request mạng thật trong bài."
+    }
+  },
+  {
+    "id": "structures-cost",
+    "version": 1,
+    "status": "beta",
+    "kind": "module-practice",
+    "level": "L0",
+    "moduleId": "L0.3",
+    "minutes": 25,
+    "title": "Chọn cấu trúc theo việc cần làm",
+    "subtitle": "Không có một cách lưu nhanh nhất cho mọi câu hỏi.",
+    "objective": "So array/list/hash/tree/heap/queue, độ phức tạp theo số thao tác, locality và biểu diễn dữ liệu.",
+    "story": "Thư viện vừa cần tìm mã sách, vừa lấy việc in có ưu tiên và thống kê theo khoảng mã. Mỗi câu hỏi cần đường đi khác; chọn cấu trúc theo một benchmark tìm đúng khóa chưa đủ.",
+    "explanation": "Vị trí trong mảng khác đường đi qua list. Tìm khóa, tìm khoảng và lấy ưu tiên khác nhau. Big O nói xu hướng, không nói số mili-giây.",
+    "limit": "Đếm thao tác theo mô hình; không chạy benchmark hay tự nhận đã dạy toàn bộ thuật toán.",
+    "terms": [
+      {
+        "name": "Độ phức tạp",
+        "english": "Complexity",
+        "meaning": "Xu hướng chi phí theo kích thước dưới mô hình đã chọn."
+      },
+      {
+        "name": "Kiểu truy cập",
+        "english": "Access pattern",
+        "meaning": "Những câu hỏi/thao tác hệ thống thường thực hiện."
+      },
+      {
+        "name": "Cấu trúc dữ liệu đã quy định",
+        "english": "schema",
+        "meaning": "Hợp đồng về trường, kiểu và ràng buộc. Dữ liệu đúng cấu trúc vẫn có thể sai về nội dung nghiệp vụ."
+      }
+    ],
+    "chapters": {
+      "version": 1,
+      "items": [
+        {
+          "id": "sequence",
+          "title": "Vị trí trong mảng khác đường đi qua list",
+          "explanation": "Mảng hỗ trợ tìm theo chỉ số qua địa chỉ tính được; chèn giữa thường dịch nhiều phần tử. Linked list đi qua liên kết để tìm vị trí; chèn sau một nút đã có có thể ít thao tác liên kết nhưng tìm nút vẫn tốn. Chi phí locality/allocator chưa nằm hết trong Big O.",
+          "example": "Mảng [A,B,C,D], chèn X trước B phải dịch B,C,D theo mô hình đơn giản. List có sẵn con trỏ A chỉ sửa liên kết, nhưng nếu phải tìm A từ đầu thì tính cả bước tìm.",
+          "steps": [
+            "Đếm ba phần tử mảng phải dịch.",
+            "Tách chi phí tìm vị trí và chi phí chèn tại vị trí đã biết."
+          ],
+          "misconception": "Nói list chèn O(1) phải nêu đã có nút/vị trí phù hợp; không tự có truy cập chỉ số O(1).",
+          "sourceIds": [
+            "mit-algorithms"
+          ]
+        },
+        {
+          "id": "queries",
+          "title": "Tìm khóa, tìm khoảng và lấy ưu tiên khác nhau",
+          "explanation": "Hash phù hợp equality với giả định hàm băm/phân bố và xử lý collision. Cây có thứ tự hỗ trợ range; cân bằng ảnh hưởng chiều cao. Min-heap giữ phần tử nhỏ nhất ở gốc, không sắp toàn bộ mảng. FIFO queue lấy theo thứ tự vào.",
+          "example": "Ba việc ưu tiên 3,1,2: FIFO lấy 3 trước nếu vào đầu; min-heap lấy 1. Dùng heap để in mọi phần tử tăng dần phải liên tục lấy/sửa, không đọc mảng theo tầng rồi coi đã sort.",
+          "steps": [
+            "Ghi truy vấn cần trả lời trước chọn cấu trúc.",
+            "So FIFO/min-heap trên cùng thứ tự đến và giải thích khác biệt."
+          ],
+          "misconception": "Heap vùng nhớ, heap cấu trúc ưu tiên và cây tìm kiếm không là cùng khái niệm.",
+          "sourceIds": [
+            "mit-algorithms"
+          ]
+        },
+        {
+          "id": "growth",
+          "title": "Big O nói xu hướng, không nói số mili-giây",
+          "explanation": "Độ phức tạp mô tả chi phí tăng theo kích thước n dưới mô hình. Tìm tuyến tính có thể xét n mục, binary search trên dữ liệu đã sắp thu hẹp khoảng; hash expected khác worst case. Cache/locality/serialization/compression ảnh hưởng bytes và tài nguyên thực.",
+          "example": "Danh sách tăng từ 16 lên32: tuyến tính worst case tăng16→32 bước xét; chia đôi tăng số lần thu hẹp khoảng khoảng một bước. Nhưng sắp xếp ban đầu và cập nhật cũng có chi phí.",
+          "steps": [
+            "Chọn phép đếm: so khóa, di chuyển phần tử hay bytes.",
+            "Tính chi phí chuẩn bị/cập nhật và điều kiện dữ liệu đã sắp trước so."
+          ],
+          "misconception": "O(log n) không tự nhanh hơn trong mọi input nhỏ; không đổi số bước thành ms không đo.",
+          "sourceIds": [
+            "mit-algorithms"
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "version": 1,
+      "items": [
+        {
+          "id": "sequence",
+          "text": "Chèn list ít đổi liên kết có nghĩa tìm phần tử thứ 100 cũng O(1)?",
+          "options": [
+            "Có; mọi thao tác list đều O(1).",
+            "Có nếu tên list ngắn.",
+            "Không; thường phải đi theo liên kết."
+          ],
+          "answer": 2,
+          "explanation": "Mảng [A,B,C,D], chèn X trước B phải dịch B,C,D theo mô hình đơn giản. List có sẵn con trỏ A chỉ sửa liên kết, nhưng nếu phải tìm A từ đầu thì tính cả bước tìm. Nói list chèn O(1) phải nêu đã có nút/vị trí phù hợp; không tự có truy cập chỉ số O(1).",
+          "sourceIds": [
+            "mit-algorithms"
+          ]
+        },
+        {
+          "id": "queries",
+          "text": "Mảng theo tầng của heap có luôn tăng dần toàn cục?",
+          "options": [
+            "Có; heap là mảng đã sort.",
+            "Không; chỉ có quan hệ heap cha–con.",
+            "Có nếu gốc nhỏ nhất."
+          ],
+          "answer": 1,
+          "explanation": "Ba việc ưu tiên 3,1,2: FIFO lấy 3 trước nếu vào đầu; min-heap lấy 1. Dùng heap để in mọi phần tử tăng dần phải liên tục lấy/sửa, không đọc mảng theo tầng rồi coi đã sort. Heap vùng nhớ, heap cấu trúc ưu tiên và cây tìm kiếm không là cùng khái niệm.",
+          "sourceIds": [
+            "mit-algorithms"
+          ]
+        },
+        {
+          "id": "growth",
+          "text": "So binary search với linear mà bỏ chi phí sắp khi dữ liệu đổi liên tục có đủ?",
+          "options": [
+            "Chưa; phải tính workload đọc/ghi và chuẩn bị.",
+            "Đủ; Big O là thời gian thực chính xác.",
+            "Đủ; hash không có collision."
+          ],
+          "answer": 0,
+          "explanation": "Danh sách tăng từ 16 lên32: tuyến tính worst case tăng16→32 bước xét; chia đôi tăng số lần thu hẹp khoảng khoảng một bước. Nhưng sắp xếp ban đầu và cập nhật cũng có chi phí. O(log n) không tự nhanh hơn trong mọi input nhỏ; không đổi số bước thành ms không đo.",
+          "sourceIds": [
+            "mit-algorithms"
+          ]
+        }
+      ]
+    },
+    "prediction": {
+      "text": "Một cấu trúc tìm khóa nhanh có luôn hợp truy vấn khoảng?",
+      "options": [
+        "Có; mọi query là tìm khóa.",
+        "Không; phải xem cấu trúc giữ thứ tự hay không."
+      ],
+      "answer": 1,
+      "explanation": "Access pattern quyết định lợi ích của cấu trúc."
+    },
+    "challenge": {
+      "text": "Cần xử lý việc tới trước nhưng chọn min-heap theo giá trị ưu tiên. Có giữ FIFO không?",
+      "options": [
+        "Có; heap và queue giống hệt.",
+        "Có nếu ít hơn 100 việc.",
+        "Không nói chung; phải dùng đúng thứ tự theo yêu cầu."
+      ],
+      "answer": 2,
+      "explanation": "Cơ chế chọn phần tử quyết định thứ tự, không phải số lượng nhỏ."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Theo dấu nơi giữ trạng thái và điều đã được xác nhận.",
+        "Access pattern quyết định lợi ích của cấu trúc."
+      ],
+      "challenge": [
+        "Kiểm tra yêu cầu mới; tìm lịch thao tác có thể làm phương án sai.",
+        "Cơ chế chọn phần tử quyết định thứ tự, không phải số lượng nhỏ."
+      ]
+    },
+    "sources": [
+      {
+        "title": "MIT OCW 6.006 — Introduction to Algorithms",
+        "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/pages/lecture-notes/"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-structures-cost",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L0-03",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Không có một cách lưu nhanh nhất cho mọi câu hỏi.",
+      "context": "Thư viện vừa cần tìm mã sách, vừa lấy việc in có ưu tiên và thống kê theo khoảng mã. Mỗi câu hỏi cần đường đi khác; chọn cấu trúc theo một benchmark tìm đúng khóa chưa đủ.",
+      "requirements": [
+        "So array/list/hash/tree/heap/queue, độ phức tạp theo số thao tác, locality và biểu diễn dữ liệu.",
+        "Giải thích được một tình huống lỗi và điều kiện để phương án còn đúng."
+      ],
+      "activityRef": "module-practice",
+      "experimentSteps": [
+        "Theo từng bước trong các ví dụ và tự tính kết quả trước khi xem giải thích.",
+        "Chọn phương án cho từng tình huống, kiểm tra và sửa lựa chọn.",
+        "Áp dụng sang yêu cầu mới; nêu điều kiện và giới hạn của quyết định."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Nói list chèn O(1) phải nêu đã có nút/vị trí phù hợp; không tự có truy cập chỉ số O(1).",
+        "O(log n) không tự nhanh hơn trong mọi input nhỏ; không đổi số bước thành ms không đo."
+      ],
+      "limitations": "Đếm thao tác theo mô hình; không chạy benchmark hay tự nhận đã dạy toàn bộ thuật toán."
+    }
+  },
+  {
+    "id": "streaming-lifecycle",
+    "version": 1,
+    "status": "beta",
+    "kind": "module-practice",
+    "level": "L0",
+    "moduleId": "L0.5",
+    "minutes": 25,
+    "title": "Vì sao có thể đọc nội dung khi chưa tải xong?",
+    "subtitle": "Một kết nối mở không chứng minh toàn bộ dữ liệu đã tới.",
+    "objective": "Phân biệt streaming/request-response, SSE/WebSocket/polling, framing, reconnect và backpressure.",
+    "story": "Bảng thông báo muốn hiện tin ngay khi có. Gửi lại HTTP mỗi giây, giữ dòng SSE hoặc dùng WebSocket đều là lựa chọn, nhưng mất kết nối giữa chừng cần biết tin nào đã nhận.",
+    "explanation": "Dòng byte cần quy tắc xác định bản tin. Chọn chiều giao tiếp và tần suất cần thiết. Kết nối lại cần biết mốc và khoảng dữ liệu còn giữ.",
+    "limit": "Ví dụ protocol bằng chữ; không mở kết nối WebSocket/SSE thật hoặc phát nội dung ngoài.",
+    "terms": [
+      {
+        "name": "Truyền tăng dần",
+        "english": "Streaming",
+        "meaning": "Nhận/xử lý nội dung từng phần khi còn đang truyền."
+      },
+      {
+        "name": "Ranh giới bản tin",
+        "english": "Framing",
+        "meaning": "Quy tắc nhận biết đầu/cuối message trong dòng dữ liệu."
+      },
+      {
+        "name": "Mốc tiếp tục",
+        "english": "Cursor",
+        "meaning": "Vị trí để yêu cầu dữ liệu tiếp theo."
+      },
+      {
+        "name": "Thông báo xác nhận",
+        "english": "ACK",
+        "meaning": "Phản hồi cho biết một bước đã được bên nhận xác nhận. Phải đọc hợp đồng để biết đó là nhận, lưu bền hay áp dụng."
+      },
+      {
+        "name": "Cấu trúc dữ liệu đã quy định",
+        "english": "schema",
+        "meaning": "Hợp đồng về trường, kiểu và ràng buộc. Dữ liệu đúng cấu trúc vẫn có thể sai về nội dung nghiệp vụ."
+      },
+      {
+        "name": "Chạy lại dữ liệu đã ghi",
+        "english": "replay",
+        "meaning": "Đọc và áp dụng lại lịch sử theo quy tắc; cần tránh lặp hiệu ứng bên ngoài."
+      },
+      {
+        "name": "Thời hạn giữ dữ liệu",
+        "english": "retention",
+        "meaning": "Khoảng thời gian dữ liệu hoặc bản sao được giữ trước khi xóa theo chính sách."
+      }
+    ],
+    "chapters": {
+      "version": 1,
+      "items": [
+        {
+          "id": "chunks",
+          "title": "Dòng byte cần quy tắc xác định bản tin",
+          "explanation": "Streaming cho ứng dụng xử lý dữ liệu tăng dần thay vì đợi toàn bộ. Một chunk mạng không nhất thiết là một message ứng dụng. Phải dùng framing/parser của protocol; UTF-8 ký tự nhiều byte có thể bị cắt giữa chunk và cần decoder phù hợp.",
+          "example": "Bản tin “phòng 205” có thể tới qua hai chunk; không được coi mỗi chunk là một dòng hoàn chỉnh. Response bắt đầu 200 cũng có thể đứt trước khi đủ body.",
+          "steps": [
+            "Ghép bytes theo protocol trước kết luận message hoàn chỉnh.",
+            "Thử mất kết nối giữa body và ghi rõ trạng thái thiếu."
+          ],
+          "misconception": "HTTP 200 đầu response không chứng minh đã nhận hết nội dung streaming.",
+          "sourceIds": [
+            "http-rfc",
+            "sse"
+          ]
+        },
+        {
+          "id": "transport",
+          "title": "Chọn chiều giao tiếp và tần suất cần thiết",
+          "explanation": "Polling gửi request định kỳ; SSE truyền sự kiện server→client qua HTTP với EventSource và cơ chế reconnect; WebSocket cho trao đổi hai chiều trên kết nối. Protocol không tự lưu lịch sử, cấp quyền hay dedup ứng dụng.",
+          "example": "Bảng tin một chiều có thể dùng SSE; game cần hai chiều có thể xét WebSocket. Gửi mỗi giây bằng polling tạo request cả lúc không có tin, nhưng cách vận hành có thể đơn giản hơn.",
+          "steps": [
+            "Ghi ai gửi, tần suất và mức trễ chấp nhận.",
+            "So chi phí kết nối/request và hỗ trợ proxy, không chỉ tên protocol."
+          ],
+          "misconception": "WebSocket không tự là hàng đợi bền vững hoặc bảo đảm xử lý đúng một lần.",
+          "sourceIds": [
+            "websocket",
+            "sse"
+          ]
+        },
+        {
+          "id": "resume",
+          "title": "Kết nối lại cần biết mốc và khoảng dữ liệu còn giữ",
+          "explanation": "Client có thể lưu event ID/cursor đã xử lý; server quyết định replay theo retention và quyền. Nếu mất khoảng lịch sử, cần tải snapshot rồi tiếp dòng mới. Backpressure/buffer giới hạn tránh client chậm làm RAM tăng mãi; duplicate phải được xử lý.",
+          "example": "Client đã xử lý E8, reconnect xin sau E8. Server còn E9/E10 thì replay; nếu chỉ giữ từ E20, phải báo khoảng thiếu và lấy snapshot theo hợp đồng.",
+          "steps": [
+            "Tách đã nhận bytes khỏi đã xử lý event.",
+            "Thử reconnect, nhận trùng E8 và cursor quá cũ; chọn hành vi rõ."
+          ],
+          "misconception": "Auto-reconnect không tự bảo đảm không mất/trùng sự kiện.",
+          "sourceIds": [
+            "sse",
+            "kafka-design"
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "version": 1,
+      "items": [
+        {
+          "id": "chunks",
+          "text": "Nhận status 200 rồi mất mạng giữa body. Có chắc toàn dữ liệu đã tải?",
+          "options": [
+            "Không; cần xác minh body/message hoàn chỉnh.",
+            "Có; status đại diện mọi byte tương lai.",
+            "Có nếu UI hiện spinner."
+          ],
+          "answer": 0,
+          "explanation": "Bản tin “phòng 205” có thể tới qua hai chunk; không được coi mỗi chunk là một dòng hoàn chỉnh. Response bắt đầu 200 cũng có thể đứt trước khi đủ body. HTTP 200 đầu response không chứng minh đã nhận hết nội dung streaming.",
+          "sourceIds": [
+            "http-rfc",
+            "sse"
+          ]
+        },
+        {
+          "id": "transport",
+          "text": "SSE phù hợp trực tiếp với chiều nào?",
+          "options": [
+            "Server gửi sự kiện tới client.",
+            "Tự tạo transaction database hai chiều.",
+            "Bảo đảm mọi tin lưu vĩnh viễn."
+          ],
+          "answer": 0,
+          "explanation": "Bảng tin một chiều có thể dùng SSE; game cần hai chiều có thể xét WebSocket. Gửi mỗi giây bằng polling tạo request cả lúc không có tin, nhưng cách vận hành có thể đơn giản hơn. WebSocket không tự là hàng đợi bền vững hoặc bảo đảm xử lý đúng một lần.",
+          "sourceIds": [
+            "websocket",
+            "sse"
+          ]
+        },
+        {
+          "id": "resume",
+          "text": "Cursor E8 nhưng server chỉ giữ từ E20. Có thể lặng lẽ tiếp E20 rồi nói đủ lịch sử?",
+          "options": [
+            "Không; cần báo gap và đồng bộ lại phù hợp.",
+            "Có; reconnect sửa mọi dữ liệu.",
+            "Có nếu dùng TCP."
+          ],
+          "answer": 0,
+          "explanation": "Client đã xử lý E8, reconnect xin sau E8. Server còn E9/E10 thì replay; nếu chỉ giữ từ E20, phải báo khoảng thiếu và lấy snapshot theo hợp đồng. Auto-reconnect không tự bảo đảm không mất/trùng sự kiện.",
+          "sourceIds": [
+            "sse",
+            "kafka-design"
+          ]
+        }
+      ]
+    },
+    "prediction": {
+      "text": "Một chunk mạng có luôn là một tin nhắn hoàn chỉnh?",
+      "options": [
+        "Không; ứng dụng cần framing/parser đúng.",
+        "Có; mỗi packet là một tin."
+      ],
+      "answer": 0,
+      "explanation": "Biên truyền bytes khác biên message của ứng dụng."
+    },
+    "challenge": {
+      "text": "Màn chat reconnect và nhận lại tin E9 đã lưu. Nên làm gì?",
+      "options": [
+        "Hiển thị hai tin là hai ý định mới.",
+        "Dùng ID/state để xử lý trùng và tiếp từ mốc phù hợp.",
+        "Xóa hết lịch sử rồi giả vờ không mất."
+      ],
+      "answer": 1,
+      "explanation": "Danh tính event và cơ chế resume là trách nhiệm ứng dụng."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Theo dấu nơi giữ trạng thái và điều đã được xác nhận.",
+        "Biên truyền bytes khác biên message của ứng dụng."
+      ],
+      "challenge": [
+        "Kiểm tra yêu cầu mới; tìm lịch thao tác có thể làm phương án sai.",
+        "Danh tính event và cơ chế resume là trách nhiệm ứng dụng."
+      ]
+    },
+    "sources": [
+      {
+        "title": "RFC 9110 — HTTP Semantics",
+        "url": "https://www.rfc-editor.org/rfc/rfc9110.html"
+      },
+      {
+        "title": "WHATWG HTML — Server-sent events",
+        "url": "https://html.spec.whatwg.org/multipage/server-sent-events.html"
+      },
+      {
+        "title": "RFC 6455 — WebSocket",
+        "url": "https://www.rfc-editor.org/rfc/rfc6455.html"
+      },
+      {
+        "title": "Apache Kafka 4.1 — Design",
+        "url": "https://kafka.apache.org/41/design/design/"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-streaming-lifecycle",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L0-05",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Một kết nối mở không chứng minh toàn bộ dữ liệu đã tới.",
+      "context": "Bảng thông báo muốn hiện tin ngay khi có. Gửi lại HTTP mỗi giây, giữ dòng SSE hoặc dùng WebSocket đều là lựa chọn, nhưng mất kết nối giữa chừng cần biết tin nào đã nhận.",
+      "requirements": [
+        "Phân biệt streaming/request-response, SSE/WebSocket/polling, framing, reconnect và backpressure.",
+        "Giải thích được một tình huống lỗi và điều kiện để phương án còn đúng."
+      ],
+      "activityRef": "module-practice",
+      "experimentSteps": [
+        "Theo từng bước trong các ví dụ và tự tính kết quả trước khi xem giải thích.",
+        "Chọn phương án cho từng tình huống, kiểm tra và sửa lựa chọn.",
+        "Áp dụng sang yêu cầu mới; nêu điều kiện và giới hạn của quyết định."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "HTTP 200 đầu response không chứng minh đã nhận hết nội dung streaming.",
+        "Auto-reconnect không tự bảo đảm không mất/trùng sự kiện."
+      ],
+      "limitations": "Ví dụ protocol bằng chữ; không mở kết nối WebSocket/SSE thật hoặc phát nội dung ngoài."
+    }
+  },
+  {
+    "id": "measurement-reliability",
+    "version": 1,
+    "status": "beta",
+    "kind": "module-practice",
+    "level": "L0",
+    "moduleId": "L0.6",
+    "minutes": 25,
+    "title": "Nhanh, phục vụ được và không mất dữ liệu khác nhau thế nào?",
+    "subtitle": "Dùng đúng đơn vị và cửa sổ trước khi so số.",
+    "objective": "Phân biệt latency/throughput/concurrency/availability/durability, byte/time và ước lượng workload.",
+    "story": "Cổng trường hoàn tất 100 lượt trong10 giây nhưng một học sinh đợi5 giây. Tối đến dữ liệu mất do chưa lưu bền. Một con số lượt mỗi giây không mô tả cả ba vấn đề.",
+    "explanation": "Thời gian mỗi việc khác số việc mỗi giây. Đang phục vụ khác giữ được điều đã lưu. Tính bytes và thời gian bằng giả định công khai.",
+    "limit": "Số liệu/đơn vị minh họa, không benchmark hoặc cam kết độ tin cậy sản phẩm.",
+    "terms": [
+      {
+        "name": "Tốc độ hoàn tất",
+        "english": "Throughput",
+        "meaning": "Số việc hoàn tất mỗi đơn vị thời gian."
+      },
+      {
+        "name": "Bền vững dữ liệu",
+        "english": "Durability",
+        "meaning": "Khả năng giữ dữ liệu đã xác nhận dưới mô hình lỗi."
+      },
+      {
+        "name": "Khả dụng",
+        "english": "Availability",
+        "meaning": "Khả năng phục vụ theo định nghĩa và cửa sổ đã chốt."
+      },
+      {
+        "name": "Thông báo xác nhận",
+        "english": "ACK",
+        "meaning": "Phản hồi cho biết một bước đã được bên nhận xác nhận. Phải đọc hợp đồng để biết đó là nhận, lưu bền hay áp dụng."
+      },
+      {
+        "name": "Cấu trúc dữ liệu đã quy định",
+        "english": "schema",
+        "meaning": "Hợp đồng về trường, kiểu và ràng buộc. Dữ liệu đúng cấu trúc vẫn có thể sai về nội dung nghiệp vụ."
+      },
+      {
+        "name": "Thời hạn giữ dữ liệu",
+        "english": "retention",
+        "meaning": "Khoảng thời gian dữ liệu hoặc bản sao được giữ trước khi xóa theo chính sách."
+      }
+    ],
+    "chapters": {
+      "version": 1,
+      "items": [
+        {
+          "id": "measures",
+          "title": "Thời gian mỗi việc khác số việc mỗi giây",
+          "explanation": "Latency là thời gian từ mốc bắt đầu tới kết thúc đã chọn. Throughput là số hoàn tất trong cửa sổ chia thời lượng. Concurrency là số việc cùng nằm trong phạm vi tại một thời điểm; không bằng số user đăng ký tài khoản.",
+          "example": "100 lượt hoàn tất/10s=10 lượt/s. Một lượt bắt đầu1s kết thúc6s có latency5s. Không lấy 1/10s làm thời gian mọi lượt vì chúng có thể chờ/chạy song song.",
+          "steps": [
+            "Tính throughput trên cửa sổ10s.",
+            "Tính latency từ hai mốc của cùng lượt, rồi đếm concurrency tại mốc cần."
+          ],
+          "misconception": "Throughput cao không bảo đảm mỗi lượt nhanh.",
+          "sourceIds": [
+            "sre-objectives"
+          ]
+        },
+        {
+          "id": "durable",
+          "title": "Đang phục vụ khác giữ được điều đã lưu",
+          "explanation": "Availability nói khả năng nhận kết quả theo định nghĩa; durability nói dữ liệu đã xác nhận còn được giữ dưới mô hình lỗi. Hệ đang dừng vẫn có thể giữ dữ liệu an toàn, và hệ trả lời nhanh vẫn có thể mất bản ghi chưa bền.",
+          "example": "Server RAM ACK phiếu rồi mất điện: có thể mất phiếu. Database đang bảo trì có thể tạm không phục vụ nhưng dữ liệu trên storage vẫn còn; phải xét cấu hình/lỗi thực.",
+          "steps": [
+            "Tạo hai câu hỏi riêng: có phục vụ được không, phiếu ACK có còn không.",
+            "Ghi failure model như mất process/máy/vùng/xóa nhầm."
+          ],
+          "misconception": "Uptime cao không tự là durability cao; replica không tự là backup.",
+          "sourceIds": [
+            "replication-pg",
+            "backup-pg"
+          ]
+        },
+        {
+          "id": "estimate",
+          "title": "Tính bytes và thời gian bằng giả định công khai",
+          "explanation": "Dung lượng ≈ số bản ghi × bytes/bản × số ngày, rồi xét index/replica/backup/compression. Dùng đơn vị rõ: ví dụ này KB=1.000 byte, MB=1.000.000; KiB=1.024 byte. Ước lượng là khoảng theo workload, không benchmark.",
+          "example": "2.000 học sinh × 5 sự kiện/ngày × 200 byte=2.000.000 byte/ngày=2MB/ngày thập phân. 30 ngày=60MB dữ liệu thô; ba bản sao=180MB trước index/backup.",
+          "steps": [
+            "Viết đơn vị sau từng thừa số và rút gọn.",
+            "Thay retention/tần suất gấp đôi và kiểm kết quả thay đổi."
+          ],
+          "misconception": "Dữ liệu thô không là toàn chi phí hoặc dung lượng hệ thống.",
+          "sourceIds": [
+            "sre-objectives",
+            "backup-pg"
+          ]
+        }
+      ]
+    },
+    "practice": {
+      "version": 1,
+      "items": [
+        {
+          "id": "measures",
+          "text": "100 lượt xong trong10s cho throughput bao nhiêu?",
+          "options": [
+            "0,1s cho mọi lượt.",
+            "100 lượt/s.",
+            "10 lượt/s."
+          ],
+          "answer": 2,
+          "explanation": "100 lượt hoàn tất/10s=10 lượt/s. Một lượt bắt đầu1s kết thúc6s có latency5s. Không lấy 1/10s làm thời gian mọi lượt vì chúng có thể chờ/chạy song song. Throughput cao không bảo đảm mỗi lượt nhanh.",
+          "sourceIds": [
+            "sre-objectives"
+          ]
+        },
+        {
+          "id": "durable",
+          "text": "Hệ bảo trì không nhận request nhưng dữ liệu còn nguyên. Điều gì đúng?",
+          "options": [
+            "Mọi dữ liệu chắc đã mất.",
+            "Availability tạm giảm; chưa có bằng chứng mất durability.",
+            "Availability và durability luôn là một số."
+          ],
+          "answer": 1,
+          "explanation": "Server RAM ACK phiếu rồi mất điện: có thể mất phiếu. Database đang bảo trì có thể tạm không phục vụ nhưng dữ liệu trên storage vẫn còn; phải xét cấu hình/lỗi thực. Uptime cao không tự là durability cao; replica không tự là backup.",
+          "sourceIds": [
+            "replication-pg",
+            "backup-pg"
+          ]
+        },
+        {
+          "id": "estimate",
+          "text": "Theo ví dụ, 30 ngày dữ liệu thô một bản là bao nhiêu?",
+          "options": [
+            "180MB cho một bản.",
+            "2.000GB.",
+            "60MB thập phân."
+          ],
+          "answer": 2,
+          "explanation": "2.000 học sinh × 5 sự kiện/ngày × 200 byte=2.000.000 byte/ngày=2MB/ngày thập phân. 30 ngày=60MB dữ liệu thô; ba bản sao=180MB trước index/backup. Dữ liệu thô không là toàn chi phí hoặc dung lượng hệ thống.",
+          "sourceIds": [
+            "sre-objectives",
+            "backup-pg"
+          ]
+        }
+      ]
+    },
+    "prediction": {
+      "text": "Website trả lời nhanh có đủ chứng minh phiếu đã lưu bền?",
+      "options": [
+        "Có; latency thấp là durability.",
+        "Không; cần biết mốc xác nhận và failure model."
+      ],
+      "answer": 1,
+      "explanation": "Hiệu năng và bền vững là hai yêu cầu khác nhau."
+    },
+    "challenge": {
+      "text": "Thời gian giữ dữ liệu tăng từ30 lên60 ngày, cùng tốc độ sinh. Dữ liệu thô đổi thế nào?",
+      "options": [
+        "Không đổi vì số user giữ nguyên.",
+        "Giảm một nửa.",
+        "Gấp đôi trong mô hình này, trước các chi phí phụ."
+      ],
+      "answer": 2,
+      "explanation": "Số ngày là một thừa số của ước lượng."
+    },
+    "guidance": {
+      "schemaVersion": 1,
+      "prediction": [
+        "Theo dấu nơi giữ trạng thái và điều đã được xác nhận.",
+        "Hiệu năng và bền vững là hai yêu cầu khác nhau."
+      ],
+      "challenge": [
+        "Kiểm tra yêu cầu mới; tìm lịch thao tác có thể làm phương án sai.",
+        "Số ngày là một thừa số của ước lượng."
+      ]
+    },
+    "sources": [
+      {
+        "title": "Google SRE — Service level objectives",
+        "url": "https://sre.google/sre-book/service-level-objectives/"
+      },
+      {
+        "title": "PostgreSQL 18 — Log-shipping standby servers",
+        "url": "https://www.postgresql.org/docs/18/warm-standby.html"
+      },
+      {
+        "title": "PostgreSQL 18 — Continuous archiving and PITR",
+        "url": "https://www.postgresql.org/docs/18/continuous-archiving.html"
+      }
+    ],
+    "caseStudy": {
+      "id": "case-measurement-reliability",
+      "schemaVersion": 1,
+      "revision": 1,
+      "familyId": "CASE-L0-06",
+      "provenance": {
+        "kind": "authored-scenario"
+      },
+      "title": "Dùng đúng đơn vị và cửa sổ trước khi so số.",
+      "context": "Cổng trường hoàn tất 100 lượt trong10 giây nhưng một học sinh đợi5 giây. Tối đến dữ liệu mất do chưa lưu bền. Một con số lượt mỗi giây không mô tả cả ba vấn đề.",
+      "requirements": [
+        "Phân biệt latency/throughput/concurrency/availability/durability, byte/time và ước lượng workload.",
+        "Giải thích được một tình huống lỗi và điều kiện để phương án còn đúng."
+      ],
+      "activityRef": "module-practice",
+      "experimentSteps": [
+        "Theo từng bước trong các ví dụ và tự tính kết quả trước khi xem giải thích.",
+        "Chọn phương án cho từng tình huống, kiểm tra và sửa lựa chọn.",
+        "Áp dụng sang yêu cầu mới; nêu điều kiện và giới hạn của quyết định."
+      ],
+      "assessmentRef": "challenge",
+      "tradeoffs": [
+        "Throughput cao không bảo đảm mỗi lượt nhanh.",
+        "Dữ liệu thô không là toàn chi phí hoặc dung lượng hệ thống."
+      ],
+      "limitations": "Số liệu/đơn vị minh họa, không benchmark hoặc cam kết độ tin cậy sản phẩm."
+    }
+  }
+]

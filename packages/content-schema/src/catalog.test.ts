@@ -1,3 +1,12 @@
+import serviceDesign from '../../../content/lessons/vi/service-design.json';
+import bridges from '../../../content/lessons/vi/foundation-bridges.json';
+import scaling from '../../../content/lessons/vi/scaling-design.json';
+import distributed from '../../../content/lessons/vi/distributed-design.json';
+import production from '../../../content/lessons/vi/production-design.json';
+import architecture from '../../../content/lessons/vi/architecture-design.json';
+import tracks from '../../../content/lessons/vi/specialist-tracks.json';
+import capstones from '../../../content/lessons/vi/level-capstones.json';
+import cases from '../../../content/lessons/vi/integrated-cases.json';
 import osPractice from '../../../content/lessons/vi/os-practice.json';
 import webProtocols from '../../../content/lessons/vi/web-protocols.json';
 import osLessons from '../../../content/lessons/vi/os-foundations.json';
@@ -36,6 +45,15 @@ const lessons = [
   ...osLessons,
   ...webProtocols,
   ...osPractice,
+  ...serviceDesign,
+  ...bridges,
+  ...scaling,
+  ...distributed,
+  ...production,
+  ...architecture,
+  ...tracks,
+  ...capstones,
+  ...cases,
 ].map((l) => lessonSchema.parse(l));
 const modules = Array.from({ length: 6 }, (_, level) =>
   Array.from({ length: 6 }, (_, i) => ({
@@ -47,7 +65,8 @@ const modules = Array.from({ length: 6 }, (_, level) =>
 ).flat();
 it('validates actual catalog without equating beta coverage with module completion', () => {
   const result = validateCatalog(modules, lessons, registry);
-  expect(result.lessons).toHaveLength(30);
+  expect(result.lessons).toHaveLength(85);
+  expect(result.coverage.every((c) => c.betaLessonIds.length > 0)).toBe(true);
   expect(result.coverage).toHaveLength(36);
   expect(result.coverage.every((c) => !c.complete)).toBe(true);
 });
@@ -158,8 +177,8 @@ it('validates authored two-step guidance without accepting executable fields', (
   ).toThrow();
 });
 
-it('all thirty beta lessons have authored two-stage hints while v1 answers stay unchanged', () => {
-  expect(lessons.filter((l) => l.status === 'beta')).toHaveLength(30);
+it('all available beta lessons have authored two-stage hints while v1 answers stay unchanged', () => {
+  expect(lessons.filter((l) => l.status === 'beta')).toHaveLength(85);
   for (const lesson of lessons.filter((l) => l.status === 'beta')) {
     expect(lesson.guidance?.schemaVersion).toBe(1);
     expect(lesson.guidance?.prediction).toHaveLength(2);
@@ -189,4 +208,26 @@ it('locks practice payload and validates activity bindings, item IDs and sources
   const invalid = structuredClone(l);
   invalid.practice!.items[0]!.answer = 99;
   expect(() => lessonSchema.parse(invalid)).toThrow('Practice answer');
+});
+
+it('validates chapter IDs, sources and non-executable data; locks published teaching content', async () => {
+  const { validateCompatibility } = await import('./compatibility');
+  const { default: baseline } = await import('../../../content/compatibility-v1.json');
+  const lesson = lessons.find((l) => l.id === 'transactions-isolation')!;
+  expect(lesson.chapters?.items).toHaveLength(5);
+  expect(() =>
+    lessonSchema.parse({ ...lesson, chapters: { ...lesson.chapters, code: 'execute()' } }),
+  ).toThrow();
+  const malformed = structuredClone(lesson);
+  malformed.chapters!.items[0]!.steps = ['Một bước'];
+  expect(() => lessonSchema.parse(malformed)).toThrow();
+  const duplicate = structuredClone(lessons);
+  duplicate.find((l) => l.id === lesson.id)!.chapters!.items[1]!.id = lesson.chapters!.items[0]!.id;
+  expect(() => validateCatalog(modules, duplicate, registry)).toThrow('Duplicate chapter');
+  const unknown = structuredClone(lessons);
+  unknown.find((l) => l.id === lesson.id)!.chapters!.items[0]!.sourceIds = ['unknown'];
+  expect(() => validateCatalog(modules, unknown, registry)).toThrow('Invalid chapter source');
+  const changed = structuredClone(lessons);
+  changed.find((l) => l.id === lesson.id)!.chapters!.items[0]!.explanation += ' Thay đổi cơ chế.';
+  expect(() => validateCompatibility(changed, baseline)).toThrow('Progress migration required');
 });
