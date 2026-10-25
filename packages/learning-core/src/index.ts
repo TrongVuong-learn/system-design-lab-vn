@@ -73,3 +73,4 @@ export function updateSchoolReview(progress: Progress, review: SchoolReviewProgr
 }
 
 export { evaluatePractice, PRACTICE_MODEL_VERSION } from './module-practice';
+export { readDesignDraft, isLessonComplete } from './design-draft';

@@ -1,6 +1,6 @@
 # Giao bản học thử cho AI khác kiểm tra
 
-Bản hiện tại 30 bài +1 bài ôn, không phải toàn bộ36module. Người dùng dùng để tự học, chưa có reviewer con người; có thể dùng bản học thử ngay, ghi rõ lỗi phát hiện để sửa. AI review không tự biến thành human-reviewed.
+Catalog source hiện tại 85 bài +1 bài ôn, có học liệu ở cả36module nhưng chưa chứng nhận đủ mọi năng lực. Người dùng dùng để tự học, chưa có reviewer con người; có thể dùng bản học thử ngay, ghi rõ lỗi phát hiện để sửa. AI review không tự biến thành human-reviewed.
 
 ## Prompt có thể sao chép
 
@@ -44,3 +44,13 @@ Bảy route mới: `/#/learn/address-space`, `file-handles`, `event-loop`, `cook
 - Bài OS áp dụng: thử chưa trả lời/sai/đúng 6/6, đổi đáp án/reset, reload và export/import/offline. Không tin score/pass nhập, ready đòi toàn bộ đúng và đã kiểm tra; không dùng điểm này như chứng nhận mastery / human review.
 
 Kiểm trên 320/390 px và desktop và tìm counterexample ngoài assumptions trước khi kết luận sai. Báo rõ chưa xác minh thay vì suy nguồn gắn URL là mọi claim đã chuẩn. AI review vẫn không thay pilot học sinh hoặc thiết bị thật.
+
+## EDU-25 — L1 từ yêu cầu đến vận hành
+
+Sáu route mới: requirements-boundaries, api-contracts, data-models, database-indexes, transactions-isolation, service-delivery. Chặng đầu có 27 chương cơ chế/ví dụ/điều dễ nhầm, chặng luyện có 40 câu và cuối mỗi bài có case chuyển giao. Đối chiếu nguồn ở từng bài và editorial registry, không lấy đáp án khớp UI làm bằng chứng kiến thức đúng. Đây là bài phân tích quyết định, không phải DB/cloud thật chạy trong browser. Cần kiểm các giới hạn: timeout/cancellation không rollback; token retry có phạm vi/payload; cursor không tự snapshot; SQL constraint không tự mọi invariant; planner cost khác ms; PostgreSQL18 Read Committed khác snapshot toàn transaction; rollback deployment khác dữ liệu. Xem báo cáo EDU-25 để biết source/build/QA/publication; chưa chứng nhận toàn L1 hoặc 36 module.
+
+## EDU-26 — toàn lộ trình tự luyện
+
+49 bài mới ngoài EDU-25: L0 bổ trợ/L2–L5, 7 track, 6 capstone, 8 case; 27 bài thiết kế có textarea và rubric. Dùng bộ lọc tại Khám phá để mở từng nhóm. Kiểm trace/số tự tính trong chương, assumptions và counterexample theo nguồn sơ cấp, đặc biệt quorum không tự linearizable, lease cần fencing, Raft commit cần điều kiện term, CRDT convergence khác invariant, saga compensation khác rollback, RPO khác cam kết phục hồi, RAG không tự quyền truy cập. Bài mới là lịch suy luận và lựa chọn thiết kế, không chạy dịch vụ phân tán thật.
+
+Thử bản nháp thiếu mục/chỉ khoảng trắng, điền đủ, reload, quay lại làm lại bài tập, xuất–nhập và mở bài chưa ghé offline. Đã điền không được báo đã chấm đúng. Các nguồn/lịch/câu hỏi phải được review riêng với tính năng web. Không lấy 85 bài làm chứng nhận 36 module hoàn chỉnh; không tự ghi human-reviewed.

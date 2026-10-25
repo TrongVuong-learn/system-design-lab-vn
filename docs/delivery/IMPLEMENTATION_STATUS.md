@@ -2,7 +2,7 @@
 
 ## Cập nhật 18/10/2026
 
-Catalog hiện 30 bài beta và1 bài ôn tổng hợp; mới nhất là [EDU-24 bài áp dụng OS](EDU_24_MODULE_PRACTICE.md). Phần ghi số6 bài/kiểm chứng bên dưới là lịch sử đợt đầu, không phải trạng thái catalog hiện tại. [ROADMAP](ROADMAP.md) quản lý công việc tiếp; [QA-07](QA_07_KNOWLEDGE_REVIEW.md) chỉ review baseline14 bài trước EDU-14, không chứng nhận bài mới. CPU/I/O đã có bài nhập môn; cấu trúc dữ liệu đã có các bài nhập môn; OS sâu và phần lớn36 module vẫn chưa hoàn tất; chưa pilot thật.
+Catalog source hiện 85 bài beta và 1 bài ôn; mới nhất là [EDU-26](EDU_26_REMAINING_CURRICULUM.md), tích hợp sáu bài EDU-25 và 49 bài mới. Cả 36 module có bài, 7 nhánh/6 capstone/8 case có lối học, 27 bài có bản thiết kế tự viết được lưu. Các số bài/kiểm chứng bên dưới là lịch sử từng đợt. Kết quả release chỉ theo báo cáo EDU-26; chưa chứng nhận mọi năng lực, review chuyên gia hoặc pilot học sinh.
 
 ## M4-OFFLINE-01 — gói tải beta
 

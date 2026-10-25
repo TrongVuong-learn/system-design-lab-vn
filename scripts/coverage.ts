@@ -1,5 +1,10 @@
 import { readFile, readdir, writeFile } from 'node:fs/promises';
-import { lessonSchema, moduleSchema, validateCatalog } from '../packages/content-schema/src/index';
+import {
+  lessonSchema,
+  moduleSchema,
+  validateCatalog,
+  validatePathways,
+} from '../packages/content-schema/src/index';
 
 const map = await readFile('CURRICULUM_MAP.md', 'utf8');
 const modules = [...map.matchAll(/^\| (L[0-5]\.[1-6]) \| ([^|]+) \|/gm)].map((m) =>
@@ -34,6 +39,13 @@ const rows = coverage.map((c) => {
   );
   return `| ${c.moduleId} | ${c.betaLessonIds.join(', ') || '—'} | ${depths.join(' / ')} | Chưa hoàn chỉnh |`;
 });
+const pathways = validatePathways(
+  JSON.parse(await readFile('content/pathways.json', 'utf8')),
+  lessons,
+);
+const pathwayRows = pathways.tracks
+  .map((t) => `| ${t.title} | ${t.lessonIds.join(', ')} |`)
+  .join('\n');
 const report = `# Độ bao phủ học liệu — báo cáo sinh từ source
 
 Chạy lại bằng \`pnpm coverage:write\`; kiểm tra drift bằng \`pnpm coverage:check\`.
@@ -46,7 +58,19 @@ Phạm vi bắt buộc vẫn ở [CURRICULUM_MAP](../../CURRICULUM_MAP.md) và [
 ${rows.join('\n')}
 
 Tổng: ${lessons.filter((l) => l.status === 'beta').length} bài beta; ${coverage.filter((c) => c.betaLessonIds.length > 0).length}/36 module có ít nhất một bài; 0/36 module được công nhận hoàn chỉnh.
-Không tính bài ôn liên module thành một module đầy đủ. Bảy track và sáu capstone vẫn theo kế hoạch riêng, chưa được chứng nhận bởi bảng này.
+Không tính bài ôn liên module thành một module đầy đủ. Số bài phản ánh nội dung khả dụng, không phải chứng nhận mastery hoặc hoàn tất mọi năng lực.
+
+## Nhánh chuyên sâu và bài tổng hợp khả dụng
+
+| Nhánh | Bài beta |
+| --- | --- |
+${pathwayRows}
+
+Sáu capstone: ${pathways.capstones.join(', ')}.
+
+Tám case tích hợp: ${pathways.cases.join(', ')}.
+
+${lessons.filter((l) => l.designTask).length} bài có bản thiết kế tự viết, rubric tự đối chiếu và đề đổi ràng buộc. Chưa chấm thiết kế tự động, chưa review chuyên gia/pilot học sinh.
 `;
 const path = 'docs/delivery/CONTENT_COVERAGE.md';
 if (process.argv.includes('--write')) await writeFile(path, report);

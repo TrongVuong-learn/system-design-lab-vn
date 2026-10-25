@@ -5,6 +5,7 @@ import {
   validateCatalog,
   validateReviews,
   validateCompatibility,
+  validatePathways,
 } from '../packages/content-schema/src/index';
 const source = await readFile('CURRICULUM_MAP.md', 'utf8');
 const modules = [...source.matchAll(/^\| (L[0-5]\.[1-6]) \| ([^|]+) \|/gm)].map((m) => {
@@ -35,6 +36,10 @@ const { lessons, editorial, coverage } = validateCatalog(
 validateCompatibility(
   allLessons,
   JSON.parse(await readFile('content/compatibility-v1.json', 'utf8')),
+);
+const pathways = validatePathways(
+  JSON.parse(await readFile('content/pathways.json', 'utf8')),
+  lessons,
 );
 const reviewFiles = (await readdir('content/reviews/vi')).filter((f) => f.endsWith('.json')).sort();
 const reviews = validateReviews(
@@ -79,8 +84,27 @@ const order = [
   'queue',
   'replica',
   'design',
+  'requirements-boundaries',
+  'api-contracts',
+  'data-models',
+  'database-indexes',
+  'transactions-isolation',
+  'service-delivery',
 ];
-lessons.sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
+const rank = new Map(order.map((id, index) => [id, index]));
+lessons.sort((a, b) => {
+  const ar = rank.get(a.id),
+    br = rank.get(b.id);
+  if (ar !== undefined || br !== undefined) return (ar ?? order.length) - (br ?? order.length);
+  const kindRank = (id: string) =>
+    id.startsWith('capstone-') ? 3 : id.startsWith('case-') ? 2 : id.startsWith('track-') ? 1 : 0;
+  return (
+    a.level.localeCompare(b.level) ||
+    kindRank(a.id) - kindRank(b.id) ||
+    a.moduleId.localeCompare(b.moduleId) ||
+    a.id.localeCompare(b.id)
+  );
+});
 if (!process.argv.includes('--check')) {
   await mkdir('apps/web/src/generated', { recursive: true });
   await writeFile(
@@ -90,6 +114,7 @@ if (!process.argv.includes('--check')) {
         modules,
         lessons,
         reviews,
+        pathways,
         editorial: {
           ...editorial,
           lessons: editorial.lessons.filter((r) => lessons.some((l) => l.id === r.lessonId)),
@@ -102,5 +127,5 @@ if (!process.argv.includes('--check')) {
   );
 }
 console.log(
-  `Content validated: ${modules.length} modules, ${lessons.length} available introductory lessons, ${reviews.length} integrated review. Full curriculum remains in development.`,
+  `Content validated: ${modules.length} modules, ${lessons.length} beta lessons, ${pathways.tracks.length} tracks, ${pathways.capstones.length} capstones, ${pathways.cases.length} design cases, ${reviews.length} integrated review. Mastery is not inferred.`,
 );

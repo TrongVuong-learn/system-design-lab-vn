@@ -17,6 +17,7 @@ export function ModulePracticeLab({
     answers[index] = answer;
     onChange({
       lab: {
+        ...progress.lab,
         modelVersion: PRACTICE_MODEL_VERSION,
         practiceVersion: practice.version,
         answers: JSON.stringify(answers),
@@ -29,6 +30,7 @@ export function ModulePracticeLab({
   function check() {
     onChange({
       lab: {
+        ...progress.lab,
         modelVersion: PRACTICE_MODEL_VERSION,
         practiceVersion: practice.version,
         answers: JSON.stringify(state.answers),
@@ -40,6 +42,7 @@ export function ModulePracticeLab({
   function reset() {
     onChange({
       lab: {
+        ...progress.lab,
         modelVersion: PRACTICE_MODEL_VERSION,
         practiceVersion: practice.version,
         answers: JSON.stringify(practice.items.map(() => -1)),

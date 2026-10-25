@@ -1,6 +1,6 @@
 # Kế hoạch triển khai và nghiệm thu
 
-Trạng thái: roadmap và ước lượng; web beta có 30 bài beta và một bài ôn tổng hợp, các gate hoàn thiện level còn mở. Trạng thái thực thi theo [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md); các gate chưa đạt vẫn còn mở. Phạm vi kiến thức theo [CURRICULUM_MAP.md](../../CURRICULUM_MAP.md), tiêu chuẩn học theo [TEACHING_GUIDE.md](../../TEACHING_GUIDE.md).
+Trạng thái: roadmap và ước lượng; catalog source có 85 bài beta và một bài ôn tổng hợp, các gate hoàn thiện level còn mở. Trạng thái thực thi theo [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md); các gate chưa đạt vẫn còn mở. Phạm vi kiến thức theo [CURRICULUM_MAP.md](../../CURRICULUM_MAP.md), tiêu chuẩn học theo [TEACHING_GUIDE.md](../../TEACHING_GUIDE.md).
 
 Quy trình thực hiện từng task, Git/review, release và quản lý thư mục áp dụng theo [WORKFLOW.md](WORKFLOW.md) và [CONTRIBUTING.md](../../CONTRIBUTING.md).
 
@@ -385,3 +385,13 @@ EDU-24 local30bài+1ôn,100unit/27files và24/24E2E liên quan đạt sau sửa 
 ### Kiểm chứng phát hành EDU-22–24
 
 Ba lô đã merge master qua PR#15/#16/#17, production theo master; chi tiết commit/deployment/nguồn/giới hạn trong từng báo cáo. CI cuối EDU-24: 100 unit, 259 E2E đạt, 1 skip; HTTP 18 file khớp artifact và browser production của bảy bài mới đạt mobile/desktop, xuất/nhập, resume và offline. Catalog hiện có 30 bài và một bài ôn tích hợp; chưa có module nào trong 36 module được chứng nhận đầy đủ. ENG-03, độ sâu/assessment còn thiếu, các module chưa có bài, nhánh chuyên sâu và capstone tiếp tục mở theo §19. Không yêu cầu người dùng test từng lô để tiếp tục triển khai.
+
+## 32. EDU-25 — sáu module thiết kế dịch vụ L1
+
+In progress 18/10/2026, theo [scope và acceptance](EDU_25_SERVICE_DESIGN.md). Triển khai requirements/boundary, API contract, data model, indexes, transactions và service delivery trong một lô liên kết; mỗi bài có chương cơ chế/ví dụ/điều dễ nhầm, practice và case mới. Tiếp tục giữ phạm vi bắt buộc, không tự đóng module hoặc cấp chứng nhận từ số bài/đáp án. Quyền user cho phép tự kiểm thử và phát hành theo master vẫn áp dụng.
+
+## 33. EDU-26 — học liệu cho phần còn lại của lộ trình
+
+Yêu cầu 24–25/10/2026: hoàn thành bài còn lại, tự kiểm và sửa, đưa tất cả bài mới lên website, không hỏi lại. [Scope/acceptance/release](EDU_26_REMAINING_CURRICULUM.md). Tích hợp sáu bài EDU-25 sẵn có; thêm49 bài: bốn bổ trợL0, sáuL2, sáuL3, sáuL4, sáuL5, bảytrack, sáucapstone, támcase. Tổng85bài+1ôn; cả36module có học liệu. Các hàng trước nói “chưa có bài” là lịch sử trước EDU-26.
+
+Bài mới có chương cơ chế/ví dụ/nguồn, thực hành quyết định và chuyển giao. 27 bài có bản thiết kế tự viết/rubric/đổi ràng buộc; lưu cùng progress v1/IndexedDB2. Điều này hoàn thành phạm vi bài tự luyện của đợt, chưa đóng planned-competency/attempt migration/engine chuyên sâu, human review, pilot, thiết bị thật, installed PWA, sync/native. Module chưa có đủ bằng chứng nghiệm thu vẫn không được ghi hoàn chỉnh. Phát hành theo master sau QA/CI, kiểm source SHA/READY/offline.

@@ -34,11 +34,15 @@ test('learn cache, observe stale data, complete and resume after reload', async 
   await page.goto('/#/progress');
   await expect(page.getByText('Ôn lại và thử thêm')).toBeVisible();
 });
-test('curriculum has 6 modules per level and no unpublished start button', async ({ page }) => {
+test('curriculum has 6 modules per level with available lessons', async ({ page }) => {
   await page.goto('/#/levels/L3');
   await expect(page.locator('.module-list>div')).toHaveCount(6);
-  await expect(page.getByText('Đang biên soạn', { exact: true })).toHaveCount(6);
-  await expect(page.getByRole('link', { name: /Bắt đầu thí nghiệm/ })).toHaveCount(0);
+  await expect(page.locator('.module-list .status-label')).toHaveCount(6);
+  await expect(page.locator('.lesson-card')).toHaveCount(7);
+  for (const module of await page.locator('.module-list>div').all()) {
+    await module.locator('summary').click();
+    await expect(module.getByRole('link').first()).toBeVisible();
+  }
 });
 test('all core screens fit a narrow viewport', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 720 });

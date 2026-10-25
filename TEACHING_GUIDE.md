@@ -1,6 +1,6 @@
 # Chuẩn giảng dạy System Design dễ hiểu
 
-Phiên bản 3 — 17/10/2026; chuẩn hóa mini-case từng bài và case tổng hợp. Áp dụng cho toàn bộ [giáo trình](CURRICULUM_MAP.md) và [kế hoạch website](SYSTEM_DESIGN_WEB_PLAN.md). Đây là chuẩn biên soạn và bài mẫu. Web hiện có 30 bài beta, mỗi bài có mini-case, cùng một bài ôn tổng hợp; chưa có kết quả thử nghiệm học sinh.
+Phiên bản 4 — 25/10/2026; chuẩn hóa mini-case từng bài và case tổng hợp. Áp dụng cho toàn bộ [giáo trình](CURRICULUM_MAP.md) và [kế hoạch website](SYSTEM_DESIGN_WEB_PLAN.md). Đây là chuẩn biên soạn và bài mẫu. Catalog hiện có 85 bài beta, mỗi bài có mini-case, cùng một bài ôn tổng hợp; 27 bài có bản thiết kế tự viết; chưa có kết quả thử nghiệm học sinh.
 
 ## 1. Người học và mục tiêu
 
@@ -166,3 +166,9 @@ Dùng [bộ EDU-02](docs/research/student-pilot/README.md) để điều phối 
 Sau thao tác, ghi hành động → trước/sau có đơn vị → nguyên nhân. Chỉ so sánh bước liền trước với bước vừa làm, không gọi đó là benchmark A/B; giữ nhãn giả định và giới hạn. Thay cấu hình queue chưa thực thi phải phân biệt công suất dự kiến với việc đã hoàn thành. Cache đến hạn chỉ được làm mới khi đọc/lấy mới theo mô hình. Tổng network tách RTT, xử lý và truyền. Reset xóa quan sát cũ; reload có thể xem lại bước cuối đã lưu.
 
 Gợi ý dùng dữ liệu tĩnh có schema: hai mức cho mỗi prediction/challenge (nơi quan sát, cách suy luận). Sai: phản hồi khuyến khích, mở từng mức rồi có nút xem lời giải; đúng: hiện lời giải có nguyên nhân. Gợi ý không chứa code; glossary áp dụng trong văn xuôi. Mức đã mở lưu riêng theo bài và câu hỏi; dữ liệu cũ mặc định chưa mở. Không thay answer/options/explanation để thêm gợi ý, không coi dùng gợi ý hoặc chọn đúng sau lời giải là bằng chứng thành thạo.
+
+## Bài cơ chế và thiết kế trong EDU-25/26
+
+Chương có cơ chế, ví dụ có lịch hoặc phép tính, các bước suy luận, ngộ nhận và sourceId. Người học đọc lại được ở chặng tự thử. Với bài quyết định, hoạt động là chọn phương án và đọc phản hồi theo từng câu; không gọi đó là phép đo của database/cloud thật.
+
+Bài thiết kế thêm đề, các đầu ra cụ thể, rubric tự đối chiếu và đổi ràng buộc. Ứng dụng lưu văn bản và chỉ kiểm các mục đã điền; không tự chấm chất lượng lập luận, cấp chứng nhận hoặc gọi một lựa chọn đúng là thiết kế hoàn chỉnh. Hoàn thành tự luyện không thay review chuyên gia/pilot. Học trước được liên kết ngay trong tình huống mở bài.

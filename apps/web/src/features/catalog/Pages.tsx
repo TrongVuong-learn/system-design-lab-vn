@@ -3,9 +3,14 @@ import { ReviewCard } from '../review';
 import { SaveStatus } from '../progress/SaveStatus';
 import { useRef, useState } from 'react';
 import { Link, useParams } from 'react-router';
-import { lessons, levels, modules, tracks } from '../../app/catalog';
+import { lessons, levels, modules, tracks, pathways, lessonLabel } from '../../app/catalog';
 import { useProgress } from '../../app/progress';
-import { MAX_PROGRESS_BYTES, parseProgress, serializeProgress } from '@sdl/learning-core';
+import {
+  MAX_PROGRESS_BYTES,
+  parseProgress,
+  serializeProgress,
+  isLessonComplete,
+} from '@sdl/learning-core';
 import { Icon } from '../../ui/primitives';
 import { LessonSketch } from './LessonSketch';
 import { FeaturedExperiment } from './FeaturedExperiment';
@@ -13,7 +18,7 @@ import { FeaturedExperiment } from './FeaturedExperiment';
 export function LessonCard({ id }: { id: string; index?: number }) {
   const l = lessons.find((l) => l.id === id)!;
   const { progress } = useProgress();
-  const done = progress.lessons[id]?.completed;
+  const done = isLessonComplete(l, progress.lessons[id]);
   return (
     <Link to={`/learn/${id}`} className="lesson-card">
       <div className={`lesson-visual visual-${l.kind}`}>
@@ -27,7 +32,9 @@ export function LessonCard({ id }: { id: string; index?: number }) {
       </div>
       <div className="lesson-card-body">
         <div className="lesson-meta">
-          <span>{l.level} · Bài nhập môn</span>
+          <span>
+            {l.level} · {lessonLabel(l.id)}
+          </span>
           <span>
             <Icon name="clock" size={13} />
             {l.minutes} phút
@@ -50,7 +57,7 @@ export function LessonCard({ id }: { id: string; index?: number }) {
 export function HomePage() {
   const { progress } = useProgress();
   const continuation = lessons.find(
-    (l) => progress.lessons[l.id] && !progress.lessons[l.id]?.completed,
+    (l) => progress.lessons[l.id] && !isLessonComplete(l, progress.lessons[l.id]),
   );
   return (
     <>
@@ -75,16 +82,20 @@ export function HomePage() {
         <div className="section-head">
           <div>
             <h2>Chọn một câu hỏi để thử</h2>
-            <p>{lessons.length} bài mở đầu. Mỗi bài có dự đoán, thao tác và tình huống mới.</p>
+            <p>Bắt đầu với các tình huống quen thuộc. Lộ trình có {lessons.length} bài tự luyện.</p>
           </div>
           <Link to="/explore" className="text-link">
             Xem tất cả bài
           </Link>
         </div>
         <div className="lesson-grid">
-          {lessons.map((l) => (
-            <LessonCard key={l.id} id={l.id} />
-          ))}
+          {lessons
+            .filter((l) =>
+              ['request', 'cache', 'concurrency', 'cpu-io', 'http', 'metrics'].includes(l.id),
+            )
+            .map((l) => (
+              <LessonCard key={l.id} id={l.id} />
+            ))}
         </div>
       </section>
       <section className="path-section">
@@ -92,7 +103,7 @@ export function HomePage() {
           <h2>Sau bài đầu, đi tiếp ở đâu?</h2>
           <p>
             Học theo level hoặc mở chủ đề bạn đang cần. Lộ trình gồm 36 module và 7 nhánh chuyên
-            sâu; nội dung được phát triển từng phần.
+            sâu, bài tổng hợp theo level và case thiết kế.
           </p>
           <Link className="text-link" to="/explore">
             Khám phá bản đồ kiến thức
@@ -112,10 +123,10 @@ export function HomePage() {
         </div>
       </section>
       <aside className="beta-note">
-        <strong>Bản thử nghiệm đang có {lessons.length} bài nhập môn.</strong>
+        <strong>Bản thử nghiệm đang có {lessons.length} bài tự luyện.</strong>
         <p>
-          Module chuyên sâu có trạng thái rõ trong lộ trình. Tiến độ học được lưu trên thiết bị của
-          bạn.
+          Bài cơ chế, bài thiết kế và nhánh chuyên sâu đều có lối vào trong lộ trình. Tiến độ và bản
+          nháp thiết kế được lưu trên thiết bị của bạn; tự luyện chưa phải chứng nhận thành thạo.
         </p>
       </aside>
     </>
@@ -123,6 +134,7 @@ export function HomePage() {
 }
 export function ExplorePage() {
   const [query, setQuery] = useState('');
+  const [group, setGroup] = useState('all');
   const normalize = (s: string) =>
     s
       .toLocaleLowerCase('vi')
@@ -131,9 +143,21 @@ export function ExplorePage() {
       .replace(/đ/g, 'd');
   const term = query.trim();
   const matches = (s: string) => normalize(s).includes(normalize(term));
-  const available = lessons.filter((l) =>
-    matches(`${l.title} ${l.subtitle} ${l.terms.map((t) => t.english).join(' ')}`),
-  );
+  const available = lessons.filter((l) => {
+    const track = tracks.find((t) => t.id === group);
+    const inGroup =
+      group === 'all' ||
+      l.level === group ||
+      (group === 'capstones' && pathways.capstones.includes(l.id)) ||
+      (group === 'cases' && pathways.cases.includes(l.id)) ||
+      Boolean(track?.lessonIds.includes(l.id));
+    return (
+      inGroup &&
+      matches(
+        `${l.title} ${l.subtitle} ${l.moduleId} ${l.objective} ${l.terms.map((t) => `${t.name} ${t.english}`).join(' ')}`,
+      )
+    );
+  });
   const planned = modules.filter((m) => matches(`${m.title} ${m.topics}`));
   return (
     <div className="page-content">
@@ -148,8 +172,30 @@ export function ExplorePage() {
           onChange={(e) => setQuery(e.target.value)}
         />
       </div>
+      <div className="pathway-filter">
+        <label htmlFor="pathway-select">Học theo lộ trình</label>
+        <select
+          id="pathway-select"
+          value={group}
+          onChange={(event) => setGroup(event.target.value)}
+        >
+          <option value="all">Tất cả bài học</option>
+          {levels.map((l) => (
+            <option key={l.id} value={l.id}>
+              {l.id} · {l.name}
+            </option>
+          ))}
+          <option value="capstones">Sáu bài tổng hợp theo level</option>
+          <option value="cases">Tám case thiết kế tích hợp</option>
+          {tracks.map((t) => (
+            <option key={t.id} value={t.id}>
+              {t.title}
+            </option>
+          ))}
+        </select>
+      </div>
       <h2>
-        Thí nghiệm đang có <span className="count">{available.length}</span>
+        Bài học đang có <span className="count">{available.length}</span>
       </h2>
       {available.length ? (
         <div className="lesson-grid">
@@ -190,10 +236,22 @@ export function ExplorePage() {
         </div>
       )}
       <h2 className="spaced-heading">Các nhánh chuyên sâu</h2>
-      <p className="muted">Đang đặc tả học liệu; mỗi nhánh sẽ có bài và điều kiện đầu vào riêng.</p>
+      <p className="muted">
+        Mỗi nhánh có bài cơ chế, đề thiết kế và liên kết học trước. Chọn nhánh để lọc bài ở trên.
+      </p>
       <div className="track-list">
         {tracks.map((t) => (
-          <span key={t}>{t}</span>
+          <button
+            className="button secondary"
+            key={t.id}
+            onClick={() => {
+              setGroup(t.id);
+              setQuery('');
+              document.getElementById('pathway-select')?.focus();
+            }}
+          >
+            {t.title}
+          </button>
         ))}
       </div>
     </div>
@@ -225,7 +283,7 @@ export function LevelPage() {
       )}
       {available.length > 0 && (
         <>
-          <h2>Bài nhập môn đang có</h2>
+          <h2>Bài học trong level</h2>
           <div className="lesson-grid">
             {available.map((l, i) => (
               <LessonCard key={l.id} id={l.id} index={i} />
@@ -235,8 +293,8 @@ export function LevelPage() {
       )}
       <h2 className="spaced-heading">6 module trong level này</h2>
       <p className="muted">
-        Danh mục dưới đây là phạm vi cần phát triển. Các module đầy đủ đang được biên soạn; bài nhập
-        môn chưa thay thế toàn bộ module.
+        Mỗi module có bài để đọc và tự luyện. Hoàn thành bài không đồng nghĩa đã chứng minh mọi năng
+        lực của module.
       </p>
       <div className="module-list">
         {modules
@@ -245,10 +303,21 @@ export function LevelPage() {
             <div key={m.id}>
               <span className="module-code">{m.id}</span>
               <h3>{m.title}</h3>
-              <span className="status-label">Đang biên soạn</span>
+              <span className="status-label">
+                {lessons.filter((l) => l.moduleId === m.id).length} bài tự luyện
+              </span>
               <details>
                 <summary>Xem các chủ đề</summary>
                 <p>{m.topics}</p>
+                <ul>
+                  {lessons
+                    .filter((l) => l.moduleId === m.id)
+                    .map((l) => (
+                      <li key={l.id}>
+                        <Link to={`/learn/${l.id}`}>{l.title}</Link>
+                      </li>
+                    ))}
+                </ul>
               </details>
             </div>
           ))}
@@ -260,7 +329,7 @@ export function ProgressPage() {
   const { progress, ready, replace } = useProgress();
   const file = useRef<HTMLInputElement>(null);
   const [notice, setNotice] = useState('');
-  const done = lessons.filter((l) => progress.lessons[l.id]?.completed);
+  const done = lessons.filter((l) => isLessonComplete(l, progress.lessons[l.id]));
   const begun = lessons.filter((l) => progress.lessons[l.id]);
   async function importFile(f: File | undefined) {
     if (!f) return;
@@ -299,7 +368,7 @@ export function ProgressPage() {
           <small> / {lessons.length}</small>
         </strong>
         <div>
-          <h2>Bài nhập môn đã hoàn thành</h2>
+          <h2>Bài tự luyện đã hoàn thành</h2>
           <p>Hoàn thành bài không đồng nghĩa đã thành thạo toàn bộ chủ đề.</p>
         </div>
       </div>
@@ -308,11 +377,11 @@ export function ProgressPage() {
         <div className="progress-list">
           {begun.map((l) => (
             <Link key={l.id} to={`/learn/${l.id}`}>
-              <Icon name={progress.lessons[l.id]?.completed ? 'check' : 'book'} />
+              <Icon name={isLessonComplete(l, progress.lessons[l.id]) ? 'check' : 'book'} />
               <div>
                 <h3>{l.title}</h3>
                 <span>
-                  {progress.lessons[l.id]?.completed
+                  {isLessonComplete(l, progress.lessons[l.id])
                     ? 'Ôn lại và thử thêm'
                     : `Tiếp tục chặng ${(progress.lessons[l.id]?.stage ?? 0) + 1}/4`}
                 </span>
