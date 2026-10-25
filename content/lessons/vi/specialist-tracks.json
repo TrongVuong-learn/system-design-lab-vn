@@ -94,7 +94,8 @@
           ],
           "misconception": "Model lớn hơn không tự đáp ứng mọi tác vụ hoặc quyền dữ liệu.",
           "sourceIds": [
-            "ai-rag"
+            "ai-rag",
+            "qa09-model-registry"
           ]
         },
         {
@@ -158,7 +159,8 @@
           "answer": 0,
           "explanation": "Model M2 tốt trên bộ câu hỏi cũ nhưng tệ ở tài liệu cập nhật. Giữ test theo version tài liệu và tập ngoài huấn luyện giúp phát hiện; không lấy chính dữ liệu train làm chứng minh tổng quát hóa. Model lớn hơn không tự đáp ứng mọi tác vụ hoặc quyền dữ liệu.",
           "sourceIds": [
-            "ai-rag"
+            "ai-rag",
+            "qa09-model-registry"
           ]
         },
         {
@@ -258,6 +260,10 @@
       {
         "title": "OWASP — LLM Prompt injection prevention",
         "url": "https://cheatsheetseries.owasp.org/cheatsheets/LLM_Prompt_Injection_Prevention_Cheat_Sheet.html"
+      },
+      {
+        "title": "MLflow — Model registry: version và lineage",
+        "url": "https://mlflow.org/docs/latest/ml/model-registry/"
       }
     ],
     "caseStudy": {
@@ -403,7 +409,10 @@
           "misconception": "Lưu mọi thứ vào lake không tự tạo dữ liệu sạch hoặc lineage.",
           "sourceIds": [
             "dataflow",
-            "kafka-design"
+            "kafka-design",
+            "qa09-etl",
+            "qa09-olap",
+            "qa09-cdc"
           ]
         },
         {
@@ -448,7 +457,9 @@
           "misconception": "Pipeline chạy xanh không chứng minh số liệu đúng.",
           "sourceIds": [
             "dataflow",
-            "kafka-design"
+            "kafka-design",
+            "qa09-lineage",
+            "qa09-quality"
           ]
         }
       ]
@@ -468,7 +479,10 @@
           "explanation": "Phiếu mượn E9 ở nguồn, bản raw giữ eventId/version, bảng phân tích gom theo giờ. Sửa logic thống kê có thể replay từ raw nếu retention/quyền cho phép. Lưu mọi thứ vào lake không tự tạo dữ liệu sạch hoặc lineage.",
           "sourceIds": [
             "dataflow",
-            "kafka-design"
+            "kafka-design",
+            "qa09-etl",
+            "qa09-olap",
+            "qa09-cdc"
           ]
         },
         {
@@ -513,7 +527,9 @@
           "explanation": "Mượn sách số lượng −2 hoặc event thiếu mã không nên tự trở thành lượt mượn hợp lệ. Giữ lỗi có lý do và kiểm tổng đối soát; không ghi dữ liệu cá nhân vào log vô hạn. Pipeline chạy xanh không chứng minh số liệu đúng.",
           "sourceIds": [
             "dataflow",
-            "kafka-design"
+            "kafka-design",
+            "qa09-lineage",
+            "qa09-quality"
           ]
         }
       ]
@@ -560,6 +576,26 @@
       {
         "title": "Apache Flink — Event time and watermarks",
         "url": "https://nightlies.apache.org/flink/flink-docs-release-2.0/docs/concepts/time/"
+      },
+      {
+        "title": "AWS — ETL và ELT: thứ tự transform/load",
+        "url": "https://aws.amazon.com/compare/the-difference-between-etl-and-elt/"
+      },
+      {
+        "title": "AWS — OLTP và OLAP: mục tiêu xử lý",
+        "url": "https://aws.amazon.com/compare/the-difference-between-olap-and-oltp/"
+      },
+      {
+        "title": "Debezium — Change events từ thay đổi dữ liệu",
+        "url": "https://debezium.io/documentation/reference/stable/kc-tutorial.html"
+      },
+      {
+        "title": "OpenLineage 1.54.0 — Dataset, Job và Run",
+        "url": "https://openlineage.io/docs/spec/object-model/"
+      },
+      {
+        "title": "Great Expectations — kiểm quy tắc dữ liệu",
+        "url": "https://docs.greatexpectations.io/docs/core/define_expectations/"
       }
     ],
     "caseStudy": {
@@ -684,7 +720,8 @@
           ],
           "misconception": "Không tìm thấy trong index trễ không chứng minh nguồn không có tài liệu.",
           "sourceIds": [
-            "lucene"
+            "lucene",
+            "security-owasp"
           ]
         },
         {
@@ -713,7 +750,8 @@
           ],
           "misconception": "Click cao không luôn đồng nghĩa hữu ích hoặc phù hợp mọi người.",
           "sourceIds": [
-            "recommend-google"
+            "recommend-google",
+            "qa09-recommend-bias"
           ]
         },
         {
@@ -727,7 +765,8 @@
           ],
           "misconception": "Cùng geohash không nghĩa cùng khoảng cách; khác ô không nghĩa xa.",
           "sourceIds": [
-            "geo-postgis"
+            "geo-postgis",
+            "qa09-geohash"
           ]
         }
       ]
@@ -746,7 +785,8 @@
           "answer": 1,
           "explanation": "D1 “sách mạng”, D2 “mạng máy tính”, D3 “truyện”. Posting “mạng”={D1,D2}; AND “mạng” và “tính” chỉ D2 theo token đã nêu. Không tìm thấy trong index trễ không chứng minh nguồn không có tài liệu.",
           "sourceIds": [
-            "lucene"
+            "lucene",
+            "security-owasp"
           ]
         },
         {
@@ -775,7 +815,8 @@
           "answer": 0,
           "explanation": "Sách A được đặt đầu nhiều lần nên có nhiều click hơn B chưa được thấy; không suy tất cả chênh lệch là sở thích thật. Có thể đo theo lượt hiển thị và thử nghiệm phù hợp. Click cao không luôn đồng nghĩa hữu ích hoặc phù hợp mọi người.",
           "sourceIds": [
-            "recommend-google"
+            "recommend-google",
+            "qa09-recommend-bias"
           ]
         },
         {
@@ -789,7 +830,8 @@
           "answer": 0,
           "explanation": "Bạn đứng sát biên ô A, điểm trả ở ô B cách20m. Chỉ tìm ô A có thể bỏ sót; lấy vùng ứng viên bao bán kính rồi tính khoảng cách chính xác theo mô hình. Cùng geohash không nghĩa cùng khoảng cách; khác ô không nghĩa xa.",
           "sourceIds": [
-            "geo-postgis"
+            "geo-postgis",
+            "qa09-geohash"
           ]
         }
       ]
@@ -840,6 +882,18 @@
       {
         "title": "PostGIS — Spatial indexing",
         "url": "https://postgis.net/workshops/postgis-intro/indexing.html"
+      },
+      {
+        "title": "OWASP — Authorization cheat sheet",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+      },
+      {
+        "title": "Chen và cộng sự (2019) — sai lệch do chỉ quan sát đề xuất đã hiển thị",
+        "url": "https://research.google/pubs/top-k-off-policy-correction-for-a-reinforce-recommender-system/"
+      },
+      {
+        "title": "Firebase — Geo queries: lấy ứng viên và lọc khoảng cách",
+        "url": "https://firebase.google.com/docs/firestore/solutions/geoqueries"
       }
     ],
     "caseStudy": {
@@ -1014,7 +1068,8 @@
           ],
           "misconception": "Hội tụ dữ liệu không tự bảo đảm mọi invariant nghiệp vụ hoặc undo đúng ý người dùng.",
           "sourceIds": [
-            "crdt-paper"
+            "crdt-paper",
+            "qa09-ot"
           ]
         }
       ]
@@ -1078,7 +1133,8 @@
           "answer": 1,
           "explanation": "A thêm câu đầu, B thêm câu cuối offline. Lấy toàn document timestamp lớn hơn có thể bỏ một câu. Text CRDT/OT phù hợp cần mô hình thao tác riêng và kiểm cursor/undo. Hội tụ dữ liệu không tự bảo đảm mọi invariant nghiệp vụ hoặc undo đúng ý người dùng.",
           "sourceIds": [
-            "crdt-paper"
+            "crdt-paper",
+            "qa09-ot"
           ]
         }
       ]
@@ -1133,6 +1189,10 @@
       {
         "title": "Preguiça, Baquero và Shapiro — CRDTs (2018)",
         "url": "https://arxiv.org/abs/1805.06358"
+      },
+      {
+        "title": "ShareDB — OT types cho chỉnh sửa cộng tác",
+        "url": "https://share.github.io/sharedb/types/"
       }
     ],
     "caseStudy": {
@@ -1267,7 +1327,8 @@
           "misconception": "Queue nhận job không nghĩa video đã phát được.",
           "sourceIds": [
             "kafka-design",
-            "hls"
+            "hls",
+            "qa09-media-output"
           ]
         },
         {
@@ -1331,7 +1392,8 @@
           "explanation": "Job J(videoV2,720p) crash sau ghi segment trước ACK. Chạy lại cần kiểm output/version, không trộn segment V1/V2 trong manifest. Queue nhận job không nghĩa video đã phát được.",
           "sourceIds": [
             "kafka-design",
-            "hls"
+            "hls",
+            "qa09-media-output"
           ]
         },
         {
@@ -1416,6 +1478,10 @@
       {
         "title": "OWASP — Authorization cheat sheet",
         "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+      },
+      {
+        "title": "AWS MediaConvert — rendition, segment và manifest",
+        "url": "https://docs.aws.amazon.com/mediaconvert/latest/ug/outputs-file-ABR.html"
       }
     ],
     "caseStudy": {
@@ -1556,7 +1622,8 @@
           "misconception": "Một API declarative vẫn cần xử lý partial failure và quyền.",
           "sourceIds": [
             "deploy-k8s",
-            "outbox-aws"
+            "outbox-aws",
+            "qa09-controller"
           ]
         },
         {
@@ -1587,7 +1654,9 @@
           "sourceIds": [
             "multitenancy",
             "cache-rfc",
-            "retry-aws"
+            "retry-aws",
+            "qa09-mesh",
+            "qa09-iac"
           ]
         },
         {
@@ -1623,7 +1692,8 @@
           "explanation": "Yêu cầu tạo site S9 được lưu, worker tạo storage rồi crash trước route. Lần reconcile tiếp phải nhận ra storage đã có, không tạo vô hạn kho mới. Một API declarative vẫn cần xử lý partial failure và quyền.",
           "sourceIds": [
             "deploy-k8s",
-            "outbox-aws"
+            "outbox-aws",
+            "qa09-controller"
           ]
         },
         {
@@ -1654,7 +1724,9 @@
           "sourceIds": [
             "multitenancy",
             "cache-rfc",
-            "retry-aws"
+            "retry-aws",
+            "qa09-mesh",
+            "qa09-iac"
           ]
         },
         {
@@ -1733,6 +1805,18 @@
       {
         "title": "OWASP — Authorization cheat sheet",
         "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+      },
+      {
+        "title": "Kubernetes — Controller: desired và current state",
+        "url": "https://kubernetes.io/docs/concepts/architecture/controller/"
+      },
+      {
+        "title": "Istio — Traffic management: retry và policy ứng dụng",
+        "url": "https://istio.io/latest/docs/concepts/traffic-management/"
+      },
+      {
+        "title": "Terraform — State và ánh xạ tài nguyên",
+        "url": "https://developer.hashicorp.com/terraform/language/state/purpose"
       }
     ],
     "caseStudy": {

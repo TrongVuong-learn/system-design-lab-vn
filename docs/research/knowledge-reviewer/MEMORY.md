@@ -45,3 +45,9 @@ Ba knowledge_reviewer gpt-6-sol/low rà intro/foundations/ôn, curriculum/networ
 ## 2026-10-17 — QA-08 sửa findings theo yêu cầu người dùng
 
 User giao sửa4 điểm. Source được sửa trên worktree18 bài, nhánh codex/qa-08-knowledge-fixes từ8f2afa8; report tại /Users/vuongn/.codex/worktrees/ui03-lesson-desk/System Design learning/docs/delivery/QA_08_KNOWLEDGE_FIXES.md. Engine1.8.1 hiển thị số đọc nguồn kỳ vọng không làm tròn, giữ nhãn lịch sử bảng cũ; ba sketch riêng, DNS resolver/referral rõ và docs18 bài. Node24.21.0/pnpm11.25.0:70unit/19files,28E2E liên quan, content/lint/typecheck/build đạt; ảnh320/390/1280 được review. Không phát hành Vercel; chưa commit/push. Source report ghi resolved trong source, không sửa kết quả audit lịch sử hoặc nhận human-reviewed.
+
+## 2026-10-25 — QA-09 review55 bài mới và sửa provenance
+
+Người dùng giao ba nhóm knowledge_reviewer gpt-6-sol/low rà55 bài mới ở baseline68f7de6, sửa finding xác minh và phát hành. Evidence tại `evidence/qa09-2026-10-25/`; parent acceptance tại [QA-09](../../delivery/QA_09_NEW_LESSONS_REVIEW.md). Ba nhóm đọc đủ inventory, lập63+174+194 dòng review theo granularity riêng. AT-01 nguồn gắn quá rộng ở8case được parent xác nhận/sửa. DP-01 MITLittle’sLaw bị bác: đọc đủPDF trang11–13 có nội dung, reviewer ghi correction. Không dùng snippet thiếu kết quả để khẳng định tài liệu không có claim.
+
+Agent follow-up chạm usage limit sau lưu report; parent tự hoàn tất6cụm thiếu nguồn chuyên sâu và retest mapping, ghi riêng residual-review.md. Bổ sung nguồn primary cho tokenbucket và6nhánh, không đổi đáp án/cơ chế.70citationarrays sửa theo ngoại lệ editorialADR0005; toàn85contract khác giữ nguyên.106unit và120E2Eliên quan đã đạt; release/CI/publicsmoke theo PR liên kết task. Đây là AI/source review và test ứng dụng, không human-reviewed/pilot, không chạy DB/Raft/payment/model thật hoặc chứng nhận toàn36module.
