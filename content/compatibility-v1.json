@@ -3278,7 +3278,8 @@
             "answer": 0,
             "explanation": "Bucket có 5 token, không nạp thêm trong thời điểm xét. 7 việc cùng tới, mỗi việc một token: nhận tối đa 5, hai việc chờ/từ chối theo hợp đồng. Đây không nói năm việc hoàn tất ngay. Rate limit theo IP có thể gộp nhiều học sinh cùng mạng; quota cần chọn chủ thể phù hợp.",
             "sourceIds": [
-              "overload-google"
+              "overload-google",
+              "qa09-token"
             ]
           },
           {
@@ -3341,7 +3342,8 @@
             ],
             "misconception": "Rate limit theo IP có thể gộp nhiều học sinh cùng mạng; quota cần chọn chủ thể phù hợp.",
             "sourceIds": [
-              "overload-google"
+              "overload-google",
+              "qa09-token"
             ]
           },
           {
@@ -6322,7 +6324,8 @@
             "answer": 0,
             "explanation": "Model M2 tốt trên bộ câu hỏi cũ nhưng tệ ở tài liệu cập nhật. Giữ test theo version tài liệu và tập ngoài huấn luyện giúp phát hiện; không lấy chính dữ liệu train làm chứng minh tổng quát hóa. Model lớn hơn không tự đáp ứng mọi tác vụ hoặc quyền dữ liệu.",
             "sourceIds": [
-              "ai-rag"
+              "ai-rag",
+              "qa09-model-registry"
             ]
           },
           {
@@ -6386,7 +6389,8 @@
             ],
             "misconception": "Model lớn hơn không tự đáp ứng mọi tác vụ hoặc quyền dữ liệu.",
             "sourceIds": [
-              "ai-rag"
+              "ai-rag",
+              "qa09-model-registry"
             ]
           },
           {
@@ -6500,7 +6504,10 @@
             "explanation": "Phiếu mượn E9 ở nguồn, bản raw giữ eventId/version, bảng phân tích gom theo giờ. Sửa logic thống kê có thể replay từ raw nếu retention/quyền cho phép. Lưu mọi thứ vào lake không tự tạo dữ liệu sạch hoặc lineage.",
             "sourceIds": [
               "dataflow",
-              "kafka-design"
+              "kafka-design",
+              "qa09-etl",
+              "qa09-olap",
+              "qa09-cdc"
             ]
           },
           {
@@ -6545,7 +6552,9 @@
             "explanation": "Mượn sách số lượng −2 hoặc event thiếu mã không nên tự trở thành lượt mượn hợp lệ. Giữ lỗi có lý do và kiểm tổng đối soát; không ghi dữ liệu cá nhân vào log vô hạn. Pipeline chạy xanh không chứng minh số liệu đúng.",
             "sourceIds": [
               "dataflow",
-              "kafka-design"
+              "kafka-design",
+              "qa09-lineage",
+              "qa09-quality"
             ]
           }
         ]
@@ -6565,7 +6574,10 @@
             "misconception": "Lưu mọi thứ vào lake không tự tạo dữ liệu sạch hoặc lineage.",
             "sourceIds": [
               "dataflow",
-              "kafka-design"
+              "kafka-design",
+              "qa09-etl",
+              "qa09-olap",
+              "qa09-cdc"
             ]
           },
           {
@@ -6610,7 +6622,9 @@
             "misconception": "Pipeline chạy xanh không chứng minh số liệu đúng.",
             "sourceIds": [
               "dataflow",
-              "kafka-design"
+              "kafka-design",
+              "qa09-lineage",
+              "qa09-quality"
             ]
           }
         ]
@@ -6678,7 +6692,8 @@
             "answer": 1,
             "explanation": "D1 “sách mạng”, D2 “mạng máy tính”, D3 “truyện”. Posting “mạng”={D1,D2}; AND “mạng” và “tính” chỉ D2 theo token đã nêu. Không tìm thấy trong index trễ không chứng minh nguồn không có tài liệu.",
             "sourceIds": [
-              "lucene"
+              "lucene",
+              "security-owasp"
             ]
           },
           {
@@ -6707,7 +6722,8 @@
             "answer": 0,
             "explanation": "Sách A được đặt đầu nhiều lần nên có nhiều click hơn B chưa được thấy; không suy tất cả chênh lệch là sở thích thật. Có thể đo theo lượt hiển thị và thử nghiệm phù hợp. Click cao không luôn đồng nghĩa hữu ích hoặc phù hợp mọi người.",
             "sourceIds": [
-              "recommend-google"
+              "recommend-google",
+              "qa09-recommend-bias"
             ]
           },
           {
@@ -6721,7 +6737,8 @@
             "answer": 0,
             "explanation": "Bạn đứng sát biên ô A, điểm trả ở ô B cách20m. Chỉ tìm ô A có thể bỏ sót; lấy vùng ứng viên bao bán kính rồi tính khoảng cách chính xác theo mô hình. Cùng geohash không nghĩa cùng khoảng cách; khác ô không nghĩa xa.",
             "sourceIds": [
-              "geo-postgis"
+              "geo-postgis",
+              "qa09-geohash"
             ]
           }
         ]
@@ -6740,7 +6757,8 @@
             ],
             "misconception": "Không tìm thấy trong index trễ không chứng minh nguồn không có tài liệu.",
             "sourceIds": [
-              "lucene"
+              "lucene",
+              "security-owasp"
             ]
           },
           {
@@ -6769,7 +6787,8 @@
             ],
             "misconception": "Click cao không luôn đồng nghĩa hữu ích hoặc phù hợp mọi người.",
             "sourceIds": [
-              "recommend-google"
+              "recommend-google",
+              "qa09-recommend-bias"
             ]
           },
           {
@@ -6783,7 +6802,8 @@
             ],
             "misconception": "Cùng geohash không nghĩa cùng khoảng cách; khác ô không nghĩa xa.",
             "sourceIds": [
-              "geo-postgis"
+              "geo-postgis",
+              "qa09-geohash"
             ]
           }
         ]
@@ -6896,7 +6916,8 @@
             "answer": 1,
             "explanation": "A thêm câu đầu, B thêm câu cuối offline. Lấy toàn document timestamp lớn hơn có thể bỏ một câu. Text CRDT/OT phù hợp cần mô hình thao tác riêng và kiểm cursor/undo. Hội tụ dữ liệu không tự bảo đảm mọi invariant nghiệp vụ hoặc undo đúng ý người dùng.",
             "sourceIds": [
-              "crdt-paper"
+              "crdt-paper",
+              "qa09-ot"
             ]
           }
         ]
@@ -6960,7 +6981,8 @@
             ],
             "misconception": "Hội tụ dữ liệu không tự bảo đảm mọi invariant nghiệp vụ hoặc undo đúng ý người dùng.",
             "sourceIds": [
-              "crdt-paper"
+              "crdt-paper",
+              "qa09-ot"
             ]
           }
         ]
@@ -7043,7 +7065,8 @@
             "explanation": "Job J(videoV2,720p) crash sau ghi segment trước ACK. Chạy lại cần kiểm output/version, không trộn segment V1/V2 trong manifest. Queue nhận job không nghĩa video đã phát được.",
             "sourceIds": [
               "kafka-design",
-              "hls"
+              "hls",
+              "qa09-media-output"
             ]
           },
           {
@@ -7107,7 +7130,8 @@
             "misconception": "Queue nhận job không nghĩa video đã phát được.",
             "sourceIds": [
               "kafka-design",
-              "hls"
+              "hls",
+              "qa09-media-output"
             ]
           },
           {
@@ -7206,7 +7230,8 @@
             "explanation": "Yêu cầu tạo site S9 được lưu, worker tạo storage rồi crash trước route. Lần reconcile tiếp phải nhận ra storage đã có, không tạo vô hạn kho mới. Một API declarative vẫn cần xử lý partial failure và quyền.",
             "sourceIds": [
               "deploy-k8s",
-              "outbox-aws"
+              "outbox-aws",
+              "qa09-controller"
             ]
           },
           {
@@ -7237,7 +7262,9 @@
             "sourceIds": [
               "multitenancy",
               "cache-rfc",
-              "retry-aws"
+              "retry-aws",
+              "qa09-mesh",
+              "qa09-iac"
             ]
           },
           {
@@ -7273,7 +7300,8 @@
             "misconception": "Một API declarative vẫn cần xử lý partial failure và quyền.",
             "sourceIds": [
               "deploy-k8s",
-              "outbox-aws"
+              "outbox-aws",
+              "qa09-controller"
             ]
           },
           {
@@ -7304,7 +7332,9 @@
             "sourceIds": [
               "multitenancy",
               "cache-rfc",
-              "retry-aws"
+              "retry-aws",
+              "qa09-mesh",
+              "qa09-iac"
             ]
           },
           {
@@ -8538,9 +8568,7 @@
             "explanation": "Bộ sinh ra k7 cho ghi chú B nhưng k7 đã trỏ A: insert phải bị conflict và cấp mã khác cho B. Không cập nhật k7→B như thể thành công. Xác suất collision thấp không xóa nhu cầu xử lý conflict.",
             "sourceIds": [
               "pg-constraints",
-              "cache-rfc",
-              "security-owasp",
-              "kafka-design"
+              "security-owasp"
             ]
           },
           {
@@ -8554,10 +8582,8 @@
             "answer": 0,
             "explanation": "Link hết lúc12:00, cache được tạo11:59 TTL10 phút. Nếu chỉ dựa TTL thì có thể phục vụ tới12:09 trái yêu cầu. TTL cache không phải quyền truy cập vĩnh viễn tới lúc eviction.",
             "sourceIds": [
-              "pg-constraints",
               "cache-rfc",
-              "security-owasp",
-              "kafka-design"
+              "security-owasp"
             ]
           },
           {
@@ -8571,9 +8597,6 @@
             "answer": 0,
             "explanation": "Ba event E1,E2,E1 replay: đếm theo eventId là2, không3. Nếu hai event thuộc cùng người thì unique người còn có định nghĩa khác. Ba request không tự bằng ba người độc lập.",
             "sourceIds": [
-              "pg-constraints",
-              "cache-rfc",
-              "security-owasp",
               "kafka-design"
             ]
           }
@@ -8594,9 +8617,7 @@
             "misconception": "Xác suất collision thấp không xóa nhu cầu xử lý conflict.",
             "sourceIds": [
               "pg-constraints",
-              "cache-rfc",
-              "security-owasp",
-              "kafka-design"
+              "security-owasp"
             ]
           },
           {
@@ -8610,10 +8631,8 @@
             ],
             "misconception": "TTL cache không phải quyền truy cập vĩnh viễn tới lúc eviction.",
             "sourceIds": [
-              "pg-constraints",
               "cache-rfc",
-              "security-owasp",
-              "kafka-design"
+              "security-owasp"
             ]
           },
           {
@@ -8627,9 +8646,6 @@
             ],
             "misconception": "Ba request không tự bằng ba người độc lập.",
             "sourceIds": [
-              "pg-constraints",
-              "cache-rfc",
-              "security-owasp",
               "kafka-design"
             ]
           }
@@ -8699,9 +8715,7 @@
             "answer": 0,
             "explanation": "Một bài từ tài khoản10.000 follower cần tới10.000 mục feed theo mô hình write fan-out; bài thường20. Nếu100 bài đều thường thì2.000 mục, khác xa100 bài đều nổi tiếng là1.000.000. Số user trung bình che được celebrity/hot key.",
             "sourceIds": [
-              "kafka-design",
-              "security-owasp",
-              "overload-google"
+              "qa09-feed"
             ]
           },
           {
@@ -8716,8 +8730,8 @@
             "explanation": "E9 bị giao hai lần. Nếu feed insert không có key ổn định, một post hiện hai lần; index cập nhật version cũ đến sau có thể làm sống lại bản bị xóa. Broker ordering không tự đảm bảo mọi hiệu ứng cùng thứ tự.",
             "sourceIds": [
               "kafka-design",
-              "security-owasp",
-              "overload-google"
+              "pg-constraints",
+              "qa09-index-version"
             ]
           },
           {
@@ -8731,9 +8745,8 @@
             "answer": 0,
             "explanation": "An bị loại khỏi CLB nhưng feed cache còn bài riêng. API phải chặn theo quyền hiện hành hoặc policy thu hồi đã chốt, không tin danh sách cache là quyền. Bài từng được nhìn thấy không nghĩa có quyền xem mọi phiên bản về sau.",
             "sourceIds": [
-              "kafka-design",
               "security-owasp",
-              "overload-google"
+              "cache-rfc"
             ]
           }
         ]
@@ -8752,9 +8765,7 @@
             ],
             "misconception": "Số user trung bình che được celebrity/hot key.",
             "sourceIds": [
-              "kafka-design",
-              "security-owasp",
-              "overload-google"
+              "qa09-feed"
             ]
           },
           {
@@ -8769,8 +8780,8 @@
             "misconception": "Broker ordering không tự đảm bảo mọi hiệu ứng cùng thứ tự.",
             "sourceIds": [
               "kafka-design",
-              "security-owasp",
-              "overload-google"
+              "pg-constraints",
+              "qa09-index-version"
             ]
           },
           {
@@ -8784,9 +8795,8 @@
             ],
             "misconception": "Bài từng được nhìn thấy không nghĩa có quyền xem mọi phiên bản về sau.",
             "sourceIds": [
-              "kafka-design",
               "security-owasp",
-              "overload-google"
+              "cache-rfc"
             ]
           }
         ]
@@ -8855,9 +8865,8 @@
             "answer": 0,
             "explanation": "Bắt đầu A: frontier[B,C]; xử lýB thấyC đã scheduled nên không thêm; xử lýC bỏA, thêmD; cuối xử lýD. Thứ tự BFS A,B,C,D theo thứ tự link đề cho. URL khác chuỗi có thể cùng nội dung; chuẩn hóa sai cũng có thể gộp nhầm tài nguyên.",
             "sourceIds": [
-              "algorithms",
-              "robots",
-              "kafka-design"
+              "qa09-bfs",
+              "pg-constraints"
             ]
           },
           {
@@ -8871,9 +8880,8 @@
             "answer": 0,
             "explanation": "Nếu C tạm timeout, không kết luận D không tồn tại. Lưu lỗi và lịch thử lại hữu hạn; không để retry một host chiếm hết worker. robots.txt không cấp quyền truy cập nội dung riêng.",
             "sourceIds": [
-              "algorithms",
               "robots",
-              "kafka-design"
+              "overload-google"
             ]
           },
           {
@@ -8887,8 +8895,7 @@
             "answer": 0,
             "explanation": "A version2 có nội dung mới, index còn version1: kết quả tìm kiếm trễ, không phải nguồn chưa đổi. Retry index v1 đến sau v2 không được làm lùi tùy tiện. Crawl xong không nghĩa index đã cập nhật và nội dung đúng quyền.",
             "sourceIds": [
-              "algorithms",
-              "robots",
+              "qa09-index-version",
               "kafka-design"
             ]
           }
@@ -8908,9 +8915,8 @@
             ],
             "misconception": "URL khác chuỗi có thể cùng nội dung; chuẩn hóa sai cũng có thể gộp nhầm tài nguyên.",
             "sourceIds": [
-              "algorithms",
-              "robots",
-              "kafka-design"
+              "qa09-bfs",
+              "pg-constraints"
             ]
           },
           {
@@ -8924,9 +8930,8 @@
             ],
             "misconception": "robots.txt không cấp quyền truy cập nội dung riêng.",
             "sourceIds": [
-              "algorithms",
               "robots",
-              "kafka-design"
+              "overload-google"
             ]
           },
           {
@@ -8940,8 +8945,7 @@
             ],
             "misconception": "Crawl xong không nghĩa index đã cập nhật và nội dung đúng quyền.",
             "sourceIds": [
-              "algorithms",
-              "robots",
+              "qa09-index-version",
               "kafka-design"
             ]
           }
@@ -9010,10 +9014,8 @@
             "answer": 0,
             "explanation": "T1:+100,T2:−30,T1:+100 replay cho tổng70, không170. Mô hình không phí, đơn vị là điểm quỹ giả lập. Cùng số tiền/ngày không đủ chứng minh hai giao dịch là một.",
             "sourceIds": [
-              "pg-transactions",
               "pg-constraints",
-              "kafka-design",
-              "security-owasp"
+              "kafka-design"
             ]
           },
           {
@@ -9027,10 +9029,7 @@
             "answer": 0,
             "explanation": "T2 gợi ý “khác”, thủ quỹ chọn “sách”. Import mới đổi memo không được tự xóa “sách” nếu policy ưu tiên sửa tay còn hiệu lực. Last-write-wins toàn bản ghi có thể phá ý định sửa tay.",
             "sourceIds": [
-              "pg-transactions",
-              "pg-constraints",
-              "kafka-design",
-              "security-owasp"
+              "qa09-pg-update"
             ]
           },
           {
@@ -9044,10 +9043,9 @@
             "answer": 0,
             "explanation": "Ngưỡng chi50, T2 chi30 chưa vượt. Nếu một correction thành−60, cần update tổng theo version và một cảnh báo theo policy; không cộng thêm60 như giao dịch mới khi cùngT2. Dashboard cân bằng không chứng minh đã đối soát với mọi nguồn ngoài.",
             "sourceIds": [
-              "pg-transactions",
-              "pg-constraints",
-              "kafka-design",
-              "security-owasp"
+              "qa09-pg-update",
+              "security-owasp",
+              "kafka-design"
             ]
           }
         ]
@@ -9066,10 +9064,8 @@
             ],
             "misconception": "Cùng số tiền/ngày không đủ chứng minh hai giao dịch là một.",
             "sourceIds": [
-              "pg-transactions",
               "pg-constraints",
-              "kafka-design",
-              "security-owasp"
+              "kafka-design"
             ]
           },
           {
@@ -9083,10 +9079,7 @@
             ],
             "misconception": "Last-write-wins toàn bản ghi có thể phá ý định sửa tay.",
             "sourceIds": [
-              "pg-transactions",
-              "pg-constraints",
-              "kafka-design",
-              "security-owasp"
+              "qa09-pg-update"
             ]
           },
           {
@@ -9100,10 +9093,9 @@
             ],
             "misconception": "Dashboard cân bằng không chứng minh đã đối soát với mọi nguồn ngoài.",
             "sourceIds": [
-              "pg-transactions",
-              "pg-constraints",
-              "kafka-design",
-              "security-owasp"
+              "qa09-pg-update",
+              "security-owasp",
+              "kafka-design"
             ]
           }
         ]
@@ -9171,9 +9163,7 @@
             "answer": 0,
             "explanation": "TừA: lớp0 A; lớp1 B,C; lớp2 D,E; lớp3 F. Theo thứ tự chữ, parentF=D nên đường A-B-D-F dài3 cạnh; A-C-E-F cũng dài3. Đường ngắn nhất có thể không duy nhất; không gọi BFS là tối ưu mọi graph có trọng số.",
             "sourceIds": [
-              "algorithms",
-              "security-owasp",
-              "shards-aws"
+              "qa09-bfs"
             ]
           },
           {
@@ -9187,9 +9177,8 @@
             "answer": 0,
             "explanation": "Shard1 chứaA,B,D; shard2 chứaC,E,F. Các cạnh A-C,D-F nối shard. Đường A-B-D-F qua biên ở D-F theo bố trí đã nêu, nhưng tìm kiếm có thể đọc cả nhánhC/E. Chi phí tìm đường không chỉ bằng độ dài đường tìm được.",
             "sourceIds": [
-              "algorithms",
-              "security-owasp",
-              "shards-aws"
+              "qa09-bfs",
+              "graphql-queries"
             ]
           },
           {
@@ -9203,9 +9192,8 @@
             "answer": 0,
             "explanation": "Dừng sau lớp1 vì budget: chưa thấyF nhưng graph có đường dài3. Thông báo “không tìm trong giới hạn” khác “không tồn tại đường”. Không thấy trong phạm vi tìm không chứng minh không tồn tại toàn graph.",
             "sourceIds": [
-              "algorithms",
-              "security-owasp",
-              "shards-aws"
+              "qa09-bfs",
+              "security-owasp"
             ]
           }
         ]
@@ -9224,9 +9212,7 @@
             ],
             "misconception": "Đường ngắn nhất có thể không duy nhất; không gọi BFS là tối ưu mọi graph có trọng số.",
             "sourceIds": [
-              "algorithms",
-              "security-owasp",
-              "shards-aws"
+              "qa09-bfs"
             ]
           },
           {
@@ -9240,9 +9226,8 @@
             ],
             "misconception": "Chi phí tìm đường không chỉ bằng độ dài đường tìm được.",
             "sourceIds": [
-              "algorithms",
-              "security-owasp",
-              "shards-aws"
+              "qa09-bfs",
+              "graphql-queries"
             ]
           },
           {
@@ -9256,9 +9241,8 @@
             ],
             "misconception": "Không thấy trong phạm vi tìm không chứng minh không tồn tại toàn graph.",
             "sourceIds": [
-              "algorithms",
-              "security-owasp",
-              "shards-aws"
+              "qa09-bfs",
+              "security-owasp"
             ]
           }
         ]
@@ -9327,9 +9311,7 @@
             "answer": 0,
             "explanation": "A miss:[A]; B miss:[B,A]; A hit:[A,B]; C miss đẩyB:[C,A]; B miss đẩyA:[B,C]. Tổng1 hit/5 lượt=20%. FIFO có thể cho trace khác vì hit không đổi thứ tự vào.",
             "sourceIds": [
-              "cache-azure",
-              "cache-rfc",
-              "dynamo-paper"
+              "qa09-lru"
             ]
           },
           {
@@ -9344,8 +9326,7 @@
             "explanation": "A version1 đang cache, nguồn thànhv2 trước TTL. Đọc hit có thể vẫnv1; cập nhật nguồn không tự báo mọi cache. Hit không đồng nghĩa dữ liệu mới hoặc đúng quyền.",
             "sourceIds": [
               "cache-azure",
-              "cache-rfc",
-              "dynamo-paper"
+              "security-owasp"
             ]
           },
           {
@@ -9359,9 +9340,8 @@
             "answer": 0,
             "explanation": "Từ2 lên3 node bằng k modN có thể đổi nơi nhiều key; node mới chưa có bản dù nguồn còn. Một key nhận90% lượt vẫn không chia đều chỉ nhờ hash. Thêm cache node có thể tạm tăng tải nguồn.",
             "sourceIds": [
-              "cache-azure",
-              "cache-rfc",
-              "dynamo-paper"
+              "dynamo-paper",
+              "cache-azure"
             ]
           }
         ]
@@ -9380,9 +9360,7 @@
             ],
             "misconception": "FIFO có thể cho trace khác vì hit không đổi thứ tự vào.",
             "sourceIds": [
-              "cache-azure",
-              "cache-rfc",
-              "dynamo-paper"
+              "qa09-lru"
             ]
           },
           {
@@ -9397,8 +9375,7 @@
             "misconception": "Hit không đồng nghĩa dữ liệu mới hoặc đúng quyền.",
             "sourceIds": [
               "cache-azure",
-              "cache-rfc",
-              "dynamo-paper"
+              "security-owasp"
             ]
           },
           {
@@ -9412,9 +9389,8 @@
             ],
             "misconception": "Thêm cache node có thể tạm tăng tải nguồn.",
             "sourceIds": [
-              "cache-azure",
-              "cache-rfc",
-              "dynamo-paper"
+              "dynamo-paper",
+              "cache-azure"
             ]
           }
         ]
@@ -9483,8 +9459,7 @@
             "explanation": "Sau đủ event duy nhất E1,E2,E3: A=2,B=1. E1 replay không tăngA lên3. TrướcE3 tới, A=B=1 và bảng có thể là tạm. Freshness của bảng và tốc độ đọc bảng là hai chỉ số khác.",
             "sourceIds": [
               "flink-time",
-              "kafka-design",
-              "security-owasp"
+              "kafka-design"
             ]
           },
           {
@@ -9498,9 +9473,9 @@
             "answer": 0,
             "explanation": "Job tínhA=2 rồi crash trước checkpoint. Replay không được cộng thêm2 vào tổng đã có nếu mục đích là thay snapshot window. Replay không có dedup/overwrite policy có thể nhân đôi kết quả.",
             "sourceIds": [
-              "flink-time",
               "kafka-design",
-              "security-owasp"
+              "qa09-pg-update",
+              "dataflow"
             ]
           },
           {
@@ -9514,9 +9489,9 @@
             "answer": 0,
             "explanation": "E3 bị hủy theo policy: A từ2 về1 trong window, không xóa sáchA khỏi mọi lịch sử. Nếu tie A=B, dùng tie-break đã chốt. Bảng tổng hợp vẫn có thể lộ dữ liệu khi nhóm quá nhỏ; cần scope phù hợp.",
             "sourceIds": [
-              "flink-time",
-              "kafka-design",
-              "security-owasp"
+              "qa09-pg-update",
+              "security-owasp",
+              "cache-azure"
             ]
           }
         ]
@@ -9536,8 +9511,7 @@
             "misconception": "Freshness của bảng và tốc độ đọc bảng là hai chỉ số khác.",
             "sourceIds": [
               "flink-time",
-              "kafka-design",
-              "security-owasp"
+              "kafka-design"
             ]
           },
           {
@@ -9551,9 +9525,9 @@
             ],
             "misconception": "Replay không có dedup/overwrite policy có thể nhân đôi kết quả.",
             "sourceIds": [
-              "flink-time",
               "kafka-design",
-              "security-owasp"
+              "qa09-pg-update",
+              "dataflow"
             ]
           },
           {
@@ -9567,9 +9541,9 @@
             ],
             "misconception": "Bảng tổng hợp vẫn có thể lộ dữ liệu khi nhóm quá nhỏ; cần scope phù hợp.",
             "sourceIds": [
-              "flink-time",
-              "kafka-design",
-              "security-owasp"
+              "qa09-pg-update",
+              "security-owasp",
+              "cache-azure"
             ]
           }
         ]
@@ -9638,10 +9612,8 @@
             "answer": 0,
             "explanation": "Nếu query thiếu index quét nhiều dòng chiếm thời gian, thêm web không giảm lượng DB làm. Kiểm query plan và workload trước đổi kiến trúc. Tăng user không tự cho biết CPU, I/O, khóa hay mạng là nút thắt.",
             "sourceIds": [
-              "sre-objectives",
-              "replication-pg",
-              "adr",
-              "deploy-k8s"
+              "pg-explain18",
+              "sre-objectives"
             ]
           },
           {
@@ -9655,10 +9627,9 @@
             "answer": 0,
             "explanation": "Thêm replica giúp đọc cho phép trễ, nhưng đọc sau ghi vẫn cần route/mốc. Tổng pool tăng khi thêm app cần budget DB. Không có bước “bật cloud” làm mọi bảo đảm tự xuất hiện.",
             "sourceIds": [
-              "sre-objectives",
               "replication-pg",
-              "adr",
-              "deploy-k8s"
+              "cache-azure",
+              "overload-google"
             ]
           },
           {
@@ -9672,9 +9643,8 @@
             "answer": 0,
             "explanation": "Mốc1 index đạt p95 theo tải đã chốt; mốc2 cache chỉ cho dữ liệu công khai; mốc3 replica khi đọc thành bottleneck. Không bắt buộc đạt mọi mốc nếu chưa cần. Roadmap không phải cam kết đã triển khai hoặc benchmark mọi quy mô.",
             "sourceIds": [
-              "sre-objectives",
-              "replication-pg",
               "adr",
+              "sre-objectives",
               "deploy-k8s"
             ]
           }
@@ -9694,10 +9664,8 @@
             ],
             "misconception": "Tăng user không tự cho biết CPU, I/O, khóa hay mạng là nút thắt.",
             "sourceIds": [
-              "sre-objectives",
-              "replication-pg",
-              "adr",
-              "deploy-k8s"
+              "pg-explain18",
+              "sre-objectives"
             ]
           },
           {
@@ -9711,10 +9679,9 @@
             ],
             "misconception": "Không có bước “bật cloud” làm mọi bảo đảm tự xuất hiện.",
             "sourceIds": [
-              "sre-objectives",
               "replication-pg",
-              "adr",
-              "deploy-k8s"
+              "cache-azure",
+              "overload-google"
             ]
           },
           {
@@ -9728,9 +9695,8 @@
             ],
             "misconception": "Roadmap không phải cam kết đã triển khai hoặc benchmark mọi quy mô.",
             "sourceIds": [
-              "sre-objectives",
-              "replication-pg",
               "adr",
+              "sre-objectives",
               "deploy-k8s"
             ]
           }

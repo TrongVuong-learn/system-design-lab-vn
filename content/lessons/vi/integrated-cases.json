@@ -12,7 +12,7 @@
     "objective": "Thiết kế link ngắn: tạo mã không trùng, tra cứu khi cache cũ, hết hạn và xử lý đổi đích.",
     "story": "Lớp chia sẻ ghi chú qua mã6 ký tự, có thời hạn24 giờ và quyền riêng/tự công khai. Một mã có thể bị sinh trùng; thống kê lượt mở xử lý nền.",
     "explanation": "Cấp mã phải bảo vệ ánh xạ cũ. Hết hạn phải theo hợp đồng tại nơi phục vụ. Thống kê không nên chặn đường đọc cốt lõi.",
-    "limit": "Case tự biên soạn trên dữ liệu giả lập bằng chữ; không mô tả kiến trúc hiện tại của công ty, không truy cập dữ liệu người thật hoặc hệ thống ngoài.",
+    "limit": "Case tự biên soạn trên dữ liệu giả lập bằng chữ; không mô tả kiến trúc hiện tại của công ty, không truy cập dữ liệu người thật hoặc hệ thống ngoài. Nguồn đọc thêm hỗ trợ nguyên lý tương ứng; các số liệu, chính sách và phép tính trong tình huống do tác giả tự đặt, không phải kết quả chạy hệ thống trong nguồn.",
     "terms": [
       {
         "name": "Nguồn dữ liệu",
@@ -65,9 +65,7 @@
           "misconception": "Xác suất collision thấp không xóa nhu cầu xử lý conflict.",
           "sourceIds": [
             "pg-constraints",
-            "cache-rfc",
-            "security-owasp",
-            "kafka-design"
+            "security-owasp"
           ]
         },
         {
@@ -81,10 +79,8 @@
           ],
           "misconception": "TTL cache không phải quyền truy cập vĩnh viễn tới lúc eviction.",
           "sourceIds": [
-            "pg-constraints",
             "cache-rfc",
-            "security-owasp",
-            "kafka-design"
+            "security-owasp"
           ]
         },
         {
@@ -98,9 +94,6 @@
           ],
           "misconception": "Ba request không tự bằng ba người độc lập.",
           "sourceIds": [
-            "pg-constraints",
-            "cache-rfc",
-            "security-owasp",
             "kafka-design"
           ]
         }
@@ -121,9 +114,7 @@
           "explanation": "Bộ sinh ra k7 cho ghi chú B nhưng k7 đã trỏ A: insert phải bị conflict và cấp mã khác cho B. Không cập nhật k7→B như thể thành công. Xác suất collision thấp không xóa nhu cầu xử lý conflict.",
           "sourceIds": [
             "pg-constraints",
-            "cache-rfc",
-            "security-owasp",
-            "kafka-design"
+            "security-owasp"
           ]
         },
         {
@@ -137,10 +128,8 @@
           "answer": 0,
           "explanation": "Link hết lúc12:00, cache được tạo11:59 TTL10 phút. Nếu chỉ dựa TTL thì có thể phục vụ tới12:09 trái yêu cầu. TTL cache không phải quyền truy cập vĩnh viễn tới lúc eviction.",
           "sourceIds": [
-            "pg-constraints",
             "cache-rfc",
-            "security-owasp",
-            "kafka-design"
+            "security-owasp"
           ]
         },
         {
@@ -154,9 +143,6 @@
           "answer": 0,
           "explanation": "Ba event E1,E2,E1 replay: đếm theo eventId là2, không3. Nếu hai event thuộc cùng người thì unique người còn có định nghĩa khác. Ba request không tự bằng ba người độc lập.",
           "sourceIds": [
-            "pg-constraints",
-            "cache-rfc",
-            "security-owasp",
             "kafka-design"
           ]
         }
@@ -199,12 +185,12 @@
         "url": "https://www.postgresql.org/docs/18/ddl-constraints.html"
       },
       {
-        "title": "RFC 9111 — HTTP Caching",
-        "url": "https://www.rfc-editor.org/rfc/rfc9111.html"
-      },
-      {
         "title": "OWASP — Authorization cheat sheet",
         "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+      },
+      {
+        "title": "RFC 9111 — HTTP Caching",
+        "url": "https://www.rfc-editor.org/rfc/rfc9111.html"
       },
       {
         "title": "Apache Kafka 4.1 — Design",
@@ -276,7 +262,7 @@
     "objective": "Thiết kế bảng tin trường: chọn đẩy/kéo bài viết, giữ thứ tự, chống trùng và thu hồi quyền đọc.",
     "story": "Mỗi ngày100 bài đăng; tài khoản thường có20 follower, một tài khoản có10.000. Cần feed, tìm kiếm và thu hồi bài riêng theo quyền.",
     "explanation": "Fan-out khi ghi và khi đọc có chi phí khác. Queue và index cần chống lặp và biết độ trễ. Feed nhanh vẫn cần đúng quyền.",
-    "limit": "Case tự biên soạn trên dữ liệu giả lập bằng chữ; không mô tả kiến trúc hiện tại của công ty, không truy cập dữ liệu người thật hoặc hệ thống ngoài.",
+    "limit": "Case tự biên soạn trên dữ liệu giả lập bằng chữ; không mô tả kiến trúc hiện tại của công ty, không truy cập dữ liệu người thật hoặc hệ thống ngoài. Nguồn đọc thêm hỗ trợ nguyên lý tương ứng; các số liệu, chính sách và phép tính trong tình huống do tác giả tự đặt, không phải kết quả chạy hệ thống trong nguồn.",
     "terms": [
       {
         "name": "Nguồn dữ liệu",
@@ -328,9 +314,7 @@
           ],
           "misconception": "Số user trung bình che được celebrity/hot key.",
           "sourceIds": [
-            "kafka-design",
-            "security-owasp",
-            "overload-google"
+            "qa09-feed"
           ]
         },
         {
@@ -345,8 +329,8 @@
           "misconception": "Broker ordering không tự đảm bảo mọi hiệu ứng cùng thứ tự.",
           "sourceIds": [
             "kafka-design",
-            "security-owasp",
-            "overload-google"
+            "pg-constraints",
+            "qa09-index-version"
           ]
         },
         {
@@ -360,9 +344,8 @@
           ],
           "misconception": "Bài từng được nhìn thấy không nghĩa có quyền xem mọi phiên bản về sau.",
           "sourceIds": [
-            "kafka-design",
             "security-owasp",
-            "overload-google"
+            "cache-rfc"
           ]
         }
       ]
@@ -381,9 +364,7 @@
           "answer": 0,
           "explanation": "Một bài từ tài khoản10.000 follower cần tới10.000 mục feed theo mô hình write fan-out; bài thường20. Nếu100 bài đều thường thì2.000 mục, khác xa100 bài đều nổi tiếng là1.000.000. Số user trung bình che được celebrity/hot key.",
           "sourceIds": [
-            "kafka-design",
-            "security-owasp",
-            "overload-google"
+            "qa09-feed"
           ]
         },
         {
@@ -398,8 +379,8 @@
           "explanation": "E9 bị giao hai lần. Nếu feed insert không có key ổn định, một post hiện hai lần; index cập nhật version cũ đến sau có thể làm sống lại bản bị xóa. Broker ordering không tự đảm bảo mọi hiệu ứng cùng thứ tự.",
           "sourceIds": [
             "kafka-design",
-            "security-owasp",
-            "overload-google"
+            "pg-constraints",
+            "qa09-index-version"
           ]
         },
         {
@@ -413,9 +394,8 @@
           "answer": 0,
           "explanation": "An bị loại khỏi CLB nhưng feed cache còn bài riêng. API phải chặn theo quyền hiện hành hoặc policy thu hồi đã chốt, không tin danh sách cache là quyền. Bài từng được nhìn thấy không nghĩa có quyền xem mọi phiên bản về sau.",
           "sourceIds": [
-            "kafka-design",
             "security-owasp",
-            "overload-google"
+            "cache-rfc"
           ]
         }
       ]
@@ -453,16 +433,28 @@
     },
     "sources": [
       {
+        "title": "Koo tại AWS Summit 2022 — fan-out, VIP và feed tính khi đọc",
+        "url": "https://d1.awsstatic.com/events/Summits/awsdelhisummit/ADT202-S_HowKoo.pdf"
+      },
+      {
         "title": "Apache Kafka 4.1 — Design",
         "url": "https://kafka.apache.org/41/design/design/"
+      },
+      {
+        "title": "PostgreSQL 18 — Constraints",
+        "url": "https://www.postgresql.org/docs/18/ddl-constraints.html"
+      },
+      {
+        "title": "Elasticsearch 8.19 — Index API: external versioning",
+        "url": "https://www.elastic.co/guide/en/elasticsearch/reference/8.19/docs-index_.html"
       },
       {
         "title": "OWASP — Authorization cheat sheet",
         "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
       },
       {
-        "title": "Google SRE — Handling overload",
-        "url": "https://sre.google/sre-book/handling-overload/"
+        "title": "RFC 9111 — HTTP Caching",
+        "url": "https://www.rfc-editor.org/rfc/rfc9111.html"
       }
     ],
     "caseStudy": {
@@ -530,7 +522,7 @@
     "objective": "Thiết kế bộ thu thập trang thử nghiệm: frontier, chống trùng, hạn mức theo host, lỗi và cập nhật chỉ mục.",
     "story": "Kho giả lập có A→B,C; B→C; C→A,D; D không có link. Chỉ duyệt fixture, không crawl Internet. Mỗi trang chỉ xử lý một lần trong lượt và cần lịch thu thập lại có giới hạn.",
     "explanation": "Frontier phải ngăn chu kỳ ngay lúc đưa vào. Tôn trọng host và phân biệt lỗi với không tồn tại. Chỉ mục là bản suy ra có version.",
-    "limit": "Case tự biên soạn trên dữ liệu giả lập bằng chữ; không mô tả kiến trúc hiện tại của công ty, không truy cập dữ liệu người thật hoặc hệ thống ngoài.",
+    "limit": "Case tự biên soạn trên dữ liệu giả lập bằng chữ; không mô tả kiến trúc hiện tại của công ty, không truy cập dữ liệu người thật hoặc hệ thống ngoài. Nguồn đọc thêm hỗ trợ nguyên lý tương ứng; các số liệu, chính sách và phép tính trong tình huống do tác giả tự đặt, không phải kết quả chạy hệ thống trong nguồn.",
     "terms": [
       {
         "name": "Nguồn dữ liệu",
@@ -592,9 +584,8 @@
           ],
           "misconception": "URL khác chuỗi có thể cùng nội dung; chuẩn hóa sai cũng có thể gộp nhầm tài nguyên.",
           "sourceIds": [
-            "algorithms",
-            "robots",
-            "kafka-design"
+            "qa09-bfs",
+            "pg-constraints"
           ]
         },
         {
@@ -608,9 +599,8 @@
           ],
           "misconception": "robots.txt không cấp quyền truy cập nội dung riêng.",
           "sourceIds": [
-            "algorithms",
             "robots",
-            "kafka-design"
+            "overload-google"
           ]
         },
         {
@@ -624,8 +614,7 @@
           ],
           "misconception": "Crawl xong không nghĩa index đã cập nhật và nội dung đúng quyền.",
           "sourceIds": [
-            "algorithms",
-            "robots",
+            "qa09-index-version",
             "kafka-design"
           ]
         }
@@ -645,9 +634,8 @@
           "answer": 0,
           "explanation": "Bắt đầu A: frontier[B,C]; xử lýB thấyC đã scheduled nên không thêm; xử lýC bỏA, thêmD; cuối xử lýD. Thứ tự BFS A,B,C,D theo thứ tự link đề cho. URL khác chuỗi có thể cùng nội dung; chuẩn hóa sai cũng có thể gộp nhầm tài nguyên.",
           "sourceIds": [
-            "algorithms",
-            "robots",
-            "kafka-design"
+            "qa09-bfs",
+            "pg-constraints"
           ]
         },
         {
@@ -661,9 +649,8 @@
           "answer": 0,
           "explanation": "Nếu C tạm timeout, không kết luận D không tồn tại. Lưu lỗi và lịch thử lại hữu hạn; không để retry một host chiếm hết worker. robots.txt không cấp quyền truy cập nội dung riêng.",
           "sourceIds": [
-            "algorithms",
             "robots",
-            "kafka-design"
+            "overload-google"
           ]
         },
         {
@@ -677,8 +664,7 @@
           "answer": 0,
           "explanation": "A version2 có nội dung mới, index còn version1: kết quả tìm kiếm trễ, không phải nguồn chưa đổi. Retry index v1 đến sau v2 không được làm lùi tùy tiện. Crawl xong không nghĩa index đã cập nhật và nội dung đúng quyền.",
           "sourceIds": [
-            "algorithms",
-            "robots",
+            "qa09-index-version",
             "kafka-design"
           ]
         }
@@ -717,12 +703,24 @@
     },
     "sources": [
       {
-        "title": "MIT OCW — Algorithms lecture notes",
-        "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/pages/lecture-notes/"
+        "title": "MIT 6.006 Fall 2011 — Lecture 13: BFS, adjacency và shortest paths",
+        "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/1208e162775f6f5cedfbb9f2b694ede0_MIT6_006F11_lec13.pdf"
+      },
+      {
+        "title": "PostgreSQL 18 — Constraints",
+        "url": "https://www.postgresql.org/docs/18/ddl-constraints.html"
       },
       {
         "title": "RFC 9309 — Robots Exclusion Protocol",
         "url": "https://www.rfc-editor.org/rfc/rfc9309.html"
+      },
+      {
+        "title": "Google SRE — Handling overload",
+        "url": "https://sre.google/sre-book/handling-overload/"
+      },
+      {
+        "title": "Elasticsearch 8.19 — Index API: external versioning",
+        "url": "https://www.elastic.co/guide/en/elasticsearch/reference/8.19/docs-index_.html"
       },
       {
         "title": "Apache Kafka 4.1 — Design",
@@ -794,7 +792,7 @@
     "objective": "Thiết kế sổ thu–chi câu lạc bộ: ghi nhận một lần, lưu dấu vết, tính số dư và đối soát.",
     "story": "Dữ liệu giả lập nhập T1:+100,T2:−30 rồi T1 gửi lại. Người dùng tự phân loại T2; lần nhập sau nguồn đổi ghi chú nhưng không được xóa phân loại thủ công.",
     "explanation": "Nhập cùng giao dịch không được cộng lần nữa. Dữ liệu nguồn và sửa tay cần ownership riêng. Tổng hợp và cảnh báo cần cùng ngữ nghĩa.",
-    "limit": "Case tự biên soạn trên dữ liệu giả lập bằng chữ; không mô tả kiến trúc hiện tại của công ty, không truy cập dữ liệu người thật hoặc hệ thống ngoài.",
+    "limit": "Case tự biên soạn trên dữ liệu giả lập bằng chữ; không mô tả kiến trúc hiện tại của công ty, không truy cập dữ liệu người thật hoặc hệ thống ngoài. Nguồn đọc thêm hỗ trợ nguyên lý tương ứng; các số liệu, chính sách và phép tính trong tình huống do tác giả tự đặt, không phải kết quả chạy hệ thống trong nguồn.",
     "terms": [
       {
         "name": "Nguồn dữ liệu",
@@ -851,10 +849,8 @@
           ],
           "misconception": "Cùng số tiền/ngày không đủ chứng minh hai giao dịch là một.",
           "sourceIds": [
-            "pg-transactions",
             "pg-constraints",
-            "kafka-design",
-            "security-owasp"
+            "kafka-design"
           ]
         },
         {
@@ -868,10 +864,7 @@
           ],
           "misconception": "Last-write-wins toàn bản ghi có thể phá ý định sửa tay.",
           "sourceIds": [
-            "pg-transactions",
-            "pg-constraints",
-            "kafka-design",
-            "security-owasp"
+            "qa09-pg-update"
           ]
         },
         {
@@ -885,10 +878,9 @@
           ],
           "misconception": "Dashboard cân bằng không chứng minh đã đối soát với mọi nguồn ngoài.",
           "sourceIds": [
-            "pg-transactions",
-            "pg-constraints",
-            "kafka-design",
-            "security-owasp"
+            "qa09-pg-update",
+            "security-owasp",
+            "kafka-design"
           ]
         }
       ]
@@ -907,10 +899,8 @@
           "answer": 0,
           "explanation": "T1:+100,T2:−30,T1:+100 replay cho tổng70, không170. Mô hình không phí, đơn vị là điểm quỹ giả lập. Cùng số tiền/ngày không đủ chứng minh hai giao dịch là một.",
           "sourceIds": [
-            "pg-transactions",
             "pg-constraints",
-            "kafka-design",
-            "security-owasp"
+            "kafka-design"
           ]
         },
         {
@@ -924,10 +914,7 @@
           "answer": 0,
           "explanation": "T2 gợi ý “khác”, thủ quỹ chọn “sách”. Import mới đổi memo không được tự xóa “sách” nếu policy ưu tiên sửa tay còn hiệu lực. Last-write-wins toàn bản ghi có thể phá ý định sửa tay.",
           "sourceIds": [
-            "pg-transactions",
-            "pg-constraints",
-            "kafka-design",
-            "security-owasp"
+            "qa09-pg-update"
           ]
         },
         {
@@ -941,10 +928,9 @@
           "answer": 0,
           "explanation": "Ngưỡng chi50, T2 chi30 chưa vượt. Nếu một correction thành−60, cần update tổng theo version và một cảnh báo theo policy; không cộng thêm60 như giao dịch mới khi cùngT2. Dashboard cân bằng không chứng minh đã đối soát với mọi nguồn ngoài.",
           "sourceIds": [
-            "pg-transactions",
-            "pg-constraints",
-            "kafka-design",
-            "security-owasp"
+            "qa09-pg-update",
+            "security-owasp",
+            "kafka-design"
           ]
         }
       ]
@@ -981,16 +967,16 @@
     },
     "sources": [
       {
-        "title": "PostgreSQL 18 — Transaction isolation",
-        "url": "https://www.postgresql.org/docs/18/transaction-iso.html"
-      },
-      {
         "title": "PostgreSQL 18 — Constraints",
         "url": "https://www.postgresql.org/docs/18/ddl-constraints.html"
       },
       {
         "title": "Apache Kafka 4.1 — Design",
         "url": "https://kafka.apache.org/41/design/design/"
+      },
+      {
+        "title": "PostgreSQL 18 — UPDATE: chỉ đổi các cột được chỉ định",
+        "url": "https://www.postgresql.org/docs/18/sql-update.html"
       },
       {
         "title": "OWASP — Authorization cheat sheet",
@@ -1062,7 +1048,7 @@
     "objective": "Tìm đường liên hệ trong đồ thị: chọn BFS, giới hạn mở rộng và giữ quyền riêng tư.",
     "story": "Graph vô hướng không trọng số: A-B,A-C,B-D,C-E,D-F,E-F. Tìm đường từA tớiF; láng giềng xét theo chữ cái. Các đỉnh có thể nằm ở shard khác.",
     "explanation": "BFS mở rộng từng lớp khoảng cách. Chia shard thêm chi phí đọc biên. Quyền và thay đổi graph ảnh hưởng kết quả.",
-    "limit": "Case tự biên soạn trên dữ liệu giả lập bằng chữ; không mô tả kiến trúc hiện tại của công ty, không truy cập dữ liệu người thật hoặc hệ thống ngoài.",
+    "limit": "Case tự biên soạn trên dữ liệu giả lập bằng chữ; không mô tả kiến trúc hiện tại của công ty, không truy cập dữ liệu người thật hoặc hệ thống ngoài. Nguồn đọc thêm hỗ trợ nguyên lý tương ứng; các số liệu, chính sách và phép tính trong tình huống do tác giả tự đặt, không phải kết quả chạy hệ thống trong nguồn.",
     "terms": [
       {
         "name": "Nguồn dữ liệu",
@@ -1109,9 +1095,7 @@
           ],
           "misconception": "Đường ngắn nhất có thể không duy nhất; không gọi BFS là tối ưu mọi graph có trọng số.",
           "sourceIds": [
-            "algorithms",
-            "security-owasp",
-            "shards-aws"
+            "qa09-bfs"
           ]
         },
         {
@@ -1125,9 +1109,8 @@
           ],
           "misconception": "Chi phí tìm đường không chỉ bằng độ dài đường tìm được.",
           "sourceIds": [
-            "algorithms",
-            "security-owasp",
-            "shards-aws"
+            "qa09-bfs",
+            "graphql-queries"
           ]
         },
         {
@@ -1141,9 +1124,8 @@
           ],
           "misconception": "Không thấy trong phạm vi tìm không chứng minh không tồn tại toàn graph.",
           "sourceIds": [
-            "algorithms",
-            "security-owasp",
-            "shards-aws"
+            "qa09-bfs",
+            "security-owasp"
           ]
         }
       ]
@@ -1162,9 +1144,7 @@
           "answer": 0,
           "explanation": "TừA: lớp0 A; lớp1 B,C; lớp2 D,E; lớp3 F. Theo thứ tự chữ, parentF=D nên đường A-B-D-F dài3 cạnh; A-C-E-F cũng dài3. Đường ngắn nhất có thể không duy nhất; không gọi BFS là tối ưu mọi graph có trọng số.",
           "sourceIds": [
-            "algorithms",
-            "security-owasp",
-            "shards-aws"
+            "qa09-bfs"
           ]
         },
         {
@@ -1178,9 +1158,8 @@
           "answer": 0,
           "explanation": "Shard1 chứaA,B,D; shard2 chứaC,E,F. Các cạnh A-C,D-F nối shard. Đường A-B-D-F qua biên ở D-F theo bố trí đã nêu, nhưng tìm kiếm có thể đọc cả nhánhC/E. Chi phí tìm đường không chỉ bằng độ dài đường tìm được.",
           "sourceIds": [
-            "algorithms",
-            "security-owasp",
-            "shards-aws"
+            "qa09-bfs",
+            "graphql-queries"
           ]
         },
         {
@@ -1194,9 +1173,8 @@
           "answer": 0,
           "explanation": "Dừng sau lớp1 vì budget: chưa thấyF nhưng graph có đường dài3. Thông báo “không tìm trong giới hạn” khác “không tồn tại đường”. Không thấy trong phạm vi tìm không chứng minh không tồn tại toàn graph.",
           "sourceIds": [
-            "algorithms",
-            "security-owasp",
-            "shards-aws"
+            "qa09-bfs",
+            "security-owasp"
           ]
         }
       ]
@@ -1233,16 +1211,16 @@
     },
     "sources": [
       {
-        "title": "MIT OCW — Algorithms lecture notes",
-        "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/pages/lecture-notes/"
+        "title": "MIT 6.006 Fall 2011 — Lecture 13: BFS, adjacency và shortest paths",
+        "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/1208e162775f6f5cedfbb9f2b694ede0_MIT6_006F11_lec13.pdf"
+      },
+      {
+        "title": "GraphQL — queries",
+        "url": "https://graphql.org/learn/queries/"
       },
       {
         "title": "OWASP — Authorization cheat sheet",
         "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
-      },
-      {
-        "title": "Amazon DynamoDB — Partition key design",
-        "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-partition-key-design.html"
       }
     ],
     "caseStudy": {
@@ -1310,7 +1288,7 @@
     "objective": "Thiết kế cache kết quả truy vấn: khóa đúng ngữ cảnh, xử lý sửa dữ liệu, hết hạn và đồng thời nhiều miss.",
     "story": "Cache LRU giữ2 kết quả, bắt đầu rỗng; truy cập A,B,A,C,B. Không có TTL hết hạn trong trace đầu. Sau đó nguồnA đổi version và thêm node cache.",
     "explanation": "Tính hit/miss và eviction từng bước. TTL không biết mọi thay đổi nguồn. Thêm node có chi phí cold cache và skew.",
-    "limit": "Case tự biên soạn trên dữ liệu giả lập bằng chữ; không mô tả kiến trúc hiện tại của công ty, không truy cập dữ liệu người thật hoặc hệ thống ngoài.",
+    "limit": "Case tự biên soạn trên dữ liệu giả lập bằng chữ; không mô tả kiến trúc hiện tại của công ty, không truy cập dữ liệu người thật hoặc hệ thống ngoài. Nguồn đọc thêm hỗ trợ nguyên lý tương ứng; các số liệu, chính sách và phép tính trong tình huống do tác giả tự đặt, không phải kết quả chạy hệ thống trong nguồn. Trace dùng LRU lý tưởng; Redis trong nguồn dùng cách xấp xỉ nên không được coi là cùng một trace thực thi.",
     "terms": [
       {
         "name": "Nguồn dữ liệu",
@@ -1357,9 +1335,7 @@
           ],
           "misconception": "FIFO có thể cho trace khác vì hit không đổi thứ tự vào.",
           "sourceIds": [
-            "cache-azure",
-            "cache-rfc",
-            "dynamo-paper"
+            "qa09-lru"
           ]
         },
         {
@@ -1374,8 +1350,7 @@
           "misconception": "Hit không đồng nghĩa dữ liệu mới hoặc đúng quyền.",
           "sourceIds": [
             "cache-azure",
-            "cache-rfc",
-            "dynamo-paper"
+            "security-owasp"
           ]
         },
         {
@@ -1389,9 +1364,8 @@
           ],
           "misconception": "Thêm cache node có thể tạm tăng tải nguồn.",
           "sourceIds": [
-            "cache-azure",
-            "cache-rfc",
-            "dynamo-paper"
+            "dynamo-paper",
+            "cache-azure"
           ]
         }
       ]
@@ -1410,9 +1384,7 @@
           "answer": 0,
           "explanation": "A miss:[A]; B miss:[B,A]; A hit:[A,B]; C miss đẩyB:[C,A]; B miss đẩyA:[B,C]. Tổng1 hit/5 lượt=20%. FIFO có thể cho trace khác vì hit không đổi thứ tự vào.",
           "sourceIds": [
-            "cache-azure",
-            "cache-rfc",
-            "dynamo-paper"
+            "qa09-lru"
           ]
         },
         {
@@ -1427,8 +1399,7 @@
           "explanation": "A version1 đang cache, nguồn thànhv2 trước TTL. Đọc hit có thể vẫnv1; cập nhật nguồn không tự báo mọi cache. Hit không đồng nghĩa dữ liệu mới hoặc đúng quyền.",
           "sourceIds": [
             "cache-azure",
-            "cache-rfc",
-            "dynamo-paper"
+            "security-owasp"
           ]
         },
         {
@@ -1442,9 +1413,8 @@
           "answer": 0,
           "explanation": "Từ2 lên3 node bằng k modN có thể đổi nơi nhiều key; node mới chưa có bản dù nguồn còn. Một key nhận90% lượt vẫn không chia đều chỉ nhờ hash. Thêm cache node có thể tạm tăng tải nguồn.",
           "sourceIds": [
-            "cache-azure",
-            "cache-rfc",
-            "dynamo-paper"
+            "dynamo-paper",
+            "cache-azure"
           ]
         }
       ]
@@ -1482,12 +1452,16 @@
     },
     "sources": [
       {
+        "title": "Redis — Key eviction: LRU lý tưởng và LRU xấp xỉ của Redis",
+        "url": "https://redis.io/docs/latest/develop/reference/eviction/"
+      },
+      {
         "title": "Microsoft — Cache-aside",
         "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside"
       },
       {
-        "title": "RFC 9111 — HTTP Caching",
-        "url": "https://www.rfc-editor.org/rfc/rfc9111.html"
+        "title": "OWASP — Authorization cheat sheet",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
       },
       {
         "title": "Amazon — Dynamo paper (2007)",
@@ -1559,7 +1533,7 @@
     "objective": "Thiết kế bảng xếp hạng sách: xử lý sự kiện muộn/trùng, top-k, cập nhật và tính lại.",
     "story": "Trong cửa sổ09:00–10:00 có E1:A lúc09:10,E2:B lúc09:20,E3:A lúc09:55 tới11:00 và E1 gửi lại. Bảng xếp hạng dùng event time, cho cập nhật muộn theo policy.",
     "explanation": "Định nghĩa cửa sổ và danh tính trước tính tổng. Giữ raw để replay có kiểm soát. Phục vụ bảng cần ghi mốc và xử lý sửa nguồn.",
-    "limit": "Case tự biên soạn trên dữ liệu giả lập bằng chữ; không mô tả kiến trúc hiện tại của công ty, không truy cập dữ liệu người thật hoặc hệ thống ngoài.",
+    "limit": "Case tự biên soạn trên dữ liệu giả lập bằng chữ; không mô tả kiến trúc hiện tại của công ty, không truy cập dữ liệu người thật hoặc hệ thống ngoài. Nguồn đọc thêm hỗ trợ nguyên lý tương ứng; các số liệu, chính sách và phép tính trong tình huống do tác giả tự đặt, không phải kết quả chạy hệ thống trong nguồn.",
     "terms": [
       {
         "name": "Nguồn dữ liệu",
@@ -1627,8 +1601,7 @@
           "misconception": "Freshness của bảng và tốc độ đọc bảng là hai chỉ số khác.",
           "sourceIds": [
             "flink-time",
-            "kafka-design",
-            "security-owasp"
+            "kafka-design"
           ]
         },
         {
@@ -1642,9 +1615,9 @@
           ],
           "misconception": "Replay không có dedup/overwrite policy có thể nhân đôi kết quả.",
           "sourceIds": [
-            "flink-time",
             "kafka-design",
-            "security-owasp"
+            "qa09-pg-update",
+            "dataflow"
           ]
         },
         {
@@ -1658,9 +1631,9 @@
           ],
           "misconception": "Bảng tổng hợp vẫn có thể lộ dữ liệu khi nhóm quá nhỏ; cần scope phù hợp.",
           "sourceIds": [
-            "flink-time",
-            "kafka-design",
-            "security-owasp"
+            "qa09-pg-update",
+            "security-owasp",
+            "cache-azure"
           ]
         }
       ]
@@ -1680,8 +1653,7 @@
           "explanation": "Sau đủ event duy nhất E1,E2,E3: A=2,B=1. E1 replay không tăngA lên3. TrướcE3 tới, A=B=1 và bảng có thể là tạm. Freshness của bảng và tốc độ đọc bảng là hai chỉ số khác.",
           "sourceIds": [
             "flink-time",
-            "kafka-design",
-            "security-owasp"
+            "kafka-design"
           ]
         },
         {
@@ -1695,9 +1667,9 @@
           "answer": 0,
           "explanation": "Job tínhA=2 rồi crash trước checkpoint. Replay không được cộng thêm2 vào tổng đã có nếu mục đích là thay snapshot window. Replay không có dedup/overwrite policy có thể nhân đôi kết quả.",
           "sourceIds": [
-            "flink-time",
             "kafka-design",
-            "security-owasp"
+            "qa09-pg-update",
+            "dataflow"
           ]
         },
         {
@@ -1711,9 +1683,9 @@
           "answer": 0,
           "explanation": "E3 bị hủy theo policy: A từ2 về1 trong window, không xóa sáchA khỏi mọi lịch sử. Nếu tie A=B, dùng tie-break đã chốt. Bảng tổng hợp vẫn có thể lộ dữ liệu khi nhóm quá nhỏ; cần scope phù hợp.",
           "sourceIds": [
-            "flink-time",
-            "kafka-design",
-            "security-owasp"
+            "qa09-pg-update",
+            "security-owasp",
+            "cache-azure"
           ]
         }
       ]
@@ -1758,8 +1730,20 @@
         "url": "https://kafka.apache.org/41/design/design/"
       },
       {
+        "title": "PostgreSQL 18 — UPDATE: chỉ đổi các cột được chỉ định",
+        "url": "https://www.postgresql.org/docs/18/sql-update.html"
+      },
+      {
+        "title": "Akidau và cộng sự — The Dataflow Model (2015)",
+        "url": "https://research.google/pubs/the-dataflow-model-a-practical-approach-to-balancing-correctness-latency-and-cost-in-massive-scale-unbounded-out-of-order-data-processing/"
+      },
+      {
         "title": "OWASP — Authorization cheat sheet",
         "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+      },
+      {
+        "title": "Microsoft — Cache-aside",
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside"
       }
     ],
     "caseStudy": {
@@ -1827,7 +1811,7 @@
     "objective": "Lập lộ trình tăng trưởng: đo nút thắt, ước lượng tải và chi phí, chọn bước thay đổi có thể kiểm chứng.",
     "story": "Một máy web và database phục vụ200 học sinh. Dự kiến lên20.000, nhưng chưa có số peak hay profile. Nhóm muốn lộ trình có thể kiểm và quay lại.",
     "explanation": "Bắt đầu từ số đo và giới hạn thật. Mỗi bước mở rộng thêm rủi ro cần kiểm. Roadmap có gate thay vì ngày hứa vô căn cứ.",
-    "limit": "Case tự biên soạn trên dữ liệu giả lập bằng chữ; không mô tả kiến trúc hiện tại của công ty, không truy cập dữ liệu người thật hoặc hệ thống ngoài.",
+    "limit": "Case tự biên soạn trên dữ liệu giả lập bằng chữ; không mô tả kiến trúc hiện tại của công ty, không truy cập dữ liệu người thật hoặc hệ thống ngoài. Nguồn đọc thêm hỗ trợ nguyên lý tương ứng; các số liệu, chính sách và phép tính trong tình huống do tác giả tự đặt, không phải kết quả chạy hệ thống trong nguồn.",
     "terms": [
       {
         "name": "Nguồn dữ liệu",
@@ -1884,10 +1868,8 @@
           ],
           "misconception": "Tăng user không tự cho biết CPU, I/O, khóa hay mạng là nút thắt.",
           "sourceIds": [
-            "sre-objectives",
-            "replication-pg",
-            "adr",
-            "deploy-k8s"
+            "pg-explain18",
+            "sre-objectives"
           ]
         },
         {
@@ -1901,10 +1883,9 @@
           ],
           "misconception": "Không có bước “bật cloud” làm mọi bảo đảm tự xuất hiện.",
           "sourceIds": [
-            "sre-objectives",
             "replication-pg",
-            "adr",
-            "deploy-k8s"
+            "cache-azure",
+            "overload-google"
           ]
         },
         {
@@ -1918,9 +1899,8 @@
           ],
           "misconception": "Roadmap không phải cam kết đã triển khai hoặc benchmark mọi quy mô.",
           "sourceIds": [
-            "sre-objectives",
-            "replication-pg",
             "adr",
+            "sre-objectives",
             "deploy-k8s"
           ]
         }
@@ -1940,10 +1920,8 @@
           "answer": 0,
           "explanation": "Nếu query thiếu index quét nhiều dòng chiếm thời gian, thêm web không giảm lượng DB làm. Kiểm query plan và workload trước đổi kiến trúc. Tăng user không tự cho biết CPU, I/O, khóa hay mạng là nút thắt.",
           "sourceIds": [
-            "sre-objectives",
-            "replication-pg",
-            "adr",
-            "deploy-k8s"
+            "pg-explain18",
+            "sre-objectives"
           ]
         },
         {
@@ -1957,10 +1935,9 @@
           "answer": 0,
           "explanation": "Thêm replica giúp đọc cho phép trễ, nhưng đọc sau ghi vẫn cần route/mốc. Tổng pool tăng khi thêm app cần budget DB. Không có bước “bật cloud” làm mọi bảo đảm tự xuất hiện.",
           "sourceIds": [
-            "sre-objectives",
             "replication-pg",
-            "adr",
-            "deploy-k8s"
+            "cache-azure",
+            "overload-google"
           ]
         },
         {
@@ -1974,9 +1951,8 @@
           "answer": 0,
           "explanation": "Mốc1 index đạt p95 theo tải đã chốt; mốc2 cache chỉ cho dữ liệu công khai; mốc3 replica khi đọc thành bottleneck. Không bắt buộc đạt mọi mốc nếu chưa cần. Roadmap không phải cam kết đã triển khai hoặc benchmark mọi quy mô.",
           "sourceIds": [
-            "sre-objectives",
-            "replication-pg",
             "adr",
+            "sre-objectives",
             "deploy-k8s"
           ]
         }
@@ -2015,12 +1991,24 @@
     },
     "sources": [
       {
+        "title": "PostgreSQL 18 — using EXPLAIN",
+        "url": "https://www.postgresql.org/docs/18/using-explain.html"
+      },
+      {
         "title": "Google SRE — Service level objectives",
         "url": "https://sre.google/sre-book/service-level-objectives/"
       },
       {
         "title": "PostgreSQL 18 — Log-shipping standby servers",
         "url": "https://www.postgresql.org/docs/18/warm-standby.html"
+      },
+      {
+        "title": "Microsoft — Cache-aside",
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside"
+      },
+      {
+        "title": "Google SRE — Handling overload",
+        "url": "https://sre.google/sre-book/handling-overload/"
       },
       {
         "title": "Michael Nygard — Documenting architecture decisions",

@@ -1,0 +1,58 @@
+[
+  {
+    "id": "case-query-cache",
+    "width": 320,
+    "links": 4,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "id": "case-school-feed",
+    "width": 320,
+    "links": 6,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "id": "track-data",
+    "width": 320,
+    "links": 8,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "id": "capacity-tail",
+    "width": 320,
+    "links": 3,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "id": "case-query-cache",
+    "width": 1280,
+    "links": 4,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "id": "case-school-feed",
+    "width": 1280,
+    "links": 6,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "id": "track-data",
+    "width": 1280,
+    "links": 8,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "id": "capacity-tail",
+    "width": 1280,
+    "links": 3,
+    "overflow": false,
+    "errors": []
+  }
+]

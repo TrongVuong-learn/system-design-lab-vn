@@ -1,0 +1,293 @@
+{
+  "baseline": "68f7de6cd2d1659c0b9840c067e5e519539c1194",
+  "checkedAt": "2026-10-25",
+  "method": "parent source-read + independent fixture calculation; no external service execution",
+  "mapping": [
+    {
+      "lessonId": "case-short-links",
+      "steps": [
+        {
+          "step": 1,
+          "sourceIds": [
+            "pg-constraints",
+            "security-owasp"
+          ],
+          "supportAndLimits": "Unique chống ghi đè; kiểm quyền không dựa vào mã khó đoán."
+        },
+        {
+          "step": 2,
+          "sourceIds": [
+            "cache-rfc",
+            "security-owasp"
+          ],
+          "supportAndLimits": "Freshness HTTP và kiểm quyền mỗi request; expiry/thu hồi là hợp đồng tự đặt của case."
+        },
+        {
+          "step": 3,
+          "sourceIds": [
+            "kafka-design"
+          ],
+          "supportAndLimits": "Kafka giải thích delivery/replay, ứng dụng phải định nghĩa dedup; phép đếm E1/E2 tự tính."
+        }
+      ]
+    },
+    {
+      "lessonId": "case-school-feed",
+      "steps": [
+        {
+          "step": 1,
+          "sourceIds": [
+            "qa09-feed"
+          ],
+          "supportAndLimits": "Koo 2022 nêu fan-out, tách VIP và feed người ít dùng tính khi đọc; số follower/mục là fixture."
+        },
+        {
+          "step": 2,
+          "sourceIds": [
+            "kafka-design",
+            "pg-constraints",
+            "qa09-index-version"
+          ],
+          "supportAndLimits": "Delivery/retry + unique + external version là ví dụ cơ chế chống lặp và bản cũ; không mặc định broker bảo vệ mọi sink."
+        },
+        {
+          "step": 3,
+          "sourceIds": [
+            "security-owasp",
+            "cache-rfc"
+          ],
+          "supportAndLimits": "Quyền trên request và freshness cache; policy thu hồi/final do case quy định."
+        }
+      ]
+    },
+    {
+      "lessonId": "case-fixture-crawler",
+      "steps": [
+        {
+          "step": 1,
+          "sourceIds": [
+            "qa09-bfs",
+            "pg-constraints"
+          ],
+          "supportAndLimits": "BFS/adjacency/visited và unique; fixture tự tính, không benchmark crawler."
+        },
+        {
+          "step": 2,
+          "sourceIds": [
+            "robots",
+            "overload-google"
+          ],
+          "supportAndLimits": "Robots không phải bảo mật; giới hạn retry/tải là ứng dụng nguyên lý overload."
+        },
+        {
+          "step": 3,
+          "sourceIds": [
+            "qa09-index-version",
+            "kafka-design"
+          ],
+          "supportAndLimits": "External version ngăn ghi lùi khi upsert; delivery/replay cần sink hợp tác. Pipeline và hash là thiết kế case."
+        }
+      ]
+    },
+    {
+      "lessonId": "case-club-ledger",
+      "steps": [
+        {
+          "step": 1,
+          "sourceIds": [
+            "pg-constraints",
+            "kafka-design"
+          ],
+          "supportAndLimits": "Unique + delivery/replay; tổng70 là số tự tính theo transactionId."
+        },
+        {
+          "step": 2,
+          "sourceIds": [
+            "qa09-pg-update"
+          ],
+          "supportAndLimits": "UPDATE chỉ sửa cột chỉ định: cơ chế để giữ override. Ưu tiên sửa tay là policy case, không phải bảo đảm tự có của DB."
+        },
+        {
+          "step": 3,
+          "sourceIds": [
+            "qa09-pg-update",
+            "security-owasp",
+            "kafka-design"
+          ],
+          "supportAndLimits": "Cập nhật theo định danh/cột, quyền và delivery; correction/threshold/timezone/retention do case chọn."
+        }
+      ]
+    },
+    {
+      "lessonId": "case-social-path",
+      "steps": [
+        {
+          "step": 1,
+          "sourceIds": [
+            "qa09-bfs"
+          ],
+          "supportAndLimits": "BFS cho số cạnh ngắn nhất; thứ tự và hai đường là trace fixture."
+        },
+        {
+          "step": 2,
+          "sourceIds": [
+            "qa09-bfs",
+            "graphql-queries"
+          ],
+          "supportAndLimits": "MIT adjacency/BFS minh họa đọc cả nhánh; GraphQL là query API. Shard placement và số lượt mạng là suy luận từ fixture, không benchmark nguồn."
+        },
+        {
+          "step": 3,
+          "sourceIds": [
+            "qa09-bfs",
+            "security-owasp"
+          ],
+          "supportAndLimits": "BFS bị dừng sớm chưa chứng minh không có đường; kiểm quyền mỗi request. Snapshot/budget là contract case."
+        }
+      ]
+    },
+    {
+      "lessonId": "case-query-cache",
+      "steps": [
+        {
+          "step": 1,
+          "sourceIds": [
+            "qa09-lru"
+          ],
+          "supportAndLimits": "Nguồn phân biệt true LRU với Redis sampled LRU; trace hai chỗ là LRU lý tưởng tự tính, không trace Redis."
+        },
+        {
+          "step": 2,
+          "sourceIds": [
+            "cache-azure",
+            "security-owasp"
+          ],
+          "supportAndLimits": "Cache-aside không tự nhất quán, quyền cần scope đúng; không chuyển semantics HTTP sang cache query."
+        },
+        {
+          "step": 3,
+          "sourceIds": [
+            "dynamo-paper",
+            "cache-azure"
+          ],
+          "supportAndLimits": "Dynamo §4.2 consistent hashing; Azure cache priming/miss. Hot key90% là giả định."
+        }
+      ]
+    },
+    {
+      "lessonId": "case-book-ranking",
+      "steps": [
+        {
+          "step": 1,
+          "sourceIds": [
+            "flink-time",
+            "kafka-design"
+          ],
+          "supportAndLimits": "Event time/watermarks và replay; window/tie-break/count là policy fixture."
+        },
+        {
+          "step": 2,
+          "sourceIds": [
+            "kafka-design",
+            "qa09-pg-update",
+            "dataflow"
+          ],
+          "supportAndLimits": "Kafka delivery cần phối hợp output, UPDATE/overwrite là ví dụ và Dataflow xử lý lại; không cam kết sink exactly-once tự động."
+        },
+        {
+          "step": 3,
+          "sourceIds": [
+            "qa09-pg-update",
+            "security-owasp",
+            "cache-azure"
+          ],
+          "supportAndLimits": "UPDATE contribution, kiểm quyền, freshness; hủyE3/tie-break là policy fixture."
+        }
+      ]
+    },
+    {
+      "lessonId": "case-growth-roadmap",
+      "steps": [
+        {
+          "step": 1,
+          "sourceIds": [
+            "pg-explain18",
+            "sre-objectives"
+          ],
+          "supportAndLimits": "EXPLAIN xem query plan và SLO để chọn thước đo; chưa có benchmark DB thật."
+        },
+        {
+          "step": 2,
+          "sourceIds": [
+            "replication-pg",
+            "cache-azure",
+            "overload-google"
+          ],
+          "supportAndLimits": "PostgreSQL async replication lag, cache-aside và overload/pool; không bảo đảm mọi DB/LB."
+        },
+        {
+          "step": 3,
+          "sourceIds": [
+            "adr",
+            "sre-objectives",
+            "deploy-k8s"
+          ],
+          "supportAndLimits": "ADR ghi context/decision, SLO kiểm mục tiêu, deployment rollback có phạm vi; milestone là kế hoạch case."
+        }
+      ]
+    }
+  ],
+  "supplements": {
+    "track-ai": {
+      "lifecycle": [
+        "qa09-model-registry"
+      ]
+    },
+    "track-data": {
+      "ingest": [
+        "qa09-etl",
+        "qa09-olap",
+        "qa09-cdc"
+      ],
+      "quality": [
+        "qa09-lineage",
+        "qa09-quality"
+      ]
+    },
+    "track-search": {
+      "lexical": [
+        "security-owasp"
+      ],
+      "recommend": [
+        "qa09-recommend-bias"
+      ],
+      "geo": [
+        "qa09-geohash"
+      ]
+    },
+    "track-realtime": {
+      "editing": [
+        "qa09-ot"
+      ]
+    },
+    "track-media": {
+      "jobs": [
+        "qa09-media-output"
+      ]
+    },
+    "track-platform": {
+      "reconcile": [
+        "qa09-controller"
+      ],
+      "network": [
+        "qa09-mesh",
+        "qa09-iac"
+      ]
+    },
+    "admission-backpressure": {
+      "tokens": [
+        "qa09-token"
+      ]
+    }
+  }
+}

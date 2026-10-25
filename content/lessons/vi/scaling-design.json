@@ -1370,7 +1370,8 @@
           ],
           "misconception": "Rate limit theo IP có thể gộp nhiều học sinh cùng mạng; quota cần chọn chủ thể phù hợp.",
           "sourceIds": [
-            "overload-google"
+            "overload-google",
+            "qa09-token"
           ]
         },
         {
@@ -1433,7 +1434,8 @@
           "answer": 0,
           "explanation": "Bucket có 5 token, không nạp thêm trong thời điểm xét. 7 việc cùng tới, mỗi việc một token: nhận tối đa 5, hai việc chờ/từ chối theo hợp đồng. Đây không nói năm việc hoàn tất ngay. Rate limit theo IP có thể gộp nhiều học sinh cùng mạng; quota cần chọn chủ thể phù hợp.",
           "sourceIds": [
-            "overload-google"
+            "overload-google",
+            "qa09-token"
           ]
         },
         {
@@ -1506,6 +1508,10 @@
       {
         "title": "Google SRE — Addressing cascading failures",
         "url": "https://sre.google/sre-book/addressing-cascading-failures/"
+      },
+      {
+        "title": "RFC 3290 §A.2–A.3 — Token bucket và giới hạn burst",
+        "url": "https://www.rfc-editor.org/rfc/rfc3290.html"
       }
     ],
     "caseStudy": {

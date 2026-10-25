@@ -875,10 +875,10 @@
     },
     {
       "id": "little-mit",
-      "title": "MIT — Queueing systems and Little’s Law",
+      "title": "MIT 6.02 Spring 2009 — Lecture 17 §17.4.1–2: Little’s Law",
       "url": "https://courses.csail.mit.edu/6.02/s2009/handouts/L17.pdf",
-      "revision": "Tài liệu đối chiếu ngày 2026-10-24; ví dụ do tác giả dựng",
-      "checkedAt": "2026-10-24",
+      "revision": "MIT 6.02 Spring 2009, Lecture 17 Communication Networks, pp. 11–13, §§17.4.1–17.4.2",
+      "checkedAt": "2026-10-25",
       "attribution": "MIT — Queueing systems and Little’s Law; diễn giải và tình huống riêng của System Design Lab"
     },
     {
@@ -1016,6 +1016,158 @@
       "revision": "Tài liệu đối chiếu ngày 2026-10-24; ví dụ do tác giả dựng",
       "checkedAt": "2026-10-24",
       "attribution": "MIT OCW — Algorithms lecture notes; diễn giải và tình huống riêng của System Design Lab"
+    },
+    {
+      "id": "qa09-bfs",
+      "title": "MIT 6.006 Fall 2011 — Lecture 13: BFS, adjacency và shortest paths",
+      "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/1208e162775f6f5cedfbb9f2b694ede0_MIT6_006F11_lec13.pdf",
+      "revision": "Lecture 13, pp. 2–6; Fall 2011",
+      "checkedAt": "2026-10-25",
+      "attribution": "MIT 6.006 Fall 2011 — Lecture 13: BFS, adjacency và shortest paths; chỉ hỗ trợ nguyên lý liên quan, ví dụ số/chính sách của bài do System Design Lab tự biên soạn."
+    },
+    {
+      "id": "qa09-pg-update",
+      "title": "PostgreSQL 18 — UPDATE: chỉ đổi các cột được chỉ định",
+      "url": "https://www.postgresql.org/docs/18/sql-update.html",
+      "revision": "PostgreSQL 18, UPDATE / Description",
+      "checkedAt": "2026-10-25",
+      "attribution": "PostgreSQL 18 — UPDATE: chỉ đổi các cột được chỉ định; chỉ hỗ trợ nguyên lý liên quan, ví dụ số/chính sách của bài do System Design Lab tự biên soạn."
+    },
+    {
+      "id": "qa09-index-version",
+      "title": "Elasticsearch 8.19 — Index API: external versioning",
+      "url": "https://www.elastic.co/guide/en/elasticsearch/reference/8.19/docs-index_.html",
+      "revision": "Elasticsearch 8.19, Versioning; bản lưu không còn cập nhật, ví dụ giới hạn ở phiên bản này",
+      "checkedAt": "2026-10-25",
+      "attribution": "Elasticsearch 8.19 — Index API: external versioning; chỉ hỗ trợ nguyên lý liên quan, ví dụ số/chính sách của bài do System Design Lab tự biên soạn."
+    },
+    {
+      "id": "qa09-lru",
+      "title": "Redis — Key eviction: LRU lý tưởng và LRU xấp xỉ của Redis",
+      "url": "https://redis.io/docs/latest/develop/reference/eviction/",
+      "revision": "Tài liệu sống, revision unknown; Eviction policies / Approximated LRU algorithm",
+      "checkedAt": "2026-10-25",
+      "attribution": "Redis — Key eviction: LRU lý tưởng và LRU xấp xỉ của Redis; chỉ hỗ trợ nguyên lý liên quan, ví dụ số/chính sách của bài do System Design Lab tự biên soạn."
+    },
+    {
+      "id": "qa09-feed",
+      "title": "Koo tại AWS Summit 2022 — fan-out, VIP và feed tính khi đọc",
+      "url": "https://d1.awsstatic.com/events/Summits/awsdelhisummit/ADT202-S_HowKoo.pdf",
+      "revision": "9 September 2022, pp.5,12–13; kiến trúc trình bày tại thời điểm đó",
+      "checkedAt": "2026-10-25",
+      "attribution": "Koo tại AWS Summit 2022 — fan-out, VIP và feed tính khi đọc; chỉ hỗ trợ nguyên lý liên quan, ví dụ số/chính sách của bài do System Design Lab tự biên soạn."
+    },
+    {
+      "id": "qa09-token",
+      "title": "RFC 3290 §A.2–A.3 — Token bucket và giới hạn burst",
+      "url": "https://www.rfc-editor.org/rfc/rfc3290.html",
+      "revision": "Informational, May2002; A.2–A.3",
+      "checkedAt": "2026-10-25",
+      "attribution": "RFC 3290 §A.2–A.3 — Token bucket và giới hạn burst; nguồn hỗ trợ nguyên lý, không chứng nhận fixture hoặc hệ thống thật của bài."
+    },
+    {
+      "id": "qa09-model-registry",
+      "title": "MLflow — Model registry: version và lineage",
+      "url": "https://mlflow.org/docs/latest/ml/model-registry/",
+      "revision": "Live, revision unknown; Why Model Registry / Concepts",
+      "checkedAt": "2026-10-25",
+      "attribution": "MLflow — Model registry: version và lineage; nguồn hỗ trợ nguyên lý, không chứng nhận fixture hoặc hệ thống thật của bài."
+    },
+    {
+      "id": "qa09-etl",
+      "title": "AWS — ETL và ELT: thứ tự transform/load",
+      "url": "https://aws.amazon.com/compare/the-difference-between-etl-and-elt/",
+      "revision": "Live, revision unknown; Transformation / Load",
+      "checkedAt": "2026-10-25",
+      "attribution": "AWS — ETL và ELT: thứ tự transform/load; nguồn hỗ trợ nguyên lý, không chứng nhận fixture hoặc hệ thống thật của bài."
+    },
+    {
+      "id": "qa09-olap",
+      "title": "AWS — OLTP và OLAP: mục tiêu xử lý",
+      "url": "https://aws.amazon.com/compare/the-difference-between-olap-and-oltp/",
+      "revision": "Live, revision unknown; Key differences / Purpose",
+      "checkedAt": "2026-10-25",
+      "attribution": "AWS — OLTP và OLAP: mục tiêu xử lý; nguồn hỗ trợ nguyên lý, không chứng nhận fixture hoặc hệ thống thật của bài."
+    },
+    {
+      "id": "qa09-cdc",
+      "title": "Debezium — Change events từ thay đổi dữ liệu",
+      "url": "https://debezium.io/documentation/reference/stable/kc-tutorial.html",
+      "revision": "Debezium tutorial, examples 3.7; Viewing change events",
+      "checkedAt": "2026-10-25",
+      "attribution": "Debezium — Change events từ thay đổi dữ liệu; nguồn hỗ trợ nguyên lý, không chứng nhận fixture hoặc hệ thống thật của bài."
+    },
+    {
+      "id": "qa09-lineage",
+      "title": "OpenLineage 1.54.0 — Dataset, Job và Run",
+      "url": "https://openlineage.io/docs/spec/object-model/",
+      "revision": "1.54.0 Object Model",
+      "checkedAt": "2026-10-25",
+      "attribution": "OpenLineage 1.54.0 — Dataset, Job và Run; nguồn hỗ trợ nguyên lý, không chứng nhận fixture hoặc hệ thống thật của bài."
+    },
+    {
+      "id": "qa09-quality",
+      "title": "Great Expectations — kiểm quy tắc dữ liệu",
+      "url": "https://docs.greatexpectations.io/docs/core/define_expectations/",
+      "revision": "GX1.24.1 Define Expectations",
+      "checkedAt": "2026-10-25",
+      "attribution": "Great Expectations — kiểm quy tắc dữ liệu; nguồn hỗ trợ nguyên lý, không chứng nhận fixture hoặc hệ thống thật của bài."
+    },
+    {
+      "id": "qa09-recommend-bias",
+      "title": "Chen và cộng sự (2019) — sai lệch do chỉ quan sát đề xuất đã hiển thị",
+      "url": "https://research.google/pubs/top-k-off-policy-correction-for-a-reinforce-recommender-system/",
+      "revision": "RecSys2019, abstract; không suy thành bảo đảm mọi recommender",
+      "checkedAt": "2026-10-25",
+      "attribution": "Chen và cộng sự (2019) — sai lệch do chỉ quan sát đề xuất đã hiển thị; nguồn hỗ trợ nguyên lý, không chứng nhận fixture hoặc hệ thống thật của bài."
+    },
+    {
+      "id": "qa09-geohash",
+      "title": "Firebase — Geo queries: lấy ứng viên và lọc khoảng cách",
+      "url": "https://firebase.google.com/docs/firestore/solutions/geoqueries",
+      "revision": "Live, revision unknown; Query geohashes / Limitations",
+      "checkedAt": "2026-10-25",
+      "attribution": "Firebase — Geo queries: lấy ứng viên và lọc khoảng cách; nguồn hỗ trợ nguyên lý, không chứng nhận fixture hoặc hệ thống thật của bài."
+    },
+    {
+      "id": "qa09-ot",
+      "title": "ShareDB — OT types cho chỉnh sửa cộng tác",
+      "url": "https://share.github.io/sharedb/types/",
+      "revision": "Live, revision unknown; OT Types",
+      "checkedAt": "2026-10-25",
+      "attribution": "ShareDB — OT types cho chỉnh sửa cộng tác; nguồn hỗ trợ nguyên lý, không chứng nhận fixture hoặc hệ thống thật của bài."
+    },
+    {
+      "id": "qa09-media-output",
+      "title": "AWS MediaConvert — rendition, segment và manifest",
+      "url": "https://docs.aws.amazon.com/mediaconvert/latest/ug/outputs-file-ABR.html",
+      "revision": "Live, revision unknown; Streaming output packages",
+      "checkedAt": "2026-10-25",
+      "attribution": "AWS MediaConvert — rendition, segment và manifest; nguồn hỗ trợ nguyên lý, không chứng nhận fixture hoặc hệ thống thật của bài."
+    },
+    {
+      "id": "qa09-controller",
+      "title": "Kubernetes — Controller: desired và current state",
+      "url": "https://kubernetes.io/docs/concepts/architecture/controller/",
+      "revision": "Last modified 2024-09-01; Controller pattern / Desired versus current state",
+      "checkedAt": "2026-10-25",
+      "attribution": "Kubernetes — Controller: desired và current state; nguồn hỗ trợ nguyên lý, không chứng nhận fixture hoặc hệ thống thật của bài."
+    },
+    {
+      "id": "qa09-mesh",
+      "title": "Istio — Traffic management: retry và policy ứng dụng",
+      "url": "https://istio.io/latest/docs/concepts/traffic-management/",
+      "revision": "Documentation v1.31 as viewed; Retries / Working with your applications",
+      "checkedAt": "2026-10-25",
+      "attribution": "Istio — Traffic management: retry và policy ứng dụng; nguồn hỗ trợ nguyên lý, không chứng nhận fixture hoặc hệ thống thật của bài."
+    },
+    {
+      "id": "qa09-iac",
+      "title": "Terraform — State và ánh xạ tài nguyên",
+      "url": "https://developer.hashicorp.com/terraform/language/state/purpose",
+      "revision": "Live, revision unknown; Mapping to the Real World / Syncing",
+      "checkedAt": "2026-10-25",
+      "attribution": "Terraform — State và ánh xạ tài nguyên; nguồn hỗ trợ nguyên lý, không chứng nhận fixture hoặc hệ thống thật của bài."
     }
   ],
   "competencies": [
@@ -3814,7 +3966,7 @@
     },
     {
       "lessonId": "admission-backpressure",
-      "revision": 1,
+      "revision": 2,
       "competencyIds": [
         "competency-admission-backpressure"
       ],
@@ -3832,7 +3984,8 @@
         {
           "text": "Token bucket tích token tới sức chứa B, nạp r mỗi giây; mỗi việc tiêu token theo chi phí đã định. Cho burst tới số token hiện có nhưng giới hạn dài hạn. Giới hạn concurrency chặn số việc đang chạy, cần khi thời gian mỗi việc thay đổi.",
           "sourceIds": [
-            "overload-google"
+            "overload-google",
+            "qa09-token"
           ]
         },
         {
@@ -3860,11 +4013,11 @@
         "evidence": "EDU_26_REMAINING_CURRICULUM.md: đối chiếu nguồn, tự tính ví dụ và rà đáp án; không pilot/human review."
       },
       "review": {
-        "reviewer": "Codex parent",
+        "reviewer": "Codex parent sau knowledge_reviewer (gpt-6-sol / low)",
         "reviewerType": "agent",
-        "date": "2026-10-24",
+        "date": "2026-10-25",
         "status": "beta-checked",
-        "evidence": "EDU_26_REMAINING_CURRICULUM.md: đối chiếu nguồn, tự tính ví dụ và rà đáp án; không pilot/human review."
+        "evidence": "QA_09_NEW_LESSONS_REVIEW.md: parent đối chiếu phần nguồn còn thiếu và bổ sung citation; không đổi assessment/cơ chế, không pilot/human review."
       }
     },
     {
@@ -4314,7 +4467,7 @@
     },
     {
       "lessonId": "capacity-tail",
-      "revision": 1,
+      "revision": 2,
       "competencyIds": [
         "competency-capacity-tail"
       ],
@@ -4885,7 +5038,7 @@
     },
     {
       "lessonId": "track-ai",
-      "revision": 1,
+      "revision": 2,
       "competencyIds": [
         "competency-track-ai"
       ],
@@ -4899,7 +5052,8 @@
         {
           "text": "Training điều chỉnh tham số từ dữ liệu; inference dùng model đã chọn để tạo kết quả. Feature/data pipeline cần version, chất lượng và quyền. Registry nối model với dữ liệu/config/eval; rollback cần biết tương thích prompt/index, không chỉ tên model.",
           "sourceIds": [
-            "ai-rag"
+            "ai-rag",
+            "qa09-model-registry"
           ]
         },
         {
@@ -4934,16 +5088,16 @@
         "evidence": "EDU_26_REMAINING_CURRICULUM.md: đối chiếu nguồn, tự tính ví dụ và rà đáp án; không pilot/human review."
       },
       "review": {
-        "reviewer": "Codex parent",
+        "reviewer": "Codex parent sau knowledge_reviewer (gpt-6-sol / low)",
         "reviewerType": "agent",
-        "date": "2026-10-24",
+        "date": "2026-10-25",
         "status": "beta-checked",
-        "evidence": "EDU_26_REMAINING_CURRICULUM.md: đối chiếu nguồn, tự tính ví dụ và rà đáp án; không pilot/human review."
+        "evidence": "QA_09_NEW_LESSONS_REVIEW.md: parent đối chiếu phần nguồn còn thiếu và bổ sung citation; không đổi assessment/cơ chế, không pilot/human review."
       }
     },
     {
       "lessonId": "track-data",
-      "revision": 1,
+      "revision": 2,
       "competencyIds": [
         "competency-track-data"
       ],
@@ -4957,7 +5111,10 @@
           "text": "ETL biến đổi trước khi nạp đích, ELT nạp rồi biến đổi trong đích. CDC lấy thay đổi từ nguồn, không tự là sự kiện nghiệp vụ hoàn chỉnh. OLTP ưu tiên thao tác giao dịch; OLAP ưu tiên phân tích tập dữ liệu. Warehouse/lake/lakehouse là các cách tổ chức cần xét schema, catalog, transaction và engine.",
           "sourceIds": [
             "dataflow",
-            "kafka-design"
+            "kafka-design",
+            "qa09-etl",
+            "qa09-olap",
+            "qa09-cdc"
           ]
         },
         {
@@ -4978,7 +5135,9 @@
           "text": "Data quality kiểm schema, miền giá trị, unique, completeness và freshness theo hợp đồng. Lineage ghi nguồn và biến đổi. Orchestration chạy dependency/retry/backfill với version; không chỉ lịch cron. Dữ liệu sai có thể quarantine thay vì làm bẩn bảng chính.",
           "sourceIds": [
             "dataflow",
-            "kafka-design"
+            "kafka-design",
+            "qa09-lineage",
+            "qa09-quality"
           ]
         }
       ],
@@ -4992,16 +5151,16 @@
         "evidence": "EDU_26_REMAINING_CURRICULUM.md: đối chiếu nguồn, tự tính ví dụ và rà đáp án; không pilot/human review."
       },
       "review": {
-        "reviewer": "Codex parent",
+        "reviewer": "Codex parent sau knowledge_reviewer (gpt-6-sol / low)",
         "reviewerType": "agent",
-        "date": "2026-10-24",
+        "date": "2026-10-25",
         "status": "beta-checked",
-        "evidence": "EDU_26_REMAINING_CURRICULUM.md: đối chiếu nguồn, tự tính ví dụ và rà đáp án; không pilot/human review."
+        "evidence": "QA_09_NEW_LESSONS_REVIEW.md: parent đối chiếu phần nguồn còn thiếu và bổ sung citation; không đổi assessment/cơ chế, không pilot/human review."
       }
     },
     {
       "lessonId": "track-search",
-      "revision": 1,
+      "revision": 2,
       "competencyIds": [
         "competency-track-search"
       ],
@@ -5015,7 +5174,8 @@
         {
           "text": "Inverted index lưu term→danh sách tài liệu/vị trí. Query pipeline phân tích từ, lấy candidates, lọc và xếp hạng. Autocomplete cần prefix/token policy và tránh lộ truy vấn riêng; index cập nhật có độ trễ so nguồn.",
           "sourceIds": [
-            "lucene"
+            "lucene",
+            "security-owasp"
           ]
         },
         {
@@ -5028,13 +5188,15 @@
         {
           "text": "Recommendation thường tạo candidates rồi ranking theo tín hiệu và mục tiêu. Feedback loop có thể làm cái đã được hiển thị tiếp tục nổi, nên cần xét exposure bias, cold start và chất lượng ngoài click. Không dùng đặc tính nhạy cảm tùy tiện.",
           "sourceIds": [
-            "recommend-google"
+            "recommend-google",
+            "qa09-recommend-bias"
           ]
         },
         {
           "text": "Spatial index/geohash chia không gian để thu hẹp tìm kiếm; ô lân cận có thể chứa điểm gần qua biên. Sau lọc cần kiểm khoảng cách/quan hệ hình học đúng hệ tọa độ. Ranking có thể kết hợp khoảng cách, độ mới và giờ mở nhưng cần định nghĩa.",
           "sourceIds": [
-            "geo-postgis"
+            "geo-postgis",
+            "qa09-geohash"
           ]
         }
       ],
@@ -5048,16 +5210,16 @@
         "evidence": "EDU_26_REMAINING_CURRICULUM.md: đối chiếu nguồn, tự tính ví dụ và rà đáp án; không pilot/human review."
       },
       "review": {
-        "reviewer": "Codex parent",
+        "reviewer": "Codex parent sau knowledge_reviewer (gpt-6-sol / low)",
         "reviewerType": "agent",
-        "date": "2026-10-24",
+        "date": "2026-10-25",
         "status": "beta-checked",
-        "evidence": "EDU_26_REMAINING_CURRICULUM.md: đối chiếu nguồn, tự tính ví dụ và rà đáp án; không pilot/human review."
+        "evidence": "QA_09_NEW_LESSONS_REVIEW.md: parent đối chiếu phần nguồn còn thiếu và bổ sung citation; không đổi assessment/cơ chế, không pilot/human review."
       }
     },
     {
       "lessonId": "track-realtime",
-      "revision": 1,
+      "revision": 2,
       "competencyIds": [
         "competency-track-realtime"
       ],
@@ -5091,7 +5253,8 @@
         {
           "text": "OT biến đổi operation theo ngữ cảnh để phối hợp edits; CRDT thiết kế dữ liệu/operation hội tụ dưới điều kiện giao nhận. Cả hai cần ID, vị trí/nhân quả, policy và kiểm ý định. LWW cả tài liệu dễ mất đoạn; không tự dùng G-counter cho text.",
           "sourceIds": [
-            "crdt-paper"
+            "crdt-paper",
+            "qa09-ot"
           ]
         }
       ],
@@ -5105,16 +5268,16 @@
         "evidence": "EDU_26_REMAINING_CURRICULUM.md: đối chiếu nguồn, tự tính ví dụ và rà đáp án; không pilot/human review."
       },
       "review": {
-        "reviewer": "Codex parent",
+        "reviewer": "Codex parent sau knowledge_reviewer (gpt-6-sol / low)",
         "reviewerType": "agent",
-        "date": "2026-10-24",
+        "date": "2026-10-25",
         "status": "beta-checked",
-        "evidence": "EDU_26_REMAINING_CURRICULUM.md: đối chiếu nguồn, tự tính ví dụ và rà đáp án; không pilot/human review."
+        "evidence": "QA_09_NEW_LESSONS_REVIEW.md: parent đối chiếu phần nguồn còn thiếu và bổ sung citation; không đổi assessment/cơ chế, không pilot/human review."
       }
     },
     {
       "lessonId": "track-media",
-      "revision": 1,
+      "revision": 2,
       "competencyIds": [
         "competency-track-media"
       ],
@@ -5135,7 +5298,8 @@
           "text": "Transcoding tạo rendition theo codec/resolution/bitrate. Job có key từ video source version và cấu hình để retry không công bố lẫn đầu ra. Publish manifest khi tập đầu ra đủ điều kiện; dọn output lỗi mà không xóa bản đang dùng.",
           "sourceIds": [
             "kafka-design",
-            "hls"
+            "hls",
+            "qa09-media-output"
           ]
         },
         {
@@ -5163,16 +5327,16 @@
         "evidence": "EDU_26_REMAINING_CURRICULUM.md: đối chiếu nguồn, tự tính ví dụ và rà đáp án; không pilot/human review."
       },
       "review": {
-        "reviewer": "Codex parent",
+        "reviewer": "Codex parent sau knowledge_reviewer (gpt-6-sol / low)",
         "reviewerType": "agent",
-        "date": "2026-10-24",
+        "date": "2026-10-25",
         "status": "beta-checked",
-        "evidence": "EDU_26_REMAINING_CURRICULUM.md: đối chiếu nguồn, tự tính ví dụ và rà đáp án; không pilot/human review."
+        "evidence": "QA_09_NEW_LESSONS_REVIEW.md: parent đối chiếu phần nguồn còn thiếu và bổ sung citation; không đổi assessment/cơ chế, không pilot/human review."
       }
     },
     {
       "lessonId": "track-platform",
-      "revision": 1,
+      "revision": 2,
       "competencyIds": [
         "competency-track-platform"
       ],
@@ -5186,7 +5350,8 @@
           "text": "Orchestrator/controller quan sát desired state và thực tế rồi điều chỉnh qua nhiều bước có thể retry. API accepted không nghĩa tài nguyên ready. Cần operationId/status/error và reconcile idempotent; xóa cũng có dependency/finalization.",
           "sourceIds": [
             "deploy-k8s",
-            "outbox-aws"
+            "outbox-aws",
+            "qa09-controller"
           ]
         },
         {
@@ -5201,7 +5366,9 @@
           "sourceIds": [
             "multitenancy",
             "cache-rfc",
-            "retry-aws"
+            "retry-aws",
+            "qa09-mesh",
+            "qa09-iac"
           ]
         },
         {
@@ -5223,11 +5390,11 @@
         "evidence": "EDU_26_REMAINING_CURRICULUM.md: đối chiếu nguồn, tự tính ví dụ và rà đáp án; không pilot/human review."
       },
       "review": {
-        "reviewer": "Codex parent",
+        "reviewer": "Codex parent sau knowledge_reviewer (gpt-6-sol / low)",
         "reviewerType": "agent",
-        "date": "2026-10-24",
+        "date": "2026-10-25",
         "status": "beta-checked",
-        "evidence": "EDU_26_REMAINING_CURRICULUM.md: đối chiếu nguồn, tự tính ví dụ và rà đáp án; không pilot/human review."
+        "evidence": "QA_09_NEW_LESSONS_REVIEW.md: parent đối chiếu phần nguồn còn thiếu và bổ sung citation; không đổi assessment/cơ chế, không pilot/human review."
       }
     },
     {
@@ -5651,7 +5818,7 @@
     },
     {
       "lessonId": "case-short-links",
-      "revision": 1,
+      "revision": 2,
       "competencyIds": [
         "competency-case-short-links"
       ],
@@ -5665,26 +5832,19 @@
           "text": "Encoding đổi cách biểu diễn có thể đảo ngược theo quy tắc; hashing ánh xạ có thể collision. Mã ngắn cần namespace/unique và retry khi trùng, không ghi đè link cũ. URL khó đoán không thay quyền.",
           "sourceIds": [
             "pg-constraints",
-            "cache-rfc",
-            "security-owasp",
-            "kafka-design"
+            "security-owasp"
           ]
         },
         {
           "text": "ExpiresAt và quyền cần được kiểm ở API/cache/CDN theo chính sách. TTL cache phải tương thích expiry; link có thể bị thu hồi trước hạn. Truy cập sau expiry không được mặc nhiên trả nội dung cũ từ cache.",
           "sourceIds": [
-            "pg-constraints",
             "cache-rfc",
-            "security-owasp",
-            "kafka-design"
+            "security-owasp"
           ]
         },
         {
           "text": "Click analytics có eventId và policy chống duplicate; định nghĩa đếm mở/unique user khác nhau. Có thể xử lý nền với freshness công khai. Dữ liệu riêng và bot cần policy; không lấy số click làm số người chắc chắn.",
           "sourceIds": [
-            "pg-constraints",
-            "cache-rfc",
-            "security-owasp",
             "kafka-design"
           ]
         }
@@ -5699,16 +5859,16 @@
         "evidence": "EDU_26_REMAINING_CURRICULUM.md: đối chiếu nguồn, tự tính ví dụ và rà đáp án; không pilot/human review."
       },
       "review": {
-        "reviewer": "Codex parent",
+        "reviewer": "Codex parent sau knowledge_reviewer (gpt-6-sol / low)",
         "reviewerType": "agent",
-        "date": "2026-10-24",
+        "date": "2026-10-25",
         "status": "beta-checked",
-        "evidence": "EDU_26_REMAINING_CURRICULUM.md: đối chiếu nguồn, tự tính ví dụ và rà đáp án; không pilot/human review."
+        "evidence": "QA_09_NEW_LESSONS_REVIEW.md: sửa AT-01, nguồn theo claim; assessment/trace số không đổi. Không human review hoặc pilot."
       }
     },
     {
       "lessonId": "case-school-feed",
-      "revision": 1,
+      "revision": 2,
       "competencyIds": [
         "competency-case-school-feed"
       ],
@@ -5721,25 +5881,22 @@
         {
           "text": "Fan-out-on-write chuẩn bị feed người nhận lúc đăng, giúp đọc nhanh nhưng tốn ghi theo follower. Fan-out-on-read gom lúc đọc, giảm một số ghi nhưng tăng chi phí truy vấn. Hybrid có thể tách tài khoản quá nhiều follower.",
           "sourceIds": [
-            "kafka-design",
-            "security-owasp",
-            "overload-google"
+            "qa09-feed"
           ]
         },
         {
           "text": "Event post có ID/version; worker fan-out hoặc index có thể retry. Feed item unique theo người nhận/post/version policy; search là view có lag. Post xóa/sửa cần cập nhật các bản và kiểm quyền khi đọc.",
           "sourceIds": [
             "kafka-design",
-            "security-owasp",
-            "overload-google"
+            "pg-constraints",
+            "qa09-index-version"
           ]
         },
         {
           "text": "Feed cache chứa ID hoặc nội dung cần policy quyền/expiry phù hợp. Thu hồi thành viên hoặc đổi post private không chỉ xóa nút UI. Ranking/ordering cần quy tắc và giải thích freshness; tải một phần không nói đã đủ.",
           "sourceIds": [
-            "kafka-design",
             "security-owasp",
-            "overload-google"
+            "cache-rfc"
           ]
         }
       ],
@@ -5753,16 +5910,16 @@
         "evidence": "EDU_26_REMAINING_CURRICULUM.md: đối chiếu nguồn, tự tính ví dụ và rà đáp án; không pilot/human review."
       },
       "review": {
-        "reviewer": "Codex parent",
+        "reviewer": "Codex parent sau knowledge_reviewer (gpt-6-sol / low)",
         "reviewerType": "agent",
-        "date": "2026-10-24",
+        "date": "2026-10-25",
         "status": "beta-checked",
-        "evidence": "EDU_26_REMAINING_CURRICULUM.md: đối chiếu nguồn, tự tính ví dụ và rà đáp án; không pilot/human review."
+        "evidence": "QA_09_NEW_LESSONS_REVIEW.md: sửa AT-01, nguồn theo claim; assessment/trace số không đổi. Không human review hoặc pilot."
       }
     },
     {
       "lessonId": "case-fixture-crawler",
-      "revision": 1,
+      "revision": 2,
       "competencyIds": [
         "competency-case-fixture-crawler"
       ],
@@ -5775,24 +5932,21 @@
         {
           "text": "Frontier giữ URL chờ; visited/scheduled ghi URL đã nhận theo quy tắc chuẩn hóa. Chu kỳ graph không tự dừng. Mark khi enqueue giúp tránh cùng URL được xếp nhiều lần trước xử lý; hệ phân tán cần claim/unique thích hợp.",
           "sourceIds": [
-            "algorithms",
-            "robots",
-            "kafka-design"
+            "qa09-bfs",
+            "pg-constraints"
           ]
         },
         {
           "text": "Trong crawler thật cần robots/policy, quota theo host, timeout/backoff và quyền truy cập; robots không là authorization. Bài này chỉ fixture nên không phát request. Retry lỗi tạm khác giữ404 theo policy; scheduler recrawl dựa freshness/budget.",
           "sourceIds": [
-            "algorithms",
             "robots",
-            "kafka-design"
+            "overload-google"
           ]
         },
         {
           "text": "Fetch→parse→dedup content→index có thể lỗi riêng. Lưu source URL/version/hash/thời gian để truy dấu; content hash hỗ trợ nhận biết giống nhưng không thay quyền/canonical policy. Xóa/đổi trang cần cập nhật index.",
           "sourceIds": [
-            "algorithms",
-            "robots",
+            "qa09-index-version",
             "kafka-design"
           ]
         }
@@ -5807,16 +5961,16 @@
         "evidence": "EDU_26_REMAINING_CURRICULUM.md: đối chiếu nguồn, tự tính ví dụ và rà đáp án; không pilot/human review."
       },
       "review": {
-        "reviewer": "Codex parent",
+        "reviewer": "Codex parent sau knowledge_reviewer (gpt-6-sol / low)",
         "reviewerType": "agent",
-        "date": "2026-10-24",
+        "date": "2026-10-25",
         "status": "beta-checked",
-        "evidence": "EDU_26_REMAINING_CURRICULUM.md: đối chiếu nguồn, tự tính ví dụ và rà đáp án; không pilot/human review."
+        "evidence": "QA_09_NEW_LESSONS_REVIEW.md: sửa AT-01, nguồn theo claim; assessment/trace số không đổi. Không human review hoặc pilot."
       }
     },
     {
       "lessonId": "case-club-ledger",
-      "revision": 1,
+      "revision": 2,
       "competencyIds": [
         "competency-case-club-ledger"
       ],
@@ -5828,28 +5982,22 @@
         {
           "text": "Dùng định danh nguồn/account/transaction theo hợp đồng, lưu raw/version và upsert phù hợp. Tổng dựa giao dịch duy nhất, không số message nhận. Nếu provider sửa bản ghi cần policy update/reversal rõ.",
           "sourceIds": [
-            "pg-transactions",
             "pg-constraints",
-            "kafka-design",
-            "security-owasp"
+            "kafka-design"
           ]
         },
         {
           "text": "Lưu categorySuggested và categoryOverride riêng hoặc policy tương đương. Bản nhập mới cập nhật phần thuộc nguồn; không ghi đè override của người dùng. Version và audit giúp giải thích tổng/nhãn đã đổi vì đâu.",
           "sourceIds": [
-            "pg-transactions",
-            "pg-constraints",
-            "kafka-design",
-            "security-owasp"
+            "qa09-pg-update"
           ]
         },
         {
           "text": "Aggregation theo kỳ cần timezone/event date và policy điều chỉnh. Alert có ID/điều kiện để replay không gửi trùng vô hạn. Quyền xem/sửa sổ theo vai trò, export/audit có retention.",
           "sourceIds": [
-            "pg-transactions",
-            "pg-constraints",
-            "kafka-design",
-            "security-owasp"
+            "qa09-pg-update",
+            "security-owasp",
+            "kafka-design"
           ]
         }
       ],
@@ -5863,16 +6011,16 @@
         "evidence": "EDU_26_REMAINING_CURRICULUM.md: đối chiếu nguồn, tự tính ví dụ và rà đáp án; không pilot/human review."
       },
       "review": {
-        "reviewer": "Codex parent",
+        "reviewer": "Codex parent sau knowledge_reviewer (gpt-6-sol / low)",
         "reviewerType": "agent",
-        "date": "2026-10-24",
+        "date": "2026-10-25",
         "status": "beta-checked",
-        "evidence": "EDU_26_REMAINING_CURRICULUM.md: đối chiếu nguồn, tự tính ví dụ và rà đáp án; không pilot/human review."
+        "evidence": "QA_09_NEW_LESSONS_REVIEW.md: sửa AT-01, nguồn theo claim; assessment/trace số không đổi. Không human review hoặc pilot."
       }
     },
     {
       "lessonId": "case-social-path",
-      "revision": 1,
+      "revision": 2,
       "competencyIds": [
         "competency-case-social-path"
       ],
@@ -5884,25 +6032,21 @@
         {
           "text": "Trong graph không trọng số, BFS dùng FIFO và visited khi enqueue; lần đầu tới đỉnh cho số cạnh ngắn nhất. Lưu parent để dựng đường. Với trọng số khác nhau, BFS không tự cho chi phí nhỏ nhất.",
           "sourceIds": [
-            "algorithms",
-            "security-owasp",
-            "shards-aws"
+            "qa09-bfs"
           ]
         },
         {
           "text": "Giữ adjacency theo đỉnh giúp đọc láng giềng nhưng BFS có thể qua nhiều shard. Số cạnh/nút xét khác số request mạng nhờ batching/cache. GraphQL là kiểu API, không tự là graph database hoặc thuật toán BFS.",
           "sourceIds": [
-            "algorithms",
-            "security-owasp",
-            "shards-aws"
+            "qa09-bfs",
+            "graphql-queries"
           ]
         },
         {
           "text": "Quan hệ riêng không được lộ qua đường suy ra. Cần snapshot/version hoặc hợp đồng kết quả khi graph đổi; giới hạn độ sâu/budget tránh tìm không hạn. Nếu dừng vì budget phải báo chưa đủ, không kết luận không có đường.",
           "sourceIds": [
-            "algorithms",
-            "security-owasp",
-            "shards-aws"
+            "qa09-bfs",
+            "security-owasp"
           ]
         }
       ],
@@ -5916,16 +6060,16 @@
         "evidence": "EDU_26_REMAINING_CURRICULUM.md: đối chiếu nguồn, tự tính ví dụ và rà đáp án; không pilot/human review."
       },
       "review": {
-        "reviewer": "Codex parent",
+        "reviewer": "Codex parent sau knowledge_reviewer (gpt-6-sol / low)",
         "reviewerType": "agent",
-        "date": "2026-10-24",
+        "date": "2026-10-25",
         "status": "beta-checked",
-        "evidence": "EDU_26_REMAINING_CURRICULUM.md: đối chiếu nguồn, tự tính ví dụ và rà đáp án; không pilot/human review."
+        "evidence": "QA_09_NEW_LESSONS_REVIEW.md: sửa AT-01, nguồn theo claim; assessment/trace số không đổi. Không human review hoặc pilot."
       }
     },
     {
       "lessonId": "case-query-cache",
-      "revision": 1,
+      "revision": 2,
       "competencyIds": [
         "competency-case-query-cache"
       ],
@@ -5938,25 +6082,21 @@
         {
           "text": "LRU đẩy mục ít được dùng gần đây nhất khi cần chỗ. Hit làm mục thành vừa dùng; miss nạp từ nguồn theo giả định. Dung lượng và freshness là hai trục khác nhau.",
           "sourceIds": [
-            "cache-azure",
-            "cache-rfc",
-            "dynamo-paper"
+            "qa09-lru"
           ]
         },
         {
           "text": "TTL hết thì phải xử lý theo policy nguồn/stale/error. Invalidation/version để tránh trả sai sau update; concurrent fill có thể tái đưa bản cũ. Query cache key chứa query params, schema/data version và scope quyền phù hợp.",
           "sourceIds": [
             "cache-azure",
-            "cache-rfc",
-            "dynamo-paper"
+            "security-owasp"
           ]
         },
         {
           "text": "Đổi phân phối key làm một phần hoặc nhiều cache miss; consistent hashing giảm chuyển vùng theo mô hình nhưng hot key vẫn nóng. Cần nguồn chịu cold load, gộp lượt tải và giới hạn, không chỉ đo tổng RAM.",
           "sourceIds": [
-            "cache-azure",
-            "cache-rfc",
-            "dynamo-paper"
+            "dynamo-paper",
+            "cache-azure"
           ]
         }
       ],
@@ -5970,16 +6110,16 @@
         "evidence": "EDU_26_REMAINING_CURRICULUM.md: đối chiếu nguồn, tự tính ví dụ và rà đáp án; không pilot/human review."
       },
       "review": {
-        "reviewer": "Codex parent",
+        "reviewer": "Codex parent sau knowledge_reviewer (gpt-6-sol / low)",
         "reviewerType": "agent",
-        "date": "2026-10-24",
+        "date": "2026-10-25",
         "status": "beta-checked",
-        "evidence": "EDU_26_REMAINING_CURRICULUM.md: đối chiếu nguồn, tự tính ví dụ và rà đáp án; không pilot/human review."
+        "evidence": "QA_09_NEW_LESSONS_REVIEW.md: sửa AT-01, nguồn theo claim; assessment/trace số không đổi. Không human review hoặc pilot."
       }
     },
     {
       "lessonId": "case-book-ranking",
-      "revision": 1,
+      "revision": 2,
       "competencyIds": [
         "competency-case-book-ranking"
       ],
@@ -5992,24 +6132,23 @@
           "text": "Xếp hạng theo event time khác theo arrival time. Dedup theo eventId; category có thể nhiều nên một event thuộc nhiều bảng theo quy tắc rõ. Tie-break ổn định giúp tái lập; policy late update cần công khai.",
           "sourceIds": [
             "flink-time",
-            "kafka-design",
-            "security-owasp"
+            "kafka-design"
           ]
         },
         {
           "text": "Aggregate là view; raw/version/checkpoint cho phép sửa logic và backfill. Upsert kết quả theo window/book/version hoặc transaction phù hợp tránh nhân đôi khi chạy lại. Nếu policy bỏ muộn, cần side output/đối soát thay vì giấu mất.",
           "sourceIds": [
-            "flink-time",
             "kafka-design",
-            "security-owasp"
+            "qa09-pg-update",
+            "dataflow"
           ]
         },
         {
           "text": "Cache/index có freshness riêng; hiển thị mốc cập nhật và policy final/tạm. Event correction/cancel cần đảo/cập nhật contribution theo định danh. Bảo vệ quyền và không lộ lịch mượn cá nhân qua dữ liệu quá chi tiết.",
           "sourceIds": [
-            "flink-time",
-            "kafka-design",
-            "security-owasp"
+            "qa09-pg-update",
+            "security-owasp",
+            "cache-azure"
           ]
         }
       ],
@@ -6023,16 +6162,16 @@
         "evidence": "EDU_26_REMAINING_CURRICULUM.md: đối chiếu nguồn, tự tính ví dụ và rà đáp án; không pilot/human review."
       },
       "review": {
-        "reviewer": "Codex parent",
+        "reviewer": "Codex parent sau knowledge_reviewer (gpt-6-sol / low)",
         "reviewerType": "agent",
-        "date": "2026-10-24",
+        "date": "2026-10-25",
         "status": "beta-checked",
-        "evidence": "EDU_26_REMAINING_CURRICULUM.md: đối chiếu nguồn, tự tính ví dụ và rà đáp án; không pilot/human review."
+        "evidence": "QA_09_NEW_LESSONS_REVIEW.md: sửa AT-01, nguồn theo claim; assessment/trace số không đổi. Không human review hoặc pilot."
       }
     },
     {
       "lessonId": "case-growth-roadmap",
-      "revision": 1,
+      "revision": 2,
       "competencyIds": [
         "competency-case-growth-roadmap"
       ],
@@ -6044,27 +6183,23 @@
         {
           "text": "Đo đường quan trọng, tải đọc/ghi/peak, latency/error/saturation và kế hoạch tăng. Tách web/database hoặc thêm index khi bằng chứng phù hợp, không vì sơ đồ tham khảo có nhiều ô. Cloud vendor là lớp triển khai, không thay nguyên lý.",
           "sourceIds": [
-            "sre-objectives",
-            "replication-pg",
-            "adr",
-            "deploy-k8s"
+            "pg-explain18",
+            "sre-objectives"
           ]
         },
         {
           "text": "Load balancer cần state/health/pool; cache cần freshness/quyền/cold-start; replica có lag/failover; shard có key/migration. Chọn theo vấn đề đã đo và giữ contract với client cũ.",
           "sourceIds": [
-            "sre-objectives",
             "replication-pg",
-            "adr",
-            "deploy-k8s"
+            "cache-azure",
+            "overload-google"
           ]
         },
         {
           "text": "Mỗi milestone có hypothesis, workload test, invariant/security, cost và rollback tương thích. Build/buy theo năng lực trực; migration expand-contract và đối soát trước cutover. Giữ evidence/version để không gọi kế hoạch thành đã chạy.",
           "sourceIds": [
-            "sre-objectives",
-            "replication-pg",
             "adr",
+            "sre-objectives",
             "deploy-k8s"
           ]
         }
@@ -6079,11 +6214,11 @@
         "evidence": "EDU_26_REMAINING_CURRICULUM.md: đối chiếu nguồn, tự tính ví dụ và rà đáp án; không pilot/human review."
       },
       "review": {
-        "reviewer": "Codex parent",
+        "reviewer": "Codex parent sau knowledge_reviewer (gpt-6-sol / low)",
         "reviewerType": "agent",
-        "date": "2026-10-24",
+        "date": "2026-10-25",
         "status": "beta-checked",
-        "evidence": "EDU_26_REMAINING_CURRICULUM.md: đối chiếu nguồn, tự tính ví dụ và rà đáp án; không pilot/human review."
+        "evidence": "QA_09_NEW_LESSONS_REVIEW.md: sửa AT-01, nguồn theo claim; assessment/trace số không đổi. Không human review hoặc pilot."
       }
     }
   ]

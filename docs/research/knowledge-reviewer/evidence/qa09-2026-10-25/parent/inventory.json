@@ -1,0 +1,445 @@
+{
+  "baseline": "68f7de6cd2d1659c0b9840c067e5e519539c1194",
+  "lessons": [
+    {
+      "lessonId": "requirements-boundaries",
+      "file": "content/lessons/vi/service-design.json",
+      "version": 1,
+      "chapters": 4,
+      "practice": 6,
+      "designTask": false
+    },
+    {
+      "lessonId": "api-contracts",
+      "file": "content/lessons/vi/service-design.json",
+      "version": 1,
+      "chapters": 5,
+      "practice": 8,
+      "designTask": false
+    },
+    {
+      "lessonId": "data-models",
+      "file": "content/lessons/vi/service-design.json",
+      "version": 1,
+      "chapters": 4,
+      "practice": 6,
+      "designTask": false
+    },
+    {
+      "lessonId": "database-indexes",
+      "file": "content/lessons/vi/service-design.json",
+      "version": 1,
+      "chapters": 4,
+      "practice": 6,
+      "designTask": false
+    },
+    {
+      "lessonId": "transactions-isolation",
+      "file": "content/lessons/vi/service-design.json",
+      "version": 1,
+      "chapters": 5,
+      "practice": 8,
+      "designTask": false
+    },
+    {
+      "lessonId": "service-delivery",
+      "file": "content/lessons/vi/service-design.json",
+      "version": 1,
+      "chapters": 5,
+      "practice": 6,
+      "designTask": false
+    },
+    {
+      "lessonId": "system-boundaries",
+      "file": "content/lessons/vi/foundation-bridges.json",
+      "version": 1,
+      "chapters": 3,
+      "practice": 3,
+      "designTask": false
+    },
+    {
+      "lessonId": "structures-cost",
+      "file": "content/lessons/vi/foundation-bridges.json",
+      "version": 1,
+      "chapters": 3,
+      "practice": 3,
+      "designTask": false
+    },
+    {
+      "lessonId": "streaming-lifecycle",
+      "file": "content/lessons/vi/foundation-bridges.json",
+      "version": 1,
+      "chapters": 3,
+      "practice": 3,
+      "designTask": false
+    },
+    {
+      "lessonId": "measurement-reliability",
+      "file": "content/lessons/vi/foundation-bridges.json",
+      "version": 1,
+      "chapters": 3,
+      "practice": 3,
+      "designTask": false
+    },
+    {
+      "lessonId": "scaling-service",
+      "file": "content/lessons/vi/scaling-design.json",
+      "version": 1,
+      "chapters": 4,
+      "practice": 4,
+      "designTask": false
+    },
+    {
+      "lessonId": "cache-policies",
+      "file": "content/lessons/vi/scaling-design.json",
+      "version": 1,
+      "chapters": 4,
+      "practice": 4,
+      "designTask": false
+    },
+    {
+      "lessonId": "replication-failover",
+      "file": "content/lessons/vi/scaling-design.json",
+      "version": 1,
+      "chapters": 4,
+      "practice": 4,
+      "designTask": false
+    },
+    {
+      "lessonId": "partitioning",
+      "file": "content/lessons/vi/scaling-design.json",
+      "version": 1,
+      "chapters": 4,
+      "practice": 4,
+      "designTask": false
+    },
+    {
+      "lessonId": "messaging-delivery",
+      "file": "content/lessons/vi/scaling-design.json",
+      "version": 1,
+      "chapters": 4,
+      "practice": 4,
+      "designTask": false
+    },
+    {
+      "lessonId": "admission-backpressure",
+      "file": "content/lessons/vi/scaling-design.json",
+      "version": 1,
+      "chapters": 4,
+      "practice": 4,
+      "designTask": false
+    },
+    {
+      "lessonId": "distributed-order",
+      "file": "content/lessons/vi/distributed-design.json",
+      "version": 1,
+      "chapters": 4,
+      "practice": 4,
+      "designTask": false
+    },
+    {
+      "lessonId": "consensus-raft",
+      "file": "content/lessons/vi/distributed-design.json",
+      "version": 1,
+      "chapters": 4,
+      "practice": 4,
+      "designTask": false
+    },
+    {
+      "lessonId": "quorum-fencing",
+      "file": "content/lessons/vi/distributed-design.json",
+      "version": 1,
+      "chapters": 4,
+      "practice": 4,
+      "designTask": false
+    },
+    {
+      "lessonId": "distributed-workflows",
+      "file": "content/lessons/vi/distributed-design.json",
+      "version": 1,
+      "chapters": 4,
+      "practice": 4,
+      "designTask": false
+    },
+    {
+      "lessonId": "conflicts-crdt",
+      "file": "content/lessons/vi/distributed-design.json",
+      "version": 1,
+      "chapters": 4,
+      "practice": 4,
+      "designTask": false
+    },
+    {
+      "lessonId": "multi-region",
+      "file": "content/lessons/vi/distributed-design.json",
+      "version": 1,
+      "chapters": 4,
+      "practice": 4,
+      "designTask": false
+    },
+    {
+      "lessonId": "slo-observability",
+      "file": "content/lessons/vi/production-design.json",
+      "version": 1,
+      "chapters": 4,
+      "practice": 4,
+      "designTask": false
+    },
+    {
+      "lessonId": "resilience",
+      "file": "content/lessons/vi/production-design.json",
+      "version": 1,
+      "chapters": 4,
+      "practice": 4,
+      "designTask": false
+    },
+    {
+      "lessonId": "capacity-tail",
+      "file": "content/lessons/vi/production-design.json",
+      "version": 1,
+      "chapters": 4,
+      "practice": 4,
+      "designTask": false
+    },
+    {
+      "lessonId": "security-lifecycle",
+      "file": "content/lessons/vi/production-design.json",
+      "version": 1,
+      "chapters": 4,
+      "practice": 4,
+      "designTask": false
+    },
+    {
+      "lessonId": "delivery-platform",
+      "file": "content/lessons/vi/production-design.json",
+      "version": 1,
+      "chapters": 4,
+      "practice": 4,
+      "designTask": false
+    },
+    {
+      "lessonId": "recovery-cost",
+      "file": "content/lessons/vi/production-design.json",
+      "version": 1,
+      "chapters": 4,
+      "practice": 4,
+      "designTask": false
+    },
+    {
+      "lessonId": "capstone-foundations",
+      "file": "content/lessons/vi/level-capstones.json",
+      "version": 1,
+      "chapters": 3,
+      "practice": 3,
+      "designTask": true
+    },
+    {
+      "lessonId": "capstone-service",
+      "file": "content/lessons/vi/level-capstones.json",
+      "version": 1,
+      "chapters": 3,
+      "practice": 3,
+      "designTask": true
+    },
+    {
+      "lessonId": "capstone-scaling",
+      "file": "content/lessons/vi/level-capstones.json",
+      "version": 1,
+      "chapters": 3,
+      "practice": 3,
+      "designTask": true
+    },
+    {
+      "lessonId": "capstone-distributed",
+      "file": "content/lessons/vi/level-capstones.json",
+      "version": 1,
+      "chapters": 3,
+      "practice": 3,
+      "designTask": true
+    },
+    {
+      "lessonId": "capstone-production",
+      "file": "content/lessons/vi/level-capstones.json",
+      "version": 1,
+      "chapters": 3,
+      "practice": 3,
+      "designTask": true
+    },
+    {
+      "lessonId": "capstone-architecture",
+      "file": "content/lessons/vi/level-capstones.json",
+      "version": 1,
+      "chapters": 3,
+      "practice": 3,
+      "designTask": true
+    },
+    {
+      "lessonId": "end-to-end-design",
+      "file": "content/lessons/vi/architecture-design.json",
+      "version": 1,
+      "chapters": 4,
+      "practice": 4,
+      "designTask": true
+    },
+    {
+      "lessonId": "architecture-boundaries",
+      "file": "content/lessons/vi/architecture-design.json",
+      "version": 1,
+      "chapters": 4,
+      "practice": 4,
+      "designTask": true
+    },
+    {
+      "lessonId": "migration-evolution",
+      "file": "content/lessons/vi/architecture-design.json",
+      "version": 1,
+      "chapters": 4,
+      "practice": 4,
+      "designTask": true
+    },
+    {
+      "lessonId": "platform-tenants",
+      "file": "content/lessons/vi/architecture-design.json",
+      "version": 1,
+      "chapters": 4,
+      "practice": 4,
+      "designTask": true
+    },
+    {
+      "lessonId": "architecture-decisions",
+      "file": "content/lessons/vi/architecture-design.json",
+      "version": 1,
+      "chapters": 4,
+      "practice": 4,
+      "designTask": true
+    },
+    {
+      "lessonId": "architecture-review",
+      "file": "content/lessons/vi/architecture-design.json",
+      "version": 1,
+      "chapters": 4,
+      "practice": 4,
+      "designTask": true
+    },
+    {
+      "lessonId": "track-ai",
+      "file": "content/lessons/vi/specialist-tracks.json",
+      "version": 1,
+      "chapters": 4,
+      "practice": 4,
+      "designTask": true
+    },
+    {
+      "lessonId": "track-data",
+      "file": "content/lessons/vi/specialist-tracks.json",
+      "version": 1,
+      "chapters": 4,
+      "practice": 4,
+      "designTask": true
+    },
+    {
+      "lessonId": "track-search",
+      "file": "content/lessons/vi/specialist-tracks.json",
+      "version": 1,
+      "chapters": 4,
+      "practice": 4,
+      "designTask": true
+    },
+    {
+      "lessonId": "track-realtime",
+      "file": "content/lessons/vi/specialist-tracks.json",
+      "version": 1,
+      "chapters": 4,
+      "practice": 4,
+      "designTask": true
+    },
+    {
+      "lessonId": "track-media",
+      "file": "content/lessons/vi/specialist-tracks.json",
+      "version": 1,
+      "chapters": 4,
+      "practice": 4,
+      "designTask": true
+    },
+    {
+      "lessonId": "track-platform",
+      "file": "content/lessons/vi/specialist-tracks.json",
+      "version": 1,
+      "chapters": 4,
+      "practice": 4,
+      "designTask": true
+    },
+    {
+      "lessonId": "track-business",
+      "file": "content/lessons/vi/specialist-tracks.json",
+      "version": 1,
+      "chapters": 4,
+      "practice": 4,
+      "designTask": true
+    },
+    {
+      "lessonId": "case-short-links",
+      "file": "content/lessons/vi/integrated-cases.json",
+      "version": 1,
+      "chapters": 3,
+      "practice": 3,
+      "designTask": true
+    },
+    {
+      "lessonId": "case-school-feed",
+      "file": "content/lessons/vi/integrated-cases.json",
+      "version": 1,
+      "chapters": 3,
+      "practice": 3,
+      "designTask": true
+    },
+    {
+      "lessonId": "case-fixture-crawler",
+      "file": "content/lessons/vi/integrated-cases.json",
+      "version": 1,
+      "chapters": 3,
+      "practice": 3,
+      "designTask": true
+    },
+    {
+      "lessonId": "case-club-ledger",
+      "file": "content/lessons/vi/integrated-cases.json",
+      "version": 1,
+      "chapters": 3,
+      "practice": 3,
+      "designTask": true
+    },
+    {
+      "lessonId": "case-social-path",
+      "file": "content/lessons/vi/integrated-cases.json",
+      "version": 1,
+      "chapters": 3,
+      "practice": 3,
+      "designTask": true
+    },
+    {
+      "lessonId": "case-query-cache",
+      "file": "content/lessons/vi/integrated-cases.json",
+      "version": 1,
+      "chapters": 3,
+      "practice": 3,
+      "designTask": true
+    },
+    {
+      "lessonId": "case-book-ranking",
+      "file": "content/lessons/vi/integrated-cases.json",
+      "version": 1,
+      "chapters": 3,
+      "practice": 3,
+      "designTask": true
+    },
+    {
+      "lessonId": "case-growth-roadmap",
+      "file": "content/lessons/vi/integrated-cases.json",
+      "version": 1,
+      "chapters": 3,
+      "practice": 3,
+      "designTask": true
+    }
+  ]
+}

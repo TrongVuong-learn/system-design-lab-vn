@@ -1,0 +1,996 @@
+{
+  "baseline": "68f7de6cd2d1659c0b9840c067e5e519539c1194",
+  "contracts": 85,
+  "changedCitationArrays": 70,
+  "allOtherContractFieldsIdentical": true,
+  "changes": [
+    {
+      "lessonId": "admission-backpressure",
+      "field": "practice",
+      "item": 1,
+      "before": [
+        "overload-google"
+      ],
+      "after": [
+        "overload-google",
+        "qa09-token"
+      ]
+    },
+    {
+      "lessonId": "admission-backpressure",
+      "field": "chapters",
+      "item": 1,
+      "before": [
+        "overload-google"
+      ],
+      "after": [
+        "overload-google",
+        "qa09-token"
+      ]
+    },
+    {
+      "lessonId": "track-ai",
+      "field": "practice",
+      "item": 0,
+      "before": [
+        "ai-rag"
+      ],
+      "after": [
+        "ai-rag",
+        "qa09-model-registry"
+      ]
+    },
+    {
+      "lessonId": "track-ai",
+      "field": "chapters",
+      "item": 0,
+      "before": [
+        "ai-rag"
+      ],
+      "after": [
+        "ai-rag",
+        "qa09-model-registry"
+      ]
+    },
+    {
+      "lessonId": "track-data",
+      "field": "practice",
+      "item": 0,
+      "before": [
+        "dataflow",
+        "kafka-design"
+      ],
+      "after": [
+        "dataflow",
+        "kafka-design",
+        "qa09-etl",
+        "qa09-olap",
+        "qa09-cdc"
+      ]
+    },
+    {
+      "lessonId": "track-data",
+      "field": "practice",
+      "item": 3,
+      "before": [
+        "dataflow",
+        "kafka-design"
+      ],
+      "after": [
+        "dataflow",
+        "kafka-design",
+        "qa09-lineage",
+        "qa09-quality"
+      ]
+    },
+    {
+      "lessonId": "track-data",
+      "field": "chapters",
+      "item": 0,
+      "before": [
+        "dataflow",
+        "kafka-design"
+      ],
+      "after": [
+        "dataflow",
+        "kafka-design",
+        "qa09-etl",
+        "qa09-olap",
+        "qa09-cdc"
+      ]
+    },
+    {
+      "lessonId": "track-data",
+      "field": "chapters",
+      "item": 3,
+      "before": [
+        "dataflow",
+        "kafka-design"
+      ],
+      "after": [
+        "dataflow",
+        "kafka-design",
+        "qa09-lineage",
+        "qa09-quality"
+      ]
+    },
+    {
+      "lessonId": "track-search",
+      "field": "practice",
+      "item": 0,
+      "before": [
+        "lucene"
+      ],
+      "after": [
+        "lucene",
+        "security-owasp"
+      ]
+    },
+    {
+      "lessonId": "track-search",
+      "field": "practice",
+      "item": 2,
+      "before": [
+        "recommend-google"
+      ],
+      "after": [
+        "recommend-google",
+        "qa09-recommend-bias"
+      ]
+    },
+    {
+      "lessonId": "track-search",
+      "field": "practice",
+      "item": 3,
+      "before": [
+        "geo-postgis"
+      ],
+      "after": [
+        "geo-postgis",
+        "qa09-geohash"
+      ]
+    },
+    {
+      "lessonId": "track-search",
+      "field": "chapters",
+      "item": 0,
+      "before": [
+        "lucene"
+      ],
+      "after": [
+        "lucene",
+        "security-owasp"
+      ]
+    },
+    {
+      "lessonId": "track-search",
+      "field": "chapters",
+      "item": 2,
+      "before": [
+        "recommend-google"
+      ],
+      "after": [
+        "recommend-google",
+        "qa09-recommend-bias"
+      ]
+    },
+    {
+      "lessonId": "track-search",
+      "field": "chapters",
+      "item": 3,
+      "before": [
+        "geo-postgis"
+      ],
+      "after": [
+        "geo-postgis",
+        "qa09-geohash"
+      ]
+    },
+    {
+      "lessonId": "track-realtime",
+      "field": "practice",
+      "item": 3,
+      "before": [
+        "crdt-paper"
+      ],
+      "after": [
+        "crdt-paper",
+        "qa09-ot"
+      ]
+    },
+    {
+      "lessonId": "track-realtime",
+      "field": "chapters",
+      "item": 3,
+      "before": [
+        "crdt-paper"
+      ],
+      "after": [
+        "crdt-paper",
+        "qa09-ot"
+      ]
+    },
+    {
+      "lessonId": "track-media",
+      "field": "practice",
+      "item": 1,
+      "before": [
+        "kafka-design",
+        "hls"
+      ],
+      "after": [
+        "kafka-design",
+        "hls",
+        "qa09-media-output"
+      ]
+    },
+    {
+      "lessonId": "track-media",
+      "field": "chapters",
+      "item": 1,
+      "before": [
+        "kafka-design",
+        "hls"
+      ],
+      "after": [
+        "kafka-design",
+        "hls",
+        "qa09-media-output"
+      ]
+    },
+    {
+      "lessonId": "track-platform",
+      "field": "practice",
+      "item": 0,
+      "before": [
+        "deploy-k8s",
+        "outbox-aws"
+      ],
+      "after": [
+        "deploy-k8s",
+        "outbox-aws",
+        "qa09-controller"
+      ]
+    },
+    {
+      "lessonId": "track-platform",
+      "field": "practice",
+      "item": 2,
+      "before": [
+        "multitenancy",
+        "cache-rfc",
+        "retry-aws"
+      ],
+      "after": [
+        "multitenancy",
+        "cache-rfc",
+        "retry-aws",
+        "qa09-mesh",
+        "qa09-iac"
+      ]
+    },
+    {
+      "lessonId": "track-platform",
+      "field": "chapters",
+      "item": 0,
+      "before": [
+        "deploy-k8s",
+        "outbox-aws"
+      ],
+      "after": [
+        "deploy-k8s",
+        "outbox-aws",
+        "qa09-controller"
+      ]
+    },
+    {
+      "lessonId": "track-platform",
+      "field": "chapters",
+      "item": 2,
+      "before": [
+        "multitenancy",
+        "cache-rfc",
+        "retry-aws"
+      ],
+      "after": [
+        "multitenancy",
+        "cache-rfc",
+        "retry-aws",
+        "qa09-mesh",
+        "qa09-iac"
+      ]
+    },
+    {
+      "lessonId": "case-short-links",
+      "field": "practice",
+      "item": 0,
+      "before": [
+        "pg-constraints",
+        "cache-rfc",
+        "security-owasp",
+        "kafka-design"
+      ],
+      "after": [
+        "pg-constraints",
+        "security-owasp"
+      ]
+    },
+    {
+      "lessonId": "case-short-links",
+      "field": "practice",
+      "item": 1,
+      "before": [
+        "pg-constraints",
+        "cache-rfc",
+        "security-owasp",
+        "kafka-design"
+      ],
+      "after": [
+        "cache-rfc",
+        "security-owasp"
+      ]
+    },
+    {
+      "lessonId": "case-short-links",
+      "field": "practice",
+      "item": 2,
+      "before": [
+        "pg-constraints",
+        "cache-rfc",
+        "security-owasp",
+        "kafka-design"
+      ],
+      "after": [
+        "kafka-design"
+      ]
+    },
+    {
+      "lessonId": "case-short-links",
+      "field": "chapters",
+      "item": 0,
+      "before": [
+        "pg-constraints",
+        "cache-rfc",
+        "security-owasp",
+        "kafka-design"
+      ],
+      "after": [
+        "pg-constraints",
+        "security-owasp"
+      ]
+    },
+    {
+      "lessonId": "case-short-links",
+      "field": "chapters",
+      "item": 1,
+      "before": [
+        "pg-constraints",
+        "cache-rfc",
+        "security-owasp",
+        "kafka-design"
+      ],
+      "after": [
+        "cache-rfc",
+        "security-owasp"
+      ]
+    },
+    {
+      "lessonId": "case-short-links",
+      "field": "chapters",
+      "item": 2,
+      "before": [
+        "pg-constraints",
+        "cache-rfc",
+        "security-owasp",
+        "kafka-design"
+      ],
+      "after": [
+        "kafka-design"
+      ]
+    },
+    {
+      "lessonId": "case-school-feed",
+      "field": "practice",
+      "item": 0,
+      "before": [
+        "kafka-design",
+        "security-owasp",
+        "overload-google"
+      ],
+      "after": [
+        "qa09-feed"
+      ]
+    },
+    {
+      "lessonId": "case-school-feed",
+      "field": "practice",
+      "item": 1,
+      "before": [
+        "kafka-design",
+        "security-owasp",
+        "overload-google"
+      ],
+      "after": [
+        "kafka-design",
+        "pg-constraints",
+        "qa09-index-version"
+      ]
+    },
+    {
+      "lessonId": "case-school-feed",
+      "field": "practice",
+      "item": 2,
+      "before": [
+        "kafka-design",
+        "security-owasp",
+        "overload-google"
+      ],
+      "after": [
+        "security-owasp",
+        "cache-rfc"
+      ]
+    },
+    {
+      "lessonId": "case-school-feed",
+      "field": "chapters",
+      "item": 0,
+      "before": [
+        "kafka-design",
+        "security-owasp",
+        "overload-google"
+      ],
+      "after": [
+        "qa09-feed"
+      ]
+    },
+    {
+      "lessonId": "case-school-feed",
+      "field": "chapters",
+      "item": 1,
+      "before": [
+        "kafka-design",
+        "security-owasp",
+        "overload-google"
+      ],
+      "after": [
+        "kafka-design",
+        "pg-constraints",
+        "qa09-index-version"
+      ]
+    },
+    {
+      "lessonId": "case-school-feed",
+      "field": "chapters",
+      "item": 2,
+      "before": [
+        "kafka-design",
+        "security-owasp",
+        "overload-google"
+      ],
+      "after": [
+        "security-owasp",
+        "cache-rfc"
+      ]
+    },
+    {
+      "lessonId": "case-fixture-crawler",
+      "field": "practice",
+      "item": 0,
+      "before": [
+        "algorithms",
+        "robots",
+        "kafka-design"
+      ],
+      "after": [
+        "qa09-bfs",
+        "pg-constraints"
+      ]
+    },
+    {
+      "lessonId": "case-fixture-crawler",
+      "field": "practice",
+      "item": 1,
+      "before": [
+        "algorithms",
+        "robots",
+        "kafka-design"
+      ],
+      "after": [
+        "robots",
+        "overload-google"
+      ]
+    },
+    {
+      "lessonId": "case-fixture-crawler",
+      "field": "practice",
+      "item": 2,
+      "before": [
+        "algorithms",
+        "robots",
+        "kafka-design"
+      ],
+      "after": [
+        "qa09-index-version",
+        "kafka-design"
+      ]
+    },
+    {
+      "lessonId": "case-fixture-crawler",
+      "field": "chapters",
+      "item": 0,
+      "before": [
+        "algorithms",
+        "robots",
+        "kafka-design"
+      ],
+      "after": [
+        "qa09-bfs",
+        "pg-constraints"
+      ]
+    },
+    {
+      "lessonId": "case-fixture-crawler",
+      "field": "chapters",
+      "item": 1,
+      "before": [
+        "algorithms",
+        "robots",
+        "kafka-design"
+      ],
+      "after": [
+        "robots",
+        "overload-google"
+      ]
+    },
+    {
+      "lessonId": "case-fixture-crawler",
+      "field": "chapters",
+      "item": 2,
+      "before": [
+        "algorithms",
+        "robots",
+        "kafka-design"
+      ],
+      "after": [
+        "qa09-index-version",
+        "kafka-design"
+      ]
+    },
+    {
+      "lessonId": "case-club-ledger",
+      "field": "practice",
+      "item": 0,
+      "before": [
+        "pg-transactions",
+        "pg-constraints",
+        "kafka-design",
+        "security-owasp"
+      ],
+      "after": [
+        "pg-constraints",
+        "kafka-design"
+      ]
+    },
+    {
+      "lessonId": "case-club-ledger",
+      "field": "practice",
+      "item": 1,
+      "before": [
+        "pg-transactions",
+        "pg-constraints",
+        "kafka-design",
+        "security-owasp"
+      ],
+      "after": [
+        "qa09-pg-update"
+      ]
+    },
+    {
+      "lessonId": "case-club-ledger",
+      "field": "practice",
+      "item": 2,
+      "before": [
+        "pg-transactions",
+        "pg-constraints",
+        "kafka-design",
+        "security-owasp"
+      ],
+      "after": [
+        "qa09-pg-update",
+        "security-owasp",
+        "kafka-design"
+      ]
+    },
+    {
+      "lessonId": "case-club-ledger",
+      "field": "chapters",
+      "item": 0,
+      "before": [
+        "pg-transactions",
+        "pg-constraints",
+        "kafka-design",
+        "security-owasp"
+      ],
+      "after": [
+        "pg-constraints",
+        "kafka-design"
+      ]
+    },
+    {
+      "lessonId": "case-club-ledger",
+      "field": "chapters",
+      "item": 1,
+      "before": [
+        "pg-transactions",
+        "pg-constraints",
+        "kafka-design",
+        "security-owasp"
+      ],
+      "after": [
+        "qa09-pg-update"
+      ]
+    },
+    {
+      "lessonId": "case-club-ledger",
+      "field": "chapters",
+      "item": 2,
+      "before": [
+        "pg-transactions",
+        "pg-constraints",
+        "kafka-design",
+        "security-owasp"
+      ],
+      "after": [
+        "qa09-pg-update",
+        "security-owasp",
+        "kafka-design"
+      ]
+    },
+    {
+      "lessonId": "case-social-path",
+      "field": "practice",
+      "item": 0,
+      "before": [
+        "algorithms",
+        "security-owasp",
+        "shards-aws"
+      ],
+      "after": [
+        "qa09-bfs"
+      ]
+    },
+    {
+      "lessonId": "case-social-path",
+      "field": "practice",
+      "item": 1,
+      "before": [
+        "algorithms",
+        "security-owasp",
+        "shards-aws"
+      ],
+      "after": [
+        "qa09-bfs",
+        "graphql-queries"
+      ]
+    },
+    {
+      "lessonId": "case-social-path",
+      "field": "practice",
+      "item": 2,
+      "before": [
+        "algorithms",
+        "security-owasp",
+        "shards-aws"
+      ],
+      "after": [
+        "qa09-bfs",
+        "security-owasp"
+      ]
+    },
+    {
+      "lessonId": "case-social-path",
+      "field": "chapters",
+      "item": 0,
+      "before": [
+        "algorithms",
+        "security-owasp",
+        "shards-aws"
+      ],
+      "after": [
+        "qa09-bfs"
+      ]
+    },
+    {
+      "lessonId": "case-social-path",
+      "field": "chapters",
+      "item": 1,
+      "before": [
+        "algorithms",
+        "security-owasp",
+        "shards-aws"
+      ],
+      "after": [
+        "qa09-bfs",
+        "graphql-queries"
+      ]
+    },
+    {
+      "lessonId": "case-social-path",
+      "field": "chapters",
+      "item": 2,
+      "before": [
+        "algorithms",
+        "security-owasp",
+        "shards-aws"
+      ],
+      "after": [
+        "qa09-bfs",
+        "security-owasp"
+      ]
+    },
+    {
+      "lessonId": "case-query-cache",
+      "field": "practice",
+      "item": 0,
+      "before": [
+        "cache-azure",
+        "cache-rfc",
+        "dynamo-paper"
+      ],
+      "after": [
+        "qa09-lru"
+      ]
+    },
+    {
+      "lessonId": "case-query-cache",
+      "field": "practice",
+      "item": 1,
+      "before": [
+        "cache-azure",
+        "cache-rfc",
+        "dynamo-paper"
+      ],
+      "after": [
+        "cache-azure",
+        "security-owasp"
+      ]
+    },
+    {
+      "lessonId": "case-query-cache",
+      "field": "practice",
+      "item": 2,
+      "before": [
+        "cache-azure",
+        "cache-rfc",
+        "dynamo-paper"
+      ],
+      "after": [
+        "dynamo-paper",
+        "cache-azure"
+      ]
+    },
+    {
+      "lessonId": "case-query-cache",
+      "field": "chapters",
+      "item": 0,
+      "before": [
+        "cache-azure",
+        "cache-rfc",
+        "dynamo-paper"
+      ],
+      "after": [
+        "qa09-lru"
+      ]
+    },
+    {
+      "lessonId": "case-query-cache",
+      "field": "chapters",
+      "item": 1,
+      "before": [
+        "cache-azure",
+        "cache-rfc",
+        "dynamo-paper"
+      ],
+      "after": [
+        "cache-azure",
+        "security-owasp"
+      ]
+    },
+    {
+      "lessonId": "case-query-cache",
+      "field": "chapters",
+      "item": 2,
+      "before": [
+        "cache-azure",
+        "cache-rfc",
+        "dynamo-paper"
+      ],
+      "after": [
+        "dynamo-paper",
+        "cache-azure"
+      ]
+    },
+    {
+      "lessonId": "case-book-ranking",
+      "field": "practice",
+      "item": 0,
+      "before": [
+        "flink-time",
+        "kafka-design",
+        "security-owasp"
+      ],
+      "after": [
+        "flink-time",
+        "kafka-design"
+      ]
+    },
+    {
+      "lessonId": "case-book-ranking",
+      "field": "practice",
+      "item": 1,
+      "before": [
+        "flink-time",
+        "kafka-design",
+        "security-owasp"
+      ],
+      "after": [
+        "kafka-design",
+        "qa09-pg-update",
+        "dataflow"
+      ]
+    },
+    {
+      "lessonId": "case-book-ranking",
+      "field": "practice",
+      "item": 2,
+      "before": [
+        "flink-time",
+        "kafka-design",
+        "security-owasp"
+      ],
+      "after": [
+        "qa09-pg-update",
+        "security-owasp",
+        "cache-azure"
+      ]
+    },
+    {
+      "lessonId": "case-book-ranking",
+      "field": "chapters",
+      "item": 0,
+      "before": [
+        "flink-time",
+        "kafka-design",
+        "security-owasp"
+      ],
+      "after": [
+        "flink-time",
+        "kafka-design"
+      ]
+    },
+    {
+      "lessonId": "case-book-ranking",
+      "field": "chapters",
+      "item": 1,
+      "before": [
+        "flink-time",
+        "kafka-design",
+        "security-owasp"
+      ],
+      "after": [
+        "kafka-design",
+        "qa09-pg-update",
+        "dataflow"
+      ]
+    },
+    {
+      "lessonId": "case-book-ranking",
+      "field": "chapters",
+      "item": 2,
+      "before": [
+        "flink-time",
+        "kafka-design",
+        "security-owasp"
+      ],
+      "after": [
+        "qa09-pg-update",
+        "security-owasp",
+        "cache-azure"
+      ]
+    },
+    {
+      "lessonId": "case-growth-roadmap",
+      "field": "practice",
+      "item": 0,
+      "before": [
+        "sre-objectives",
+        "replication-pg",
+        "adr",
+        "deploy-k8s"
+      ],
+      "after": [
+        "pg-explain18",
+        "sre-objectives"
+      ]
+    },
+    {
+      "lessonId": "case-growth-roadmap",
+      "field": "practice",
+      "item": 1,
+      "before": [
+        "sre-objectives",
+        "replication-pg",
+        "adr",
+        "deploy-k8s"
+      ],
+      "after": [
+        "replication-pg",
+        "cache-azure",
+        "overload-google"
+      ]
+    },
+    {
+      "lessonId": "case-growth-roadmap",
+      "field": "practice",
+      "item": 2,
+      "before": [
+        "sre-objectives",
+        "replication-pg",
+        "adr",
+        "deploy-k8s"
+      ],
+      "after": [
+        "adr",
+        "sre-objectives",
+        "deploy-k8s"
+      ]
+    },
+    {
+      "lessonId": "case-growth-roadmap",
+      "field": "chapters",
+      "item": 0,
+      "before": [
+        "sre-objectives",
+        "replication-pg",
+        "adr",
+        "deploy-k8s"
+      ],
+      "after": [
+        "pg-explain18",
+        "sre-objectives"
+      ]
+    },
+    {
+      "lessonId": "case-growth-roadmap",
+      "field": "chapters",
+      "item": 1,
+      "before": [
+        "sre-objectives",
+        "replication-pg",
+        "adr",
+        "deploy-k8s"
+      ],
+      "after": [
+        "replication-pg",
+        "cache-azure",
+        "overload-google"
+      ]
+    },
+    {
+      "lessonId": "case-growth-roadmap",
+      "field": "chapters",
+      "item": 2,
+      "before": [
+        "sre-objectives",
+        "replication-pg",
+        "adr",
+        "deploy-k8s"
+      ],
+      "after": [
+        "adr",
+        "sre-objectives",
+        "deploy-k8s"
+      ]
+    }
+  ]
+}
