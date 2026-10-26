@@ -9,3 +9,5 @@ Taste game inspector: 0 FAIL, 3 WARN. Saturated fields and large title are inten
 Evidence: .cache/qa11 (local screenshots/logs); durable selected images and final verification recorded with this task.
 
 Final tablet fix visually checked at 768px: full-width rows retain both illustrations and readable copy. Final Taste inspector remains 0 FAIL / 3 intentional poster warnings. Lottie produces pixels and changes frames on action; WebGL canvas and request-step control verified without page errors. Selected screenshots in evidence/.
+
+Minh resumed successfully after the limit reset. Report: ../../research/student-tester/RUN_2026-10-26_GAMES.md. First-use baseline then isolated redesign regression at 320/390/768. No confirmed blocking/layout defect; terminology explanations and save indicator remain UX hypotheses. Parent read report and reviewed reg-home390/reg-queue320. This is simulated student perspective, not a physical-device pilot. Final game suite: 16/16 pass after tablet correction.
