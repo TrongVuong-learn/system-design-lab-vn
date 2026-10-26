@@ -1,3 +1,4 @@
+import { LessonGameBridge } from '../../ui/motion/LessonGameBridge';
 import { QuestionFeedback } from './QuestionFeedback';
 import { LessonChapters } from './LessonChapters';
 import { DesignDraft } from './DesignDraft';
@@ -136,6 +137,7 @@ export function LessonPage() {
           </div>
         </section>
       )}
+      {p.stage === 0 && <LessonGameBridge lessonId={lesson.id} />}
       {p.stage === 3 && <CaseStudyContext lesson={lesson} />}
       {(p.stage === 0 || p.stage === 2) && <LessonChapters lesson={lesson} />}
       {(p.stage === 1 || p.stage === 3) && (

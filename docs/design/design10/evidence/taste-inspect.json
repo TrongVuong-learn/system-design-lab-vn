@@ -1,0 +1,2200 @@
+{
+ "url": "http://127.0.0.1:4173",
+ "at": "2026-10-26T02:04:53.104Z",
+ "allow": [],
+ "viewports": [
+  {
+   "width": 1440,
+   "height": 900,
+   "load": "load",
+   "screens": 4,
+   "filled": [
+    0.49,
+    0.4,
+    0.51,
+    0.12
+   ],
+   "motion": {
+    "elements": 4,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 4,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "page": {
+     "height": 3314,
+     "screens": 3.7,
+     "words": 720,
+     "img": 1,
+     "video": 0,
+     "canvas": 1,
+     "svg": 25,
+     "sections": 5,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Hiểu hệ thống. Bằng cách thử.",
+     "words": 6,
+     "chars": 29,
+     "lines": 2,
+     "size": 62,
+     "vw": 4.3,
+     "font": "Be Vietnam Pro",
+     "weight": 600,
+     "tracking": -0.05,
+     "leading": 1.15,
+     "top": 181,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "h1": {
+     "text": "Hiểu hệ thống. Bằng cách thử.",
+     "words": 6,
+     "lines": 2,
+     "size": 62,
+     "font": "Be Vietnam Pro"
+    },
+    "headings": [
+     {
+      "text": "Hiểu hệ thống. Bằng cách thử.",
+      "words": 6,
+      "chars": 29,
+      "lines": 2,
+      "size": 62,
+      "vw": 4.3,
+      "font": "Be Vietnam Pro",
+      "weight": 600,
+      "tracking": -0.055,
+      "leading": 1.15,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.38,
+      "top": 181,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "Đến lượt bạn vận hành.",
+      "words": 5,
+      "chars": 22,
+      "lines": 1,
+      "size": 32,
+      "vw": 2.2,
+      "font": "Be Vietnam Pro",
+      "weight": 550,
+      "tracking": -0.035,
+      "leading": 1.15,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.42,
+      "top": 673,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Vì sao lịch học vẫn hiện phòng cũ?",
+      "words": 8,
+      "chars": 34,
+      "lines": 2,
+      "size": 35,
+      "vw": 2.4,
+      "font": "Be Vietnam Pro",
+      "weight": 550,
+      "tracking": -0.035,
+      "leading": 1.15,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.36,
+      "top": 1073,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "201",
+      "words": 1,
+      "chars": 3,
+      "lines": 1,
+      "size": 43,
+      "vw": 3,
+      "font": "Be Vietnam Pro",
+      "weight": 600,
+      "tracking": 0,
+      "leading": 1.3,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.15,
+      "top": 1112,
+      "tag": "strong",
+      "kind": "heading"
+     },
+     {
+      "text": "201",
+      "words": 1,
+      "chars": 3,
+      "lines": 1,
+      "size": 43,
+      "vw": 3,
+      "font": "Be Vietnam Pro",
+      "weight": 600,
+      "tracking": 0,
+      "leading": 1.3,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.15,
+      "top": 1112,
+      "tag": "strong",
+      "kind": "heading"
+     },
+     {
+      "text": "Chọn một câu hỏi để thử",
+      "words": 6,
+      "chars": 23,
+      "lines": 1,
+      "size": 32,
+      "vw": 2.2,
+      "font": "Be Vietnam Pro",
+      "weight": 600,
+      "tracking": -0.025,
+      "leading": 1.15,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.31,
+      "top": 1503,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Sau bài đầu, đi tiếp ở đâu?",
+      "words": 7,
+      "chars": 27,
+      "lines": 1,
+      "size": 30,
+      "vw": 2.1,
+      "font": "Be Vietnam Pro",
+      "weight": 600,
+      "tracking": -0.023,
+      "leading": 1.3,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.29,
+      "top": 2483,
+      "tag": "h2",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 7,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": 6,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Be Vietnam Pro",
+       "share": 1,
+       "mono": false
+      }
+     ],
+     "familyCount": 1,
+     "sizes": [
+      12,
+      13,
+      14,
+      16,
+      17,
+      18,
+      20,
+      23,
+      30,
+      32,
+      35,
+      43,
+      62
+     ],
+     "sizeCount": 13,
+     "notLoaded": [],
+     "body": {
+      "font": "Be Vietnam Pro",
+      "size": 14,
+      "leading": 1.6,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 5.6
+     },
+     "measureChars": 100,
+     "max": {
+      "size": 62,
+      "vw": 4.3,
+      "font": "Be Vietnam Pro",
+      "text": "Hiểu hệ thống.Bằng cách thử."
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.01,
+     "centerShare": 0.03,
+     "smallText": 50
+    },
+    "eyebrows": [
+     {
+      "text": "Phòng sinh hoạt",
+      "above": "201",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 1093
+     },
+     {
+      "text": "Phòng sinh hoạt",
+      "above": "201",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 1093
+     }
+    ],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#f3f5f1",
+     "bodyBgHsl": {
+      "h": 90,
+      "s": 0.17,
+      "l": 0.95
+     },
+     "dark": false,
+     "sectionBgs": [],
+     "textColors": [
+      {
+       "color": "#53665f",
+       "share": 0.63
+      },
+      {
+       "color": "#193b35",
+       "share": 0.23
+      },
+      {
+       "color": "#1b6e66",
+       "share": 0.08
+      },
+      {
+       "color": "#d3e4d9",
+       "share": 0.03
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.02
+      }
+     ],
+     "button": {
+      "bg": "#1b6e66",
+      "hsl": {
+       "h": 174,
+       "s": 0.61,
+       "l": 0.27
+      },
+      "fg": "#193b35"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 8,
+     "inHero": 4,
+     "radius": 9,
+     "height": 48,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Đến nội dung chính",
+      "Bắt đầu bài đầu tiên",
+      "Gửi một yêu cầu →",
+      "Khám phá Game"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 18,
+     "hairlineSamples": [
+      "header.site-header 1440px",
+      "div.experiment-top 555px",
+      "div.schedule-source 248px",
+      "div.schedule-copy 248px",
+      "section.section.notebook-section 1120px"
+     ],
+     "outlinedBoxes": 7,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 11,
+     "boxRadius": 9,
+     "squareMedia": 0,
+     "roundedMedia": 1,
+     "mediaRadius": 24,
+     "textShadow": 0,
+     "cardRows": [
+      {
+       "count": 4,
+       "iconTopped": true,
+       "rounded": true,
+       "top": 637
+      },
+      {
+       "count": 6,
+       "iconTopped": true,
+       "rounded": true,
+       "top": 1601
+      }
+     ]
+    },
+    "heroMedia": [
+     {
+      "type": "canvas",
+      "ratio": 0.1
+     }
+    ],
+    "nav": {
+     "links": 5,
+     "fixed": false,
+     "height": 78,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "be vietnam pro"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "pageH": 3314,
+    "margins": {
+     "left": 160,
+     "right": 181
+    },
+    "sections": [
+     {
+      "sel": "section.workshop-hero",
+      "tag": "section",
+      "top": 78,
+      "height": 559,
+      "words": 77,
+      "media": 1,
+      "middle": 182,
+      "heading": {
+       "text": "Hiểu hệ thống.",
+       "size": 62,
+       "tag": "h1"
+      },
+      "left": 160,
+      "right": 184,
+      "textLeft": 160,
+      "textRight": 184,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.game-invitation",
+      "tag": "section",
+      "top": 637,
+      "height": 251,
+      "words": 31,
+      "media": 0,
+      "middle": 296,
+      "heading": {
+       "text": "Đến lượt bạn vận hành.",
+       "size": 32,
+       "tag": "h2"
+      },
+      "left": 196,
+      "right": 266,
+      "textLeft": 196,
+      "textRight": 266,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.learning-desk",
+      "tag": "section",
+      "top": 888,
+      "height": 549,
+      "words": 79,
+      "media": 0,
+      "middle": 97,
+      "heading": {
+       "text": "201",
+       "size": 43,
+       "tag": "strong"
+      },
+      "left": 160,
+      "right": 183,
+      "textLeft": 160,
+      "textRight": 183,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.section.notebook-section",
+      "tag": "section",
+      "top": 1437,
+      "height": 995,
+      "words": 289,
+      "media": 0,
+      "middle": 51,
+      "heading": {
+       "text": "Chọn một câu hỏi để thử",
+       "size": 32,
+       "tag": "h2"
+      },
+      "left": 160,
+      "right": 160,
+      "textLeft": 160,
+      "textRight": 160,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.path-section",
+      "tag": "section",
+      "top": 2432,
+      "height": 644,
+      "words": 141,
+      "media": 0,
+      "middle": 76,
+      "heading": {
+       "text": "Sau bài đầu, đi tiếp ở đâu?",
+       "size": 30,
+       "tag": "h2"
+      },
+      "left": 160,
+      "right": 434,
+      "textLeft": 160,
+      "textRight": 434,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "aside.beta-note",
+      "tag": "aside",
+      "top": 3075,
+      "height": 129,
+      "words": 42,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 160,
+      "right": 638,
+      "textLeft": 160,
+      "textRight": 638,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "Hiểu hệ thống. Bằng cách thử.",
+      "size": 62,
+      "top": 181,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 160,
+      "n": 8
+     },
+     {
+      "x": 708,
+      "n": 6
+     },
+     {
+      "x": 341,
+      "n": 3
+     },
+     {
+      "x": 909,
+      "n": 3
+     },
+     {
+      "x": 196,
+      "n": 2
+     }
+    ],
+    "leftBlocks": 22,
+    "bodySize": 12,
+    "stage": false,
+    "explains": true,
+    "slivers": [],
+    "voidShare": 0.11,
+    "voidBox": {
+     "x": 1260,
+     "y": 120,
+     "w": 180,
+     "h": 780
+    }
+   },
+   "app": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "dark": false,
+    "ground": "#f3f5f1",
+    "sidebar": null,
+    "topbar": {
+     "h": 78
+    },
+    "canvas": {
+     "left": 160,
+     "right": 160
+    },
+    "hero": {
+     "text": "Hiểu hệ thống. Bằng cách thử.",
+     "words": 6,
+     "chars": 29,
+     "lines": 2,
+     "size": 62,
+     "vw": 4.3,
+     "font": "Be Vietnam Pro",
+     "weight": 600,
+     "tracking": -0.05,
+     "leading": 1.15,
+     "top": 181,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "charts": 0,
+    "layout": {
+     "panels": 7,
+     "firstScreen": 2,
+     "ragged": [],
+     "voids": []
+    },
+    "tiles": 0,
+    "panels": {
+     "count": 21,
+     "radii": [
+      [
+       0,
+       10
+      ],
+      [
+       9,
+       6
+      ],
+      [
+       24,
+       2
+      ],
+      [
+       6,
+       2
+      ],
+      [
+       14,
+       1
+      ]
+     ],
+     "heavyBorders": 2,
+     "borderSamples": [
+      "#1b6e66 on #ffffff (6.05:1)",
+      "#8f9caf on #ffffff (2.78:1)"
+     ],
+     "heavyShadows": 0,
+     "softShadows": 0,
+     "shadowSamples": [],
+     "glass": 0
+    },
+    "chips": {
+     "count": 0,
+     "hues": 0,
+     "samples": []
+    },
+    "numbers": {
+     "cells": 0,
+     "leftAligned": 0,
+     "figures": 4,
+     "tabularShare": 0.5,
+     "kpiMax": 43
+    },
+    "rows": null,
+    "chartHues": 0,
+    "placeholders": [],
+    "type": {
+     "under13": 0.5,
+     "tiny": 0,
+     "tinySamples": [],
+     "sizes": [
+      12,
+      13,
+      14,
+      16,
+      17,
+      18,
+      20,
+      23,
+      30,
+      32,
+      35,
+      43,
+      62
+     ]
+    },
+    "title": {
+     "text": "Hiểu hệ thống.\nBằng cách thử.",
+     "size": 62,
+     "top": 181
+    },
+    "colourShare": 0.014
+   },
+   "consoleErrors": []
+  },
+  {
+   "width": 768,
+   "height": 1024,
+   "load": "load",
+   "screens": 4,
+   "filled": [
+    0.57,
+    0.63,
+    0.59,
+    0.33
+   ],
+   "motion": {
+    "elements": 4,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 4,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "page": {
+     "height": 3489,
+     "screens": 3.4,
+     "words": 720,
+     "img": 1,
+     "video": 0,
+     "canvas": 1,
+     "svg": 25,
+     "sections": 5,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Hiểu hệ thống. Bằng cách thử.",
+     "words": 6,
+     "chars": 29,
+     "lines": 2,
+     "size": 38,
+     "vw": 4.9,
+     "font": "Be Vietnam Pro",
+     "weight": 600,
+     "tracking": -0.05,
+     "leading": 1.15,
+     "top": 227,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "h1": {
+     "text": "Hiểu hệ thống. Bằng cách thử.",
+     "words": 6,
+     "lines": 2,
+     "size": 38,
+     "font": "Be Vietnam Pro"
+    },
+    "headings": [
+     {
+      "text": "Hiểu hệ thống. Bằng cách thử.",
+      "words": 6,
+      "chars": 29,
+      "lines": 2,
+      "size": 38,
+      "vw": 4.9,
+      "font": "Be Vietnam Pro",
+      "weight": 600,
+      "tracking": -0.055,
+      "leading": 1.15,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.44,
+      "top": 227,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "Đến lượt bạn vận hành.",
+      "words": 5,
+      "chars": 22,
+      "lines": 2,
+      "size": 32,
+      "vw": 4.2,
+      "font": "Be Vietnam Pro",
+      "weight": 550,
+      "tracking": -0.035,
+      "leading": 1.15,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.44,
+      "top": 712,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Vì sao lịch học vẫn hiện phòng cũ?",
+      "words": 8,
+      "chars": 34,
+      "lines": 2,
+      "size": 30.7,
+      "vw": 4,
+      "font": "Be Vietnam Pro",
+      "weight": 550,
+      "tracking": -0.035,
+      "leading": 1.15,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.41,
+      "top": 1202,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "201",
+      "words": 1,
+      "chars": 3,
+      "lines": 1,
+      "size": 43,
+      "vw": 5.6,
+      "font": "Be Vietnam Pro",
+      "weight": 600,
+      "tracking": 0,
+      "leading": 1.3,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.14,
+      "top": 1213,
+      "tag": "strong",
+      "kind": "heading"
+     },
+     {
+      "text": "201",
+      "words": 1,
+      "chars": 3,
+      "lines": 1,
+      "size": 43,
+      "vw": 5.6,
+      "font": "Be Vietnam Pro",
+      "weight": 600,
+      "tracking": 0,
+      "leading": 1.3,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.14,
+      "top": 1213,
+      "tag": "strong",
+      "kind": "heading"
+     },
+     {
+      "text": "Chọn một câu hỏi để thử",
+      "words": 6,
+      "chars": 23,
+      "lines": 1,
+      "size": 32,
+      "vw": 4.2,
+      "font": "Be Vietnam Pro",
+      "weight": 600,
+      "tracking": -0.025,
+      "leading": 1.15,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.59,
+      "top": 1675,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Sau bài đầu, đi tiếp ở đâu?",
+      "words": 7,
+      "chars": 27,
+      "lines": 2,
+      "size": 30,
+      "vw": 3.9,
+      "font": "Be Vietnam Pro",
+      "weight": 600,
+      "tracking": -0.023,
+      "leading": 1.3,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.35,
+      "top": 2658,
+      "tag": "h2",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 7,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": 6,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Be Vietnam Pro",
+       "share": 1,
+       "mono": false
+      }
+     ],
+     "familyCount": 1,
+     "sizes": [
+      12,
+      13,
+      14,
+      16,
+      17,
+      18,
+      20,
+      23,
+      30,
+      31,
+      32,
+      38,
+      43
+     ],
+     "sizeCount": 13,
+     "notLoaded": [],
+     "body": {
+      "font": "Be Vietnam Pro",
+      "size": 14,
+      "leading": 1.6,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 5.6
+     },
+     "measureChars": 100,
+     "max": {
+      "size": 43,
+      "vw": 5.6,
+      "font": "Be Vietnam Pro",
+      "text": "201"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.01,
+     "centerShare": 0.03,
+     "smallText": 50
+    },
+    "eyebrows": [
+     {
+      "text": "Phòng sinh hoạt",
+      "above": "201",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 1193
+     },
+     {
+      "text": "Phòng sinh hoạt",
+      "above": "201",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 1193
+     }
+    ],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#f3f5f1",
+     "bodyBgHsl": {
+      "h": 90,
+      "s": 0.17,
+      "l": 0.95
+     },
+     "dark": false,
+     "sectionBgs": [],
+     "textColors": [
+      {
+       "color": "#53665f",
+       "share": 0.63
+      },
+      {
+       "color": "#193b35",
+       "share": 0.23
+      },
+      {
+       "color": "#1b6e66",
+       "share": 0.08
+      },
+      {
+       "color": "#d3e4d9",
+       "share": 0.03
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.02
+      }
+     ],
+     "button": {
+      "bg": "#1b6e66",
+      "hsl": {
+       "h": 174,
+       "s": 0.61,
+       "l": 0.27
+      },
+      "fg": "#193b35"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 8,
+     "inHero": 4,
+     "radius": 9,
+     "height": 48,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Đến nội dung chính",
+      "Bắt đầu bài đầu tiên",
+      "Gửi một yêu cầu →",
+      "Khám phá Game"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 16,
+     "hairlineSamples": [
+      "header.site-header 768px",
+      "div.experiment-top 339px",
+      "section.section.notebook-section 704px",
+      "div.lesson-visual.visual-request 130px",
+      "div.lesson-visual.visual-concurrency 130px"
+     ],
+     "outlinedBoxes": 7,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 9,
+     "boxRadius": 9,
+     "squareMedia": 0,
+     "roundedMedia": 1,
+     "mediaRadius": 24,
+     "textShadow": 0,
+     "cardRows": [
+      {
+       "count": 6,
+       "iconTopped": true,
+       "rounded": true,
+       "top": 1773
+      }
+     ]
+    },
+    "heroMedia": [
+     {
+      "type": "canvas",
+      "ratio": 0.09
+     }
+    ],
+    "nav": {
+     "links": 5,
+     "fixed": false,
+     "height": 78,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "be vietnam pro"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "pageH": 3489,
+    "margins": {
+     "left": 32,
+     "right": 49
+    },
+    "sections": [
+     {
+      "sel": "section.workshop-hero",
+      "tag": "section",
+      "top": 78,
+      "height": 598,
+      "words": 77,
+      "media": 1,
+      "middle": 59,
+      "heading": {
+       "text": "Hiểu hệ thống.",
+       "size": 38,
+       "tag": "h1"
+      },
+      "left": 32,
+      "right": 56,
+      "textLeft": 32,
+      "textRight": 56,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.game-invitation",
+      "tag": "section",
+      "top": 676,
+      "height": 313,
+      "words": 31,
+      "media": 0,
+      "middle": 148,
+      "heading": {
+       "text": "Đến lượt bạn vận hành.",
+       "size": 32,
+       "tag": "h2"
+      },
+      "left": 68,
+      "right": 80,
+      "textLeft": 68,
+      "textRight": 80,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.learning-desk",
+      "tag": "section",
+      "top": 988,
+      "height": 621,
+      "words": 79,
+      "media": 0,
+      "middle": 74,
+      "heading": {
+       "text": "201",
+       "size": 43,
+       "tag": "strong"
+      },
+      "left": 32,
+      "right": 55,
+      "textLeft": 32,
+      "textRight": 55,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.section.notebook-section",
+      "tag": "section",
+      "top": 1609,
+      "height": 998,
+      "words": 289,
+      "media": 0,
+      "middle": 31,
+      "heading": {
+       "text": "Chọn một câu hỏi để thử",
+       "size": 32,
+       "tag": "h2"
+      },
+      "left": 32,
+      "right": 32,
+      "textLeft": 32,
+      "textRight": 32,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.path-section",
+      "tag": "section",
+      "top": 2607,
+      "height": 644,
+      "words": 141,
+      "media": 0,
+      "middle": 52,
+      "heading": {
+       "text": "Sau bài đầu, đi tiếp ở đâu?",
+       "size": 30,
+       "tag": "h2"
+      },
+      "left": 32,
+      "right": 71,
+      "textLeft": 32,
+      "textRight": 71,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "aside.beta-note",
+      "tag": "aside",
+      "top": 3250,
+      "height": 129,
+      "words": 42,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 32,
+      "right": 94,
+      "textLeft": 32,
+      "textRight": 94,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "Hiểu hệ thống. Bằng cách thử.",
+      "size": 38,
+      "top": 227,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 32,
+      "n": 8
+     },
+     {
+      "x": 399,
+      "n": 6
+     },
+     {
+      "x": 179,
+      "n": 3
+     },
+     {
+      "x": 538,
+      "n": 3
+     },
+     {
+      "x": 68,
+      "n": 2
+     }
+    ],
+    "leftBlocks": 22,
+    "bodySize": 12,
+    "stage": false,
+    "explains": true,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "dark": false,
+    "ground": "#f3f5f1",
+    "sidebar": null,
+    "topbar": {
+     "h": 78
+    },
+    "canvas": {
+     "left": 32,
+     "right": 32
+    },
+    "hero": {
+     "text": "Hiểu hệ thống. Bằng cách thử.",
+     "words": 6,
+     "chars": 29,
+     "lines": 2,
+     "size": 38,
+     "vw": 4.9,
+     "font": "Be Vietnam Pro",
+     "weight": 600,
+     "tracking": -0.05,
+     "leading": 1.15,
+     "top": 227,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "charts": 0,
+    "layout": {
+     "panels": 6,
+     "firstScreen": 2,
+     "ragged": [],
+     "voids": [
+      {
+       "gap": 56,
+       "at": 1479,
+       "panel": "Thử ngay trên bàn học"
+      }
+     ]
+    },
+    "tiles": 0,
+    "panels": {
+     "count": 12,
+     "radii": [
+      [
+       9,
+       6
+      ],
+      [
+       0,
+       3
+      ],
+      [
+       24,
+       2
+      ],
+      [
+       14,
+       1
+      ]
+     ],
+     "heavyBorders": 0,
+     "borderSamples": [],
+     "heavyShadows": 0,
+     "softShadows": 0,
+     "shadowSamples": [],
+     "glass": 0
+    },
+    "chips": {
+     "count": 0,
+     "hues": 0,
+     "samples": []
+    },
+    "numbers": {
+     "cells": 0,
+     "leftAligned": 0,
+     "figures": 4,
+     "tabularShare": 0.5,
+     "kpiMax": 43
+    },
+    "rows": null,
+    "chartHues": 0,
+    "placeholders": [],
+    "type": {
+     "under13": 0.5,
+     "tiny": 0,
+     "tinySamples": [],
+     "sizes": [
+      12,
+      13,
+      14,
+      16,
+      17,
+      18,
+      20,
+      23,
+      30,
+      31,
+      32,
+      38,
+      43
+     ]
+    },
+    "title": {
+     "text": "Hiểu hệ thống.\nBằng cách thử.",
+     "size": 38,
+     "top": 227
+    },
+    "colourShare": 0.027
+   },
+   "consoleErrors": []
+  },
+  {
+   "width": 390,
+   "height": 844,
+   "load": "load",
+   "screens": 7,
+   "filled": [
+    0.66,
+    0.7,
+    0.79,
+    0.9,
+    0.74,
+    0.34,
+    0.37
+   ],
+   "motion": {
+    "elements": 4,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 4,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "page": {
+     "height": 5118,
+     "screens": 6.1,
+     "words": 720,
+     "img": 1,
+     "video": 0,
+     "canvas": 1,
+     "svg": 25,
+     "sections": 5,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Hiểu hệ thống. Bằng cách thử.",
+     "words": 6,
+     "chars": 29,
+     "lines": 2,
+     "size": 34,
+     "vw": 8.7,
+     "font": "Be Vietnam Pro",
+     "weight": 600,
+     "tracking": -0.05,
+     "leading": 1.15,
+     "top": 98,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "h1": {
+     "text": "Hiểu hệ thống. Bằng cách thử.",
+     "words": 6,
+     "lines": 2,
+     "size": 34,
+     "font": "Be Vietnam Pro"
+    },
+    "headings": [
+     {
+      "text": "Hiểu hệ thống. Bằng cách thử.",
+      "words": 6,
+      "chars": 29,
+      "lines": 2,
+      "size": 34,
+      "vw": 8.7,
+      "font": "Be Vietnam Pro",
+      "weight": 600,
+      "tracking": -0.055,
+      "leading": 1.15,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.9,
+      "top": 98,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "Đến lượt bạn vận hành.",
+      "words": 5,
+      "chars": 22,
+      "lines": 1,
+      "size": 28,
+      "vw": 7.2,
+      "font": "Be Vietnam Pro",
+      "weight": 550,
+      "tracking": -0.035,
+      "leading": 1.15,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.77,
+      "top": 918,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Vì sao lịch học vẫn hiện phòng cũ?",
+      "words": 8,
+      "chars": 34,
+      "lines": 2,
+      "size": 26,
+      "vw": 6.7,
+      "font": "Be Vietnam Pro",
+      "weight": 550,
+      "tracking": -0.035,
+      "leading": 1.15,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.9,
+      "top": 1284,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "201",
+      "words": 1,
+      "chars": 3,
+      "lines": 1,
+      "size": 39,
+      "vw": 10,
+      "font": "Be Vietnam Pro",
+      "weight": 600,
+      "tracking": 0,
+      "leading": 1.3,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.32,
+      "top": 1628,
+      "tag": "strong",
+      "kind": "heading"
+     },
+     {
+      "text": "201",
+      "words": 1,
+      "chars": 3,
+      "lines": 1,
+      "size": 39,
+      "vw": 10,
+      "font": "Be Vietnam Pro",
+      "weight": 600,
+      "tracking": 0,
+      "leading": 1.3,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.32,
+      "top": 1628,
+      "tag": "strong",
+      "kind": "heading"
+     },
+     {
+      "text": "Chọn một câu hỏi để thử",
+      "words": 6,
+      "chars": 23,
+      "lines": 2,
+      "size": 32,
+      "vw": 8.2,
+      "font": "Be Vietnam Pro",
+      "weight": 600,
+      "tracking": -0.025,
+      "leading": 1.4,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.63,
+      "top": 1991,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Sau bài đầu, đi tiếp ở đâu?",
+      "words": 7,
+      "chars": 27,
+      "lines": 1,
+      "size": 26,
+      "vw": 6.7,
+      "font": "Be Vietnam Pro",
+      "weight": 600,
+      "tracking": -0.027,
+      "leading": 1.3,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.9,
+      "top": 3913,
+      "tag": "h2",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 7,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": 6,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Be Vietnam Pro",
+       "share": 1,
+       "mono": false
+      }
+     ],
+     "familyCount": 1,
+     "sizes": [
+      7,
+      12,
+      13,
+      14,
+      15,
+      16,
+      18,
+      19,
+      26,
+      28,
+      32,
+      34,
+      39
+     ],
+     "sizeCount": 13,
+     "notLoaded": [],
+     "body": {
+      "font": "Be Vietnam Pro",
+      "size": 12,
+      "leading": 1.6,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 4.9
+     },
+     "measureChars": 58,
+     "max": {
+      "size": 39,
+      "vw": 10,
+      "font": "Be Vietnam Pro",
+      "text": "201"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.01,
+     "centerShare": 0.03,
+     "smallText": 41
+    },
+    "eyebrows": [
+     {
+      "text": "AB",
+      "above": "Vì sao lịch học vẫn hiện phòng cũ?",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 13,
+      "top": 1139
+     },
+     {
+      "text": "Phòng sinh hoạt",
+      "above": "201",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 1608
+     },
+     {
+      "text": "Phòng sinh hoạt",
+      "above": "201",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 1608
+     },
+     {
+      "text": "Học bài này từng bước",
+      "above": "Chọn một câu hỏi để thử",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 1906
+     }
+    ],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#f3f5f1",
+     "bodyBgHsl": {
+      "h": 90,
+      "s": 0.17,
+      "l": 0.95
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#e1e9df",
+       "top": 422,
+       "hsl": {
+        "h": 108,
+        "s": 0.19,
+        "l": 0.89
+       }
+      },
+      {
+       "color": "#193b35",
+       "top": 894,
+       "hsl": {
+        "h": 169,
+        "s": 0.4,
+        "l": 0.16
+       }
+      },
+      {
+       "color": "#ffffff",
+       "top": 1487,
+       "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 1
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#53665f",
+       "share": 0.63
+      },
+      {
+       "color": "#193b35",
+       "share": 0.23
+      },
+      {
+       "color": "#1b6e66",
+       "share": 0.08
+      },
+      {
+       "color": "#d3e4d9",
+       "share": 0.03
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.02
+      }
+     ],
+     "button": {
+      "bg": "#1b6e66",
+      "hsl": {
+       "h": 174,
+       "s": 0.61,
+       "l": 0.27
+      },
+      "fg": "#193b35"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 8,
+     "inHero": 3,
+     "radius": 9,
+     "height": 48,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Đến nội dung chính",
+      "Bắt đầu bài đầu tiên",
+      "Gửi một yêu cầu →"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 18,
+     "hairlineSamples": [
+      "header.site-header 390px",
+      "div.experiment-top 348px",
+      "section.section.notebook-section 350px",
+      "div.lesson-visual.visual-concurrency 130px",
+      "div.lesson-visual.visual-cpu-io 130px"
+     ],
+     "outlinedBoxes": 7,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 11,
+     "boxRadius": 8,
+     "squareMedia": 0,
+     "roundedMedia": 1,
+     "mediaRadius": 24,
+     "textShadow": 0,
+     "cardRows": [
+      {
+       "count": 4,
+       "iconTopped": true,
+       "rounded": true,
+       "top": 894
+      },
+      {
+       "count": 6,
+       "iconTopped": true,
+       "rounded": true,
+       "top": 2202
+      }
+     ]
+    },
+    "heroMedia": [
+     {
+      "type": "canvas",
+      "ratio": 0.19
+     }
+    ],
+    "nav": {
+     "links": 1,
+     "fixed": false,
+     "height": 66,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "be vietnam pro"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "pageH": 5118,
+    "margins": {
+     "left": 20,
+     "right": 31
+    },
+    "sections": [
+     {
+      "sel": "main#main-content.main",
+      "tag": "main",
+      "top": 66,
+      "height": 4860,
+      "words": 659,
+      "media": 1,
+      "middle": 0,
+      "heading": {
+       "text": "201",
+       "size": 39,
+       "tag": "strong"
+      },
+      "left": 20,
+      "right": 25,
+      "textLeft": 20,
+      "textRight": 25,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "footer.site-footer",
+      "tag": "footer",
+      "top": 4926,
+      "height": 192,
+      "words": 17,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 20,
+      "right": 137,
+      "textLeft": 20,
+      "textRight": 137,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "Hiểu hệ thống. Bằng cách thử.",
+      "size": 34,
+      "top": 98,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 20,
+      "n": 7
+     },
+     {
+      "x": 79,
+      "n": 6
+     },
+     {
+      "x": 165,
+      "n": 6
+     },
+     {
+      "x": 44,
+      "n": 2
+     }
+    ],
+    "leftBlocks": 21,
+    "bodySize": 13,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "dark": false,
+    "ground": "#f3f5f1",
+    "sidebar": null,
+    "topbar": {
+     "h": 66
+    },
+    "canvas": {
+     "left": 20,
+     "right": 20
+    },
+    "hero": {
+     "text": "Hiểu hệ thống. Bằng cách thử.",
+     "words": 6,
+     "chars": 29,
+     "lines": 2,
+     "size": 34,
+     "vw": 8.7,
+     "font": "Be Vietnam Pro",
+     "weight": 600,
+     "tracking": -0.05,
+     "leading": 1.15,
+     "top": 98,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "charts": 0,
+    "layout": {
+     "panels": 6,
+     "firstScreen": 1,
+     "ragged": [],
+     "voids": []
+    },
+    "tiles": 0,
+    "panels": {
+     "count": 14,
+     "radii": [
+      [
+       8,
+       6
+      ],
+      [
+       0,
+       3
+      ],
+      [
+       24,
+       2
+      ],
+      [
+       6,
+       2
+      ],
+      [
+       11,
+       1
+      ]
+     ],
+     "heavyBorders": 2,
+     "borderSamples": [
+      "#1b6e66 on #ffffff (6.05:1)",
+      "#8f9caf on #ffffff (2.78:1)"
+     ],
+     "heavyShadows": 0,
+     "softShadows": 0,
+     "shadowSamples": [],
+     "glass": 0
+    },
+    "chips": {
+     "count": 0,
+     "hues": 0,
+     "samples": []
+    },
+    "numbers": {
+     "cells": 0,
+     "leftAligned": 0,
+     "figures": 4,
+     "tabularShare": 0.5,
+     "kpiMax": 39
+    },
+    "rows": null,
+    "chartHues": 0,
+    "placeholders": [],
+    "type": {
+     "under13": 0.41,
+     "tiny": 2,
+     "tinySamples": [
+      "Nguồn chính 7px",
+      "Bản ghi gần 7px"
+     ],
+     "sizes": [
+      7,
+      12,
+      13,
+      14,
+      15,
+      16,
+      18,
+      19,
+      26,
+      28,
+      32,
+      34,
+      39
+     ]
+    },
+    "title": {
+     "text": "Hiểu hệ thống.\nBằng cách thử.",
+     "size": 34,
+     "top": 98
+    },
+    "colourShare": 0.055
+   },
+   "consoleErrors": []
+  }
+ ],
+ "findings": [
+  {
+   "level": "WARN",
+   "id": "radius-mix",
+   "width": 1440,
+   "message": "Panels use 4 corner radii (0, 9, 24, 6px).",
+   "fix": "One radius for panels, one for controls, full round only for pills and avatars.",
+   "alsoAt": [
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "tiny-text",
+   "width": 1440,
+   "message": "50% of the text is under 13px.",
+   "fix": "Data and labels read at 13–14px; keep 11–12px for sublines and axis ticks.",
+   "alsoAt": [
+    768
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "below-fold",
+   "width": 1440,
+   "message": "Only 2 of 7 blocks start on the first 1440px screen.",
+   "fix": "Every block the brief names shows its header and first rows on the first desktop screen: size the headline block to its question, cap long lists with \"View all\", and put time-sensitive blocks before long tables."
+  },
+  {
+   "level": "WARN",
+   "id": "app-title-size",
+   "width": 1440,
+   "message": "The h1 is 62px (\"Hiểu hệ thống.\nBằng cách thử.\").",
+   "fix": "An app screen is not a landing page: the title is 18-32px (20-24px on a phone).",
+   "alsoAt": [
+    768,
+    390
+   ]
+  }
+ ],
+ "images": [
+  {
+   "viewport": "desktop",
+   "width": 1440,
+   "fold": "/Users/vuongn/Documents/ChatGPT/System Design learning/.cache/design10/inspect/desktop-fold.jpg",
+   "pages": [
+    "/Users/vuongn/Documents/ChatGPT/System Design learning/.cache/design10/inspect/desktop-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "tablet",
+   "width": 768,
+   "fold": "/Users/vuongn/Documents/ChatGPT/System Design learning/.cache/design10/inspect/tablet-fold.jpg",
+   "pages": [
+    "/Users/vuongn/Documents/ChatGPT/System Design learning/.cache/design10/inspect/tablet-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "mobile",
+   "width": 390,
+   "fold": "/Users/vuongn/Documents/ChatGPT/System Design learning/.cache/design10/inspect/mobile-fold.jpg",
+   "pages": [
+    "/Users/vuongn/Documents/ChatGPT/System Design learning/.cache/design10/inspect/mobile-page-01.jpg"
+   ],
+   "film": []
+  }
+ ]
+}

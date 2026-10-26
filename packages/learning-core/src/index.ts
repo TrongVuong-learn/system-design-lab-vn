@@ -74,3 +74,5 @@ export function updateSchoolReview(progress: Progress, review: SchoolReviewProgr
 
 export { evaluatePractice, PRACTICE_MODEL_VERSION } from './module-practice';
 export { readDesignDraft, isLessonComplete } from './design-draft';
+export { GAME_VERSION, GAME_IDS, gameInputs, gameResult, playGame, parseGame } from './games';
+export type { GameId, GameState } from './games';

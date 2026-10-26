@@ -130,7 +130,7 @@ input[type='checkbox'] {
   color: var(--muted);
 }
 .beta-badge {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 650;
   border: 1px solid var(--line);
   padding: 5px 10px;
@@ -312,7 +312,7 @@ input[type='checkbox'] {
   gap: 8px;
   font-weight: 550;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 12px;
 }
 .lesson-meta > span:last-child {
   display: flex;
@@ -338,7 +338,7 @@ input[type='checkbox'] {
   color: var(--accent);
   font-weight: 650;
   margin-top: auto;
-  font-size: 11px;
+  font-size: 12px;
 }
 .done-badge {
   position: absolute;
@@ -352,7 +352,7 @@ input[type='checkbox'] {
   top: 8px;
   left: 7px;
   right: auto;
-  font-size: 8px;
+  font-size: 12px;
 }
 .level-list {
   display: grid;
@@ -384,7 +384,7 @@ input[type='checkbox'] {
   flex: 1;
 }
 .level-list .eyebrow {
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0;
 }
 .level-list h3 {
@@ -499,12 +499,12 @@ input[type='checkbox'] {
 }
 .module-code {
   font-family: monospace;
-  font-size: 11px;
+  font-size: 12px;
   color: var(--accent);
 }
 .status-label {
   display: inline-flex;
-  font-size: 10px;
+  font-size: 12px;
   background: var(--wash);
   color: var(--muted);
   border-radius: 4px;
@@ -574,7 +574,7 @@ input[type='checkbox'] {
   margin: 0;
 }
 .save-status {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--muted);
   margin: 15px 0;
   overflow-wrap: anywhere;
@@ -623,7 +623,7 @@ input[type='checkbox'] {
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  font-size: 11px;
+  font-size: 12px;
   color: var(--muted);
 }
 .lesson-heading {
@@ -675,7 +675,7 @@ input[type='checkbox'] {
 }
 .stage-list span {
   font-family: var(--font-body);
-  font-size: 11px;
+  font-size: 12px;
 }
 .stage-list b {
   font-weight: 400;
@@ -752,7 +752,7 @@ input[type='checkbox'] {
   display: grid;
   place-items: center;
   flex-shrink: 0;
-  font-size: 11px;
+  font-size: 12px;
   font-family: monospace;
 }
 .answer-option > svg {
@@ -856,7 +856,7 @@ input[type='checkbox'] {
   gap: 12px;
 }
 .time-badge {
-  font-size: 10px;
+  font-size: 12px;
   color: var(--muted);
   background: var(--wash);
   padding: 4px 8px;
@@ -935,7 +935,7 @@ input[type='checkbox'] {
   border-radius: 8px;
 }
 .metric > span {
-  font-size: 11px;
+  font-size: 12px;
   display: block;
   color: var(--muted);
 }
@@ -948,7 +948,7 @@ input[type='checkbox'] {
 }
 .metric small {
   font-family: var(--font-body);
-  font-size: 10px;
+  font-size: 12px;
   color: var(--muted);
 }
 .stepper {
@@ -965,7 +965,7 @@ input[type='checkbox'] {
 }
 .stepper small {
   display: block;
-  font-size: 11px;
+  font-size: 12px;
   color: var(--muted);
 }
 .stepper-controls {
@@ -1006,7 +1006,7 @@ input[type='checkbox'] {
 .toggle small {
   display: block;
   color: var(--muted);
-  font-size: 11px;
+  font-size: 12px;
 }
 .explanation-panel {
   padding: 5px 3px 15px;
@@ -1053,7 +1053,7 @@ input[type='checkbox'] {
     padding: 16px;
   }
   .lesson-meta {
-    font-size: 9px;
+    font-size: 12px;
   }
   .level-list {
     gap: 0 20px;
@@ -1076,7 +1076,7 @@ input[type='checkbox'] {
     height: 29px;
   }
   .beta-badge {
-    font-size: 9px;
+    font-size: 12px;
     letter-spacing: 0.2px;
     padding: 4px 7px;
   }
@@ -1130,7 +1130,7 @@ input[type='checkbox'] {
   }
   .lesson-meta {
     gap: 5px;
-    font-size: 8px;
+    font-size: 12px;
     flex-wrap: wrap;
   }
   .lesson-card h3 {
@@ -1141,14 +1141,14 @@ input[type='checkbox'] {
   }
   .lesson-card p {
     margin-bottom: 11px;
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1.75;
   }
   .card-action {
-    font-size: 10px;
+    font-size: 12px;
   }
   .done-badge {
-    font-size: 8px;
+    font-size: 12px;
     right: auto;
     left: 8px;
     top: 8px;
@@ -1171,7 +1171,7 @@ input[type='checkbox'] {
   .site-footer {
     padding: 20px 20px 95px;
     display: block;
-    font-size: 11px;
+    font-size: 12px;
   }
   .site-footer > span {
     display: block;
@@ -1184,22 +1184,21 @@ input[type='checkbox'] {
     left: 0;
     right: 0;
     justify-content: space-around;
-    background: #fcfcf9f5;
+    background: var(--paper);
     border-top: 1px solid var(--line);
     padding: 8px 15px calc(8px + env(safe-area-inset-bottom));
     z-index: 5;
-    backdrop-filter: blur(14px);
   }
   .mobile-nav a {
     min-height: 48px;
-    min-width: 70px;
+    min-width: 56px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 4px;
     color: var(--muted);
-    font-size: 10px;
+    font-size: 12px;
   }
   .mobile-nav a.active {
     color: var(--accent);
@@ -1248,7 +1247,7 @@ input[type='checkbox'] {
     padding: 15px 0 30px;
   }
   .lesson-topbar {
-    font-size: 10px;
+    font-size: 12px;
     gap: 8px;
   }
   .lesson-topbar .back-link {
@@ -1309,7 +1308,7 @@ input[type='checkbox'] {
     letter-spacing: 0;
   }
   .time-badge {
-    font-size: 11px;
+    font-size: 12px;
   }
   .diagram ol {
     flex-direction: column;

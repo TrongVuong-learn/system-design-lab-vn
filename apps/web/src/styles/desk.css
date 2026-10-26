@@ -39,12 +39,10 @@
 }
 .featured-experiment {
   background: white;
-  border: 1px solid #cbd4e6;
+  border: 1px solid var(--line);
   border-radius: 14px;
   overflow: hidden;
-  box-shadow:
-    0 9px 0 -4px #e8edf6,
-    0 16px 0 -9px #e8edf6;
+  box-shadow: none;
 }
 .experiment-top {
   display: flex;
@@ -57,7 +55,7 @@
   font-weight: 600;
 }
 .experiment-type {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--accent);
 }
 .schedule-pair {
@@ -79,7 +77,7 @@
   font-weight: 600;
 }
 .schedule-pair small {
-  font-size: 10px;
+  font-size: 12px;
   color: var(--muted);
   margin-top: 13px;
 }
@@ -91,7 +89,7 @@
   font-variant-numeric: tabular-nums;
 }
 .schedule-caption {
-  font-size: 10px;
+  font-size: 12px;
   margin-top: 8px;
   color: var(--muted);
 }
@@ -114,7 +112,7 @@
   border-radius: 6px;
   background: white;
   color: var(--ink);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   min-height: 44px;
   padding: 10px 12px;
@@ -123,7 +121,7 @@
 }
 .experiment-actions button:hover {
   background: var(--surface-tint);
-  border-color: #a9bdfc;
+  border-color: var(--accent);
 }
 .experiment-result {
   min-height: 63px;
@@ -153,15 +151,15 @@
   padding: 18px 13px;
 }
 .sketch-caption {
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 600;
   line-height: 1.5;
-  color: #4a618c;
+  color: var(--muted);
   margin-bottom: 15px;
 }
 .sketch p {
-  font-size: 9px !important;
-  color: #4a618c;
+  font-size: 12px !important;
+  color: var(--muted);
   margin: 14px 0 0 !important;
   line-height: 1.55;
 }
@@ -171,17 +169,17 @@
 }
 .cache-sketch > div > span {
   background: white;
-  border: 1px solid #c7d4eb;
+  border: 1px solid var(--line);
   border-radius: 4px;
   padding: 6px;
-  font-size: 8px;
+  font-size: 12px;
   flex: 1;
 }
 .cache-sketch strong {
   display: block;
   font-size: 23px;
   font-weight: 600;
-  color: #244edb;
+  color: var(--accent);
 }
 .cache-sketch > div > .old-copy {
   background: var(--highlight);
@@ -199,7 +197,7 @@
   font-weight: 600;
 }
 .request-stops small {
-  font-size: 8px;
+  font-size: 12px;
   display: block;
   font-weight: 400;
 }
@@ -244,7 +242,7 @@
   padding: 3px;
 }
 .replica-path {
-  font-size: 8px;
+  font-size: 12px;
   white-space: nowrap;
   position: relative;
   border-top: 1px dashed #8098c4;
@@ -349,15 +347,15 @@
     padding: 12px 15px;
   }
   .desk-start > span {
-    font-size: 11px;
+    font-size: 12px;
   }
   .featured-experiment {
-    box-shadow: 0 7px 0 -3px #e8edf6;
+    box-shadow: none;
     border-radius: 11px;
   }
   .experiment-top {
     padding: 15px 17px;
-    font-size: 11px;
+    font-size: 12px;
   }
   .schedule-pair {
     padding: 20px 17px 15px;
@@ -370,28 +368,28 @@
     font-size: 39px;
   }
   .schedule-pair small {
-    font-size: 9px;
+    font-size: 12px;
   }
   .schedule-caption {
-    font-size: 9px;
+    font-size: 12px;
   }
   .experiment-actions {
     padding: 0 17px;
     gap: 6px;
   }
   .experiment-actions button {
-    font-size: 9px;
+    font-size: 12px;
     padding: 9px 7px;
     min-height: 44px;
   }
   .experiment-result {
-    font-size: 11px;
+    font-size: 12px;
     margin: 13px 17px 10px;
     min-height: 54px;
   }
   .experiment-link {
     padding: 14px 17px;
-    font-size: 11px;
+    font-size: 12px;
   }
   .notebook-section .section-head {
     display: block;
@@ -400,11 +398,11 @@
     padding: 15px 9px;
   }
   .sketch-caption {
-    font-size: 8px;
+    font-size: 12px;
     margin-bottom: 10px;
   }
   .sketch p {
-    font-size: 8px !important;
+    font-size: 12px !important;
   }
   .cache-sketch > div {
     flex-direction: column;
@@ -427,7 +425,7 @@
     font-size: 7px;
   }
   .request-stops b {
-    font-size: 9px;
+    font-size: 12px;
   }
   .replica-sketch > div {
     flex-wrap: wrap;
@@ -459,7 +457,7 @@
     padding: 18px 0;
   }
   .level-list p {
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1.7;
   }
 }
@@ -468,20 +466,20 @@
     font-size: 29px;
   }
   .desk-start .button {
-    font-size: 11px;
+    font-size: 12px;
   }
   .schedule-pair > div {
     padding: 12px 9px;
   }
   .schedule-pair > div > span:first-child {
-    font-size: 11px;
+    font-size: 12px;
   }
   .experiment-actions {
     flex-wrap: wrap;
   }
   .experiment-actions button {
     flex-basis: 100%;
-    font-size: 11px;
+    font-size: 12px;
   }
   .sketch-caption {
     font-size: 7px;
@@ -508,7 +506,7 @@
     font-size: 13px;
   }
   .lesson-meta {
-    font-size: 10px;
+    font-size: 12px;
   }
   .card-action {
     font-size: 12px;
@@ -545,7 +543,7 @@
 .latency-track > span {
   display: block;
   height: 100%;
-  background: #244edb;
+  background: var(--accent);
 }
 .packet-board {
   display: grid;
@@ -589,10 +587,10 @@
 }
 
 .lab-panel .button.secondary[aria-pressed='true'] {
-  border-color: #244edb;
+  border-color: var(--accent);
   background: #eaf0ff;
   color: #183ba8;
-  box-shadow: inset 0 0 0 1px #244edb;
+  box-shadow: inset 0 0 0 1px var(--accent);
 }
 .dns-records {
   display: grid;
@@ -686,7 +684,7 @@
   display: block;
   height: 100%;
   min-width: 2px;
-  background: #244edb;
+  background: var(--accent);
 }
 .download-track.processing span {
   background: #60728f;
@@ -723,7 +721,7 @@
   margin: 0;
 }
 .case-requirements {
-  border-left: 3px solid #244edb;
+  border-left: 3px solid var(--accent);
   padding-left: 16px;
   margin: 24px 0;
 }
@@ -777,7 +775,7 @@
   border-radius: 6px;
 }
 .routing-inputs select:focus-visible {
-  outline: 2px solid #244edb;
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 .routing-trace {
@@ -786,7 +784,7 @@
   margin: 24px 0;
 }
 .routing-trace li {
-  border-left: 3px solid #244edb;
+  border-left: 3px solid var(--accent);
   padding: 12px 16px;
   margin: 12px 0;
   overflow-wrap: anywhere;
@@ -871,7 +869,7 @@
 .review-entry {
   margin-block: 2rem;
   padding: 1.25rem;
-  border-left: 3px solid #244edb;
+  border-left: 3px solid var(--accent);
   background: #fff;
   display: grid;
   gap: 1rem;
@@ -901,12 +899,12 @@
   min-height: 48px;
 }
 .review-scenarios [aria-pressed='true'] {
-  border-color: #244edb;
-  color: #244edb;
+  border-color: var(--accent);
+  color: var(--accent);
   background: #eaf0ff;
 }
 .review-brief {
-  border-left: 3px solid #244edb;
+  border-left: 3px solid var(--accent);
   padding-left: 1rem;
   margin-block: 1.5rem;
 }
@@ -1313,7 +1311,7 @@
   padding-inline-start: 1.4rem;
 }
 .chapter-misconception {
-  border-inline-start: 3px solid #244edb;
+  border-inline-start: 3px solid var(--accent);
   padding-inline-start: 1rem;
 }
 
@@ -1366,7 +1364,7 @@
 }
 .design-field textarea:focus-visible,
 .pathway-filter select:focus-visible {
-  outline: 3px solid #244edb;
+  outline: 3px solid var(--accent);
   outline-offset: 3px;
 }
 .design-draft li {
