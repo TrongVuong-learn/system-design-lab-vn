@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { GameScene } from './GameScene';
 import { Link, useParams } from 'react-router';
 import { GAME_IDS, gameInputs, gameResult, playGame, type GameId } from '@sdl/learning-core';
 import { readGame, writeGame } from '../../adapters/game-repository';
@@ -100,17 +101,20 @@ export function GamesPage() {
 function PlaySession({ id }: { id: GameId }) {
   const [state, setState] = useState(() => readGame(id));
   const [saveFailed, setSaveFailed] = useState(false);
+  const [pulse, setPulse] = useState(0);
   const game = games[id];
   const result = gameResult(state);
   const turn = state.actions.length;
   function choose(action: number) {
     const next = playGame(state, action);
     setState(next);
+    setPulse((n) => n + 1);
     setSaveFailed(!writeGame(next));
   }
   function reset() {
     const next = { id, actions: [] };
     setState(next);
+    setPulse(0);
     setSaveFailed(!writeGame(next));
   }
   return (
@@ -205,6 +209,7 @@ function PlaySession({ id }: { id: GameId }) {
               ))}
             </div>
           )}
+          <GameScene state={state} pulse={pulse} />
           <div role="status" className="game-feedback">
             {result.done ? (
               <>

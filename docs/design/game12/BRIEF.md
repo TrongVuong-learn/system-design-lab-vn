@@ -1,0 +1,7 @@
+# GAME12 — Thao tác có đường đi
+
+Scope: animate all three existing games from authoritative before/after core results, preserve rules and persistence. No new dependency or game scoring. Owner: root. Acceptance: each action has a subject-specific sequence, replay is read-only, rapid input/reset/navigation cannot leave stale animation, reduced-motion/static fallback, 320px/touch/offline regression and master→Vercel verified release.
+
+Choose mechanism diagrams over confetti, generic pulse or background decoration. Palette/type retained from QA11. Balance: a weighted packet travels to selected machine; accumulated allocation remains visible, never pretend processing has started. Cache: source/cache→reader, source read also copies into cache; stale/empty response has explicit text. Queue: incoming jobs enter six slots before worker service; overflow travels to lost lane, processed work to done lane, remainder stays queued. Timeline timing is illustrative, never simulated performance. Controls remain available; latest action interrupts prior visual only. Saved state remains authoritative and synchronous.
+
+Static final SVG plus HTML summary are complete without motion. GSAP lazy-loaded, scoped context and media cleanup; no infinite loop. Reduced motion immediately settles. Replay does not write storage or advance a turn. Reuse the three-game engine before/after results, derive deltas for presentation only. Verify screenshot at320/390/1280 and actual motion frames, queue loss conservation, cache stale path, rapid input/reset/reload/offline.

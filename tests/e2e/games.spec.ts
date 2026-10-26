@@ -81,9 +81,12 @@ test('downloaded pack opens an unvisited game and Lottie runtime offline', async
   await panel.getByRole('button', { name: 'Tải gói học', exact: true }).click();
   await expect(panel.getByRole('status')).toContainText('Gói đã tải đủ', { timeout: 30000 });
   await context.setOffline(true);
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.goto('/#/games/cache');
   await page.getByRole('button', { name: 'Đọc nguồn', exact: true }).click();
   await expect(page.getByText('Lượt 2 / 6', { exact: true })).toBeVisible();
+  await expect(page.locator('.game-scene')).not.toHaveAttribute('data-phase', '-1');
   await page.reload();
   await expect(page.getByText('Lượt 2 / 6', { exact: true })).toBeVisible();
+  await expect(page.locator('.game-scene')).toHaveAttribute('data-phase', '-1');
 });

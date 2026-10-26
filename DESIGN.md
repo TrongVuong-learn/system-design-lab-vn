@@ -82,3 +82,7 @@ Game là điểm đến `/games`, độc lập với học và tiến độ bài
 ## QA11 — Trạm điều phối (thay hướng DESIGN-10)
 
 Người dùng yêu cầu phá cách hơn: chuyển sang cobalt #2447d8, mực #142454, giấy #f4f6ff, vàng tín hiệu #f6da59. Hero chữ lớn trên mảng màu đặc cạnh hành trình request thật. Khu Game là ba vùng bất đối xứng, chia tải chiếm hai hàng trên desktop, mobile chuyển thành ba poster liên tiếp. Không còn ba card trắng giống nhau. Be Vietnam Pro và nội dung/luật/saved state giữ nguyên; màn bài học và bàn chơi vẫn nền sáng. Xem docs/design/qa11/BRIEF.md.
+
+## GAME12 — Diễn biến từng lượt
+
+Ba game có sơ đồ SVG riêng lấy số liệu trước/sau từ learning-core. GSAP minh họa gói tải đến máy, đọc nguồn/cache và cập nhật bản lưu, việc vào hàng đợi trước khi worker xử lý/tràn mất. Nút xem lại chỉ chạy hình; thao tác mới hủy chuyển động cũ, không chặn điều khiển hoặc lưu. Không dùng thời gian hoạt ảnh làm tốc độ hệ thống. Reduced-motion và lỗi tải animation giữ ảnh kết quả cùng diễn giải chữ. Xem docs/design/game12/BRIEF.md và REVIEW.md.
