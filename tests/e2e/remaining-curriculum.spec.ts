@@ -115,6 +115,7 @@ test('design drafts survive partial reload, redoing practice, export/import and 
   await lab.getByRole('button', { name: 'Kiểm tra bài áp dụng', exact: true }).click();
   await page.getByRole('button', { name: 'Thử tình huống mới', exact: true }).click();
   await expect(fields.first()).toHaveValue(note);
+  await expect(page.getByText('Đã lưu trên thiết bị', { exact: true })).toBeVisible();
   await page.goto('/#/progress');
   const download = page.waitForEvent('download');
   await page.getByRole('button', { name: 'Xuất bản lưu' }).click();
@@ -126,6 +127,7 @@ test('design drafts survive partial reload, redoing practice, export/import and 
   const restored = await fresh.newPage();
   try {
     await restored.goto('/#/progress');
+    await expect(restored.getByRole('button', { name: 'Nhập bản lưu', exact: true })).toBeEnabled();
     await restored.locator('input[type=file]').setInputFiles({
       name: 'progress.json',
       mimeType: 'application/json',
@@ -140,6 +142,8 @@ test('design drafts survive partial reload, redoing practice, export/import and 
       ),
     });
     await expect(restored.getByRole('status').filter({ hasText: 'Đã nhập' })).toBeVisible();
+    // Import acknowledgement is in-memory; a full navigation must await durable storage.
+    await expect(restored.getByText('Đã lưu trên thiết bị', { exact: true })).toBeVisible();
     await restored.goto('/#/learn/track-ai');
     await expect(restored.locator('.design-draft textarea').first()).toHaveValue(note);
     await expect(restored.getByRole('button', { name: 'Lưu bài đã hoàn thành' })).toBeDisabled();

@@ -17,3 +17,5 @@ Artwork: Three.js geometry và Lottie JSON nguyên gốc trong source; không as
 Bằng chứng máy và ảnh ở docs/design/design10/evidence; kết quả CI và production được cập nhật trong PR phát hành.
 
 Gate cuối: Taste source lint 0 FAIL/0 WARN; browser inspector 0 FAIL/4 WARN. Đã đọc đủ fold và contact sheet desktop/tablet/mobile. Warning tỷ lệ nhãn 12px được giữ vì đây là metadata/nhãn số liệu bên cạnh tên bài và nội dung 14–18px; không còn chữ dưới 11px. Các warning còn lại có lý do ở trên.
+
+CI vòng đầu: 558 E2E pass, 1 skip cũ, 1 failure WebKit ở test nhập bản thiết kế. Test gọi full navigation ngay sau thông báo nhập vào bộ nhớ, trước khi storage xác nhận lưu. Sửa test đợi nút nhập enabled và “Đã lưu trên thiết bị” trước navigation; không tăng timeout/skip assertion. Local responsive 79/80 pass; một request HTTP lỗi lúc rebuild dist đồng thời, chạy lại ca trên artifact ổn định để phân biệt với lỗi UI.
