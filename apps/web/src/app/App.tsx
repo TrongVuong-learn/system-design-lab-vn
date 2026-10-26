@@ -10,6 +10,7 @@ import {
 } from '../features/catalog/Pages';
 import { ReviewPage } from '../features/review';
 import { LessonPage } from '../features/lesson-player/LessonPage';
+import { GamesPage, GamePage } from '../features/games/GamesPage';
 import { Icon } from '../ui/primitives';
 
 class ErrorBoundary extends Component<{ children: ReactNode }, { error: boolean }> {
@@ -46,6 +47,7 @@ function Shell() {
   const navigation = [
     { to: '/', label: 'Học', icon: 'home' },
     { to: '/explore', label: 'Khám phá', icon: 'grid' },
+    { to: '/games', label: 'Game', icon: 'play' },
     { to: '/progress', label: 'Tiến độ', icon: 'chart' },
   ];
   return (
@@ -85,6 +87,8 @@ function Shell() {
           <Route path="/levels/:level" element={<LevelPage />} />
           <Route path="/learn/:id" element={<LessonPage />} />
           <Route path="/review/:id" element={<ReviewPage />} />
+          <Route path="/games" element={<GamesPage />} />
+          <Route path="/games/:id" element={<GamePage />} />
           <Route path="/progress" element={<ProgressPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

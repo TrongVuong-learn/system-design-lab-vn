@@ -1,0 +1,496 @@
+/* A working surface: 12 columns / equal outer gutters, real controls above the fold. */
+.workshop-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 32px;
+  padding: 64px 0 48px;
+}
+.workshop-intro h1 {
+  font-size: clamp(38px, 4.7vw, 62px);
+  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: -0.055em;
+  margin-bottom: 28px;
+}
+.workshop-intro > p {
+  font-size: 18px;
+  max-width: 43ch;
+  margin-bottom: 28px;
+}
+.workshop-intro-note {
+  display: block;
+  font-size: 13px;
+  margin-top: 16px;
+  color: var(--muted);
+}
+.request-workshop {
+  background: #e1e9df;
+  border-radius: 24px;
+  padding: 0 24px 22px;
+  overflow: hidden;
+}
+.workshop-canvas {
+  height: 255px;
+  position: relative;
+}
+.workshop-canvas canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.workshop-caption {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 13px;
+}
+.workshop-caption strong {
+  color: var(--accent);
+}
+.workshop-stations {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  gap: 8px;
+  margin: 16px 0;
+}
+.workshop-stations li {
+  flex: 1;
+  font-size: 12px;
+  padding: 8px 5px;
+  border-top: 3px solid #bacac0;
+}
+.workshop-stations li[aria-current] {
+  border-color: var(--accent);
+  font-weight: 700;
+}
+.workshop-note {
+  font-size: 12px;
+  margin: 12px 0 0;
+}
+.game-invitation {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 32px;
+  background: #193b35;
+  color: #f3f5f1;
+  padding: 36px;
+  border-radius: 24px;
+}
+.game-invitation h2 {
+  font-size: 32px;
+}
+.game-invitation p {
+  color: #d3e4d9;
+  max-width: 55ch;
+}
+.game-invitation .button {
+  background: #e3eee5;
+  color: #193b35;
+}
+.invitation-diagram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  font-size: 16px;
+}
+.invitation-diagram span {
+  background: #31564c;
+  border-radius: 12px;
+  padding: 20px 12px;
+}
+.workshop-home .learning-desk {
+  gap: 48px;
+  padding: 72px 0 24px;
+}
+.workshop-home .section-head h2 {
+  font-size: 32px;
+}
+.workshop-home .lesson-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.explore-workshop .lesson-card {
+  box-shadow: none;
+}
+.games-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 32px;
+}
+.games-heading h1 {
+  margin-bottom: 20px;
+}
+.games-heading p {
+  max-width: 58ch;
+}
+.lottie-signal {
+  display: inline-block;
+  width: 120px;
+  height: 60px;
+  flex: none;
+}
+.lottie-signal canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.games-heading > .lottie-signal {
+  width: 200px;
+  height: 100px;
+}
+.game-shelf {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin-bottom: 48px;
+}
+.game-cover {
+  border-radius: 24px;
+  background: white;
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+.game-cover:hover {
+  transform: translateY(-4px);
+}
+.game-cover > div:last-of-type {
+  padding: 24px;
+}
+.game-cover h2 {
+  font-size: 26px;
+  line-height: 1.25;
+  margin: 12px 0;
+}
+.game-cover p {
+  font-size: 15px;
+}
+.game-cover strong {
+  display: flex;
+  justify-content: space-between;
+  color: var(--accent);
+}
+.game-topic {
+  font-size: 12px;
+  color: var(--muted);
+}
+.game-cover-art {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background: #dce8df;
+}
+.game-cover-cache .game-cover-art {
+  background: #eee3ce;
+}
+.game-cover-queue .game-cover-art {
+  background: #dee6ed;
+}
+.tower {
+  width: 64px;
+  background: #315b4e;
+  padding: 12px;
+  color: white;
+  border-radius: 8px;
+  transform: skewY(-8deg);
+}
+.tower i {
+  display: block;
+  height: 9px;
+  background: #b8d3c0;
+  margin-top: 9px;
+  border-radius: 2px;
+}
+.version-sheet {
+  font-size: 30px;
+  background: #d6c6a8;
+  padding: 22px 16px;
+  border-radius: 6px;
+  transform: rotate(-12deg);
+}
+.version-sheet.fresh {
+  background: #fff9e9;
+  transform: rotate(8deg);
+}
+.queue-art {
+  display: grid;
+  grid-template-columns: repeat(3, 36px);
+  gap: 12px;
+  transform: rotate(-12deg);
+}
+.queue-art i {
+  width: 36px;
+  height: 36px;
+  background: #426579;
+  border-radius: 8px;
+}
+.queue-art i:nth-child(3n) {
+  background: #9eafbb;
+}
+.game-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: 32px;
+  align-items: start;
+}
+.game-board {
+  background: white;
+  border-radius: 24px;
+  padding: 28px;
+}
+.game-board-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.game-workload > span {
+  font-size: 14px;
+  color: var(--muted);
+}
+.workload-strip {
+  display: flex;
+  gap: 8px;
+  margin: 12px 0 28px;
+}
+.workload-strip > span {
+  flex: 1;
+  text-align: center;
+  padding: 10px 2px;
+  border-radius: 8px;
+  background: var(--wash);
+  font-variant-numeric: tabular-nums;
+}
+.workload-strip > .current-work {
+  background: var(--ink);
+  color: white;
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+.workload-strip > .past-work {
+  color: var(--muted);
+  background: transparent;
+}
+.load-lanes {
+  display: grid;
+  gap: 18px;
+  margin: 24px 0;
+}
+.load-lanes span {
+  display: flex;
+  justify-content: space-between;
+}
+.load-lanes meter {
+  width: 100%;
+  height: 28px;
+  accent-color: var(--accent);
+}
+.game-stats {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 24px 0;
+}
+.game-stats dt {
+  font-size: 12px;
+  color: var(--muted);
+}
+.game-stats dd {
+  font-size: 24px;
+  margin: 4px 0 0;
+  font-variant-numeric: tabular-nums;
+}
+.game-actions,
+.game-footer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+.game-actions .button {
+  flex: 1;
+}
+.game-feedback {
+  margin: 24px 0;
+  padding: 20px;
+  background: var(--wash);
+  border-radius: 14px;
+  min-height: 112px;
+}
+.game-feedback p:last-child {
+  margin-bottom: 0;
+}
+.game-feedback h2 {
+  font-size: 24px;
+}
+.game-rules h2 {
+  font-size: 22px;
+  margin-top: 20px;
+}
+.game-rules p,
+.game-rules li {
+  font-size: 15px;
+}
+.game-rules ol {
+  padding-left: 22px;
+}
+.game-rules li {
+  margin-bottom: 12px;
+}
+.lesson-game-bridge {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: var(--wash);
+  border-radius: 16px;
+  padding: 24px;
+  margin: 24px 0;
+}
+.lesson-game-bridge h2 {
+  font-size: 22px;
+}
+.lesson-game-bridge p {
+  font-size: 14px;
+}
+@media (max-width: 760px) {
+  .workshop-hero {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 32px 0;
+  }
+  .workshop-intro h1 {
+    font-size: clamp(34px, 8vw, 48px);
+  }
+  .workshop-intro > p {
+    font-size: 16px;
+  }
+  .workshop-canvas {
+    height: 210px;
+  }
+  .game-invitation {
+    grid-template-columns: 1fr;
+    padding: 24px;
+    gap: 24px;
+  }
+  .game-invitation h2 {
+    font-size: 28px;
+  }
+  .invitation-diagram {
+    justify-content: flex-start;
+  }
+  .workshop-home .learning-desk {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 48px 0 0;
+  }
+  .workshop-home .lesson-grid {
+    grid-template-columns: 1fr;
+  }
+  .game-shelf {
+    grid-template-columns: 1fr;
+  }
+  .game-cover {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+  }
+  .game-cover-art {
+    height: 100%;
+    gap: 8px;
+    padding: 12px;
+  }
+  .game-cover > div:last-of-type {
+    padding: 20px 16px;
+  }
+  .game-cover h2 {
+    font-size: 23px;
+  }
+  .game-cover-art .tower {
+    width: 32px;
+    padding: 6px;
+    font-size: 12px;
+  }
+  .game-cover-art .version-sheet {
+    font-size: 17px;
+    padding: 14px 6px;
+  }
+  .queue-art {
+    grid-template-columns: repeat(2, 24px);
+    gap: 8px;
+  }
+  .queue-art i {
+    width: 24px;
+    height: 24px;
+  }
+  .games-heading > .lottie-signal {
+    display: none;
+  }
+  .game-layout {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .game-board {
+    padding: 20px 16px;
+  }
+  .game-actions {
+    gap: 8px;
+  }
+  .game-actions .button {
+    font-size: 13px;
+    padding: 12px 8px;
+  }
+  .lesson-game-bridge {
+    display: block;
+    padding: 20px;
+  }
+  .game-session h1 {
+    font-size: 34px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .game-cover {
+    transition: none;
+  }
+  .game-cover:hover {
+    transform: none;
+  }
+}
+
+.workshop-fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 12px;
+}
+.workshop-fallback span {
+  padding: 16px 8px;
+  background: #cbdcd4;
+  border-radius: 8px;
+}
+
+.game-goal {
+  font-size: 14px;
+  color: var(--ink);
+  margin: 8px 0;
+}
+.game-how {
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+@media (max-width: 760px) {
+  .invitation-diagram {
+    gap: 8px;
+    font-size: 13px;
+  }
+  .invitation-diagram span {
+    padding: 16px 8px;
+    min-width: 0;
+    text-align: center;
+  }
+}

@@ -8,4 +8,5 @@ import '@fontsource/be-vietnam-pro/latin-700.css';
 import '@fontsource/be-vietnam-pro/vietnamese-700.css';
 import './styles/main.css';
 import './styles/desk.css';
+import './styles/workshop.css';
 createRoot(document.getElementById('root')!).render(<App />);

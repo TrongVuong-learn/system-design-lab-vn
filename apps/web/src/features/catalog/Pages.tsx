@@ -13,6 +13,8 @@ import {
 } from '@sdl/learning-core';
 import { Icon } from '../../ui/primitives';
 import { LessonSketch } from './LessonSketch';
+import { RequestWorkshop } from '../../ui/motion/RequestWorkshop';
+import { useWorkshopMotion } from '../../ui/motion/useWorkshopMotion';
 import { FeaturedExperiment } from './FeaturedExperiment';
 
 export function LessonCard({ id }: { id: string; index?: number }) {
@@ -55,26 +57,65 @@ export function LessonCard({ id }: { id: string; index?: number }) {
   );
 }
 export function HomePage() {
+  const root = useRef<HTMLDivElement>(null);
+  useWorkshopMotion(root);
   const { progress } = useProgress();
   const continuation = lessons.find(
     (l) => progress.lessons[l.id] && !isLessonComplete(l, progress.lessons[l.id]),
   );
   return (
-    <>
-      <section className="learning-desk">
+    <div ref={root} className="workshop-home">
+      <section className="workshop-hero">
+        <div className="workshop-intro" data-reveal>
+          <h1>
+            Hiểu hệ thống.
+            <br />
+            Bằng cách thử.
+          </h1>
+          <p>
+            Từ một lần bấm đến hàng triệu yêu cầu. Tự tay khám phá cách phần mềm vận hành, bằng
+            tiếng Việt.
+          </p>
+          <Link
+            className="button primary"
+            to={continuation ? `/learn/${continuation.id}` : '/learn/request'}
+          >
+            {continuation ? 'Tiếp tục bài đang học' : 'Bắt đầu bài đầu tiên'} <Icon name="arrow" />
+          </Link>
+          <span className="workshop-intro-note">
+            Không cần biết code. Bắt đầu từ điều bạn tò mò.
+          </span>
+        </div>
+        <RequestWorkshop />
+      </section>
+      <section className="game-invitation" data-reveal>
+        <div>
+          <h2>Đến lượt bạn vận hành.</h2>
+          <p>
+            Chia tải. Giữ dữ liệu mới. Vượt giờ cao điểm. Ba game, mỗi quyết định đều có kết quả để
+            quan sát.
+          </p>
+          <Link to="/games" className="button primary">
+            Khám phá Game <Icon name="arrow" />
+          </Link>
+        </div>
+        <div className="invitation-diagram" aria-hidden="true">
+          <span>request</span>
+          <b>→</b>
+          <span>
+            A<br />B
+          </span>
+          <b>→</b>
+          <span>kết quả</span>
+        </div>
+      </section>
+      <section className="learning-desk" data-reveal>
         <div className="desk-copy">
-          <p className="desk-context">Bàn học của bạn</p>
-          <h1>Vì sao lịch học vẫn hiện phòng cũ?</h1>
+          <h2>Vì sao lịch học vẫn hiện phòng cũ?</h2>
           <p>Cô giáo đã đổi phòng. Website chưa đổi theo. Thử xem hai nơi đang giữ thông tin gì.</p>
-          <div className="desk-start">
-            <Link
-              className="button primary"
-              to={continuation ? `/learn/${continuation.id}` : '/learn/request'}
-            >
-              {continuation ? 'Tiếp tục bài đang học' : 'Mới bắt đầu? Theo dấu một yêu cầu'}
-            </Link>
-            <span>Bài nhập môn không cần viết code.</span>
-          </div>
+          <Link to="/learn/cache" className="text-link">
+            Tìm hiểu cache →
+          </Link>
         </div>
         <FeaturedExperiment />
       </section>
@@ -129,7 +170,7 @@ export function HomePage() {
           nháp thiết kế được lưu trên thiết bị của bạn; tự luyện chưa phải chứng nhận thành thạo.
         </p>
       </aside>
-    </>
+    </div>
   );
 }
 export function ExplorePage() {
@@ -160,7 +201,7 @@ export function ExplorePage() {
   });
   const planned = modules.filter((m) => matches(`${m.title} ${m.topics}`));
   return (
-    <div className="page-content">
+    <div className="page-content explore-workshop">
       <h1>Khám phá bài học</h1>
       <p className="page-lead">Chọn một câu hỏi để thử ngay, hoặc nhìn toàn bộ lộ trình.</p>
       <div className="search-box">

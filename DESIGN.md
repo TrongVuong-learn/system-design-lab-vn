@@ -72,3 +72,9 @@ Ba lựa chọn ngắn → xem một mục/chạy xong → số mục và phạm
 ### Học liệu theo lộ trình và bản thiết kế — EDU-25/26
 
 Giữ palette/font bàn thí nghiệm. Trang đầu có sáu bài nhập môn; Khám phá có bộ lọc level/nhánh/capstone/case và tìm kiếm có mã module. Mỗi module dẫn thẳng tới bài. Chương cơ chế dùng details có tiêu đề thật, ví dụ và bước suy luận; không dùng hình trang trí thay nội dung. Bản thiết kế nằm sau câu chuyển giao đúng, một cột textarea có nhãn rõ, đếm ký tự, rubric mở khi cần và phần đổi ràng buộc. Viết từng mục được lưu ngay; lời nhắc chỉ nói đủ bản nháp, không tự đánh giá đúng. Kiểm screenshots thực tế320/390/1280 và tương tác bàn phím/chạm trước phát hành.
+
+## DESIGN-10 — Xưởng vận hành (26/10/2026)
+
+Theo yêu cầu redesign và Game riêng: chuyển nền sang trắng đá #f3f5f1, mực xanh rừng #193b35, action teal #1b6e66. Be Vietnam Pro tiếp tục tự host. Hero là xưởng request tương tác; lớp 3D lazy-load, vẽ khi có thay đổi, có lời giải HTML tương đương. Catalog/lesson vẫn ưu tiên đọc và điều khiển cơ chế.
+
+Game là điểm đến `/games`, độc lập với học và tiến độ bài. Mỗi game 6 lượt, không đếm giờ, có luật giả định, trace và kết quả; local save version riêng, không tính mastery. Ba cơ chế: chia tải, cache freshness, queue capacity/worker budget. GSAP dùng transform theo cuộn ngắn, không pinning/scroll-jacking; tôn trọng reduced-motion. LottieFiles runtime phát JSON tự tạo theo thao tác, không loop vô hạn. Brief và lựa chọn ở docs/design/design10/BRIEF.md.
