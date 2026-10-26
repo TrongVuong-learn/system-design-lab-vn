@@ -549,3 +549,100 @@
     font-size: 48px;
   }
 }
+
+/* GAME12: mechanism-specific action diagrams; final results remain readable without animation. */
+.game-scene {
+  margin: 24px 0;
+  padding: 16px;
+  background: #eaf0ff;
+  border-radius: 16px;
+}
+.scene-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.scene-heading strong {
+  font-size: 15px;
+}
+.scene-heading button {
+  min-height: 44px;
+  font-size: 13px;
+}
+.scene-map {
+  display: block;
+  width: 100%;
+  max-height: 310px;
+  margin: 12px auto;
+  overflow: visible;
+}
+.scene-map text {
+  font-family: var(--font-body);
+  font-size: 16px;
+  fill: var(--ink);
+}
+.scene-route {
+  fill: none;
+  stroke: #8198d4;
+  stroke-width: 3;
+  stroke-dasharray: 5 5;
+}
+.scene-machine,
+.scene-slot {
+  fill: white;
+  stroke: #9eafe2;
+  stroke-width: 1.5;
+}
+.scene-reader {
+  fill: #d5e9de;
+  stroke: #397657;
+  stroke-width: 1.5;
+}
+.scene-unit {
+  fill: var(--accent);
+}
+.scene-packet {
+  fill: #f6da59;
+  stroke: #142454;
+  stroke-width: 1;
+}
+.scene-error {
+  fill: #ffdbd3;
+  stroke: #a33221;
+}
+.scene-map .scene-packet-text {
+  font-size: 12px;
+  font-weight: 700;
+}
+.scene-stages {
+  padding-left: 22px;
+  margin: 8px 0 12px;
+  font-size: 13px;
+}
+.scene-stages li {
+  padding: 3px 5px;
+}
+.scene-stages li[aria-current] {
+  background: #f6da59;
+  color: #142454;
+  font-weight: 600;
+  border-radius: 4px;
+}
+.game-scene figcaption {
+  font-size: 14px;
+  color: var(--ink);
+}
+.game-scene .scene-note {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 10px 0 0;
+}
+@media (max-width: 420px) {
+  .game-scene {
+    padding: 12px 8px;
+  }
+  .scene-heading {
+    flex-wrap: wrap;
+  }
+}
