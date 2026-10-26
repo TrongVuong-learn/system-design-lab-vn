@@ -68,9 +68,9 @@ export function HomePage() {
       <section className="workshop-hero">
         <div className="workshop-intro" data-reveal>
           <h1>
-            Hiểu hệ thống.
+            Vận hành
             <br />
-            Bằng cách thử.
+            để hiểu.
           </h1>
           <p>
             Từ một lần bấm đến hàng triệu yêu cầu. Tự tay khám phá cách phần mềm vận hành, bằng

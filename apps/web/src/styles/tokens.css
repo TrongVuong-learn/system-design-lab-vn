@@ -1,12 +1,12 @@
 :root {
-  --paper: #f3f5f1;
-  --ink: #193b35;
-  --muted: #53665f;
-  --accent: #1b6e66;
-  --surface-tint: #e1eee7;
-  --wash: #eaf0eb;
-  --line: #d4dfd7;
-  --highlight: #f6e6bd;
+  --paper: #f4f6ff;
+  --ink: #142454;
+  --muted: #526080;
+  --accent: #2447d8;
+  --surface-tint: #dce5ff;
+  --wash: #eaf0ff;
+  --line: #ccd5eb;
+  --highlight: #f6da59;
   --font-body: 'Be Vietnam Pro', sans-serif;
   --font-display: 'Be Vietnam Pro', sans-serif;
 }

@@ -78,3 +78,7 @@ Giữ palette/font bàn thí nghiệm. Trang đầu có sáu bài nhập môn; K
 Theo yêu cầu redesign và Game riêng: chuyển nền sang trắng đá #f3f5f1, mực xanh rừng #193b35, action teal #1b6e66. Be Vietnam Pro tiếp tục tự host. Hero là xưởng request tương tác; lớp 3D lazy-load, vẽ khi có thay đổi, có lời giải HTML tương đương. Catalog/lesson vẫn ưu tiên đọc và điều khiển cơ chế.
 
 Game là điểm đến `/games`, độc lập với học và tiến độ bài. Mỗi game 6 lượt, không đếm giờ, có luật giả định, trace và kết quả; local save version riêng, không tính mastery. Ba cơ chế: chia tải, cache freshness, queue capacity/worker budget. GSAP dùng transform theo cuộn ngắn, không pinning/scroll-jacking; tôn trọng reduced-motion. LottieFiles runtime phát JSON tự tạo theo thao tác, không loop vô hạn. Brief và lựa chọn ở docs/design/design10/BRIEF.md.
+
+## QA11 — Trạm điều phối (thay hướng DESIGN-10)
+
+Người dùng yêu cầu phá cách hơn: chuyển sang cobalt #2447d8, mực #142454, giấy #f4f6ff, vàng tín hiệu #f6da59. Hero chữ lớn trên mảng màu đặc cạnh hành trình request thật. Khu Game là ba vùng bất đối xứng, chia tải chiếm hai hàng trên desktop, mobile chuyển thành ba poster liên tiếp. Không còn ba card trắng giống nhau. Be Vietnam Pro và nội dung/luật/saved state giữ nguyên; màn bài học và bàn chơi vẫn nền sáng. Xem docs/design/qa11/BRIEF.md.

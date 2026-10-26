@@ -29,3 +29,7 @@ P3: diễn đạt định nghĩa port có thể trừu tượng cho người m�
 ## 2026-10-14 — QA-06 first-use DNS/network/queue
 
 Definition1.0.0, HEAD f8ae271, bundle baseline24625a3 do parent xác minh. Chạy song song độc lập với knowledge reviewer. [Report gốc](RUN_2026-10-14_DNS_NETWORK_QUEUE.md); artifact `/private/tmp/student-parallel-2026-10-14/`. Ba luồng prediction→lab→case→completion, phản hồi sai/sửa có chủ ý, tap glossary, saved→reload, case/lab giữ câu trả lời; touch390 và case320. Không xác nhận defect. P3 payload/backlog thiếu giải thích inline, parent bổ sung glossary; regression xem [QA-06](../../delivery/QA_06_PARALLEL_REVIEW.md). Chưa pilot thật, desktop, offline hay assistive technology.
+
+## 2026-10-26 — QA11 yêu cầu mobile/new games
+
+Definition 1.0.0; production 9f3ac9f, fingerprint bf1cb7cffcfb18ae. Native student_tester được gọi với context mới để khám phá home và ba game, 390×844/touch và 320px. Lần đầu bị usage limit trước khi có báo cáo hoặc ảnh; không có finding nào để xác nhận từ Minh. Parent đang kiểm tra riêng và redesign theo steering mới của user; không coi kiểm tra parent là AI mô phỏng góc nhìn học sinh hoặc pilot thật. Một lần tiếp tục được yêu cầu sau mốc reset mà runtime thông báo; kết quả cần ghi bổ sung nếu có.

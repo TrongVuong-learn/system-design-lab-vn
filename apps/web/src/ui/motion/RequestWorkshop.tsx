@@ -34,12 +34,12 @@ export function RequestWorkshop() {
         scene.add(light);
         const geometry = new T.BoxGeometry(1.2, 0.35, 1.5);
         const teal = new T.MeshStandardMaterial({
-          color: 0x1b6e66,
+          color: 0x2447d8,
           roughness: 0.4,
           metalness: 0.25,
         });
-        const pale = new T.MeshStandardMaterial({ color: 0xcbdcd4, roughness: 0.6 });
-        const orange = new T.MeshStandardMaterial({ color: 0xe4753b, roughness: 0.3 });
+        const pale = new T.MeshStandardMaterial({ color: 0xffffff, roughness: 0.6 });
+        const orange = new T.MeshStandardMaterial({ color: 0xf6da59, roughness: 0.3 });
         const group = new T.Group();
         scene.add(group);
         [-2.2, 0, 2.2].forEach((x, i) => {
