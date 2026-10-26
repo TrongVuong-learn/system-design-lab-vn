@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-10-12",
+  "reviewedAt": "2026-10-26",
   "existingDesignLock": "docs/design/tooling-lock.json",
   "installed": [
     {
@@ -190,6 +190,187 @@
         "testing-patterns/performance-testing.md": "0faccd5ec785b4c66466f194ce9c8d1b9e257674e5be5c1ef5dd8864538bde5b",
         "testing-patterns/security-testing.md": "c03fe6ead5ec78bfe20af45e05ab587d054f77f8e1a6d26dd7791f06be7cabd7",
         "testing-patterns/visual-regression.md": "b58d614c2d34f6b63df6a6aaa9d255a90dd4e4e5475db8227b6ea43c8a079a33"
+      }
+    },
+    {
+      "name": "design-taste-frontend",
+      "repository": "https://github.com/Leonxlnx/taste-skill",
+      "commit": "12af471f627f866411b4bd785b19646d3672784c",
+      "sourcePath": "skills/taste-skill",
+      "projectPath": ".agents/skills/taste-skill",
+      "scope": "project",
+      "license": "See preserved upstream license/readme",
+      "upstreamModified": false,
+      "files": {
+        "README.md": "5e33fd716b3e1ffaca9340f645d44c193f9b446107fa67f0cce498d33025672c",
+        "SKILL.md": "3435ed963b15a1b6447746ec8844ab2cd38d8d2e8ead3451937f42df01e408c4",
+        "UPSTREAM-LICENSE": "4575a543ab88dad12ccea7d97e563d0bce5b448b06072e65d3264497dad326df",
+        "UPSTREAM-README.md": "a3e3735d1bd37553801bc09918804f93b8f0a98448f3cb58001332832bb89357",
+        "assets/app.css": "16518c3a999fb81b2698137f1f743128c189272e8b1d411c4b02598c6755b67f",
+        "assets/base.css": "aa6ea21613c79e06e06dea3d33200c78590c89b0346bb976ec07947bb45ceafa",
+        "assets/base.js": "8d50416125596b84c0083d5d5ffba09add57db4b06cbf0eedac2d4999b7653bc",
+        "assets/charts.js": "a7e916594729576b7c7e37048a68508a3243fe8fbc9654775cd245232e9f8100",
+        "assets/scenes/stage.css": "b5c587dac45ac6fcc34ae7cb4aa2b3e43797b2ef5d71fd32b48483bda3fca3e0",
+        "assets/scenes/stage.js": "9ce782a94406e6a230c49ca5f87e56aff9d436da3f56416b1659421f8976bc2b",
+        "evals/evals.json": "df0ee2a248cd5445c0e1600eb095dc0d43dd312f5b4bb4316a78471ae0d22a74",
+        "library/app.json": "3678ccbe1e8d05feff6d4f07fa16a0d610aefeea5e697e842a876713ba763cf5",
+        "library/directions.json": "d71e3824af33a92d9e1ca543e17f80baa5b7a30c815df5125cfe3300a14892c1",
+        "library/heroes.json": "98d5e01104412a5fb27936f9c686f3bc0a5f76ce0793186d3de46b982c65b172",
+        "library/motions.json": "51815dd09a823c829897f99ed9ea7dc5c35bd305ac989b8a0632ea6d42a3f08b",
+        "library/palettes.json": "a14be9f45baba848c53436f4aa44eb4f1925ad3e232c5d1dcddf4f565661a525",
+        "library/photos.json": "8fc3b76bca90f44675bd99d99bb4ce95b0756c6c5d4141b7e917d11d90e61520",
+        "library/sections.json": "7c2c8a470a22501176948661f803434db8c542a511281752c717252de80c1ad8",
+        "library/sites.json": "a2bc4d0cff8ebff481f0dfd4879c106d5e1e16cb3122f9ab3702184a5e1f3502",
+        "library/type.json": "dbabf41a468775cf6cc5ea5f3c898b0663293822e167b72b02feba1ef03ebf37",
+        "references/app-screens.md": "55e937ec30de605b53a11310b446f328a3ce7403de24fff008920a00be1a5ed4",
+        "references/colour.md": "6556bcc7eed48b7bc2d0d281c28bf57c1b75e94d7ca0bde49f5d9df8c6a09351",
+        "references/copy.md": "676edbe75d5f3cfd8a793010ea9f730525ae074b231a674c2426264d3398262e",
+        "references/critique.md": "9c2f4392674530b3f02ac529fba53d82ab37b85f401c4c1989fbe98d6217f0b4",
+        "references/imagery.md": "518def6b2c643b295e13e66b09b66f2e3fc1421d3cf6c7dbb1dc749097ad2ad9",
+        "references/layout.md": "40080640719b07737afb94a8868afef87767a1ab4892814d9b6882e2d283453b",
+        "references/motion.md": "79f94d8469898d2bf6186c198ad86ddf691a67c6536eaec36a4ec101285d9a37",
+        "references/research.md": "83433646a352cae588591e05bc0a75fe1deadff55ede8851bc8dd5dd483adfc5",
+        "references/scenes.md": "733ac7258a1a28f2f6ae8205bc36ba66c563594ad0a2e2f829c5eaaba3199a61",
+        "references/tells.md": "8e6de4411c43d3108f832b3f33bb1a2a838148a72b92a176df893b67d99a0da9",
+        "references/type.md": "6353ff1d0ce2f9913628c88fbcb7dad3cc3877e61196848bce99e33a17d20611",
+        "scripts/assets.mjs": "b4b4b99b5634735f5a0b4213169cda5240ee6bbed8ed8042ad1bcf2b6607c1fa",
+        "scripts/draw.mjs": "6c2047d207d2400d3b099956dfe2ac306203b614246e66bc8760212a7f797dbf",
+        "scripts/inspect.mjs": "c0d7366f789b3f594787b37a525d1d7096104a499aac8a97ae04b405046cf02c",
+        "scripts/lib/app-draw.mjs": "aa0802d341d19b53ec14ec21746e428be49a8ec3ed7b30253194105fc18a8df6",
+        "scripts/lib/cdp.mjs": "320fb75c6454a97b88458e5c33559a1188042aa0041bd5eff53455900236c88a",
+        "scripts/lib/inspection-files.mjs": "5635c0d5fbe0f5bd012e58534bcd554ff7440a4e5c724a61a61c476c7f42e918",
+        "scripts/lib/probe.mjs": "a5a17df891e438f55f196d8233601c3c79c873755f442c1ac5c3568de4e6bb48",
+        "scripts/lib/rules.mjs": "8244aa9f53e77a59a562410310414e6b1a0f0cf002ce8f5aa792740b7f0149bf",
+        "scripts/lint.mjs": "05f2fae2f56fc051b539cdbacb43a6f78fbbfb9644bb74aa11be472ff12dcaf5",
+        "scripts/scenes.mjs": "234ec582e2b841457c33033feeeba8535f9ac285495a74d08dc533a1566c90d5"
+      }
+    },
+    {
+      "name": "gsap-core",
+      "repository": "https://github.com/greensock/gsap-skills",
+      "commit": "aed9cfd3277740755f6bfc1155c7aa645403b760",
+      "sourcePath": "skills/gsap-core",
+      "projectPath": ".agents/skills/gsap-core",
+      "scope": "project",
+      "license": "See preserved upstream license/readme",
+      "upstreamModified": false,
+      "files": {
+        "SKILL.md": "3887b47e050ab5afbe2a9a820f23d39fa02ab785e06a343be44c6f91d84d12b3",
+        "UPSTREAM-LICENSE": "51b04b06556662dd817e8f4aa6d06bc7139dc73739e1319a7233cfde3e147b90",
+        "UPSTREAM-README.md": "2cd27948cd1486056271d8d962918eec074e9956b594111b5f84304ec1c13914"
+      }
+    },
+    {
+      "name": "gsap-performance",
+      "repository": "https://github.com/greensock/gsap-skills",
+      "commit": "aed9cfd3277740755f6bfc1155c7aa645403b760",
+      "sourcePath": "skills/gsap-performance",
+      "projectPath": ".agents/skills/gsap-performance",
+      "scope": "project",
+      "license": "See preserved upstream license/readme",
+      "upstreamModified": false,
+      "files": {
+        "SKILL.md": "cb5408d6fba707aabcbfe3320317a14c1f8fca6070074e5261047930f50d441e",
+        "UPSTREAM-LICENSE": "51b04b06556662dd817e8f4aa6d06bc7139dc73739e1319a7233cfde3e147b90",
+        "UPSTREAM-README.md": "2cd27948cd1486056271d8d962918eec074e9956b594111b5f84304ec1c13914"
+      }
+    },
+    {
+      "name": "gsap-react",
+      "repository": "https://github.com/greensock/gsap-skills",
+      "commit": "aed9cfd3277740755f6bfc1155c7aa645403b760",
+      "sourcePath": "skills/gsap-react",
+      "projectPath": ".agents/skills/gsap-react",
+      "scope": "project",
+      "license": "See preserved upstream license/readme",
+      "upstreamModified": false,
+      "files": {
+        "SKILL.md": "88e2a5312b45e8cc7b3c496637ff5bc9af2ae9c925b555c8b235b34cbc989d74",
+        "UPSTREAM-LICENSE": "51b04b06556662dd817e8f4aa6d06bc7139dc73739e1319a7233cfde3e147b90",
+        "UPSTREAM-README.md": "2cd27948cd1486056271d8d962918eec074e9956b594111b5f84304ec1c13914"
+      }
+    },
+    {
+      "name": "gsap-scrolltrigger",
+      "repository": "https://github.com/greensock/gsap-skills",
+      "commit": "aed9cfd3277740755f6bfc1155c7aa645403b760",
+      "sourcePath": "skills/gsap-scrolltrigger",
+      "projectPath": ".agents/skills/gsap-scrolltrigger",
+      "scope": "project",
+      "license": "See preserved upstream license/readme",
+      "upstreamModified": false,
+      "files": {
+        "SKILL.md": "9351b6666a4749c0740406ea363aaccb99a087ff45cc5e8b99a0f367facf3ef4",
+        "UPSTREAM-LICENSE": "51b04b06556662dd817e8f4aa6d06bc7139dc73739e1319a7233cfde3e147b90",
+        "UPSTREAM-README.md": "2cd27948cd1486056271d8d962918eec074e9956b594111b5f84304ec1c13914"
+      }
+    },
+    {
+      "name": "scroll-craft",
+      "repository": "https://github.com/nateherkai/scroll-craft",
+      "commit": "75d81f74e83692add18cd7a8a8e078b8a887a579",
+      "sourcePath": "plugins/nateherk-design/skills/scroll-craft",
+      "projectPath": ".agents/skills/scroll-craft",
+      "scope": "project",
+      "license": "See preserved upstream license/readme",
+      "upstreamModified": false,
+      "files": {
+        "CHANGELOG.md": "1be4ff92fc5076895b071f39c067cafe1c5063c40d6890cfd3d20b23b64fc68b",
+        "SKILL.md": "6e798bb51c3dcbe4f35f098dcdd3cdd20d08e538a33993bcae909c9fd0a500a1",
+        "UPSTREAM-LICENSE": "dd471a27eca72488a53e6ea6fbe9392d81aa3f01e950e63fe328affb2ddfa6e3",
+        "UPSTREAM-README.md": "fb78570c66c520296567be4a176919da0456027cb94bdeca3cb5ca2a06f43bbb",
+        "engine/scrollcraft.css": "e19eb3aa73b0944626ca56e6e427c76f44753481e04d60f4bac20e8cf1d7758a",
+        "engine/scrollcraft.js": "4a419b3ede51f64790af7b56c0195ea01c98a84df8e0e768ebf343956b922f39",
+        "references/approved-collection.md": "8a963a46af4c6ed40656fb5b21589629ee3ce30aa06a8b31c10bc132b74f2780",
+        "references/assets.md": "0cc3871ad903ccaf3bf769cf3a05a54a9326ed558ac3e45e57f19043ce70efa6",
+        "references/device-diag.html": "8ec61db711e3f74ec38a81f418a051a88d9574240f5bbde4716ed9f053775e59",
+        "references/devices.md": "e5ae5a4f2924fc1b13177bf0b0ac10f04e686edd916dc33755ed1420a6a478f5",
+        "references/feel.md": "3951f1f0331f329dab14e8766edeecb6ce8e05437ea8986c48a074726bef41a0",
+        "references/hero-depth.md": "2426fb9703d4398b1e3b666b2db7f4b68e7cd41112da77700a7d63f2965dd726",
+        "references/taste.md": "f33c581024f466ab98612ae291aa46ccbc326875f8fa0918a3f45455a2c60e80",
+        "references/template.html": "4be3e8d772cf063ea5d1e695d6c39443920b2ff0e8491656013bebb87d098096",
+        "references/uniqueness.md": "0fd65a43624da868ca2027946bd4ce152605d6ea856eeae93b35721714c8b20e",
+        "references/verify.md": "de645d648f738f3e19452083eadcc649cb8477058b6ad79ab4fa29198406150a",
+        "references/worldflight.md": "451fead8f90604423b113cd0b0d3bfb6be1f7ca7a7b5ab9e2688ea3da762af4c",
+        "references/worlds.md": "dea3e4cc20c7245f87638a6d88eb2e3fc22a69dabc9f75f001dd97a3121077bd",
+        "scripts/doctor.mjs": "92aade1921c12cce3ebc27e3c0f727d1bfaf1e0678deb7bd930a93248dbb37d9",
+        "scripts/encode.sh": "01eedead388130fdce1052f4ed2e99a7420d4fffcde8621587c840b40a325d79",
+        "scripts/kie.mjs": "6d4a1d4cfb3ed6400cd9a453064b2949d72581f03ba56abe2038be4c78ebc136",
+        "scripts/serve.mjs": "3dff774c47f1ebecb22f6bb2618d1ec13c99f21a92ce53e984ed0ae525c3327e",
+        "scripts/shoot.mjs": "963b1f2f0425783979b41ce0fcd2c668d47376735612816a83ca8142bb225be0",
+        "scripts/workspace.mjs": "98896557c62c12452d2258c26e7984b0f0d69d87938650fa20705ba1b0ba193b",
+        "scripts/worldflight-assert.mjs": "6932652d313a5e72d9d023f74eaa4dd893752ad7db33d010d586a56f929c8449",
+        "templates/FINGERPRINTS.md": "8c1597e6b068bfa77086f847cf90b9e2ebeba3ec42f1e6cc522e222e2700da16"
+      }
+    },
+    {
+      "name": "threejs-fundamentals",
+      "repository": "https://github.com/CloudAI-X/threejs-skills",
+      "commit": "0e181866f095b5f06d005133876e926515390d95",
+      "sourcePath": "skills/threejs-fundamentals",
+      "projectPath": ".agents/skills/threejs-fundamentals",
+      "scope": "project",
+      "license": "See preserved upstream license/readme",
+      "upstreamModified": false,
+      "files": {
+        "SKILL.md": "cb6a0db8f05bb7d8196cad0ca6ae245e2baec53da4675e1b94be4fa735ed8a09",
+        "UPSTREAM-LICENSE": "d26f12fa1a0e03fd5aa4d3cbf05262a9f1c684672d0864abac78b3bbb12b268c",
+        "UPSTREAM-README.md": "e068ef3b64df1fbfd82e4f078f868abc3a3d011520e86e40c5eda3707086d6ad"
+      }
+    },
+    {
+      "name": "threejs-performance",
+      "repository": "https://github.com/CloudAI-X/threejs-skills",
+      "commit": "0e181866f095b5f06d005133876e926515390d95",
+      "sourcePath": "skills/threejs-performance",
+      "projectPath": ".agents/skills/threejs-performance",
+      "scope": "project",
+      "license": "See preserved upstream license/readme",
+      "upstreamModified": false,
+      "files": {
+        "SKILL.md": "dacbf6a43ed280bdfcda2ce9fcf7a3f0ae54c25ed264e62f6e9a0117d6534285",
+        "UPSTREAM-LICENSE": "d26f12fa1a0e03fd5aa4d3cbf05262a9f1c684672d0864abac78b3bbb12b268c",
+        "UPSTREAM-README.md": "e068ef3b64df1fbfd82e4f078f868abc3a3d011520e86e40c5eda3707086d6ad"
       }
     }
   ]

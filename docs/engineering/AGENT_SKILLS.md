@@ -37,3 +37,9 @@ node scripts/check-skills.mjs
 Lệnh kiểm tra inventory, checksum, commit pin, manifest và local links từ SKILL.md của ba skill mới; không chứng nhận mọi ví dụ upstream là đúng hoặc đã chạy. Đánh giá chất lượng vẫn cần kết quả task thực tế.
 
 Khi cập nhật: chọn commit cụ thể, đọc diff và license, kiểm tra tương thích stack rồi thay đúng thư mục skill trong thay đổi riêng; cập nhật checksum sau review. Không tự theo `main`, không ghi đè thay đổi local. Có thể cài lại bằng `skill-installer --repo … --ref <commit> --path <sourcePath> --dest <thư mục tạm>` rồi đối chiếu với lock trước khi thay thế. Installer từ chối ghi đè thư mục đã tồn tại.
+
+## Motion và redesign — 26/10/2026
+
+Theo yêu cầu DESIGN-10, cài project-local Taste (Leonxlnx), bốn skill GSAP chính thức (core/react/scrolltrigger/performance), Scroll Craft (nateherkai) và Three.js fundamentals/performance (CloudAI-X). Commit, inventory và checksum trong skills-lock.json; license/readme upstream được giữ nguyên. Không tìm thấy tên chính xác `threejs3d`; dùng bộ Three.js nói trên cho nhu cầu 3D.
+
+Taste dùng app-screen workflow cho app học tương tác; giữ font tiếng Việt, controls tối thiểu 44px, nội dung và khả năng truy cập của repo. Scroll Craft dùng working-surface grammar, depth/reveal/visual verification; không áp dụng generator, dịch vụ tạo ảnh trả phí, page-length quota hay engine HTML độc lập vào React. Không tạo ảnh stock để đạt số lượng hình. GSAP quản lý cleanup/matchMedia; Three.js chỉ presentation, lazy import và fallback HTML. Animation Lottie JSON là artwork gốc trong repo, dùng runtime LottieFiles, không tải asset của tác giả khác hay tuyên bố đã dùng Creator.
