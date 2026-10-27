@@ -48,3 +48,5 @@ Không đổi curriculum, assessment hoặc persistence; không gọi Minh vì l
 - Advisory nguồn: https://github.com/advisories/GHSA-mrhx-c7xc-m3w5 ; hướng dẫn headers: https://vercel.com/docs/cdn-security/security-headers . Rà nguồn 27/10/2026.
 - Production baseline để rollback: master `0d8480dedf134f0afb25b31f5a8480447adf511d`, deployment `dpl_RHeGg8Tty3bjzRJvBH3b9iL5kHVR` (READY).
 - Kết quả CI, SHA tích hợp và deployment cuối sẽ được đối chiếu với artifact và smoke trên URL công khai trước báo phát hành thành công.
+
+WebKit local phát hiện `upgrade-insecure-requests` nâng URL asset từ HTTP localhost lên HTTPS làm preview trắng; bỏ directive dư này khỏi CSP dùng chung. Production tiếp tục HTTPS/HSTS do Vercel, còn CSP `self` vẫn giới hạn script cùng origin. Kiểm lại WebKit trước merge.
