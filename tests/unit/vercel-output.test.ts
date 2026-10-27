@@ -22,7 +22,20 @@ test('Vercel pack preserves exact static bytes and correctly scopes cache header
     expect(route('/assets/app-hash.js').headers['Cache-Control']).toContain('immutable');
     for (const url of ['/', '/index.html', '/sw.js', '/offline.json'])
       expect(route(url).headers['Cache-Control']).toContain('no-cache');
-    expect(route('/swXjs')).toBeUndefined();
+    expect(route('/swXjs').headers['Cache-Control']).toBeUndefined();
+    for (const url of ['/', '/index.html', '/sw.js', '/assets/app-hash.js', '/swXjs']) {
+      const rules = config.routes.filter(
+        (r: { src?: string }) => r.src && new RegExp(r.src).test(url),
+      );
+      const headers = Object.assign(
+        {},
+        ...rules.map((r: { headers: Record<string, string> }) => r.headers),
+      );
+      expect(headers['X-Content-Type-Options']).toBe('nosniff');
+      expect(headers['X-Frame-Options']).toBe('DENY');
+      expect(headers['Content-Security-Policy']).toContain("frame-ancestors 'none'");
+      expect(headers['Content-Security-Policy']).toContain("'wasm-unsafe-eval'");
+    }
     expect(config.version).toBe(3);
     await expect(prepareVercel(dist, out)).rejects.toThrow('Output exists');
     await writeFile(join(dist, 'index.html'), 'tampered');

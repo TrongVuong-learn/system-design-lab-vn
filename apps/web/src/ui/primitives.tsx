@@ -3,7 +3,7 @@ export function Icon({ name, size = 20 }: { name: string; size?: number }) {
   const paths: Record<string, ReactNode> = {
     play: (
       <>
-        <rect x="2" y="6" width="20" height="13" rx="4" />
+        <rect x="2" y="6" width="20" height="13" rx="0" />
         <path d="M6 12h5M8.5 9.5v5M16 11h.01M18 14h.01" />
       </>
     ),
@@ -20,10 +20,10 @@ export function Icon({ name, size = 20 }: { name: string; size?: number }) {
     ),
     grid: (
       <>
-        <rect x="3" y="3" width="7" height="7" rx="1" />
-        <rect x="14" y="3" width="7" height="7" rx="1" />
-        <rect x="3" y="14" width="7" height="7" rx="1" />
-        <rect x="14" y="14" width="7" height="7" rx="1" />
+        <rect x="3" y="3" width="7" height="7" rx="0" />
+        <rect x="14" y="3" width="7" height="7" rx="0" />
+        <rect x="3" y="14" width="7" height="7" rx="0" />
+        <rect x="14" y="14" width="7" height="7" rx="0" />
       </>
     ),
     chart: (
@@ -68,8 +68,8 @@ export function Icon({ name, size = 20 }: { name: string; size?: number }) {
       fill="none"
       stroke="currentColor"
       strokeWidth="1.7"
-      strokeLinecap="round"
-      strokeLinejoin="round"
+      strokeLinecap="square"
+      strokeLinejoin="miter"
       aria-hidden="true"
     >
       {paths[name] ?? paths['book']}

@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from './validation';
 import type { Lesson } from './index';
 
 // v1 progress stores answer indices and lab checkpoints by lesson ID. Until a

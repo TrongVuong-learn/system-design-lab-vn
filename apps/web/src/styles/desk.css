@@ -40,7 +40,7 @@
 .featured-experiment {
   background: white;
   border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: 2px;
   overflow: hidden;
   box-shadow: none;
 }
@@ -68,7 +68,7 @@
   padding: 17px 16px;
   border: 1px solid var(--line);
   border-top: 3px solid var(--accent);
-  border-radius: 6px;
+  border-radius: 2px;
   display: flex;
   flex-direction: column;
 }
@@ -109,7 +109,7 @@
 }
 .experiment-actions button {
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 2px;
   background: white;
   color: var(--ink);
   font-size: 12px;
@@ -170,7 +170,7 @@
 .cache-sketch > div > span {
   background: white;
   border: 1px solid var(--line);
-  border-radius: 4px;
+  border-radius: 2px;
   padding: 6px;
   font-size: 12px;
   flex: 1;
@@ -215,7 +215,7 @@
   height: 25px;
   background: white;
   border: 1px solid #b2c4e5;
-  border-radius: 3px;
+  border-radius: 2px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -351,7 +351,7 @@
   }
   .featured-experiment {
     box-shadow: none;
-    border-radius: 11px;
+    border-radius: 2px;
   }
   .experiment-top {
     padding: 15px 17px;
@@ -412,7 +412,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 7px;
+    font-size: 12px;
     padding: 4px 5px;
   }
   .cache-sketch strong {
@@ -422,7 +422,7 @@
     font-size: 16px;
   }
   .request-stops small {
-    font-size: 7px;
+    font-size: 12px;
   }
   .request-stops b {
     font-size: 12px;
@@ -434,7 +434,7 @@
     font-size: 20px;
   }
   .replica-path {
-    font-size: 7px;
+    font-size: 12px;
   }
   .budget-dots {
     gap: 5px;
@@ -482,7 +482,7 @@
     font-size: 12px;
   }
   .sketch-caption {
-    font-size: 7px;
+    font-size: 12px;
   }
   .replica-sketch strong {
     font-size: 18px;
@@ -772,7 +772,7 @@
   color: #17233d;
   background: white;
   border: 1px solid #d8dfeb;
-  border-radius: 6px;
+  border-radius: 2px;
 }
 .routing-inputs select:focus-visible {
   outline: 2px solid var(--accent);
@@ -982,7 +982,7 @@
   resize: vertical;
   margin-top: 0.75rem;
   border: 1px solid #8999b8;
-  border-radius: 8px;
+  border-radius: 2px;
   background: #fff;
   padding: 0.8rem;
   font: inherit;
@@ -1334,7 +1334,7 @@
   color: inherit;
   background: #fff;
   border: 1px solid #d8dfeb;
-  border-radius: 8px;
+  border-radius: 2px;
 }
 .design-draft {
   margin: 2rem 0;
@@ -1359,7 +1359,7 @@
   color: #17233d;
   background: #fff;
   border: 1px solid #d8dfeb;
-  border-radius: 8px;
+  border-radius: 2px;
   padding: 0.75rem;
 }
 .design-field textarea:focus-visible,

@@ -14,8 +14,8 @@ import {
 import { Icon } from '../../ui/primitives';
 import { LessonSketch } from './LessonSketch';
 import { RequestWorkshop } from '../../ui/motion/RequestWorkshop';
-import { useWorkshopMotion } from '../../ui/motion/useWorkshopMotion';
 import { FeaturedExperiment } from './FeaturedExperiment';
+import { PixelBuilding } from '../../ui/PixelCity';
 
 export function LessonCard({ id }: { id: string; index?: number }) {
   const l = lessons.find((l) => l.id === id)!;
@@ -57,24 +57,22 @@ export function LessonCard({ id }: { id: string; index?: number }) {
   );
 }
 export function HomePage() {
-  const root = useRef<HTMLDivElement>(null);
-  useWorkshopMotion(root);
   const { progress } = useProgress();
   const continuation = lessons.find(
     (l) => progress.lessons[l.id] && !isLessonComplete(l, progress.lessons[l.id]),
   );
   return (
-    <div ref={root} className="workshop-home">
+    <div className="workshop-home">
       <section className="workshop-hero">
-        <div className="workshop-intro" data-reveal>
+        <div className="workshop-intro">
           <h1>
-            Vận hành
+            Thành phố
             <br />
-            để hiểu.
+            dữ liệu.
           </h1>
           <p>
-            Từ một lần bấm đến hàng triệu yêu cầu. Tự tay khám phá cách phần mềm vận hành, bằng
-            tiếng Việt.
+            Một yêu cầu đi đâu sau lần bấm? Gửi một bưu kiện qua các trạm, rồi tự tay khám phá cách
+            phần mềm vận hành.
           </p>
           <Link
             className="button primary"
@@ -88,9 +86,9 @@ export function HomePage() {
         </div>
         <RequestWorkshop />
       </section>
-      <section className="game-invitation" data-reveal>
+      <section className="game-invitation">
         <div>
-          <h2>Đến lượt bạn vận hành.</h2>
+          <h2>Ba sân chơi. Ba cơ chế.</h2>
           <p>
             Chia tải. Giữ dữ liệu mới. Vượt giờ cao điểm. Ba game, mỗi quyết định đều có kết quả để
             quan sát.
@@ -109,7 +107,7 @@ export function HomePage() {
           <span>kết quả</span>
         </div>
       </section>
-      <section className="learning-desk" data-reveal>
+      <section className="learning-desk">
         <div className="desk-copy">
           <h2>Vì sao lịch học vẫn hiện phòng cũ?</h2>
           <p>Cô giáo đã đổi phòng. Website chưa đổi theo. Thử xem hai nơi đang giữ thông tin gì.</p>
@@ -141,18 +139,21 @@ export function HomePage() {
       </section>
       <section className="path-section">
         <div className="path-intro">
-          <h2>Sau bài đầu, đi tiếp ở đâu?</h2>
+          <h2>Sáu khu, một lộ trình</h2>
           <p>
             Học theo level hoặc mở chủ đề bạn đang cần. Lộ trình gồm 36 module và 7 nhánh chuyên
             sâu, bài tổng hợp theo level và case thiết kế.
           </p>
           <Link className="text-link" to="/explore">
-            Khám phá bản đồ kiến thức
+            Khám phá sáu khu học
           </Link>
         </div>
         <div className="level-list">
           {levels.map((level) => (
             <Link key={level.id} to={`/levels/${level.id}`}>
+              <span className="district-icon">
+                <PixelBuilding district={levels.indexOf(level)} />
+              </span>
               <span className="level-number">{level.id}</span>
               <div>
                 <h3>{level.name}</h3>
@@ -176,6 +177,7 @@ export function HomePage() {
 export function ExplorePage() {
   const [query, setQuery] = useState('');
   const [group, setGroup] = useState('all');
+  const [district, setDistrict] = useState<string | null>('L0');
   const normalize = (s: string) =>
     s
       .toLocaleLowerCase('vi')
@@ -203,7 +205,9 @@ export function ExplorePage() {
   return (
     <div className="page-content explore-workshop">
       <h1>Khám phá bài học</h1>
-      <p className="page-lead">Chọn một câu hỏi để thử ngay, hoặc nhìn toàn bộ lộ trình.</p>
+      <p className="page-lead">
+        Sáu khu học từ nền tảng đến thiết kế hệ thống. Chọn khu hoặc tìm thẳng bài bạn cần.
+      </p>
       <div className="search-box">
         <Icon name="search" />
         <input
@@ -235,6 +239,51 @@ export function ExplorePage() {
           ))}
         </select>
       </div>
+      {!term && group === 'all' && (
+        <section className="district-map" aria-label="Sáu khu học">
+          {levels.map((level, i) => (
+            <div className="district" key={level.id}>
+              <button
+                className="district-toggle"
+                aria-expanded={district === level.id}
+                aria-controls={`district-${level.id}`}
+                onClick={() => {
+                  setDistrict(district === level.id ? null : level.id);
+                }}
+              >
+                <span className="district-icon">
+                  <PixelBuilding district={i} />
+                </span>
+                <span>
+                  <small>{level.id}</small>
+                  <strong>{level.name}</strong>
+                </span>
+                <span aria-hidden="true">{district === level.id ? '−' : '+'}</span>
+              </button>
+              <div
+                className="district-content"
+                id={`district-${level.id}`}
+                hidden={district !== level.id}
+              >
+                <p>{level.subtitle}</p>
+                <Link className="text-link" to={`/levels/${level.id}`}>
+                  Mở khu {level.id}
+                </Link>
+                <button
+                  className="text-button"
+                  onClick={() => {
+                    setGroup(level.id);
+                    setQuery('');
+                    document.getElementById('pathway-select')?.focus();
+                  }}
+                >
+                  Lọc bài của khu này
+                </button>
+              </div>
+            </div>
+          ))}
+        </section>
+      )}
       <h2>
         Bài học đang có <span className="count">{available.length}</span>
       </h2>
@@ -308,9 +357,9 @@ export function LevelPage() {
       <Link className="back-link" to="/explore">
         ← Về lộ trình
       </Link>
-      <span className="eyebrow">
+      <p className="level-context">
         {level.id} · {level.label}
-      </span>
+      </p>
       <h1>{level.name}</h1>
       <p className="page-lead">{level.subtitle}</p>
       {id === 'L0' && (
@@ -440,6 +489,27 @@ export function ProgressPage() {
           </Link>
         </aside>
       )}
+      <section className="progress-districts" aria-label="Tiến độ sáu khu học">
+        {levels.map((level, i) => {
+          const total = lessons.filter((l) => l.level === level.id).length;
+          const completed = done.filter((l) => l.level === level.id).length;
+          return (
+            <Link key={level.id} to={`/levels/${level.id}`}>
+              <PixelBuilding district={i} />
+              <strong>{level.id}</strong>
+              <span>{level.name}</span>
+              <span>
+                {completed} / {total} bài tự luyện
+              </span>
+              <progress
+                value={completed}
+                max={total}
+                aria-label={`${level.id}: ${completed} trên ${total} bài tự luyện`}
+              />
+            </Link>
+          );
+        })}
+      </section>
       <ReviewCard />
       <OfflinePanel />
       <section className="transfer-panel">

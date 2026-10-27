@@ -51,9 +51,11 @@ export async function prepareVercel(dist: string, output: string) {
     | { handle: 'filesystem' };
   const routes: Route[] = sourceConfig.headers.map((rule) => ({
     src:
-      rule.source === '/assets/(.*)'
-        ? '^/assets/.*$'
-        : '^' + rule.source.replaceAll('.', '\\.') + '$',
+      rule.source === '/(.*)'
+        ? '^/.*$'
+        : rule.source === '/assets/(.*)'
+          ? '^/assets/.*$'
+          : '^' + rule.source.replaceAll('.', '\\.') + '$',
     headers: Object.fromEntries(rule.headers.map((h) => [h.key, h.value])),
     continue: true,
   }));

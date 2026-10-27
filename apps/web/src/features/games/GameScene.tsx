@@ -190,9 +190,15 @@ export function GameScene({ state, pulse }: { state: GameState; pulse: number })
         )}
       </div>
       <svg viewBox="0 0 320 220" aria-hidden="true" className="scene-map">
+        <defs>
+          <pattern id={`belt-${state.id}`} width="12" height="12" patternUnits="userSpaceOnUse">
+            <path d="M0 0v12" stroke="#8194a5" strokeWidth="4" />
+          </pattern>
+        </defs>
         {state.id === 'balance' ? (
           <>
             <path className="scene-route" d="M160 35V80H79V125 M160 80H241V125" />
+            <path fill="#2447d8" d="M28 106h102v8H28zm162 0h102v8H190z" />
             <text x="160" y="18" textAnchor="middle">
               Gói việc {turn ? input : gameInputs.balance[0]} đơn vị
             </text>
@@ -204,11 +210,23 @@ export function GameScene({ state, pulse }: { state: GameState; pulse: number })
                   y="110"
                   width="126"
                   height="98"
-                  rx="14"
+                  rx="0"
                 />
                 <text x={machine * 162 + 79} y="103" textAnchor="middle">
                   Máy {machine === 0 ? 'A' : 'B'}
                 </text>
+                <path fill="#dbe9f5" d={`M${machine * 162 + 24} 122h110v22h-110z`} />
+                {Array.from({ length: 8 }, (_, i) => (
+                  <rect
+                    key={`capacity-${i}`}
+                    x={machine * 162 + 25 + i * 13}
+                    y="163"
+                    width="10"
+                    height="10"
+                    fill="#e9f0f8"
+                    stroke="#8194a5"
+                  />
+                ))}
                 {Array.from({ length: result.loads[machine] ?? 0 }, (_, i) => (
                   <rect
                     key={i}
@@ -217,7 +235,7 @@ export function GameScene({ state, pulse }: { state: GameState; pulse: number })
                     y={i < 8 ? 163 : 149}
                     width="10"
                     height="10"
-                    rx="2"
+                    rx="0"
                   />
                 ))}
                 <text x={machine * 162 + 79} y="196" textAnchor="middle">
@@ -229,8 +247,14 @@ export function GameScene({ state, pulse }: { state: GameState; pulse: number })
         ) : state.id === 'cache' ? (
           <>
             <path className="scene-route" d="M64 51H254 M64 51L160 104V164 M254 51L160 104" />
-            <rect className="scene-machine" x="10" y="22" width="108" height="67" rx="12" />
-            <rect className="scene-machine" x="202" y="22" width="108" height="67" rx="12" />
+            <rect className="scene-machine" x="10" y="22" width="108" height="67" rx="0" />
+            <rect className="scene-machine" x="202" y="22" width="108" height="67" rx="0" />
+            <path fill="#ffcf56" d="M198 22h116v12H198z" />
+            <path
+              stroke="#14203b"
+              strokeWidth="2"
+              d="M202 22v12m16-12v12m16-12v12m16-12v12m16-12v12m16-12v12m16-12v12"
+            />
             <text x="64" y="16" textAnchor="middle">
               Nguồn v{input}
             </text>
@@ -249,7 +273,7 @@ export function GameScene({ state, pulse }: { state: GameState; pulse: number })
               y="138"
               width="152"
               height="72"
-              rx="14"
+              rx="0"
             />
             <text x="160" y="132" textAnchor="middle">
               Người nhận
@@ -267,6 +291,8 @@ export function GameScene({ state, pulse }: { state: GameState; pulse: number })
             <text x="10" y="69">
               Hàng đợi: 6 chỗ
             </text>
+            <rect x="20" y="72" width="270" height="36" fill={`url(#belt-${state.id})`} />
+            <path fill="#db5b52" d="M216 183h88v24h-88z" />
             {Array.from({ length: 6 }, (_, i) => (
               <rect
                 key={i}
@@ -275,7 +301,7 @@ export function GameScene({ state, pulse }: { state: GameState; pulse: number })
                 y="73"
                 width="30"
                 height="30"
-                rx="6"
+                rx="0"
               />
             ))}
             {Array.from({ length: turn ? action + 1 : 1 }, (_, i) => (
@@ -286,7 +312,7 @@ export function GameScene({ state, pulse }: { state: GameState; pulse: number })
                   y="119"
                   width="88"
                   height="42"
-                  rx="10"
+                  rx="0"
                 />
                 <text x={60 + i * 100} y="145" textAnchor="middle">
                   Worker {i + 1}
@@ -319,7 +345,8 @@ export function GameScene({ state, pulse }: { state: GameState; pulse: number })
               className={packet.lost ? 'scene-packet scene-error' : 'scene-packet'}
               width="22"
               height="22"
-              rx="5"
+              shapeRendering="crispEdges"
+              rx="0"
             />
             <text className="scene-packet-text" x="11" y="16" textAnchor="middle">
               {packet.label}
@@ -334,7 +361,7 @@ export function GameScene({ state, pulse }: { state: GameState; pulse: number })
           </li>
         ))}
       </ol>
-      <figcaption>
+      <figcaption aria-live="polite">
         {turn ? result.trace.at(-1) : 'Chọn một hành động để xem gói việc hoặc dữ liệu di chuyển.'}
       </figcaption>
       <p className="scene-note">
