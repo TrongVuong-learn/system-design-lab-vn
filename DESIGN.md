@@ -6,7 +6,7 @@ Người học cần mở một bài, dự đoán, thao tác và hiểu kết qu
 
 ## PIXEL-CITY — Hệ UI hiện hành trong source (27/10/2026)
 
-Theo [plan rework](docs/design/PIXEL_CITY_REWORK_PLAN.md), giao diện chuyển sang thành phố dữ liệu pixel trên toàn site. Source đang ở nhánh `codex/pixel-city-ui`; tình trạng kiểm chứng/phát hành nằm trong [báo cáo triển khai](docs/delivery/PIXEL_CITY_UI.md). Các hướng bên dưới là lịch sử và quy tắc cho cơ chế bài học, không phải palette hiện hành.
+Theo [plan rework](docs/design/PIXEL_CITY_REWORK_PLAN.md), giao diện chuyển sang thành phố dữ liệu pixel trên toàn site. Đã phát hành trên master qua [PR #25](https://github.com/TrongVuong-learn/system-design-lab-vn/pull/25); tình trạng kiểm chứng/phát hành nằm trong [báo cáo triển khai](docs/delivery/PIXEL_CITY_UI.md). Các hướng bên dưới là lịch sử và quy tắc cho cơ chế bài học, không phải palette hiện hành.
 
 - Mực `#14203b`, giấy đọc `#f4f7ff`, trời `#b9e6ff`, hành động cobalt `#2447d8`, tín hiệu `#ffcf56`. Be Vietnam Pro tự host, đủ dấu Việt; không dùng font pixel cho phần đọc.
 - Trang đầu: bưu kiện đi qua bốn trạm SVG theo thao tác. Cảnh dựa lưới 4 đơn vị, không cần WebGL và không tự chạy khi cuộn. Số liệu của thí nghiệm cache bên dưới vẫn từ engine.

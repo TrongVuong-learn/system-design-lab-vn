@@ -180,13 +180,6 @@ input[type='checkbox'] {
   letter-spacing: 0;
   text-transform: none;
 }
-.live-dot {
-  height: 6px;
-  width: 6px;
-  display: inline-block;
-  border-radius: 50%;
-  background: var(--accent);
-}
 .button {
   min-height: 48px;
   padding: 12px 20px;
@@ -249,10 +242,6 @@ input[type='checkbox'] {
   min-height: 44px;
   display: inline-flex;
   align-items: center;
-}
-.moving-dot {
-  fill: var(--accent);
-  stroke: none;
 }
 .section {
   padding: 55px 0;
@@ -1450,9 +1439,6 @@ input[type='checkbox'] {
     scroll-behavior: auto !important;
     transition: none !important;
     animation: none !important;
-  }
-  .moving-dot {
-    display: none;
   }
 }
 

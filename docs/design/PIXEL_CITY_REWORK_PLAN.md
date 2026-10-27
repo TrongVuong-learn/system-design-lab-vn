@@ -1,6 +1,6 @@
 # Kế hoạch rework — Thành phố dữ liệu pixel
 
-Trạng thái: kế hoạch theo yêu cầu27/10/2026, chưa hiện thực/phát hành. Đây là hướng kế tiếp sau QA13, không mô tả giao diện đang chạy. Phạm vi: trang đầu, Khám phá, khu Game và ba bàn chơi, màn học, Tiến độ. Giữ6level/36module/7nhánh/85bài, các ID/đáp án/luật/phiên lưu hiện có.
+Trạng thái: UI đã hiện thực và phát hành ngày 27/10/2026 qua [PR #25](https://github.com/TrongVuong-learn/system-design-lab-vn/pull/25). Kế hoạch được giữ làm nguồn phạm vi; kết quả thực tế nằm trong [báo cáo phát hành](../delivery/PIXEL_CITY_UI.md). Phạm vi: trang đầu, Khám phá, khu Game và ba bàn chơi, màn học, Tiến độ. Giữ6level/36module/7nhánh/85bài, các ID/đáp án/luật/phiên lưu hiện có.
 
 ## Ý tưởng chủ đạo
 
@@ -69,4 +69,4 @@ Ngoài phạm vi đợt này: multiplayer, leaderboard thật, đăng nhập/clo
 
 ## Theo dõi triển khai
 
-Source UI và QA theo plan đã được hiện thực trên nhánh `codex/pixel-city-ui`; ngày 27/10/2026 người dùng yêu cầu deploy. Gate bảo mật được thực hiện trong đợt phát hành này. Xem [báo cáo triển khai/phát hành](../delivery/PIXEL_CITY_UI.md) để phân biệt source, kiểm chứng và trạng thái production; các phát hiện sơ bộ ở trên là baseline trước sửa.
+Source UI đã merge vào master và Vercel READY ngày 27/10/2026; gate bảo mật và production smoke đã đạt trong đợt PR #25. Xem [báo cáo triển khai/phát hành](../delivery/PIXEL_CITY_UI.md) để phân biệt source, kiểm chứng và trạng thái production; các phát hiện sơ bộ ở trên là baseline trước sửa.

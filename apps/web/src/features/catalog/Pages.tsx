@@ -17,7 +17,7 @@ import { RequestWorkshop } from '../../ui/motion/RequestWorkshop';
 import { FeaturedExperiment } from './FeaturedExperiment';
 import { PixelBuilding } from '../../ui/PixelCity';
 
-export function LessonCard({ id }: { id: string; index?: number }) {
+export function LessonCard({ id }: { id: string }) {
   const l = lessons.find((l) => l.id === id)!;
   const { progress } = useProgress();
   const done = isLessonComplete(l, progress.lessons[id]);
@@ -289,8 +289,8 @@ export function ExplorePage() {
       </h2>
       {available.length ? (
         <div className="lesson-grid">
-          {available.map((l, i) => (
-            <LessonCard key={l.id} id={l.id} index={i} />
+          {available.map((l) => (
+            <LessonCard key={l.id} id={l.id} />
           ))}
         </div>
       ) : (
@@ -375,8 +375,8 @@ export function LevelPage() {
         <>
           <h2>Bài học trong level</h2>
           <div className="lesson-grid">
-            {available.map((l, i) => (
-              <LessonCard key={l.id} id={l.id} index={i} />
+            {available.map((l) => (
+              <LessonCard key={l.id} id={l.id} />
             ))}
           </div>
         </>
