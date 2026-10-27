@@ -1,6 +1,6 @@
 # PIXEL-CITY — Rework UI toàn site
 
-Ngày: 27/10/2026. Nhánh triển khai: `codex/pixel-city-ui`. Nguồn phạm vi: [plan đã chốt](../design/PIXEL_CITY_REWORK_PLAN.md). Người dùng đã yêu cầu deploy; đang hoàn tất gate bảo mật, PR/CI và phát hành theo master. Không sửa nội dung plan đang có thay đổi của người dùng.
+Ngày: 27/10/2026. Nhánh triển khai: `codex/pixel-city-ui`. Nguồn phạm vi: [plan đã chốt](../design/PIXEL_CITY_REWORK_PLAN.md). Đã phát hành theo master qua [PR #25](https://github.com/TrongVuong-learn/system-design-lab-vn/pull/25); các yêu cầu đã chốt trong plan được giữ nguyên.
 
 ## Phạm vi và điều kiện hoàn tất
 
@@ -34,11 +34,11 @@ Review ảnh đầu phát hiện nested SVG dùng kích thước mặc định k
 - Đã xem ảnh thật trang đầu desktop/mobile, Khám phá, level, màn học, Game và Tiến độ. Màn học giữ font dễ đọc/focus; CTA và bản đồ có lối HTML. Bộ ảnh 10 route ×4 viewport ở `.cache/pixel-city/`.
 - Bundle chính cuối 1,603.42 kB / gzip 399.62 kB; CSS 52.22 kB / gzip 10.88 kB. Không còn tải chunk Three.js 746.77 kB và ScrollTrigger 43.55 kB cho hero. Đây là số build, không phải đo tốc độ mạng/FPS.
 
-Runtime máy kiểm là Node 26.11.1, pnpm 11.25.0; repo vẫn khóa Node 24.21.0, không sửa pin hoặc nâng dependency. Cần CI trên runtime khóa trước tích hợp/phát hành. Không coi kiểm source hoặc ảnh mockup là tính năng đã phát hành.
+QA ban đầu dùng Node 26.11.1; build kiểm phát hành và CI sau đó dùng Node 24.21.0/pnpm 11.25.0 theo pin. Không coi kiểm source hoặc ảnh mockup là tính năng đã phát hành.
 
 ## Giới hạn và phát hành
 
-Không đổi curriculum, assessment hoặc persistence; không gọi Minh vì lượt này không giao task tester học sinh. Chưa kiểm điện thoại thật hoặc pilot học sinh. Chưa chạy CI remote/merge/production smoke. Gate bảo mật: đã cập nhật Zod 4.6.6, dùng validation jitless và audit production không báo advisory; thêm CSP, chống nhúng, nosniff, referrer/permissions policy và bước audit high trong CI. Có kiểm CSP/WASM/offline và packaging headers; không gọi đây là pentest. Build còn cảnh báo bundle chính trên 500 kB; không tuyên bố 60fps khi chưa đo thiết bị thật.
+Không đổi curriculum, assessment hoặc persistence; không gọi Minh vì lượt này không giao task tester học sinh. Chưa kiểm điện thoại thật hoặc pilot học sinh. CI remote, merge master và production smoke đã đạt; xem kết quả phát hành bên dưới. Gate bảo mật: đã cập nhật Zod 4.6.6, dùng validation jitless và audit production không báo advisory; thêm CSP, chống nhúng, nosniff, referrer/permissions policy và bước audit high trong CI. Có kiểm CSP/WASM/offline và packaging headers; không gọi đây là pentest. Build còn cảnh báo bundle chính trên 500 kB; không tuyên bố 60fps khi chưa đo thiết bị thật.
 
 ## Chuẩn bị phát hành theo yêu cầu deploy
 
@@ -47,8 +47,17 @@ Không đổi curriculum, assessment hoặc persistence; không gọi Minh vì l
 - CSP chỉ cho script cùng origin và WASM, không cho JavaScript eval; style inline còn cần cho React/GSAP. Zod dùng interpreter để tránh thử `new Function`. Test ghi nhận mọi securitypolicyviolation khi đi qua hero, game animation và tải offline.
 - Advisory nguồn: https://github.com/advisories/GHSA-mrhx-c7xc-m3w5 ; hướng dẫn headers: https://vercel.com/docs/cdn-security/security-headers . Rà nguồn 27/10/2026.
 - Production baseline để rollback: master `0d8480dedf134f0afb25b31f5a8480447adf511d`, deployment `dpl_RHeGg8Tty3bjzRJvBH3b9iL5kHVR` (READY).
-- Kết quả CI, SHA tích hợp và deployment cuối sẽ được đối chiếu với artifact và smoke trên URL công khai trước báo phát hành thành công.
+- Kết quả CI, SHA tích hợp và deployment đã được đối chiếu với artifact và smoke; chi tiết bên dưới.
 
-WebKit local phát hiện `upgrade-insecure-requests` nâng URL asset từ HTTP localhost lên HTTPS làm preview trắng; bỏ directive dư này khỏi CSP dùng chung. Production tiếp tục HTTPS/HSTS do Vercel, còn CSP `self` vẫn giới hạn script cùng origin. Kiểm lại WebKit trước merge.
+WebKit local phát hiện `upgrade-insecure-requests` nâng URL asset từ HTTP localhost lên HTTPS làm preview trắng; bỏ directive dư này khỏi CSP dùng chung. Production tiếp tục HTTPS/HSTS do Vercel, còn CSP `self` vẫn giới hạn script cùng origin. Tám kiểm tra WebKit về game, CSP/offline và dữ liệu cũ đã đạt trước merge.
 
-CI #55 dừng tải tại gói font từ Azure Ubuntu mirror hơn 8 phút, chưa chạy E2E. Bổ sung mirror Ubuntu chính thức và timeout/retry cho apt trong runner ephemeral; không đổi app artifact hoặc runtime pin. Kiểm lại toàn bộ CI trên head mới trước merge.
+CI #55 dừng tải tại gói font từ Azure Ubuntu mirror hơn 8 phút, chưa chạy E2E. Bổ sung mirror Ubuntu chính thức và timeout/retry cho apt trong runner ephemeral; không đổi app artifact hoặc runtime pin. CI #56 trên head mới đã đạt trước merge.
+
+## Kết quả phát hành — 27/10/2026
+
+- URL: https://system-design-lab-vn.vercel.app ; master `f9f4e37c5a85589a6ca031ea1f1445948d838a59`.
+- [Quality #56](https://github.com/TrongVuong-learn/system-design-lab-vn/actions/runs/40499298040) tại head `0984e4e6232902ad8856b9517ea60d34f1862f08`: audit, content/lint/format, 110 unit, build và 603 E2E đạt; một hover test skip cho touch.
+- Vercel deployment `dpl_7zUTDB14rKXTFGoTSwFC7hyziLuc`: READY, target production, source SHA đúng master.
+- Artifact `2d57d6e94830b8c0`: 21/21 file công khai khớp SHA-256 bản kiểm local; security/cache headers đã xác minh.
+- Production smoke: 44/44 browser test đạt; mở đủ 85 bài ở 390/1280, không có pageerror hoặc tràn ngang. Học/resume, game, nhập/xuất, offline và CSP đều qua.
+- Bằng chứng local ignored: `.cache/pixel-city/release.json`, `production-http.json`, `production-routes.json`, `production-e2e/` và bộ ảnh thật.
