@@ -50,3 +50,5 @@ Không đổi curriculum, assessment hoặc persistence; không gọi Minh vì l
 - Kết quả CI, SHA tích hợp và deployment cuối sẽ được đối chiếu với artifact và smoke trên URL công khai trước báo phát hành thành công.
 
 WebKit local phát hiện `upgrade-insecure-requests` nâng URL asset từ HTTP localhost lên HTTPS làm preview trắng; bỏ directive dư này khỏi CSP dùng chung. Production tiếp tục HTTPS/HSTS do Vercel, còn CSP `self` vẫn giới hạn script cùng origin. Kiểm lại WebKit trước merge.
+
+CI #55 dừng tải tại gói font từ Azure Ubuntu mirror hơn 8 phút, chưa chạy E2E. Bổ sung mirror Ubuntu chính thức và timeout/retry cho apt trong runner ephemeral; không đổi app artifact hoặc runtime pin. Kiểm lại toàn bộ CI trên head mới trước merge.
