@@ -86,3 +86,7 @@ Người dùng yêu cầu phá cách hơn: chuyển sang cobalt #2447d8, mực #
 ## GAME12 — Diễn biến từng lượt
 
 Ba game có sơ đồ SVG riêng lấy số liệu trước/sau từ learning-core. GSAP minh họa gói tải đến máy, đọc nguồn/cache và cập nhật bản lưu, việc vào hàng đợi trước khi worker xử lý/tràn mất. Nút xem lại chỉ chạy hình; thao tác mới hủy chuyển động cũ, không chặn điều khiển hoặc lưu. Không dùng thời gian hoạt ảnh làm tốc độ hệ thống. Reduced-motion và lỗi tải animation giữ ảnh kết quả cùng diễn giải chữ. Xem docs/design/game12/BRIEF.md và REVIEW.md.
+
+## QA13 — Giữ diễn biến trong vùng nhìn
+
+Sau hành động hoặc replay, nếu hình game nằm ngoài viewport (tính cả thanh điều hướng cố định), đưa hình vào giữa màn hình trước khi phát hoạt ảnh. Cuộn tức thì, không chuyển focus và không tự cuộn khi mở/resume trang. Đây là sửa QA13-F1: hoạt ảnh cache/queue từng nằm dưới màn hình sau tap đầu ở390px.

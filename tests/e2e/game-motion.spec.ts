@@ -87,3 +87,45 @@ test('rapid actions, reduced-motion changes and reset cancel the previous visual
   await page.reload();
   await expect(page.getByText('Lượt 1 / 6', { exact: true })).toBeVisible();
 });
+
+test('first action reveals its diagram above mobile navigation without moving keyboard focus', async ({
+  page,
+}) => {
+  for (const width of [320, 390]) {
+    await page.setViewportSize({ width, height: 844 });
+    for (const reducedMotion of ['no-preference', 'reduce'] as const) {
+      await page.emulateMedia({ reducedMotion });
+      for (const [id, action] of [
+        ['balance', 'Gửi máy A'],
+        ['cache', 'Đọc nguồn'],
+        ['queue', '1 worker'],
+      ]) {
+        await page.goto(`/#/games/${id}`);
+        const control = page.getByRole('button', { name: action, exact: true });
+        await control.focus();
+        await page.keyboard.press('Enter');
+        await expect(control).toBeFocused();
+        await expect
+          .poll(async () => {
+            const picture = await page.locator('.scene-map').boundingBox();
+            const nav = await page.locator('.mobile-nav').boundingBox();
+            const button = await control.boundingBox();
+            return (
+              !!picture &&
+              !!nav &&
+              !!button &&
+              picture.y >= 0 &&
+              picture.y + picture.height <= nav.y &&
+              button.y >= 0 &&
+              button.y + button.height <= nav.y
+            );
+          })
+          .toBe(true);
+        if (reducedMotion === 'no-preference') {
+          await expect(page.locator('.game-scene')).not.toHaveAttribute('data-phase', '-1');
+        }
+        await page.getByRole('button', { name: 'Chơi lại từ đầu' }).click();
+      }
+    }
+  }
+});
