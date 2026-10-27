@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from './validation';
 import type { Lesson, CurriculumModule } from './index';
 
 const id = z.string().min(1);

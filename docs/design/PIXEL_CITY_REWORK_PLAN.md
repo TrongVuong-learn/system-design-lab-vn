@@ -4,6 +4,8 @@ Trạng thái: kế hoạch theo yêu cầu27/10/2026, chưa hiện thực/phát
 
 ## Ý tưởng chủ đạo
 
+**Phạm vi đã chốt: rework UI toàn site, không chỉ khu Game.** Trang đầu, điều hướng chung, Khám phá, trang level/module/nhánh, toàn bộ màn học và bài ôn, Tiến độ, nhập/xuất và offline đều thuộc cùng hệ thiết kế. Game là một phần của trải nghiệm. Phác thảo khu Game hiện tại chỉ minh họa ý tưởng, chưa đại diện bản thiết kế toàn site.
+
 Người học là người vận hành một thành phố phần mềm thu nhỏ. Yêu cầu là bưu kiện, máy chủ là trạm xử lý, cache là quầy giữ bản tin, hàng đợi là băng chuyền sáu chỗ. Mỗi vật thể phải giải thích một cơ chế; không thêm nhân vật, đồng xu hoặc hiệu ứng chỉ để lấp chỗ trống.
 
 So sánh bốn hướng: máy arcade neon (dễ lẫn với game giải trí/tạo áp lực thời gian), desktop máy tính cổ (nặng cửa sổ và chữ nhỏ), sổ pixel (vẫn là bộ card cũ), thành phố pixel (chọn vì gắn được đường đi, điểm đến và giới hạn tài nguyên). Điểm nhận diện: bưu kiện đi xuyên các trạm theo thao tác, các game có sân khấu riêng; không chỉ đổi font và thêm viền răng cưa.
@@ -33,7 +35,7 @@ Kế thừa QA13-F1: mỗi lần chọn hành động phải nhìn thấy cảnh
 
 ## Thứ tự thực hiện và mốc nghiệm thu
 
-**P1 — Mẫu có thể chơi.** Dựng một lát cắt hoàn chỉnh trang Game + game cache ở390/320 và1280, dùng nội dung thật và engine hiện tại. So sánh với giao diện cũ qua ảnh/video. Chốt palette, sprite grid, khung/nút và cách hiện lỗi trước khi nhân rộng.
+**P1 — Hệ thiết kế và mẫu toàn site.** Chốt palette, sprite grid, typography, điều hướng, khung/nút và trạng thái lỗi qua các màn đại diện: trang đầu, Khám phá, một bài học, Tiến độ và Game. Review đồng thời ở 320/390 và 1280 với nội dung thật để chứng minh phong cách xuyên suốt. Sau đó hoàn thiện một lát cắt game cache với engine hiện tại để kiểm ngôn ngữ chuyển động trước khi nhân rộng.
 
 **P2 — Ba game.** Hoàn thiện sprite/đường đi cho chia tải và queue. Kiểm đủ nhánh thắng, sai, tràn, bản cũ, reset, replay, bấm nhanh và resume. Không đổi luật để khớp hình đẹp.
 
@@ -45,6 +47,17 @@ Kế thừa QA13-F1: mỗi lần chọn hành động phải nhìn thấy cảnh
 
 ## Điều kiện đạt
 
+### Gate bảo mật trước phát hành rework
+
+Kiểm tra sơ bộ ngày 27/10/2026: ứng dụng hiện là React/TypeScript/Vite tĩnh trên Vercel, chưa có API/tài khoản/database server. Tiến độ lưu IndexedDB, game lưu localStorage; import tiến độ qua schema và giới hạn 2 MB. Backend Node/Fastify và PostgreSQL trong kiến trúc là phương án tương lai, chưa triển khai.
+
+- HTTP production hiện có HTTPS/HSTS, chưa thấy CSP, chống nhúng trang, `X-Content-Type-Options` hoặc `Referrer-Policy` trong phản hồi trang chủ. Cần bổ sung chính sách phù hợp và kiểm tương thích GSAP/Lottie/WASM/offline trước phát hành.
+- `pnpm audit --prod` báo một advisory high cho Zod 4.6.5: [GHSA-mrhx-c7xc-m3w5](https://github.com/advisories/GHSA-mrhx-c7xc-m3w5), bản vá được công bố là 4.6.6. Đây là phát hiện dependency; chưa chứng minh khai thác được qua luồng import có giới hạn của ứng dụng. Cần vá và kiểm dữ liệu cũ/import lỗi.
+- Bổ sung kiểm dependency tự động, rà nguồn asset/script và xử lý dữ liệu nhập. Không lưu secret vào bundle hoặc browser storage; không coi tiến độ phía client là bằng chứng chống gian lận.
+- Nếu thêm tài khoản/sync, phải có phạm vi riêng cho xác thực, phân quyền phía server, giới hạn request, backup và bảo vệ dữ liệu học sinh trước mở tính năng.
+
+Các mục trên là việc cần hoàn tất, không phải tuyên bố đã vá hay đã pentest. Kiểm thử chức năng hiện có không thay kiểm toán bảo mật.
+
 - Nhìn trang Game nhận ra chủ đề pixel, ba game phân biệt được bằng cơ chế và bố cục.
 - Trên320px không cuộn ngang ngoài ý muốn; nút chạm tối thiểu44px; văn bản Việt đủ dấu và dễ đọc.
 - Thao tác→chuyển động→kết quả dễ theo dõi; có thể xem lại/tắt chuyển động mà vẫn hiểu trạng thái bằng chữ.
@@ -53,3 +66,7 @@ Kế thừa QA13-F1: mỗi lần chọn hành động phải nhìn thấy cảnh
 - Chỉ ghi hoàn tất khi toàn bộ màn trong phạm vi đã kiểm, không coi mockup hay một hero pixel là rework xong.
 
 Ngoài phạm vi đợt này: multiplayer, leaderboard thật, đăng nhập/cloud save, đổi curriculum/đáp án, nền tảng native, âm thanh hoặc hệ thưởng gây nhầm với năng lực học.
+
+## Theo dõi triển khai
+
+Source UI và QA theo plan đã được hiện thực trên nhánh `codex/pixel-city-ui`; ngày 27/10/2026 người dùng yêu cầu deploy. Gate bảo mật được thực hiện trong đợt phát hành này. Xem [báo cáo triển khai/phát hành](../delivery/PIXEL_CITY_UI.md) để phân biệt source, kiểm chứng và trạng thái production; các phát hiện sơ bộ ở trên là baseline trước sửa.

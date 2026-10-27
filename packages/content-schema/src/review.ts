@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from './validation';
 export const schoolConfigSchema = z
   .object({
     servers: z.number().int().min(1).max(4),

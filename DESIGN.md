@@ -4,7 +4,20 @@
 
 Người học cần mở một bài, dự đoán, thao tác và hiểu kết quả trên điện thoại. Giữ lối nhập môn phù hợp học sinh cấp 3. Đây là sản phẩm học tập; mỗi chi tiết thị giác cần hỗ trợ đọc, nhận biết trạng thái hoặc hành động.
 
-## Hướng mới: bàn thí nghiệm
+## PIXEL-CITY — Hệ UI hiện hành trong source (27/10/2026)
+
+Theo [plan rework](docs/design/PIXEL_CITY_REWORK_PLAN.md), giao diện chuyển sang thành phố dữ liệu pixel trên toàn site. Source đang ở nhánh `codex/pixel-city-ui`; tình trạng kiểm chứng/phát hành nằm trong [báo cáo triển khai](docs/delivery/PIXEL_CITY_UI.md). Các hướng bên dưới là lịch sử và quy tắc cho cơ chế bài học, không phải palette hiện hành.
+
+- Mực `#14203b`, giấy đọc `#f4f7ff`, trời `#b9e6ff`, hành động cobalt `#2447d8`, tín hiệu `#ffcf56`. Be Vietnam Pro tự host, đủ dấu Việt; không dùng font pixel cho phần đọc.
+- Trang đầu: bưu kiện đi qua bốn trạm SVG theo thao tác. Cảnh dựa lưới 4 đơn vị, không cần WebGL và không tự chạy khi cuộn. Số liệu của thí nghiệm cache bên dưới vẫn từ engine.
+- Khám phá: sáu khu có accordion HTML, mobile mở một khu; tìm kiếm/lọc và danh sách bài giữ lối vào trực tiếp. Trang level và nhánh dùng cùng tokens/controls.
+- Game: hai trạm nhận tải, quầy bản tin có mái, băng chuyền sáu chỗ/worker/khay tràn. Xem trước chạy engine một lượt trong bộ nhớ, không ghi phiên game hoặc tiến độ học. Kết quả bàn chơi và replay tiếp tục từ engine thật.
+- Màn học và bài ôn: vùng đọc trắng, khung gọn, bảng chặng dùng viền vuông và tín hiệu vàng cho chặng hiện tại; giữ focus, glossary, lỗi lưu, form và điều kiện mở chặng. Không phủ sprite/texture sau văn bản.
+- Tiến độ: sáu khu hiển thị số bài tự luyện từ dữ liệu thật, liên kết về level. Import/export và offline giữ vị trí/nhãn rõ; hoàn thành tự luyện không đồng nghĩa thành thạo.
+- Nét vuông và bóng khối 3px chỉ dành cho nút hành động, không outline dày mọi đoạn văn. SVG là artwork gốc trong source, nhãn/phiên bản là text thật. Chuyển động theo hành động, có reduced-motion và trạng thái chữ.
+
+## Lịch sử: bàn thí nghiệm
+
 
 Trang đầu đặt một thí nghiệm thật lên trước: đổi phòng học ở nguồn, đọc bản ghi cũ rồi làm mới. Nội dung có câu hỏi cụ thể và nút mô tả việc sẽ xảy ra. Các bài khác được trình bày như những mục trong sổ học, mỗi bài có sơ đồ riêng đúng chủ đề.
 

@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from './validation';
 import type { Lesson } from './index';
 const ids = z.array(z.string().min(1)).min(1);
 export const pathwaysSchema = z

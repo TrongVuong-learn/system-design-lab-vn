@@ -33,6 +33,39 @@ const games = {
     hint: 'Nhìn trước đợt kế tiếp. Hàng đợi giữ việc tạm thời; thêm worker quá muộn không cứu được việc đã mất.',
   },
 };
+function GamePreview({ id }: { id: GameId }) {
+  const [preview, setPreview] = useState(false);
+  const state = preview
+    ? playGame({ id, actions: [] }, id === 'cache' ? 1 : 0)
+    : { id, actions: [] };
+  return (
+    <article className={`game-cover game-cover-${id}`}>
+      <div className="game-preview-art">
+        <GameScene state={state} pulse={preview ? 1 : 0} />
+      </div>
+      <div className="game-cover-copy">
+        <span className="game-topic">{games[id].topic} · 6 lượt</span>
+        <h2>{games[id].title}</h2>
+        <p>{games[id].intro}</p>
+        <div className="game-preview-actions">
+          <button className="text-button" onClick={() => setPreview(!preview)}>
+            {preview
+              ? 'Đặt lại xem trước'
+              : id === 'balance'
+                ? 'Thử giao gói đầu'
+                : id === 'cache'
+                  ? 'Thử lấy bản tin'
+                  : 'Thử chạy băng chuyền'}
+          </button>
+          <Link className="button primary" to={`/games/${id}`}>
+            Vào chơi
+          </Link>
+        </div>
+        <p className="preview-note">Xem trước cơ chế, chưa tính lượt chơi.</p>
+      </div>
+    </article>
+  );
+}
 export function GamesPage() {
   return (
     <div className="page-content games-page">
@@ -45,44 +78,8 @@ export function GamesPage() {
         <LottieSignal />
       </div>
       <div className="game-shelf">
-        {GAME_IDS.map((id, i) => (
-          <Link className={`game-cover game-cover-${id}`} to={`/games/${id}`} key={id}>
-            <div className="game-cover-art" aria-hidden="true">
-              {id === 'balance' ? (
-                <>
-                  <span className="tower">
-                    A<i />
-                    <i />
-                    <i />
-                  </span>
-                  <span className="tower">
-                    B<i />
-                    <i />
-                  </span>
-                </>
-              ) : id === 'cache' ? (
-                <>
-                  <span className="version-sheet">v1</span>
-                  <span className="version-sheet fresh">v2</span>
-                </>
-              ) : (
-                <span className="queue-art">
-                  {Array.from({ length: 6 }, (_, n) => (
-                    <i key={n} />
-                  ))}
-                </span>
-              )}
-            </div>
-            <div>
-              <span className="game-topic">{games[id].topic} · 6 lượt</span>
-              <h2>{games[id].title}</h2>
-              <p>{games[id].intro}</p>
-              <strong>
-                Vào chơi <span aria-hidden="true">↗</span>
-              </strong>
-            </div>
-            <span className="visually-hidden">Game {i + 1}</span>
-          </Link>
+        {GAME_IDS.map((id) => (
+          <GamePreview key={id} id={id} />
         ))}
       </div>
       <aside className="intro-note">
