@@ -78,6 +78,15 @@ export function GameScene({ state, pulse }: { state: GameState; pulse: number })
   }
   useEffect(() => {
     if (!turn || (!pulse && !replay)) return;
+    // Reveal the consequence of an explicit action before its short animation starts.
+    // Keep keyboard focus on the control and do not scroll on initial load/resume.
+    const diagram = root.current?.querySelector<SVGSVGElement>('.scene-map');
+    const bounds = diagram?.getBoundingClientRect();
+    const navigation = document.querySelector('.mobile-nav')?.getBoundingClientRect();
+    const visibleBottom = navigation?.height ? navigation.top : window.innerHeight;
+    if (bounds && (bounds.top < 16 || bounds.bottom > visibleBottom - 16)) {
+      diagram?.scrollIntoView({ block: 'center', behavior: 'instant' });
+    }
     let disposed = false;
     let cleanup = () => {};
     void import('gsap')

@@ -37,3 +37,7 @@ Definition 1.0.0; production 9f3ac9f, fingerprint bf1cb7cffcfb18ae. Native stude
 ### QA11 — tiếp tục thành công sau reset
 
 [Report](RUN_2026-10-26_GAMES.md). Baseline first-use trên production; regression riêng local commit804a83b ở390/320/768px. Cả3game đạt mục tiêu, thử sai/reset/link bài/saved→reload được kiểm. Không phát hiện defect chặn thao tác hoặc layout trong phạm vi. Parent đã đọc report và xem reg-queue320/reg-home390. Thuật ngữ tại chỗ và nhãn lưu là đề xuất UX chưa xác minh như defect, không đổi engine/học liệu vì các giả thuyết này. AI mô phỏng, không pilot/điện thoại thật; chưa screen reader, quota/đa tab qua tester. Parent có kiểm offline độc lập.
+
+## 2026-10-27 — QA13 hoạt ảnh ba game
+
+Native student_tester, definition1.0.0, first-use production4e624da/fingerprint465a632d01c85089, context riêng390×844 touch và320/reduced-motion. [Report](qa13-2026-10-27/report.md). Parent xác minh QA13-F1/P2: hình cache/queue nằm dưới nav sau tap đầu390px. Đã sửa reveal hình trước timeline, giữ focus và không tự cuộn khi mở/resume. [Regression](qa13-2026-10-27/regression.md) lưu trước khi agent báo usage limit:12 tổ hợp cả3game×320/390×normal/reduced, thêm replay từ ngoài viewport. Parent đọc report/measurements và review ảnh; không gọi việc thiếu final message là chưa có evidence. Phạm vi còn lại theo giới hạn report, không suy ra pilot/learning gain. QA13-H1/H2 về thuật ngữ/nhận biết lượt vẫn là giả thuyết, không đổi luật/học liệu.
