@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "reviewedAt": "2026-10-15",
+  "reviewedAt": "2026-11-16",
   "origin": "repository-authored",
   "agents": [
     {
@@ -10,8 +10,20 @@
       "documentation": "https://learn.chatgpt.com/docs/agent-configuration/subagents#custom-agents",
       "files": {
         ".codex/agents/student_tester.toml": "fb41a2be4292afd36170e5161314637d2505204acc93c2cf3e3efb6daa50cb87",
-        "docs/research/student-tester/README.md": "5319de7ec6c771655b4ebca94252af380a498989946a2280a267dc5c7f7b4dee",
-        "docs/research/student-tester/MEMORY.md": "23ba9ae6be4304203f06d37df7f9a2f73b861a71087e63492c94a5df0c961c63"
+        "docs/research/student-tester/README.md": "cc694adec5c7ddfc13e0e6a0c7354331acbd7128406bc39bf036c06d4d8e2af6",
+        "docs/research/student-tester/MEMORY.md": "f2a46d10824b82483061474780246ed9911fd0ff28bbb01ba681fdc1ce7be225"
+      }
+    },
+    {
+      "agentName": "student-tester",
+      "runtime": "claude-code",
+      "definitionVersion": "1.1.0",
+      "baselineCommit": "f6b9bf3",
+      "documentation": "https://code.claude.com/docs/en/sub-agents",
+      "files": {
+        ".claude/agents/student-tester.md": "fdd5346437fa2ed2d7f186e550ed0480e641c9c064204d32cf61b22293d9f58c",
+        "docs/research/student-tester/README.md": "cc694adec5c7ddfc13e0e6a0c7354331acbd7128406bc39bf036c06d4d8e2af6",
+        "docs/research/student-tester/MEMORY.md": "f2a46d10824b82483061474780246ed9911fd0ff28bbb01ba681fdc1ce7be225"
       }
     },
     {
@@ -23,14 +35,28 @@
       "documentation": "https://learn.chatgpt.com/docs/agent-configuration/subagents",
       "files": {
         ".codex/agents/knowledge_reviewer.toml": "d54265d0058641eaa8488880f651d223c1cb067b521c6b47e99829920dcda18b",
-        "docs/research/knowledge-reviewer/README.md": "8bdd4d059fbc6b608268e19700d8968b3d2805c702b3e5634591dfcabb37aa4f",
-        "docs/research/knowledge-reviewer/MEMORY.md": "f73045b09ff28c9b57d1d3d8e018ada50eb2c95891feade0a640e50001398cc4",
+        "docs/research/knowledge-reviewer/README.md": "48582775c62cda6f19d67b6a2f1082e62ce7abb7582b24cc55324d783bd8b6b7",
+        "docs/research/knowledge-reviewer/MEMORY.md": "c4b3fa958476b85be93c64005f6ed515bb8a04fa6ab56a71a9e9a941de740728",
         "docs/research/knowledge-reviewer/AUTHORING_2026-10-14.md": "497e91e95da5aab369ab6f9200366014c09916c9c60ec0b2bea02e1a925e90d2",
         "docs/research/knowledge-reviewer/REFERENCE_GUIDE.md": "2a66b61b07d1630427604506c99942426b7f2b2facc4d2bf21960ac92a8953f6",
         "docs/research/knowledge-reviewer/RESEARCH_2026-10-15.md": "f7e68b1b25fabaf7d761fddbee7b80ed80cdd63b6b967e6f50154e505b536497"
       },
       "authoringModel": "gpt-6-astra",
       "authoringReasoningEffort": "medium"
+    },
+    {
+      "agentName": "knowledge-reviewer",
+      "runtime": "claude-code",
+      "definitionVersion": "1.2.0",
+      "baselineCommit": "f6b9bf3",
+      "model": "inherit",
+      "documentation": "https://code.claude.com/docs/en/sub-agents",
+      "files": {
+        ".claude/agents/knowledge-reviewer.md": "06f354635ce2fcc061bc9b61113c96295187097b5eda9c024aa3ba33eecd41ee",
+        "docs/research/knowledge-reviewer/README.md": "48582775c62cda6f19d67b6a2f1082e62ce7abb7582b24cc55324d783bd8b6b7",
+        "docs/research/knowledge-reviewer/MEMORY.md": "c4b3fa958476b85be93c64005f6ed515bb8a04fa6ab56a71a9e9a941de740728",
+        "docs/research/knowledge-reviewer/REFERENCE_GUIDE.md": "2a66b61b07d1630427604506c99942426b7f2b2facc4d2bf21960ac92a8953f6"
+      }
     }
   ]
 }

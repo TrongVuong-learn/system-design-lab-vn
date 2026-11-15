@@ -12,6 +12,23 @@ Agent dùng tiêu chuẩn thẩm định của senior software engineer/system a
 
 Parent cung cấp checkout/commit, phạm vi, URL nếu cần và artifact path. Agent đọc native definition rồi chỉ đọc/kiểm/report, không sửa source/commit/deploy hoặc spawn thêm. Parent review findings trước sửa. Không sửa findings/nguồn trong lịch sử để làm kết quả cũ trông thành công.
 
+## Bản Claude Code (16/11/2026)
+
+Định nghĩa 1.2.0 ở [.claude/agents/knowledge-reviewer.md](../../../.claude/agents/knowledge-reviewer.md), theo [tài liệu subagent của Claude Code](https://code.claude.com/docs/en/sub-agents). Giữ nguyên quy trình 1.1.0: claim → nguồn sơ cấp → expected độc lập → trace engine → câu hỏi/UI → verdict; cùng `REFERENCE_GUIDE.md`, cùng định dạng `report.md` và `claim-matrix.json`. Khác bản Codex:
+
+- **Model:** kế thừa model của phiên Claude Code cha. Yêu cầu `gpt-6-sol`/`low` chỉ áp dụng cho bản Codex vì Claude Code không có model đó; không tự chọn model khác thay người dùng.
+- **Công cụ:** Read, Grep, Glob, Bash, Write, Edit, WebFetch, WebSearch. Engine được chạy độc lập bằng `node --import tsx <script>.ts` import `packages/simulation-engine/src/index.ts` (đã thử chạy được 16/11/2026).
+- **Bản đồ repo** ghi sẵn đường dẫn học liệu, registry, hợp đồng đáp án, engine và lab.
+- **Chế độ `triage`:** nhận mục "Nghi vấn chuyên môn" từ báo cáo `student-tester` chế độ `kien-thuc` và kết luận xác nhận / bác bỏ / chưa xác minh. Câu chữ đúng nhưng dễ hiểu sai xếp ngộ nhận có nguy cơ, không xếp lỗi kiến thức.
+
+Kết quả mặc định ở `.cache/knowledge-reviewer/<ngày>-<phạm-vi>/` (Git ignore); parent chép bằng chứng cần giữ sang `evidence/` khi tổng hợp. Agent mới được nạp khi mở phiên Claude Code mới. Chưa có lượt chạy nào bằng định nghĩa 1.2.0.
+
+Cách gọi:
+
+> Dùng agent knowledge-reviewer review bài cache và cpu-io tại commit hiện tại, kiểm claim, engine và câu hỏi; trả report và claim matrix.
+
+> Dùng knowledge-reviewer chế độ triage cho mục nghi vấn chuyên môn trong [đường dẫn report của student-tester].
+
 ## Tài liệu truy xuất theo task
 
 [REFERENCE_GUIDE.md](REFERENCE_GUIDE.md) chứa 19 nguồn đã mở, section/edition/checkedAt, điều kiện/phản ví dụ, checklist và tám tình huống tự hiệu chỉnh. [RESEARCH_2026-10-15.md](RESEARCH_2026-10-15.md) ghi phạm vi nghiên cứu, nguồn và giới hạn. Profile yêu cầu đọc phần phù hợp rồi xác minh trực tiếp nguồn cho claim đang review; không nạp toàn bộ mọi nguồn mỗi lượt. Đây là tài liệu hỗ trợ truy xuất, không huấn luyện lại model hay bảo đảm mọi kết luận đúng.
