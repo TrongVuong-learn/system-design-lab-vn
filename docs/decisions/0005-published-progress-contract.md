@@ -13,3 +13,12 @@ Báo cáo `CONTENT_COVERAGE.md` sinh từ catalog/editorial, CI kiểm drift. Ch
 ## Ngoại lệ editorial QA-09 — 25/10/2026
 
 Review nguồn của tám integrated cases xác nhận citation gắn quá rộng. Áp dụng ngoại lệ biên tập đã nêu ở trên: chỉ vá 70 mảng `sourceIds` của chapters/practice (48 mảng của tám case và 22 mảng bổ sung nguồn cho sáu nhánh chuyên sâu cùng token bucket) trong baseline tương ứng với mapping được parent review; không sinh lại baseline, không nới validator. Đối chiếu toàn 85 contract với release `68f7de6` chứng minh mọi trường khác (ID, version, text, options, answer, explanations, designTask và thứ tự) giống hệt. Script/evidence ở `docs/research/knowledge-reviewer/evidence/qa09-2026-10-25/parent/check-contract.py` và `contract-check.json`; rationale/mapping ở `source-mapping.json`. Vì không đổi cách diễn giải answer/checkpoint, không cần migration tiến độ. Mọi thay đổi assessment/cơ chế sau này vẫn bị chặn như trước; ngoại lệ này không cho phép tự tái tạo baseline để vượt kiểm tra.
+
+## Ngoại lệ editorial knowledge review — 15/11/2026
+
+Review kiến thức 85 bài ở `c5b6f07` (chạy bằng Claude, không phải runtime gpt-6-sol của profile) xác nhận hai câu chữ assessment gây hiểu sai nhưng không sai đáp án. Áp dụng ngoại lệ biên tập như trên, chỉ vá đúng hai trường trong baseline, không sinh lại baseline, không nới validator:
+
+- `messaging-delivery` `practice.items[2].explanation`: phản hồi trước đây kể kịch bản crash trước ACK (gây trùng) trong khi câu hỏi và đáp án `1` nói về ACK trước rồi crash (gây mất). Phản hồi mới giải thích đúng at-most-once và cách ghi dấu cùng ranh giới nguyên tử trước ACK.
+- `capstone-foundations` `designTask.variation`: câu cũ khẳng định bottleneck thay đổi, nhưng tính lại (2,00s truyền + 0,08s TLS + 0,60s server = 2,68s) chặng truyền vẫn lớn nhất. Câu mới yêu cầu tính lại và kiểm tra chặng lớn nhất có đổi không.
+
+Đối chiếu bằng script với `c5b6f07`: toàn bộ 85 contract giống hệt ngoài hai trường trên (ID, version, text, options, answer, sourceIds, deliverables, rubric và thứ tự không đổi). Không đổi answer index hoặc checkpoint nên không cần migration tiến độ. Ba sửa còn lại (subtitle bị cắt số của `case-school-feed` và `capstone-architecture`, story `resilience` thêm tầng gọi để khớp 3×3×3=27) nằm ngoài contract. Evidence review gốc ở thư mục tạm của phiên, chưa lưu vào repository; ngoại lệ này không cho phép tự tái tạo baseline cho thay đổi assessment khác.

@@ -1181,7 +1181,7 @@
             "Luôn làm cộng hai lần."
           ],
           "answer": 1,
-          "explanation": "Nhận E9 → cộng điểm → crash trước ACK. Lần sau E9 tới lại: nếu chỉ cộng tiếp sẽ thành hai lần. Dấu E9 và phép cộng cần cùng ranh giới nguyên tử để không có khe hở. Exactly-once trong một phạm vi của broker không bảo đảm mọi API ngoài chỉ chạy một lần.",
+          "explanation": "Nhận E9 → ACK → crash trước khi cộng. Broker coi E9 đã xong nên không giao lại; lần cộng bị mất (at-most-once). Muốn không mất và không trùng: cộng điểm cùng ghi dấu E9 trong một ranh giới nguyên tử rồi mới ACK, để lần giao lại bị bỏ qua. Exactly-once trong một phạm vi của broker không bảo đảm mọi API ngoài chỉ chạy một lần.",
           "sourceIds": [
             "kafka-design",
             "outbox-aws"

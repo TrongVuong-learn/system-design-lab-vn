@@ -240,7 +240,7 @@
         "Trace lỗi có vị trí lỗi, điều đã biết/chưa biết và cách phục hồi.",
         "Nêu quyền, chi phí, giới hạn; phân biệt giả định với kết quả chưa được đo."
       ],
-      "variation": "DNS đã cache nhưng server chậm thêm500ms. Tính lại và giải thích bottleneck thay đổi."
+      "variation": "DNS đã cache nhưng server chậm thêm500ms. Tính lại tổng thời gian và kiểm tra chặng lớn nhất có đổi không."
     }
   },
   {
@@ -1340,7 +1340,7 @@
     "moduleId": "L5.6",
     "minutes": 60,
     "title": "Tổng hợp L5: bảo vệ và sửa một bản thiết kế",
-    "subtitle": "Cổng trường từ2.",
+    "subtitle": "Cổng trường từ2.000 lên20.000 học sinh, nhóm từ2 lên4 người.",
     "objective": "Kết hợp kiến thức trong level để lập luận, kiểm lịch thao tác và thiết kế dưới ràng buộc mới.",
     "story": "Cổng trường từ2.000 lên20.000 học sinh, nhóm từ2 lên4 người; thêm yêu cầu offline và không mất phiếu đã xác nhận khi mất một máy. Bản cũ dùng một app và một database.",
     "explanation": "Đổi quy mô không tự chỉ định kiến trúc. Tiến hóa qua các mốc có thể quay lại. Review để chọn và biết khi cần đổi.",
@@ -1570,7 +1570,7 @@
       "provenance": {
         "kind": "authored-scenario"
       },
-      "title": "Cổng trường từ2.",
+      "title": "Cổng trường từ2.000 lên20.000 học sinh, nhóm từ2 lên4 người.",
       "context": "Cổng trường từ2.000 lên20.000 học sinh, nhóm từ2 lên4 người; thêm yêu cầu offline và không mất phiếu đã xác nhận khi mất một máy. Bản cũ dùng một app và một database.",
       "requirements": [
         "Kết hợp kiến thức trong level để lập luận, kiểm lịch thao tác và thiết kế dưới ràng buộc mới.",
