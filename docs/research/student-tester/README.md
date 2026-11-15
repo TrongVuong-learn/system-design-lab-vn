@@ -22,6 +22,24 @@ Parent cung cấp checkout/URL đã chuẩn bị, phạm vi 1–2 bài và mode;
 
 Cấu hình này có thể cần phiên mới để được discovery. Đã kiểm tra cú pháp/schema tối thiểu và checksum; chưa xác nhận custom role được ứng dụng desktop tự nạp trong phiên hiện tại. Cách fallback giữ nguyên persona và quy trình khi chưa có discovery.
 
+## Claude Code và chế độ kiểm kiến thức (16/11/2026)
+
+Định nghĩa 1.1.0 cho Claude Code ở [.claude/agents/student-tester.md](../../../.claude/agents/student-tester.md), theo [tài liệu subagent của Claude Code](https://code.claude.com/docs/en/sub-agents): file Markdown có frontmatter `name`, `description`, `tools`. Cùng hồ sơ Minh với bản Codex 1.0.0; model kế thừa phiên cha; công cụ giới hạn ở Bash, Read, Write, Edit. Bản Codex giữ nguyên.
+
+Thêm chế độ `kien-thuc` để trả lời câu hỏi "học sinh cấp 3 có hiểu được kiến thức của bài không". Minh học bài chỉ qua giao diện, ghi sổ các ý site đã nói (kèm route, chặng, nhãn nguyên văn), tự ra 4–6 câu hỏi chuyển giao ở bối cảnh khác, trả lời chỉ dựa vào sổ, rồi chấm ba cột: đúng không, site có đủ căn cứ không, ngộ nhận nào có thể hình thành. Kết luận theo từng phần của câu mục tiêu bài.
+
+Vì mô hình đã biết sẵn system design, chế độ này không đo học sinh học được bao nhiêu. Thứ nó đo được là site có tự đủ để một người mới lập luận đúng không và câu chữ nào dễ dẫn tới khái quát sai. Kết quả là giả thuyết, cần pilot học sinh thật để xác nhận. Nhận định về độ chính xác chuyên môn vẫn thuộc knowledge reviewer: chuyển mục "Nghi vấn chuyên môn" trong report của Minh cho agent `knowledge-reviewer` ở chế độ `triage`.
+
+Agent mới được Claude Code nạp khi mở phiên mới (hoặc sau `/agents`). Chưa có lượt chạy nào bằng định nghĩa 1.1.0.
+
+Cách gọi trong Claude Code:
+
+> Dùng agent student-tester (Minh), chế độ kien-thuc, kiểm bài cache và cpu-io trên http://127.0.0.1:4173/, mobile 390 px. Không đưa đáp án hay báo cáo cũ.
+
+> Dùng student-tester chế độ regression, tái hiện các finding trong [đường dẫn report] trên commit [SHA].
+
+Parent dựng bản preview trước (`pnpm build` rồi `pnpm preview`), giao 1–2 bài mỗi lượt, đọc `report.md` và xem ảnh trước khi cập nhật [MEMORY.md](MEMORY.md) hoặc sửa nội dung.
+
 ## Quy tắc phiên
 
 - **first-use:** trình duyệt mới, đọc UI trước; không xem code/đáp án/report cũ trong vòng khám phá.
