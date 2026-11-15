@@ -261,7 +261,7 @@
     "title": "Thử lại càng nhiều, hệ thống càng chậm?",
     "subtitle": "Ba tầng cùng retry làm một lỗi thành nhiều lượt gọi.",
     "objective": "Chọn deadline/timeout, retry budget/backoff/jitter, circuit breaker, bulkhead và suy giảm có kiểm soát.",
-    "story": "API nộp bài gọi lưu trữ, lưu trữ gọi dịch vụ khác. Khi chậm, cả ba tầng đều thử ba lần. Tải phụ tăng đúng lúc hệ thống yếu nhất.",
+    "story": "Ứng dụng gọi API nộp bài, API gọi lưu trữ, lưu trữ gọi dịch vụ khác. Khi chậm, cả ba tầng gọi phía trước đều thử ba lần. Tải phụ dồn vào dịch vụ cuối đúng lúc hệ thống yếu nhất.",
     "explanation": "Ngân sách chờ cần đi qua cả chuỗi. Giảm tải thử lại và rải thời điểm. Ngừng gọi nơi đang lỗi và giới hạn lan truyền. Giảm chức năng phải giữ điều cốt lõi.",
     "limit": "Lịch lỗi giả định; không dùng retry cho mọi lỗi, không cam kết phục hồi dưới mọi tải.",
     "terms": [
@@ -495,7 +495,7 @@
         "kind": "authored-scenario"
       },
       "title": "Ba tầng cùng retry làm một lỗi thành nhiều lượt gọi.",
-      "context": "API nộp bài gọi lưu trữ, lưu trữ gọi dịch vụ khác. Khi chậm, cả ba tầng đều thử ba lần. Tải phụ tăng đúng lúc hệ thống yếu nhất.",
+      "context": "Ứng dụng gọi API nộp bài, API gọi lưu trữ, lưu trữ gọi dịch vụ khác. Khi chậm, cả ba tầng gọi phía trước đều thử ba lần. Tải phụ dồn vào dịch vụ cuối đúng lúc hệ thống yếu nhất.",
       "requirements": [
         "Chọn deadline/timeout, retry budget/backoff/jitter, circuit breaker, bulkhead và suy giảm có kiểm soát.",
         "Giải thích được một tình huống lỗi và điều kiện để phương án còn đúng."

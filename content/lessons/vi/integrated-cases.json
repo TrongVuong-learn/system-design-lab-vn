@@ -258,7 +258,7 @@
     "moduleId": "L2.5",
     "minutes": 45,
     "title": "Case: bảng tin câu lạc bộ",
-    "subtitle": "Mỗi ngày100 bài đăng; tài khoản thường có20 follower, một tài khoản có10.",
+    "subtitle": "Mỗi ngày100 bài đăng; tài khoản thường có20 follower, một tài khoản có10.000 follower.",
     "objective": "Thiết kế bảng tin trường: chọn đẩy/kéo bài viết, giữ thứ tự, chống trùng và thu hồi quyền đọc.",
     "story": "Mỗi ngày100 bài đăng; tài khoản thường có20 follower, một tài khoản có10.000. Cần feed, tìm kiếm và thu hồi bài riêng theo quyền.",
     "explanation": "Fan-out khi ghi và khi đọc có chi phí khác. Queue và index cần chống lặp và biết độ trễ. Feed nhanh vẫn cần đúng quyền.",
@@ -465,7 +465,7 @@
       "provenance": {
         "kind": "authored-scenario"
       },
-      "title": "Mỗi ngày100 bài đăng; tài khoản thường có20 follower, một tài khoản có10.",
+      "title": "Mỗi ngày100 bài đăng; tài khoản thường có20 follower, một tài khoản có10.000 follower.",
       "context": "Mỗi ngày100 bài đăng; tài khoản thường có20 follower, một tài khoản có10.000. Cần feed, tìm kiếm và thu hồi bài riêng theo quyền.",
       "requirements": [
         "Thiết kế bảng tin trường: chọn đẩy/kéo bài viết, giữ thứ tự, chống trùng và thu hồi quyền đọc.",
