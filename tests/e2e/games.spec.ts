@@ -72,7 +72,7 @@ test('mobile layout and reduced-motion preserve controls without WebGL', async (
   }
 });
 
-test('downloaded pack opens an unvisited game and Lottie runtime offline', async ({
+test('downloaded pack opens an unvisited game and its animation offline', async ({
   page,
   context,
 }) => {

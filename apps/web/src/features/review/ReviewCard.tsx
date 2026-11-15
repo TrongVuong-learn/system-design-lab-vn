@@ -1,6 +1,5 @@
 import { isSchoolReviewSaved } from './model';
-import { Button } from '@astryxdesign/core/Button';
-import { Card } from '@astryxdesign/core/Card';
+import { Button } from '../../ui/Button';
 import { Heading } from '@astryxdesign/core/Heading';
 import { HStack } from '@astryxdesign/core/HStack';
 import { Text } from '@astryxdesign/core/Text';
@@ -16,7 +15,7 @@ export function ReviewCard() {
     Number(isSchoolReviewSaved(record, 'opening')) + Number(isSchoolReviewSaved(record, 'rush'));
   return (
     <section className="review-entry" aria-label="Ôn tổng hợp">
-      <Card variant="blue" padding={6}>
+      <div className="review-entry-card">
         <HStack gap={4} hAlign="between" vAlign="center" wrap="wrap">
           <VStack gap={2}>
             <Heading level={2}>Ghép các kiến thức lại</Heading>
@@ -28,11 +27,12 @@ export function ReviewCard() {
             </Text>
           </VStack>
           <Button
+            variant="primary"
             label={record ? 'Tiếp tục ôn website trường' : 'Thử bài ôn website trường'}
             href="/review/school-day"
           />
         </HStack>
-      </Card>
+      </div>
     </section>
   );
 }

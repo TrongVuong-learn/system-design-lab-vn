@@ -1,4 +1,4 @@
-import { Button } from '@astryxdesign/core/Button';
+import { Button } from '../../ui/Button';
 import { isSchoolReviewSaved } from './model';
 import { useEffect, useRef } from 'react';
 import { useParams } from 'react-router';

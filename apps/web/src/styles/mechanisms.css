@@ -6,8 +6,7 @@
     height: auto;
     min-height: 190px;
     padding: 0;
-    background: var(--color-background-blue);
-    border-right: 1px solid var(--color-border);
+    background: var(--lv-wash, var(--color-background-blue));
   }
   @media (max-width: 680px) {
     .lesson-visual {
@@ -41,13 +40,13 @@
     width: min(320px, calc(100vw - 24px));
     padding: 18px;
     border: 1px solid var(--color-border);
-    border-radius: 2px;
-    background: white;
+    border-radius: var(--radius-inner);
+    background: var(--color-background-card);
     color: var(--color-text-primary);
     font-family: var(--font-family-body);
     font-size: 14px;
     line-height: 1.7;
-    box-shadow: 0 8px 28px #17233d20;
+    box-shadow: var(--sdl-shadow-lift);
   }
   .term-note strong {
     display: block;
@@ -66,7 +65,7 @@
     min-width: 44px;
     min-height: 44px;
     border: 1px solid var(--color-border);
-    border-radius: 2px;
+    border-radius: var(--radius-inner);
     padding: 8px 14px;
     background: var(--color-background-muted);
     color: var(--color-text-primary);
@@ -103,9 +102,9 @@
     gap: 8px;
   }
   .cache-sketch > div > span {
-    background: white;
+    background: var(--color-background-card);
     border: 1px solid var(--color-border);
-    border-radius: 2px;
+    border-radius: var(--radius-inner);
     padding: 6px;
     font-size: 12px;
     flex: 1;
@@ -148,9 +147,9 @@
   }
   .job-strip span {
     height: 25px;
-    background: white;
+    background: var(--color-background-card);
     border: 1px solid var(--color-border-blue);
-    border-radius: 2px;
+    border-radius: var(--radius-inner);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -180,7 +179,7 @@
   .balance-sketch svg {
     width: 100%;
     height: auto;
-    fill: white;
+    fill: var(--color-background-card);
     stroke: var(--color-icon-blue);
     stroke-width: 1.6;
   }
@@ -192,7 +191,7 @@
   .budget-dots span {
     height: 22px;
     width: 22px;
-    background: white;
+    background: var(--color-background-card);
     border: 1px solid var(--color-border-blue);
     border-radius: 50%;
   }
@@ -422,9 +421,9 @@
     font: inherit;
     padding: 10px;
     color: var(--color-text-primary);
-    background: white;
+    background: var(--color-background-card);
     border: 1px solid var(--color-border);
-    border-radius: 2px;
+    border-radius: var(--radius-inner);
   }
   .routing-inputs select:focus-visible {
     outline: 2px solid var(--color-accent);
@@ -726,27 +725,49 @@
     margin: 12px auto;
     overflow: visible;
   }
+  .game-scene,
+  .game-preview-art {
+    --scene-bg: var(--color-background-muted);
+  }
+  .game-preview-art {
+    --scene-bg: var(--game-wash);
+  }
+  /* Labels carry a halo in the scene's background so routes never cut through the words. */
   .scene-map text {
     font-family: var(--font-family-body);
-    font-size: 16px;
+    font-size: 15px;
+    font-weight: 600;
     fill: var(--color-text-primary);
+    paint-order: stroke;
+    stroke: var(--scene-bg);
+    stroke-width: 6px;
+    stroke-linejoin: round;
   }
   .scene-route {
     fill: none;
     stroke: var(--color-icon-secondary);
-    stroke-width: 8;
-    stroke-dasharray: 4 4;
+    stroke-width: 3;
+    stroke-dasharray: 1 7;
+    stroke-linecap: round;
   }
   .scene-machine,
   .scene-slot {
-    fill: white;
+    fill: var(--color-background-card);
     stroke: var(--color-text-primary);
     stroke-width: 2;
+  }
+  .scene-machine {
+    rx: 8px;
+  }
+  .scene-machine + text,
+  .scene-machine ~ text {
+    stroke: none;
   }
   .scene-reader {
     fill: var(--color-background-green);
     stroke: var(--color-icon-success);
     stroke-width: 2;
+    rx: 8px;
   }
   .scene-unit {
     fill: var(--color-accent);
@@ -754,6 +775,7 @@
   .scene-map .scene-packet-text {
     font-size: 12px;
     font-weight: 700;
+    stroke: none;
   }
   .scene-stages {
     padding-left: 22px;

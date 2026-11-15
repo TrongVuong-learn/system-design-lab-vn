@@ -8,13 +8,12 @@ import { SaveStatus } from '../progress/SaveStatus';
 import { useEffect, useRef } from 'react';
 import { useParams } from 'react-router';
 import { Banner } from '@astryxdesign/core/Banner';
-import { Button } from '@astryxdesign/core/Button';
+import { Button } from '../../ui/Button';
 import { Card } from '@astryxdesign/core/Card';
 import { Heading } from '@astryxdesign/core/Heading';
 import { HStack } from '@astryxdesign/core/HStack';
 import { Link } from '@astryxdesign/core/Link';
 import { Text } from '@astryxdesign/core/Text';
-import { Token } from '@astryxdesign/core/Token';
 import { VStack } from '@astryxdesign/core/VStack';
 import { lessons, editorial } from '../../app/catalog';
 import { useProgress } from '../../app/progress';
@@ -83,18 +82,18 @@ export function LessonPage() {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }
   return (
-    <article className="lesson-page">
+    <article className="lesson-page" data-level={lesson.level}>
       <VStack gap={6}>
         <HStack gap={2} hAlign="between" vAlign="center" wrap="wrap" className="lesson-topbar">
-          <Link href="/explore">← Về lộ trình</Link>
-          <Text type="supporting">{lesson.minutes} phút · Bản thử nghiệm</Text>
+          <Link href="/explore">Về lộ trình</Link>
+          <Text type="supporting">{lesson.minutes} phút, bản thử nghiệm</Text>
         </HStack>
 
         <VStack gap={2} className="lesson-heading">
-          <HStack gap={2}>
-            <Token size="sm" color="blue" label={lesson.level} />
-            <Token size="sm" label={`Chặng ${p.stage + 1}/4`} />
-          </HStack>
+          <p className="lesson-meta">
+            <span className="level-chip">{lesson.level}</span>
+            <span>Chặng {p.stage + 1}/4</span>
+          </p>
           <h1 ref={heading} tabIndex={-1} className="heading-1">
             {lesson.title}
           </h1>
@@ -148,11 +147,10 @@ export function LessonPage() {
                   ))}
                 </Text>
               )}
-              <Banner
-                status="info"
-                title="Không cần viết code."
-                description="Hãy đọc câu chuyện, dự đoán rồi tự thử từng bước."
-              />
+              <p className="quiet-note">
+                <strong>Không cần viết code.</strong> Hãy đọc câu chuyện, dự đoán rồi tự thử từng
+                bước.
+              </p>
             </VStack>
           </Card>
         )}

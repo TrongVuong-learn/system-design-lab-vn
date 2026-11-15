@@ -1,4 +1,4 @@
-import { Button } from '@astryxdesign/core/Button';
+import { Button } from '../../ui/Button';
 import { ModulePracticeLab } from './ModulePracticeLab';
 import { CookieSessionLab, ReverseProxyLab, MultiplexLab } from './WebProtocolLabs';
 import { AddressSpaceLab, FileHandlesLab, EventLoopLab } from './OsLabs';

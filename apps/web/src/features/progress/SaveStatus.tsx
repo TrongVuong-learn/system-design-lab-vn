@@ -1,5 +1,5 @@
 import { Banner } from '@astryxdesign/core/Banner';
-import { Button } from '@astryxdesign/core/Button';
+import { Button } from '../../ui/Button';
 import { HStack } from '@astryxdesign/core/HStack';
 import { VStack } from '@astryxdesign/core/VStack';
 import { useProgress } from '../../app/progress';

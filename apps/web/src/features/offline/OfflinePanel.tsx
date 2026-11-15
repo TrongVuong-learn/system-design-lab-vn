@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Button } from '@astryxdesign/core/Button';
+import { Button } from '../../ui/Button';
 import { Card } from '@astryxdesign/core/Card';
 import { Code } from '@astryxdesign/core/Code';
 import { HStack } from '@astryxdesign/core/HStack';

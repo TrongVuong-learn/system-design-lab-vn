@@ -1,4 +1,4 @@
-import { Button } from '@astryxdesign/core/Button';
+import { Button } from '../../ui/Button';
 import type { Lesson, LessonProgress } from '@sdl/content-schema';
 import {
   concurrencyStep,

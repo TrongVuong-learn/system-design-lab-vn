@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { cacheStep, initialCache, type CacheCommand } from '@sdl/simulation-engine';
-import { Button } from '@astryxdesign/core/Button';
+import { Button } from '../../ui/Button';
 import { Card } from '@astryxdesign/core/Card';
 import { Grid } from '@astryxdesign/core/Grid';
 import { HStack } from '@astryxdesign/core/HStack';
