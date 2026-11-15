@@ -1,6 +1,12 @@
+import { Button } from '@astryxdesign/core/Button';
 import { isSchoolReviewSaved } from './model';
 import { useEffect, useRef } from 'react';
-import { Link, useParams } from 'react-router';
+import { useParams } from 'react-router';
+import { Link } from '@astryxdesign/core/Link';
+import { Text } from '@astryxdesign/core/Text';
+import { Token } from '@astryxdesign/core/Token';
+import { VStack } from '@astryxdesign/core/VStack';
+import { PageHeader } from '../../ui/layout';
 import { newSchoolReviewProgress } from '@sdl/learning-core';
 import {
   evaluateSchoolReview,
@@ -27,10 +33,10 @@ export function ReviewPage() {
   }, [ready, scenarioId]);
   if (!review)
     return (
-      <div className="page-content">
-        <h1>Chưa có bài ôn này.</h1>
-        <Link to="/explore">Về Khám phá</Link>
-      </div>
+      <VStack gap={3}>
+        <PageHeader title="Chưa có bài ôn này." />
+        <Link href="/explore">Về Khám phá</Link>
+      </VStack>
     );
   if (!ready) return <p role="status">Đang mở lượt ôn…</p>;
   const terms = lessons
@@ -83,38 +89,41 @@ export function ReviewPage() {
   const saveFailed =
     saveState === 'write-error' || saveState === 'read-error' || saveState === 'conflict';
   const status = (pass: boolean) => (
-    <span className={pass ? 'review-pass' : 'review-fail'}>{pass ? 'Đạt' : 'Chưa đạt'}</span>
+    <Token
+      size="sm"
+      color={pass ? 'green' : 'red'}
+      label={pass ? 'Đạt' : 'Chưa đạt'}
+      className={pass ? 'review-pass' : 'review-fail'}
+    />
   );
   return (
-    <article className="page-content school-review">
-      <Link className="back-link" to="/explore">
-        Về Khám phá
-      </Link>
-      <h1 ref={heading} tabIndex={-1}>
+    <article className="school-review">
+      <Link href="/explore">← Về Khám phá</Link>
+      <h1 ref={heading} tabIndex={-1} className="heading-1">
         {review.title}
       </h1>
-      <p className="page-lead">{review.introduction}</p>
+      <Text as="p" type="large" weight="normal" color="secondary">
+        {review.introduction}
+      </Text>
       <details className="advanced">
         <summary>Nên ôn trước những bài nào?</summary>
         <ul>
           {review.prerequisiteIds.map((id) => (
             <li key={id}>
-              <Link to={`/learn/${id}`}>{lessons.find((l) => l.id === id)?.title}</Link>
+              <Link href={`/learn/${id}`}>{lessons.find((l) => l.id === id)?.title}</Link>
             </li>
           ))}
         </ul>
       </details>
       <nav className="review-scenarios" aria-label="Chọn tình huống ôn">
         {review.scenarios.map((s, i) => (
-          <button
+          <Button
             key={s.id}
-            className="button secondary"
+            variant={scenarioId === s.id ? 'primary' : 'secondary'}
             aria-pressed={scenarioId === s.id}
+            label={`${i + 1}. ${s.title}${isSchoolReviewSaved(state, s.id) ? ' · Đã lưu' : ''}`}
             onClick={() => select(s.id)}
-          >
-            {i + 1}. {s.title}
-            {isSchoolReviewSaved(state, s.id) ? ' · Đã lưu' : ''}
-          </button>
+          />
         ))}
       </nav>
       {saveFailed && <SaveStatus />}
@@ -183,12 +192,8 @@ export function ReviewPage() {
           chờ của tình huống.
         </p>
         <div className="lab-controls">
-          <button className="button primary" onClick={simulate}>
-            Chạy phương án
-          </button>
-          <button className="button secondary" onClick={reset}>
-            Đặt lại phương án
-          </button>
+          <Button variant="primary" label="Chạy phương án" onClick={simulate} />
+          <Button label="Đặt lại phương án" onClick={reset} />
         </div>
         {state.hints[scenarioId] > 0 && (
           <div className="review-hints">
@@ -201,17 +206,16 @@ export function ReviewPage() {
           </div>
         )}
         {state.hints[scenarioId] < 2 && (
-          <button
-            className="text-button"
+          <Button
+            variant="ghost"
+            label={`Mở gợi ý ${state.hints[scenarioId] + 1}`}
             onClick={() =>
               updateReview({
                 ...state,
                 hints: { ...state.hints, [scenarioId]: state.hints[scenarioId] + 1 },
               })
             }
-          >
-            Mở gợi ý {state.hints[scenarioId] + 1}
-          </button>
+          />
         )}
       </section>
       {result && (
@@ -348,14 +352,13 @@ export function ReviewPage() {
           Bạn tự rà lời giải thích; công cụ không tự chấm nội dung này. Kiểm: đã nêu nguyên nhân,
           phân biệt hai luồng và các yêu cầu và nói được một giới hạn chưa?
         </p>
-        <button
-          className="button primary"
-          disabled={!canSave}
+        <Button
+          variant="primary"
+          label={isSchoolReviewSaved(state, scenarioId) ? 'Đã lưu lượt ôn' : 'Lưu lượt ôn'}
+          isDisabled={!canSave}
           aria-describedby="review-save-help"
           onClick={() => updateReview({ ...state, saved: { ...state.saved, [scenarioId]: true } })}
-        >
-          {isSchoolReviewSaved(state, scenarioId) ? 'Đã lưu lượt ôn' : 'Lưu lượt ôn'}
-        </button>
+        />
         <p id="review-save-help" className="muted">
           {canSave
             ? 'Lưu kết quả mô hình và nhận định của bạn, không chứng nhận thành thạo.'

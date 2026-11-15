@@ -1,3 +1,4 @@
+import { Button } from '@astryxdesign/core/Button';
 import type { Lesson, LessonProgress } from '@sdl/content-schema';
 import {
   concurrencyStep,
@@ -84,25 +85,23 @@ export function ConcurrencyLab({
                       ? 'Bước tiếp: đọc số chung.'
                       : `Bước tiếp: ghi ${state.locals[actor]} +1.`}
               </p>
-              <button
-                className="button secondary"
-                disabled={stage === 2}
+              <Button
+                label={
+                  stage === 2
+                    ? `${name} đã ghi xong`
+                    : stage === 0
+                      ? `${name} đọc số chung`
+                      : `${name} ghi số đã đọc +1`
+                }
+                isDisabled={stage === 2}
                 onClick={() => step(actor)}
-              >
-                {stage === 2
-                  ? `${name} đã ghi xong`
-                  : stage === 0
-                    ? `${name} đọc số chung`
-                    : `${name} ghi số đã đọc +1`}
-              </button>
+              />
             </section>
           );
         })}
       </div>
       <div className="lab-controls">
-        <button className="button secondary" onClick={() => start(state.locked)}>
-          Bắt đầu lại lượt thử
-        </button>
+        <Button label="Bắt đầu lại lượt thử" onClick={() => start(state.locked)} />
       </div>
       <ObservationPanel value={progress.lab['observation']} />
       <div className="feedback" role="status">

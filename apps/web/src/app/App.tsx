@@ -1,5 +1,15 @@
-import { Component, useEffect, type ReactNode } from 'react';
-import { HashRouter, Link, NavLink, Route, Routes, useLocation } from 'react-router';
+import { Component, forwardRef, useEffect, type ReactNode } from 'react';
+import { HashRouter, Link as RouterLink, Route, Routes, useLocation } from 'react-router';
+import { Theme } from '@astryxdesign/core/theme';
+import { LinkProvider } from '@astryxdesign/core/Link';
+import { TopNav, TopNavHeading, TopNavItem } from '@astryxdesign/core/TopNav';
+import { Badge } from '@astryxdesign/core/Badge';
+import { Button } from '@astryxdesign/core/Button';
+import { Heading } from '@astryxdesign/core/Heading';
+import { Text } from '@astryxdesign/core/Text';
+import { VStack } from '@astryxdesign/core/VStack';
+import { HStack } from '@astryxdesign/core/HStack';
+import { themes, defaultThemeSlug } from '../astryx-themes';
 import { ProgressProvider } from './progress';
 import {
   HomePage,
@@ -13,6 +23,16 @@ import { LessonPage } from '../features/lesson-player/LessonPage';
 import { GamesPage, GamePage } from '../features/games/GamesPage';
 import { Icon } from '../ui/primitives';
 
+/** Astryx renders links through this, so every href stays inside the hash router. */
+const RouteLink = forwardRef<
+  HTMLAnchorElement,
+  { href?: string; to?: string } & Record<string, unknown>
+>(function RouteLink({ href, to, ...rest }, ref) {
+  const target = String(href ?? to ?? '/');
+  if (/^(https?:|mailto:|#)/.test(target)) return <a ref={ref} href={target} {...rest} />;
+  return <RouterLink ref={ref} to={target} {...rest} />;
+});
+
 class ErrorBoundary extends Component<{ children: ReactNode }, { error: boolean }> {
   state = { error: false };
   static getDerivedStateFromError() {
@@ -20,36 +40,45 @@ class ErrorBoundary extends Component<{ children: ReactNode }, { error: boolean 
   }
   render() {
     return this.state.error ? (
-      <main className="page-content">
-        <h1>Cần mở lại trang học.</h1>
-        <p>Trang gặp lỗi hiển thị. Bản lưu đã ghi thành công vẫn ở trên thiết bị.</p>
-        <button
-          className="button primary"
-          onClick={() => {
-            window.location.hash = '/progress';
-            window.location.reload();
-          }}
-        >
-          Mở lại Tiến độ
-        </button>
+      <main className="page">
+        <VStack gap={3}>
+          <Heading level={1}>Cần mở lại trang học.</Heading>
+          <Text as="p">Trang gặp lỗi hiển thị. Bản lưu đã ghi thành công vẫn ở trên thiết bị.</Text>
+          <HStack>
+            <Button
+              variant="primary"
+              label="Mở lại Tiến độ"
+              onClick={() => {
+                window.location.hash = '/progress';
+                window.location.reload();
+              }}
+            />
+          </HStack>
+        </VStack>
       </main>
     ) : (
       this.props.children
     );
   }
 }
+
+const navigation = [
+  { to: '/', label: 'Học', icon: 'home' },
+  { to: '/explore', label: 'Khám phá', icon: 'grid' },
+  { to: '/games', label: 'Game', icon: 'play' },
+  { to: '/progress', label: 'Tiến độ', icon: 'chart' },
+];
+
+function isCurrent(pathname: string, to: string) {
+  return to === '/' ? pathname === '/' : pathname === to || pathname.startsWith(`${to}/`);
+}
+
 function Shell() {
   const { pathname } = useLocation();
   const learning = pathname.startsWith('/learn/') || pathname.startsWith('/review/');
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
-  const navigation = [
-    { to: '/', label: 'Học', icon: 'home' },
-    { to: '/explore', label: 'Khám phá', icon: 'grid' },
-    { to: '/games', label: 'Game', icon: 'play' },
-    { to: '/progress', label: 'Tiến độ', icon: 'chart' },
-  ];
   return (
     <>
       <a
@@ -62,25 +91,32 @@ function Shell() {
       >
         Đến nội dung chính
       </a>
-      <header className="site-header">
-        <div className="header-inner">
-          <Link className="brand" to="/">
-            <img src="/icon.svg" alt="" />
-            <span>
-              System Design<span className="brand-lab"> Lab</span>
+      <div className="site-header">
+        <TopNav
+          label="Điều hướng chính"
+          heading={
+            <TopNavHeading
+              logo={<img src="/icon.svg" alt="" width={28} height={28} />}
+              heading="System Design Lab"
+              headingHref="/"
+            />
+          }
+          centerContent={
+            <span className="desktop-nav">
+              {navigation.map((n) => (
+                <TopNavItem
+                  key={n.to}
+                  label={n.label}
+                  href={n.to}
+                  isSelected={isCurrent(pathname, n.to)}
+                />
+              ))}
             </span>
-          </Link>
-          <nav className="desktop-nav" aria-label="Điều hướng chính">
-            {navigation.map((n) => (
-              <NavLink end={n.to === '/'} to={n.to} key={n.to}>
-                {n.label}
-              </NavLink>
-            ))}
-          </nav>
-          <span className="beta-badge">Bản thử nghiệm</span>
-        </div>
-      </header>
-      <main id="main-content" tabIndex={-1} className={learning ? 'main lesson-main' : 'main'}>
+          }
+          endContent={<Badge variant="info" label="Bản thử nghiệm" />}
+        />
+      </div>
+      <main id="main-content" tabIndex={-1} className={learning ? 'page page-learning' : 'page'}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/explore" element={<ExplorePage />} />
@@ -96,18 +132,22 @@ function Shell() {
       {!learning && (
         <>
           <footer className="site-footer">
-            <div>
-              <strong>System Design Lab</strong>
-              <p>Hiểu bằng cách thử. Học từng bước nhỏ.</p>
-            </div>
-            <span>Tiếng Việt · Mobile-first · Local-first</span>
+            <VStack gap={1}>
+              <Text weight="semibold">System Design Lab</Text>
+              <Text type="supporting">Hiểu bằng cách thử. Học từng bước nhỏ.</Text>
+              <Text type="supporting">Tiếng Việt · Mobile-first · Local-first</Text>
+            </VStack>
           </footer>
           <nav className="mobile-nav" aria-label="Điều hướng điện thoại">
             {navigation.map((n) => (
-              <NavLink end={n.to === '/'} key={n.to} to={n.to}>
+              <RouterLink
+                key={n.to}
+                to={n.to}
+                aria-current={isCurrent(pathname, n.to) ? 'page' : undefined}
+              >
                 <Icon name={n.icon} />
                 <span>{n.label}</span>
-              </NavLink>
+              </RouterLink>
             ))}
           </nav>
         </>
@@ -115,14 +155,19 @@ function Shell() {
     </>
   );
 }
+
 export function App() {
   return (
     <ErrorBoundary>
-      <ProgressProvider>
-        <HashRouter>
-          <Shell />
-        </HashRouter>
-      </ProgressProvider>
+      <Theme theme={themes[defaultThemeSlug]} mode="light">
+        <ProgressProvider>
+          <HashRouter>
+            <LinkProvider component={RouteLink}>
+              <Shell />
+            </LinkProvider>
+          </HashRouter>
+        </ProgressProvider>
+      </Theme>
     </ErrorBoundary>
   );
 }

@@ -2,7 +2,20 @@ import { OfflinePanel } from '../offline';
 import { ReviewCard } from '../review';
 import { SaveStatus } from '../progress/SaveStatus';
 import { useRef, useState } from 'react';
-import { Link, useParams } from 'react-router';
+import { Link as RouterLink, useParams } from 'react-router';
+import { Button } from '@astryxdesign/core/Button';
+import { Card } from '@astryxdesign/core/Card';
+import { Collapsible } from '@astryxdesign/core/Collapsible';
+import { Grid } from '@astryxdesign/core/Grid';
+import { Heading } from '@astryxdesign/core/Heading';
+import { HStack } from '@astryxdesign/core/HStack';
+import { Link } from '@astryxdesign/core/Link';
+import { ProgressBar } from '@astryxdesign/core/ProgressBar';
+import { Text } from '@astryxdesign/core/Text';
+import { TextInput } from '@astryxdesign/core/TextInput';
+import { Token } from '@astryxdesign/core/Token';
+import { VStack } from '@astryxdesign/core/VStack';
+import { Banner } from '@astryxdesign/core/Banner';
 import { lessons, levels, modules, tracks, pathways, lessonLabel } from '../../app/catalog';
 import { useProgress } from '../../app/progress';
 import {
@@ -12,122 +25,126 @@ import {
   isLessonComplete,
 } from '@sdl/learning-core';
 import { Icon } from '../../ui/primitives';
+import { PageHeader, RowLink, SectionHeader } from '../../ui/layout';
 import { LessonSketch } from './LessonSketch';
 import { RequestWorkshop } from '../../ui/motion/RequestWorkshop';
 import { FeaturedExperiment } from './FeaturedExperiment';
-import { PixelBuilding } from '../../ui/PixelCity';
 
 export function LessonCard({ id }: { id: string }) {
   const l = lessons.find((l) => l.id === id)!;
   const { progress } = useProgress();
   const done = isLessonComplete(l, progress.lessons[id]);
+  const action = done
+    ? 'Ôn lại bài'
+    : progress.lessons[id]?.stage
+      ? 'Tiếp tục học'
+      : 'Bắt đầu thí nghiệm';
   return (
-    <Link to={`/learn/${id}`} className="lesson-card">
-      <div className={`lesson-visual visual-${l.kind}`}>
-        <LessonSketch kind={l.kind} />
-        {done && (
-          <span className="done-badge">
-            <Icon name="check" size={14} />
-            Đã hoàn thành
-          </span>
-        )}
-      </div>
-      <div className="lesson-card-body">
-        <div className="lesson-meta">
-          <span>
-            {l.level} · {lessonLabel(l.id)}
-          </span>
-          <span>
-            <Icon name="clock" size={13} />
-            {l.minutes} phút
-          </span>
+    <RouterLink to={`/learn/${id}`} className="lesson-card">
+      <Card padding={0} className="lesson-card-surface">
+        <div className={`lesson-visual visual-${l.kind}`}>
+          <LessonSketch kind={l.kind} />
         </div>
-        <h3>{l.title}</h3>
-        <p>{l.subtitle}</p>
-        <span className="card-action">
-          {done
-            ? 'Ôn lại bài'
-            : progress.lessons[id]?.stage
-              ? 'Tiếp tục học'
-              : 'Bắt đầu thí nghiệm'}
-          <Icon name="arrow" size={18} />
-        </span>
-      </div>
-    </Link>
+        <VStack gap={2} padding={4} className="lesson-card-body">
+          <HStack gap={2} wrap="wrap" vAlign="center">
+            <Token size="sm" label={`${l.level} · ${lessonLabel(l.id)}`} />
+            <Text type="supporting">{l.minutes} phút</Text>
+            {done && <Token size="sm" color="green" label="Đã hoàn thành" />}
+          </HStack>
+          <Heading level={3}>{l.title}</Heading>
+          <Text as="p" color="secondary">
+            {l.subtitle}
+          </Text>
+          <Text weight="semibold" color="accent" className="card-action">
+            {action} →
+          </Text>
+        </VStack>
+      </Card>
+    </RouterLink>
   );
 }
+
+function LevelList({ withNumber = false }: { withNumber?: boolean }) {
+  return (
+    <VStack gap={0} className="level-list row-list">
+      {levels.map((level) => (
+        <RowLink
+          key={level.id}
+          to={`/levels/${level.id}`}
+          label={level.name}
+          description={level.subtitle}
+          start={
+            <span className="level-chip" aria-hidden={!withNumber}>
+              {withNumber ? level.number : level.id}
+            </span>
+          }
+        />
+      ))}
+    </VStack>
+  );
+}
+
 export function HomePage() {
   const { progress } = useProgress();
   const continuation = lessons.find(
     (l) => progress.lessons[l.id] && !isLessonComplete(l, progress.lessons[l.id]),
   );
   return (
-    <div className="workshop-home">
-      <section className="workshop-hero">
-        <div className="workshop-intro">
-          <h1>
-            Thành phố
-            <br />
-            dữ liệu.
-          </h1>
-          <p>
-            Một yêu cầu đi đâu sau lần bấm? Gửi một bưu kiện qua các trạm, rồi tự tay khám phá cách
-            phần mềm vận hành.
-          </p>
-          <Link
-            className="button primary"
-            to={continuation ? `/learn/${continuation.id}` : '/learn/request'}
-          >
-            {continuation ? 'Tiếp tục bài đang học' : 'Bắt đầu bài đầu tiên'} <Icon name="arrow" />
-          </Link>
-          <span className="workshop-intro-note">
-            Không cần biết code. Bắt đầu từ điều bạn tò mò.
-          </span>
-        </div>
+    <VStack gap={10} className="home">
+      <section className="home-hero">
+        <VStack gap={4} className="home-intro">
+          <Heading level={1} type="display-2">
+            Hiểu hệ thống bằng cách tự tay thử.
+          </Heading>
+          <Text as="p" type="large" weight="normal" color="secondary">
+            Một yêu cầu đi đâu sau lần bấm? Gửi nó qua từng chặng, rồi khám phá cách phần mềm vận
+            hành qua những thí nghiệm nhỏ.
+          </Text>
+          <HStack gap={2} wrap="wrap">
+            <Button
+              variant="primary"
+              size="lg"
+              label={continuation ? 'Tiếp tục bài đang học' : 'Bắt đầu bài đầu tiên'}
+              href={continuation ? `/learn/${continuation.id}` : '/learn/request'}
+            />
+            <Button size="lg" label="Xem lộ trình" href="/explore" />
+          </HStack>
+          <Text type="supporting">Không cần biết code. Bắt đầu từ điều bạn tò mò.</Text>
+        </VStack>
         <RequestWorkshop />
       </section>
-      <section className="game-invitation">
-        <div>
-          <h2>Ba sân chơi. Ba cơ chế.</h2>
-          <p>
-            Chia tải. Giữ dữ liệu mới. Vượt giờ cao điểm. Ba game, mỗi quyết định đều có kết quả để
-            quan sát.
-          </p>
-          <Link to="/games" className="button primary">
-            Khám phá Game <Icon name="arrow" />
-          </Link>
-        </div>
-        <div className="invitation-diagram" aria-hidden="true">
-          <span>request</span>
-          <b>→</b>
-          <span>
-            A<br />B
-          </span>
-          <b>→</b>
-          <span>kết quả</span>
-        </div>
-      </section>
-      <section className="learning-desk">
-        <div className="desk-copy">
-          <h2>Vì sao lịch học vẫn hiện phòng cũ?</h2>
-          <p>Cô giáo đã đổi phòng. Website chưa đổi theo. Thử xem hai nơi đang giữ thông tin gì.</p>
-          <Link to="/learn/cache" className="text-link">
-            Tìm hiểu cache →
-          </Link>
-        </div>
+
+      <Card variant="muted" padding={6} className="home-games">
+        <HStack gap={4} hAlign="between" vAlign="center" wrap="wrap">
+          <VStack gap={2}>
+            <Heading level={2}>Ba game, ba cơ chế</Heading>
+            <Text as="p" color="secondary">
+              Chia tải. Giữ dữ liệu mới. Vượt giờ cao điểm. Mỗi quyết định đều có kết quả để quan
+              sát.
+            </Text>
+          </VStack>
+          <Button variant="primary" label="Khám phá Game" href="/games" />
+        </HStack>
+      </Card>
+
+      <section className="home-desk">
+        <VStack gap={2}>
+          <Heading level={2}>Vì sao lịch học vẫn hiện phòng cũ?</Heading>
+          <Text as="p" color="secondary">
+            Cô giáo đã đổi phòng. Website chưa đổi theo. Thử xem hai nơi đang giữ thông tin gì.
+          </Text>
+          <Link href="/learn/cache">Tìm hiểu cache →</Link>
+        </VStack>
         <FeaturedExperiment />
       </section>
-      <section className="section notebook-section">
-        <div className="section-head">
-          <div>
-            <h2>Chọn một câu hỏi để thử</h2>
-            <p>Bắt đầu với các tình huống quen thuộc. Lộ trình có {lessons.length} bài tự luyện.</p>
-          </div>
-          <Link to="/explore" className="text-link">
-            Xem tất cả bài
-          </Link>
-        </div>
-        <div className="lesson-grid">
+
+      <VStack gap={4}>
+        <SectionHeader
+          title="Chọn một câu hỏi để thử"
+          description={`Bắt đầu với các tình huống quen thuộc. Lộ trình có ${lessons.length} bài tự luyện.`}
+          action={<Link href="/explore">Xem tất cả bài</Link>}
+        />
+        <Grid columns={{ minWidth: 260 }} gap={4} className="lesson-grid">
           {lessons
             .filter((l) =>
               ['request', 'cache', 'concurrency', 'cpu-io', 'http', 'metrics'].includes(l.id),
@@ -135,55 +152,36 @@ export function HomePage() {
             .map((l) => (
               <LessonCard key={l.id} id={l.id} />
             ))}
-        </div>
-      </section>
-      <section className="path-section">
-        <div className="path-intro">
-          <h2>Sáu khu, một lộ trình</h2>
-          <p>
+        </Grid>
+      </VStack>
+
+      <section className="home-path">
+        <VStack gap={2}>
+          <Heading level={2}>Sáu khu, một lộ trình</Heading>
+          <Text as="p" color="secondary">
             Học theo level hoặc mở chủ đề bạn đang cần. Lộ trình gồm 36 module và 7 nhánh chuyên
             sâu, bài tổng hợp theo level và case thiết kế.
-          </p>
-          <Link className="text-link" to="/explore">
-            Khám phá sáu khu học
-          </Link>
-        </div>
-        <div className="level-list">
-          {levels.map((level) => (
-            <Link key={level.id} to={`/levels/${level.id}`}>
-              <span className="district-icon">
-                <PixelBuilding district={levels.indexOf(level)} />
-              </span>
-              <span className="level-number">{level.id}</span>
-              <div>
-                <h3>{level.name}</h3>
-                <p>{level.subtitle}</p>
-              </div>
-              <Icon name="arrow" />
-            </Link>
-          ))}
-        </div>
+          </Text>
+          <Link href="/explore">Khám phá sáu khu học</Link>
+        </VStack>
+        <LevelList />
       </section>
-      <aside className="beta-note">
-        <strong>Bản thử nghiệm đang có {lessons.length} bài tự luyện.</strong>
-        <p>
-          Bài cơ chế, bài thiết kế và nhánh chuyên sâu đều có lối vào trong lộ trình. Tiến độ và bản
-          nháp thiết kế được lưu trên thiết bị của bạn; tự luyện chưa phải chứng nhận thành thạo.
-        </p>
-      </aside>
-    </div>
+
+      <Banner
+        status="info"
+        title={`Bản thử nghiệm đang có ${lessons.length} bài tự luyện.`}
+        description="Bài cơ chế, bài thiết kế và nhánh chuyên sâu đều có lối vào trong lộ trình. Tiến độ và bản nháp thiết kế được lưu trên thiết bị của bạn; tự luyện chưa phải chứng nhận thành thạo."
+      />
+    </VStack>
   );
 }
+
 export function ExplorePage() {
   const [query, setQuery] = useState('');
   const [group, setGroup] = useState('all');
   const [district, setDistrict] = useState<string | null>('L0');
   const normalize = (s: string) =>
-    s
-      .toLocaleLowerCase('vi')
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .replace(/đ/g, 'd');
+    s.toLocaleLowerCase('vi').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd');
   const term = query.trim();
   const matches = (s: string) => normalize(s).includes(normalize(term));
   const available = lessons.filter((l) => {
@@ -202,219 +200,226 @@ export function ExplorePage() {
     );
   });
   const planned = modules.filter((m) => matches(`${m.title} ${m.topics}`));
+  const chooseGroup = (value: string) => {
+    setGroup(value);
+    setQuery('');
+    document.getElementById('pathway-select')?.focus();
+  };
   return (
-    <div className="page-content explore-workshop">
-      <h1>Khám phá bài học</h1>
-      <p className="page-lead">
-        Sáu khu học từ nền tảng đến thiết kế hệ thống. Chọn khu hoặc tìm thẳng bài bạn cần.
-      </p>
-      <div className="search-box">
-        <Icon name="search" />
-        <input
-          aria-label="Tìm bài học hoặc chủ đề"
+    <VStack gap={8}>
+      <PageHeader
+        title="Khám phá bài học"
+        lead="Sáu khu học từ nền tảng đến thiết kế hệ thống. Chọn khu hoặc tìm thẳng bài bạn cần."
+      />
+      <Grid columns={{ minWidth: 260 }} gap={4} className="explore-filters">
+        <TextInput
+          label="Tìm bài học hoặc chủ đề"
           placeholder="Tìm cache, dữ liệu, hàng đợi…"
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={(value) => setQuery(value)}
         />
-      </div>
-      <div className="pathway-filter">
-        <label htmlFor="pathway-select">Học theo lộ trình</label>
-        <select
-          id="pathway-select"
-          value={group}
-          onChange={(event) => setGroup(event.target.value)}
-        >
-          <option value="all">Tất cả bài học</option>
-          {levels.map((l) => (
-            <option key={l.id} value={l.id}>
-              {l.id} · {l.name}
-            </option>
-          ))}
-          <option value="capstones">Sáu bài tổng hợp theo level</option>
-          <option value="cases">Tám case thiết kế tích hợp</option>
-          {tracks.map((t) => (
-            <option key={t.id} value={t.id}>
-              {t.title}
-            </option>
-          ))}
-        </select>
-      </div>
+        <VStack gap={1}>
+          <label htmlFor="pathway-select" className="field-label">
+            Học theo lộ trình
+          </label>
+          <select
+            id="pathway-select"
+            className="native-select"
+            value={group}
+            onChange={(event) => setGroup(event.target.value)}
+          >
+            <option value="all">Tất cả bài học</option>
+            {levels.map((l) => (
+              <option key={l.id} value={l.id}>
+                {l.id} · {l.name}
+              </option>
+            ))}
+            <option value="capstones">Sáu bài tổng hợp theo level</option>
+            <option value="cases">Tám case thiết kế tích hợp</option>
+            {tracks.map((t) => (
+              <option key={t.id} value={t.id}>
+                {t.title}
+              </option>
+            ))}
+          </select>
+        </VStack>
+      </Grid>
+
       {!term && group === 'all' && (
         <section className="district-map" aria-label="Sáu khu học">
-          {levels.map((level, i) => (
-            <div className="district" key={level.id}>
-              <button
-                className="district-toggle"
-                aria-expanded={district === level.id}
-                aria-controls={`district-${level.id}`}
-                onClick={() => {
-                  setDistrict(district === level.id ? null : level.id);
-                }}
+          <Card padding={0}>
+            {levels.map((level) => (
+              <Collapsible
+                key={level.id}
+                className="district"
+                isOpen={district === level.id}
+                onOpenChange={(open) => setDistrict(open ? level.id : null)}
+                trigger={
+                  <HStack gap={3} vAlign="center">
+                    <span className="level-chip">{level.id}</span>
+                    <Text weight="semibold">{level.name}</Text>
+                  </HStack>
+                }
               >
-                <span className="district-icon">
-                  <PixelBuilding district={i} />
-                </span>
-                <span>
-                  <small>{level.id}</small>
-                  <strong>{level.name}</strong>
-                </span>
-                <span aria-hidden="true">{district === level.id ? '−' : '+'}</span>
-              </button>
-              <div
-                className="district-content"
-                id={`district-${level.id}`}
-                hidden={district !== level.id}
-              >
-                <p>{level.subtitle}</p>
-                <Link className="text-link" to={`/levels/${level.id}`}>
-                  Mở khu {level.id}
-                </Link>
-                <button
-                  className="text-button"
-                  onClick={() => {
-                    setGroup(level.id);
-                    setQuery('');
-                    document.getElementById('pathway-select')?.focus();
-                  }}
-                >
-                  Lọc bài của khu này
-                </button>
-              </div>
-            </div>
-          ))}
+                <VStack gap={2} className="district-content">
+                  <Text as="p" color="secondary">
+                    {level.subtitle}
+                  </Text>
+                  <HStack gap={2} wrap="wrap">
+                    <Button size="sm" label={`Mở khu ${level.id}`} href={`/levels/${level.id}`} />
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      label="Lọc bài của khu này"
+                      onClick={() => chooseGroup(level.id)}
+                    />
+                  </HStack>
+                </VStack>
+              </Collapsible>
+            ))}
+          </Card>
         </section>
       )}
-      <h2>
-        Bài học đang có <span className="count">{available.length}</span>
-      </h2>
-      {available.length ? (
-        <div className="lesson-grid">
-          {available.map((l) => (
-            <LessonCard key={l.id} id={l.id} />
-          ))}
-        </div>
-      ) : (
-        <p className="empty-state">
-          Chưa có bài thử cho từ khóa này. Xem các chủ đề trong lộ trình bên dưới.
-        </p>
-      )}
+
+      <VStack gap={4}>
+        <HStack gap={2} vAlign="center">
+          <Heading level={2}>Bài học đang có</Heading>
+          <Token label={String(available.length)} color="blue" />
+        </HStack>
+        {available.length ? (
+          <Grid columns={{ minWidth: 260 }} gap={4} className="lesson-grid">
+            {available.map((l) => (
+              <LessonCard key={l.id} id={l.id} />
+            ))}
+          </Grid>
+        ) : (
+          <Text as="p" color="secondary" className="empty-state">
+            Chưa có bài thử cho từ khóa này. Xem các chủ đề trong lộ trình bên dưới.
+          </Text>
+        )}
+      </VStack>
+
       {!term && <ReviewCard />}
-      <h2 className="spaced-heading">Bản đồ kiến thức</h2>
-      {term ? (
-        <div className="module-list">
-          {planned.map((m) => (
-            <div key={m.id}>
-              <span className="module-code">{m.id}</span>
-              <h3>{m.title}</h3>
-              <span className="status-label">Trong lộ trình</span>
-            </div>
+
+      <VStack gap={4}>
+        <Heading level={2}>Bản đồ kiến thức</Heading>
+        {term ? (
+          <Card padding={0}>
+            <VStack gap={0} className="module-list">
+              {planned.map((m) => (
+                <div key={m.id} className="module-row">
+                  <span className="level-chip">{m.id}</span>
+                  <Heading level={3}>{m.title}</Heading>
+                  <Token size="sm" label="Trong lộ trình" className="status-label" />
+                </div>
+              ))}
+              {!planned.length && (
+                <Text as="p" color="secondary" className="module-empty">
+                  Không tìm thấy chủ đề. Thử từ khóa ngắn hơn.
+                </Text>
+              )}
+            </VStack>
+          </Card>
+        ) : (
+          <Card padding={0}>
+            <LevelList withNumber />
+          </Card>
+        )}
+      </VStack>
+
+      <VStack gap={3}>
+        <SectionHeader
+          title="Các nhánh chuyên sâu"
+          description="Mỗi nhánh có bài cơ chế, đề thiết kế và liên kết học trước. Chọn nhánh để lọc bài ở trên."
+        />
+        <HStack gap={2} wrap="wrap" className="track-list">
+          {tracks.map((t) => (
+            <Button key={t.id} label={t.title} onClick={() => chooseGroup(t.id)} />
           ))}
-          {!planned.length && <p>Không tìm thấy chủ đề. Thử từ khóa ngắn hơn.</p>}
-        </div>
-      ) : (
-        <div className="level-list">
-          {levels.map((l) => (
-            <Link to={`/levels/${l.id}`} key={l.id}>
-              <span className="level-number">{l.number}</span>
-              <div>
-                <h3>{l.name}</h3>
-                <p>{l.subtitle}</p>
-              </div>
-              <Icon name="arrow" />
-            </Link>
-          ))}
-        </div>
-      )}
-      <h2 className="spaced-heading">Các nhánh chuyên sâu</h2>
-      <p className="muted">
-        Mỗi nhánh có bài cơ chế, đề thiết kế và liên kết học trước. Chọn nhánh để lọc bài ở trên.
-      </p>
-      <div className="track-list">
-        {tracks.map((t) => (
-          <button
-            className="button secondary"
-            key={t.id}
-            onClick={() => {
-              setGroup(t.id);
-              setQuery('');
-              document.getElementById('pathway-select')?.focus();
-            }}
-          >
-            {t.title}
-          </button>
-        ))}
-      </div>
-    </div>
+        </HStack>
+      </VStack>
+    </VStack>
   );
 }
+
 export function LevelPage() {
   const { level: id } = useParams();
   const level = levels.find((l) => l.id === id);
   if (!level) return <NotFound />;
   const available = lessons.filter((l) => l.level === id);
   return (
-    <div className="page-content">
-      <Link className="back-link" to="/explore">
-        ← Về lộ trình
-      </Link>
-      <p className="level-context">
-        {level.id} · {level.label}
-      </p>
-      <h1>{level.name}</h1>
-      <p className="page-lead">{level.subtitle}</p>
+    <VStack gap={8}>
+      <VStack gap={4}>
+        <Link href="/explore">← Về lộ trình</Link>
+        <PageHeader
+          context={`${level.id} · ${level.label}`}
+          title={level.name}
+          lead={level.subtitle}
+        />
+      </VStack>
       {id === 'L0' && (
-        <aside className="intro-note">
-          <strong>Bạn có thể bắt đầu ngay.</strong>
-          <p>
-            Chỉ cần biết dùng trình duyệt. Chúng mình sẽ giải thích từ mới, phép tính và cách đọc
-            hình đúng lúc cần.
-          </p>
-        </aside>
+        <Banner
+          status="success"
+          title="Bạn có thể bắt đầu ngay."
+          description="Chỉ cần biết dùng trình duyệt. Chúng mình sẽ giải thích từ mới, phép tính và cách đọc hình đúng lúc cần."
+        />
       )}
       {available.length > 0 && (
-        <>
-          <h2>Bài học trong level</h2>
-          <div className="lesson-grid">
+        <VStack gap={4}>
+          <Heading level={2}>Bài học trong level</Heading>
+          <Grid columns={{ minWidth: 260 }} gap={4} className="lesson-grid">
             {available.map((l) => (
               <LessonCard key={l.id} id={l.id} />
             ))}
-          </div>
-        </>
+          </Grid>
+        </VStack>
       )}
-      <h2 className="spaced-heading">6 module trong level này</h2>
-      <p className="muted">
-        Mỗi module có bài để đọc và tự luyện. Hoàn thành bài không đồng nghĩa đã chứng minh mọi năng
-        lực của module.
-      </p>
-      <div className="module-list">
-        {modules
-          .filter((m) => m.level === id)
-          .map((m) => (
-            <div key={m.id}>
-              <span className="module-code">{m.id}</span>
-              <h3>{m.title}</h3>
-              <span className="status-label">
-                {lessons.filter((l) => l.moduleId === m.id).length} bài tự luyện
-              </span>
-              <details>
-                <summary>Xem các chủ đề</summary>
-                <p>{m.topics}</p>
-                <ul>
-                  {lessons
-                    .filter((l) => l.moduleId === m.id)
-                    .map((l) => (
-                      <li key={l.id}>
-                        <Link to={`/learn/${l.id}`}>{l.title}</Link>
-                      </li>
-                    ))}
-                </ul>
-              </details>
-            </div>
-          ))}
-      </div>
-    </div>
+      <VStack gap={4}>
+        <SectionHeader
+          title="6 module trong level này"
+          description="Mỗi module có bài để đọc và tự luyện. Hoàn thành bài không đồng nghĩa đã chứng minh mọi năng lực của module."
+        />
+        <Card padding={0}>
+          <VStack gap={0} className="module-list">
+            {modules
+              .filter((m) => m.level === id)
+              .map((m) => {
+                const moduleLessons = lessons.filter((l) => l.moduleId === m.id);
+                return (
+                  <div key={m.id} className="module-row">
+                    <span className="level-chip">{m.id}</span>
+                    <Heading level={3}>{m.title}</Heading>
+                    <Token
+                      size="sm"
+                      color={moduleLessons.length ? 'blue' : 'default'}
+                      label={`${moduleLessons.length} bài tự luyện`}
+                      className="status-label"
+                    />
+                    <details className="module-details">
+                      <summary>Xem các chủ đề</summary>
+                      <VStack gap={2}>
+                        <Text as="p" color="secondary">
+                          {m.topics}
+                        </Text>
+                        <ul>
+                          {moduleLessons.map((l) => (
+                            <li key={l.id}>
+                              <Link href={`/learn/${l.id}`}>{l.title}</Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </VStack>
+                    </details>
+                  </div>
+                );
+              })}
+          </VStack>
+        </Card>
+      </VStack>
+    </VStack>
   );
 }
+
 export function ProgressPage() {
   const { progress, ready, replace } = useProgress();
   const file = useRef<HTMLInputElement>(null);
@@ -449,115 +454,141 @@ export function ProgressPage() {
     setNotice('Đã tạo bản lưu để tải về. Bạn có thể nhập lại trên thiết bị khác.');
   }
   return (
-    <div className="page-content">
-      <h1>Tiến độ học của bạn</h1>
-      <p className="page-lead">Tiến độ ở trên thiết bị này. Không cần tài khoản để bắt đầu.</p>
-      <div className="progress-summary">
-        <strong>
-          {done.length}
-          <small> / {lessons.length}</small>
-        </strong>
-        <div>
-          <h2>Bài tự luyện đã hoàn thành</h2>
-          <p>Hoàn thành bài không đồng nghĩa đã thành thạo toàn bộ chủ đề.</p>
-        </div>
-      </div>
+    <VStack gap={8}>
+      <PageHeader
+        title="Tiến độ học của bạn"
+        lead="Tiến độ ở trên thiết bị này. Không cần tài khoản để bắt đầu."
+      />
+      <Card padding={6} className="progress-summary">
+        <HStack gap={4} vAlign="center" wrap="wrap">
+          <strong className="progress-count">
+            {done.length}
+            <small> / {lessons.length}</small>
+          </strong>
+          <VStack gap={1}>
+            <Heading level={2}>Bài tự luyện đã hoàn thành</Heading>
+            <Text as="p" color="secondary">
+              Hoàn thành bài không đồng nghĩa đã thành thạo toàn bộ chủ đề.
+            </Text>
+          </VStack>
+        </HStack>
+      </Card>
       <SaveStatus showBackupLink={false} />
       {begun.length ? (
-        <div className="progress-list">
-          {begun.map((l) => (
-            <Link key={l.id} to={`/learn/${l.id}`}>
-              <Icon name={isLessonComplete(l, progress.lessons[l.id]) ? 'check' : 'book'} />
-              <div>
-                <h3>{l.title}</h3>
-                <span>
-                  {isLessonComplete(l, progress.lessons[l.id])
-                    ? 'Ôn lại và thử thêm'
-                    : `Tiếp tục chặng ${(progress.lessons[l.id]?.stage ?? 0) + 1}/4`}
-                </span>
-              </div>
-              <Icon name="arrow" />
-            </Link>
-          ))}
-        </div>
+        <Card padding={0}>
+          <VStack gap={0} className="progress-list row-list">
+            {begun.map((l) => {
+              const complete = isLessonComplete(l, progress.lessons[l.id]);
+              return (
+                <RowLink
+                  key={l.id}
+                  to={`/learn/${l.id}`}
+                  label={l.title}
+                  description={
+                    complete
+                      ? 'Ôn lại và thử thêm'
+                      : `Tiếp tục chặng ${(progress.lessons[l.id]?.stage ?? 0) + 1}/4`
+                  }
+                  start={<Icon name={complete ? 'check' : 'book'} />}
+                />
+              );
+            })}
+          </VStack>
+        </Card>
       ) : (
-        <aside className="intro-note">
-          <h2>Bắt đầu bằng một câu hỏi nhỏ.</h2>
-          <p>Thử theo dấu một yêu cầu hoặc tìm hiểu vì sao lịch học vẫn cũ.</p>
-          <Link to="/learn/request" className="button primary">
-            Thử bài đầu tiên <Icon name="arrow" />
-          </Link>
-        </aside>
+        <Card variant="muted" padding={6}>
+          <VStack gap={3} hAlign="start">
+            <Heading level={2}>Bắt đầu bằng một câu hỏi nhỏ.</Heading>
+            <Text as="p" color="secondary">
+              Thử theo dấu một yêu cầu hoặc tìm hiểu vì sao lịch học vẫn cũ.
+            </Text>
+            <Button variant="primary" label="Thử bài đầu tiên" href="/learn/request" />
+          </VStack>
+        </Card>
       )}
-      <section className="progress-districts" aria-label="Tiến độ sáu khu học">
-        {levels.map((level, i) => {
-          const total = lessons.filter((l) => l.level === level.id).length;
-          const completed = done.filter((l) => l.level === level.id).length;
-          return (
-            <Link key={level.id} to={`/levels/${level.id}`}>
-              <PixelBuilding district={i} />
-              <strong>{level.id}</strong>
-              <span>{level.name}</span>
-              <span>
-                {completed} / {total} bài tự luyện
-              </span>
-              <progress
-                value={completed}
-                max={total}
-                aria-label={`${level.id}: ${completed} trên ${total} bài tự luyện`}
-              />
-            </Link>
-          );
-        })}
+      <section aria-label="Tiến độ sáu khu học">
+        <Grid columns={{ minWidth: 220 }} gap={3} className="progress-districts">
+          {levels.map((level) => {
+            const total = lessons.filter((l) => l.level === level.id).length;
+            const completed = done.filter((l) => l.level === level.id).length;
+            return (
+              <RouterLink key={level.id} to={`/levels/${level.id}`} className="district-progress">
+                <Card padding={4}>
+                  <VStack gap={2}>
+                    <HStack gap={2} vAlign="center">
+                      <span className="level-chip">{level.id}</span>
+                      <Text weight="semibold">{level.name}</Text>
+                    </HStack>
+                    <ProgressBar
+                      label={`${level.id}: ${completed} trên ${total} bài tự luyện`}
+                      isLabelHidden
+                      value={completed}
+                      max={Math.max(total, 1)}
+                    />
+                    <Text type="supporting">
+                      {completed} / {total} bài tự luyện
+                    </Text>
+                  </VStack>
+                </Card>
+              </RouterLink>
+            );
+          })}
+        </Grid>
       </section>
       <ReviewCard />
       <OfflinePanel />
-      <section className="transfer-panel">
-        <h2>Mang tiến độ theo bạn</h2>
-        <p>Dữ liệu trình duyệt có thể bị xóa. Xuất bản lưu để giữ một bản trên thiết bị của bạn.</p>
-        <div className="lab-controls">
-          <button className="button primary" disabled={!ready} onClick={exportFile}>
-            <Icon name="download" />
-            Xuất bản lưu
-          </button>
-          <button
-            className="button secondary"
-            disabled={!ready}
-            onClick={() => file.current?.click()}
-          >
-            Nhập bản lưu
-          </button>
-          <input
-            className="visually-hidden"
-            tabIndex={-1}
-            aria-hidden="true"
-            type="file"
-            accept="application/json,.json"
-            ref={file}
-            onChange={(e) => void importFile(e.target.files?.[0])}
-          />
-        </div>
-        <p className="muted">
-          Nhập bản lưu sẽ thay thế tiến độ hiện tại. Hãy xuất bản hiện tại trước nếu bạn muốn giữ cả
-          hai.
-        </p>
-        {notice && (
-          <p role="status" className="feedback">
-            {notice}
-          </p>
-        )}
-      </section>
-    </div>
+      <Card padding={6} className="transfer-panel">
+        <VStack gap={3}>
+          <Heading level={2}>Mang tiến độ theo bạn</Heading>
+          <Text as="p" color="secondary">
+            Dữ liệu trình duyệt có thể bị xóa. Xuất bản lưu để giữ một bản trên thiết bị của bạn.
+          </Text>
+          <HStack gap={2} wrap="wrap">
+            <Button
+              variant="primary"
+              icon={<Icon name="download" />}
+              label="Xuất bản lưu"
+              isDisabled={!ready}
+              onClick={exportFile}
+            />
+            <Button
+              label="Nhập bản lưu"
+              isDisabled={!ready}
+              onClick={() => file.current?.click()}
+            />
+            <input
+              className="visually-hidden"
+              tabIndex={-1}
+              aria-hidden="true"
+              type="file"
+              accept="application/json,.json"
+              ref={file}
+              onChange={(e) => void importFile(e.target.files?.[0])}
+            />
+          </HStack>
+          <Text as="p" type="supporting">
+            Nhập bản lưu sẽ thay thế tiến độ hiện tại. Hãy xuất bản hiện tại trước nếu bạn muốn giữ
+            cả hai.
+          </Text>
+          {notice && (
+            <p role="status" className="feedback">
+              {notice}
+            </p>
+          )}
+        </VStack>
+      </Card>
+    </VStack>
   );
 }
+
 export function NotFound() {
   return (
-    <div className="page-content">
-      <h1>Chưa tìm thấy trang này.</h1>
-      <p>Quay lại lộ trình để chọn một bài đang có.</p>
-      <Link className="button primary" to="/explore">
-        Về lộ trình
-      </Link>
-    </div>
+    <VStack gap={4} hAlign="start">
+      <PageHeader
+        title="Chưa tìm thấy trang này."
+        lead="Quay lại lộ trình để chọn một bài đang có."
+      />
+      <Button variant="primary" label="Về lộ trình" href="/explore" />
+    </VStack>
   );
 }

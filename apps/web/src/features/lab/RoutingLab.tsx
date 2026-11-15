@@ -1,3 +1,4 @@
+import { Button } from '@astryxdesign/core/Button';
 import { ObservationPanel } from './ObservationPanel';
 import type { LessonProgress } from '@sdl/content-schema';
 import { routePacket } from '@sdl/simulation-engine';
@@ -61,27 +62,24 @@ export function RoutingLab({
         </label>
       </div>
       <div className="lab-controls">
-        <button
-          className="button primary"
-          disabled={result.terminal}
+        <Button
+          variant="primary"
+          label={
+            result.phase === 0
+              ? 'Gửi tới router'
+              : result.phase === 1
+                ? 'Chuyển tới máy đích'
+                : 'Chọn dịch vụ tại đích'
+          }
+          isDisabled={result.terminal}
           onClick={() => change({ step: result.phase + 1 })}
-        >
-          {result.phase === 0
-            ? 'Gửi tới router'
-            : result.phase === 1
-              ? 'Chuyển tới máy đích'
-              : 'Chọn dịch vụ tại đích'}
-        </button>
-        <button className="button secondary" onClick={() => change({ step: 0 })}>
-          Bắt đầu lại đường đi
-        </button>
-        <button
-          className="button secondary"
+        />
+        <Button label="Bắt đầu lại đường đi" onClick={() => change({ step: 0 })} />
+        <Button
+          label={result.hasRoute ? 'Bỏ route ở router' : 'Khôi phục route ở router'}
           aria-pressed={!result.hasRoute}
           onClick={() => change({ route: !result.hasRoute, step: 0 })}
-        >
-          {result.hasRoute ? 'Bỏ route ở router' : 'Khôi phục route ở router'}
-        </button>
+        />
       </div>
       <ol className="routing-trace" aria-label="Đường đi của yêu cầu">
         <li>

@@ -1,3 +1,4 @@
+import { Button } from '@astryxdesign/core/Button';
 import type { LessonProgress } from '@sdl/content-schema';
 import { normalizeTls, simulateTls, observeTls } from '@sdl/simulation-engine';
 import { ObservationPanel } from './ObservationPanel';
@@ -64,15 +65,11 @@ export function TlsLab({
         </label>
       </div>
       <div className="lab-controls">
-        <button className="button primary" onClick={run}>
-          Gửi lịch
-        </button>
-        <button
-          className="button secondary"
+        <Button variant="primary" label="Gửi lịch" onClick={run} />
+        <Button
+          label="Đặt lại"
           onClick={() => change({ secure: true, certificate: 'valid', attack: 'none' })}
-        >
-          Đặt lại
-        </button>
+        />
       </div>
       <ol className="routing-trace" aria-label="Ba góc nhìn">
         <li>

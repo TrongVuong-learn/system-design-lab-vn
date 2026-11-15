@@ -12,20 +12,22 @@ test('one-block locality explains hits, thrashing and saved progress at 320px', 
   await next.press('Enter');
   await expect(next).toBeFocused();
   await next.click();
-  await expect(lab.getByRole('status').first()).toContainText(
+  await expect(lab.getByRole('status').filter({ hasText: /\S/ }).first()).toContainText(
     'Đã đọc 2/8 ô. Đọc từ cache: 1 lượt. Nạp khối: 1 lượt',
   );
   await expect(page.getByText('Đã lưu trên thiết bị', { exact: true })).toBeVisible();
   await page.reload();
-  await expect(lab.getByRole('status').first()).toContainText('Đã đọc 2/8 ô');
+  await expect(lab.getByRole('status').filter({ hasText: /\S/ }).first()).toContainText(
+    'Đã đọc 2/8 ô',
+  );
   await lab.getByRole('button', { name: 'Đọc hết lượt', exact: true }).click();
-  await expect(lab.getByRole('status').first()).toContainText(
+  await expect(lab.getByRole('status').filter({ hasText: /\S/ }).first()).toContainText(
     'Đọc từ cache: 6 lượt. Nạp khối: 2 lượt',
   );
   await lab.getByLabel('Thứ tự đọc').selectOption('interleaved');
   await expect(lab.getByRole('region', { name: 'So sánh bước vừa thử' })).toHaveCount(0);
   await lab.getByRole('button', { name: 'Đọc hết lượt', exact: true }).click();
-  await expect(lab.getByRole('status').first()).toContainText(
+  await expect(lab.getByRole('status').filter({ hasText: /\S/ }).first()).toContainText(
     'Đọc từ cache: 0 lượt. Nạp khối: 8 lượt',
   );
   await lab.getByText('Xem từng lượt đọc', { exact: true }).click();
@@ -35,7 +37,7 @@ test('one-block locality explains hits, thrashing and saved progress at 320px', 
   await lab.getByLabel('Thứ tự đọc').selectOption('repeated');
   await lab.getByLabel('Kích thước khối').selectOption('1');
   await lab.getByRole('button', { name: 'Đọc hết lượt', exact: true }).click();
-  await expect(lab.getByRole('status').first()).toContainText(
+  await expect(lab.getByRole('status').filter({ hasText: /\S/ }).first()).toContainText(
     'Đọc từ cache: 7 lượt. Nạp khối: 1 lượt',
   );
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);

@@ -79,7 +79,9 @@ test('downloaded pack opens an unvisited game and Lottie runtime offline', async
   await page.goto('/#/progress');
   const panel = page.getByRole('region', { name: 'Học khi mất mạng' });
   await panel.getByRole('button', { name: 'Tải gói học', exact: true }).click();
-  await expect(panel.getByRole('status')).toContainText('Gói đã tải đủ', { timeout: 30000 });
+  await expect(panel.getByRole('status').filter({ hasText: /\S/ })).toContainText('Gói đã tải đủ', {
+    timeout: 30000,
+  });
   await context.setOffline(true);
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.goto('/#/games/cache');

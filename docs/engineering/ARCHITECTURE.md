@@ -10,7 +10,7 @@ JavaScript thuần vẫn làm được sản phẩm nhưng không phải baselin
 
 | Lớp | Lựa chọn | Lý do / thời điểm |
 | --- | --- | --- |
-| UI web | React + TypeScript strict | Hợp bài đọc, component tương tác và sơ đồ; dùng từ đầu |
+| UI web | React + TypeScript strict, component Astryx (`@astryxdesign/core`) | Hợp bài đọc, component tương tác và sơ đồ; Astryx cho khung/controls từ 15/11/2026 (xem DESIGN.md) |
 | Build | Vite | Tạo static bundle, phù hợp lab phía client và bundle cho Capacitor |
 | Routing | React Router, route lazy-loading | Điều hướng level/bài và khôi phục vị trí |
 | Style | CSS Modules + CSS variables/design tokens | HTML ngữ nghĩa, ít lớp phụ thuộc; mobile là mặc định |

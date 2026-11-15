@@ -13,24 +13,36 @@ test('hash collision requires full-key comparison, restores work, and keeps 320p
   const next = lab.getByRole('button', { name: 'So một khóa', exact: true });
   await next.press('Enter');
   await expect(next).toBeFocused();
-  await expect(lab.getByRole('status').first()).toContainText('Đã so 1 khóa. Chưa kết luận');
+  await expect(lab.getByRole('status').filter({ hasText: /\S/ }).first()).toContainText(
+    'Đã so 1 khóa. Chưa kết luận',
+  );
   await expect(page.getByText('Đã lưu trên thiết bị', { exact: true })).toBeVisible();
   await page.reload();
-  await expect(lab.getByRole('status').first()).toContainText('Đã so 1 khóa');
+  await expect(lab.getByRole('status').filter({ hasText: /\S/ }).first()).toContainText(
+    'Đã so 1 khóa',
+  );
   await lab.getByRole('button', { name: 'Tra đến khi xong' }).click();
-  await expect(lab.getByRole('status').first()).toContainText('Đã so 4 khóa. Tìm thấy mã 14');
+  await expect(lab.getByRole('status').filter({ hasText: /\S/ }).first()).toContainText(
+    'Đã so 4 khóa. Tìm thấy mã 14',
+  );
   await lab.getByLabel('Số ngăn').selectOption('8');
   await expect(lab.getByRole('region', { name: 'So sánh bước vừa thử' })).toHaveCount(0);
   await lab.getByRole('button', { name: 'Tra đến khi xong' }).click();
-  await expect(lab.getByRole('status').first()).toContainText('Đã so 2 khóa. Tìm thấy mã 14');
+  await expect(lab.getByRole('status').filter({ hasText: /\S/ }).first()).toContainText(
+    'Đã so 2 khóa. Tìm thấy mã 14',
+  );
   await lab.getByLabel('Mã cần tìm').selectOption('missing');
   await lab.getByRole('button', { name: 'Tra đến khi xong' }).click();
-  await expect(lab.getByRole('status').first()).toContainText('Đã so 2 khóa. Không có mã 18');
+  await expect(lab.getByRole('status').filter({ hasText: /\S/ }).first()).toContainText(
+    'Đã so 2 khóa. Không có mã 18',
+  );
   await lab.getByText('Xem các khóa đã so', { exact: true }).click();
   await expect(lab.locator('ol li')).toHaveCount(2);
   await lab.getByLabel('Cách tìm').selectOption('linear');
   await lab.getByRole('button', { name: 'Tra đến khi xong' }).click();
-  await expect(lab.getByRole('status').first()).toContainText('Đã so 4 khóa. Không có mã 18');
+  await expect(lab.getByRole('status').filter({ hasText: /\S/ }).first()).toContainText(
+    'Đã so 4 khóa. Không có mã 18',
+  );
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await page.getByRole('button', { name: 'Thử tình huống mới' }).click();
   await expect(

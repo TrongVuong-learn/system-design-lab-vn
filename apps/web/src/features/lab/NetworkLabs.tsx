@@ -1,3 +1,4 @@
+import { Button } from '@astryxdesign/core/Button';
 import { ObservationPanel } from './ObservationPanel';
 import type { LessonProgress } from '@sdl/content-schema';
 import {
@@ -25,43 +26,34 @@ export function HttpLab({ progress, onChange }: Props) {
         <span className="time-badge">Bước {step}/2</span>
       </div>
       <div className="lab-controls">
-        <button
-          className="button primary"
-          disabled={step === 2}
+        <Button
+          variant="primary"
+          label={step === 0 ? 'Gửi yêu cầu' : 'Xem phản hồi'}
+          isDisabled={step === 2}
           onClick={() => change({ step: step + 1 })}
-        >
-          {step === 0 ? 'Gửi yêu cầu' : 'Xem phản hồi'}
-        </button>
-        <button className="button secondary" onClick={() => change({ step: 0 })}>
-          Thử lại yêu cầu
-        </button>
+        />
+        <Button label="Thử lại yêu cầu" onClick={() => change({ step: 0 })} />
       </div>
       <fieldset className="http-choices">
         <legend>Đường dẫn bạn muốn hỏi</legend>
         <div className="lab-controls">
-          <button
-            className="button secondary"
+          <Button
+            label="Lịch học có thật"
             aria-pressed={resource === 'timetable'}
             onClick={() => change({ resource: 'timetable', step: 0 })}
-          >
-            Lịch học có thật
-          </button>
-          <button
-            className="button secondary"
+          />
+          <Button
+            label="Đường dẫn không có"
             aria-pressed={resource === 'missing'}
             onClick={() => change({ resource: 'missing', step: 0 })}
-          >
-            Đường dẫn không có
-          </button>
+          />
         </div>
       </fieldset>
-      <button
-        className="button secondary"
+      <Button
+        label={maintenance ? 'Kết thúc bảo trì' : 'Cho dịch vụ bảo trì'}
         aria-pressed={maintenance}
         onClick={() => change({ maintenance: !maintenance, step: 0 })}
-      >
-        {maintenance ? 'Kết thúc bảo trì' : 'Cho dịch vụ bảo trì'}
-      </button>
+      />
       <div className="http-messages">
         <section className="http-message" aria-label="Thông điệp yêu cầu">
           <h3>Yêu cầu từ trình duyệt</h3>

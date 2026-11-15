@@ -14,24 +14,28 @@ test('module practice saves partial answers, requires a correct check and resets
   await lab.locator('fieldset').first().getByRole('button').first().press('Enter');
   await expect(lab.locator('fieldset').first().getByRole('button').first()).toBeFocused();
   await check.click();
-  await expect(lab.getByRole('status')).toContainText('Đúng 1/6');
+  await expect(lab.getByRole('status').filter({ hasText: /\S/ })).toContainText('Đúng 1/6');
   await expect(lab.getByText('Chưa trả lời.', { exact: true })).toHaveCount(5);
   await expect(next).toBeDisabled();
   await expect(page.getByText('Đã lưu trên thiết bị', { exact: true })).toBeVisible();
   await page.reload();
-  await expect(lab.getByRole('status')).toContainText('Đúng 1/6');
+  await expect(lab.getByRole('status').filter({ hasText: /\S/ })).toContainText('Đúng 1/6');
   for (const [i, answer] of [0, 1, 0, 1, 1, 1].entries())
     await lab.locator('fieldset').nth(i).getByRole('button').nth(answer).click();
-  await expect(lab.getByRole('status')).toContainText('Đã chọn 6/6. Chưa kiểm tra lại');
+  await expect(lab.getByRole('status').filter({ hasText: /\S/ })).toContainText(
+    'Đã chọn 6/6. Chưa kiểm tra lại',
+  );
   await expect(next).toBeDisabled();
   await check.click();
-  await expect(lab.getByRole('status')).toContainText('Đúng 6/6');
+  await expect(lab.getByRole('status').filter({ hasText: /\S/ })).toContainText('Đúng 6/6');
   await expect(next).toBeEnabled();
   await lab.locator('fieldset').first().getByRole('button').nth(1).click();
-  await expect(lab.getByRole('status')).toContainText('Chưa kiểm tra lại');
+  await expect(lab.getByRole('status').filter({ hasText: /\S/ })).toContainText(
+    'Chưa kiểm tra lại',
+  );
   await expect(next).toBeDisabled();
   await check.click();
-  await expect(lab.getByRole('status')).toContainText('Đúng 5/6');
+  await expect(lab.getByRole('status').filter({ hasText: /\S/ })).toContainText('Đúng 5/6');
   await expect(lab.getByText('Cần xem lại.', { exact: true })).toHaveCount(1);
   await lab.locator('fieldset').first().getByRole('button').first().click();
   await check.click();

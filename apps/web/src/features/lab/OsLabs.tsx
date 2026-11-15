@@ -1,3 +1,4 @@
+import { Button } from '@astryxdesign/core/Button';
 import type { LessonProgress } from '@sdl/content-schema';
 import { addressSpace, fileHandles, ioLoop, OS_MODEL_VERSION } from '@sdl/simulation-engine';
 import { ObservationPanel } from './ObservationPanel';
@@ -77,12 +78,8 @@ export function AddressSpaceLab({ progress, onChange }: Props) {
         RAM ban đầu; không giữ lần ghi trước.
       </p>
       <div className="lab-controls">
-        <button className="button primary" disabled={s.step === 1} onClick={run}>
-          Thử truy cập
-        </button>
-        <button className="button secondary" onClick={() => configure()}>
-          Bắt đầu lại
-        </button>
+        <Button variant="primary" label="Thử truy cập" isDisabled={s.step === 1} onClick={run} />
+        <Button label="Bắt đầu lại" onClick={() => configure()} />
       </div>
       <p role="status">
         {s.step
@@ -139,12 +136,13 @@ export function FileHandlesLab({ progress, onChange }: Props) {
         dựng sẵn: “Lịch: phòng 205”.
       </p>
       <div className="lab-controls">
-        <button className="button primary" disabled={s.step === 4} onClick={() => run(s.step + 1)}>
-          {labels[s.step] ?? 'Đã đóng file'}
-        </button>
-        <button className="button secondary" onClick={() => run(0)}>
-          Bắt đầu lại
-        </button>
+        <Button
+          variant="primary"
+          label={labels[s.step] ?? 'Đã đóng file'}
+          isDisabled={s.step === 4}
+          onClick={() => run(s.step + 1)}
+        />
+        <Button label="Bắt đầu lại" onClick={() => run(0)} />
       </div>
       <p role="status">
         Bước {s.step}/4. Đường dẫn: {s.pathExists ? 'còn tên' : 'đã xóa tên'}. Descriptor:{' '}
@@ -223,12 +221,8 @@ export function EventLoopLab({ progress, onChange }: Props) {
         khoảng → CPU 1 khoảng; B chỉ cần CPU 1 khoảng. Đổi chế độ bắt đầu lại.
       </p>
       <div className="lab-controls">
-        <button className="button primary" disabled={s.finished} onClick={run}>
-          Qua một khoảng
-        </button>
-        <button className="button secondary" onClick={() => configure()}>
-          Bắt đầu lại
-        </button>
+        <Button variant="primary" label="Qua một khoảng" isDisabled={s.finished} onClick={run} />
+        <Button label="Bắt đầu lại" onClick={() => configure()} />
       </div>
       <p role="status">
         Mốc {s.step}. A: {s.aDone ? 'xong' : 'chưa xong'}. B: {s.bDone ? 'xong' : 'chưa xong'}.{' '}

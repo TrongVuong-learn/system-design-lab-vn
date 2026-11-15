@@ -1,6 +1,17 @@
+import { Button } from '@astryxdesign/core/Button';
 import { useState } from 'react';
 import { GameScene } from './GameScene';
-import { Link, useParams } from 'react-router';
+import { useParams } from 'react-router';
+import { Card } from '@astryxdesign/core/Card';
+import { Grid } from '@astryxdesign/core/Grid';
+import { Heading } from '@astryxdesign/core/Heading';
+import { HStack } from '@astryxdesign/core/HStack';
+import { Link } from '@astryxdesign/core/Link';
+import { ProgressBar } from '@astryxdesign/core/ProgressBar';
+import { Text } from '@astryxdesign/core/Text';
+import { Token } from '@astryxdesign/core/Token';
+import { VStack } from '@astryxdesign/core/VStack';
+import { PageHeader } from '../../ui/layout';
 import { GAME_IDS, gameInputs, gameResult, playGame, type GameId } from '@sdl/learning-core';
 import { readGame, writeGame } from '../../adapters/game-repository';
 import { LottieSignal } from '../../ui/motion/LottieSignal';
@@ -40,59 +51,67 @@ function GamePreview({ id }: { id: GameId }) {
     : { id, actions: [] };
   return (
     <article className={`game-cover game-cover-${id}`}>
-      <div className="game-preview-art">
-        <GameScene state={state} pulse={preview ? 1 : 0} />
-      </div>
-      <div className="game-cover-copy">
-        <span className="game-topic">{games[id].topic} · 6 lượt</span>
-        <h2>{games[id].title}</h2>
-        <p>{games[id].intro}</p>
-        <div className="game-preview-actions">
-          <button className="text-button" onClick={() => setPreview(!preview)}>
-            {preview
-              ? 'Đặt lại xem trước'
-              : id === 'balance'
-                ? 'Thử giao gói đầu'
-                : id === 'cache'
-                  ? 'Thử lấy bản tin'
-                  : 'Thử chạy băng chuyền'}
-          </button>
-          <Link className="button primary" to={`/games/${id}`}>
-            Vào chơi
-          </Link>
+      <Card padding={0}>
+        <div className="game-preview-art">
+          <GameScene state={state} pulse={preview ? 1 : 0} />
         </div>
-        <p className="preview-note">Xem trước cơ chế, chưa tính lượt chơi.</p>
-      </div>
+        <VStack gap={2} padding={5} className="game-cover-copy">
+          <HStack>
+            <Token size="sm" color="blue" label={`${games[id].topic} · 6 lượt`} />
+          </HStack>
+          <Heading level={2}>{games[id].title}</Heading>
+          <Text as="p" color="secondary">
+            {games[id].intro}
+          </Text>
+          <HStack gap={2} wrap="wrap" vAlign="center" className="game-preview-actions">
+            <Button
+              variant="ghost"
+              label={
+                preview
+                  ? 'Đặt lại xem trước'
+                  : id === 'balance'
+                    ? 'Thử giao gói đầu'
+                    : id === 'cache'
+                      ? 'Thử lấy bản tin'
+                      : 'Thử chạy băng chuyền'
+              }
+              onClick={() => setPreview(!preview)}
+            />
+            <Button variant="primary" label="Vào chơi" href={`/games/${id}`} />
+          </HStack>
+          <Text type="supporting">Xem trước cơ chế, chưa tính lượt chơi.</Text>
+        </VStack>
+      </Card>
     </article>
   );
 }
 export function GamesPage() {
   return (
-    <div className="page-content games-page">
-      <div className="games-heading">
-        <div>
-          <h1>Chơi để hiểu.</h1>
-          <p className="page-lead">Bạn vận hành. Hệ thống trả lời bằng kết quả.</p>
-          <p>Ba game ngắn từ bài học. Không đồng hồ đếm ngược, cứ thử và xem điều gì thay đổi.</p>
-        </div>
+    <VStack gap={8} className="games-page">
+      <HStack gap={4} hAlign="between" vAlign="center" wrap="wrap" className="games-heading">
+        <PageHeader title="Chơi để hiểu." lead="Bạn vận hành. Hệ thống trả lời bằng kết quả.">
+          <Text as="p" color="secondary">
+            Ba game ngắn từ bài học. Không đồng hồ đếm ngược, cứ thử và xem điều gì thay đổi.
+          </Text>
+        </PageHeader>
         <LottieSignal />
-      </div>
-      <div className="game-shelf">
+      </HStack>
+      <Grid columns={{ minWidth: 280 }} gap={4} className="game-shelf">
         {GAME_IDS.map((id) => (
           <GamePreview key={id} id={id} />
         ))}
-      </div>
-      <aside className="intro-note">
-        <h2>Thử sai cũng có ích.</h2>
-        <p>
-          Mỗi lượt đều có nhật ký và giải thích. Phiên game lưu riêng trên thiết bị, không tự đánh
-          dấu hoàn thành bài học. Bản xuất tiến độ học chưa bao gồm game.
-        </p>
-        <Link className="text-link" to="/explore">
-          Mở các bài học liên quan →
-        </Link>
-      </aside>
-    </div>
+      </Grid>
+      <Card variant="muted" padding={6} className="intro-note">
+        <VStack gap={2} hAlign="start">
+          <Heading level={2}>Thử sai cũng có ích.</Heading>
+          <Text as="p" color="secondary">
+            Mỗi lượt đều có nhật ký và giải thích. Phiên game lưu riêng trên thiết bị, không tự đánh
+            dấu hoàn thành bài học. Bản xuất tiến độ học chưa bao gồm game.
+          </Text>
+          <Link href="/explore">Mở các bài học liên quan →</Link>
+        </VStack>
+      </Card>
+    </VStack>
   );
 }
 function PlaySession({ id }: { id: GameId }) {
@@ -115,18 +134,15 @@ function PlaySession({ id }: { id: GameId }) {
     setSaveFailed(!writeGame(next));
   }
   return (
-    <div className="page-content game-session">
-      <Link to="/games" className="back-link">
-        ← Tất cả game
-      </Link>
-      <h1>{game.title}</h1>
-      <p className="page-lead">{game.intro}</p>
+    <VStack gap={6} className="game-session">
+      <Link href="/games">← Tất cả game</Link>
+      <PageHeader title={game.title} lead={game.intro} />
       <div className="game-layout">
         <section className="game-board" aria-label="Bàn chơi">
-          <div className="game-board-head">
-            <strong>{result.done ? 'Kết thúc phiên' : `Lượt ${turn + 1} / 6`}</strong>
+          <HStack gap={2} hAlign="between" vAlign="center" className="game-board-head">
+            <Heading level={2}>{result.done ? 'Kết thúc phiên' : `Lượt ${turn + 1} / 6`}</Heading>
             <LottieSignal pulse={turn} />
-          </div>
+          </HStack>
           <p className="game-goal">
             {id === 'balance'
               ? 'Mục tiêu: 8 đơn vị tải cho mỗi máy.'
@@ -162,17 +178,19 @@ function PlaySession({ id }: { id: GameId }) {
           {id === 'balance' ? (
             <div className="load-lanes">
               {result.loads.map((load, i) => (
-                <div key={i}>
-                  <span>
+                <VStack gap={1} key={i}>
+                  <Text>
                     Máy {i === 0 ? 'A' : 'B'} <strong>{load} / 8</strong>
-                  </span>
-                  <meter
-                    min={0}
-                    max={16}
+                  </Text>
+                  <ProgressBar
+                    label={`Tải máy ${i === 0 ? 'A' : 'B'}`}
+                    isLabelHidden
                     value={load}
-                    aria-label={`Tải máy ${i === 0 ? 'A' : 'B'}`}
+                    max={16}
+                    marks={[{ value: 8, label: 'Mục tiêu 8' }]}
+                    variant={load > 8 ? 'warning' : 'accent'}
                   />
-                </div>
+                </VStack>
               ))}
             </div>
           ) : (
@@ -198,13 +216,11 @@ function PlaySession({ id }: { id: GameId }) {
             </dl>
           )}
           {!result.done && (
-            <div className="game-actions">
+            <HStack gap={2} wrap="wrap" className="game-actions">
               {game.choices.map((choice, i) => (
-                <button className="button primary" key={choice} onClick={() => choose(i)}>
-                  {choice}
-                </button>
+                <Button variant="primary" label={choice} key={choice} onClick={() => choose(i)} />
               ))}
-            </div>
+            </HStack>
           )}
           <GameScene state={state} pulse={pulse} />
           <div role="status" className="game-feedback">
@@ -225,21 +241,17 @@ function PlaySession({ id }: { id: GameId }) {
               lượt mới.
             </p>
           )}
-          <div className="game-footer-actions">
-            <button className="button secondary" onClick={reset}>
-              Chơi lại từ đầu
-            </button>
-            <Link className="text-link" to={`/learn/${game.lesson}`}>
-              Học cơ chế này →
-            </Link>
-          </div>
+          <HStack gap={3} vAlign="center" wrap="wrap" className="game-footer-actions">
+            <Button label="Chơi lại từ đầu" onClick={reset} />
+            <Link href={`/learn/${game.lesson}`}>Học cơ chế này →</Link>
+          </HStack>
         </section>
         <aside className="game-rules">
           <details>
             <summary>Gợi ý chiến thuật</summary>
             <p>{game.hint}</p>
           </details>
-          <h2>Nhật ký lượt chơi</h2>
+          <Heading level={2}>Nhật ký lượt chơi</Heading>
           {result.trace.length ? (
             <ol>
               {result.trace.map((text, i) => (
@@ -251,7 +263,7 @@ function PlaySession({ id }: { id: GameId }) {
           )}
         </aside>
       </div>
-    </div>
+    </VStack>
   );
 }
 export function GamePage() {
@@ -259,9 +271,9 @@ export function GamePage() {
   return GAME_IDS.includes(id as GameId) ? (
     <PlaySession key={id} id={id as GameId} />
   ) : (
-    <div className="page-content">
-      <h1>Chưa có game này.</h1>
-      <Link to="/games">Về mục Game</Link>
-    </div>
+    <VStack gap={3}>
+      <PageHeader title="Chưa có game này." />
+      <Link href="/games">Về mục Game</Link>
+    </VStack>
   );
 }

@@ -1,3 +1,4 @@
+import { Button } from '@astryxdesign/core/Button';
 import type { LessonProgress } from '@sdl/content-schema';
 import { memoryLocality, LOCALITY_MODEL_VERSION } from '@sdl/simulation-engine';
 import { ObservationPanel } from './ObservationPanel';
@@ -74,19 +75,14 @@ export function LocalityLab({
         <strong>Thứ tự cần đọc:</strong> {state.addresses.join(' → ')}.
       </p>
       <div className="lab-controls">
-        <button
-          className="button primary"
-          disabled={state.finished}
+        <Button
+          variant="primary"
+          label="Đọc một ô"
+          isDisabled={state.finished}
           onClick={() => run(state.step + 1)}
-        >
-          Đọc một ô
-        </button>
-        <button className="button secondary" disabled={state.finished} onClick={() => run(8)}>
-          Đọc hết lượt
-        </button>
-        <button className="button secondary" onClick={() => configure()}>
-          Bắt đầu lại
-        </button>
+        />
+        <Button label="Đọc hết lượt" isDisabled={state.finished} onClick={() => run(8)} />
+        <Button label="Bắt đầu lại" onClick={() => configure()} />
       </div>
       <p role="status">
         Đã đọc {state.step}/8 ô. Đọc từ cache: {state.hits} lượt. Nạp khối: {state.loads} lượt.

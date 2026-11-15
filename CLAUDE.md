@@ -63,7 +63,7 @@ apps/web/src/adapters → browser storage / service worker
 - `packages/content-schema` — Zod schemas and validators for lessons, editorial registry, reviews, compatibility and pathways. The data boundary for content and saved data.
 - `packages/simulation-engine` — one deterministic model per activity (`routing.ts`, `tls.ts`, `concurrency.ts`, …), each with a co-located test. No system time, no uncontrolled randomness, no DOM; state is derived from config/seed/command log, and checkpoints restored from storage or import are re-validated rather than trusted.
 - `packages/learning-core` — learning model (progress, module practice, design drafts, games). Pure; storage lives in adapters.
-- `apps/web/src` — `app/` (HashRouter shell, `ProgressProvider`, catalog loader), `features/` (`catalog`, `lesson-player`, `lab`, `games`, `review`, `progress`, `offline`), `adapters/` (IndexedDB progress and game repositories, offline pack), `ui/` (shared presentational pieces), `styles/` (plain CSS with tokens).
+- `apps/web/src` — `app/` (HashRouter shell, `ProgressProvider`, catalog loader), `features/` (`catalog`, `lesson-player`, `lab`, `games`, `review`, `progress`, `offline`), `adapters/` (IndexedDB progress and game repositories, offline pack), `ui/` (shared presentational pieces), `styles/` (Astryx base CSS plus app and mechanism-diagram CSS using Astryx tokens; components come from `@astryxdesign/core`, theme `lab` in `apps/web/themes/`).
 
 Each lab in `features/lab/*Lab.tsx` is the renderer for an engine model of the same name; `Lab.tsx` dispatches on `lesson.kind`. Adding an activity means touching the schema whitelist, an engine model + test, a lab renderer, and lesson content together.
 

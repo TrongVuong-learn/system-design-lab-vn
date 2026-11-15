@@ -1,4 +1,7 @@
 import type { Lesson } from '@sdl/content-schema';
+import { Button } from '@astryxdesign/core/Button';
+import { Heading } from '@astryxdesign/core/Heading';
+import { HStack } from '@astryxdesign/core/HStack';
 import { AnnotatedText } from './TermNote';
 export function QuestionFeedback({
   lesson,
@@ -32,7 +35,7 @@ export function QuestionFeedback({
           <div className="question-hints">
             {level >= 1 && (
               <section aria-label="Gợi ý 1">
-                <h3>1. Nhìn vào đâu?</h3>
+                <Heading level={3}>1. Nhìn vào đâu?</Heading>
                 <p>
                   <AnnotatedText text={hints[0]} terms={lesson.terms} />
                 </p>
@@ -40,16 +43,20 @@ export function QuestionFeedback({
             )}
             {level >= 2 && (
               <section aria-label="Gợi ý 2">
-                <h3>2. Suy luận từng bước</h3>
+                <Heading level={3}>2. Suy luận từng bước</Heading>
                 <p>
                   <AnnotatedText text={hints[1]} terms={lesson.terms} />
                 </p>
               </section>
             )}
             {level < 3 && (
-              <button className="button secondary" onClick={() => onReveal(level + 1)}>
-                {level === 0 ? 'Mở gợi ý 1' : level === 1 ? 'Mở gợi ý 2' : 'Xem lời giải'}
-              </button>
+              <HStack>
+                <Button
+                  size="sm"
+                  label={level === 0 ? 'Mở gợi ý 1' : level === 1 ? 'Mở gợi ý 2' : 'Xem lời giải'}
+                  onClick={() => onReveal(level + 1)}
+                />
+              </HStack>
             )}
           </div>
         )}

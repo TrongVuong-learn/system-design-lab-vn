@@ -1,4 +1,9 @@
 import type { ReactNode } from 'react';
+import { Button } from '@astryxdesign/core/Button';
+import { Card } from '@astryxdesign/core/Card';
+import { HStack } from '@astryxdesign/core/HStack';
+import { Text } from '@astryxdesign/core/Text';
+import { VStack } from '@astryxdesign/core/VStack';
 export function Icon({ name, size = 20 }: { name: string; size?: number }) {
   const paths: Record<string, ReactNode> = {
     play: (
@@ -67,9 +72,9 @@ export function Icon({ name, size = 20 }: { name: string; size?: number }) {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.7"
-      strokeLinecap="square"
-      strokeLinejoin="miter"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       aria-hidden="true"
     >
       {paths[name] ?? paths['book']}
@@ -86,13 +91,15 @@ export function Metric({
   suffix?: string;
 }) {
   return (
-    <div className="metric">
-      <span>{label}</span>
-      <strong>
-        {value}
-        <small>{suffix}</small>
-      </strong>
-    </div>
+    <Card variant="muted" padding={3} className="metric">
+      <VStack gap={1}>
+        <Text type="supporting">{label}</Text>
+        <strong className="metric-value">
+          {value}
+          {suffix && <small> {suffix}</small>}
+        </strong>
+      </VStack>
+    </Card>
   );
 }
 export function Stepper({
@@ -113,29 +120,29 @@ export function Stepper({
   step?: number;
 }) {
   return (
-    <div className="stepper">
-      <div>
-        <label>{label}</label>
-        {unit && <small>{unit}</small>}
-      </div>
-      <div className="stepper-controls">
-        <button
-          aria-label={`Giảm ${label}`}
-          disabled={value <= min}
+    <HStack gap={3} hAlign="between" vAlign="center" className="stepper">
+      <VStack gap={0}>
+        <Text weight="medium">{label}</Text>
+        {unit && <Text type="supporting">{unit}</Text>}
+      </VStack>
+      <HStack gap={1} vAlign="center" className="stepper-controls">
+        <Button
+          label={`Giảm ${label}`}
+          isDisabled={value <= min}
           onClick={() => onChange(Math.max(min, value - step))}
         >
           −
-        </button>
+        </Button>
         <output aria-label={label}>{value}</output>
-        <button
-          aria-label={`Tăng ${label}`}
-          disabled={value >= max}
+        <Button
+          label={`Tăng ${label}`}
+          isDisabled={value >= max}
           onClick={() => onChange(Math.min(max, value + step))}
         >
           +
-        </button>
-      </div>
-    </div>
+        </Button>
+      </HStack>
+    </HStack>
   );
 }
 export function Diagram({

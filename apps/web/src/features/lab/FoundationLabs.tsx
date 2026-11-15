@@ -1,3 +1,4 @@
+import { Button } from '@astryxdesign/core/Button';
 import { ObservationPanel } from './ObservationPanel';
 import type { LessonProgress } from '@sdl/content-schema';
 import {
@@ -34,13 +35,11 @@ export function MetricsLab(props: Props) {
         max={4}
         onChange={(workers) => change({ workers })}
       />
-      <button
-        className="button secondary"
+      <Button
+        label={slow ? 'Cho hai việc cuối nhanh lại' : 'Làm hai việc cuối chậm hơn'}
         aria-pressed={slow}
         onClick={() => change({ slow: !slow })}
-      >
-        {slow ? 'Cho hai việc cuối nhanh lại' : 'Làm hai việc cuối chậm hơn'}
-      </button>
+      />
       <p className="muted">
         Hai việc cuối đang mất {slow ? '1.000 ms' : '100 ms'} mỗi việc. ms là mili giây: 1.000 ms =
         1 giây.
@@ -105,15 +104,9 @@ export function DnsLab({ progress, onChange }: Props) {
         Kết quả lần tra gần nhất: <strong>{ip(state.last)}</strong>
       </p>
       <div className="lab-controls">
-        <button className="button primary" onClick={() => act('lookup')}>
-          Tra địa chỉ
-        </button>
-        <button className="button secondary" onClick={() => act('move')}>
-          Đổi IP ở nguồn
-        </button>
-        <button className="button secondary" onClick={() => act('wait')}>
-          Qua 1 giây
-        </button>
+        <Button variant="primary" label="Tra địa chỉ" onClick={() => act('lookup')} />
+        <Button label="Đổi IP ở nguồn" onClick={() => act('move')} />
+        <Button label="Qua 1 giây" onClick={() => act('wait')} />
       </div>
       <ObservationPanel value={progress.lab['observation']} />
       <div className="feedback" role="status">
@@ -168,13 +161,11 @@ export function TransportLab(props: Props) {
             {p.toUpperCase()}
           </button>
         ))}
-        <button
-          className="button secondary"
+        <Button
+          label={`Mất mảnh 2: ${loss ? 'bật' : 'tắt'}`}
           aria-pressed={loss}
           onClick={() => change({ loss: !loss, step: 0 })}
-        >
-          Mất mảnh 2: {loss ? 'bật' : 'tắt'}
-        </button>
+        />
       </div>
       <div className="packet-board">
         {[1, 2, 3].map((n) => (
@@ -195,16 +186,13 @@ export function TransportLab(props: Props) {
         ))}
       </div>
       <div className="lab-controls">
-        <button
-          className="button primary"
-          disabled={step === 3}
+        <Button
+          variant="primary"
+          label={step === 0 ? 'Gửi ba mảnh' : step === 1 ? 'Nhận tại đích' : 'Xem bước khôi phục'}
+          isDisabled={step === 3}
           onClick={() => change({ step: step + 1 })}
-        >
-          {step === 0 ? 'Gửi ba mảnh' : step === 1 ? 'Nhận tại đích' : 'Xem bước khôi phục'}
-        </button>
-        <button className="button secondary" onClick={() => change({ step: 0 })}>
-          Thử lại
-        </button>
+        />
+        <Button label="Thử lại" onClick={() => change({ step: 0 })} />
       </div>
       <ObservationPanel value={progress.lab['observation']} />
       <div className="feedback" role="status">

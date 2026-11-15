@@ -59,10 +59,14 @@ test('home experiment demonstrates stale cache without completing a lesson', asy
   await page.getByRole('button', { name: 'Đổi phòng ở nguồn' }).click();
   await expect(page.getByText('Chưa nhận thay đổi', { exact: true })).toBeVisible();
   await page.getByRole('button', { name: 'Xem lịch', exact: true }).click();
-  await expect(page.getByRole('status')).toContainText('Bạn thấy phòng 201.');
+  await expect(page.getByRole('status').filter({ hasText: /\S/ })).toContainText(
+    'Bạn thấy phòng 201.',
+  );
   await page.getByRole('button', { name: 'Lấy lịch mới', exact: true }).click();
   await page.getByRole('button', { name: 'Xem lịch', exact: true }).click();
-  await expect(page.getByRole('status')).toContainText('Bạn thấy phòng 205.');
+  await expect(page.getByRole('status').filter({ hasText: /\S/ })).toContainText(
+    'Bạn thấy phòng 205.',
+  );
   await page.goto('/#/progress');
   await expect(page.getByText('Ôn lại và thử thêm')).toHaveCount(0);
 });

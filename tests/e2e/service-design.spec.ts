@@ -27,11 +27,15 @@ for (const lesson of serviceDesign) {
     const fields = lab.locator('fieldset');
     await fields.first().getByRole('button').nth(lesson.practice.items[0]!.answer).click();
     await lab.getByRole('button', { name: 'Kiểm tra bài áp dụng', exact: true }).click();
-    await expect(lab.getByRole('status')).toContainText(`Đúng 1/${lesson.practice.items.length}`);
+    await expect(lab.getByRole('status').filter({ hasText: /\S/ })).toContainText(
+      `Đúng 1/${lesson.practice.items.length}`,
+    );
     await expect(next).toBeDisabled();
     await expect(page.getByText('Đã lưu trên thiết bị', { exact: true })).toBeVisible();
     await page.reload();
-    await expect(lab.getByRole('status')).toContainText(`Đúng 1/${lesson.practice.items.length}`);
+    await expect(lab.getByRole('status').filter({ hasText: /\S/ })).toContainText(
+      `Đúng 1/${lesson.practice.items.length}`,
+    );
     for (const [i, item] of lesson.practice.items.entries()) {
       const button = fields.nth(i).getByRole('button').nth(item.answer);
       const box = await button.boundingBox();
@@ -39,7 +43,7 @@ for (const lesson of serviceDesign) {
       await button.click();
     }
     await lab.getByRole('button', { name: 'Kiểm tra bài áp dụng', exact: true }).click();
-    await expect(lab.getByRole('status')).toContainText(
+    await expect(lab.getByRole('status').filter({ hasText: /\S/ })).toContainText(
       `Đúng ${lesson.practice.items.length}/${lesson.practice.items.length}`,
     );
     await expect(next).toBeEnabled();

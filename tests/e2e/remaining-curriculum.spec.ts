@@ -155,7 +155,9 @@ test('design drafts survive partial reload, redoing practice, export/import and 
   }
   const panel = page.getByRole('region', { name: 'Học khi mất mạng' });
   await panel.getByRole('button', { name: 'Tải gói học', exact: true }).click();
-  await expect(panel.getByRole('status')).toContainText('Gói đã tải đủ', { timeout: 20000 });
+  await expect(panel.getByRole('status').filter({ hasText: /\S/ })).toContainText('Gói đã tải đủ', {
+    timeout: 20000,
+  });
   await context.setOffline(true);
   await page.goto('/#/learn/capstone-architecture');
   await expect(page.getByRole('region', { name: 'Giải thích từng cơ chế' })).toBeVisible();

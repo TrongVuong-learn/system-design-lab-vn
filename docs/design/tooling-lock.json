@@ -22,5 +22,21 @@
       "commit": "67803eac81607188194aea9842a723b89326d90d",
       "usage": "Evaluated, not installed"
     }
+  ],
+  "dependencies": [
+    {
+      "name": "@astryxdesign/core",
+      "version": "0.7.16",
+      "repository": "https://github.com/meta/astryx",
+      "license": "MIT",
+      "packages": [
+        "@astryxdesign/core@0.7.16",
+        "@astryxdesign/theme-neutral@0.7.16",
+        "@astryxdesign/cli@0.7.16 (dev)",
+        "@stylexjs/stylex@0.19.0"
+      ],
+      "usage": "UI component library and theme for every page since 15/11/2026; install scripts (agent-doc nudges) are declined in pnpm-workspace.yaml",
+      "projectPath": "apps/web"
+    }
   ]
 }

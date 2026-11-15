@@ -1,3 +1,4 @@
+import { Button } from '@astryxdesign/core/Button';
 import type { Lesson, LessonProgress } from '@sdl/content-schema';
 import { librarySearch, SEARCH_MODEL_VERSION } from '@sdl/simulation-engine';
 import { ObservationPanel } from './ObservationPanel';
@@ -98,23 +99,18 @@ export function LibrarySearchLab({
         Đổi cách tìm, số sách hoặc mục tiêu sẽ bắt đầu lại và xóa quan sát cũ.
       </p>
       <div className="lab-controls">
-        <button
-          className="button primary"
-          disabled={state.finished}
+        <Button
+          variant="primary"
+          label="Xem một mục"
+          isDisabled={state.finished}
           onClick={() => run(state.step + 1)}
-        >
-          Xem một mục
-        </button>
-        <button
-          className="button secondary"
-          disabled={state.finished}
+        />
+        <Button
+          label="Tìm đến khi xong"
+          isDisabled={state.finished}
           onClick={() => run(state.config.size)}
-        >
-          Tìm đến khi xong
-        </button>
-        <button className="button secondary" onClick={() => configure({})}>
-          Bắt đầu lại
-        </button>
+        />
+        <Button label="Bắt đầu lại" onClick={() => configure({})} />
       </div>
       <p role="status">
         Đã xem {state.step} mục.{' '}

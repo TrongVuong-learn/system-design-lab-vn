@@ -1,5 +1,10 @@
 import { isSchoolReviewSaved } from './model';
-import { Link } from 'react-router';
+import { Button } from '@astryxdesign/core/Button';
+import { Card } from '@astryxdesign/core/Card';
+import { Heading } from '@astryxdesign/core/Heading';
+import { HStack } from '@astryxdesign/core/HStack';
+import { Text } from '@astryxdesign/core/Text';
+import { VStack } from '@astryxdesign/core/VStack';
 import { reviews } from '../../app/catalog';
 import { useProgress } from '../../app/progress';
 export function ReviewCard() {
@@ -11,18 +16,23 @@ export function ReviewCard() {
     Number(isSchoolReviewSaved(record, 'opening')) + Number(isSchoolReviewSaved(record, 'rush'));
   return (
     <section className="review-entry" aria-label="Ôn tổng hợp">
-      <div>
-        <h2>Ghép các kiến thức lại</h2>
-        <p>{review.subtitle}</p>
-        <p className="muted">
-          {record
-            ? `Đã lưu ${saved}/2 lượt ôn. Nhận định do bạn tự đánh giá.`
-            : 'Bạn có thể bắt đầu ngay; có liên kết ôn kiến thức nền trong bài.'}
-        </p>
-      </div>
-      <Link className="button secondary" to="/review/school-day">
-        {record ? 'Tiếp tục ôn website trường' : 'Thử bài ôn website trường'}
-      </Link>
+      <Card variant="blue" padding={6}>
+        <HStack gap={4} hAlign="between" vAlign="center" wrap="wrap">
+          <VStack gap={2}>
+            <Heading level={2}>Ghép các kiến thức lại</Heading>
+            <Text as="p">{review.subtitle}</Text>
+            <Text as="p" type="supporting">
+              {record
+                ? `Đã lưu ${saved}/2 lượt ôn. Nhận định do bạn tự đánh giá.`
+                : 'Bạn có thể bắt đầu ngay; có liên kết ôn kiến thức nền trong bài.'}
+            </Text>
+          </VStack>
+          <Button
+            label={record ? 'Tiếp tục ôn website trường' : 'Thử bài ôn website trường'}
+            href="/review/school-day"
+          />
+        </HStack>
+      </Card>
     </section>
   );
 }

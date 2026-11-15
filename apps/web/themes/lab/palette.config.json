@@ -1,0 +1,37 @@
+{
+  "modeStrategy": "light-and-dark",
+  "families": [
+    {
+      "id": "accent",
+      "name": "Accent",
+      "seed": "#2447d8",
+      "anchors": [
+        {
+          "mode": "light",
+          "stop": 40,
+          "color": "#2447d8",
+          "policy": "exact"
+        }
+      ]
+    },
+    {
+      "id": "warning",
+      "name": "Warning",
+      "seed": "#c98a00",
+      "anchors": [
+        {
+          "mode": "light",
+          "stop": 65,
+          "color": "#c98a00",
+          "policy": "exact"
+        },
+        {
+          "mode": "dark",
+          "stop": 65,
+          "color": "#c98a00",
+          "policy": "exact"
+        }
+      ]
+    }
+  ]
+}
