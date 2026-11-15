@@ -1,3 +1,4 @@
+import { Button } from '@astryxdesign/core/Button';
 import type { LessonProgress } from '@sdl/content-schema';
 import {
   serializeRecord,
@@ -76,12 +77,15 @@ export function SerializationLab({ progress, onChange }: Props) {
         <dd>true</dd>
       </dl>
       <div className="lab-controls">
-        <button className="button primary" disabled={state.finished} onClick={run}>
-          {state.step === 0 ? 'Tạo JSON UTF-8' : state.step === 1 ? 'Đọc lại JSON' : 'Đã khôi phục'}
-        </button>
-        <button className="button secondary" onClick={() => configure()}>
-          Bắt đầu lại
-        </button>
+        <Button
+          variant="primary"
+          label={
+            state.step === 0 ? 'Tạo JSON UTF-8' : state.step === 1 ? 'Đọc lại JSON' : 'Đã khôi phục'
+          }
+          isDisabled={state.finished}
+          onClick={run}
+        />
+        <Button label="Bắt đầu lại" onClick={() => configure()} />
       </div>
       <p role="status">
         {state.step === 0
@@ -165,12 +169,13 @@ export function CompressionLab({ progress, onChange }: Props) {
         {state.raw}
       </p>
       <div className="lab-controls">
-        <button className="button primary" disabled={state.finished} onClick={run}>
-          {state.step === 0 ? 'Nén chuỗi' : state.step === 1 ? 'Giải nén' : 'Đã khôi phục'}
-        </button>
-        <button className="button secondary" onClick={() => configure()}>
-          Bắt đầu lại
-        </button>
+        <Button
+          variant="primary"
+          label={state.step === 0 ? 'Nén chuỗi' : state.step === 1 ? 'Giải nén' : 'Đã khôi phục'}
+          isDisabled={state.finished}
+          onClick={run}
+        />
+        <Button label="Bắt đầu lại" onClick={() => configure()} />
       </div>
       <p role="status">
         {state.step === 0

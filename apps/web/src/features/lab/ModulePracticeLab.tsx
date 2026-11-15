@@ -1,3 +1,4 @@
+import { Button } from '@astryxdesign/core/Button';
 import type { Lesson, LessonProgress } from '@sdl/content-schema';
 import { evaluatePractice, PRACTICE_MODEL_VERSION } from '@sdl/learning-core';
 export function ModulePracticeLab({
@@ -91,12 +92,8 @@ export function ModulePracticeLab({
         </fieldset>
       ))}
       <div className="lab-controls">
-        <button className="button primary" onClick={check}>
-          Kiểm tra bài áp dụng
-        </button>
-        <button className="button secondary" onClick={reset}>
-          Làm lại bài áp dụng
-        </button>
+        <Button variant="primary" label="Kiểm tra bài áp dụng" onClick={check} />
+        <Button label="Làm lại bài áp dụng" onClick={reset} />
       </div>
       <p role="status">
         {checked

@@ -24,22 +24,28 @@ test('process addresses translate independently and invalid writes leave RAM unc
   await open(page, 'address-space');
   const lab = page.getByRole('region', { name: 'Thí nghiệm không gian địa chỉ' });
   await lab.getByRole('button', { name: 'Thử truy cập', exact: true }).press('Enter');
-  await expect(lab.getByRole('status').first()).toContainText('VA 0 → PA 4. Kết quả: A0');
+  await expect(lab.getByRole('status').filter({ hasText: /\S/ }).first()).toContainText(
+    'VA 0 → PA 4. Kết quả: A0',
+  );
   await lab.getByLabel('Process', { exact: true }).selectOption('B');
   await lab.getByRole('button', { name: 'Thử truy cập', exact: true }).click();
-  await expect(lab.getByRole('status').first()).toContainText('VA 0 → PA 8. Kết quả: B0');
+  await expect(lab.getByRole('status').filter({ hasText: /\S/ }).first()).toContainText(
+    'VA 0 → PA 8. Kết quả: B0',
+  );
   await lab.getByLabel('Thao tác', { exact: true }).selectOption('write');
   await lab.getByLabel('Địa chỉ ảo', { exact: true }).selectOption('4');
   await lab.getByRole('button', { name: 'Thử truy cập', exact: true }).click();
-  await expect(lab.getByRole('status').first()).toContainText(
+  await expect(lab.getByRole('status').filter({ hasText: /\S/ }).first()).toContainText(
     'Bị chặn: vượt giới hạn. RAM không đổi',
   );
   await expect(page.getByText('Đã lưu trên thiết bị', { exact: true })).toBeVisible();
   await page.reload();
-  await expect(lab.getByRole('status').first()).toContainText('Bị chặn');
+  await expect(lab.getByRole('status').filter({ hasText: /\S/ }).first()).toContainText('Bị chặn');
   await lab.getByLabel('Địa chỉ ảo', { exact: true }).selectOption('3');
   await lab.getByRole('button', { name: 'Thử truy cập', exact: true }).click();
-  await expect(lab.getByRole('status').first()).toContainText('PA 11. Kết quả: B mới');
+  await expect(lab.getByRole('status').filter({ hasText: /\S/ }).first()).toContainText(
+    'PA 11. Kết quả: B mới',
+  );
   await finish(page, 'Hai ứng dụng ghi danh cùng chạy');
 });
 test('open descriptor survives unlink and is released after close', async ({ page }) => {
@@ -48,7 +54,7 @@ test('open descriptor survives unlink and is released after close', async ({ pag
   await lab.getByRole('button', { name: 'Mở file', exact: true }).press('Enter');
   await expect(lab.getByRole('button', { name: 'Xóa tên file', exact: true })).toBeFocused();
   await lab.getByRole('button', { name: 'Xóa tên file', exact: true }).click();
-  await expect(lab.getByRole('status').first()).toContainText(
+  await expect(lab.getByRole('status').filter({ hasText: /\S/ }).first()).toContainText(
     'Đường dẫn: đã xóa tên. Descriptor: đang mở. File: còn được giữ',
   );
   await expect(page.getByText('Đã lưu trên thiết bị', { exact: true })).toBeVisible();
@@ -58,7 +64,9 @@ test('open descriptor survives unlink and is released after close', async ({ pag
     'Lịch: phòng 205',
   );
   await lab.getByRole('button', { name: 'Đóng fd 3', exact: true }).click();
-  await expect(lab.getByRole('status').first()).toContainText('File: được giải phóng');
+  await expect(lab.getByRole('status').filter({ hasText: /\S/ }).first()).toContainText(
+    'File: được giải phóng',
+  );
   await finish(page, 'Ứng dụng đang đọc lịch bị xóa tên');
 });
 test('event-loop frees CPU for B while A waits, without accelerating A', async ({ page }) => {
@@ -68,21 +76,31 @@ test('event-loop frees CPU for B while A waits, without accelerating A', async (
   await next.press('Enter');
   await expect(next).toBeFocused();
   await next.click();
-  await expect(lab.getByRole('status').first()).toContainText('Mốc 2. A: chưa xong. B: xong');
+  await expect(lab.getByRole('status').filter({ hasText: /\S/ }).first()).toContainText(
+    'Mốc 2. A: chưa xong. B: xong',
+  );
   await expect(page.getByText('Đã lưu trên thiết bị', { exact: true })).toBeVisible();
   await page.reload();
-  await expect(lab.getByRole('status').first()).toContainText('Mốc 2');
+  await expect(lab.getByRole('status').filter({ hasText: /\S/ }).first()).toContainText('Mốc 2');
   await next.click();
   await next.click();
-  await expect(lab.getByRole('status').first()).toContainText('phần xử lý tiếp của A chưa chạy');
+  await expect(lab.getByRole('status').filter({ hasText: /\S/ }).first()).toContainText(
+    'phần xử lý tiếp của A chưa chạy',
+  );
   await next.click();
-  await expect(lab.getByRole('status').first()).toContainText('Mốc 5. A: xong. B: xong');
+  await expect(lab.getByRole('status').filter({ hasText: /\S/ }).first()).toContainText(
+    'Mốc 5. A: xong. B: xong',
+  );
   await expect(next).toBeDisabled();
   await lab.getByLabel('Cách chờ I/O').selectOption('blocking');
   await expect(lab.getByRole('region', { name: 'So sánh bước vừa thử' })).toHaveCount(0);
   for (let i = 0; i < 5; i++) await next.click();
-  await expect(lab.getByRole('status').first()).toContainText('Mốc 5. A: xong. B: chưa xong');
+  await expect(lab.getByRole('status').filter({ hasText: /\S/ }).first()).toContainText(
+    'Mốc 5. A: xong. B: chưa xong',
+  );
   await next.click();
-  await expect(lab.getByRole('status').first()).toContainText('Mốc 6. A: xong. B: xong');
+  await expect(lab.getByRole('status').filter({ hasText: /\S/ }).first()).toContainText(
+    'Mốc 6. A: xong. B: xong',
+  );
   await finish(page, 'Lấy ảnh và trả thông báo ngắn');
 });

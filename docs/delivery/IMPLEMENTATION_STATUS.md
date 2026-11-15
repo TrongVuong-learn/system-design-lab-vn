@@ -15,7 +15,7 @@ Gói offline toàn artifact16 bài + bài ôn đã hiện thực; tải đủ c�
 - Commit tài liệu nền tảng trên `master`; triển khai trong `codex/eng-01-web-foundation`.
 - pnpm workspace với web và ba package content-schema, learning-core, simulation-engine.
 - Runtime Node 24.21.0 dùng cho build/test; package manager được khóa và có lockfile.
-- Giao diện mobile-first: Học, Khám phá, Tiến độ, trang level và player bốn chặng.
+- Giao diện mobile-first: Học, Khám phá, Tiến độ, trang level và player bốn chặng; dựng bằng component Astryx từ 15/11/2026 ([báo cáo](ASTRYX_UI.md)).
 - Catalog 6 level, 36 module và 7 nhánh. Module đầy đủ đang soạn, không có nút học giả.
 - Sáu bài beta: hành trình request, nút thắt/chia tải, cache, queue, replication lag và lựa chọn thiết kế nhập môn.
 - Mô phỏng deterministic theo command/thời gian logic; metrics có giả định và đơn vị. Chưa cần worker cho workload nhỏ của bản này.

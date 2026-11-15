@@ -1,3 +1,4 @@
+import { Button } from '@astryxdesign/core/Button';
 import type { Lesson, LessonProgress } from '@sdl/content-schema';
 import {
   restoreCpuIo,
@@ -77,19 +78,14 @@ export function CpuIoLab({
         Vẫn chỉ một CPU dù chọn 1 hay 2 worker. Đổi cấu hình bắt đầu lại từ 0 ms và xóa quan sát cũ.
       </p>
       <div className="lab-controls">
-        <button
-          className="button primary"
-          disabled={state.finished}
+        <Button
+          variant="primary"
+          label="Qua 1 ms"
+          isDisabled={state.finished}
           onClick={() => run(state.time + 1)}
-        >
-          Qua 1 ms
-        </button>
-        <button className="button secondary" disabled={state.finished} onClick={() => run(10)}>
-          Chạy đến khi xong
-        </button>
-        <button className="button secondary" onClick={() => configure({})}>
-          Bắt đầu lại
-        </button>
+        />
+        <Button label="Chạy đến khi xong" isDisabled={state.finished} onClick={() => run(10)} />
+        <Button label="Bắt đầu lại" onClick={() => configure({})} />
       </div>
       <div className="cpu-io-clock">
         <strong>Mốc {state.time} ms</strong>

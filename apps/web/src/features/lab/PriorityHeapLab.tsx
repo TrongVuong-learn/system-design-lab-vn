@@ -1,3 +1,4 @@
+import { Button } from '@astryxdesign/core/Button';
 import type { Lesson, LessonProgress } from '@sdl/content-schema';
 import { priorityHeap, HEAP_MODEL_VERSION, type HeapJob } from '@sdl/simulation-engine';
 import { ObservationPanel } from './ObservationPanel';
@@ -80,19 +81,14 @@ export function PriorityHeapLab({
         phải một phép so hoặc thời gian in. Chưa có việc mới đến trong lượt thử.
       </p>
       <div className="lab-controls">
-        <button
-          className="button primary"
-          disabled={state.finished}
+        <Button
+          variant="primary"
+          label="Lấy một việc"
+          isDisabled={state.finished}
           onClick={() => run(state.step + 1)}
-        >
-          Lấy một việc
-        </button>
-        <button className="button secondary" disabled={state.finished} onClick={() => run(7)}>
-          Lấy hết việc
-        </button>
-        <button className="button secondary" onClick={() => configure()}>
-          Bắt đầu lại
-        </button>
+        />
+        <Button label="Lấy hết việc" isDisabled={state.finished} onClick={() => run(7)} />
+        <Button label="Bắt đầu lại" onClick={() => configure()} />
       </div>
       <p role="status">
         Đã lấy {state.step} việc.{' '}

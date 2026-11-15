@@ -4,9 +4,19 @@
 
 Người học cần mở một bài, dự đoán, thao tác và hiểu kết quả trên điện thoại. Giữ lối nhập môn phù hợp học sinh cấp 3. Đây là sản phẩm học tập; mỗi chi tiết thị giác cần hỗ trợ đọc, nhận biết trạng thái hoặc hành động.
 
-## PIXEL-CITY — Hệ UI hiện hành trong source (27/10/2026)
+## ASTRYX — Hệ UI hiện hành trong source (15/11/2026)
 
-Theo [plan rework](docs/design/PIXEL_CITY_REWORK_PLAN.md), giao diện chuyển sang thành phố dữ liệu pixel trên toàn site. Đã phát hành trên master qua [PR #25](https://github.com/TrongVuong-learn/system-design-lab-vn/pull/25); tình trạng kiểm chứng/phát hành nằm trong [báo cáo triển khai](docs/delivery/PIXEL_CITY_UI.md). Các hướng bên dưới là lịch sử và quy tắc cho cơ chế bài học, không phải palette hiện hành.
+Theo yêu cầu người dùng, toàn bộ trang chuyển sang thư viện [Astryx](https://github.com/meta/astryx) (`@astryxdesign/core` 0.7.16, MIT), thay hệ Pixel City. Cách áp dụng ở repository này:
+
+- Theme `lab` tạo bằng `astryx experimental theme editor` từ neutral: accent cobalt `#2447d8`, warning `#c98a00`, font Be Vietnam Pro tự host cho cả body và heading. Nguồn theme ở `apps/web/themes/lab/`, bản app ở `apps/web/src/themes/lab/`, nạp qua `src/astryx-themes.js`; ứng dụng cố định chế độ sáng. Đổi màu/font qua theme editor, không ghi đè `:root`.
+- Khung, chữ, nút, thẻ, banner, token, thanh tiến độ, ô nhập và liên kết dùng component Astryx (`TopNav`, `Heading`, `Text`, `Button`, `Card`, `Banner`, `Token`, `ProgressBar`, `TextInput`, `TextArea`, `Collapsible`, `Grid`, `VStack`/`HStack`). Liên kết đi qua `LinkProvider` nối với `HashRouter`.
+- Giữ phần tử gốc có chủ đích: thanh điều hướng dưới trên mobile (mobile-first, bốn mục cố định), `select` lộ trình và `details/summary` của module/chương (giá trị và hành vi bàn phím mà test và trình đọc màn hình dựa vào), nút đáp án `aria-pressed`, bảng trước–sau, và sơ đồ SVG của từng cơ chế. Các phần này chỉ dùng token Astryx trong `src/styles/base.css` và `mechanisms.css`, không dùng mã màu cứng.
+- Sơ đồ cơ chế giữ nguyên nội dung và số liệu từ engine; chỉ đổi màu sang token. Hero trang đầu là sơ đồ bốn trạm SVG thay cảnh pixel; gói tin chỉ di chuyển theo thao tác.
+- Quy trình review UI bên dưới vẫn áp dụng: chụp 390 px và desktop với nội dung thật, kiểm 320 px, focus, reduced motion, lỗi và dữ liệu lưu.
+
+## PIXEL-CITY — Hướng UI trước Astryx (27/10/2026, đã thay)
+
+Theo [plan rework](docs/design/PIXEL_CITY_REWORK_PLAN.md), giao diện từng chuyển sang thành phố dữ liệu pixel trên toàn site. Đã phát hành trên master qua [PR #25](https://github.com/TrongVuong-learn/system-design-lab-vn/pull/25); tình trạng kiểm chứng/phát hành nằm trong [báo cáo triển khai](docs/delivery/PIXEL_CITY_UI.md). Các hướng bên dưới là lịch sử và quy tắc cho cơ chế bài học, không phải palette hiện hành.
 
 - Mực `#14203b`, giấy đọc `#f4f7ff`, trời `#b9e6ff`, hành động cobalt `#2447d8`, tín hiệu `#ffcf56`. Be Vietnam Pro tự host, đủ dấu Việt; không dùng font pixel cho phần đọc.
 - Trang đầu: bưu kiện đi qua bốn trạm SVG theo thao tác. Cảnh dựa lưới 4 đơn vị, không cần WebGL và không tự chạy khi cuộn. Số liệu của thí nghiệm cache bên dưới vẫn từ engine.

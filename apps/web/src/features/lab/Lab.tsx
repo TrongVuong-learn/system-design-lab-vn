@@ -1,3 +1,4 @@
+import { Button } from '@astryxdesign/core/Button';
 import { ModulePracticeLab } from './ModulePracticeLab';
 import { CookieSessionLab, ReverseProxyLab, MultiplexLab } from './WebProtocolLabs';
 import { AddressSpaceLab, FileHandlesLab, EventLoopLab } from './OsLabs';
@@ -173,21 +174,13 @@ function CacheLab({ progress, onChange }: LabProps) {
         active={state.last === null ? -1 : 1}
       />
       <div className="lab-controls">
-        <button className="button primary" onClick={() => act({ type: 'read' })}>
-          Xem lịch
-        </button>
-        <button
-          className="button secondary"
+        <Button variant="primary" label="Xem lịch" onClick={() => act({ type: 'read' })} />
+        <Button
+          label="Đổi phòng ở nguồn"
           onClick={() => act({ type: 'update', value: state.source === 201 ? 205 : 201 })}
-        >
-          Đổi phòng ở nguồn
-        </button>
-        <button className="button secondary" onClick={() => act({ type: 'refresh' })}>
-          Lấy lịch mới
-        </button>
-        <button className="button secondary" onClick={() => act({ type: 'wait' })}>
-          Qua 1 phút
-        </button>
+        />
+        <Button label="Lấy lịch mới" onClick={() => act({ type: 'refresh' })} />
+        <Button label="Qua 1 phút" onClick={() => act({ type: 'wait' })} />
       </div>
       <ObservationPanel value={progress.lab['observation']} />
       {!progress.lab['observation'] && (
@@ -260,21 +253,18 @@ function RequestLab({ progress, onChange }: LabProps) {
       />
       <p className="muted">Mỗi mức bằng 20 ms. Hiện tại: {delay} ms.</p>
       <div className="lab-controls">
-        <button
-          className="button primary"
-          disabled={step === 3}
+        <Button
+          variant="primary"
+          label="Từng bước"
+          isDisabled={step === 3}
           onClick={() =>
             onChange({ lab: { step: step + 1, delay }, actions: progress.actions + 1 })
           }
-        >
-          Từng bước
-        </button>
-        <button
-          className="button secondary"
+        />
+        <Button
+          label="Gửi lại từ đầu"
           onClick={() => onChange({ lab: { step: 0, delay }, actions: progress.actions + 1 })}
-        >
-          Gửi lại từ đầu
-        </button>
+        />
       </div>
       <ObservationPanel value={progress.lab['observation']} />
     </section>
@@ -420,22 +410,19 @@ function QueueLab({ progress, onChange }: LabProps) {
         onChange={(value) => change({ workers: value })}
       />
       <div className="lab-controls">
-        <button
-          className="button primary"
+        <Button
+          variant="primary"
+          label="Qua 1 giây"
           onClick={() => {
             change({ ...queueStep(state, arrivals, workers) });
           }}
-        >
-          Qua 1 giây
-        </button>
-        <button
-          className="button secondary"
+        />
+        <Button
+          label="Đặt lại hàng đợi"
           onClick={() => {
             change({ ...initialQueue(), observation: '' });
           }}
-        >
-          Đặt lại hàng đợi
-        </button>
+        />
       </div>
       <div className="metrics">
         <Metric label="Đã nhận" value={state.received} />
@@ -500,19 +487,14 @@ function ReplicaLab({ progress, onChange }: LabProps) {
         }
       />
       <div className="lab-controls">
-        <button
-          className="button primary"
-          disabled={state.pending.length >= 10}
+        <Button
+          variant="primary"
+          label="Đổi phòng ở nguồn"
+          isDisabled={state.pending.length >= 10}
           onClick={() => change(replicaWrite(state, state.primary === 201 ? 205 : 201, lag))}
-        >
-          Đổi phòng ở nguồn
-        </button>
-        <button className="button secondary" onClick={() => change(replicaTick(state))}>
-          Qua 1 giây
-        </button>
-        <button className="button secondary" onClick={() => change(initialReplica(), true)}>
-          Đặt lại
-        </button>
+        />
+        <Button label="Qua 1 giây" onClick={() => change(replicaTick(state))} />
+        <Button label="Đặt lại" onClick={() => change(initialReplica(), true)} />
       </div>
       <ObservationPanel value={progress.lab['observation']} />
       <div className="feedback" role="status">

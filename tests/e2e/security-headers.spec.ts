@@ -29,6 +29,9 @@ test('production policy permits lessons, game animation, WASM and offline withou
   await page.goto('/#/progress');
   const offline = page.getByRole('region', { name: 'Học khi mất mạng' });
   await offline.getByRole('button', { name: 'Tải gói học', exact: true }).click();
-  await expect(offline.getByRole('status')).toContainText('Gói đã tải đủ', { timeout: 30000 });
+  await expect(offline.getByRole('status').filter({ hasText: /\S/ })).toContainText(
+    'Gói đã tải đủ',
+    { timeout: 30000 },
+  );
   expect(violations).toEqual([]);
 });

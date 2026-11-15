@@ -1,3 +1,4 @@
+import { Button } from '@astryxdesign/core/Button';
 import type { Lesson, LessonProgress } from '@sdl/content-schema';
 import { searchTree, TREE_MODEL_VERSION } from '@sdl/simulation-engine';
 import { ObservationPanel } from './ObservationPanel';
@@ -101,19 +102,14 @@ export function SearchTreeLab({
         ms hoặc số lệnh CPU. Hai cây đã dựng sẵn, không có thao tác tự cân bằng.
       </p>
       <div className="lab-controls">
-        <button
-          className="button primary"
-          disabled={state.finished}
+        <Button
+          variant="primary"
+          label="Xét một nút"
+          isDisabled={state.finished}
           onClick={() => run(state.step + 1)}
-        >
-          Xét một nút
-        </button>
-        <button className="button secondary" disabled={state.finished} onClick={() => run(7)}>
-          Tra đến khi xong
-        </button>
-        <button className="button secondary" onClick={() => configure({})}>
-          Bắt đầu lại
-        </button>
+        />
+        <Button label="Tra đến khi xong" isDisabled={state.finished} onClick={() => run(7)} />
+        <Button label="Bắt đầu lại" onClick={() => configure({})} />
       </div>
       <p role="status">
         Đã xét {state.step} nút.{' '}

@@ -1,4 +1,10 @@
 import { useEffect, useState } from 'react';
+import { Button } from '@astryxdesign/core/Button';
+import { Card } from '@astryxdesign/core/Card';
+import { Code } from '@astryxdesign/core/Code';
+import { HStack } from '@astryxdesign/core/HStack';
+import { Text } from '@astryxdesign/core/Text';
+import { VStack } from '@astryxdesign/core/VStack';
 import {
   downloadOffline,
   offlineState,
@@ -83,58 +89,60 @@ export function OfflinePanel() {
       aria-labelledby="offline-title"
       aria-busy={busy}
     >
-      <h2 id="offline-title">Học khi mất mạng</h2>
-      <p>
-        Tải các bài nhập môn và bài ôn đang có, kèm thí nghiệm và font chữ. Các đường dẫn nguồn đọc
-        thêm vẫn cần mạng; module đang biên soạn chưa có trong gói.
-      </p>
-      {downloadBytes !== null && (
-        <p>
-          Gói tải hiện có: {(downloadBytes / 1000000).toFixed(1)} MB (chưa tính nén truyền mạng).
-        </p>
-      )}
-      {pack && (
-        <p>
-          Phiên bản <code>{pack.version}</code> · {(pack.bytes / 1000000).toFixed(1)} MB ·{' '}
-          {pack.files} tệp
-        </p>
-      )}
-      <p role="status" className="feedback">
-        {notice}
-      </p>
-      {state.waiting?.ready && (
-        <p>
-          Bản mới đang chờ. Bài đang mở tiếp tục dùng bản hiện tại; đóng tất cả tab rồi mở lại để
-          đổi bản.
-        </p>
-      )}
-      <div className="lab-controls">
-        <button
-          className="button primary"
-          disabled={!supported || busy}
-          onClick={() => void act('download')}
-        >
-          {state.active?.ready ? 'Tải bản mới nếu có' : 'Tải gói học'}
-        </button>
-        <button
-          className="button secondary"
-          disabled={!supported || busy}
-          onClick={() => void act('check')}
-        >
-          Kiểm tra gói
-        </button>
-        <button
-          className="button secondary"
-          disabled={!supported || busy || !pack}
-          onClick={() => void act('remove')}
-        >
-          Xóa gói tải
-        </button>
-      </div>
-      <p className="muted">
-        Trình duyệt hoặc hệ điều hành có thể thu hồi dữ liệu tải. Kiểm tra gói trước khi rời mạng và
-        xuất bản lưu tiến độ để dự phòng. Xóa gói không xóa tiến độ.
-      </p>
+      <Card padding={6}>
+        <VStack gap={3}>
+          <h2 id="offline-title" className="heading-2">
+            Học khi mất mạng
+          </h2>
+          <Text as="p" color="secondary">
+            Tải các bài nhập môn và bài ôn đang có, kèm thí nghiệm và font chữ. Các đường dẫn nguồn
+            đọc thêm vẫn cần mạng; module đang biên soạn chưa có trong gói.
+          </Text>
+          {downloadBytes !== null && (
+            <Text as="p">
+              Gói tải hiện có: {(downloadBytes / 1000000).toFixed(1)} MB (chưa tính nén truyền
+              mạng).
+            </Text>
+          )}
+          {pack && (
+            <Text as="p">
+              Phiên bản <Code>{pack.version}</Code> · {(pack.bytes / 1000000).toFixed(1)} MB ·{' '}
+              {pack.files} tệp
+            </Text>
+          )}
+          <p role="status" className="feedback">
+            {notice}
+          </p>
+          {state.waiting?.ready && (
+            <Text as="p">
+              Bản mới đang chờ. Bài đang mở tiếp tục dùng bản hiện tại; đóng tất cả tab rồi mở lại
+              để đổi bản.
+            </Text>
+          )}
+          <HStack gap={2} wrap="wrap">
+            <Button
+              variant="primary"
+              label={state.active?.ready ? 'Tải bản mới nếu có' : 'Tải gói học'}
+              isDisabled={!supported || busy}
+              onClick={() => void act('download')}
+            />
+            <Button
+              label="Kiểm tra gói"
+              isDisabled={!supported || busy}
+              onClick={() => void act('check')}
+            />
+            <Button
+              label="Xóa gói tải"
+              isDisabled={!supported || busy || !pack}
+              onClick={() => void act('remove')}
+            />
+          </HStack>
+          <Text as="p" type="supporting">
+            Trình duyệt hoặc hệ điều hành có thể thu hồi dữ liệu tải. Kiểm tra gói trước khi rời
+            mạng và xuất bản lưu tiến độ để dự phòng. Xóa gói không xóa tiến độ.
+          </Text>
+        </VStack>
+      </Card>
     </section>
   );
 }

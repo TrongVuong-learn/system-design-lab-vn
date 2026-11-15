@@ -1,3 +1,4 @@
+import { Button } from '@astryxdesign/core/Button';
 import type { Lesson, LessonProgress } from '@sdl/content-schema';
 import { hashTable, HASH_MODEL_VERSION } from '@sdl/simulation-engine';
 import { ObservationPanel } from './ObservationPanel';
@@ -99,19 +100,14 @@ export function HashTableLab({
         công dựng bảng hoặc tính hash.
       </p>
       <div className="lab-controls">
-        <button
-          className="button primary"
-          disabled={state.finished}
+        <Button
+          variant="primary"
+          label="So một khóa"
+          isDisabled={state.finished}
           onClick={() => run(state.step + 1)}
-        >
-          So một khóa
-        </button>
-        <button className="button secondary" disabled={state.finished} onClick={() => run(4)}>
-          Tra đến khi xong
-        </button>
-        <button className="button secondary" onClick={() => configure({})}>
-          Bắt đầu lại
-        </button>
+        />
+        <Button label="Tra đến khi xong" isDisabled={state.finished} onClick={() => run(4)} />
+        <Button label="Bắt đầu lại" onClick={() => configure({})} />
       </div>
       <p role="status">
         Đã so {state.step} khóa.{' '}

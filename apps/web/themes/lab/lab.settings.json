@@ -1,0 +1,24 @@
+{
+  "name": "lab",
+  "like": "neutral",
+  "mode": "both",
+  "settings": [
+    {
+      "thing": "font",
+      "value": "\"Be Vietnam Pro\", system-ui, sans-serif",
+      "source": "dial"
+    },
+    {
+      "thing": "accent",
+      "value": "#2447d8",
+      "source": "dial"
+    },
+    {
+      "thing": "warning",
+      "value": "#c98a00",
+      "source": "dial"
+    }
+  ],
+  "lifted": [],
+  "palette": "db032a5af20d356c06c806c15272501e59a9db10b7304434fe3829dd9195d76c"
+}

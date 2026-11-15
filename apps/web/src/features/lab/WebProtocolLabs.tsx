@@ -1,3 +1,4 @@
+import { Button } from '@astryxdesign/core/Button';
 import type { LessonProgress } from '@sdl/content-schema';
 import {
   cookieSession,
@@ -59,12 +60,8 @@ export function CookieSessionLab({ progress, onChange }: Props) {
         huống bắt đầu lại. S1 chỉ là nhãn minh họa, không phải session ID an toàn.
       </p>
       <div className="lab-controls">
-        <button className="button primary" disabled={s.finished} onClick={run}>
-          Tiến một chặng
-        </button>
-        <button className="button secondary" onClick={() => configure()}>
-          Bắt đầu lại
-        </button>
+        <Button variant="primary" label="Tiến một chặng" isDisabled={s.finished} onClick={run} />
+        <Button label="Bắt đầu lại" onClick={() => configure()} />
       </div>
       <p role="status">
         Chặng {s.step}/3.{' '}
@@ -145,12 +142,8 @@ export function ReverseProxyLab({ progress, onChange }: Props) {
         {s.path}. Backend phục vụ: {s.backend}. Đổi lựa chọn bắt đầu lại.
       </p>
       <div className="lab-controls">
-        <button className="button primary" disabled={s.finished} onClick={run}>
-          Đi một chặng
-        </button>
-        <button className="button secondary" onClick={() => configure()}>
-          Bắt đầu lại
-        </button>
+        <Button variant="primary" label="Đi một chặng" isDisabled={s.finished} onClick={run} />
+        <Button label="Bắt đầu lại" onClick={() => configure()} />
       </div>
       <p role="status">
         Chặng {s.step}/3. {s.finished ? 'Browser đã nhận 200.' : 'Chưa hoàn tất response.'}
@@ -228,12 +221,8 @@ export function MultiplexLab({ progress, onChange }: Props) {
         cần. Đổi lựa chọn bắt đầu lại.
       </p>
       <div className="lab-controls">
-        <button className="button primary" disabled={s.finished} onClick={run}>
-          Xử lý sự kiện
-        </button>
-        <button className="button secondary" onClick={() => configure()}>
-          Bắt đầu lại
-        </button>
+        <Button variant="primary" label="Xử lý sự kiện" isDisabled={s.finished} onClick={run} />
+        <Button label="Bắt đầu lại" onClick={() => configure()} />
       </div>
       <p role="status">
         Sự kiện {s.step}/3. Giao cho ứng dụng: A {s.aDelivered ? 'đã có' : 'chưa có'}, B{' '}
