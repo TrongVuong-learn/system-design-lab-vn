@@ -1040,3 +1040,17 @@
     }
   }
 }
+
+@layer app {
+  /* Lab controls are touch targets for students on phones: keep them at least 44px. */
+  .lab-panel .astryx-button,
+  .lab-panel button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  @media (max-width: 760px) {
+    .page .astryx-button {
+      min-height: 44px;
+    }
+  }
+}
