@@ -1,0 +1,130 @@
+/*
+ * "Vở ô li" identity on top of the Astryx `lab` theme.
+ *
+ * A Vietnamese school notebook: squared paper, violet fountain-pen ink, a red margin
+ * rule and a yellow highlighter. This file is the only place that names raw colors;
+ * every other stylesheet reads tokens. Astryx tokens are re-pointed here (the `app`
+ * layer sits above `astryx-theme`), and app-only tokens use the `--sdl-` prefix.
+ */
+@layer app {
+  :root,
+  [data-astryx-theme='lab'] {
+    /* Ink and paper */
+    --sdl-ink: #1b1444;
+    --sdl-ink-soft: #554e7c;
+    --sdl-paper: #f6f5fc;
+    --sdl-sheet: #ffffff;
+    --sdl-rule: #dcd8f3;
+    --sdl-rule-faint: #e9e6f8;
+    --sdl-violet: #4530c9;
+    --sdl-violet-deep: #2c1c94;
+    --sdl-violet-wash: #e8e3fc;
+    --sdl-margin-red: #e0364f;
+    --sdl-highlight: #ffe45c;
+    --sdl-highlight-wash: #fff4b8;
+
+    /* One hue per level; always paired with the written level code. */
+    --sdl-l0: #087a70;
+    --sdl-l0-wash: #d5f2ed;
+    --sdl-l1: #1c63cc;
+    --sdl-l1-wash: #dbe9fd;
+    --sdl-l2: #6a3fe0;
+    --sdl-l2-wash: #e8e0fd;
+    --sdl-l3: #b52a76;
+    --sdl-l3-wash: #fbdfee;
+    --sdl-l4: #b84d0c;
+    --sdl-l4-wash: #fde4d2;
+    --sdl-l5: #2a7a30;
+    --sdl-l5-wash: #dcf0dc;
+
+    --sdl-radius-sheet: 22px;
+    --sdl-radius-control: 14px;
+    --sdl-radius-chip: 10px;
+    --sdl-shadow-sheet: 0 1px 0 #1b14440a, 0 12px 32px -18px #1b144438;
+    --sdl-shadow-lift: 0 2px 0 #1b14440f, 0 22px 44px -20px #1b144452;
+    --sdl-edge: 0 3px 0;
+    --sdl-content: 1160px;
+
+    /* Astryx tokens re-pointed to the notebook palette */
+    --color-background-body: var(--sdl-paper);
+    --color-background-surface: var(--sdl-sheet);
+    --color-background-card: var(--sdl-sheet);
+    --color-background-popover: var(--sdl-sheet);
+    --color-background-muted: #f0eefa;
+    --color-accent: var(--sdl-violet);
+    --color-accent-muted: var(--sdl-violet-wash);
+    --color-on-accent: #ffffff;
+    --color-text-primary: var(--sdl-ink);
+    --color-text-secondary: var(--sdl-ink-soft);
+    --color-text-disabled: #9a95b8;
+    --color-text-accent: var(--sdl-violet);
+    --color-icon-primary: var(--sdl-ink);
+    --color-icon-secondary: #7a74a0;
+    --color-icon-accent: var(--sdl-violet);
+    --color-border: #1b14441a;
+    --color-border-emphasized: #c8c2e6;
+    --color-neutral: #1b14440f;
+    --color-skeleton: #ebe8f8;
+    --color-shadow: #1b14441f;
+    --focus-outline-color: var(--sdl-violet);
+
+    --color-info: var(--sdl-violet);
+    --color-info-muted: var(--sdl-violet-wash);
+    --color-on-info: #ffffff;
+    --color-text-info: var(--sdl-violet-deep);
+    --color-on-info-muted: var(--sdl-violet-deep);
+    --color-success: #12805c;
+    --color-success-muted: #d3f1e3;
+    --color-text-success: #0d6146;
+    --color-on-success-muted: #0a4a36;
+    --color-warning: #b86e00;
+    --color-warning-muted: var(--sdl-highlight-wash);
+    --color-text-warning: #6f4a00;
+    --color-on-warning-muted: #4a3200;
+    --color-border-warning: #e8c64a;
+    --color-error: #c4283c;
+    --color-error-muted: #fddde1;
+    --color-text-error: #a81c2f;
+
+    --color-background-blue: var(--sdl-violet-wash);
+    --color-text-blue: var(--sdl-violet-deep);
+    --color-border-blue: #b9aef0;
+    --color-background-yellow: var(--sdl-highlight-wash);
+    --color-border-yellow: #e8c64a;
+    --color-background-green: #d3f1e3;
+    --color-background-gray: #ebe8f6;
+
+    --shadow-inset-hover: inset 0 0 0 2px #4530c94d;
+    --shadow-inset-selected: inset 0 0 0 2px #4530c9;
+    --astryx-theme-neutral-color-status-fill-accent: var(--sdl-violet);
+
+    --radius-inner: 8px;
+    --radius-element: var(--sdl-radius-control);
+    --radius-container: var(--sdl-radius-sheet);
+
+    /* Type: one family, wide range of weight. Body is 16px for phone reading. */
+    --text-body-size: 1rem;
+    --text-body-leading: 1.6;
+    --text-large-size: 1.1875rem;
+    --text-large-leading: 1.55;
+    --text-supporting-size: 0.875rem;
+    --text-supporting-leading: 1.5;
+    --text-label-size: 0.9375rem;
+    --text-heading-1-size: clamp(1.875rem, 1.3rem + 2.6vw, 2.75rem);
+    --text-heading-1-weight: 800;
+    --text-heading-1-leading: 1.18;
+    --text-heading-2-size: clamp(1.375rem, 1.2rem + 0.8vw, 1.75rem);
+    --text-heading-2-weight: 700;
+    --text-heading-2-leading: 1.25;
+    --text-heading-3-size: 1.1875rem;
+    --text-heading-3-weight: 700;
+    --text-heading-3-leading: 1.3;
+    --text-heading-4-size: 1.0625rem;
+    --text-heading-4-weight: 700;
+    --text-heading-5-size: 1rem;
+    --text-heading-5-weight: 600;
+    --text-display-2-size: clamp(2.5rem, 1.4rem + 5.4vw, 4.75rem);
+    --text-display-2-leading: 1.08;
+    --text-display-3-size: clamp(2rem, 1.5rem + 2vw, 2.75rem);
+  }
+}

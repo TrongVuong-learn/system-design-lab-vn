@@ -4,7 +4,22 @@
 
 Người học cần mở một bài, dự đoán, thao tác và hiểu kết quả trên điện thoại. Giữ lối nhập môn phù hợp học sinh cấp 3. Đây là sản phẩm học tập; mỗi chi tiết thị giác cần hỗ trợ đọc, nhận biết trạng thái hoặc hành động.
 
-## ASTRYX — Hệ UI hiện hành trong source (15/11/2026)
+## VỞ Ô LI — Hướng thị giác hiện hành (16/11/2026)
+
+Người dùng yêu cầu một bản lột xác hoàn toàn vì bản Astryx mặc định trông như wireframe. Hướng mới lấy từ chính thế giới của người học: cuốn vở ô li của học sinh Việt Nam. Báo cáo: [docs/delivery/UP_01_VO_O_LI.md](docs/delivery/UP_01_VO_O_LI.md).
+
+- **Chất liệu:** giấy kẻ ô (lưới 24 px, nét đậm mỗi ô thứ tư), mực tím `#4530c9`, mực chữ `#1b1444`, lề đỏ `#e0364f`, bút dạ quang `#ffe45c`. Giấy nền `#f6f5fc`, tờ nội dung trắng.
+- **Màu mang nghĩa:** mỗi level một sắc (L0 lục lam, L1 lam, L2 tím, L3 hồng đậm, L4 cam, L5 lục) và luôn đi kèm mã chữ L0–L5. Dạ quang chỉ dùng cho "điều đang diễn ra/vừa thay đổi": chặng hiện tại, bản ghi cũ, ô vừa đổi, phần giải thích sau thí nghiệm. Đỏ chỉ dùng cho lề vở và lỗi.
+- **Chữ:** Be Vietnam Pro tự host, thêm weight 800 cho tiêu đề lớn. Body 16 px, dòng 1,6; tiêu đề trang 30–44 px; tiêu đề trang đầu 40–76 px. Một family, phân cấp bằng cỡ và độ đậm.
+- **Điểm nhấn duy nhất:** trang đầu là một trang vở có lề đỏ, bên phải là tờ giấy vẽ hành trình yêu cầu bằng mực (trình duyệt, máy chủ, dữ liệu, màn hình kết quả là bốn hình khác nhau). Gói tin chỉ đi khi người học bấm. Các trang khác yên hơn: tờ trắng, viền mảnh, màu level.
+- **Thứ bấm được trông bấm được:** nút và đáp án có cạnh dày 3 px, lún xuống khi nhấn; thẻ bài nâng nhẹ khi rê chuột. Khối thông tin thì phẳng.
+- **Danh sách dài:** Khám phá và trang level dùng hàng gọn có hình thu nhỏ cơ chế của bài; thẻ đầy đủ chỉ dùng cho sáu bài nhập môn ở trang đầu (trên điện thoại là dải vuốt ngang).
+- **Kỹ thuật:** token nằm ở `apps/web/src/styles/tokens.css`, là nơi duy nhất ghi mã màu; file này trỏ lại token Astryx trong layer `app` và thêm token `--sdl-*`. Đây là thay đổi so với quy tắc "chỉ đổi qua theme editor" của mục Astryx bên dưới: theme `lab` sinh sẵn giữ nguyên, phần nhận diện nằm ở `tokens.css`. `ui/Button.tsx` bọc Button của Astryx để gắn class theo variant. Khung trang (header, footer) là HTML thường; component Astryx còn lại (Heading, Text, Link, Card, Collapsible, TextInput, ProgressBar, Banner) giữ hành vi và trợ năng.
+- **Đã bỏ:** hoạt ảnh Lottie ba chấm và gói `@lottiefiles/dotlottie-web`; logo tòa nhà pixel.
+
+Quy trình review UI, quy tắc màn học, lab và game ở các mục dưới vẫn áp dụng. Các bảng màu trong những mục cũ là lịch sử.
+
+## ASTRYX — Lớp component bên dưới (15/11/2026)
 
 Theo yêu cầu người dùng, toàn bộ trang chuyển sang thư viện [Astryx](https://github.com/meta/astryx) (`@astryxdesign/core` 0.7.16, MIT), thay hệ Pixel City. Cách áp dụng ở repository này:
 

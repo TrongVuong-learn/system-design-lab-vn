@@ -1,5 +1,6 @@
 @layer reset, astryx-base, astryx-theme, app;
 @import '@astryxdesign/core/reset.css';
 @import '@astryxdesign/core/astryx.css';
+@import './tokens.css';
 @import './base.css';
 @import './mechanisms.css';

@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { Button } from '@astryxdesign/core/Button';
+import { Button } from './Button';
 import { Card } from '@astryxdesign/core/Card';
 import { HStack } from '@astryxdesign/core/HStack';
 import { Text } from '@astryxdesign/core/Text';

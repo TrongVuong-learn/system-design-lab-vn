@@ -1,4 +1,4 @@
-import { Button } from '@astryxdesign/core/Button';
+import { Button } from '../../ui/Button';
 import type { LessonProgress } from '@sdl/content-schema';
 import { normalizeTls, simulateTls, observeTls } from '@sdl/simulation-engine';
 import { ObservationPanel } from './ObservationPanel';

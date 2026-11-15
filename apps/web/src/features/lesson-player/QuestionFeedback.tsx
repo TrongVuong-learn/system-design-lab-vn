@@ -1,5 +1,5 @@
 import type { Lesson } from '@sdl/content-schema';
-import { Button } from '@astryxdesign/core/Button';
+import { Button } from '../../ui/Button';
 import { Heading } from '@astryxdesign/core/Heading';
 import { HStack } from '@astryxdesign/core/HStack';
 import { AnnotatedText } from './TermNote';

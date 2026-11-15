@@ -2,9 +2,7 @@ import { Component, forwardRef, useEffect, type ReactNode } from 'react';
 import { HashRouter, Link as RouterLink, Route, Routes, useLocation } from 'react-router';
 import { Theme } from '@astryxdesign/core/theme';
 import { LinkProvider } from '@astryxdesign/core/Link';
-import { TopNav, TopNavHeading, TopNavItem } from '@astryxdesign/core/TopNav';
-import { Badge } from '@astryxdesign/core/Badge';
-import { Button } from '@astryxdesign/core/Button';
+import { Button } from '../ui/Button';
 import { Heading } from '@astryxdesign/core/Heading';
 import { Text } from '@astryxdesign/core/Text';
 import { VStack } from '@astryxdesign/core/VStack';
@@ -22,6 +20,8 @@ import { ReviewPage } from '../features/review';
 import { LessonPage } from '../features/lesson-player/LessonPage';
 import { GamesPage, GamePage } from '../features/games/GamesPage';
 import { Icon } from '../ui/primitives';
+import { lessons, levels } from './catalog';
+import { games } from '../features/games/GamesPage';
 
 /** Astryx renders links through this, so every href stays inside the hash router. */
 const RouteLink = forwardRef<
@@ -73,11 +73,27 @@ function isCurrent(pathname: string, to: string) {
   return to === '/' ? pathname === '/' : pathname === to || pathname.startsWith(`${to}/`);
 }
 
+const SITE = 'System Design Lab';
+
+/** Tab title for the current route, so history and open tabs name the page. */
+function pageTitle(pathname: string) {
+  const [, section, id] = pathname.split('/');
+  if (section === 'learn') return lessons.find((l) => l.id === id)?.title;
+  if (section === 'levels') return levels.find((l) => l.id === id)?.name;
+  if (section === 'games') return id ? games[id as keyof typeof games]?.title : 'Game';
+  if (section === 'review') return 'Ôn tổng hợp';
+  if (section === 'explore') return 'Khám phá bài học';
+  if (section === 'progress') return 'Tiến độ';
+  return undefined;
+}
+
 function Shell() {
   const { pathname } = useLocation();
   const learning = pathname.startsWith('/learn/') || pathname.startsWith('/review/');
   useEffect(() => {
     window.scrollTo(0, 0);
+    const title = pageTitle(pathname);
+    document.title = title ? `${title} · ${SITE}` : `${SITE} · Hiểu bằng cách thử`;
   }, [pathname]);
   return (
     <>
@@ -91,32 +107,31 @@ function Shell() {
       >
         Đến nội dung chính
       </a>
-      <div className="site-header">
-        <TopNav
-          label="Điều hướng chính"
-          heading={
-            <TopNavHeading
-              logo={<img src="/icon.svg" alt="" width={28} height={28} />}
-              heading="System Design Lab"
-              headingHref="/"
-            />
-          }
-          centerContent={
-            <span className="desktop-nav">
-              {navigation.map((n) => (
-                <TopNavItem
-                  key={n.to}
-                  label={n.label}
-                  href={n.to}
-                  isSelected={isCurrent(pathname, n.to)}
-                />
-              ))}
-            </span>
-          }
-          endContent={<Badge variant="info" label="Bản thử nghiệm" />}
-        />
-      </div>
-      <main id="main-content" tabIndex={-1} className={learning ? 'page page-learning' : 'page'}>
+      <header className="site-header">
+        <div className="site-bar">
+          <RouterLink to="/" className="brand">
+            <img src="/icon.svg" alt="" width={32} height={32} />
+            <span>{SITE}</span>
+          </RouterLink>
+          <nav className="desktop-nav" aria-label="Điều hướng chính">
+            {navigation.map((n) => (
+              <RouterLink
+                key={n.to}
+                to={n.to}
+                aria-current={isCurrent(pathname, n.to) ? 'page' : undefined}
+              >
+                {n.label}
+              </RouterLink>
+            ))}
+          </nav>
+          <span className="beta-tag">Bản thử nghiệm</span>
+        </div>
+      </header>
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className={learning ? 'page page-learning' : pathname === '/' ? 'page page-home' : 'page'}
+      >
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/explore" element={<ExplorePage />} />
@@ -132,11 +147,24 @@ function Shell() {
       {!learning && (
         <>
           <footer className="site-footer">
-            <VStack gap={1}>
-              <Text weight="semibold">System Design Lab</Text>
-              <Text type="supporting">Hiểu bằng cách thử. Học từng bước nhỏ.</Text>
-              <Text type="supporting">Tiếng Việt · Mobile-first · Local-first</Text>
-            </VStack>
+            <div className="site-footer-inner">
+              <div className="footer-brand">
+                <img src="/icon.svg" alt="" width={28} height={28} />
+                <div>
+                  <strong>{SITE}</strong>
+                  <p>Hiểu bằng cách thử. Học từng bước nhỏ.</p>
+                </div>
+              </div>
+              <nav className="footer-links" aria-label="Liên kết cuối trang">
+                <RouterLink to="/explore">Lộ trình sáu khu</RouterLink>
+                <RouterLink to="/games">Ba game cơ chế</RouterLink>
+                <RouterLink to="/progress">Tiến độ và bản lưu</RouterLink>
+              </nav>
+              <p className="footer-note">
+                Tiến độ nằm trên thiết bị của bạn, không cần tài khoản. Bài tự luyện chưa phải chứng
+                nhận thành thạo.
+              </p>
+            </div>
           </footer>
           <nav className="mobile-nav" aria-label="Điều hướng điện thoại">
             {navigation.map((n) => (

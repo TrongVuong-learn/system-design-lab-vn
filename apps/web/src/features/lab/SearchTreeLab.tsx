@@ -1,4 +1,4 @@
-import { Button } from '@astryxdesign/core/Button';
+import { Button } from '../../ui/Button';
 import type { Lesson, LessonProgress } from '@sdl/content-schema';
 import { searchTree, TREE_MODEL_VERSION } from '@sdl/simulation-engine';
 import { ObservationPanel } from './ObservationPanel';
